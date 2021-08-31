@@ -2,6 +2,7 @@
 
 This project is a prototype developed to deploy OSDU on Azure](https://community.opengroup.org/osdu/platform/deployment-and-operations/infra-azure-provisioning) on self managed infrastructure.
 
+![architecture](./images/architecture.png)
 
 ## Initialize the project
 
