@@ -1,0 +1,65 @@
+name: '2. Prepare Builder'
+
+on:
+  workflow_dispatch:
+
+env:
+  AZURE_PRINCIPAL_NAME: osdu-azure-credentials
+  OSDU_PRINCIPAL_NAME: osdu-credentials
+  OSDU_APPLICATION_NAME: osdu-application
+
+jobs:
+
+  builder:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@master
+
+      - name: Azure Login
+        uses: Azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+
+      - name: Validate Template Resources
+        uses: Azure/cli@1.0.4
+        with:
+          inlineScript: |
+            PRINCIPAL_OID=$(az ad sp list --display-name $AZURE_PRINCIPAL_NAME --query [].objectId -otsv)
+            az deployment sub validate --location ${{ secrets.AZURE_LOCATION }} --template-file $GITHUB_WORKSPACE/main.bicep \
+              --parameter location=${{ secrets.AZURE_LOCATION }} \
+              --parameter suffix=${{ secrets.RAND }} \
+              --parameter azurePrincipalOID=$PRINCIPAL_OID
+
+
+      - name: Deploy Template Resources
+        uses: Azure/cli@1.0.4
+        with:
+          inlineScript: |
+            PRINCIPAL_OID=$(az ad sp list --display-name $AZURE_PRINCIPAL_NAME --query [].objectId -otsv)
+            GROUP=$(az deployment sub create --location ${{ secrets.AZURE_LOCATION }} --template-file $GITHUB_WORKSPACE/main.bicep \
+              --parameter location=${{ secrets.AZURE_LOCATION }} \
+              --parameter suffix=${{ secrets.RAND }} \
+              --parameter azurePrincipalOID=$PRINCIPAL_OID --query properties.parameters.groupName.value -otsv)
+            echo "RESOURCE_GROUP=$GROUP" >> $GITHUB_ENV
+
+
+      - name: Save Secrets to Key Vault
+        uses: Azure/cli@1.0.4
+        with:
+          inlineScript: |
+            VAULT=$(az keyvault list --resource-group $RESOURCE_GROUP --query [].name -otsv)
+            STORAGE=$(az storage account list --resource-group $RESOURCE_GROUP --query [].name -otsv)
+            az keyvault secret set --vault-name $VAULT --name tenant-id --value $(az account show --query homeTenantId) -o none 2>/dev/null
+            az keyvault secret set --vault-name $VAULT --name terraform-id --value $(echo '${{ secrets.AZURE_CREDENTIALS }}' | jq -r ".clientId") -o none 2>/dev/null
+            az keyvault secret set --vault-name $VAULT --name terraform-secret --value $(echo '${{ secrets.AZURE_CREDENTIALS }}' | jq -r ".clientSecret") -o none 2>/dev/null
+            az keyvault secret set --vault-name $VAULT --name terraform-oid --value $(az ad sp list --display-name $AZURE_PRINCIPAL_NAME --query [].objectId -otsv) -o none 2>/dev/null
+            az keyvault secret set --vault-name $VAULT --name client-id --value $(echo '${{ secrets.OSDU_CREDENTIALS }}' | jq -r ".clientId") -o none 2>/dev/null
+            az keyvault secret set --vault-name $VAULT --name client-secret --value $(echo '${{ secrets.OSDU_CREDENTIALS }}' | jq -r ".clientSecret") -o none 2>/dev/null
+            az keyvault secret set --vault-name $VAULT --name client-oid --value $(echo '${{ secrets.OSDU_CREDENTIAL_OID }}') -o none 2>/dev/null
+            az keyvault secret set --vault-name $VAULT --name application-id --value $(echo '${{ secrets.OSDU_APPLICATION }}' | jq -r ".appId") -o none 2>/dev/null
+            az keyvault secret set --vault-name $VAULT --name storage --value $STORAGE -o none 2>/dev/null
+            az keyvault secret set --vault-name $VAULT --name storage-key --value $(az storage account keys list --account-name $STORAGE --resource-group $RESOURCE_GROUP --query '[0].value' --output tsv) -o none 2>/dev/null
+            az keyvault secret set --vault-name $VAULT --name ssh-public-key --value '${{ secrets.SSH_PUBLIC_KEY }}'  -o none 2>/dev/null
+            az keyvault secret set --vault-name $VAULT --name ssh-private-key --value '${{ secrets.SSH_PRIVATE_KEY }}'  -o none 2>/dev/null

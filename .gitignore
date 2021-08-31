@@ -1,0 +1,9 @@
+AZURE_CREDENTIALS
+.env
+.env_*
+*.tfvars
+.envrc
+.ssh
+charts
+.DS_Store
+.ssh
