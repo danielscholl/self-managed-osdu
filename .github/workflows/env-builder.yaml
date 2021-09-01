@@ -45,7 +45,7 @@ jobs:
             echo "RESOURCE_GROUP=$GROUP" >> $GITHUB_ENV
 
 
-      - name: Save Secrets to Key Vault
+      - name: Save Secrets to Vault
         uses: Azure/cli@1.0.4
         with:
           inlineScript: |
@@ -61,5 +61,100 @@ jobs:
             az keyvault secret set --vault-name $VAULT --name application-id --value $(echo '${{ secrets.OSDU_APPLICATION }}' | jq -r ".appId") -o none 2>/dev/null
             az keyvault secret set --vault-name $VAULT --name storage --value $STORAGE -o none 2>/dev/null
             az keyvault secret set --vault-name $VAULT --name storage-key --value $(az storage account keys list --account-name $STORAGE --resource-group $RESOURCE_GROUP --query '[0].value' --output tsv) -o none 2>/dev/null
-            az keyvault secret set --vault-name $VAULT --name ssh-public-key --value '${{ secrets.SSH_PUBLIC_KEY }}'  -o none 2>/dev/null
-            az keyvault secret set --vault-name $VAULT --name ssh-private-key --value '${{ secrets.SSH_PRIVATE_KEY }}'  -o none 2>/dev/null
+            az keyvault secret set --vault-name $VAULT --name ssh-passphrase --value '${{ secrets.SSH_PASSPHRASE }}' -o none 2>/dev/null
+
+      - name: Upload SSH Keys to Share
+        uses: Azure/cli@1.0.4
+        env:
+          FILE_SHARE: ssh-keys
+        with:
+          inlineScript: |
+            mkdir -p $FILE_SHARE
+            echo '${{ secrets.SSH_PUBLIC_KEY }}' > $FILE_SHARE/azure-aks-node-ssh-key && chmod 600 $FILE_SHARE/azure-aks-node-ssh-key
+            echo '${{ secrets.SSH_PRIVATE_KEY }}' > $FILE_SHARE/azure-aks-node-ssh-key.pub && chmod 644 $FILE_SHARE/azure-aks-node-ssh-key.pub
+            STORAGE=$(az storage account list --resource-group $RESOURCE_GROUP --query [].name -otsv)
+            STORAGE_KEY=$(az storage account keys list --account-name $STORAGE --resource-group $RESOURCE_GROUP --query '[0].value' -otsv)
+            az storage file upload-batch --account-name $STORAGE --account-key $STORAGE_KEY --destination $FILE_SHARE --source $FILE_SHARE --pattern "**"
+            rm -rf $FILE_SHARE
+
+      - name: Upload Configuration to Share
+        uses: Azure/cli@1.0.4
+        env:
+          FILE_SHARE: configuration
+        with:
+          inlineScript: |
+            mkdir -p $FILE_SHARE
+            wget https://community.opengroup.org/osdu/platform/deployment-and-operations/infra-azure-provisioning/-/raw/master/infra/templates/osdu-r3-mvp/central_resources/override.tfvars -O $FILE_SHARE/central.tfvars
+            wget https://community.opengroup.org/osdu/platform/deployment-and-operations/infra-azure-provisioning/-/raw/master/infra/templates/osdu-r3-mvp/data_partition/override.tfvars -O $FILE_SHARE/partition.tfvars
+            wget https://community.opengroup.org/osdu/platform/deployment-and-operations/infra-azure-provisioning/-/raw/master/infra/templates/osdu-r3-mvp/service_resources/override.tfvars -O $FILE_SHARE/service.tfvars
+            STORAGE=$(az storage account list --resource-group $RESOURCE_GROUP --query [].name -otsv)
+            STORAGE_KEY=$(az storage account keys list --account-name $STORAGE --resource-group $RESOURCE_GROUP --query '[0].value' -otsv)
+            az storage file upload-batch --account-name $STORAGE --account-key $STORAGE_KEY --destination $FILE_SHARE --source $FILE_SHARE --pattern "**"
+            rm -rf $FILE_SHARE
+
+      - name: Save Infrastructure Environment to Vault
+        uses: Azure/cli@1.0.4
+        env:
+          FILE_SHARE: configuration
+        with:
+          inlineScript: |
+            VAULT=$(az keyvault list --resource-group $RESOURCE_GROUP --query [].name -otsv)
+            cat > envrc << EOF
+            ## These variables support AzureRM Backend Storage State
+            export ARM_TENANT_ID="$(az account show --query homeTenantId -otsv)"
+            export ARM_SUBSCRIPTION_ID="$(az account show --query id -otsv)"
+            export ARM_CLIENT_ID="$(az keyvault secret show --id https://$VAULT.vault.azure.net/secrets/terraform-id --query value -otsv)"
+            export ARM_CLIENT_SECRET="$(az keyvault secret show --id https://$VAULT.vault.azure.net/secrets/terraform-secret --query value -otsv)"
+            export ARM_ACCESS_KEY="$(az keyvault secret show --id https://$VAULT.vault.azure.net/secrets/storage-key --query value -otsv)"
+            export TF_VAR_remote_state_account="$(az keyvault secret show --id https://$VAULT.vault.azure.net/secrets/storage --query value -otsv)"
+            export TF_VAR_remote_state_container="remote-state-container"
+
+            ## These variables support creating the infrastructure
+            # Global Region Pair Location
+            export TF_VAR_cosmosdb_replica_location="$(az account list-locations --query "[?name == '${{ secrets.AZURE_LOCATION }}'].metadata.pairedRegion[0].name" -otsv)"
+
+            # Central Resources
+            export TF_VAR_principal_appId="$(az keyvault secret show --id https://$VAULT.vault.azure.net/secrets/client-id --query value -otsv)"
+            export TF_VAR_principal_name="$principalName"
+            export TF_VAR_principal_password="$(az keyvault secret show --id https://$VAULT.vault.azure.net/secrets/client-secret --query value -otsv)"
+            export TF_VAR_principal_objectId="$(az keyvault secret show --id https://$VAULT.vault.azure.net/secrets/client-oid --query value -otsv)"
+            export TF_VAR_aad_clientId="$(az keyvault secret show --id https://$VAULT.vault.azure.net/secrets/application-id --query value -otsv)"
+
+            # Data Partition
+            export TF_VAR_elasticsearch_endpoint="https://<your_fqdn>:9243"
+            export TF_VAR_elasticsearch_username="elastic"
+            export TF_VAR_elasticsearch_password="<your_password>"
+
+            # Service Resources
+            export TF_VAR_gitops_ssh_url="git@myRepo.git"
+            export TF_VAR_ssh_public_key_file="/osdu-azure/.ssh/azure-aks-node-ssh-key.pub"
+            export TF_VAR_gitops_ssh_key_file="/osdu-azure/.ssh/azure-aks-gitops-ssh-key"
+            EOF
+            az keyvault secret set --vault-name $VAULT --name "envrc" --file envrc
+
+      - name: Save Application Environment to Vault
+        uses: Azure/cli@1.0.4
+        env:
+          FILE_SHARE: configuration
+        with:
+          inlineScript: |
+            VAULT=$(az keyvault list --resource-group $RESOURCE_GROUP --query [].name -otsv)
+            cat > env << EOF
+            # Global Region Pair Location
+            TF_VAR_cosmosdb_replica_location="$(az account list-locations --query "[?name == '${{ secrets.AZURE_LOCATION }}'].metadata.pairedRegion[0].name" -otsv)"
+
+            # Central Resources
+            TF_VAR_principal_appId="$(az keyvault secret show --id https://$VAULT.vault.azure.net/secrets/client-id --query value -otsv)"
+            TF_VAR_principal_name="$principalName"
+            TF_VAR_principal_password="$(az keyvault secret show --id https://$VAULT.vault.azure.net/secrets/client-secret --query value -otsv)"
+            TF_VAR_principal_objectId="$(az keyvault secret show --id https://$VAULT.vault.azure.net/secrets/client-oid --query value -otsv)"
+
+            # Data Partition
+            TF_VAR_elasticsearch_endpoint="https://<your_fqdn>:9243"
+            TF_VAR_elasticsearch_username="elastic"
+            TF_VAR_elasticsearch_password="<your_password>"
+
+            # Service Resources
+            TF_VAR_gitops_ssh_url="git@myRepo.git"
+            EOF
+            az keyvault secret set --vault-name $VAULT --name "envrc" --file envrc

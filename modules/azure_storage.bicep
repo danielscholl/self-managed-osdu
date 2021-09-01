@@ -23,12 +23,11 @@ param type string = 'Standard_LRS'
 param principalId string = 'null'
 
 @allowed([
-  'Owner'
-  'Contributor'
-  'Reader'
+  'BlobOwner'
+  'ShareOwner'
 ])
 @description('Built-in role to assign')
-param builtInRoleType string = 'Contributor'
+param builtInRoleType string = 'ShareOwner'
 
 @description('Blob Containers to Add to Storage Account')
 param containers array = []
@@ -40,6 +39,8 @@ var role = {
   Owner: '/subscriptions/${subscription().subscriptionId}/providers/Microsoft.Authorization/roleDefinitions/8e3af657-a8ff-443c-a75c-2fe8c4bcb635'
   Contributor: '/subscriptions/${subscription().subscriptionId}/providers/Microsoft.Authorization/roleDefinitions/b24988ac-6180-42a0-ab88-20f7382dd24c'
   Reader: '/subscriptions/${subscription().subscriptionId}/providers/Microsoft.Authorization/roleDefinitions/acdd72a7-3385-48ef-bd42-f606fba81ae7'
+  ShareOwner: '/subscriptions/${subscription().subscriptionId}/providers/Microsoft.Authorization/roleDefinitions/a7264617-510b-434b-a828-9731dc254ea7'
+  BlobOwner: '/subscriptions/${subscription().subscriptionId}/providers/Microsoft.Authorization/roleDefinitions/b7e6dc6d-f1e8-4753-8033-0f276bb0955b'
 }
 
 var storageName = take(replace('${name}', '-', ''), 23)
@@ -109,7 +110,7 @@ resource lock 'Microsoft.Authorization/locks@2016-09-01' = if (enableDeleteLock)
 
 // Assign Role
 resource roleAssignment 'Microsoft.Authorization/roleAssignments@2020-04-01-preview' = {
-  name: guid(storage.id, name)
+  name: guid(storage.id, name, 'data')
   properties: {
     roleDefinitionId: role[builtInRoleType]
     principalId: principalId
@@ -127,7 +128,7 @@ param privateLinkSettings object = {
   vnetId: null // Specify the Virtual Network for Virtual Network Link
 }
 
-var enablePrivateLink = privateLinkSettings.vnetId != 'null' && privateLinkSettings.subnetId != 'null'
+var enablePrivateLink = privateLinkSettings.vnetId != null && privateLinkSettings.subnetId != null
 
 @description('Specifies the name of the private link to the Azure Container Registry.')
 param privateEndpointName string = 'storagePrivateEndpoint'
