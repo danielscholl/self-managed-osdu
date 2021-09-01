@@ -27,7 +27,7 @@ jobs:
         with:
           inlineScript: |
             PRINCIPAL_OID=$(az ad sp list --display-name $AZURE_PRINCIPAL_NAME --query [].objectId -otsv)
-            az deployment sub validate --location ${{ secrets.AZURE_LOCATION }} --template-file $GITHUB_WORKSPACE/main.bicep \
+            az deployment sub validate --name 'osdu-${{ secrets.RAND }}' --location ${{ secrets.AZURE_LOCATION }} --template-file $GITHUB_WORKSPACE/main.bicep \
               --parameter location=${{ secrets.AZURE_LOCATION }} \
               --parameter suffix=${{ secrets.RAND }} \
               --parameter azurePrincipalOID=$PRINCIPAL_OID
@@ -38,7 +38,7 @@ jobs:
         with:
           inlineScript: |
             PRINCIPAL_OID=$(az ad sp list --display-name $AZURE_PRINCIPAL_NAME --query [].objectId -otsv)
-            GROUP=$(az deployment sub create --location ${{ secrets.AZURE_LOCATION }} --template-file $GITHUB_WORKSPACE/main.bicep \
+            GROUP=$(az deployment sub create --name 'osdu-${{ secrets.RAND }}' --location ${{ secrets.AZURE_LOCATION }} --template-file $GITHUB_WORKSPACE/main.bicep \
               --parameter location=${{ secrets.AZURE_LOCATION }} \
               --parameter suffix=${{ secrets.RAND }} \
               --parameter azurePrincipalOID=$PRINCIPAL_OID --query properties.parameters.groupName.value -otsv)
