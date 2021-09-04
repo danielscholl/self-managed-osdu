@@ -46,7 +46,7 @@
   // "forwardPorts": [],
   // Use 'postCreateCommand' to run commands after the container is created.
   // "postCreateCommand": "terraform --version",
-  "postStartCommand": "echo 'eval \"$(direnv hook bash)\"' >> ~/.bashrc &&  sudo cp -r /workspaces/self-managed-osdu/custom/* /osdu-azure/templates/osdu-r3-mvp/ && sudo cp /workspaces/self-managed-osdu/README.md /osdu-azure/README.md && sudo chown -R vscode /osdu-azure",
+  "postStartCommand": "echo 'eval \"$(direnv hook bash)\"' >> ~/.bashrc &&  sudo cp -r /workspaces/self-managed-osdu/custom/* /osdu-azure/templates/osdu-r3-mvp/ && sudo cp /workspaces/self-managed-osdu/docs/README.md /osdu-azure/README.md && sudo chown -R vscode /osdu-azure",
   // Comment out connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
   "remoteUser": "vscode"
 }
