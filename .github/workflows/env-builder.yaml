@@ -126,7 +126,7 @@ jobs:
             export TF_VAR_elasticsearch_password="<your_password>"
 
             # Service Resources
-            export TF_VAR_gitops_ssh_url="git@myRepo.git"
+            export TF_VAR_gitops_ssh_url="git@github.com/$GITHUB_REPOSITORY/.git"
             export TF_VAR_ssh_public_key_file="/osdu-azure/.ssh/azure-aks-node-ssh-key.pub"
             export TF_VAR_gitops_ssh_key_file="/osdu-azure/.ssh/azure-aks-gitops-ssh-key"
             EOF
@@ -150,11 +150,11 @@ jobs:
             TF_VAR_principal_objectId="$(az keyvault secret show --id https://$VAULT.vault.azure.net/secrets/client-oid --query value -otsv)"
 
             # Data Partition
-            TF_VAR_elasticsearch_endpoint="https://<your_fqdn>:9243"
+            TF_VAR_elasticsearch_endpoint="${{ secrets.ELASTIC_ENDPOINT }}"
             TF_VAR_elasticsearch_username="elastic"
-            TF_VAR_elasticsearch_password="<your_password>"
+            TF_VAR_elasticsearch_password="${{ secrets.ELASTIC_ENDPOINT }}"
 
             # Service Resources
-            TF_VAR_gitops_ssh_url="git@myRepo.git"
+            TF_VAR_gitops_ssh_url="git@github.com/$GITHUB_REPOSITORY/.git"
             EOF
             az keyvault secret set --vault-name $VAULT --name "envrc" --file envrc
