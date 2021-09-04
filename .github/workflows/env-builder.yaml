@@ -157,4 +157,4 @@ jobs:
             # Service Resources
             TF_VAR_gitops_ssh_url="git@github.com/$GITHUB_REPOSITORY.git"
             EOF
-            az keyvault secret set --vault-name $VAULT --name "envrc" --file envrc
+            az keyvault secret set --vault-name $VAULT --name "env" --file env
