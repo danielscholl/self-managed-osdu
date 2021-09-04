@@ -92,7 +92,7 @@ az ad sp create-for-rbac --name "osdu-credentials" \
 az ad sp list --display-name "osdu-credentials" --query [].objectId -otsv
 ```
 
-4. `OSDU_APPLICATION`: The OSDU Environment Application json output
+5. `OSDU_APPLICATION`: The OSDU Environment Application json output
 
 ```bash
 az ad app create --display-name "osdu-application" \
@@ -107,6 +107,16 @@ az ad app create --display-name "osdu-application" \
   "objectId": "00000000-0000-0000-0000-000000000000"
 }
 ```
+
+6. `ELASTIC_ENDPOINT`: The endpoint of the Elasticsearch cluster. 
+
+```bash
+# Sample Format
+https://my-osdu.es.southcentralus.azure.elastic-cloud.com:9243
+```
+
+7. `ELASTIC_PASSWORD`: The password of the Elasticsearch cluster.
+
 
 ## Execute Github Actions
 
