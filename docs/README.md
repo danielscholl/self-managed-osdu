@@ -63,6 +63,8 @@ The following variables are required to support this solution.
 ```bash
 # Download and set the environment variables
 VAULT=<your_common_vault>
+az keyvault set-policy --name $VAULT --secret-permissions get list \
+  --object-id $(az ad user show --id $(az account show --query user.name -otsv) --query objectId -otsv)
 az keyvault secret show --id https://$VAULT.vault.azure.net/secrets/envrc --query value -otsv > .envrc
 
 # Allow environment variable loading

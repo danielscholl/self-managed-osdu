@@ -1,0 +1,24 @@
+name: '3. Deploy Infrastructure'
+
+on:
+  workflow_dispatch:
+
+env:
+  AZURE_PRINCIPAL_NAME: osdu-azure-credentials
+  OSDU_PRINCIPAL_NAME: osdu-credentials
+  OSDU_APPLICATION_NAME: osdu-application
+
+jobs:
+
+  docker:
+    runs-on: ubuntu-latest
+
+    steps:
+
+    - name: Build and push
+      id: docker_build
+      uses: docker/build-push-action@v2
+      with:
+        push: false
+        file: ./devcontainer/Dockerfile.infra
+        tags: user/app:latest
