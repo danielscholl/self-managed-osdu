@@ -1,7 +1,7 @@
 # You can pick any Debian/Ubuntu-based image. 😊
 FROM mcr.microsoft.com/vscode/devcontainers/base:buster
 
-COPY library-scripts/*.sh /tmp/library-scripts/
+COPY .devcontainer/library-scripts/*.sh /tmp/library-scripts/
 
 # [Option] Install zsh
 ARG INSTALL_ZSH="true"
