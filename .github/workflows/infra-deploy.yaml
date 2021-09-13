@@ -53,21 +53,46 @@ jobs:
         run: docker load --input /tmp/self-managed-osdu.tar
 
       - name: Setup Environment
+        uses: Azure/cli@1.0.4
         env:
-          ENV_FILE: ${{ secrets.ENV_FILE }}
-          HELLO: world
-        run: |
-          echo $HELLO
-          echo $ENV_FILE
-          echo $ENV_FILE | base64 -d > $RUNNER_TEMP/.env
-          ls -la $RUNNER_TEMP
+          FILE_SHARE: configuration
+        with:
+          inlineScript: |
+            VAULT=$(az keyvault list --resource-group $RESOURCE_GROUP --query [].name -otsv)
+            cat > $RUNNER_TEMP/.env << EOF
+            ## These variables support AzureRM Backend Storage State
+            ARM_TENANT_ID="$(az account show --query homeTenantId -otsv)"
+            ARM_SUBSCRIPTION_ID="$(az account show --query id -otsv)"
+            ARM_CLIENT_ID="$(az keyvault secret show --id https://$VAULT.vault.azure.net/secrets/terraform-id --query value -otsv)"
+            ARM_CLIENT_SECRET="$(az keyvault secret show --id https://$VAULT.vault.azure.net/secrets/terraform-secret --query value -otsv)"
+            ARM_ACCESS_KEY="$(az keyvault secret show --id https://$VAULT.vault.azure.net/secrets/storage-key --query value -otsv)"
+            TF_VAR_remote_state_account="$(az keyvault secret show --id https://$VAULT.vault.azure.net/secrets/storage --query value -otsv)"
+            TF_VAR_remote_state_container="remote-state-container"
 
-      # - name: Deploy Resources
-      #   env:
-      #     ENV_FILE: ${{ secrets.ENV_FILE }}
-      #   run: |
-      #     echo $ENV_FILE | base64 -d > $RUNNER_TEMP/.env
-      #     cat RUNNER_TEMP/.env
-      #     cat $RUNNER_TEMP/.env | grep TF_VAR_remote_state_account
-      #     # docker run --rm --env-file $RUNNER_TEMP/.env --env TF_VAR_workspace="cr-${{ secrets.RAND }}" --workdir /osdu-azure/templates/osdu-r3-mvp/central_resources self-managed-osdu:latest
-      #   shell: bash
+            ## These variables support creating the infrastructure
+            # Global Region Pair Location
+            TF_VAR_cosmosdb_replica_location="$(az account list-locations --query "[?name == '${{ secrets.AZURE_LOCATION }}'].metadata.pairedRegion[0].name" -otsv)"
+
+            # Central Resources
+            TF_VAR_principal_appId="$(az keyvault secret show --id https://$VAULT.vault.azure.net/secrets/client-id --query value -otsv)"
+            TF_VAR_principal_name="$principalName"
+            TF_VAR_principal_password="$(az keyvault secret show --id https://$VAULT.vault.azure.net/secrets/client-secret --query value -otsv)"
+            TF_VAR_principal_objectId="$(az keyvault secret show --id https://$VAULT.vault.azure.net/secrets/client-oid --query value -otsv)"
+            TF_VAR_aad_client_id="$(az keyvault secret show --id https://$VAULT.vault.azure.net/secrets/application-id --query value -otsv)"
+
+            # Data Partition
+            TF_VAR_elasticsearch_endpoint="${{ secrets.ELASTIC_ENDPOINT }}"
+            TF_VAR_elasticsearch_username="elastic"
+            TF_VAR_elasticsearch_password="${{ secrets.ELASTIC_PASSWORD }}"
+
+            # Service Resources
+            TF_VAR_gitops_ssh_url="git@github.com/$GITHUB_REPOSITORY.git"
+            TF_VAR_ssh_public_key_file="/osdu-azure/.ssh/azure-aks-node-ssh-key.pub"
+            TF_VAR_gitops_ssh_key_file="/osdu-azure/.ssh/azure-aks-gitops-ssh-key"
+            EOF
+
+      - name: Deploy Resources
+        run: |
+          ls -l $RUNNER_TEMP/.env
+          docker run --rm --env-file $RUNNER_TEMP/.env --env TF_VAR_workspace="cr-${{ secrets.RAND }}" --workdir /osdu-azure/templates/osdu-r3-mvp/central_resources self-managed-osdu:latest
+        shell: bash
