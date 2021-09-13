@@ -55,5 +55,5 @@ jobs:
           docker load --input /tmp/self-managed-osdu.tar
 
       - name: Deploy Resources
-        run: docker run --rm --env TF_VAR_workspace="cr-${{ secrets.RAND }} --workdir /osdu-azure/templates/osdu-r3-mvp/central_resources self-managed-osdu:latest
+        run: docker run --rm --env TF_VAR_workspace="cr-${{ secrets.RAND }}" --workdir /osdu-azure/templates/osdu-r3-mvp/central_resources self-managed-osdu:latest
         shell: bash
