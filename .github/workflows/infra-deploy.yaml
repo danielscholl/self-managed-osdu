@@ -51,7 +51,8 @@ jobs:
 
       - name: Load image
         run: |
-          echo ${{ secrets.ENV_FILE }} >> /tmp/.env
+          echo ${{ secrets.ENV_FILE }} > /tmp/.env
+          ls -la /tmp
           docker load --input /tmp/self-managed-osdu.tar
           docker image ls -a
           docker run self-managed-osdu --env-file /tmp/.env  --env TF_VAR_workspace="cr-${{ secrets.RAND }} --workdir /osdu-azure/templates/osdu-r3-mvp/central_resources

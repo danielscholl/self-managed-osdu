@@ -73,5 +73,7 @@ RUN echo "$SSH_PUBLIC_KEY" > /osdu-azure/.ssh/id_rsa.pub && \
   chmod 600 /osdu-azure/.ssh/id_rsa.pub && \
   chmod 600 /osdu-azure/.ssh/id_rsa
 
+# Create env file
+
 ENTRYPOINT [ "/usr/local/bin/terraform.sh" ]
 CMD [ "run" ]
