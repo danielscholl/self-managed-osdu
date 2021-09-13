@@ -54,11 +54,9 @@ jobs:
 
       - name: Setup Environment
         uses: Azure/cli@1.0.4
-        env:
-          FILE_SHARE: configuration
         with:
           inlineScript: |
-            VAULT=$(az keyvault list --resource-group $RESOURCE_GROUP --query [].name -otsv)
+            VAULT=$(az keyvault list --resource-group ${{ secrets.BUILDER_GROUP }} --query [].name -otsv)
             cat > $RUNNER_TEMP/.env << EOF
             ## These variables support AzureRM Backend Storage State
             ARM_TENANT_ID="$(az account show --query homeTenantId -otsv)"

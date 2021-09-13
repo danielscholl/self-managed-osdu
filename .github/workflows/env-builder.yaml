@@ -44,6 +44,13 @@ jobs:
               --parameter azurePrincipalOID=$PRINCIPAL_OID --query properties.parameters.groupName.value -otsv)
             echo "RESOURCE_GROUP=$GROUP" >> $GITHUB_ENV
 
+        - name: Save Resource Group as Secret
+          uses: gliech/create-github-secret-action@v1
+          with:
+            name: BUILDER_GROUP
+            value: ${{ env.RESOURCE_GROUP }}
+            pa_token: ${{ secrets.GH_REPO_TOKEN }}
+
 
       - name: Save Secrets to Vault
         uses: Azure/cli@1.0.4
@@ -133,55 +140,55 @@ jobs:
             az keyvault secret set --vault-name $VAULT --name "envrc" --file envrc
 
 
-      - name: Save .env file as Secret
-        uses: Azure/cli@1.0.4
-        env:
-          FILE_SHARE: configuration
-        with:
-          inlineScript: |
-            VAULT=$(az keyvault list --resource-group $RESOURCE_GROUP --query [].name -otsv)
-            cat > env << EOF
-            ## These variables support AzureRM Backend Storage State
-            ARM_TENANT_ID="$(az account show --query homeTenantId -otsv)"
-            ARM_SUBSCRIPTION_ID="$(az account show --query id -otsv)"
-            ARM_CLIENT_ID="$(az keyvault secret show --id https://$VAULT.vault.azure.net/secrets/terraform-id --query value -otsv)"
-            ARM_CLIENT_SECRET="$(az keyvault secret show --id https://$VAULT.vault.azure.net/secrets/terraform-secret --query value -otsv)"
-            ARM_ACCESS_KEY="$(az keyvault secret show --id https://$VAULT.vault.azure.net/secrets/storage-key --query value -otsv)"
-            TF_VAR_remote_state_account="$(az keyvault secret show --id https://$VAULT.vault.azure.net/secrets/storage --query value -otsv)"
-            TF_VAR_remote_state_container="remote-state-container"
+      # - name: Save .env file as Secret
+      #   uses: Azure/cli@1.0.4
+      #   env:
+      #     FILE_SHARE: configuration
+      #   with:
+      #     inlineScript: |
+      #       VAULT=$(az keyvault list --resource-group $RESOURCE_GROUP --query [].name -otsv)
+      #       cat > env << EOF
+      #       ## These variables support AzureRM Backend Storage State
+      #       ARM_TENANT_ID="$(az account show --query homeTenantId -otsv)"
+      #       ARM_SUBSCRIPTION_ID="$(az account show --query id -otsv)"
+      #       ARM_CLIENT_ID="$(az keyvault secret show --id https://$VAULT.vault.azure.net/secrets/terraform-id --query value -otsv)"
+      #       ARM_CLIENT_SECRET="$(az keyvault secret show --id https://$VAULT.vault.azure.net/secrets/terraform-secret --query value -otsv)"
+      #       ARM_ACCESS_KEY="$(az keyvault secret show --id https://$VAULT.vault.azure.net/secrets/storage-key --query value -otsv)"
+      #       TF_VAR_remote_state_account="$(az keyvault secret show --id https://$VAULT.vault.azure.net/secrets/storage --query value -otsv)"
+      #       TF_VAR_remote_state_container="remote-state-container"
 
-            ## These variables support creating the infrastructure
-            # Global Region Pair Location
-            TF_VAR_cosmosdb_replica_location="$(az account list-locations --query "[?name == '${{ secrets.AZURE_LOCATION }}'].metadata.pairedRegion[0].name" -otsv)"
+      #       ## These variables support creating the infrastructure
+      #       # Global Region Pair Location
+      #       TF_VAR_cosmosdb_replica_location="$(az account list-locations --query "[?name == '${{ secrets.AZURE_LOCATION }}'].metadata.pairedRegion[0].name" -otsv)"
 
-            # Central Resources
-            TF_VAR_principal_appId="$(az keyvault secret show --id https://$VAULT.vault.azure.net/secrets/client-id --query value -otsv)"
-            TF_VAR_principal_name="$principalName"
-            TF_VAR_principal_password="$(az keyvault secret show --id https://$VAULT.vault.azure.net/secrets/client-secret --query value -otsv)"
-            TF_VAR_principal_objectId="$(az keyvault secret show --id https://$VAULT.vault.azure.net/secrets/client-oid --query value -otsv)"
-            TF_VAR_aad_client_id="$(az keyvault secret show --id https://$VAULT.vault.azure.net/secrets/application-id --query value -otsv)"
+      #       # Central Resources
+      #       TF_VAR_principal_appId="$(az keyvault secret show --id https://$VAULT.vault.azure.net/secrets/client-id --query value -otsv)"
+      #       TF_VAR_principal_name="$principalName"
+      #       TF_VAR_principal_password="$(az keyvault secret show --id https://$VAULT.vault.azure.net/secrets/client-secret --query value -otsv)"
+      #       TF_VAR_principal_objectId="$(az keyvault secret show --id https://$VAULT.vault.azure.net/secrets/client-oid --query value -otsv)"
+      #       TF_VAR_aad_client_id="$(az keyvault secret show --id https://$VAULT.vault.azure.net/secrets/application-id --query value -otsv)"
 
-            # Data Partition
-            TF_VAR_elasticsearch_endpoint="${{ secrets.ELASTIC_ENDPOINT }}"
-            TF_VAR_elasticsearch_username="elastic"
-            TF_VAR_elasticsearch_password="${{ secrets.ELASTIC_PASSWORD }}"
+      #       # Data Partition
+      #       TF_VAR_elasticsearch_endpoint="${{ secrets.ELASTIC_ENDPOINT }}"
+      #       TF_VAR_elasticsearch_username="elastic"
+      #       TF_VAR_elasticsearch_password="${{ secrets.ELASTIC_PASSWORD }}"
 
-            # Service Resources
-            TF_VAR_gitops_ssh_url="git@github.com/$GITHUB_REPOSITORY.git"
-            TF_VAR_ssh_public_key_file="/osdu-azure/.ssh/azure-aks-node-ssh-key.pub"
-            TF_VAR_gitops_ssh_key_file="/osdu-azure/.ssh/azure-aks-gitops-ssh-key"
-            EOF
-            base64 env > env.b64
+      #       # Service Resources
+      #       TF_VAR_gitops_ssh_url="git@github.com/$GITHUB_REPOSITORY.git"
+      #       TF_VAR_ssh_public_key_file="/osdu-azure/.ssh/azure-aks-node-ssh-key.pub"
+      #       TF_VAR_gitops_ssh_key_file="/osdu-azure/.ssh/azure-aks-gitops-ssh-key"
+      #       EOF
+      #       base64 env > env.b64
 
-      - name: Read .env file
-        id: envfile
-        uses: juliangruber/read-file-action@v1
-        with:
-          path: ./env.b64
+      # - name: Read .env file
+      #   id: envfile
+      #   uses: juliangruber/read-file-action@v1
+      #   with:
+      #     path: ./env.b64
 
-      - name: Save .env file as Secret
-        uses: gliech/create-github-secret-action@v1
-        with:
-          name: ENV_FILE
-          value: ${{ steps.passphrase.envfile.content }}
-          pa_token: ${{ secrets.GH_REPO_TOKEN }}
+      # - name: Save .env file as Secret
+      #   uses: gliech/create-github-secret-action@v1
+      #   with:
+      #     name: ENV_FILE
+      #     value: ${{ steps.passphrase.envfile.content }}
+      #     pa_token: ${{ secrets.GH_REPO_TOKEN }}
