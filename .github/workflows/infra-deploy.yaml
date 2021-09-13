@@ -52,12 +52,21 @@ jobs:
       - name: Hydrate Image
         run: docker load --input /tmp/self-managed-osdu.tar
 
-      - name: Deploy Resources
+      - name: Setup Environment
         env:
           ENV_FILE: ${{ secrets.ENV_FILE }}
+          HELLO: world
         run: |
-          echo $ENV_FILE | base64 -d > $RUNNER_TEMP/.env
-          cat RUNNER_TEMP/.env
-          cat $RUNNER_TEMP/.env | grep TF_VAR_remote_state_account
-          docker run --rm --env-file $RUNNER_TEMP/.env --env TF_VAR_workspace="cr-${{ secrets.RAND }}" --workdir /osdu-azure/templates/osdu-r3-mvp/central_resources self-managed-osdu:latest
-        shell: bash
+          echo $HELLO
+          echo $ENV_FILE | base64 -d > $RUNNER_TEMP.env
+          ls -la $RUNNER_TEMP
+
+      # - name: Deploy Resources
+      #   env:
+      #     ENV_FILE: ${{ secrets.ENV_FILE }}
+      #   run: |
+      #     echo $ENV_FILE | base64 -d > $RUNNER_TEMP/.env
+      #     cat RUNNER_TEMP/.env
+      #     cat $RUNNER_TEMP/.env | grep TF_VAR_remote_state_account
+      #     # docker run --rm --env-file $RUNNER_TEMP/.env --env TF_VAR_workspace="cr-${{ secrets.RAND }}" --workdir /osdu-azure/templates/osdu-r3-mvp/central_resources self-managed-osdu:latest
+      #   shell: bash
