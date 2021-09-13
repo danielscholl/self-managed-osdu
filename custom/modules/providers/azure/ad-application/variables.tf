@@ -120,7 +120,7 @@ locals {
     }
   }
 
-  required_resource_access = [
+  required_resource_access = var.aad_client_id != "" ? [] : [
     for a in local.api_permissions : {
       resource_app_id = local.service_principals[a.name].application_id
       resource_access = concat(

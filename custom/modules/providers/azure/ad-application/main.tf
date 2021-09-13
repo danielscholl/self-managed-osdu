@@ -13,7 +13,7 @@
 //  limitations under the License.
 
 data "azuread_service_principal" "main" {
-  count        = length(local.api_names)
+  count        = var.aad_client_id != "" ? 0 : length(local.api_names)
   display_name = local.api_names[count.index]
 }
 
