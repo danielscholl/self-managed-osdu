@@ -54,7 +54,8 @@ jobs:
 
       - name: Deploy Resources
         run: |
-          echo ${{ secrets.ENV_FILE }} > /tmp/.env
+          echo "${{ secrets.ENV_FILE }}" > /tmp/.env
+          ls -la /tmp
           cat /tmp/.env
           docker run --rm --env-file /tmp/.env --env TF_VAR_workspace="cr-${{ secrets.RAND }}" --workdir /osdu-azure/templates/osdu-r3-mvp/central_resources self-managed-osdu:latest
           rm /tmp/.env
