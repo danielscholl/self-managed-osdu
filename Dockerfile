@@ -1,5 +1,6 @@
 ### LOCAL BUILD COMMAND
 # docker build -t self-managed-osdu --build-arg SSH_PRIVATE_KEY="$(cat ~/.ssh/id_rsa)" --build-arg SSH_PUBLIC_KEY="$(cat ~/.ssh/id_rsa.pub)" .
+# docker run --env-file .env -it self-managed-osdu
 
 # You can pick any Debian/Ubuntu-based image. 😊
 FROM mcr.microsoft.com/vscode/devcontainers/base:buster
@@ -72,6 +73,5 @@ RUN echo "$SSH_PUBLIC_KEY" > /osdu-azure/.ssh/id_rsa.pub && \
   chmod 600 /osdu-azure/.ssh/id_rsa.pub && \
   chmod 600 /osdu-azure/.ssh/id_rsa
 
-ENTRYPOINT [ "/usr/local/share/docker-init.sh" ]
-CMD [ "sleep", "infinity" ]
-
+ENTRYPOINT [ "/usr/local/bin/terraform.sh" ]
+CMD [ "run" ]
