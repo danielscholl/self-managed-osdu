@@ -53,10 +53,10 @@ jobs:
         run: docker load --input /tmp/self-managed-osdu.tar
 
       - name: Deploy Resources
+        env:
+          ENV_FILE: ${{ secrets.ENV_FILE }}
         run: |
-          echo "${{ secrets.ENV_FILE }}" > /tmp/.env
-          ls -la /tmp
-          cat /tmp/.env
-          docker run --rm --env-file /tmp/.env --env TF_VAR_workspace="cr-${{ secrets.RAND }}" --workdir /osdu-azure/templates/osdu-r3-mvp/central_resources self-managed-osdu:latest
+          echo $ENV_FILE | base64 -d > $RUNNER_TEMP/.env
+          docker run --rm --env-file $RUNNER_TEMP/.env --env TF_VAR_workspace="cr-${{ secrets.RAND }}" --workdir /osdu-azure/templates/osdu-r3-mvp/central_resources self-managed-osdu:latest
           rm /tmp/.env
         shell: bash

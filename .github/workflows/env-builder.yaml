@@ -171,12 +171,13 @@ jobs:
             TF_VAR_ssh_public_key_file="/osdu-azure/.ssh/azure-aks-node-ssh-key.pub"
             TF_VAR_gitops_ssh_key_file="/osdu-azure/.ssh/azure-aks-gitops-ssh-key"
             EOF
+            base64 env > env.b64
 
       - name: Read .env file
         id: envfile
         uses: juliangruber/read-file-action@v1
         with:
-          path: ./env
+          path: ./env.b64
 
       - name: Save .env file as Secret
         uses: gliech/create-github-secret-action@v1
