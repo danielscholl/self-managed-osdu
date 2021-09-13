@@ -58,7 +58,8 @@ jobs:
           HELLO: world
         run: |
           echo $HELLO
-          echo $ENV_FILE | base64 -d > $RUNNER_TEMP.env
+          echo $ENV_FILE
+          echo $ENV_FILE | base64 -d > $RUNNER_TEMP/.env
           ls -la $RUNNER_TEMP
 
       # - name: Deploy Resources
