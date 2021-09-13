@@ -21,4 +21,5 @@ curl -sSL -o /tmp/osdu-downloads/osdu.tar.gz https://community.opengroup.org/osd
 tar -xzvf /tmp/osdu-downloads/osdu.tar.gz -C /osdu-azure --strip-components=2 infra-azure-provisioning-${OSDU_VERSION}/infra/modules
 tar -xzvf /tmp/osdu-downloads/osdu.tar.gz -C /osdu-azure --strip-components=2 infra-azure-provisioning-${OSDU_VERSION}/infra/templates
 tar -xzvf /tmp/osdu-downloads/osdu.tar.gz -C /usr/local/bin --strip-components=3 infra-azure-provisioning-${OSDU_VERSION}/infra/scripts/terraform.sh
+cp /usr/local/bin/terraform.sh /usr/local/bin/deploy && chmod 766 /usr/local/bin/deploy
 echo "Done!"

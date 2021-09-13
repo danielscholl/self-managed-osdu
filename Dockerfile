@@ -1,6 +1,6 @@
 ### LOCAL BUILD COMMAND
 # docker build -t self-managed-osdu --build-arg SSH_PRIVATE_KEY="$(cat ~/.ssh/id_rsa)" --build-arg SSH_PUBLIC_KEY="$(cat ~/.ssh/id_rsa.pub)" .
-# docker run --env-file .env -it self-managed-osdu
+# docker run -it --env-file .env -it self-managed-osdu --env TF_VAR_workspace="cr-local" --workdir /osdu-azure/templates/osdu-r3-mvp/central_resources
 
 # You can pick any Debian/Ubuntu-based image. 😊
 FROM mcr.microsoft.com/vscode/devcontainers/base:buster
@@ -73,7 +73,6 @@ RUN echo "$SSH_PUBLIC_KEY" > /osdu-azure/.ssh/id_rsa.pub && \
   chmod 600 /osdu-azure/.ssh/id_rsa.pub && \
   chmod 600 /osdu-azure/.ssh/id_rsa
 
-# Create env file
 
-ENTRYPOINT [ "/usr/local/bin/terraform.sh" ]
-CMD [ "run" ]
+ENTRYPOINT [ "/usr/local/bin/deploy" ]
+CMD [ "show" ]
