@@ -49,11 +49,13 @@ jobs:
           name: self-managed-osdu
           path: /tmp
 
-      - name: Hydrate Environment and Image
-        run: |
-          echo ${{ secrets.ENV_FILE }} > /tmp/.env
-          docker load --input /tmp/self-managed-osdu.tar
+      - name: Hydrate Image
+        run: docker load --input /tmp/self-managed-osdu.tar
 
       - name: Deploy Resources
-        run: docker run --rm --env-file /tmp/.env --env TF_VAR_workspace="cr-${{ secrets.RAND }}" --workdir /osdu-azure/templates/osdu-r3-mvp/central_resources self-managed-osdu:latest
+        run: |
+          echo ${{ secrets.ENV_FILE }} > /tmp/.env
+          cat /tmp/.env
+          docker run --rm --env-file /tmp/.env --env TF_VAR_workspace="cr-${{ secrets.RAND }}" --workdir /osdu-azure/templates/osdu-r3-mvp/central_resources self-managed-osdu:latest
+          rm /tmp/.env
         shell: bash
