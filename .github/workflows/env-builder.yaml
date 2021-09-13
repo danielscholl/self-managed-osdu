@@ -132,7 +132,8 @@ jobs:
             EOF
             az keyvault secret set --vault-name $VAULT --name "envrc" --file envrc
 
-      - name: Save Application Environment to Vault
+
+      - name: Save .env file as Secret
         uses: Azure/cli@1.0.4
         env:
           FILE_SHARE: configuration
@@ -140,6 +141,16 @@ jobs:
           inlineScript: |
             VAULT=$(az keyvault list --resource-group $RESOURCE_GROUP --query [].name -otsv)
             cat > env << EOF
+            ## These variables support AzureRM Backend Storage State
+            ARM_TENANT_ID="$(az account show --query homeTenantId -otsv)"
+            ARM_SUBSCRIPTION_ID="$(az account show --query id -otsv)"
+            ARM_CLIENT_ID="$(az keyvault secret show --id https://$VAULT.vault.azure.net/secrets/terraform-id --query value -otsv)"
+            ARM_CLIENT_SECRET="$(az keyvault secret show --id https://$VAULT.vault.azure.net/secrets/terraform-secret --query value -otsv)"
+            ARM_ACCESS_KEY="$(az keyvault secret show --id https://$VAULT.vault.azure.net/secrets/storage-key --query value -otsv)"
+            TF_VAR_remote_state_account="$(az keyvault secret show --id https://$VAULT.vault.azure.net/secrets/storage --query value -otsv)"
+            TF_VAR_remote_state_container="remote-state-container"
+
+            ## These variables support creating the infrastructure
             # Global Region Pair Location
             TF_VAR_cosmosdb_replica_location="$(az account list-locations --query "[?name == '${{ secrets.AZURE_LOCATION }}'].metadata.pairedRegion[0].name" -otsv)"
 
@@ -148,6 +159,7 @@ jobs:
             TF_VAR_principal_name="$principalName"
             TF_VAR_principal_password="$(az keyvault secret show --id https://$VAULT.vault.azure.net/secrets/client-secret --query value -otsv)"
             TF_VAR_principal_objectId="$(az keyvault secret show --id https://$VAULT.vault.azure.net/secrets/client-oid --query value -otsv)"
+            TF_VAR_aad_client_id="$(az keyvault secret show --id https://$VAULT.vault.azure.net/secrets/application-id --query value -otsv)"
 
             # Data Partition
             TF_VAR_elasticsearch_endpoint="${{ secrets.ELASTIC_ENDPOINT }}"
@@ -156,5 +168,19 @@ jobs:
 
             # Service Resources
             TF_VAR_gitops_ssh_url="git@github.com/$GITHUB_REPOSITORY.git"
+            TF_VAR_ssh_public_key_file="/osdu-azure/.ssh/azure-aks-node-ssh-key.pub"
+            TF_VAR_gitops_ssh_key_file="/osdu-azure/.ssh/azure-aks-gitops-ssh-key"
             EOF
-            az keyvault secret set --vault-name $VAULT --name "env" --file env
+
+      - name: Read .env file
+        id: envfile
+        uses: juliangruber/read-file-action@v1
+        with:
+          path: ./env
+
+      - name: Save .env file as Secret
+        uses: gliech/create-github-secret-action@v1
+        with:
+          name: ENV_FILE
+          value: ${{ steps.passphrase.envfile.content }}
+          pa_token: ${{ secrets.GH_REPO_TOKEN }}
