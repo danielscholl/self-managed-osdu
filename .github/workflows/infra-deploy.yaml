@@ -26,14 +26,14 @@ jobs:
       uses: docker/build-push-action@v2
       with:
         push: false
-        tags: infrastructure:latest
-        outputs: type=docker,dest=/tmp/infrastructure.tar
+        tags: self-managed-osdu:latest
+        outputs: type=docker,dest=/tmp/self-managed-osdu.tar
 
     - name: Upload Docker Image Artifact
       uses: actions/upload-artifact@v2
       with:
-        name: infrastructure
-        path: /tmp/infrastructure.tar
+        name: self-managed-osdu
+        path: /tmp/self-managed-osdu.tar
 
   central-reources:
     runs-on: ubuntu-latest
@@ -46,10 +46,10 @@ jobs:
         name: Download artifact
         uses: actions/download-artifact@v2
         with:
-          name: infrastructure
+          name: self-managed-osdu
           path: /tmp
       -
         name: Load image
         run: |
-          docker load --input /tmp/infrastructure.tar
+          docker load --input /tmp/self-managed-osdu.tar
           docker image ls -a

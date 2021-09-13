@@ -21,7 +21,7 @@ The solution leverages [Visual Studio Code Remote - Containers](https://code.vis
 
 Open the solution with VSCode `Reopen in Container` and login to the Azure CLI
 
-> This process requires the logged in user to have access to common keyvault secrets and the storage account.
+> This process requires the logged in user to have access to the builder keyvault secrets and the storage account.
 
 ```bash
 # Login to Azure CLI and set the subscription.
@@ -30,39 +30,11 @@ az account set --subscription <your_subscription>
 ```
 
 
-### Required Common Environment Variables
-
-__Environment Variables__
-
-The following variables are required to support this solution.
-
-| name                          | description                |
-| ----------------------------- | -------------------------- |
-| ARM_TENANT_ID                 | Azure AD Tenant Id         |
-| ARM_SUBSCRIPTION_ID           | Azure Subscription Id      |
-| ARM_CLIENT_ID                 | Terraform Principal Id     |
-| ARM_CLIENT_SECRET             | Terraform Principal Secret |
-| ARM_ACCESS_KEY                | Storage Account Access Key |
-| TF_VAR_remote_state_account   | Storage Account Name       |
-| TF_VAR_remote_state_container | Storage Account Container  |
-| TF_VAR_cosmosdb_replica_location   | The Region Pair Location for DR Replication  |
-| TF_VAR_principal_appId             | Environment Principal App Id                 |
-| TF_VAR_principal_name              | Environment Principal Name                   |
-| TF_VAR_principal_password          | Environment Principal Secret                 |
-| TF_VAR_principal_objectId          | Environment Principal Object Id              |
-| TF_VAR_aad_clientId                | Environment Application Id                   |
-| `TF_VAR_elasticsearch_endpoint`    | `Environment Elastic Search Endpoint`        |
-| TF_VAR_elasticsearch_username      | Environment Elastic Search UserName          |
-| `TF_VAR_elasticsearch_password`    | `Environment Elastic Search Password`        |
-| TF_VAR_gitops_ssh_url              | Environment GitOps SSH URL                   |
-| TF_VAR_ssh_public_key_file         | Environment AKS Node SSH Public Key File     |
-| TF_VAR_gitops_ssh_key_file         | Environment GitOps SSH Private Key File      |
-
-> Note: Elastic search information needs to be manually configured.
+### Install Infrastructure from the Container
 
 ```bash
 # Download and set the environment variables
-VAULT=<your_common_vault>
+VAULT=<your_builer_vault>
 az keyvault set-policy --name $VAULT --secret-permissions get list \
   --object-id $(az ad user show --id $(az account show --query user.name -otsv) --query objectId -otsv)
 az keyvault secret show --id https://$VAULT.vault.azure.net/secrets/envrc --query value -otsv > .envrc

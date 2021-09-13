@@ -118,7 +118,7 @@ jobs:
             export TF_VAR_principal_name="$principalName"
             export TF_VAR_principal_password="$(az keyvault secret show --id https://$VAULT.vault.azure.net/secrets/client-secret --query value -otsv)"
             export TF_VAR_principal_objectId="$(az keyvault secret show --id https://$VAULT.vault.azure.net/secrets/client-oid --query value -otsv)"
-            export TF_VAR_aad_clientId="$(az keyvault secret show --id https://$VAULT.vault.azure.net/secrets/application-id --query value -otsv)"
+            export TF_VAR_aad_client_id="$(az keyvault secret show --id https://$VAULT.vault.azure.net/secrets/application-id --query value -otsv)"
 
             # Data Partition
             export TF_VAR_elasticsearch_endpoint="${{ secrets.ELASTIC_ENDPOINT }}"
