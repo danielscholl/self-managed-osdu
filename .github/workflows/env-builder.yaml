@@ -171,9 +171,7 @@ jobs:
             TF_VAR_ssh_public_key_file="/osdu-azure/.ssh/azure-aks-node-ssh-key.pub"
             TF_VAR_gitops_ssh_key_file="/osdu-azure/.ssh/azure-aks-gitops-ssh-key"
             EOF
-            cat env
             base64 env > env.b64
-            cat env.b64
 
       - name: Read .env file
         id: envfile

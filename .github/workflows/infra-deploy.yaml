@@ -57,5 +57,7 @@ jobs:
           ENV_FILE: ${{ secrets.ENV_FILE }}
         run: |
           echo $ENV_FILE | base64 -d > $RUNNER_TEMP/.env
+          cat RUNNER_TEMP/.env
+          cat $RUNNER_TEMP/.env | grep TF_VAR_remote_state_account
           docker run --rm --env-file $RUNNER_TEMP/.env --env TF_VAR_workspace="cr-${{ secrets.RAND }}" --workdir /osdu-azure/templates/osdu-r3-mvp/central_resources self-managed-osdu:latest
         shell: bash
