@@ -26,6 +26,7 @@ jobs:
       uses: docker/build-push-action@v2
       with:
         push: false
+        build-args: SSH_PUBLIC_KEY=${{ secrets.SSH_PUBLIC_KEY }}, SSH_PRIVATE_KEY=${{ secrets.SSH_PRIVATE_KEY }}
         tags: self-managed-osdu:latest
         outputs: type=docker,dest=/tmp/self-managed-osdu.tar
 

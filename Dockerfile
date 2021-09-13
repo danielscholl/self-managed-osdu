@@ -1,3 +1,6 @@
+### LOCAL BUILD COMMAND
+# docker build -t self-managed-osdu --build-arg SSH_PRIVATE_KEY="$(cat ~/.ssh/id_rsa)" --build-arg SSH_PUBLIC_KEY="$(cat ~/.ssh/id_rsa.pub)" .
+
 # You can pick any Debian/Ubuntu-based image. 😊
 FROM mcr.microsoft.com/vscode/devcontainers/base:buster
 
@@ -51,9 +54,24 @@ ARG TFLINT_VERSION=0.8.2
 ARG TERRAGRUNT_VERSION=0.28.1
 RUN bash /tmp/library-scripts/terraform-debian.sh "${TERRAFORM_VERSION}" "${TFLINT_VERSION}" "${TERRAGRUNT_VERSION}"
 
+# Copy Customizations
+COPY custom/modules/**/* /osdu-azure/modules/
+COPY custom/templates/**/* /osdu-azure/templates/
+COPY custom/central.tfvars /osdu-azure/templates/central_resources/custom.tfvars
+COPY custom/partition.tfvars /osdu-azure/templates/data_partition/custom.tfvars
+COPY custom/service.tfvars /osdu-azure/templates/services_resources/custom.tfvars
+
+# Create SSH Keys
+ARG SSH_PUBLIC_KEY
+ARG SSH_PRIVATE_KEY
+RUN mkdir -p /osdu-azure/.ssh && \
+  chmod 0700 /osdu-azure/.ssh
+# Add the keys and set permissions
+RUN echo "$SSH_PUBLIC_KEY" > /osdu-azure/.ssh/id_rsa.pub && \
+  echo "$SSH_PRIVATE_KEY" > /osdu-azure/.ssh/id_rsa && \
+  chmod 600 /osdu-azure/.ssh/id_rsa.pub && \
+  chmod 600 /osdu-azure/.ssh/id_rsa
+
 ENTRYPOINT [ "/usr/local/share/docker-init.sh" ]
 CMD [ "sleep", "infinity" ]
 
-# [Optional] Uncomment this section to install additional OS packages.
-RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
-  && apt-get -y install --no-install-recommends direnv
