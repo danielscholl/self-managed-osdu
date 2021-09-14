@@ -56,8 +56,7 @@ ARG TERRAGRUNT_VERSION=0.28.1
 RUN bash /tmp/library-scripts/terraform-debian.sh "${TERRAFORM_VERSION}" "${TFLINT_VERSION}" "${TERRAGRUNT_VERSION}"
 
 # Copy Customizations
-COPY custom/modules/providers/azure/ad-application/*.tf /osdu-azure/modules/providers/azure/ad-application
-COPY custom/modules/providers/azure/keyvault/*.tf /osdu-azure/modules/providers/azure/keyvault
+COPY custom/modules/providers/azure /osdu-azure/modules/providers/azure
 COPY custom/templates/central_resources/*.tf /osdu-azure/templates/osdu-r3-mvp/central_resources
 COPY custom/templates/data_partition/*.tf /osdu-azure/templates/osdu-r3-mvp/data_partition
 COPY custom/templates/service_resources/*.tf /osdu-azure/templates/osdu-r3-mvp/service_resources
