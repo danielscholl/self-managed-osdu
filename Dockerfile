@@ -1,5 +1,6 @@
 ### LOCAL BUILD COMMAND
-# docker build -t self-managed-osdu --build-arg SSH_PRIVATE_KEY="$(cat ~/.ssh/id_rsa)" --build-arg SSH_PUBLIC_KEY="$(cat ~/.ssh/id_rsa.pub)" .
+# docker build -t self-managed-osdu --build-arg WORKING_DIRECTORY=/osdu-azure/templates/osdu-r3-mvp/central_resources .
+# --build-arg SSH_PRIVATE_KEY="$(cat ~/.ssh/id_rsa)" --build-arg SSH_PUBLIC_KEY="$(cat ~/.ssh/id_rsa.pub)" .
 # docker run -it --env-file .env -it self-managed-osdu --env TF_VAR_workspace="cr-local" --workdir /osdu-azure/templates/osdu-r3-mvp/central_resources
 
 # You can pick any Debian/Ubuntu-based image. 😊
@@ -64,15 +65,14 @@ COPY custom/service.tfvars /osdu-azure/templates/osdu-r3-mvp/service_resources/c
 
 # Create SSH Keys
 ARG SSH_PUBLIC_KEY
-ARG SSH_PRIVATE_KEY
-RUN mkdir -p /osdu-azure/.ssh && \
-  chmod 0700 /osdu-azure/.ssh
+RUN mkdir -p /osdu-azure/.ssh && chmod 0700 /osdu-azure/.ssh
 # Add the keys and set permissions
 RUN echo "$SSH_PUBLIC_KEY" > /osdu-azure/.ssh/id_rsa.pub && \
-  echo "$SSH_PRIVATE_KEY" > /osdu-azure/.ssh/id_rsa && \
-  chmod 600 /osdu-azure/.ssh/id_rsa.pub && \
-  chmod 600 /osdu-azure/.ssh/id_rsa
+  chmod 600 /osdu-azure/.ssh/id_rsa.pub
 
+# Change Template Working Directory
+ARG WORKING_DIRECTORY
+WORKDIR ${WORKING_DIRECTORY}
 
 ENTRYPOINT [ "/usr/local/bin/deploy" ]
 CMD [ "run" ]
