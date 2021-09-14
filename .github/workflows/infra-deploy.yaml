@@ -97,7 +97,7 @@ jobs:
             EOF
 
       - name: Deploy Resources
-        run:|
+        run: |
           docker run --rm --env-file $GITHUB_WORKSPACE/.env \
             --env TF_VAR_workspace="cr-${{ secrets.RAND }}" \
             --env TV_VAR_resource_group_location="${{ secrets.AZURE_LOCATION }}" \
