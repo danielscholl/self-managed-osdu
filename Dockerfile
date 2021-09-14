@@ -66,9 +66,9 @@ COPY custom/service.tfvars /osdu-azure/templates/osdu-r3-mvp/service_resources/c
 # Create SSH Keys
 ARG SSH_PUBLIC_KEY
 RUN mkdir -p /osdu-azure/.ssh && chmod 0700 /osdu-azure/.ssh
-# Add the keys and set permissions
-RUN echo "$SSH_PUBLIC_KEY" > /osdu-azure/.ssh/id_rsa.pub && \
-  chmod 600 /osdu-azure/.ssh/id_rsa.pub
+RUN touch /osdu-azure/.ssh/id_rsa && chmod 600 /osdu-azure/.ssh/id_rsa
+RUN echo "$SSH_PUBLIC_KEY" > /osdu-azure/.ssh/id_rsa.pub && chmod 600 /osdu-azure/.ssh/id_rsa.pub
+
 
 # Change Template Working Directory
 ARG WORKING_DIRECTORY
