@@ -44,12 +44,12 @@ jobs:
               --parameter azurePrincipalOID=$PRINCIPAL_OID --query properties.parameters.groupName.value -otsv)
             echo "RESOURCE_GROUP=$GROUP" >> $GITHUB_ENV
 
-        - name: Save Resource Group as Secret
-          uses: gliech/create-github-secret-action@v1
-          with:
-            name: BUILDER_GROUP
-            value: ${{ env.RESOURCE_GROUP }}
-            pa_token: ${{ secrets.GH_REPO_TOKEN }}
+      - name: Save Resource Group as Secret
+        uses: gliech/create-github-secret-action@v1
+        with:
+          name: BUILDER_GROUP
+          value: ${{ env.RESOURCE_GROUP }}
+          pa_token: ${{ secrets.GH_REPO_TOKEN }}
 
 
       - name: Save Secrets to Vault
