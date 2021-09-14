@@ -18,6 +18,11 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
+      - name: Azure Login
+        uses: Azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1
 
@@ -28,12 +33,6 @@ jobs:
           push: false
           build-args: SSH_PUBLIC_KEY=${{ secrets.SSH_PUBLIC_KEY }}, SSH_PRIVATE_KEY=${{ secrets.SSH_PRIVATE_KEY }}
           tags: self-managed-osdu:latest
-          outputs: type=docker,dest=/tmp/self-managed-osdu.tar
-
-      - name: Azure Login
-        uses: Azure/login@v1
-        with:
-          creds: ${{ secrets.AZURE_CREDENTIALS }}
 
       - name: Retrieve Environment Settings
         uses: Azure/cli@1.0.4
