@@ -66,36 +66,36 @@ jobs:
             STORAGE_KEY=$(az storage account keys list --resource-group ${{ secrets.BUILDER_GROUP }} --account-name $STORAGE_NAME --query '[0].value' -o tsv)
             cat > $GITHUB_WORKSPACE/.env << EOF
             ## These variables support AzureRM Backend Storage State
-            ARM_TENANT_ID="$(az account show --query homeTenantId -otsv)"
-            ARM_SUBSCRIPTION_ID="$(az account show --query id -otsv)"
-            ARM_CLIENT_ID="$(az keyvault secret show --id https://$VAULT.vault.azure.net/secrets/terraform-id --query value -otsv)"
-            ARM_CLIENT_SECRET="$(az keyvault secret show --id https://$VAULT.vault.azure.net/secrets/terraform-secret --query value -otsv)"
+            ARM_TENANT_ID=$(az account show --query homeTenantId -otsv)
+            ARM_SUBSCRIPTION_ID=$(az account show --query id -otsv)
+            ARM_CLIENT_ID=$(az keyvault secret show --id https://$VAULT.vault.azure.net/secrets/terraform-id --query value -otsv)
+            ARM_CLIENT_SECRET=$(az keyvault secret show --id https://$VAULT.vault.azure.net/secrets/terraform-secret --query value -otsv)
             ARM_ACCESS_KEY=$STORAGE_KEY
-            TF_VAR_remote_state_account="$STORAGE_NAME"
-            TF_VAR_remote_state_container="remote-state-container"
+            TF_VAR_remote_state_account=$STORAGE_NAME
+            TF_VAR_remote_state_container=remote-state-container
 
             ## These variables support creating the infrastructure
             # Global Region Pair Location
-            TF_VAR_cosmosdb_replica_location="$(az account list-locations --query "[?name == '${{ secrets.AZURE_LOCATION }}'].metadata.pairedRegion[0].name" -otsv)"
+            TF_VAR_cosmosdb_replica_location=$(az account list-locations --query "[?name == '${{ secrets.AZURE_LOCATION }}'].metadata.pairedRegion[0].name" -otsv)
 
             # Central Resources
-            TF_VAR_principal_appId="$(az keyvault secret show --id https://$VAULT.vault.azure.net/secrets/client-id --query value -otsv)"
-            TF_VAR_principal_name="$principalName"
-            TF_VAR_principal_password="$(az keyvault secret show --id https://$VAULT.vault.azure.net/secrets/client-secret --query value -otsv)"
-            TF_VAR_principal_objectId="$(az keyvault secret show --id https://$VAULT.vault.azure.net/secrets/client-oid --query value -otsv)"
-            TF_VAR_aad_client_id="$(az keyvault secret show --id https://$VAULT.vault.azure.net/secrets/application-id --query value -otsv)"
+            TF_VAR_principal_appId=$(az keyvault secret show --id https://$VAULT.vault.azure.net/secrets/client-id --query value -otsv)
+            TF_VAR_principal_name=$principalName
+            TF_VAR_principal_password=$(az keyvault secret show --id https://$VAULT.vault.azure.net/secrets/client-secret --query value -otsv)
+            TF_VAR_principal_objectId=$(az keyvault secret show --id https://$VAULT.vault.azure.net/secrets/client-oid --query value -otsv)
+            TF_VAR_aad_client_id=$(az keyvault secret show --id https://$VAULT.vault.azure.net/secrets/application-id --query value -otsv)
 
             # Data Partition
-            TF_VAR_elasticsearch_endpoint="${{ secrets.ELASTIC_ENDPOINT }}"
-            TF_VAR_elasticsearch_username="elastic"
-            TF_VAR_elasticsearch_password="${{ secrets.ELASTIC_PASSWORD }}"
+            TF_VAR_elasticsearch_endpoint=${{ secrets.ELASTIC_ENDPOINT }}
+            TF_VAR_elasticsearch_username=elastic
+            TF_VAR_elasticsearch_password=${{ secrets.ELASTIC_PASSWORD }}
 
             # Service Resources
-            TF_VAR_gitops_ssh_url="git@github.com/$GITHUB_REPOSITORY.git"
-            TF_VAR_ssh_public_key_file="/osdu-azure/.ssh/azure-aks-node-ssh-key.pub"
-            TF_VAR_gitops_ssh_key_file="/osdu-azure/.ssh/azure-aks-gitops-ssh-key"
+            TF_VAR_gitops_ssh_url=git@github.com/$GITHUB_REPOSITORY.git
+            TF_VAR_ssh_public_key_file=/osdu-azure/.ssh/azure-aks-node-ssh-key.pub
+            TF_VAR_gitops_ssh_key_file=/osdu-azure/.ssh/azure-aks-gitops-ssh-key
             EOF
 
       - name: Deploy Resources
-        run: cat $GITHUB_WORKSPACE/.env && docker run -it --rm --env-file $GITHUB_WORKSPACE/.env --env TF_VAR_workspace="cr-${{ secrets.RAND }}" --workdir /osdu-azure/templates/osdu-r3-mvp/central_resources self-managed-osdu:latest
+        run: docker run --rm --env-file $GITHUB_WORKSPACE/.env --env TF_VAR_workspace="cr-${{ secrets.RAND }}" --workdir /osdu-azure/templates/osdu-r3-mvp/central_resources self-managed-osdu:latest
         shell: bash
