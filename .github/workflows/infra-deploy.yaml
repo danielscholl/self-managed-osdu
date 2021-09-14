@@ -68,6 +68,7 @@ jobs:
             ARM_SUBSCRIPTION_ID="$(az account show --query id -otsv)"
             ARM_CLIENT_ID="$(az keyvault secret show --id https://$VAULT.vault.azure.net/secrets/terraform-id --query value -otsv)"
             ARM_CLIENT_SECRET="$(az keyvault secret show --id https://$VAULT.vault.azure.net/secrets/terraform-secret --query value -otsv)"
+            ARM_ACCESS_KEY="$(az keyvault secret show --id https://$VAULT.vault.azure.net/secrets/storage-key --query value -otsv | base64)"
             TF_VAR_remote_state_account="$(az keyvault secret show --id https://$VAULT.vault.azure.net/secrets/storage --query value -otsv)"
             TF_VAR_remote_state_container="remote-state-container"
 
