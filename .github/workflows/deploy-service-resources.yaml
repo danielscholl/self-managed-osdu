@@ -65,14 +65,13 @@ jobs:
 
       - name: Deploy Resources
         run: |
-          docker run --rm --env-file $GITHUB_WORKSPACE/.env \
-            --env TF_VAR_workspace=${{ env.SR_WORKSPACE }} \
-            --env TF_VAR_resource_group_location=${{ secrets.AZURE_LOCATION }} \
+          docker run --rm --env-file $SR_WORKSPACE/.env \
+            --env TF_VAR_workspace=${{ env.CR_WORKSPACE }} \
+            --env TF_VAR_resource_group_location="${{ secrets.AZURE_LOCATION }}" \
             --env TF_VAR_central_resources_workspace_name=${{ env.CR_WORKSPACE }} \
-            --env TF_VAR_resource_group_location=${{ secrets.AZURE_LOCATION }} \
-            --env TF_VAR_gitops_ssh_url=git@github.com/$GITHUB_REPOSITORY.git \
-            --env TF_VAR_ssh_public_key_file=/osdu-azure/.ssh/id_rsa.pub \
-            --env TF_VAR_gitops_ssh_key_file=/osdu-azure/.ssh/id_rsa \
+            --env TF_VAR_gitops_ssh_url="git@github.com/$GITHUB_REPOSITORY.git" \
+            --env TF_VAR_ssh_public_key_file="/osdu-azure/.ssh/id_rsa.pub" \
+            --env TF_VAR_gitops_ssh_key_file="/osdu-azure/.ssh/id_rsa" \
             self-managed-osdu:${{ env.IMAGE_TAG }}
 
           rm $GITHUB_WORKSPACE/.env
