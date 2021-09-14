@@ -58,9 +58,9 @@ RUN bash /tmp/library-scripts/terraform-debian.sh "${TERRAFORM_VERSION}" "${TFLI
 # Copy Customizations
 COPY custom/modules/**/* /osdu-azure/modules/
 COPY custom/templates/**/* /osdu-azure/templates/
-COPY custom/central.tfvars /osdu-azure/templates/central_resources/custom.tfvars
-COPY custom/partition.tfvars /osdu-azure/templates/data_partition/custom.tfvars
-COPY custom/service.tfvars /osdu-azure/templates/service_resources/custom.tfvars
+COPY custom/central.tfvars /osdu-azure/templates/osdu-r3-mvp/central_resources/custom.tfvars
+COPY custom/partition.tfvars /osdu-azure/templates/osdu-r3-mvp/data_partition/custom.tfvars
+COPY custom/service.tfvars /osdu-azure/templates/osdu-r3-mvp/service_resources/custom.tfvars
 
 # Create SSH Keys
 ARG SSH_PUBLIC_KEY
