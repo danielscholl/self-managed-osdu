@@ -98,12 +98,17 @@ jobs:
             EOF
 
       - name: Deploy Resources
+        env:
+          WORKSPACE: "cr-${{ secrets.RAND }}"
+          TEMPLATE: /osdu-azure/templates/osdu-r3-mvp/central_resources
         run: |
           docker run --rm --env-file $GITHUB_WORKSPACE/.env \
-            --env TF_VAR_workspace="cr-${{ secrets.RAND }}" \
+            --env TF_VAR_workspace=${{ env.WORKSPACE }} \
             --env TF_VAR_resource_group_location="${{ secrets.AZURE_LOCATION }}" \
-            --workdir /osdu-azure/templates/osdu-r3-mvp/central_resources \
+            --workdir ${{ env.TEMPLATE }} \
             self-managed-osdu:latest
+
+          rm $GITHUB_WORKSPACE/.env
         shell: bash
 
 
@@ -157,12 +162,16 @@ jobs:
             EOF
 
       - name: Deploy Azure Resources
+        env:
+          CR_WORKSPACE: "cr-${{ secrets.RAND }}"
+          DP_WORKSPACE: "dp-${{ secrets.RAND }}"
+          TEMPLATE: /osdu-azure/templates/osdu-r3-mvp/data_partition
         run: |
           docker run --rm --env-file $GITHUB_WORKSPACE/.env \
-            --env TF_VAR_workspace="dp-${{ secrets.RAND }}" \
+            --env TF_VAR_workspace=${{ env.DP_WORKSPACE }} \
             --env TF_VAR_resource_group_location="${{ secrets.AZURE_LOCATION }}" \
-            --env TF_VAR_central_resources_workspace_name="cr-${{ secrets.RAND }}" \
-            --workdir /osdu-azure/templates/osdu-r3-mvp/data_partition \
+            --env TF_VAR_central_resources_workspace_name=${{ env.CR_WORKSPACE }}  \
+            --workdir ${{ env.TEMPLATE }} \
             self-managed-osdu:latest
         shell: bash
 
