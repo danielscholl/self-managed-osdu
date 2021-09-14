@@ -95,7 +95,5 @@ jobs:
             EOF
 
       - name: Deploy Resources
-        run: |
-          ls -l $GITHUB_WORKSPACE/.env
-          docker run --rm --env-file $GITHUB_WORKSPACE/.env --env TF_VAR_workspace="cr-${{ secrets.RAND }}" --workdir /osdu-azure/templates/osdu-r3-mvp/central_resources self-managed-osdu:latest
+        run: docker run --rm --env-file $GITHUB_WORKSPACE/.env --env TF_VAR_workspace="cr-${{ secrets.RAND }}" --workdir /osdu-azure/templates/osdu-r3-mvp/central_resources self-managed-osdu:latest
         shell: bash
