@@ -57,7 +57,7 @@ jobs:
       - name: Load Image
         run: docker load --input /tmp/self-managed-osdu.tar
 
-      - name: Environment Setup
+      - name: Deploy Resources
         uses: Azure/cli@1.0.4
         with:
           inlineScript: |
@@ -94,8 +94,5 @@ jobs:
             TF_VAR_gitops_ssh_key_file="/osdu-azure/.ssh/azure-aks-gitops-ssh-key"
             EOF
 
-      - name: Deploy Resources
-        run: |
-          ls -l $RUNNER_TEMP/.env
-          docker run --rm --env-file $RUNNER_TEMP/.env --env TF_VAR_workspace="cr-${{ secrets.RAND }}" --workdir /osdu-azure/templates/osdu-r3-mvp/central_resources self-managed-osdu:latest
-        shell: bash
+            ls -l $RUNNER_TEMP/.env
+            docker run --rm --env-file $RUNNER_TEMP/.env --env TF_VAR_workspace="cr-${{ secrets.RAND }}" --workdir /osdu-azure/templates/osdu-r3-mvp/central_resources self-managed-osdu:latest
