@@ -1,4 +1,4 @@
-name: '4. Deploy Data Partition'
+name: '3. Deploy Central Resources'
 
 on:
   workflow_dispatch:
@@ -11,7 +11,7 @@ env:
 jobs:
 
   deploy:
-    name: Deploy Data Partition
+    name: Deploy Central Resources
     runs-on: ubuntu-latest
     steps:
 
@@ -33,8 +33,7 @@ jobs:
         with:
           push: false
           build-args: WORKING_DIRECTORY=${{ env.TEMPLATE }}
-          # build-args: SSH_PUBLIC_KEY=${{ secrets.SSH_PUBLIC_KEY }}, SSH_PRIVATE_KEY=${{ secrets.SSH_PRIVATE_KEY }}
-          tags: self-managed-osdu:partition
+          tags: self-managed-osdu:central
           outputs: type=docker,dest=/tmp/self-managed-osdu.tar
 
       - name: Load Docker Image
@@ -61,22 +60,22 @@ jobs:
             # Global Region Pair Location
             TF_VAR_cosmosdb_replica_location=$(az account list-locations --query "[?name == '${{ secrets.AZURE_LOCATION }}'].metadata.pairedRegion[0].name" -otsv)
 
-            # Data Partition
-            TF_VAR_elasticsearch_endpoint=${{ secrets.ELASTIC_ENDPOINT }}
-            TF_VAR_elasticsearch_username=elastic
-            TF_VAR_elasticsearch_password=${{ secrets.ELASTIC_PASSWORD }}
+            # Central Resources
+            TF_VAR_principal_appId=$(az keyvault secret show --id https://$VAULT.vault.azure.net/secrets/client-id --query value -otsv)
+            TF_VAR_principal_name=$principalName
+            TF_VAR_principal_password=$(az keyvault secret show --id https://$VAULT.vault.azure.net/secrets/client-secret --query value -otsv)
+            TF_VAR_principal_objectId=$(az keyvault secret show --id https://$VAULT.vault.azure.net/secrets/client-oid --query value -otsv)
+            TF_VAR_aad_client_id=$(az keyvault secret show --id https://$VAULT.vault.azure.net/secrets/application-id --query value -otsv)
             EOF
 
-      - name: Deploy Azure Resources
+      - name: Deploy Resources
         env:
-          CR_WORKSPACE: "cr-${{ secrets.RAND }}"
-          DP_WORKSPACE: "dp-${{ secrets.RAND }}"
-          TEMPLATE: /osdu-azure/templates/osdu-r3-mvp/data_partition
+          WORKSPACE: "cr-${{ secrets.RAND }}"
         run: |
           docker run --rm --env-file $GITHUB_WORKSPACE/.env \
-            --env TF_VAR_workspace=${{ env.DP_WORKSPACE }} \
+            --env TF_VAR_workspace=${{ env.WORKSPACE }} \
             --env TF_VAR_resource_group_location="${{ secrets.AZURE_LOCATION }}" \
-            --env TF_VAR_central_resources_workspace_name=${{ env.CR_WORKSPACE }}  \
-            --workdir ${{ env.TEMPLATE }} \
-            self-managed-osdu:partition
+            self-managed-osdu:central
+
+          rm $GITHUB_WORKSPACE/.env
         shell: bash
