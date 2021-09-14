@@ -75,4 +75,4 @@ RUN echo "$SSH_PUBLIC_KEY" > /osdu-azure/.ssh/id_rsa.pub && \
 
 
 ENTRYPOINT [ "/usr/local/bin/deploy" ]
-CMD [ "show" ]
+CMD [ "run" ]
