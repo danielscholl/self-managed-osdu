@@ -11,7 +11,7 @@ env:
   DP_WORKSPACE: "dp-${{ secrets.RAND }}"
   SR_WORKSPACE: "sr-${{ secrets.RAND }}"
   IMAGE_TAG: latest
-  TEMPLATE: /osdu-azure/templates/osdu-r3-mvp/central_resources
+  TEMPLATE: /osdu-azure/templates/osdu-r3-mvp/service_resources
 
 jobs:
 
