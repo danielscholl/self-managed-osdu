@@ -62,15 +62,17 @@ jobs:
         with:
           inlineScript: |
             VAULT=$(az keyvault list --resource-group ${{ secrets.BUILDER_GROUP }} --query [].name -otsv)
+            STORAGE_NAME=$(az keyvault secret show --id https://$VAULT.vault.azure.net/secrets/storage --query value -otsv)
+            STORAGE_KEY=$(az storage account keys list --resource-group ${{ secrets.BUILDER_GROUP }} --account-name $STORAGE_NAME --query '[0].value' -o tsv)
             cat > $GITHUB_WORKSPACE/.env << EOF
             ## These variables support AzureRM Backend Storage State
             ARM_TENANT_ID="$(az account show --query homeTenantId -otsv)"
             ARM_SUBSCRIPTION_ID="$(az account show --query id -otsv)"
             ARM_CLIENT_ID="$(az keyvault secret show --id https://$VAULT.vault.azure.net/secrets/terraform-id --query value -otsv)"
             ARM_CLIENT_SECRET="$(az keyvault secret show --id https://$VAULT.vault.azure.net/secrets/terraform-secret --query value -otsv)"
-            TF_VAR_remote_state_account="$(az keyvault secret show --id https://$VAULT.vault.azure.net/secrets/storage --query value -otsv)"
+            ARM_ACCESS_KEY=$STORAGE_KEY
+            TF_VAR_remote_state_account="$STORAGE_NAME"
             TF_VAR_remote_state_container="remote-state-container"
-            TV_VAR_resource_group_name="${{ secrets.BUILDER_GROUP}}"
 
             ## These variables support creating the infrastructure
             # Global Region Pair Location
