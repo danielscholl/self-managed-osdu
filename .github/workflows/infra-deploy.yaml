@@ -100,7 +100,7 @@ jobs:
         run:|
           docker run --rm --env-file $GITHUB_WORKSPACE/.env \
             --env TF_VAR_workspace="cr-${{ secrets.RAND }}" \
-            --env TV_VAR_resource_group_location="${{ secrets.AZURE_LOCATION }}"
+            --env TV_VAR_resource_group_location="${{ secrets.AZURE_LOCATION }}" \
             --workdir /osdu-azure/templates/osdu-r3-mvp/central_resources \
             self-managed-osdu:latest
         shell: bash
