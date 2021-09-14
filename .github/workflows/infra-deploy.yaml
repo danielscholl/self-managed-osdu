@@ -62,7 +62,7 @@ jobs:
         with:
           inlineScript: |
             VAULT=$(az keyvault list --resource-group ${{ secrets.BUILDER_GROUP }} --query [].name -otsv)
-            cat > $RUNNER_TEMP/.env << EOF
+            cat > $GITHUB_WORKSPACE/.env << EOF
             ## These variables support AzureRM Backend Storage State
             ARM_TENANT_ID="$(az account show --query homeTenantId -otsv)"
             ARM_SUBSCRIPTION_ID="$(az account show --query id -otsv)"
@@ -96,6 +96,6 @@ jobs:
 
       - name: Deploy Resources
         run: |
-          ls -l $RUNNER_TEMP/.env
-          docker run --rm --env-file $RUNNER_TEMP/.env --env TF_VAR_workspace="cr-${{ secrets.RAND }}" --workdir /osdu-azure/templates/osdu-r3-mvp/central_resources self-managed-osdu:latest
+          ls -l $GITHUB_WORKSPACE/.env
+          docker run --rm --env-file $GITHUB_WORKSPACE/.env --env TF_VAR_workspace="cr-${{ secrets.RAND }}" --workdir /osdu-azure/templates/osdu-r3-mvp/central_resources self-managed-osdu:latest
         shell: bash
