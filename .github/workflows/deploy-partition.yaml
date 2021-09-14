@@ -1,4 +1,4 @@
-name: '3. Deploy Infrastructure'
+name: '4. Deploy Data Partition'
 
 on:
   workflow_dispatch:
