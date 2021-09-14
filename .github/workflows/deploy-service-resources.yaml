@@ -1,4 +1,4 @@
-name: '5. Deploy Service Resources'
+name: '4. Deploy Service Resources'
 
 on:
   workflow_dispatch:
