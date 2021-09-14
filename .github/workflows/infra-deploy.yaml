@@ -161,64 +161,65 @@ jobs:
           docker run --rm --env-file $GITHUB_WORKSPACE/.env \
             --env TF_VAR_workspace="dp-${{ secrets.RAND }}" \
             --env TF_VAR_resource_group_location="${{ secrets.AZURE_LOCATION }}" \
+            --env TF_VAR_central_resources_workspace_name="cr-${{ secrets.RAND }}" \
             --workdir /osdu-azure/templates/osdu-r3-mvp/data_partition \
             self-managed-osdu:latest
         shell: bash
 
-  service-resources:
-    name: Deploy Service Resources
-    runs-on: ubuntu-latest
-    needs: central-resources
-    steps:
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v1
+  # service-resources:
+  #   name: Deploy Service Resources
+  #   runs-on: ubuntu-latest
+  #   needs: central-resources
+  #   steps:
+  #     - name: Set up Docker Buildx
+  #       uses: docker/setup-buildx-action@v1
 
-      - name: Download artifacts
-        uses: actions/download-artifact@v2
-        with:
-          name: self-managed-osdu
-          path: /tmp
+  #     - name: Download artifacts
+  #       uses: actions/download-artifact@v2
+  #       with:
+  #         name: self-managed-osdu
+  #         path: /tmp
 
-      - name: Load Docker Image
-        run: docker load --input /tmp/self-managed-osdu.tar
+  #     - name: Load Docker Image
+  #       run: docker load --input /tmp/self-managed-osdu.tar
 
-      - name: Azure Login
-        uses: Azure/login@v1
-        with:
-          creds: ${{ secrets.AZURE_CREDENTIALS }}
+  #     - name: Azure Login
+  #       uses: Azure/login@v1
+  #       with:
+  #         creds: ${{ secrets.AZURE_CREDENTIALS }}
 
-      - name: Retrieve Environment Settings
-        uses: Azure/cli@1.0.4
-        with:
-          inlineScript: |
-            VAULT=$(az keyvault list --resource-group ${{ secrets.BUILDER_GROUP }} --query [].name -otsv)
-            STORAGE=$(az keyvault secret show --id https://$VAULT.vault.azure.net/secrets/storage --query value -otsv)
+  #     - name: Retrieve Environment Settings
+  #       uses: Azure/cli@1.0.4
+  #       with:
+  #         inlineScript: |
+  #           VAULT=$(az keyvault list --resource-group ${{ secrets.BUILDER_GROUP }} --query [].name -otsv)
+  #           STORAGE=$(az keyvault secret show --id https://$VAULT.vault.azure.net/secrets/storage --query value -otsv)
 
-            cat > $GITHUB_WORKSPACE/.env << EOF
-            ## These variables support AzureRM Backend Storage State
-            ARM_TENANT_ID=$(az account show --query homeTenantId -otsv)
-            ARM_SUBSCRIPTION_ID=$(az account show --query id -otsv)
-            ARM_CLIENT_ID=$(az keyvault secret show --id https://$VAULT.vault.azure.net/secrets/terraform-id --query value -otsv)
-            ARM_CLIENT_SECRET=$(az keyvault secret show --id https://$VAULT.vault.azure.net/secrets/terraform-secret --query value -otsv)
-            ARM_ACCESS_KEY=$(az storage account keys list --resource-group ${{ secrets.BUILDER_GROUP }} --account-name $STORAGE --query '[0].value' -o tsv)
-            TF_VAR_remote_state_account=$STORAGE
-            TF_VAR_remote_state_container=remote-state-container
+  #           cat > $GITHUB_WORKSPACE/.env << EOF
+  #           ## These variables support AzureRM Backend Storage State
+  #           ARM_TENANT_ID=$(az account show --query homeTenantId -otsv)
+  #           ARM_SUBSCRIPTION_ID=$(az account show --query id -otsv)
+  #           ARM_CLIENT_ID=$(az keyvault secret show --id https://$VAULT.vault.azure.net/secrets/terraform-id --query value -otsv)
+  #           ARM_CLIENT_SECRET=$(az keyvault secret show --id https://$VAULT.vault.azure.net/secrets/terraform-secret --query value -otsv)
+  #           ARM_ACCESS_KEY=$(az storage account keys list --resource-group ${{ secrets.BUILDER_GROUP }} --account-name $STORAGE --query '[0].value' -o tsv)
+  #           TF_VAR_remote_state_account=$STORAGE
+  #           TF_VAR_remote_state_container=remote-state-container
 
-            ## These variables support creating the infrastructure
-            # Global Region Pair Location
-            TF_VAR_cosmosdb_replica_location=$(az account list-locations --query "[?name == '${{ secrets.AZURE_LOCATION }}'].metadata.pairedRegion[0].name" -otsv)
+  #           ## These variables support creating the infrastructure
+  #           # Global Region Pair Location
+  #           TF_VAR_cosmosdb_replica_location=$(az account list-locations --query "[?name == '${{ secrets.AZURE_LOCATION }}'].metadata.pairedRegion[0].name" -otsv)
 
-            # Service Resources
-            TF_VAR_gitops_ssh_url=git@github.com/$GITHUB_REPOSITORY.git
-            TF_VAR_ssh_public_key_file=/osdu-azure/.ssh/azure-aks-node-ssh-key.pub
-            TF_VAR_gitops_ssh_key_file=/osdu-azure/.ssh/azure-aks-gitops-ssh-key
-            EOF
+  #           # Service Resources
+  #           TF_VAR_gitops_ssh_url=git@github.com/$GITHUB_REPOSITORY.git
+  #           TF_VAR_ssh_public_key_file=/osdu-azure/.ssh/azure-aks-node-ssh-key.pub
+  #           TF_VAR_gitops_ssh_key_file=/osdu-azure/.ssh/azure-aks-gitops-ssh-key
+  #           EOF
 
-      - name: Deploy Azure Resources
-        run: |
-          docker run --rm --env-file $GITHUB_WORKSPACE/.env \
-            --env TF_VAR_workspace="sr-${{ secrets.RAND }}" \
-            --env TF_VAR_resource_group_location="${{ secrets.AZURE_LOCATION }}" \
-            --workdir /osdu-azure/templates/osdu-r3-mvp/service_resources \
-            self-managed-osdu:latest
-        shell: bash
+  #     - name: Deploy Azure Resources
+  #       run: |
+  #         docker run --rm --env-file $GITHUB_WORKSPACE/.env \
+  #           --env TF_VAR_workspace="sr-${{ secrets.RAND }}" \
+  #           --env TF_VAR_resource_group_location="${{ secrets.AZURE_LOCATION }}" \
+  #           --workdir /osdu-azure/templates/osdu-r3-mvp/service_resources \
+  #           self-managed-osdu:latest
+  #       shell: bash
