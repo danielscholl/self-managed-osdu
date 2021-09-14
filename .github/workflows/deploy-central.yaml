@@ -11,7 +11,7 @@ env:
 jobs:
 
   deploy:
-    name: Deploy Central Resources
+    name: Deploy Azure Resources
     runs-on: ubuntu-latest
     steps:
 

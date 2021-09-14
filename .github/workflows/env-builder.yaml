@@ -1,4 +1,4 @@
-name: '2. Prepare Builder'
+name: '2. Environment Builder'
 
 on:
   workflow_dispatch:
