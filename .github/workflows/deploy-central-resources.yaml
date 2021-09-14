@@ -7,10 +7,11 @@ env:
   AZURE_PRINCIPAL_NAME: osdu-azure-credentials
   OSDU_PRINCIPAL_NAME: osdu-credentials
   OSDU_APPLICATION_NAME: osdu-application
-  TEMPLATE: /osdu-azure/templates/osdu-r3-mvp/central_resources
   CR_WORKSPACE: "cr-${{ secrets.RAND }}"
   DP_WORKSPACE: "dp-${{ secrets.RAND }}"
   SR_WORKSPACE: "sr-${{ secrets.RAND }}"
+  TEMPLATE: /osdu-azure/templates/osdu-r3-mvp/central_resources
+  IMAGE_TAG: central
 
 jobs:
 
@@ -35,7 +36,7 @@ jobs:
         with:
           push: false
           build-args: WORKING_DIRECTORY=${{ env.TEMPLATE }}
-          tags: self-managed-osdu:central
+          tags: self-managed-osdu:${{ env.IMAGE_TAG }}
           outputs: type=docker,dest=/tmp/self-managed-osdu.tar
 
       - name: Load Docker Image
@@ -74,7 +75,7 @@ jobs:
             --env TF_VAR_workspace=${{ env.CR_WORKSPACE }} \
             --env TF_VAR_resource_group_location="${{ secrets.AZURE_LOCATION }}" \
             --env TF_VAR_principal_name=${{ env.OSDU_PRINCIPAL_NAME }}
-            self-managed-osdu:central
+            self-managed-osdu:${{ env.IMAGE_TAG }}
 
           rm $GITHUB_WORKSPACE/.env
         shell: bash

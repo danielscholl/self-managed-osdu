@@ -7,11 +7,12 @@ env:
   AZURE_PRINCIPAL_NAME: osdu-azure-credentials
   OSDU_PRINCIPAL_NAME: osdu-credentials
   OSDU_APPLICATION_NAME: osdu-application
-  TEMPLATE: /osdu-azure/templates/osdu-r3-mvp/data_partition
   CR_WORKSPACE: "cr-${{ secrets.RAND }}"
   DP_WORKSPACE: "dp-${{ secrets.RAND }}"
   SR_WORKSPACE: "sr-${{ secrets.RAND }}"
-  ELASTIC_USERNAME: "elastic"
+  ELASTIC_USERNAME: elastic
+  TEMPLATE: /osdu-azure/templates/osdu-r3-mvp/data_partition
+  IMAGE_TAG: partition
 
 jobs:
 
@@ -36,7 +37,7 @@ jobs:
         with:
           push: false
           build-args: WORKING_DIRECTORY=${{ env.TEMPLATE }}
-          tags: self-managed-osdu:partition
+          tags: self-managed-osdu:${{ env.IMAGE_TAG }}
           outputs: type=docker,dest=/tmp/self-managed-osdu.tar
 
       - name: Load Docker Image
@@ -72,7 +73,7 @@ jobs:
             --env TF_VAR_elasticsearch_endpoint=${{ secrets.ELASTIC_ENDPOINT }} \
             --env TF_VAR_elasticsearch_username=${{ env.ELASTIC_USERNAME }} \
             --env TF_VAR_elasticsearch_password=${{ secrets.ELASTIC_PASSWORD }} \
-            self-managed-osdu:partition
+            self-managed-osdu:${{ env.IMAGE_TAG }}
 
           rm $GITHUB_WORKSPACE/.env
         shell: bash

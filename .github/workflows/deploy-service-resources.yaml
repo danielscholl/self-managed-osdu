@@ -7,10 +7,11 @@ env:
   AZURE_PRINCIPAL_NAME: osdu-azure-credentials
   OSDU_PRINCIPAL_NAME: osdu-credentials
   OSDU_APPLICATION_NAME: osdu-application
-  TEMPLATE: /osdu-azure/templates/osdu-r3-mvp/service_resources
   CR_WORKSPACE: "cr-${{ secrets.RAND }}"
   DP_WORKSPACE: "dp-${{ secrets.RAND }}"
   SR_WORKSPACE: "sr-${{ secrets.RAND }}"
+  TEMPLATE: /osdu-azure/templates/osdu-r3-mvp/service_resources
+  IMAGE_TAG: services
 
 jobs:
 
@@ -35,7 +36,7 @@ jobs:
         with:
           push: false
           build-args: WORKING_DIRECTORY=${{ env.TEMPLATE }}, SSH_PUBLIC_KEY=${{ secrets.SSH_PUBLIC_KEY }}
-          tags: self-managed-osdu:services
+          tags: self-managed-osdu:${{ env.IMAGE_TAG }}
           outputs: type=docker,dest=/tmp/self-managed-osdu.tar
 
       - name: Load Docker Image
@@ -70,7 +71,7 @@ jobs:
             --env TF_VAR_resource_group_location="${{ secrets.AZURE_LOCATION }}" \
             --env TF_VAR_gitops_ssh_url=git@github.com/$GITHUB_REPOSITORY.git \
             --env TF_VAR_ssh_public_key_file=/osdu-azure/.ssh/azure-aks-node-ssh-key.pub \
-            self-managed-osdu:partition
+            self-managed-osdu:${{ env.IMAGE_TAG }}
 
           rm $GITHUB_WORKSPACE/.env
         shell: bash
