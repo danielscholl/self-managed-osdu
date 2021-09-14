@@ -57,7 +57,9 @@ RUN bash /tmp/library-scripts/terraform-debian.sh "${TERRAFORM_VERSION}" "${TFLI
 
 # Copy Customizations
 COPY custom/modules/**/* /osdu-azure/modules/
-COPY custom/templates/**/* /osdu-azure/templates/osdu-r3-mvp/
+COPY custom/templates/central_resources/*.tf /osdu-azure/templates/osdu-r3-mvp/central_resources
+COPY custom/templates/data_partition/*.tf /osdu-azure/templates/osdu-r3-mvp/data_partition
+COPY custom/templates/service_resources/*.tf /osdu-azure/templates/osdu-r3-mvp/service_resources
 COPY custom/central.tfvars /osdu-azure/templates/osdu-r3-mvp/central_resources/custom.tfvars
 COPY custom/partition.tfvars /osdu-azure/templates/osdu-r3-mvp/data_partition/custom.tfvars
 COPY custom/service.tfvars /osdu-azure/templates/osdu-r3-mvp/service_resources/custom.tfvars
