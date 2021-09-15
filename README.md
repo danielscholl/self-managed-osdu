@@ -108,7 +108,7 @@ az ad app create --display-name "osdu-application" \
 }
 ```
 
-6. `ELASTIC_ENDPOINT`: The endpoint of the Elasticsearch cluster. 
+6. `ELASTIC_ENDPOINT`: The endpoint of the Elasticsearch cluster.
 
 ```bash
 # Sample Format
@@ -120,8 +120,12 @@ https://my-osdu.es.southcentralus.azure.elastic-cloud.com:9243
 
 ## Execute Github Actions
 
+Deployment of a self managed osdu instance is performed by executing github actions to work with a [Deploment Stamp](https://docs.microsoft.com/en-us/azure/architecture/patterns/deployment-stamp).  Currently there is only support for 1 Stamp Deployment.
+
 Deployment is performed by executing the following Github Actions:
 
-1. Generate Secrets: This action creates additional Github Secrets into the Forked Repository.
+1. __Stamp Initialize__: This action initializes the neccesary items in the github that are necessary in the provisioning process of a Deployment Stamp.
 
-2. Prepare Builder: This action deploys the builder resources into an Azure Subscription.
+2. __Stamp Builder__: This action provisions builder resources necessary in the provisioning process of a Deployment Stamp.
+
+3. __Stamp Deployment__: This action deploys a `Self Managed OSDU` Deployment Stamp.
