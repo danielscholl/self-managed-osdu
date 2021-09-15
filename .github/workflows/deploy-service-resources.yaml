@@ -65,8 +65,8 @@ jobs:
             TF_VAR_cosmosdb_replica_location=$(az account list-locations --query "[?name == '${{ secrets.AZURE_LOCATION }}'].metadata.pairedRegion[0].name" -otsv)
 
             # Service Resources
-            TF_VAR_ssh_public_key_file=/workspace/.ssh/id_rsa.pub
-            TF_VAR_gitops_ssh_key_file=/workspace/.ssh/id_rsa
+            TF_VAR_ssh_public_key_file=/osdu-azure/.ssh/id_rsa.pub
+            TF_VAR_gitops_ssh_key_file=/osdu-azure/.ssh/id_rsa
             EOF
 
       - name: Retrieve SSH Keys
@@ -78,7 +78,7 @@ jobs:
 
       - name: Deploy Resources
         run: |
-          cat $GITHUB_WORKSPACE/.ssh/id_rsa.pub
+          cat $GITHUB_WORKSPACE/.ssh/id_rsa.pub | base64
           docker run --rm -v ${{ github.workspace }}:/workspace --env-file $GITHUB_WORKSPACE/.env \
             --env TF_VAR_workspace=${{ env.SR_WORKSPACE }} \
             --env TF_VAR_resource_group_location="${{ secrets.AZURE_LOCATION }}" \
