@@ -1,4 +1,4 @@
-name: '2. Initialize Stamp Builder'
+name: 'Stamp Builder'
 
 on:
   workflow_dispatch:

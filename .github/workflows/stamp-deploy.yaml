@@ -1,4 +1,4 @@
-name: '3. Provision Deployment Stamp'
+name: 'stamp-deploy'
 
 on:
   workflow_dispatch:
