@@ -73,7 +73,6 @@ jobs:
 
       - name: Deploy Resources
         run: |
-          cat $GITHUB_WORKSPACE/.ssh/id_rsa.pub | base64
           docker run --rm -v ${{ github.workspace }}:/workspace --env-file $GITHUB_WORKSPACE/.env \
             --env TF_VAR_workspace=${{ env.SR_WORKSPACE }} \
             --env TF_VAR_resource_group_location="${{ secrets.AZURE_LOCATION }}" \
@@ -84,4 +83,5 @@ jobs:
             self-managed-osdu:${{ env.IMAGE_TAG }}
 
           rm $GITHUB_WORKSPACE/.env
+          rm -rf $GITHUB_WORKSPACE/.ssh
         shell: bash
