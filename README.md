@@ -1,8 +1,8 @@
 # Self Managed OSDU
 
-[![1. Generate Secrets](https://github.com/danielscholl/self-managed-osdu/actions/workflows/secret-generator.yaml/badge.svg)](https://github.com/danielscholl/self-managed-osdu/actions/workflows/secret-generator.yaml)
+[![1. Stamp Initialize](https://github.com/danielscholl/self-managed-osdu/actions/workflows/stamp-init.yaml/badge.svg)](https://github.com/danielscholl/self-managed-osdu/actions/workflows/stamp-init.yaml)
 
-[![2. Prepare Builder](https://github.com/danielscholl/self-managed-osdu/actions/workflows/env-builder.yaml/badge.svg)](https://github.com/danielscholl/self-managed-osdu/actions/workflows/env-builder.yaml)
+[![2. Stamp Builder](https://github.com/danielscholl/self-managed-osdu/actions/workflows/stamp-builder.yaml/badge.svg)](https://github.com/danielscholl/self-managed-osdu/actions/workflows/stamp-builder.yaml)
 
 This project is a prototype developed to deploy [OSDU on Azure](https://community.opengroup.org/osdu/platform/deployment-and-operations/infra-azure-provisioning) on self managed infrastructure.
 
