@@ -68,15 +68,15 @@ jobs:
             EOF
 
       - name: Retrieve SSH Keys
-        run: |
-          mkdir .ssh
-          cat > $GITHUB_WORKSPACE/.ssh/id_rsa.pub << EOF
-          Put SSH Key here
-          EOF
+        env:
+          SSH_PUBLIC_KEY: ${{ secrets.SSH_PUBLIC_KEY }}
+        run: 'mkdir -p $GITHUB_WORKSPACE/.ssh && echo "$SSH_PUBLIC_KEY" > $GITHUB_WORKSPACE/.ssh/id_rsa.pub'
+        shell: bash
+
 
       - name: Deploy Resources
         run: |
-          cat /workspace/.ssh
+          cat $GITHUB_WORKSPACE/.ssh/id_rsa.pub
           docker run --rm ${{ github.workspace }}:/workspace --env-file $GITHUB_WORKSPACE/.env \
             --env TF_VAR_workspace=${{ env.SR_WORKSPACE }} \
             --env TF_VAR_resource_group_location="${{ secrets.AZURE_LOCATION }}" \
