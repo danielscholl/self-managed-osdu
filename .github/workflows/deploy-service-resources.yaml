@@ -35,7 +35,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           push: false
-          build-args: WORKING_DIRECTORY=${{ env.TEMPLATE }}
+          build-args: SSH_PUBLIC_KEY=${{ secrets.SSH_PUBLIC_KEY }}, WORKING_DIRECTORY=${{ env.TEMPLATE }}
           tags: self-managed-osdu:${{ env.IMAGE_TAG }}
           outputs: type=docker,dest=/tmp/self-managed-osdu.tar
 
@@ -63,8 +63,8 @@ jobs:
             TF_VAR_cosmosdb_replica_location=$(az account list-locations --query "[?name == '${{ secrets.AZURE_LOCATION }}'].metadata.pairedRegion[0].name" -otsv)
 
             # Service Resources
-            TF_VAR_ssh_public_key_file=/osdu-azure/.ssh/id_rsa.pub
-            TF_VAR_gitops_ssh_key_file=/osdu-azure/.ssh/id_rsa
+            TF_VAR_ssh_public_key_file=/workspace/.ssh/id_rsa.pub
+            TF_VAR_gitops_ssh_key_file=/workspace/.ssh/id_rsa
             EOF
 
       - name: Retrieve SSH Keys
@@ -77,7 +77,7 @@ jobs:
       - name: Deploy Resources
         run: |
           cat $GITHUB_WORKSPACE/.ssh/id_rsa.pub
-          docker run --rm ${{ github.workspace }}:/workspace --env-file $GITHUB_WORKSPACE/.env \
+          docker run --rm -v ${{ github.workspace }}:/workspace --env-file $GITHUB_WORKSPACE/.env \
             --env TF_VAR_workspace=${{ env.SR_WORKSPACE }} \
             --env TF_VAR_resource_group_location="${{ secrets.AZURE_LOCATION }}" \
             --env TF_VAR_gitops_ssh_url=git@github.com/$GITHUB_REPOSITORY.git \
