@@ -67,9 +67,17 @@ jobs:
             TF_VAR_gitops_ssh_key_file=/osdu-azure/.ssh/id_rsa
             EOF
 
+      - name: Retrieve SSH Keys
+        run: |
+          mkdir .ssh
+          cat > $GITHUB_WORKSPACE/.ssh/id_rsa.pub << EOF
+          Put SSH Key here
+          EOF
+
       - name: Deploy Resources
         run: |
-          docker run --rm --env-file $GITHUB_WORKSPACE/.env \
+          cat /workspace/.ssh
+          docker run --rm ${{ github.workspace }}:/workspace --env-file $GITHUB_WORKSPACE/.env \
             --env TF_VAR_workspace=${{ env.SR_WORKSPACE }} \
             --env TF_VAR_resource_group_location="${{ secrets.AZURE_LOCATION }}" \
             --env TF_VAR_gitops_ssh_url=git@github.com/$GITHUB_REPOSITORY.git \
