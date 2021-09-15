@@ -1,4 +1,4 @@
-name: 'Stamp Initialize'
+name: '1. Stamp Initialize'
 
 on:
   workflow_dispatch:
