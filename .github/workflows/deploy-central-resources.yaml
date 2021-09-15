@@ -10,13 +10,14 @@ env:
   CR_WORKSPACE: "cr-${{ secrets.RAND }}"
   DP_WORKSPACE: "dp-${{ secrets.RAND }}"
   SR_WORKSPACE: "sr-${{ secrets.RAND }}"
-  TEMPLATE: /osdu-azure/templates/osdu-r3-mvp/central_resources
   IMAGE_TAG: latest
 
 jobs:
 
   deploy:
-    name: Deploy Azure Resources
+    name: Execute Terraform Template osdu-r3-mvp/central_resources
+    env:
+      TEMPLATE: /osdu-azure/templates/osdu-r3-mvp/central_resources
     runs-on: ubuntu-latest
     steps:
 

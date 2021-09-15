@@ -11,12 +11,13 @@ env:
   DP_WORKSPACE: "dp-${{ secrets.RAND }}"
   SR_WORKSPACE: "sr-${{ secrets.RAND }}"
   IMAGE_TAG: latest
-  TEMPLATE: /osdu-azure/templates/osdu-r3-mvp/service_resources
 
 jobs:
 
   deploy:
-    name: Deploy Azure Resources
+    name: Execute Terraform Template osdu-r3-mvp/service_resources
+    env:
+      TEMPLATE: /osdu-azure/templates/osdu-r3-mvp/service_resources
     runs-on: ubuntu-latest
     steps:
 

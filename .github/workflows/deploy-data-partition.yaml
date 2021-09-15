@@ -17,7 +17,9 @@ env:
 jobs:
 
   deploy:
-    name: Deploy Azure Resources
+    name: Execute Terraform Template osdu-r3-mvp/data_partition
+    env:
+      TEMPLATE: /osdu-azure/templates/osdu-r3-mvp/data_partition
     runs-on: ubuntu-latest
     steps:
 
