@@ -68,7 +68,6 @@ jobs:
 
       - name: Deploy Resources
         run: |
-          cat $GITHUB_WORKSPACE/.ssh/id_rsa.pub | base64
           docker run --rm --env-file $GITHUB_WORKSPACE/.env \
             --env TF_VAR_workspace=${{ env.SR_WORKSPACE }} \
             --env TF_VAR_resource_group_location="${{ secrets.AZURE_LOCATION }}" \
