@@ -35,7 +35,9 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           push: false
-          build-args: WORKING_DIRECTORY=${{ env.TEMPLATE }}
+          build-args: |
+            WORKING_DIRECTORY=${{ env.TEMPLATE }}
+            SSH_PUBLIC_KEY=${{ secrets.SSH_PUBLIC_KEY }}
           tags: self-managed-osdu:${{ env.IMAGE_TAG }}
           outputs: type=docker,dest=/tmp/self-managed-osdu.tar
 
