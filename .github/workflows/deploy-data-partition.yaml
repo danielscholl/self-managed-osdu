@@ -70,6 +70,7 @@ jobs:
             --env TF_VAR_workspace=${{ env.DP_WORKSPACE }} \
             --env TF_VAR_resource_group_location="${{ secrets.AZURE_LOCATION }}" \
             --env TF_VAR_central_resources_workspace_name=${{ env.CR_WORKSPACE }}  \
+            --env TF_VAR_service_resources_workspace_name=${{ env.SR_WORKSPACE }}  \
             --env TF_VAR_elasticsearch_endpoint=${{ secrets.ELASTIC_ENDPOINT }} \
             --env TF_VAR_elasticsearch_username=${{ env.ELASTIC_USERNAME }} \
             --env TF_VAR_elasticsearch_password=${{ secrets.ELASTIC_PASSWORD }} \
