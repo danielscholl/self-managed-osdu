@@ -72,7 +72,7 @@ jobs:
       - name: Deploy Resources
         run: |
           docker run --rm --env-file $GITHUB_WORKSPACE/.env \
-            --env TF_VAR_workspace=${{ env.CR_WORKSPACE }} \
+            --env TF_VAR_workspace=${{ env.SR_WORKSPACE }} \
             --env TF_VAR_resource_group_location="${{ secrets.AZURE_LOCATION }}" \
             --env TF_VAR_principal_name=${{ env.OSDU_PRINCIPAL_NAME }} \
             self-managed-osdu:${{ env.IMAGE_TAG }}
