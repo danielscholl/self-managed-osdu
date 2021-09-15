@@ -11,6 +11,7 @@ env:
 jobs:
 
   generator:
+    name: Generate Repo Secrets
     runs-on: ubuntu-latest
 
     steps:

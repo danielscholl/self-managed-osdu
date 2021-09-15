@@ -11,6 +11,7 @@ env:
 jobs:
 
   builder:
+    name: Provision Builder
     runs-on: ubuntu-latest
 
     steps:
