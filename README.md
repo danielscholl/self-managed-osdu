@@ -15,7 +15,11 @@ __Goals:__
 3. Allow for customizations and configuration.
 4. Provide access to and control of all software components installed.
 
-![architecture](./docs/images/architecture.png)
+
+| ![architecture](./docs/images/architecture.png) |
+|:--:|
+| <b>Architecture Image - Fig.1</b>|
+
 
 ## Initialize the project
 
@@ -119,9 +123,10 @@ https://my-osdu.es.southcentralus.azure.elastic-cloud.com:9243
 7. `ELASTIC_PASSWORD`: The password of the Elasticsearch cluster.
 
 
-__Diagram__
+| ![secrets](./docs/images/secrets.png) |
+|:--:|
+| <b>Secrets Image - Fig.2</b>|
 
-![secrets](./docs/images/secrets.png)
 
 
 ## Execute Github Actions
