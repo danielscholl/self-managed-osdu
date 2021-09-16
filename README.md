@@ -16,9 +16,7 @@ __Goals:__
 4. Provide access to and control of all software components installed.
 
 
-| ![architecture](./docs/images/architecture.png) |
-|:--:|
-| <b>Architecture Image - Fig.1</b>|
+![architecture](./docs/images/architecture.png)
 
 
 ## Initialize the project
@@ -123,9 +121,7 @@ https://my-osdu.es.southcentralus.azure.elastic-cloud.com:9243
 7. `ELASTIC_PASSWORD`: The password of the Elasticsearch cluster.
 
 
-| ![secrets](./docs/images/secrets.png) |
-|:--:|
-| <b>Secrets Image - Fig.2</b>|
+![secrets](./docs/images/secrets.png)
 
 
 
@@ -145,11 +141,9 @@ Deployment of a self managed osdu instance is performed by executing github acti
 
 The following resources are created in Azure for the Deployment Stamp.
 
-| ![secrets](./docs/images/groups.png) |
-| ![secrets](./docs/images/builder.png) |
-| ![secrets](./docs/images/controlplane.png) |
-| ![secrets](./docs/images/dataplane.png) |
-| ![secrets](./docs/images/partition.png) |
-|:--:|
-| <b>Azure Resources - Fig.3</b> |
+![secrets](./docs/images/groups.png)
+![secrets](./docs/images/builder.png)
+![secrets](./docs/images/controlplane.png)
+![secrets](./docs/images/dataplane.png)
+![secrets](./docs/images/partition.png)
 
