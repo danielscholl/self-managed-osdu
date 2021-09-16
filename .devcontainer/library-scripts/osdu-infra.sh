@@ -9,7 +9,7 @@
 #
 # Syntax: ./osdu-infra.sh
 
-OSDU_VERSION=${1:-"v0.11.0"}
+OSDU_VERSION=${1:-"v0.11.2"}
 
 set -e
 
