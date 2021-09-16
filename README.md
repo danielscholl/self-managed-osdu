@@ -139,3 +139,17 @@ Deployment of a self managed osdu instance is performed by executing github acti
 2. __[Stamp Builder](../../actions/workflows/stamp-builder.yaml)__: This action provisions builder resources necessary in the provisioning process of a Deployment Stamp.
 
 3. __[Stamp Provision](../../actions/workflows/stamp-provision.yaml)__: This action provisions resources for the Deployment Stamp.
+
+
+## Azure Resources
+
+The following resources are created in Azure for the Deployment Stamp.
+
+| ![secrets](./docs/images/groups.png) |
+| ![secrets](./docs/images/builder.png) |
+| ![secrets](./docs/images/controlplane.png) |
+| ![secrets](./docs/images/dataplane.png) |
+| ![secrets](./docs/images/partition.png) |
+|:--:|
+| <b>Azure Resources - Fig.3</b> |
+
