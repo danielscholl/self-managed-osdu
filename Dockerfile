@@ -58,11 +58,13 @@ ARG TERRAGRUNT_VERSION=0.28.1
 RUN bash /tmp/library-scripts/terraform-debian.sh "${TERRAFORM_VERSION}" "${TFLINT_VERSION}" "${TERRAGRUNT_VERSION}"
 
 # Copy Customizations
-COPY custom/modules/providers/azure /osdu-azure/modules/providers/azure
-COPY custom/templates /osdu-azure/templates/osdu-r3-mvp
-COPY custom/central.tfvars /osdu-azure/templates/osdu-r3-mvp/central_resources/custom.tfvars
-COPY custom/partition.tfvars /osdu-azure/templates/osdu-r3-mvp/data_partition/custom.tfvars
-COPY custom/service.tfvars /osdu-azure/templates/osdu-r3-mvp/service_resources/custom.tfvars
+COPY customizations/modules/providers/azure /osdu-azure/modules/providers/azure
+COPY customizations/templates /osdu-azure/templates/osdu-r3-mvp
+
+# Copy Configurations
+COPY configuration/controlplane.tfvars /osdu-azure/templates/osdu-r3-mvp/central_resources/custom.tfvars
+COPY configuration/dataplane.tfvars /osdu-azure/templates/osdu-r3-mvp/service_resources/custom.tfvars
+COPY configuration/partition.tfvars /osdu-azure/templates/osdu-r3-mvp/data_partition/custom.tfvars
 
 # Create SSH Keys
 ARG SSH_PUBLIC_KEY
