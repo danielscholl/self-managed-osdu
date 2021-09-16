@@ -15,8 +15,8 @@ This project is a prototype developed to deploy [OSDU on Azure](https://communit
 The solution is designed to operate from a fork instance of the project.
 
 1. Fork the Project into your own GitHub Account.
-2. Edit the Configuration Settings. _(see [Configuration](configuration/README.md))_
-3. Add any customizations (Optional) _(see [Customizations](customizations/README.md))_
+2. Edit the Configuration Settings. _(see [Configuration](configuration))_
+3. Add any customizations (Optional) _(see [Customizations](customizations))_
 
 
 ## Configure GitHub Secrets
