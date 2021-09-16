@@ -118,12 +118,11 @@ __Diagram__
 
 ## Execute Github Actions
 
-Deployment of a self managed osdu instance is performed by executing github actions to work with a [Deploment Stamp](https://docs.microsoft.com/en-us/azure/architecture/patterns/deployment-stamp).  Currently there is only support for 1 Stamp Deployment.
+Deployment of a self managed osdu instance is performed by executing github actions to work with a [Deployment Stamp](https://docs.microsoft.com/en-us/azure/architecture/patterns/deployment-stamp).  Currently there is only support for the deployment of 1 stamp.
 
-Deployment is performed by executing the following Github Actions:
 
-1. __Stamp Initialize__: This action initializes the neccesary items in the github that are necessary in the provisioning process of a Deployment Stamp.
+1. __[Stamp Initialize](./actions/workflows/stamp-init.yaml)__: This action initializes the neccesary items in the github that are necessary in the provisioning process of a Deployment Stamp.
 
-2. __Stamp Builder__: This action provisions builder resources necessary in the provisioning process of a Deployment Stamp.
+2. __[Stamp Builder](./actions/workflows/stamp-builder.yaml)__: This action provisions builder resources necessary in the provisioning process of a Deployment Stamp.
 
-3. __Stamp Provision__: This action provisions resources for a `Self Managed OSDU` Deployment Stamp.
+3. __[Stamp Provision](./actions/workflows/stamp-provision.yaml)__: This action provisions resources for the Deployment Stamp.
