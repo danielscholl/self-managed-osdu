@@ -126,4 +126,4 @@ Deployment is performed by executing the following Github Actions:
 
 2. __Stamp Builder__: This action provisions builder resources necessary in the provisioning process of a Deployment Stamp.
 
-3. __Stamp Provision: This action provisions resources for a `Self Managed OSDU` Deployment Stamp.
+3. __Stamp Provision__: This action provisions resources for a `Self Managed OSDU` Deployment Stamp.
