@@ -123,6 +123,6 @@ Deployment of a self managed osdu instance is performed by executing github acti
 
 1. __[Stamp Initialize](../../actions/workflows/stamp-init.yaml)__: This action initializes the neccesary items in the github that are necessary in the provisioning process of a Deployment Stamp.
 
-2. __[Stamp Builder](./actions/workflows/stamp-builder.yaml)__: This action provisions builder resources necessary in the provisioning process of a Deployment Stamp.
+2. __[Stamp Builder](../../actions/workflows/stamp-builder.yaml)__: This action provisions builder resources necessary in the provisioning process of a Deployment Stamp.
 
-3. __[Stamp Provision](./actions/workflows/stamp-provision.yaml)__: This action provisions resources for the Deployment Stamp.
+3. __[Stamp Provision](../../actions/workflows/stamp-provision.yaml)__: This action provisions resources for the Deployment Stamp.
