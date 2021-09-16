@@ -4,7 +4,7 @@
 
 [![2. Stamp Builder](https://github.com/danielscholl/self-managed-osdu/actions/workflows/stamp-builder.yaml/badge.svg)](https://github.com/danielscholl/self-managed-osdu/actions/workflows/stamp-builder.yaml)
 
-[![3. Stamp Deployment](https://github.com/danielscholl/self-managed-osdu/actions/workflows/stamp-deploy.yaml/badge.svg)](https://github.com/danielscholl/self-managed-osdu/actions/workflows/stamp-deploy.yaml)
+[![3. Stamp Provision](https://github.com/danielscholl/self-managed-osdu/actions/workflows/stamp-provision.yaml/badge.svg)](https://github.com/danielscholl/self-managed-osdu/actions/workflows/stamp-provision.yaml)
 
 This project is a prototype developed to deploy [OSDU on Azure](https://community.opengroup.org/osdu/platform/deployment-and-operations/infra-azure-provisioning) on self managed infrastructure.
 
@@ -132,4 +132,4 @@ Deployment is performed by executing the following Github Actions:
 
 2. __Stamp Builder__: This action provisions builder resources necessary in the provisioning process of a Deployment Stamp.
 
-3. __Stamp Deployment__: This action deploys a `Self Managed OSDU` Deployment Stamp.
+3. __Stamp Provision: This action provisions resources for a `Self Managed OSDU` Deployment Stamp.

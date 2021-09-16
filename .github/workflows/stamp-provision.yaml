@@ -1,4 +1,4 @@
-name: '3. Stamp Deployment'
+name: '3. Stamp Provision'
 
 on:
   workflow_dispatch:
@@ -7,15 +7,16 @@ env:
   AZURE_PRINCIPAL_NAME: osdu-azure-credentials
   OSDU_PRINCIPAL_NAME: osdu-credentials
   OSDU_APPLICATION_NAME: osdu-application
-  CR_WORKSPACE: "cr-${{ secrets.RAND }}"
-  DP_WORKSPACE: "dp-${{ secrets.RAND }}"
-  SR_WORKSPACE: "sr-${{ secrets.RAND }}"
+  CONTROLPLANE_WORKSPACE: "ctl-${{ secrets.RAND }}"
+  DATAPLANE_WORKSPACE: "dpl-${{ secrets.RAND }}"
+  PARTITION_WORKSPACE: "prt-${{ secrets.RAND }}"
+
   IMAGE_TAG: latest
 
 jobs:
 
-  central-resources:
-    name: osdu-r3-mvp/central_resources
+  control-plane:
+    name: Control Plane
     env:
       TEMPLATE: /osdu-azure/templates/osdu-r3-mvp/central_resources
     runs-on: ubuntu-latest
@@ -73,7 +74,7 @@ jobs:
       - name: Deploy Resources
         run: |
           docker run --rm --env-file $GITHUB_WORKSPACE/.env \
-            --env TF_VAR_workspace=${{ env.CR_WORKSPACE }} \
+            --env TF_VAR_workspace=${{ env.CONTROLPLANE_WORKSPACE }} \
             --env TF_VAR_resource_group_location="${{ secrets.AZURE_LOCATION }}" \
             --env TF_VAR_principal_name=${{ env.OSDU_PRINCIPAL_NAME }} \
             self-managed-osdu:${{ env.IMAGE_TAG }}
@@ -81,12 +82,12 @@ jobs:
           rm $GITHUB_WORKSPACE/.env
         shell: bash
 
-  service-resources:
-    name: osdu-r3-mvp/service_resources
+  data-plane:
+    name: Data Plane
     env:
       TEMPLATE: /osdu-azure/templates/osdu-r3-mvp/service_resources
     runs-on: ubuntu-latest
-    needs: central-resources
+    needs: control-plane
     steps:
 
       - name: Checkout
@@ -138,10 +139,10 @@ jobs:
       - name: Deploy Resources
         run: |
           docker run --rm --env-file $GITHUB_WORKSPACE/.env \
-            --env TF_VAR_workspace=${{ env.SR_WORKSPACE }} \
+            --env TF_VAR_workspace=${{ env.DATAPLANE_WORKSPACE }} \
             --env TF_VAR_resource_group_location="${{ secrets.AZURE_LOCATION }}" \
             --env TF_VAR_gitops_ssh_url=git@github.com/$GITHUB_REPOSITORY.git \
-            --env TF_VAR_central_resources_workspace_name=${{ env.CR_WORKSPACE }} \
+            --env TF_VAR_central_resources_workspace_name=${{ env.CONTROLPLANE_WORKSPACE }} \
             --env TF_VAR_ssh_public_key_file=/osdu-azure/.ssh/id_rsa.pub \
             --env TF_VAR_gitops_ssh_key_file=/osdu-azure/.ssh/id_rsa \
             self-managed-osdu:${{ env.IMAGE_TAG }}
@@ -149,14 +150,13 @@ jobs:
           rm $GITHUB_WORKSPACE/.env
         shell: bash
 
-
-  data-partition:
-    name: osdu-r3-mvp/data_partition
+  partition:
+    name: Partition
     env:
       TEMPLATE: /osdu-azure/templates/osdu-r3-mvp/data_partition
       ELASTIC_USERNAME: elastic
     runs-on: ubuntu-latest
-    needs: service-resources
+    needs: data-plane
     steps:
 
       - name: Checkout
@@ -205,10 +205,10 @@ jobs:
       - name: Deploy Azure Resources
         run: |
           docker run --rm --env-file $GITHUB_WORKSPACE/.env \
-            --env TF_VAR_workspace=${{ env.DP_WORKSPACE }} \
+            --env TF_VAR_workspace=${{ env.PARTITION_WORKSPACE }} \
             --env TF_VAR_resource_group_location="${{ secrets.AZURE_LOCATION }}" \
-            --env TF_VAR_central_resources_workspace_name=${{ env.CR_WORKSPACE }}  \
-            --env TF_VAR_service_resources_workspace_name=${{ env.SR_WORKSPACE }}  \
+            --env TF_VAR_central_resources_workspace_name=${{ env.CONTROLPLANE_WORKSPACE }}  \
+            --env TF_VAR_service_resources_workspace_name=${{ env.DATAPLANE_WORKSPACE }}  \
             --env TF_VAR_elasticsearch_endpoint=${{ secrets.ELASTIC_ENDPOINT }} \
             --env TF_VAR_elasticsearch_username=${{ env.ELASTIC_USERNAME }} \
             --env TF_VAR_elasticsearch_password=${{ secrets.ELASTIC_PASSWORD }} \
