@@ -6,7 +6,14 @@
 
 [![3. Stamp Provision](https://github.com/danielscholl/self-managed-osdu/actions/workflows/stamp-provision.yaml/badge.svg)](https://github.com/danielscholl/self-managed-osdu/actions/workflows/stamp-provision.yaml)
 
-This project is a prototype developed to deploy [OSDU on Azure](https://community.opengroup.org/osdu/platform/deployment-and-operations/infra-azure-provisioning) on self managed infrastructure.
+This is a prototype used to evaluate the possibility of providing an easy self managed instance of [OSDU on Azure](https://community.opengroup.org/osdu/platform/deployment-and-operations/infra-azure-provisioning) to ease the development experience of developing components or extensions that might run on top or inside of the OSDU Platform that runs in Azure.
+
+__Goals:__
+
+1. Build an automation layer on top of OSDU on Azure without impacting the official OSDU Platform.
+2. Ease the amount of required knowledge needed to deploy the platform.
+3. Allow for customizations and configuration.
+4. Provide access to and control of all software components installed.
 
 ![architecture](./docs/images/architecture.png)
 
