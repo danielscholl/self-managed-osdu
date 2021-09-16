@@ -4,9 +4,10 @@
 # docker run -it --env-file .env -it self-managed-osdu --env TF_VAR_workspace="cr-local" --workdir /osdu-azure/templates/osdu-r3-mvp/central_resources
 
 # You can pick any Debian/Ubuntu-based image. 😊
-FROM mcr.microsoft.com/vscode/devcontainers/base:buster
+# FROM mcr.microsoft.com/vscode/devcontainers/base:buster
+FROM debian:buster
 
-COPY .devcontainer/library-scripts/*.sh /tmp/library-scripts/
+COPY scripts/*.sh /tmp/library-scripts/
 
 # [Option] Install zsh
 ARG INSTALL_ZSH="true"
@@ -57,8 +58,8 @@ ARG TERRAGRUNT_VERSION=0.28.1
 RUN bash /tmp/library-scripts/terraform-debian.sh "${TERRAFORM_VERSION}" "${TFLINT_VERSION}" "${TERRAGRUNT_VERSION}"
 
 # Copy Customizations
-# COPY custom/modules/providers/azure /osdu-azure/modules/providers/azure
-# COPY custom/templates /osdu-azure/templates/osdu-r3-mvp
+COPY custom/modules/providers/azure /osdu-azure/modules/providers/azure
+COPY custom/templates /osdu-azure/templates/osdu-r3-mvp
 COPY custom/central.tfvars /osdu-azure/templates/osdu-r3-mvp/central_resources/custom.tfvars
 COPY custom/partition.tfvars /osdu-azure/templates/osdu-r3-mvp/data_partition/custom.tfvars
 COPY custom/service.tfvars /osdu-azure/templates/osdu-r3-mvp/service_resources/custom.tfvars
