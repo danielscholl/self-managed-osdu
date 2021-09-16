@@ -21,19 +21,13 @@ The solution is designed to operate from a fork instance of the project.
 
 ## Configure GitHub Secrets
 
+Secrets are managed using [Github Repository Secrets](https://docs.github.com/en/actions/reference/encrypted-secrets) some secrets are required to be created manually while others are created automatically by running Github Actions
+
+__Manually Created Secrets__
+
 1. `GH_REPO_TOKEN`: A personal access token with `repo` scope.
-
-A Personal Access Token with `repo` scope is used by the Github Actions to configure additional Github Secrets into the Forked Repository.
-
-
 2. `AZURE_LOCATION`: The Azure Region to deploy the resources to.
-
-
-3. `AZURE_CREDENTIALS`: The Azure Service Principal's json output.
-
-A Service Principal is used as the identity to deploy resources into Azure.
-
-> Subscription Owner Scope is required due to the assignment of Roles.
+3. `AZURE_CREDENTIALS`: The Azure Service Principal with _Owner_ Scope json output.
 
 ```bash
 SUBSCRIPTION_ID=$(az account show --query id --output tsv)
@@ -43,7 +37,6 @@ az ad sp create-for-rbac --name "osdu-azure-credentials" \
   --scopes /subscriptions/$SUBSCRIPTION_ID \
   --sdk-auth \
   -ojson
-
 
 # Sample Format
 {
@@ -60,8 +53,7 @@ az ad sp create-for-rbac --name "osdu-azure-credentials" \
 }
 ```
 
-
-3. `OSDU_CREDENTIALS`: The OSDU Environment Service Principal's json output.
+3. `OSDU_CREDENTIALS`: The OSDU Environment Service Principal with _Contributor_ Scope json output.
 
 ```bash
 SUBSCRIPTION_ID=$(az account show --query id --output tsv)
@@ -71,7 +63,6 @@ az ad sp create-for-rbac --name "osdu-credentials" \
   --scopes /subscriptions/$SUBSCRIPTION_ID \
   --sdk-auth \
   -ojson
-
 
 # Sample Format
 {
@@ -89,8 +80,6 @@ az ad sp create-for-rbac --name "osdu-credentials" \
 ```
 
 4. `OSDU_CREDENTIAL_OID`: The OSDU Environment Service Principal's object id.
-
-> The object id is necessary to be retrieved as the AZURE_CREDENTIALS access level is not enough to retrieve the access token automatically.
 
 ```bash
 az ad sp list --display-name "osdu-credentials" --query [].objectId -otsv
@@ -120,6 +109,11 @@ https://my-osdu.es.southcentralus.azure.elastic-cloud.com:9243
 ```
 
 7. `ELASTIC_PASSWORD`: The password of the Elasticsearch cluster.
+
+
+__Diagram__
+
+![secrets](./docs/images/secrets.png)
 
 
 ## Execute Github Actions
