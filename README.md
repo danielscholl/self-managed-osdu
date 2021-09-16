@@ -142,8 +142,12 @@ Deployment of a self managed osdu instance is performed by executing github acti
 The following resources are created in Azure for the Deployment Stamp.
 
 ![secrets](./docs/images/groups.png)
+---
 ![secrets](./docs/images/builder.png)
+---
 ![secrets](./docs/images/controlplane.png)
+---
 ![secrets](./docs/images/dataplane.png)
+---
 ![secrets](./docs/images/partition.png)
 
