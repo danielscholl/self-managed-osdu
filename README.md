@@ -27,7 +27,7 @@ __Manually Created Secrets__
 
 1. `GH_REPO_TOKEN`: A personal access token with `repo` scope.
 2. `AZURE_LOCATION`: The Azure Region to deploy the resources to.
-3. `AZURE_CREDENTIALS`: The Azure Service Principal with _Owner_ Scope json output.
+3. `AZURE_CREDENTIALS`: The json output of a Service Principal with _Owner_ Subscription Scope.
 
 ```bash
 SUBSCRIPTION_ID=$(az account show --query id --output tsv)
@@ -53,7 +53,8 @@ az ad sp create-for-rbac --name "osdu-azure-credentials" \
 }
 ```
 
-3. `OSDU_CREDENTIALS`: The OSDU Environment Service Principal with _Contributor_ Scope json output.
+3. `OSDU_CREDENTIALS`: The json output a Service Principal with _Contributor_ Subscription Scope.
+
 
 ```bash
 SUBSCRIPTION_ID=$(az account show --query id --output tsv)
@@ -79,13 +80,13 @@ az ad sp create-for-rbac --name "osdu-credentials" \
 }
 ```
 
-4. `OSDU_CREDENTIAL_OID`: The OSDU Environment Service Principal's object id.
+4. `OSDU_CREDENTIAL_OID`: The Object ID of the _OSDU_CREDENTIALS_ Service Principal.
 
 ```bash
 az ad sp list --display-name "osdu-credentials" --query [].objectId -otsv
 ```
 
-5. `OSDU_APPLICATION`: The OSDU Environment Application json output
+5. `OSDU_APPLICATION`: The json output of an Azure AD Application.
 
 ```bash
 az ad app create --display-name "osdu-application" \
