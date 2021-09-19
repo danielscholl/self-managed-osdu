@@ -1,0 +1,44 @@
+name: '4. Stamp Configure'
+
+on:
+  workflow_dispatch:
+
+env:
+  OSDU_VERSION: v0.11.2
+
+jobs:
+
+  fileshare-data:
+    name: Persistant Data Load
+    runs-on: ubuntu-latest
+    steps:
+
+      - name: Checkout
+        uses: actions/checkout@v2
+      
+      - name: Upload Platform Catalogs
+        env:
+          SERVICE: crs-catalog-service
+          FILE: crs_catalog_v2.json
+          FILE_SHARE: crs
+        uses: Azure/cli@1.0.4
+        with:
+          inlineScript: |
+            mkdir ${{ env.RUNNER_TEMP }}/results
+            curl -sSL -o ${{ env.RUNNER_TEMP }}/download.gz https://community.opengroup.org/osdu/platform/system/reference/${{ env.SERVICE }}/-/archive/${{ env.OSDU_VERSION }}/crs-catalog-service-${{ env.OSDU_VERSION }}.tar.gz
+            tar -xzvf ${{ env.RUNNER_TEMP }}/download.gz -C ${{ env.RUNNER_TEMP }}/results --strip-components=2 ${{ env.SERVICE }}-${{ env.OSDU_VERSION }}/data/${{ env.FILE }}
+            
+            GROUP=$(az group list --query "[?contains(name, 'ctl${{ secrets.RAND }}')].name" -otsv)
+            ENV_VAULT=$(az keyvault list --resource-group $GROUP --query [].name -otsv)
+
+            echo $GROUP
+            echo $ENV_VAULT
+            ls -l 
+
+            az storage file upload \
+              --account-name $(az keyvault secret show --id https://${ENV_VAULT}.vault.azure.net/secrets/airflow-storage --query value -otsv) \
+              --account-key $(az keyvault secret show --id https://${ENV_VAULT}.vault.azure.net/secrets/airflow-storage-key --query value -otsv) \
+              --share-name ${FILE_SHARE} \
+              --source ${{ env.RUNNER_TEMP }}/results/${FILE}
+
+
