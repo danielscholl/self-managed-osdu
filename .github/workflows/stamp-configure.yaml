@@ -9,7 +9,7 @@ env:
 jobs:
 
   fileshare-data:
-    name: Persistant Storage File Loads
+    name: Load Persistant Storage File Shares
     runs-on: ubuntu-latest
     steps:
 
@@ -75,8 +75,6 @@ jobs:
             curl -sSL -o ${{ env.RUNNER_TEMP }}/download.tar.gz https://community.opengroup.org/osdu/platform/system/reference/${{ env.SERVICE }}/-/archive/${{ env.OSDU_VERSION }}/${{ env.SERVICE }}-${{ env.OSDU_VERSION }}.tar.gz
             tar -xzvf ${{ env.RUNNER_TEMP }}/download.tar.gz -C ${{ env.RUNNER_TEMP }}/results --strip-components=1 ${{ env.SERVICE }}-${{ env.OSDU_VERSION }}/${{ env.FOLDER }}
             
-            ls -l ${{ env.RUNNER_TEMP }}/results
-
             GROUP=$(az group list --query "[?contains(name, 'ctl${{ secrets.RAND }}')].name" -otsv)
             ENV_VAULT=$(az keyvault list --resource-group $GROUP --query [].name -otsv)
 
@@ -86,3 +84,32 @@ jobs:
             --destination ${{ env.FILE_SHARE }} \
             --source ${{ env.RUNNER_TEMP }}/results \
             --pattern ${{ env.FOLDER }}/**
+
+      - name: Upload Manifest Ingestion DAG
+        env:
+          SERVICE: ingestion-dags
+          FOLDER: src/osdu_dags
+          FILE_SHARE: airflowdags
+        uses: Azure/cli@1.0.4
+        with:
+          inlineScript: |
+            mkdir ${{ env.RUNNER_TEMP }}/results
+            curl -sSL -o ${{ env.RUNNER_TEMP }}/download.tar.gz https://community.opengroup.org/osdu/platform/data-flow/ingestion/${{ env.SERVICE }}/-/archive/${{ env.OSDU_VERSION }}/${{ env.SERVICE }}-${{ env.OSDU_VERSION }}.tar.gz
+            tar -xzvf ${{ env.RUNNER_TEMP }}/download.tar.gz -C ${{ env.RUNNER_TEMP }}/results --strip-components=1 ${{ env.SERVICE }}-${{ env.OSDU_VERSION }}/${{ env.FOLDER }}
+            
+            GROUP=$(az group list --query "[?contains(name, 'ctl${{ secrets.RAND }}')].name" -otsv)
+            ENV_VAULT=$(az keyvault list --resource-group $GROUP --query [].name -otsv)
+
+            az storage file upload-batch \
+              --account-name $(az keyvault secret show --id https://${ENV_VAULT}.vault.azure.net/secrets/airflow-storage --query value -otsv) \
+              --account-key $(az keyvault secret show --id https://${ENV_VAULT}.vault.azure.net/secrets/airflow-storage-key --query value -otsv) \
+              --destination ${{ env.FILE_SHARE }} \
+              --source ${{ env.RUNNER_TEMP }}/results \
+              --pattern "*.ini"
+
+            az storage file upload-batch \
+              --account-name $(az keyvault secret show --id https://${ENV_VAULT}.vault.azure.net/secrets/airflow-storage --query value -otsv) \
+              --account-key $(az keyvault secret show --id https://${ENV_VAULT}.vault.azure.net/secrets/airflow-storage-key --query value -otsv) \
+              --destination ${{ env.FILE_SHARE }} \
+              --source ${{ env.RUNNER_TEMP }}/results \
+              --pattern "*.py"
