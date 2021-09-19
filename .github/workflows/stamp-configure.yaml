@@ -72,8 +72,8 @@ jobs:
         with:
           inlineScript: |
             mkdir ${{ env.RUNNER_TEMP }}/results
-            curl -sSL -o ${{ env.RUNNER_TEMP }}/download.gz https://community.opengroup.org/osdu/platform/system/reference/${{ env.SERVICE }}/-/archive/${{ env.OSDU_VERSION }}/${{ env.SERVICE }}-${{ env.OSDU_VERSION }}.tar.gz
-            tar -xzvf ${{ env.RUNNER_TEMP }}/download.gz -C ${{ env.RUNNER_TEMP }}/results --strip-components=2 ${{ env.SERVICE }}-${{ env.OSDU_VERSION }}/data/${{ env.FOLDER }}
+            curl -sSL -o ${{ env.RUNNER_TEMP }}/download.tar.gz https://community.opengroup.org/osdu/platform/system/reference/${{ env.SERVICE }}/-/archive/${{ env.OSDU_VERSION }}/${{ env.SERVICE }}-${{ env.OSDU_VERSION }}.tar.gz
+            tar -xzvf ${{ env.RUNNER_TEMP }}/download.tar.gz -C ${{ env.RUNNER_TEMP }}/results --strip-components=1 ${{ env.SERVICE }}-${{ env.OSDU_VERSION }}/${{ env.FOLDER }}
             
             ls -l ${{ env.RUNNER_TEMP }}/results
 
