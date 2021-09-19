@@ -15,8 +15,13 @@ jobs:
 
       - name: Checkout
         uses: actions/checkout@v2
+
+      - name: Azure Login
+        uses: Azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
       
-      - name: Upload Platform Catalogs
+      - name: Upload CRS Catalog
         env:
           SERVICE: crs-catalog-service
           FILE: crs_catalog_v2.json
