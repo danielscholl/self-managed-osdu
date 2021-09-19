@@ -30,7 +30,7 @@ jobs:
         with:
           inlineScript: |
             mkdir ${{ env.RUNNER_TEMP }}/results
-            curl -sSL -o ${{ env.RUNNER_TEMP }}/download.gz https://community.opengroup.org/osdu/platform/system/reference/${{ env.SERVICE }}/-/archive/${{ env.OSDU_VERSION }}/crs-catalog-service-${{ env.OSDU_VERSION }}.tar.gz
+            curl -sSL -o ${{ env.RUNNER_TEMP }}/download.gz https://community.opengroup.org/osdu/platform/system/reference/${{ env.SERVICE }}/-/archive/${{ env.OSDU_VERSION }}/${{ env.SERVICE}}-${{ env.OSDU_VERSION }}.tar.gz
             tar -xzvf ${{ env.RUNNER_TEMP }}/download.gz -C ${{ env.RUNNER_TEMP }}/results --strip-components=2 ${{ env.SERVICE }}-${{ env.OSDU_VERSION }}/data/${{ env.FILE }}
             
             GROUP=$(az group list --query "[?contains(name, 'ctl${{ secrets.RAND }}')].name" -otsv)
@@ -51,7 +51,7 @@ jobs:
         with:
           inlineScript: |
             mkdir ${{ env.RUNNER_TEMP }}/results
-            curl -sSL -o ${{ env.RUNNER_TEMP }}/download.gz https://community.opengroup.org/osdu/platform/system/reference/${{ env.SERVICE }}/-/archive/${{ env.OSDU_VERSION }}/crs-catalog-service-${{ env.OSDU_VERSION }}.tar.gz
+            curl -sSL -o ${{ env.RUNNER_TEMP }}/download.gz https://community.opengroup.org/osdu/platform/system/reference/${{ env.SERVICE }}/-/archive/${{ env.OSDU_VERSION }}/${{ env.SERVICE }}-${{ env.OSDU_VERSION }}.tar.gz
             tar -xzvf ${{ env.RUNNER_TEMP }}/download.gz -C ${{ env.RUNNER_TEMP }}/results --strip-components=2 ${{ env.SERVICE }}-${{ env.OSDU_VERSION }}/data/${{ env.FILE }}
             
             GROUP=$(az group list --query "[?contains(name, 'ctl${{ secrets.RAND }}')].name" -otsv)
