@@ -62,3 +62,27 @@ jobs:
               --account-key $(az keyvault secret show --id https://${ENV_VAULT}.vault.azure.net/secrets/airflow-storage-key --query value -otsv) \
               --share-name ${{ env.FILE_SHARE }} \
               --source ${{ env.RUNNER_TEMP }}/results/${{ env.FILE }}
+
+      - name: Upload CRS Conversion
+        env:
+          SERVICE: crs-conversion-service
+          FOLDER: apachesis_setup
+          FILE_SHARE: crs-conversion
+        uses: Azure/cli@1.0.4
+        with:
+          inlineScript: |
+            mkdir ${{ env.RUNNER_TEMP }}/results
+            curl -sSL -o ${{ env.RUNNER_TEMP }}/download.gz https://community.opengroup.org/osdu/platform/system/reference/${{ env.SERVICE }}/-/archive/${{ env.OSDU_VERSION }}/${{ env.SERVICE }}-${{ env.OSDU_VERSION }}.tar.gz
+            tar -xzvf ${{ env.RUNNER_TEMP }}/download.gz -C ${{ env.RUNNER_TEMP }}/results --strip-components=2 ${{ env.SERVICE }}-${{ env.OSDU_VERSION }}/data/${{ env.FOLDER }}
+            
+            ls -l ${{ env.RUNNER_TEMP }}/results
+
+            GROUP=$(az group list --query "[?contains(name, 'ctl${{ secrets.RAND }}')].name" -otsv)
+            ENV_VAULT=$(az keyvault list --resource-group $GROUP --query [].name -otsv)
+
+            az storage file upload-batch \
+            --account-name $(az keyvault secret show --id https://${ENV_VAULT}.vault.azure.net/secrets/airflow-storage --query value -otsv) \
+            --account-key $(az keyvault secret show --id https://${ENV_VAULT}.vault.azure.net/secrets/airflow-storage-key --query value -otsv) \
+            --destination ${{ env.FILE_SHARE }} \
+            --source ${{ env.RUNNER_TEMP }}/results \
+            --pattern ${{ env.FOLDER }}/**
