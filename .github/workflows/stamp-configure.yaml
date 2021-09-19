@@ -9,7 +9,7 @@ env:
 jobs:
 
   fileshare-data:
-    name: Persistant Data Load
+    name: Persistant Storage File Loads
     runs-on: ubuntu-latest
     steps:
 
@@ -36,8 +36,6 @@ jobs:
             GROUP=$(az group list --query "[?contains(name, 'ctl${{ secrets.RAND }}')].name" -otsv)
             ENV_VAULT=$(az keyvault list --resource-group $GROUP --query [].name -otsv)
 
-            ls -la ${{ env.RUNNER_TEMP }}/results
-
             az storage file upload \
               --account-name $(az keyvault secret show --id https://${ENV_VAULT}.vault.azure.net/secrets/airflow-storage --query value -otsv) \
               --account-key $(az keyvault secret show --id https://${ENV_VAULT}.vault.azure.net/secrets/airflow-storage-key --query value -otsv) \
@@ -58,8 +56,6 @@ jobs:
             
             GROUP=$(az group list --query "[?contains(name, 'ctl${{ secrets.RAND }}')].name" -otsv)
             ENV_VAULT=$(az keyvault list --resource-group $GROUP --query [].name -otsv)
-
-            ls -la ${{ env.RUNNER_TEMP }}/results
 
             az storage file upload \
               --account-name $(az keyvault secret show --id https://${ENV_VAULT}.vault.azure.net/secrets/airflow-storage --query value -otsv) \
