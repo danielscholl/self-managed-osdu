@@ -36,7 +36,10 @@ jobs:
             GROUP=$(az group list --query "[?contains(name, 'ctl${{ secrets.RAND }}')].name" -otsv)
             ENV_VAULT=$(az keyvault list --resource-group $GROUP --query [].name -otsv)
 
-            echo $GROUP
-            echo $ENV_VAULT
-            ls -la ${{ env.RUNNER_TEMP }}
+            ls -la ${{ env.RUNNER_TEMP }}/results
 
+            az storage file upload \
+              --account-name $(az keyvault secret show --id https://${ENV_VAULT}.vault.azure.net/secrets/airflow-storage --query value -otsv) \
+              --account-key $(az keyvault secret show --id https://${ENV_VAULT}.vault.azure.net/secrets/airflow-storage-key --query value -otsv) \
+              --share-name ${{ env.FILE_SHARE }} \
+              --source ${{ env.RUNNER_TEMP }}/results/${{ env.FILE }}
