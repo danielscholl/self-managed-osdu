@@ -35,10 +35,3 @@ jobs:
             echo $ENV_VAULT
             ls -l 
 
-            az storage file upload \
-              --account-name $(az keyvault secret show --id https://${ENV_VAULT}.vault.azure.net/secrets/airflow-storage --query value -otsv) \
-              --account-key $(az keyvault secret show --id https://${ENV_VAULT}.vault.azure.net/secrets/airflow-storage-key --query value -otsv) \
-              --share-name ${FILE_SHARE} \
-              --source ${{ env.RUNNER_TEMP }}/results/${FILE}
-
-
