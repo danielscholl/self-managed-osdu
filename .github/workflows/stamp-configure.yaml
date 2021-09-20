@@ -63,7 +63,7 @@ jobs:
 
           flux create kustomization sealed-secrets \
             --source=flux-system \
-            --path=./deploy/sealed-secrets \
+            --path=./apps/sealed-secrets \
             --prune=true \
             --interval=5m \
             --validation=client \
