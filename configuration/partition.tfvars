@@ -12,6 +12,8 @@ resource_tags = {
   environment = "Self Managed OSDU"
 }
 
+data_partition_name = "opendes"
+
 cosmos_databases = [
   {
     name       = "osdu-db"
