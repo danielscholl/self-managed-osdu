@@ -114,23 +114,23 @@ jobs:
               --source ${{ env.RUNNER_TEMP }}/results \
               --pattern "*.py"
 
-        - name: Checkout
-          uses: actions/checkout@v2
+      - name: Checkout
+        uses: actions/checkout@v2
 
-        - name: Upload Legal Country Objects
-          env:
-            PARTITION_NAME: opendes
-            CONTAINER: legal-service-azure-configuration
-            FILE: Legal_COO.json
-          uses: Azure/cli@1.0.4
-          with:
-            inlineScript: |
-              GROUP=$(az group list --query "[?contains(name, 'ctl${{ secrets.RAND }}')].name" -otsv)
-              ENV_VAULT=$(az keyvault list --resource-group $GROUP --query [].name -otsv)
+      - name: Upload Legal Country Objects
+        env:
+          PARTITION_NAME: opendes
+          CONTAINER: legal-service-azure-configuration
+          FILE: Legal_COO.json
+        uses: Azure/cli@1.0.4
+        with:
+          inlineScript: |
+            GROUP=$(az group list --query "[?contains(name, 'ctl${{ secrets.RAND }}')].name" -otsv)
+            ENV_VAULT=$(az keyvault list --resource-group $GROUP --query [].name -otsv)
 
-              az storage blob upload \
-                --account-name $(az keyvault secret show --id https://${ENV_VAULT}.vault.azure.net/secrets/${{ env.PARTITION_NAME }}-storage --query value -otsv) \
-                --account-key $(az keyvault secret show --id https://${ENV_VAULT}.vault.azure.net/secrets/${{ env.PARTITION_NAME }}-storage-key --query value -otsv) \
-                --file ${{ env.GITHUB_WORKSPACE }}/configuration/Legal_COO.json \
-                --container-name ${{ env.CONTAINER } \
-                --name ${{ env.FILE }
+            az storage blob upload \
+              --account-name $(az keyvault secret show --id https://${ENV_VAULT}.vault.azure.net/secrets/${{ env.PARTITION_NAME }}-storage --query value -otsv) \
+              --account-key $(az keyvault secret show --id https://${ENV_VAULT}.vault.azure.net/secrets/${{ env.PARTITION_NAME }}-storage-key --query value -otsv) \
+              --file ${{ env.GITHUB_WORKSPACE }}/configuration/Legal_COO.json \
+              --container-name ${{ env.CONTAINER } \
+              --name ${{ env.FILE }
