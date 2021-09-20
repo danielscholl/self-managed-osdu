@@ -168,3 +168,17 @@ jobs:
 
       - name: Bootstrap Flux
         run: flux bootstrap github --owner=${{ github.repository_owner }} --repository=$(echo $GITHUB_REPOSITORY | cut -d'/' -f2	) --branch=main --path=./clusters/${{ env.CLUSTER }}
+
+      - name: Update source code
+        run: |
+          flux create source git self-managed-osdu-source \
+            --url $GITHUB_SERVER_URL/$GITHUB_REPOSITORY \
+            --interval 1m \
+            --branch main \
+            --export > clusters/$CLUSTER/self-managed-osdu-source.yaml
+
+      - name: Commit changes
+        uses: EndBug/add-and-commit@v7
+        with:
+          message: 'Initialize Software Install'
+          add: 'clusters'
