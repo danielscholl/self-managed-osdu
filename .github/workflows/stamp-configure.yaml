@@ -77,21 +77,21 @@ jobs:
                 namespace: kube-system
           EOF
 
-      - name: Configure Gitops Software - $GITHUB_REPOSITORY/apps
-        run: |
-          flux create source git helm-charts-azure-source \
-            --url https://community.opengroup.org/osdu/platform/deployment-and-operations/helm-charts-azure \
-            --interval 1m \
-            --branch master \
-            --export > $GITHUB_WORKSPACE/clusters/$CLUSTER/helm-charts-azure-source.yaml
+      # - name: Configure Gitops Software - $GITHUB_REPOSITORY/apps
+      #   run: |
+      #     flux create source git helm-charts-azure-source \
+      #       --url https://community.opengroup.org/osdu/platform/deployment-and-operations/helm-charts-azure \
+      #       --interval 1m \
+      #       --branch master \
+      #       --export > $GITHUB_WORKSPACE/clusters/$CLUSTER/helm-charts-azure-source.yaml
 
-          flux create kustomization osdu-azure \
-            --source=flux-system \
-            --path=./apps/$CLUSTER \
-            --prune=true \
-            --interval=5m \
-            --depends-on=sealed-secrets \
-            --export > $GITHUB_WORKSPACE/clusters/$CLUSTER/osdu-azure-kustomization.yaml
+      #     flux create kustomization osdu-azure \
+      #       --source=flux-system \
+      #       --path=./apps/$CLUSTER \
+      #       --prune=true \
+      #       --interval=5m \
+      #       --depends-on=sealed-secrets \
+      #       --export > $GITHUB_WORKSPACE/clusters/$CLUSTER/osdu-azure-kustomization.yaml
 
       - name: Commit changes
         uses: EndBug/add-and-commit@v7
