@@ -132,5 +132,5 @@ jobs:
               --account-name $(az keyvault secret show --id https://${ENV_VAULT}.vault.azure.net/secrets/${{ env.PARTITION_NAME }}-storage --query value -otsv) \
               --account-key $(az keyvault secret show --id https://${ENV_VAULT}.vault.azure.net/secrets/${{ env.PARTITION_NAME }}-storage-key --query value -otsv) \
               --file ${{ env.GITHUB_WORKSPACE }}/configuration/Legal_COO.json \
-              --container-name ${{ env.CONTAINER } \
-              --name ${{ env.FILE }
+              --container-name ${{ env.CONTAINER }} \
+              --name ${{ env.FILE }}
