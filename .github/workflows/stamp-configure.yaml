@@ -153,7 +153,7 @@ jobs:
         uses: Azure/cli@1.0.4
         with:
           inlineScript: |
-            GROUP=$(az group list --query "[?contains(name, 'dpl${{ secrets.RAND }}')].name" -otsv)
+            GROUP=$(az group list --query "[?contains(name, 'dpl${{ secrets.RAND }}')].name" -otsv |grep -v MC)
             ENV_CLUSTER=$(az aks list --resource-group $GROUP --query [].name -otsv)
             echo "CLUSTER_RESOURCE_GROUP=$GROUP" >> $GITHUB_ENV
             echo "CLUSTER_NAME=$ENV_CLUSTER" >> $GITHUB_ENV
