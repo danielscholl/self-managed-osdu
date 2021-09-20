@@ -135,16 +135,24 @@ jobs:
 
   flux-setup:
     name: Flux Configuration
+    env:
+      CLUSTER: osdu-self
     runs-on: ubuntu-latest
     steps:
 
       - name: Install Flux
         run: curl -s https://fluxcd.io/install.sh | bash;
 
-      - name: Available Data
+      - name: Set Variables
         run: |
-          echo ${{ github.repository_owner }}
-          echo $GITHUB_REPOSITORY
+          echo "github_user=$(echo ${{ github.repository_owner }})" >> $GITHUB_ENV
+          echo "github_repository=$(echo ${{ github.repository_owner }} | cut -d'/' -f2')" >> $GITHUB_ENV
+
+      - name: Bootstrap
+        run: |
+          echo ${{ env.github_user }}
+          echo ${{ env.github_repository }}
+
 
       # - name: Test Flux
-      #   run: flux bootstrap github --owner=$GITHUB_USER --repository=$GITHUB_REPO --path=./clusters/$ARC_AKS_NAME
+      #   run: flux bootstrap github --owner=$GITHUB_USER --repository=$GITHUB_REPO --branch=main --path=./clusters/$CLUSTER
