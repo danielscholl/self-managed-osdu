@@ -180,7 +180,7 @@ jobs:
             --branch main \
             --export > $GITHUB_WORKSPACE/clusters/$CLUSTER/self-managed-osdu-source.yaml
 
-          cat > flux-infra/clusters/$CLUSTER/self-managed-osdu-kustomization.yaml <<EOF
+          cat > $GITHUB_WORKSPACE/clusters/$CLUSTER/self-managed-osdu-kustomization.yaml <<EOF
           ---
           # Installation of Sealed Secrets
           apiVersion: kustomize.toolkit.fluxcd.io/v1beta1

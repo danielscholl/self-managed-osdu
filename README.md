@@ -6,7 +6,7 @@
 
 [![3. Stamp Provision](https://github.com/danielscholl/self-managed-osdu/actions/workflows/stamp-provision.yaml/badge.svg)](https://github.com/danielscholl/self-managed-osdu/actions/workflows/stamp-provision.yaml)
 
-[![3. Stamp Configure](https://github.com/danielscholl/self-managed-osdu/actions/workflows/stamp-configure.yaml/badge.svg)](https://github.com/danielscholl/self-managed-osdu/actions/workflows/stamp-configure.yaml)
+[![4. Stamp Configure](https://github.com/danielscholl/self-managed-osdu/actions/workflows/stamp-configure.yaml/badge.svg)](https://github.com/danielscholl/self-managed-osdu/actions/workflows/stamp-configure.yaml)
 
 This is a prototype used to evaluate the possibility of providing an easy self managed instance of [OSDU on Azure](https://community.opengroup.org/osdu/platform/deployment-and-operations/infra-azure-provisioning) to ease the development experience of developing components or extensions that might run on top or inside of the OSDU Platform that runs in Azure.
 
@@ -137,6 +137,8 @@ Deployment of a self managed osdu instance is performed by executing github acti
 2. __[Stamp Builder](../../actions/workflows/stamp-builder.yaml)__: This action provisions builder resources necessary in the provisioning process of a Deployment Stamp.
 
 3. __[Stamp Provision](../../actions/workflows/stamp-provision.yaml)__: This action provisions resources for the Deployment Stamp.
+
+4. __[Stamp Configure](../../actions/workflows/stamp-configure.yaml)__: This action initializes the GitOps Configruation process for the Deployment Stamp.
 
 
 ## Azure Resources
