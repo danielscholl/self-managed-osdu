@@ -64,7 +64,7 @@ az ad sp create-for-rbac --name "osdu-azure-credentials" \
 }
 ```
 
-3. `OSDU_CREDENTIALS`: The json output a Service Principal with _Contributor_ Subscription Scope.
+4. `OSDU_CREDENTIALS`: The json output a Service Principal with _Contributor_ Subscription Scope.
 
 
 ```bash
@@ -91,13 +91,13 @@ az ad sp create-for-rbac --name "osdu-credentials" \
 }
 ```
 
-4. `OSDU_CREDENTIAL_OID`: The Object ID of the _OSDU_CREDENTIALS_ Service Principal.
+5. `OSDU_CREDENTIAL_OID`: The Object ID of the _OSDU_CREDENTIALS_ Service Principal.
 
 ```bash
 az ad sp list --display-name "osdu-credentials" --query [].objectId -otsv
 ```
 
-5. `OSDU_APPLICATION`: The json output of an Azure AD Application.
+6. `OSDU_APPLICATION`: The json output of an Azure AD Application.
 
 ```bash
 az ad app create --display-name "osdu-application" \
@@ -113,14 +113,14 @@ az ad app create --display-name "osdu-application" \
 }
 ```
 
-6. `ELASTIC_ENDPOINT`: The endpoint of the Elasticsearch cluster.
+7. `ELASTIC_ENDPOINT`: The endpoint of the Elasticsearch cluster.
 
 ```bash
 # Sample Format
 https://my-osdu.es.southcentralus.azure.elastic-cloud.com:9243
 ```
 
-7. `ELASTIC_PASSWORD`: The password of the Elasticsearch cluster.
+8. `ELASTIC_PASSWORD`: The password of the Elasticsearch cluster.
 
 
 ![secrets](./docs/images/secrets.png)
