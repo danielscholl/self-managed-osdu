@@ -7,6 +7,6 @@ metadata:
 spec:
   interval: 1m0s
   ref:
-    branch: main
+    branch: master
   url: https://community.opengroup.org/osdu/platform/deployment-and-operations/helm-charts-azure
 
