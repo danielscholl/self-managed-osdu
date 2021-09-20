@@ -13,14 +13,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
 
-      # - name: Checkout
-      #   uses: actions/checkout@v2
-
       - name: Azure Login
         uses: Azure/login@v1
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
-      
+
       - name: Upload CRS Catalog
         env:
           SERVICE: crs-catalog-service
@@ -32,7 +29,7 @@ jobs:
             mkdir ${{ env.RUNNER_TEMP }}/results
             curl -sSL -o ${{ env.RUNNER_TEMP }}/download.gz https://community.opengroup.org/osdu/platform/system/reference/${{ env.SERVICE }}/-/archive/${{ env.OSDU_VERSION }}/${{ env.SERVICE}}-${{ env.OSDU_VERSION }}.tar.gz
             tar -xzvf ${{ env.RUNNER_TEMP }}/download.gz -C ${{ env.RUNNER_TEMP }}/results --strip-components=2 ${{ env.SERVICE }}-${{ env.OSDU_VERSION }}/data/${{ env.FILE }}
-            
+
             GROUP=$(az group list --query "[?contains(name, 'ctl${{ secrets.RAND }}')].name" -otsv)
             ENV_VAULT=$(az keyvault list --resource-group $GROUP --query [].name -otsv)
 
@@ -53,7 +50,7 @@ jobs:
             mkdir ${{ env.RUNNER_TEMP }}/results
             curl -sSL -o ${{ env.RUNNER_TEMP }}/download.gz https://community.opengroup.org/osdu/platform/system/reference/${{ env.SERVICE }}/-/archive/${{ env.OSDU_VERSION }}/${{ env.SERVICE }}-${{ env.OSDU_VERSION }}.tar.gz
             tar -xzvf ${{ env.RUNNER_TEMP }}/download.gz -C ${{ env.RUNNER_TEMP }}/results --strip-components=2 ${{ env.SERVICE }}-${{ env.OSDU_VERSION }}/data/${{ env.FILE }}
-            
+
             GROUP=$(az group list --query "[?contains(name, 'ctl${{ secrets.RAND }}')].name" -otsv)
             ENV_VAULT=$(az keyvault list --resource-group $GROUP --query [].name -otsv)
 
@@ -74,7 +71,7 @@ jobs:
             mkdir ${{ env.RUNNER_TEMP }}/results
             curl -sSL -o ${{ env.RUNNER_TEMP }}/download.tar.gz https://community.opengroup.org/osdu/platform/system/reference/${{ env.SERVICE }}/-/archive/${{ env.OSDU_VERSION }}/${{ env.SERVICE }}-${{ env.OSDU_VERSION }}.tar.gz
             tar -xzvf ${{ env.RUNNER_TEMP }}/download.tar.gz -C ${{ env.RUNNER_TEMP }}/results --strip-components=1 ${{ env.SERVICE }}-${{ env.OSDU_VERSION }}/${{ env.FOLDER }}
-            
+
             GROUP=$(az group list --query "[?contains(name, 'ctl${{ secrets.RAND }}')].name" -otsv)
             ENV_VAULT=$(az keyvault list --resource-group $GROUP --query [].name -otsv)
 
@@ -96,7 +93,7 @@ jobs:
             mkdir ${{ env.RUNNER_TEMP }}/results
             curl -sSL -o ${{ env.RUNNER_TEMP }}/download.tar.gz https://community.opengroup.org/osdu/platform/data-flow/ingestion/${{ env.SERVICE }}/-/archive/${{ env.OSDU_VERSION }}/${{ env.SERVICE }}-${{ env.OSDU_VERSION }}.tar.gz
             tar -xzvf ${{ env.RUNNER_TEMP }}/download.tar.gz -C ${{ env.RUNNER_TEMP }}/results --strip-components=1 ${{ env.SERVICE }}-${{ env.OSDU_VERSION }}/${{ env.FOLDER }}
-            
+
             GROUP=$(az group list --query "[?contains(name, 'ctl${{ secrets.RAND }}')].name" -otsv)
             ENV_VAULT=$(az keyvault list --resource-group $GROUP --query [].name -otsv)
 
@@ -134,3 +131,15 @@ jobs:
               --file $GITHUB_WORKSPACE/configuration/Legal_COO.json \
               --container-name ${{ env.CONTAINER }} \
               --name ${{ env.FILE }}
+
+
+  flux-setup:
+    name: Load Persistant Storage File Shares
+    runs-on: ubuntu-latest
+    steps:
+
+      - name: Install Flux
+        run: curl -s https://fluxcd.io/install.sh | bash;
+
+      - name: Test Flux
+        run: flux --version
