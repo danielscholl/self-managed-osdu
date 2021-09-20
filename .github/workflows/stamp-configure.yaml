@@ -216,7 +216,7 @@ jobs:
             --prune=true \
             --interval=5m \
             --depends-on=sealed-secrets \
-            --export > $GITHUB_WORKSPACE/clusters/$CLUSTER/kustomization.yaml
+            --export > $GITHUB_WORKSPACE/clusters/$CLUSTER/osdu-azure-kustomization.yaml
 
       - name: Commit changes
         uses: EndBug/add-and-commit@v7
