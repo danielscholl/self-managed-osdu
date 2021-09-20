@@ -136,8 +136,6 @@ jobs:
   flux-setup:
     name: Flux Configuration
     env:
-      GITHUB_USER: ${{ github.repository_owner }}
-      GITHUB_REPO: self-managed-osdu-configuration
       GITHUB_TOKEN: ${{ secrets.GH_REPO_TOKEN }}
       CLUSTER: osdu-stamp
 
@@ -149,7 +147,7 @@ jobs:
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
 
-      - name: Retrieve Environment Settings
+      - name: Environment Settings
         uses: Azure/cli@1.0.4
         with:
           inlineScript: |
@@ -158,7 +156,7 @@ jobs:
             echo "CLUSTER_RESOURCE_GROUP=$GROUP" >> $GITHUB_ENV
             echo "CLUSTER_NAME=$ENV_CLUSTER" >> $GITHUB_ENV
 
-      - name: Get AKS Context
+      - name: AKS Context
         uses: azure/aks-set-context@v1
         with:
           creds: '${{ secrets.AZURE_CREDENTIALS }}'
@@ -169,4 +167,4 @@ jobs:
         run: curl -s https://fluxcd.io/install.sh | bash;
 
       - name: Bootstrap Flux
-        run: flux bootstrap github --owner=${{ env.GITHUB_USER }} --repository=${{ env.GITHUB_REPO }} --branch=main --path=./clusters/${{ env.CLUSTER }}
+        run: flux bootstrap github --owner=${{ github.repository_owner }} --repository=$(echo $GITHUB_REPOSITORY | cut -d'/' -f2	) --branch=main --path=./clusters/${{ env.CLUSTER }}
