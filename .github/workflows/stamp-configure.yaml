@@ -134,12 +134,17 @@ jobs:
 
 
   flux-setup:
-    name: Load Persistant Storage File Shares
+    name: Flux Configuration
     runs-on: ubuntu-latest
     steps:
 
       - name: Install Flux
         run: curl -s https://fluxcd.io/install.sh | bash;
 
-      - name: Test Flux
-        run: flux --version
+      - name: Available Data
+        run: |
+          echo ${{ github.repository_owner }}
+          echo $GITHUB_REPOSITORY
+
+      # - name: Test Flux
+      #   run: flux bootstrap github --owner=$GITHUB_USER --repository=$GITHUB_REPO --path=./clusters/$ARC_AKS_NAME
