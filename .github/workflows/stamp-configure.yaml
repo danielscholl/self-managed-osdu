@@ -136,7 +136,7 @@ jobs:
   flux-setup:
     name: Flux Configuration
     env:
-      GITHUB_USER: ${{ secrets.GITOPS_ORGANIZATION }}
+      GITHUB_USER: ${{ github.repository_owner }}
       GITHUB_REPO: self-managed-osdu-configuration
       GITHUB_TOKEN: ${{ secrets.GH_REPO_TOKEN }}
       CLUSTER: osdu-stamp
