@@ -180,6 +180,12 @@ jobs:
             --branch main \
             --export > $GITHUB_WORKSPACE/clusters/$CLUSTER/self-managed-osdu-source.yaml
 
+          flux create source git helm-charts-azure-source \
+            --url https://community.opengroup.org/osdu/platform/deployment-and-operations/helm-charts-azure \
+            --interval 1m \
+            --branch main \
+            --export > $GITHUB_WORKSPACE/clusters/$CLUSTER/helm-charts-azure-source.yaml
+
           cat > $GITHUB_WORKSPACE/clusters/$CLUSTER/self-managed-osdu-kustomization.yaml <<EOF
           ---
           # Installation of Sealed Secrets
