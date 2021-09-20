@@ -172,7 +172,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name: Update source code
+      - name: Create Flux Source Operators
         run: |
           flux create source git self-managed-osdu-source \
             --url $GITHUB_SERVER_URL/$GITHUB_REPOSITORY \
@@ -183,7 +183,7 @@ jobs:
           flux create source git helm-charts-azure-source \
             --url https://community.opengroup.org/osdu/platform/deployment-and-operations/helm-charts-azure \
             --interval 1m \
-            --branch main \
+            --branch master \
             --export > $GITHUB_WORKSPACE/clusters/$CLUSTER/helm-charts-azure-source.yaml
 
           cat > $GITHUB_WORKSPACE/clusters/$CLUSTER/self-managed-osdu-kustomization.yaml <<EOF

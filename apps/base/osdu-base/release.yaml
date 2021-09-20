@@ -1,0 +1,21 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: osdu-base
+  namespace: osdu-azure
+spec:
+  chart:
+    spec:
+      chart: ./charts/env-debug
+      sourceRef:
+        kind: GitRepository
+        name: helm-charts-azure-source
+        namespace: flux-system
+  interval: 5m0s
+  install:
+    remediation:
+      retries: 3
+  targetNamespace: default
+  values:
+    ingress.admin: "admin@self.managed.osdu.com"
