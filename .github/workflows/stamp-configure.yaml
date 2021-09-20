@@ -144,6 +144,27 @@ jobs:
     runs-on: ubuntu-latest
     steps:
 
+      - name: Azure Login
+        uses: Azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - name: Retrieve Environment Settings
+        uses: Azure/cli@1.0.4
+        with:
+          inlineScript: |
+            GROUP=$(az group list --query "[?contains(name, 'dpl${{ secrets.RAND }}')].name" -otsv)
+            ENV_CLUSTER=$(az aks list --resource-group $GROUP --query [].name -otsv)
+            echo "CLUSTER_RESOURCE_GROUP=$GROUP" >> $GITHUB_ENV
+            echo "CLUSTER_NAME=$ENV_CLUSTER" >> $GITHUB_ENV
+
+      - name: Get AKS Context
+        uses: azure/aks-set-context@v1
+        with:
+          creds: '${{ secrets.AZURE_CREDENTIALS }}'
+          cluster-name: ${{ env.CLUSTER_NAME }}
+          resource-group: ${{ env.CLUSTER_RESOURCE_GROUP }}
+
       - name: Install Flux
         run: curl -s https://fluxcd.io/install.sh | bash;
 
