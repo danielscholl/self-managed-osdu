@@ -6,6 +6,8 @@
 
 [![3. Stamp Provision](https://github.com/danielscholl/self-managed-osdu/actions/workflows/stamp-provision.yaml/badge.svg)](https://github.com/danielscholl/self-managed-osdu/actions/workflows/stamp-provision.yaml)
 
+[![3. Stamp Configure](https://github.com/danielscholl/self-managed-osdu/actions/workflows/stamp-configure.yaml/badge.svg)](https://github.com/danielscholl/self-managed-osdu/actions/workflows/stamp-configure.yaml)
+
 This is a prototype used to evaluate the possibility of providing an easy self managed instance of [OSDU on Azure](https://community.opengroup.org/osdu/platform/deployment-and-operations/infra-azure-provisioning) to ease the development experience of developing components or extensions that might run on top or inside of the OSDU Platform that runs in Azure.
 
 __Goals:__
