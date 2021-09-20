@@ -9,7 +9,7 @@ env:
 jobs:
 
   fileshare-data:
-    name: Load Persistant Storage File Shares
+    name: Load Persistant Storage
     runs-on: ubuntu-latest
     steps:
 
@@ -134,7 +134,7 @@ jobs:
 
 
   flux-setup:
-    name: Flux Configuration
+    name: Initialize GitOps
     env:
       GITHUB_TOKEN: ${{ secrets.GH_REPO_TOKEN }}
       CLUSTER: osdu-stamp
