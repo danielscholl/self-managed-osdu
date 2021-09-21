@@ -67,7 +67,7 @@ jobs:
             sourceRef:
               kind: GitRepository
               name: self-managed-osdu
-            path: ./deploy/sealed-secrets
+            path: ./apps/sealed-secrets
             prune: true
             validation: client
             healthChecks:
