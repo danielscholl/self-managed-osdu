@@ -55,21 +55,32 @@ jobs:
             --branch main \
             --export > $GITHUB_WORKSPACE/clusters/$CLUSTER/source-self-managed-osdu.yaml
 
+          cat > $GITHUB_WORKSPACE/clusters/$CLUSTER/kustomization-sealed-secrets.yaml <<EOF
+          ---
+          apiVersion: kustomize.toolkit.fluxcd.io/v1beta1
+          kind: Kustomization
+          metadata:
+            name: sealed-secrets
+            namespace: flux-system
+          spec:
+            interval: 5m0s
+            sourceRef:
+              kind: GitRepository
+              name: self-managed-osdu
+            path: ./deploy/sealed-secrets
+            prune: true
+            validation: client
+            healthChecks:
+              - kind: Deployment
+                name: sealed-secrets
+                namespace: kube-system
+          EOF
+
           flux create source git helm-charts-azure \
             --url https://community.opengroup.org/osdu/platform/deployment-and-operations/helm-charts-azure \
             --interval 1m \
             --branch master \
             --export > $GITHUB_WORKSPACE/clusters/$CLUSTER/source-helm-charts-azure.yaml
-
-          flux create kustomization sealed-secrets \
-            --source=self-managed-osdu \
-            --path=./apps/sealed-secrets \
-            --prune=true \
-            --interval=5m \
-            --validation=client \
-            --health-check="Deployment/kube-system.sealed-secrets" \
-            --health-check-timeout=3m \
-            --export > $GITHUB_WORKSPACE/clusters/$CLUSTER/kustomization-sealed-secrets.yaml
 
           flux create kustomization osdu-azure \
             --source=flux-system \
