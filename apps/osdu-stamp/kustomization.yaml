@@ -4,4 +4,4 @@ kind: Kustomization
 namespace: osdu-azure
 resources:
   - namespace.yaml
-  # - ../base/osdu-base
+  - ../base/osdu-base
