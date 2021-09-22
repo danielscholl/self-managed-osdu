@@ -3,7 +3,7 @@ apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
   name: osdu-istio
-  namespace: flux-system
+  namespace: istio-system
 spec:
   chart:
     spec:
