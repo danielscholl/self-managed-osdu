@@ -13,3 +13,5 @@ spec:
     name: flux-system
   path: ./apps/base/osdu-istio
   prune: true
+patchesStrategicMerge:
+  - ./apps/osdu-stamp/override-values.yaml
