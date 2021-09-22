@@ -1,0 +1,37 @@
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1beta1
+kind: Kustomization
+metadata:
+  name: osdu-base
+  namespace: flux-system
+spec:
+  dependsOn:
+  - name: sealed-secrets
+  interval: 5m0s
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+  path: ./apps/base/osdu-base
+  prune: true
+  validation: client
+  healthChecks:
+    - kind: ClusterIssuer
+      name: letsencrypt-prod-dns
+      namespace: default
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1beta1
+kind: Kustomization
+metadata:
+  name: osdu-istio
+  namespace: flux-system
+spec:
+  dependsOn:
+  - name: osdu-base
+  interval: 5m0s
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+  path: ./apps/base/osdu-istio
+  prune: true
+patchesStrategicMerge:
+  - ./apps/osdu-stamp/override-values.yaml
