@@ -2,12 +2,13 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: osdu-istio
+  name: istio-operator
   namespace: istio-system
 spec:
+  dependsOn: istio-base
   chart:
     spec:
-      chart: ./osdu-istio
+      chart: ./osdu-istio/istio-operator
       sourceRef:
         kind: GitRepository
         name: helm-charts-azure
