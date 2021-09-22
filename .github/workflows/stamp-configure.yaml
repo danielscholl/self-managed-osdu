@@ -96,7 +96,7 @@ jobs:
             GROUP=$(az group list --query "[?contains(name, 'ctl${{ secrets.RAND }}')].name" -otsv)
             ENV_VAULT=$(az keyvault list --resource-group $GROUP --query [].name -otsv)
 
-            cat > $GITHUB_WORKSPACE/apps/$CLUSTER/osdu-azure.yaml << EOF
+            cat > $GITHUB_WORKSPACE/clusters/$CLUSTER/osdu-base.yaml << EOF
             ---
             apiVersion: kustomize.toolkit.fluxcd.io/v1beta1
             kind: Kustomization
@@ -117,6 +117,9 @@ jobs:
                 - kind: ClusterIssuer
                   name: letsencrypt-prod-dns
                   namespace: default
+            EOF
+
+            cat > $GITHUB_WORKSPACE/clusters/$CLUSTER/osdu-istio.yaml << EOF
             ---
             apiVersion: kustomize.toolkit.fluxcd.io/v1beta1
             kind: Kustomization
