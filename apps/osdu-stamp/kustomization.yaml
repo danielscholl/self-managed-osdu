@@ -4,7 +4,7 @@ kind: Kustomization
 namespace: osdu-azure
 resources:
   - namespace.yaml
-  - ../base/osdu-base
-  - ../base/osdu-istio
-patchesStrategicMerge:
-  - osdu-stamp-values.yaml
+#   - ../base/osdu-base
+#   - ../base/osdu-istio
+# patchesStrategicMerge:
+#   - osdu-stamp-values.yaml
