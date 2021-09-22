@@ -113,10 +113,6 @@ jobs:
               path: ./apps/base/osdu-base
               prune: true
               validation: client
-              healthChecks:
-                - kind: ClusterIssuer
-                  name: letsencrypt-prod-dns
-                  namespace: default
             EOF
 
             cat > $GITHUB_WORKSPACE/clusters/$CLUSTER/osdu-istio.yaml << EOF
