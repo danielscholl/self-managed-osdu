@@ -4,6 +4,6 @@ kind: Kustomization
 namespace: default
 resources:
   - ../base/osdu-base
-#   - ../base/osdu-istio
+  - ../base/osdu-istio
 # patchesStrategicMerge:
 #   - override-values.yaml
