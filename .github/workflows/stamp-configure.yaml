@@ -129,10 +129,19 @@ jobs:
               sourceRef:
                 kind: GitRepository
                 name: flux-system
-              path: ./apps/base/osdu-istio
+              path: ./apps/osdu-stamp
               prune: true
+              validation: client
+            EOF
+
+            cat > $GITHUB_WORKSPACE/apps/$CLUSTER/kustomization.yaml << EOF
+            ---
+            apiVersion: kustomize.config.k8s.io/v1beta1
+            kind: Kustomization
+            resources:
+              - ../base/osdu-istio
             patchesStrategicMerge:
-              - ./apps/$CLUSTER/override-values.yaml
+              - override-values.yaml
             EOF
 
             cat > $GITHUB_WORKSPACE/apps/$CLUSTER/override-values.yaml << EOF
