@@ -91,32 +91,33 @@ jobs:
 
       - name: OSDU Software Cluster - Kustomization
         uses: Azure/cli@1.0.4
-        run: |
-          GROUP=$(az group list --query "[?contains(name, 'ctl${{ secrets.RAND }}')].name" -otsv)
-          ENV_VAULT=$(az keyvault list --resource-group $GROUP --query [].name -otsv)
+        with:
+          inlineScript: |
+            GROUP=$(az group list --query "[?contains(name, 'ctl${{ secrets.RAND }}')].name" -otsv)
+            ENV_VAULT=$(az keyvault list --resource-group $GROUP --query [].name -otsv)
 
-          cat > $GITHUB_WORKSPACE/apps/$CLUSTER/kustomization.yaml <<EOF
-          ---
-          apiVersion: kustomize.config.k8s.io/v1beta1
-          kind: Kustomization
-          namespace: default
-          resources:
-            - ../base/osdu-base
-          EOF
-
-          cat > $GITHUB_WORKSPACE/apps/$CLUSTER/osdu-stamp-values.yaml << EOF
-          ---
-          apiVersion: helm.toolkit.fluxcd.io/v2beta1
-          kind: HelmRelease
-          metadata:
-            name: osdu-istio
+            cat > $GITHUB_WORKSPACE/apps/$CLUSTER/kustomization.yaml <<EOF
+            ---
+            apiVersion: kustomize.config.k8s.io/v1beta1
+            kind: Kustomization
             namespace: default
-          spec:
-            values:
-              azure:
-                tenant: $(az keyvault secret show --id https://${ENV_VAULT}.vault.azure.net/secrets/tenant-id --query value -otsv)
-                appid: $(az keyvault secret show --id https://${ENV_VAULT}.vault.azure.net/secrets/aad-client-id --query value -otsv)
-          EOF
+            resources:
+              - ../base/osdu-base
+            EOF
+
+            cat > $GITHUB_WORKSPACE/apps/$CLUSTER/osdu-stamp-values.yaml << EOF
+            ---
+            apiVersion: helm.toolkit.fluxcd.io/v2beta1
+            kind: HelmRelease
+            metadata:
+              name: osdu-istio
+              namespace: default
+            spec:
+              values:
+                azure:
+                  tenant: $(az keyvault secret show --id https://${ENV_VAULT}.vault.azure.net/secrets/tenant-id --query value -otsv)
+                  appid: $(az keyvault secret show --id https://${ENV_VAULT}.vault.azure.net/secrets/aad-client-id --query value -otsv)
+            EOF
 
       - name: OSDU Software - Kustomization
         run: |
@@ -127,7 +128,6 @@ jobs:
             --interval=5m \
             --depends-on=sealed-secrets \
             --export > $GITHUB_WORKSPACE/clusters/$CLUSTER/kustomization-osdu-azure.yaml
-
 
       - name: GitOps Commit
         uses: EndBug/add-and-commit@v7
