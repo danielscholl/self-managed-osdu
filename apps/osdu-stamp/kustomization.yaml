@@ -3,7 +3,8 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 namespace: osdu-azure
 resources:
-  - namespace.yaml
+  - azure-namespace.yaml
+  - istio-namespace.yaml
 #   - ../base/osdu-base
 #   - ../base/osdu-istio
 # patchesStrategicMerge:
