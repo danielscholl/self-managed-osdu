@@ -47,15 +47,28 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name: Create Flux Source(s) & Kustomization(s)
+      - name: Create Cluster Directories
+        run: |
+          mkdir -p $GITHUB_WORKSPACE/clusters/$CLUSTER
+          mkdir -p $GITHUB_WORKSPACE/apps/$CLUSTER
+
+      - name: Define Flux Sources
         run: |
           flux create source git self-managed-osdu \
             --url $GITHUB_SERVER_URL/$GITHUB_REPOSITORY \
             --interval 1m \
             --branch main \
-            --export > $GITHUB_WORKSPACE/clusters/$CLUSTER/source-self-managed-osdu.yaml
+            --export > $GITHUB_WORKSPACE/clusters/$CLUSTER/self-managed-osdu.yaml
 
-          cat > $GITHUB_WORKSPACE/clusters/$CLUSTER/kustomization-sealed-secrets.yaml <<EOF
+          flux create source git helm-charts-azure \
+            --url https://community.opengroup.org/osdu/platform/deployment-and-operations/helm-charts-azure \
+            --interval 1m \
+            --branch master \
+            --export > $GITHUB_WORKSPACE/clusters/$CLUSTER/helm-charts-azure.yaml
+
+      - name: Infrastructure Software - Kustomizations
+        run: |
+          cat > $GITHUB_WORKSPACE/clusters/$CLUSTER/sealed-secrets.yaml <<EOF
           ---
           apiVersion: kustomize.toolkit.fluxcd.io/v1beta1
           kind: Kustomization
@@ -67,7 +80,7 @@ jobs:
             sourceRef:
               kind: GitRepository
               name: self-managed-osdu
-            path: ./apps/sealed-secrets
+            path: ./apps/base/sealed-secrets
             prune: true
             validation: client
             healthChecks:
@@ -76,12 +89,37 @@ jobs:
                 namespace: kube-system
           EOF
 
-          flux create source git helm-charts-azure \
-            --url https://community.opengroup.org/osdu/platform/deployment-and-operations/helm-charts-azure \
-            --interval 1m \
-            --branch master \
-            --export > $GITHUB_WORKSPACE/clusters/$CLUSTER/source-helm-charts-azure.yaml
+      - name: OSDU Software Cluster - Kustomization
+        uses: Azure/cli@1.0.4
+        run: |
+          GROUP=$(az group list --query "[?contains(name, 'ctl${{ secrets.RAND }}')].name" -otsv)
+          ENV_VAULT=$(az keyvault list --resource-group $GROUP --query [].name -otsv)
 
+          cat > $GITHUB_WORKSPACE/apps/$CLUSTER/kustomization.yaml <<EOF
+          ---
+          apiVersion: kustomize.config.k8s.io/v1beta1
+          kind: Kustomization
+          namespace: default
+          resources:
+            - ../base/osdu-base
+          EOF
+
+          cat > $GITHUB_WORKSPACE/apps/$CLUSTER/osdu-stamp-values.yaml << EOF
+          ---
+          apiVersion: helm.toolkit.fluxcd.io/v2beta1
+          kind: HelmRelease
+          metadata:
+            name: osdu-istio
+            namespace: default
+          spec:
+            values:
+              azure:
+                tenant: $(az keyvault secret show --id https://${ENV_VAULT}.vault.azure.net/secrets/tenant-id --query value -otsv)
+                appid: $(az keyvault secret show --id https://${ENV_VAULT}.vault.azure.net/secrets/aad-client-id --query value -otsv)
+          EOF
+
+      - name: OSDU Software - Kustomization
+        run: |
           flux create kustomization osdu-azure \
             --source=flux-system \
             --path=./apps/$CLUSTER \
@@ -91,7 +129,7 @@ jobs:
             --export > $GITHUB_WORKSPACE/clusters/$CLUSTER/kustomization-osdu-azure.yaml
 
 
-      - name: Commit changes
+      - name: GitOps Commit
         uses: EndBug/add-and-commit@v7
         with:
           message: 'Initialize Software Install'
