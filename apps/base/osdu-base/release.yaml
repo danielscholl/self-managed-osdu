@@ -18,4 +18,5 @@ spec:
       retries: 3
   targetNamespace: default
   values:
-    ingress.admin: "admin@self.managed.osdu.com"
+    ingress:
+      admin: "admin@self.managed.osdu.com"
