@@ -103,9 +103,9 @@ jobs:
             namespace: default
             resources:
               - ../base/osdu-base
-              - ../base/osdu-istio
-            patchesStrategicMerge:
-              - override-values.yaml
+            #   - ../base/osdu-istio
+            # patchesStrategicMerge:
+            #   - override-values.yaml
             EOF
 
             cat > $GITHUB_WORKSPACE/apps/$CLUSTER/override-values.yaml << EOF
