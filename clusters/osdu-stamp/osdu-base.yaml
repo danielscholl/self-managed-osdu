@@ -11,6 +11,6 @@ spec:
   sourceRef:
     kind: GitRepository
     name: flux-system
-  path: ./apps/osdu-stamp
+  path: ./apps/base/osdu-base
   prune: true
   validation: client
