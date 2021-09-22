@@ -127,10 +127,10 @@ jobs:
             --prune=true \
             --interval=5m \
             --depends-on=sealed-secrets \
-            --export > $GITHUB_WORKSPACE/clusters/$CLUSTER/kustomization-osdu-azure.yaml
+            --export > $GITHUB_WORKSPACE/clusters/$CLUSTER/osdu-azure.yaml
 
       - name: GitOps Commit
         uses: EndBug/add-and-commit@v7
         with:
           message: 'Initialize Software Install'
-          add: 'clusters'
+          add: '.'
