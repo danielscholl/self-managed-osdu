@@ -5,7 +5,8 @@ metadata:
   name: istio-operator
   namespace: istio-system
 spec:
-  dependsOn: istio-base
+  dependsOn:
+  - name: istio-base
   chart:
     spec:
       chart: ./osdu-istio/istio-operator
