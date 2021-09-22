@@ -10,7 +10,7 @@ spec:
       chart: ./osdu-base
       sourceRef:
         kind: GitRepository
-        name: helm-charts-azure-source
+        name: helm-charts-azure
         namespace: flux-system
   interval: 5m0s
   install:
