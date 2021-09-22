@@ -5,7 +5,7 @@ namespace: osdu-azure
 resources:
   - azure-namespace.yaml
   - istio-namespace.yaml
-#   - ../base/osdu-base
+  - ../base/osdu-base
 #   - ../base/osdu-istio
 # patchesStrategicMerge:
 #   - osdu-stamp-values.yaml
