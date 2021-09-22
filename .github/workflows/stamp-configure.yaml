@@ -103,9 +103,12 @@ jobs:
             namespace: default
             resources:
               - ../base/osdu-base
+              - ../base/osdu-istio
+            patchesStrategicMerge:
+              - override-values.yaml
             EOF
 
-            cat > $GITHUB_WORKSPACE/apps/$CLUSTER/osdu-stamp-values.yaml << EOF
+            cat > $GITHUB_WORKSPACE/apps/$CLUSTER/override-values.yaml << EOF
             ---
             apiVersion: helm.toolkit.fluxcd.io/v2beta1
             kind: HelmRelease
