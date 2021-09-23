@@ -1,0 +1,15 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: osdu-airflow
+  namespace: airflow
+spec:
+  values:
+    airflowLogin:
+      name: "admin"
+    airflow:
+      ingress:
+        web:
+          host: osdu-self-dplbedfb-wrt3-gw.centralus.cloudapp.azure.com
+
