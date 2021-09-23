@@ -4,4 +4,4 @@ kind: Kustomization
 resources:
   - ../base/osdu-istio
 patchesStrategicMerge:
-  - ./override-values.yaml
+  - override-values.yaml
