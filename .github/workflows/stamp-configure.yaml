@@ -5,6 +5,7 @@ on:
 
 env:
   OSDU_VERSION: v0.11.0
+  CLUSTER: osdu-stamp
 
 jobs:
 
@@ -12,7 +13,6 @@ jobs:
     name: Gitops Configuration
     env:
       GITHUB_TOKEN: ${{ secrets.GH_REPO_TOKEN }}
-      CLUSTER: osdu-stamp
 
     runs-on: ubuntu-latest
     steps:
@@ -50,7 +50,8 @@ jobs:
       - name: Create Cluster Directories
         run: |
           mkdir -p $GITHUB_WORKSPACE/clusters/$CLUSTER
-          mkdir -p $GITHUB_WORKSPACE/apps/$CLUSTER
+          mkdir -p $GITHUB_WORKSPACE/apps/$CLUSTER/istio
+          mkdir -p $GITHUB_WORKSPACE/apps/$CLUSTER/airflow
 
       - name: Define Flux Sources
         run: |
@@ -66,7 +67,7 @@ jobs:
             --branch master \
             --export > $GITHUB_WORKSPACE/clusters/$CLUSTER/helm-charts-azure.yaml
 
-      - name: Infrastructure Software - Kustomizations
+      - name: sealed-secrets
         run: |
           cat > $GITHUB_WORKSPACE/clusters/$CLUSTER/sealed-secrets.yaml <<EOF
           ---
@@ -89,7 +90,7 @@ jobs:
                 namespace: kube-system
           EOF
 
-      - name: OSDU Software Cluster - Kustomization
+      - name: osdu-base
         uses: Azure/cli@1.0.4
         with:
           inlineScript: |
@@ -115,6 +116,14 @@ jobs:
               validation: client
             EOF
 
+
+      - name: osdu-istio
+        uses: Azure/cli@1.0.4
+        with:
+          inlineScript: |
+            GROUP=$(az group list --query "[?contains(name, 'ctl${{ secrets.RAND }}')].name" -otsv)
+            ENV_VAULT=$(az keyvault list --resource-group $GROUP --query [].name -otsv)
+
             cat > $GITHUB_WORKSPACE/clusters/$CLUSTER/osdu-istio.yaml << EOF
             ---
             apiVersion: kustomize.toolkit.fluxcd.io/v1beta1
@@ -129,22 +138,32 @@ jobs:
               sourceRef:
                 kind: GitRepository
                 name: flux-system
-              path: ./apps/osdu-stamp
+              path: ./apps/$CLUSTER/istio
               prune: true
               validation: client
+              healthChecks:
+              - kind: Deployment
+                name: istio-operator
+                namespace: istio-operator
+              - kind: Deployment
+                name: istiod
+                namespace: istio-system
+              - kind: Deployment
+                name: istio-ingressgateway
+                namespace: istio-system
             EOF
 
-            cat > $GITHUB_WORKSPACE/apps/$CLUSTER/kustomization.yaml << EOF
+            cat > $GITHUB_WORKSPACE/apps/$CLUSTER/istio/kustomization.yaml << EOF
             ---
             apiVersion: kustomize.config.k8s.io/v1beta1
             kind: Kustomization
             resources:
-              - ../base/osdu-istio
+              - ../../base/osdu-istio
             patchesStrategicMerge:
               - override-values.yaml
             EOF
 
-            cat > $GITHUB_WORKSPACE/apps/$CLUSTER/override-values.yaml << EOF
+            cat > $GITHUB_WORKSPACE/apps/$CLUSTER/istio/override-values.yaml << EOF
             ---
             apiVersion: helm.toolkit.fluxcd.io/v2beta1
             kind: HelmRelease
@@ -157,6 +176,32 @@ jobs:
                   azure:
                     tenant: $(az keyvault secret show --id https://${ENV_VAULT}.vault.azure.net/secrets/tenant-id --query value -otsv)
                     appid: $(az keyvault secret show --id https://${ENV_VAULT}.vault.azure.net/secrets/aad-client-id --query value -otsv)
+            EOF
+
+      - name: osdu-airflow
+        uses: Azure/cli@1.0.4
+        with:
+          inlineScript: |
+            GROUP=$(az group list --query "[?contains(name, 'ctl${{ secrets.RAND }}')].name" -otsv)
+            ENV_VAULT=$(az keyvault list --resource-group $GROUP --query [].name -otsv)
+
+            cat > $GITHUB_WORKSPACE/clusters/$CLUSTER/osdu-airflow.yaml << EOF
+            ---
+            apiVersion: kustomize.toolkit.fluxcd.io/v1beta1
+            kind: Kustomization
+            metadata:
+              name: osdu-airflow
+              namespace: flux-system
+            spec:
+              dependsOn:
+              - name: osdu-base
+              interval: 5m0s
+              sourceRef:
+                kind: GitRepository
+                name: flux-system
+              path: ./apps/$CLUSTER/airflow
+              prune: true
+              validation: client
             EOF
 
       - name: GitOps Commit
