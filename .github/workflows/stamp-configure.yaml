@@ -204,6 +204,14 @@ jobs:
               validation: client
             EOF
 
+            cat > $GITHUB_WORKSPACE/apps/$CLUSTER/airflow/kustomization.yaml << EOF
+            ---
+            apiVersion: kustomize.config.k8s.io/v1beta1
+            kind: Kustomization
+            resources:
+              - ../../base/osdu-airflow
+            EOF
+
       - name: GitOps Commit
         uses: EndBug/add-and-commit@v7
         with:
