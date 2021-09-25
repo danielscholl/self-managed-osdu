@@ -2,7 +2,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: osdu-airflow
+  name: airflow
   namespace: airflow
 spec:
   chart:
@@ -17,23 +17,3 @@ spec:
     remediation:
       retries: 3
   targetNamespace: airflow
-  values:
-    airflowLogin:
-      name: admin
-    airflow:
-      airflow:
-        extraEnv:
-          - name: AIRFLOW_VAR_AZURE_ENABLE_MSI
-            value: false
-          - name: AIRFLOW_VAR_CORE__SERVICE__SCHEMA__URL
-            value:  "http://schema.airflow.svc.cluster.local/api/schema-service/v1/schema"
-          - name: AIRFLOW_VAR_CORE__SERVICE__SEARCH__URL
-            value: "http://search.airflow.svc.cluster.local/api/search/v2/query"
-          - name: AIRFLOW_VAR_CORE__SERVICE__STORAGE__URL
-            value:  "http://storage.airflow.svc.cluster.local/api/storage/v2/records"
-          - name: AIRFLOW_VAR_CORE__SERVICE__FILE__HOST
-            value: "http://file.airflow.svc.cluster.local/api/file/v2"
-          - name: AIRFLOW_VAR_CORE__SERVICE__WORKFLOW__HOST
-            value: "http://workflow.airflow.svc.cluster.local/api/workflow"
-          - name: AIRFLOW_VAR_CORE__SERVICE__SEARCH_WITH_CURSOR__URL
-            value: "http://search.airflow.svc.cluster.local/api/search/v2/query_with_cursor"

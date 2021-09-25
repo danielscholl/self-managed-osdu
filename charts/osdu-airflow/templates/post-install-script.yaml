@@ -1,0 +1,55 @@
+{{- $namespace := .Release.Namespace }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: post-install-script
+  namespace: {{ $namespace }}
+data:
+  requirements.txt: |
+    flask-bcrypt
+    psycopg2-binary
+  create_user.py: |
+    import os
+    import time
+    import sys
+    from flask_bcrypt import generate_password_hash
+    import psycopg2
+
+    PY3 = sys.version_info[0] == 3
+
+    def main():
+      host = os.environ.get('DATABASE_HOST','')
+      dbname = os.environ.get('DATABASE_DB','')
+      user = os.environ.get('DATABASE_USER','')
+      password = os.environ.get('DATABASE_USER_PASS','')
+      sslmode = "require"
+
+      if not host or not dbname or not user or not password:
+        print('missed required environment variables')
+        sys.exit(2)
+
+      # Construct connection string
+      conn_string = "host={0} user={1} dbname={2} password={3} sslmode={4}".format(host, user, dbname, password, sslmode)
+      print(f'Connection String: {conn_string}')
+
+      try:
+        connection = psycopg2.connect(conn_string)
+      except (Exception,psycopg2.DatabaseError) as error:
+        print(error)
+        sys.exit(1)
+
+      if connection is not None:
+        print("Connection established")
+        cursor = connection.cursor()
+        cursor.execute("SELECT * FROM information_schema.tables WHERE table_name='users';")
+        rows = cursor.fetchall()
+        # Print all rows
+        for row in rows:
+          print("Data row = (%s, %s, %s)" %(str(row[0]), str(row[1]), str(row[2])))
+
+      connection.close()
+
+
+
+    if __name__ == "__main__":
+       main()

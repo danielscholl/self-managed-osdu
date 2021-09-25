@@ -1,0 +1,47 @@
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+
+################################################################################
+# Specify the azure environment specific values
+#
+azure:
+  tenant: <tenant_id>
+  subscription: <subscription_id>
+  resourcegroup: <central_resource_group>
+  identity: <identity_name>
+  identity_id: <identity_id>
+  keyvault: <keyvault_name>
+  appid: <client_id>
+
+################################################################################
+# Specify the Pod Identity
+#
+identity:
+  name: osdu-identity
+
+################################################################################
+# Specify the Service Settings
+#
+service:
+  type: ClusterIP
+  port: 80
+
+################################################################################
+# Specify the OSDU Services to Load
+#
+configuration:
+
+  ######################
+  ##  DEFAULT SERVICE
+  #
+  - service: default
+    repository: neilpeterson/aks-helloworld
+    tag: v1
+    path: /*
+    probe: /
+    replicaCount: 1
+    env:
+      - name: TITLE
+        value: "Azure OSDU Platform - (AKS)"
+

@@ -3,6 +3,5 @@ AZURE_CREDENTIALS
 .env_*
 .envrc
 .ssh
-charts
 .DS_Store
 .ssh

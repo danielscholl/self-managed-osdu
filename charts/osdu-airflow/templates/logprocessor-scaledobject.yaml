@@ -1,0 +1,34 @@
+{{- $namespace := .Release.namespace }}
+{{- $isKedaV2Enabled := .Values.keda.version_2_enabled | default false -}}
+
+{{- if $isKedaV2Enabled }}
+apiVersion: keda.sh/v1alpha1
+{{- else }}
+apiVersion: keda.k8s.io/v1alpha1
+{{- end }}
+kind: ScaledObject
+metadata:
+  name: azure-queue-scaledobject
+  namespace: {{ $namespace }}
+  {{- if $isKedaV2Enabled }}
+  {{- else }}
+  labels:
+    deploymentName: log-processor
+  {{- end }}
+spec:
+  scaleTargetRef:
+    {{- if $isKedaV2Enabled }}
+    name: log-processor
+    {{- else }}
+    deploymentName: log-processor
+    {{- end }}
+  triggers:
+  - type: azure-queue
+    metadata:
+      queueName: airflowlogqueue
+      queueLength: "5" # default 5
+      {{- if $isKedaV2Enabled }}
+      connectionFromEnv: AzureWebJobsStorage
+      {{- else }}
+      connection: AzureWebJobsStorage
+      {{- end }}

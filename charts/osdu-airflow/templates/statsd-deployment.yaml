@@ -1,0 +1,48 @@
+{{- $namespace := .Release.Namespace }}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: statsd
+  namespace: {{ $namespace }}
+  labels:
+    app: statsd
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: statsd
+  template:
+    metadata:
+      labels:
+        app: statsd
+        aadpodidbinding: "osdu-identity"
+    spec:
+      containers:
+      - name: statsd
+        image: {{ .Values.image.repository }}/statsd:{{ .Values.image.tag | default .Chart.AppVersion }}
+        imagePullPolicy: Always
+        command: ["node"]
+        args: ["/usr/src/app/statsd/stats.js", "/usr/src/app/statsd/backends/config/appinsightsconfig.js"]
+        volumeMounts:
+          - name: config-volume
+            mountPath: /usr/src/app/statsd/backends/config
+        env:
+          - name: APPLICATION_INSIGHTS_INSTRUMENTATION_KEY
+            valueFrom:
+              secretKeyRef:
+                name: central-logging
+                key: appinsights
+        ports:
+          - containerPort: 8125
+            protocol: UDP
+        resources:
+          requests:
+            cpu: 100m
+            memory: 128Mi
+          limits:
+            cpu: 250m
+            memory: 256Mi
+      volumes:
+        - name: config-volume
+          configMap:
+            name: statsd-configmap

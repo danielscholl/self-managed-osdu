@@ -2,7 +2,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: osdu-airflow
+  name: airflow
   namespace: airflow
 spec:
   values:
@@ -137,5 +137,3 @@ spec:
                 readOnly: true
                 volumeAttributes:
                   secretProviderClass: azure-keyvault
-
-

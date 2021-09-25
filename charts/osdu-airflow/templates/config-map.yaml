@@ -1,0 +1,8 @@
+{{- $namespace := .Release.Namespace }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: osdu-svc-config
+  namespace: {{ $namespace }}
+data:
+  ENV_KEYVAULT: https://{{ .Values.azure.keyvault }}.vault.azure.net/
