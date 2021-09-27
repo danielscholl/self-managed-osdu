@@ -29,9 +29,16 @@ spec:
       minReplicas: 1
       maxReplicas: 3
       targetCPUUtilizationPercentage: 80
+    azure:
+      enabled: true
     env:
     - name: MESSAGE
       value: Hello World!
-    azure:
-      enabled: true
-
+    - name: AZURE_TENANT_ID
+      secret:
+        name: active-directory
+        key: tenantid
+    - name: WORKSPACE_ID
+      secret:
+        name: central-logging
+        key: log-workspace-id
