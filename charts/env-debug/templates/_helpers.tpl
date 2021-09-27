@@ -49,4 +49,5 @@ Selector labels
 {{- define "env-debug.selectorLabels" -}}
 app.kubernetes.io/name: {{ include "env-debug.name" . }}
 app.kubernetes.io/instance: {{ .Release.Name }}
+aadpodidbinding: osdu-identity
 {{- end }}

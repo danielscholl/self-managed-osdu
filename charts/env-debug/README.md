@@ -12,12 +12,27 @@ ENV_VAULT=$(az keyvault list --resource-group $GROUP --query [].name -otsv)
 
 # Translate Values File
 cat > custom_values.yaml << EOF
-# This file contains the essential configs for the osdu on azure helm chart
+replicaCount: 1
+
+nameOverride: ""
+fullnameOverride: ""
+
+service:
+  type: ClusterIP
+  port: 80
+  targetPort: 8080
+
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 3
+  targetCPUUtilizationPercentage: 80
 
 ################################################################################
 # Specify the azure environment specific values
 #
 azure:
+  enabled: true
   tenant: $(az keyvault secret show --id https://${ENV_VAULT}.vault.azure.net/secrets/tenant-id --query value -otsv)
   subscription: $(az keyvault secret show --id https://${ENV_VAULT}.vault.azure.net/secrets/subscription-id --query value -otsv)
   resourcegroup: $(az keyvault secret show --id https://${ENV_VAULT}.vault.azure.net/secrets/base-name-cr --query value -otsv)-rg
@@ -25,6 +40,18 @@ azure:
   identity_id: $(az keyvault secret show --id https://${ENV_VAULT}.vault.azure.net/secrets/osdu-identity-id --query value -otsv)
   keyvault: $ENV_VAULT
   appid: $(az keyvault secret show --id https://${ENV_VAULT}.vault.azure.net/secrets/aad-client-id --query value -otsv)
+
+env:
+- name: MESSAGE
+  value: Hello World!
+- name: AZURE_TENANT_ID
+  secret:
+    name: active-directory
+    key: tenantid
+- name: WORKSPACE_ID
+  secret:
+    name: central-logging
+    key: log-workspace-id
 
 EOF
 
@@ -39,5 +66,5 @@ NAMESPACE=debug
 kubectl create namespace $NAMESPACE
 
 # Install Charts
-helm install self-managed-osdu . -n $NAMESPACE -f custom_values.yaml
+helm install self-managed-osdu-debug . -n $NAMESPACE -f custom_values.yaml
 ```

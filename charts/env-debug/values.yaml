@@ -20,6 +20,7 @@ autoscaling:
 # Specify the azure environment specific values
 #
 azure:
+  enabled: true
   tenant: <tenant_id>
   subscription: <subscription_id>
   resourcegroup: <central_resource_group>
@@ -31,3 +32,11 @@ azure:
 env:
 - name: MESSAGE
   value: Hello World!
+- name: AZURE_TENANT_ID
+  secret:
+    name: active-directory
+    key: tenantid
+- name: WORKSPACE_ID
+  secret:
+    name: central-logging
+    key: log-workspace-id

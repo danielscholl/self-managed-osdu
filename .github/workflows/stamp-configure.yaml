@@ -90,6 +90,43 @@ jobs:
                 namespace: kube-system
           EOF
 
+      - name: debug-chart
+        run: |
+          cat > $GITHUB_WORKSPACE/clusters/$CLUSTER/env-debug.yaml <<EOF
+          ---
+          apiVersion: v1
+          kind: Namespace
+          metadata:
+            name: debug
+          ---
+          apiVersion: kustomize.toolkit.fluxcd.io/v1beta1
+          kind: Kustomization
+          metadata:
+            name: env-debug
+            namespace: flux-system
+          spec:
+            interval: 5m0s
+            sourceRef:
+              kind: GitRepository
+              name: self-managed-osdu
+            path: ./charts/env-debug
+            prune: true
+            validation: client
+            healthChecks:
+              - kind: Deployment
+                name: env-debug
+                namespace: debug
+            values:
+              azure:
+                tenant: $(az keyvault secret show --id https://${ENV_VAULT}.vault.azure.net/secrets/tenant-id --query value -otsv)
+                subscription: $(az keyvault secret show --id https://${ENV_VAULT}.vault.azure.net/secrets/subscription-id --query value -otsv)
+                resourcegroup: $(az keyvault secret show --id https://${ENV_VAULT}.vault.azure.net/secrets/base-name-cr --query value -otsv)-rg
+                identity: $(az keyvault secret show --id https://${ENV_VAULT}.vault.azure.net/secrets/base-name-cr --query value -otsv)-osdu-identity
+                identity_id: $(az keyvault secret show --id https://${ENV_VAULT}.vault.azure.net/secrets/osdu-identity-id --query value -otsv)
+                keyvault: $ENV_VAULT
+                appid: $(az keyvault secret show --id https://${ENV_VAULT}.vault.azure.net/secrets/aad-client-id --query value -otsv)
+          EOF
+
       - name: osdu-base
         uses: Azure/cli@1.0.4
         with:
