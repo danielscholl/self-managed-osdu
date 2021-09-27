@@ -97,11 +97,6 @@ jobs:
 
           cat > $GITHUB_WORKSPACE/clusters/$CLUSTER/env-debug.yaml <<EOF
           ---
-          apiVersion: v1
-          kind: Namespace
-          metadata:
-            name: debug
-          ---
           apiVersion: kustomize.toolkit.fluxcd.io/v1beta1
           kind: Kustomization
           metadata:
@@ -112,13 +107,33 @@ jobs:
             sourceRef:
               kind: GitRepository
               name: self-managed-osdu
-            path: ./charts/env-debug
+            path: ./apps/base/env-debug
             prune: true
             validation: client
             healthChecks:
               - kind: Deployment
                 name: env-debug
                 namespace: debug
+          EOF
+
+          cat > $GITHUB_WORKSPACE/apps/$CLUSTER/env-debug/kustomization.yaml << EOF
+          ---
+          apiVersion: kustomize.config.k8s.io/v1beta1
+          kind: Kustomization
+          resources:
+            - ../../base/env-debug
+          patchesStrategicMerge:
+            - override-values.yaml
+          EOF
+
+          cat > $GITHUB_WORKSPACE/apps/$CLUSTER/env-debug/override-values.yaml << EOF
+          ---
+          apiVersion: helm.toolkit.fluxcd.io/v2beta1
+          kind: HelmRelease
+          metadata:
+            name: env-debug
+            namespace: debug
+          spec:
             values:
               azure:
                 tenant: $(az keyvault secret show --id https://${ENV_VAULT}.vault.azure.net/secrets/tenant-id --query value -otsv)
