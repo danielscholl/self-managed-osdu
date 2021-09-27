@@ -102,7 +102,7 @@ jobs:
           kind: Kustomization
           metadata:
             name: osdu-debug
-            namespace: flux-system
+            namespace: osdu-debug
           spec:
             interval: 5m0s
             sourceRef:
@@ -119,8 +119,8 @@ jobs:
           kind: Kustomization
           resources:
             - ../../base/osdu-debug
-          patchesStrategicMerge:
-            - override-values.yaml
+          # patchesStrategicMerge:
+          #   - override-values.yaml
           EOF
 
           cat > $GITHUB_WORKSPACE/apps/$CLUSTER/osdu-debug/override-values.yaml << EOF
@@ -129,7 +129,7 @@ jobs:
           kind: HelmRelease
           metadata:
             name: osdu-tool
-            namespace: flux-system
+            namespace: osdu-debug
           spec:
             values:
               azure:
