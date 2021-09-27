@@ -133,7 +133,7 @@ jobs:
           kind: HelmRelease
           metadata:
             name: env-debug
-            namespace: debug
+            namespace: flux-system
           spec:
             values:
               azure:
