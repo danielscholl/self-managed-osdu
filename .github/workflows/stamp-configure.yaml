@@ -92,6 +92,9 @@ jobs:
 
       - name: debug-chart
         run: |
+          GROUP=$(az group list --query "[?contains(name, 'ctl${{ secrets.RAND }}')].name" -otsv)
+          ENV_VAULT=$(az keyvault list --resource-group $GROUP --query [].name -otsv)
+
           cat > $GITHUB_WORKSPACE/clusters/$CLUSTER/env-debug.yaml <<EOF
           ---
           apiVersion: v1
