@@ -9,7 +9,7 @@ spec:
   sourceRef:
     kind: GitRepository
     name: self-managed-osdu
-  path: ./apps/osdu-stamp/env-debug
+  path: ./apps/base/env-debug
   prune: true
   validation: client
   healthChecks:
