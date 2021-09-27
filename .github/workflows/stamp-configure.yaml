@@ -102,7 +102,7 @@ jobs:
           kind: Kustomization
           metadata:
             name: osdu-debug
-            namespace: osdu-debug
+            namespace: flux-system
           spec:
             interval: 5m0s
             sourceRef:
