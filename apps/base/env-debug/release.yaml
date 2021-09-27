@@ -17,3 +17,21 @@ spec:
     remediation:
       retries: 3
   targetNamespace: debug
+  values:
+    replicaCount: 1
+    nameOverride: ""
+    fullnameOverride: ""
+    service:
+      type: ClusterIP
+      port: 80
+    autoscaling:
+      enabled: false
+      minReplicas: 1
+      maxReplicas: 3
+      targetCPUUtilizationPercentage: 80
+    env:
+    - name: MESSAGE
+      value: Hello World!
+    azure:
+      enabled: true
+
