@@ -111,6 +111,10 @@ jobs:
             path: ./apps/$CLUSTER/env-debug
             prune: true
             validation: client
+            healthChecks:
+              - kind: Deployment
+                name: env-debug
+                namespace: debug
           EOF
 
           cat > $GITHUB_WORKSPACE/apps/$CLUSTER/env-debug/kustomization.yaml << EOF

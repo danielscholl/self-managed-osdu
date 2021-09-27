@@ -2,7 +2,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: stamp-environment
+  name: env-debug
   namespace: debug
 spec:
   values:
