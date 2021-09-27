@@ -5,7 +5,7 @@ metadata:
   name: env-debug
   namespace: debug
 spec:
-  Values:
+  values:
     azure:
       tenant: 72f988bf-86f1-41af-91ab-2d7cd011db47
       subscription: 66c8c9d5-6f78-4d7d-8d6a-796a1ae66395
