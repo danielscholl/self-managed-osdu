@@ -3,5 +3,4 @@ kind: Kustomization
 namespace: osdu-debug
 resources:
   - namespace.yaml
-  - release.yaml
-
+  # - release.yaml
