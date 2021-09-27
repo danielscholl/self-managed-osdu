@@ -107,13 +107,13 @@ jobs:
             interval: 5m0s
             sourceRef:
               kind: GitRepository
-              name: self-managed-osdu
+              name: flux-system
             path: ./apps/$CLUSTER/env-debug
             prune: true
             validation: client
             healthChecks:
               - kind: Deployment
-                name: env-debug
+                name: debug-env-debug
                 namespace: debug
           EOF
 
