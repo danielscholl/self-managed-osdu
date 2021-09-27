@@ -90,7 +90,7 @@ jobs:
                 namespace: kube-system
           EOF
 
-      - name: debug-chart
+      - name: env-debug
         run: |
           GROUP=$(az group list --query "[?contains(name, 'ctl${{ secrets.RAND }}')].name" -otsv)
           ENV_VAULT=$(az keyvault list --resource-group $GROUP --query [].name -otsv)
