@@ -113,8 +113,8 @@ jobs:
             validation: client
             healthChecks:
               - kind: Deployment
-                name: osdu-debug
-                namespace: debug
+                name: env-debug
+                namespace: osdu-debug
           EOF
 
           cat > $GITHUB_WORKSPACE/apps/$CLUSTER/osdu-debug/kustomization.yaml << EOF

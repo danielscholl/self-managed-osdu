@@ -16,11 +16,11 @@ spec:
   install:
     remediation:
       retries: 3
-  targetNamespace: debug
+  targetNamespace: osdu-debug
   values:
     replicaCount: 1
     nameOverride: ""
-    fullnameOverride: osdu-debug
+    fullnameOverride: env-debug
     service:
       type: ClusterIP
       port: 80
