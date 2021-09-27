@@ -1,0 +1,16 @@
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1beta1
+kind: Kustomization
+metadata:
+  name: osdu-airflow
+  namespace: flux-system
+spec:
+  dependsOn:
+  - name: osdu-base
+  interval: 5m0s
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+  path: ./apps/osdu-stamp/airflow
+  prune: true
+  validation: client
