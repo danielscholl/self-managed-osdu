@@ -19,15 +19,15 @@ autoscaling:
 ################################################################################
 # Specify the azure environment specific values
 #
-azure:
-  enabled: true
-  tenant: <tenant_id>
-  subscription: <subscription_id>
-  resourcegroup: <central_resource_group>
-  identity: <identity_name>
-  identity_id: <identity_id>
-  keyvault: <keyvault_name>
-  appid: <client_id>
+# azure:
+#   enabled: true
+#   tenant: <tenant_id>
+#   subscription: <subscription_id>
+#   resourcegroup: <central_resource_group>
+#   identity: <identity_name>
+#   identity_id: <identity_id>
+#   keyvault: <keyvault_name>
+#   appid: <client_id>
 
 env:
 - name: MESSAGE
