@@ -19,7 +19,7 @@ spec:
   targetNamespace: debug
   values:
     replicaCount: 1
-    nameOverride: ""
+    nameOverride: "env-debug"
     fullnameOverride: ""
     service:
       type: ClusterIP
