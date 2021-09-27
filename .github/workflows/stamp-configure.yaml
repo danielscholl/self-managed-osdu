@@ -128,8 +128,8 @@ jobs:
           apiVersion: helm.toolkit.fluxcd.io/v2beta1
           kind: HelmRelease
           metadata:
-              name: osdu-tool
-              namespace: flux-system
+            name: osdu-tool
+            namespace: flux-system
           spec:
             values:
               azure:

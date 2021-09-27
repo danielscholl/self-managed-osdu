@@ -16,7 +16,7 @@ spec:
   install:
     remediation:
       retries: 3
-  targetNamespace: osdu-debug
+  targetNamespace: default
   values:
     replicaCount: 1
     nameOverride: ""
