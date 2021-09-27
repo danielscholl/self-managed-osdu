@@ -52,6 +52,7 @@ jobs:
           mkdir -p $GITHUB_WORKSPACE/clusters/$CLUSTER
           mkdir -p $GITHUB_WORKSPACE/apps/$CLUSTER/istio
           mkdir -p $GITHUB_WORKSPACE/apps/$CLUSTER/airflow
+          mkdir -p $GITHUB_WORKSPACE/apps/$CLUSTER/env-debug
 
       - name: Define Flux Sources
         run: |
