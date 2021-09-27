@@ -113,7 +113,7 @@ jobs:
             validation: client
             healthChecks:
               - kind: Deployment
-                name: debug-env-debug
+                name: debug-stamp-environment
                 namespace: debug
           EOF
 
