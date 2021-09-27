@@ -20,7 +20,7 @@ spec:
   values:
     replicaCount: 1
     nameOverride: ""
-    fullnameOverride: env-debug
+    fullnameOverride: osdu-debug
     service:
       type: ClusterIP
       port: 80
