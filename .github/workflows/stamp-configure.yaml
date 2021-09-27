@@ -108,7 +108,7 @@ jobs:
             sourceRef:
               kind: GitRepository
               name: self-managed-osdu
-            path: ./apps/base/env-debug
+            path: ./apps/$CLUSTER/env-debug
             prune: true
             validation: client
             healthChecks:
