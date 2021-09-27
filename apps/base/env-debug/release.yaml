@@ -19,8 +19,8 @@ spec:
   targetNamespace: debug
   values:
     replicaCount: 1
-    nameOverride: "env-debug"
-    fullnameOverride: ""
+    nameOverride: ""
+    fullnameOverride: "env-debug"
     service:
       type: ClusterIP
       port: 80
