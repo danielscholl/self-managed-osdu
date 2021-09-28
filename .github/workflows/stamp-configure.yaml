@@ -267,8 +267,7 @@ jobs:
                     - name: AIRFLOW_VAR_AZURE_DNS_HOST
                       value: $DNS_HOST
                     - name: AIRFLOW_VAR_AZURE_ENABLE_MSI
-                      value:
-                    # Needed for installing python osdu python sdk. In future this will be changed
+                      value: false
                     - name: CI_COMMIT_TAG
                       value: "v0.11.0"
                     - name: AIRFLOW_VAR_ENTITLEMENTS_MODULE_NAME
@@ -329,78 +328,6 @@ jobs:
                         volumeAttributes:
                           secretProviderClass: azure-keyvault
           EOF
-
-
-
-      # - name: osdu-airflow
-      #   uses: Azure/cli@1.0.4
-      #   with:
-      #     inlineScript: |
-      #       GROUP=$(az group list --query "[?contains(name, 'ctl${{ secrets.RAND }}')].name" -otsv)
-      #       DP_GROUP=$(az group list --query "[?contains(name, 'dpl${{ secrets.RAND }}')].name" -otsv |grep -v MC)
-      #       ENV_VAULT=$(az keyvault list --resource-group $GROUP --query [].name -otsv)
-      #       DNS_HOST=$(az network public-ip list --resource-group $DP_GROUP --query [].dnsSettings.fqdn -otsv)
-
-      #       cat > $GITHUB_WORKSPACE/clusters/$CLUSTER/osdu-airflow.yaml << EOF
-      #       ---
-      #       apiVersion: kustomize.toolkit.fluxcd.io/v1beta1
-      #       kind: Kustomization
-      #       metadata:
-      #         name: osdu-airflow
-      #         namespace: flux-system
-      #       spec:
-      #         dependsOn:
-      #         - name: osdu-base
-      #         interval: 5m0s
-      #         sourceRef:
-      #           kind: GitRepository
-      #           name: flux-system
-      #         path: ./apps/$CLUSTER/airflow
-      #         prune: true
-      #         validation: client
-      #       EOF
-
-      #       cat > $GITHUB_WORKSPACE/apps/$CLUSTER/osdu-airflow/kustomization.yaml << EOF
-      #       ---
-      #       apiVersion: kustomize.config.k8s.io/v1beta1
-      #       kind: Kustomization
-      #       resources:
-      #         - ../../base/osdu-airflow
-      #       patchesStrategicMerge:
-      #         - override-values.yaml
-      #       EOF
-
-      #       cat > $GITHUB_WORKSPACE/apps/$CLUSTER/osdu-airflow/override-values.yaml << EOF
-      #       ---
-      #       apiVersion: helm.toolkit.fluxcd.io/v2beta1
-      #       kind: HelmRelease
-      #       metadata:
-      #         name: osdu-airflow
-      #         namespace: airflow
-      #       spec:
-      #         values:
-      #           azure:
-      #             tenant: $(az keyvault secret show --id https://${ENV_VAULT}.vault.azure.net/secrets/tenant-id --query value -otsv)
-      #             subscription: $(az keyvault secret show --id https://${ENV_VAULT}.vault.azure.net/secrets/subscription-id --query value -otsv)
-      #             resourcegroup: $(az keyvault secret show --id https://${ENV_VAULT}.vault.azure.net/secrets/base-name-cr --query value -otsv)-rg
-      #             identity: $(az keyvault secret show --id https://${ENV_VAULT}.vault.azure.net/secrets/base-name-cr --query value -otsv)-osdu-identity
-      #             identity_id: $(az keyvault secret show --id https://${ENV_VAULT}.vault.azure.net/secrets/osdu-identity-id --query value -otsv)
-      #             keyvault: $ENV_VAULT
-      #             appid: $(az keyvault secret show --id https://${ENV_VAULT}.vault.azure.net/secrets/aad-client-id --query value -otsv)
-      #           airflow:
-      #             ingress:
-      #               web:
-      #                 host: $DNS_HOST
-      #             externalDatabase:
-      #               host: $(az keyvault secret show --id https://${ENV_VAULT}.vault.azure.net/secrets/base-name-sr --query value -otsv)-pg.postgres.database.azure.com
-      #               user:  osdu_admin@$(az keyvault secret show --id https://${ENV_VAULT}.vault.azure.net/secrets/base-name-sr --query value -otsv)-pg
-      #             externalRedis:
-      #               host: $(az keyvault secret show --id https://${ENV_VAULT}.vault.azure.net/secrets/base-name-sr --query value -otsv)-cache.redis.cache.windows.net
-      #             airflow:
-      #               extraEnv:
-      #                 - name: AIRFLOW_VAR_AZURE_DNS_HOST
-      #                   value: $DNS_HOST
-      #       EOF
 
       - name: GitOps Commit
         uses: EndBug/add-and-commit@v7

@@ -93,7 +93,7 @@ spec:
           - name: AIRFLOW_VAR_AZURE_DNS_HOST
             value: osdu-self-dplbedfb-wrt3-gw.centralus.cloudapp.azure.com
           - name: AIRFLOW_VAR_AZURE_ENABLE_MSI
-            value:
+            value: false
           # Needed for installing python osdu python sdk. In future this will be changed
           - name: CI_COMMIT_TAG
             value: "v0.11.0"

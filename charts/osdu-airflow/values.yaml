@@ -17,7 +17,6 @@ azure:
 keda:
   version_2_enabled: false
 
-
 ################################################################################
 # Specify the Ingress Settings
 #
@@ -25,7 +24,6 @@ ingress:
   dns: <dns_hostname>
   issuer: letsencrypt-prod-dns
   enableKeyvaultCert: false
-
 
 ################################################################################
 # Specify any optional override values
@@ -35,7 +33,6 @@ image:
 
 airflowLogin:
   name: <admin_username>                                   #<-- Default Airflow Web UI username
-
 
 ################################################################################
 # Specify the airflow configuration
@@ -204,7 +201,7 @@ airflow:
           key: application-appid
     - name: AIRFLOW_VAR_APPINSIGHTS_KEY
       valueFrom:
-         secretKeyRef:
+        secretKeyRef:
           name: central-logging
           key: appinsights
     - name: AIRFLOW_VAR_AZURE_DNS_HOST
