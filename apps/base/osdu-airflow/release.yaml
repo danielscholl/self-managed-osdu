@@ -13,7 +13,7 @@ spec:
       retries: 3
   chart:
     spec:
-      chart: ./osdu-airflow
+      chart: ./charts/osdu-airflow
       sourceRef:
         kind: GitRepository
         name: flux-system
