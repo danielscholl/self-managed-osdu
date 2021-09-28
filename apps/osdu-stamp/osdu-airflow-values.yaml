@@ -17,7 +17,7 @@ spec:
     airflow:
       ingress:
         web:
-          host: 
+          host: osdu-self-dplbedfb-wrt3-gw.centralus.cloudapp.azure.com
       externalDatabase:
         host: osdu-self-dplbedfb-wrt3-pg.postgres.database.azure.com
         user:  osdu_admin@osdu-self-dplbedfb-wrt3-pg
@@ -26,4 +26,4 @@ spec:
       airflow:
         extraEnv:
           - name: AIRFLOW_VAR_AZURE_DNS_HOST
-            value: 
+            value: osdu-self-dplbedfb-wrt3-gw.centralus.cloudapp.azure.com
