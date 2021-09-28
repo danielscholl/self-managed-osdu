@@ -5,8 +5,6 @@ metadata:
   name: airflow
   namespace: airflow
 spec:
-  dependsOn:
-  - name: env-debug
   releaseName: airflow
   targetNamespace: airflow
   interval: 5m0s
