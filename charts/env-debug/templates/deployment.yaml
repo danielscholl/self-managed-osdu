@@ -31,7 +31,7 @@ spec:
               secretProviderClass: azure-keyvault
         - name: azure-share
           persistentVolumeClaim:
-            claimName: debug-pvc
+            claimName: {{ include "env-debug.fullname" . }}-pvc
     {{- end }}
       containers:
         - image: gcr.io/kuar-demo/kuard-amd64:1
