@@ -16,7 +16,6 @@ flux uninstall
 # Cleanup Git
 rm -rf clusters/osdu-stamp
 rm -rf apps/osdu-stamp
-git add -A .
-git commit -m "Reset"
+git commit -am . "Reset"
 git push
 ```
