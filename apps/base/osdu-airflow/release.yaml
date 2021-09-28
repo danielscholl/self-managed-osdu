@@ -117,7 +117,8 @@ spec:
         installRequirements: true
         persistence:
           enabled: true
-          existingClaim: airflowdagpvc
+          # existingClaim: airflowdagpvc
+          existingClaim: env-debug-pvc
           subPath: "dags"
 
       ###################################
