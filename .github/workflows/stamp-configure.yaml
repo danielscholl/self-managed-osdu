@@ -50,6 +50,7 @@ jobs:
       - name: Create Cluster Directories
         run: |
           mkdir -p $GITHUB_WORKSPACE/clusters/$CLUSTER
+          mkdir -p $GITHUB_WORKSPACE/apps/$CLUSTER/
           # mkdir -p $GITHUB_WORKSPACE/apps/$CLUSTER/istio
           # mkdir -p $GITHUB_WORKSPACE/apps/$CLUSTER/osdu-airflow
 
