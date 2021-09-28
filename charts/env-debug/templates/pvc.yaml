@@ -27,8 +27,8 @@ spec:
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: debug-pvc
-  namespace: name: {{ include "env-debug.fullname" . }}-pvc
+  name: {{ include "env-debug.fullname" . }}-pvc
+  namespace: {{ $namespace }}
   # Set this annotation to NOT let Kubernetes automatically create
   # a persistent volume for this volume claim.
   annotations:
