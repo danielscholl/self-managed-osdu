@@ -16,7 +16,7 @@ spec:
       chart: ./osdu-airflow
       sourceRef:
         kind: GitRepository
-        name: helm-charts-azure
+        name: flux-system
         namespace: flux-system
   values:
     ################################################################################
