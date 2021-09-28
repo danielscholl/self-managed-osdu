@@ -76,18 +76,18 @@ jobs:
             prune: true
             validation: client
             healthChecks:
-            - kind: Deployment
-              name: env-debug
-              namespace:osdu-debug
-            - kind: Deployment
-              name: istio-operator
-              namespace: istio-operator
-            - kind: Deployment
-              name: istiod
-              namespace: istio-system
-            - kind: Deployment
-              name: istio-ingressgateway
-              namespace: istio-system
+              - kind: Deployment
+                name: env-debug
+                namespace:osdu-debug
+              - kind: Deployment
+                name: istio-operator
+                namespace: istio-operator
+              - kind: Deployment
+                name: istiod
+                namespace: istio-system
+              - kind: Deployment
+                name: istio-ingressgateway
+                namespace: istio-system
           EOF
 
           cat > $GITHUB_WORKSPACE/apps/$CLUSTER/kustomization.yaml << EOF
