@@ -4,5 +4,7 @@ kind: Kustomization
 resources:
   - ../base/osdu-debug
   - ../base/osdu-base
+  - ../base/osdu-istio
 patchesStrategicMerge:
   - osdu-debug-values.yaml
+  - osdu-istio-values.yaml
