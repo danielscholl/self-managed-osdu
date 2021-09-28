@@ -15,7 +15,7 @@ spec:
   healthChecks:
   - kind: Deployment
     name: env-debug
-    namespace:osdu-debug
+    namespace: osdu-debug
   - kind: Deployment
     name: istio-operator
     namespace: istio-operator
