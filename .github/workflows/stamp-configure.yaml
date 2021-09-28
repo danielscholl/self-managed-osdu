@@ -75,6 +75,19 @@ jobs:
             path: ./apps/$CLUSTER/
             prune: true
             validation: client
+            healthChecks:
+            - kind: Deployment
+              name: env-debug
+              namespace:osdu-debug
+            - kind: Deployment
+              name: istio-operator
+              namespace: istio-operator
+            - kind: Deployment
+              name: istiod
+              namespace: istio-system
+            - kind: Deployment
+              name: istio-ingressgateway
+              namespace: istio-system
           EOF
 
           cat > $GITHUB_WORKSPACE/apps/$CLUSTER/kustomization.yaml << EOF
@@ -84,8 +97,10 @@ jobs:
           resources:
             - ../base/osdu-debug
             - ../base/osdu-base
+            - ../base/osdu-istio
           patchesStrategicMerge:
             - osdu-debug-values.yaml
+            - osdu-istio-values.yaml
           EOF
 
       # - name: Define Flux Sources
@@ -150,31 +165,21 @@ jobs:
                 appid: $(az keyvault secret show --id https://${ENV_VAULT}.vault.azure.net/secrets/aad-client-id --query value -otsv)
           EOF
 
-      # - name: osdu-base
-      #   uses: Azure/cli@1.0.4
-      #   with:
-      #     inlineScript: |
-      #       GROUP=$(az group list --query "[?contains(name, 'ctl${{ secrets.RAND }}')].name" -otsv)
-      #       ENV_VAULT=$(az keyvault list --resource-group $GROUP --query [].name -otsv)
+          cat > $GITHUB_WORKSPACE/apps/$CLUSTER/osdu-istio-values.yaml << EOF
+          ---
+          apiVersion: helm.toolkit.fluxcd.io/v2beta1
+          kind: HelmRelease
+          metadata:
+            name: osdu-istio
+            namespace: istio-system
+          spec:
+            values:
+              global:
+                azure:
+                  tenant: $(az keyvault secret show --id https://${ENV_VAULT}.vault.azure.net/secrets/tenant-id --query value -otsv)
+                  appid: $(az keyvault secret show --id https://${ENV_VAULT}.vault.azure.net/secrets/aad-client-id --query value -otsv)
+          EOF
 
-      #       cat > $GITHUB_WORKSPACE/clusters/$CLUSTER/osdu-base.yaml << EOF
-      #       ---
-      #       apiVersion: kustomize.toolkit.fluxcd.io/v1beta1
-      #       kind: Kustomization
-      #       metadata:
-      #         name: osdu-base
-      #         namespace: flux-system
-      #       spec:
-      #         dependsOn:
-      #         - name: sealed-secrets
-      #         interval: 5m0s
-      #         sourceRef:
-      #           kind: GitRepository
-      #           name: flux-system
-      #         path: ./apps/base/osdu-base
-      #         prune: true
-      #         validation: client
-      #       EOF
 
 
       # - name: osdu-istio
