@@ -19,3 +19,7 @@ spec:
     remediation:
       retries: 3
   targetNamespace: istio-system
+  values:
+    global:
+      azure:
+        odIdentityAuthEnabled: false
