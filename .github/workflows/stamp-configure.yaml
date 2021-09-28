@@ -50,9 +50,25 @@ jobs:
       - name: Create Cluster Directories
         run: |
           mkdir -p $GITHUB_WORKSPACE/clusters/$CLUSTER
-          mkdir -p $GITHUB_WORKSPACE/apps/$CLUSTER/istio
-          mkdir -p $GITHUB_WORKSPACE/apps/$CLUSTER/osdu-airflow
-          mkdir -p $GITHUB_WORKSPACE/apps/$CLUSTER/osdu-debug
+          # mkdir -p $GITHUB_WORKSPACE/apps/$CLUSTER/istio
+          # mkdir -p $GITHUB_WORKSPACE/apps/$CLUSTER/osdu-airflow
+
+          cat > $GITHUB_WORKSPACE/clusters/$CLUSTER/osdu-stamp.yaml <<EOF
+          ---
+          apiVersion: kustomize.toolkit.fluxcd.io/v1beta1
+          kind: Kustomization
+          metadata:
+            name: osdu-stamp
+            namespace: flux-system
+          spec:
+            interval: 5m0s
+            sourceRef:
+              kind: GitRepository
+              name: flux-system
+            path: ./apps/$CLUSTER/
+            prune: true
+            validation: client
+          EOF
 
       - name: Define Flux Sources
         run: |
@@ -91,39 +107,23 @@ jobs:
       #           namespace: kube-system
       #     EOF
 
+
       - name: osdu-debug
         run: |
           GROUP=$(az group list --query "[?contains(name, 'ctl${{ secrets.RAND }}')].name" -otsv)
           ENV_VAULT=$(az keyvault list --resource-group $GROUP --query [].name -otsv)
 
-          cat > $GITHUB_WORKSPACE/clusters/$CLUSTER/osdu-debug.yaml <<EOF
-          ---
-          apiVersion: kustomize.toolkit.fluxcd.io/v1beta1
-          kind: Kustomization
-          metadata:
-            name: osdu-debug
-            namespace: flux-system
-          spec:
-            interval: 5m0s
-            sourceRef:
-              kind: GitRepository
-              name: flux-system
-            path: ./apps/$CLUSTER/osdu-debug
-            prune: true
-            validation: client
-          EOF
-
-          cat > $GITHUB_WORKSPACE/apps/$CLUSTER/osdu-debug/kustomization.yaml << EOF
+          cat > $GITHUB_WORKSPACE/apps/$CLUSTER/osdu-debug.yaml << EOF
           ---
           apiVersion: kustomize.config.k8s.io/v1beta1
           kind: Kustomization
           resources:
-            - ../../base/osdu-debug
+            - ../base/osdu-debug
           patchesStrategicMerge:
-            - override-values.yaml
+            - osdu-debug-values.yaml
           EOF
 
-          cat > $GITHUB_WORKSPACE/apps/$CLUSTER/osdu-debug/override-values.yaml << EOF
+          cat > $GITHUB_WORKSPACE/apps/$CLUSTER/osdu-debug-values.yaml << EOF
           ---
           apiVersion: helm.toolkit.fluxcd.io/v2beta1
           kind: HelmRelease
