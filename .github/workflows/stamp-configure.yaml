@@ -83,7 +83,7 @@ jobs:
           kind: Kustomization
           resources:
             - ../base/osdu-debug
-            - ../base/osdu-debug
+            - ../base/osdu-base
           patchesStrategicMerge:
             - osdu-debug-values.yaml
           EOF
