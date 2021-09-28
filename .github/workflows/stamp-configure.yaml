@@ -169,7 +169,7 @@ jobs:
                   appid: $(az keyvault secret show --id https://${ENV_VAULT}.vault.azure.net/secrets/aad-client-id --query value -otsv)
           EOF
 
-          cat > $GITHUB_WORKSPACE/apps/$CLUSTER/osdu-airflow/override-values.yaml << EOF
+          cat > $GITHUB_WORKSPACE/apps/$CLUSTER/osdu-airflow-values.yaml << EOF
           ---
           apiVersion: helm.toolkit.fluxcd.io/v2beta1
           kind: HelmRelease
