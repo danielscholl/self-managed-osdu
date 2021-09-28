@@ -5,6 +5,12 @@ metadata:
   name: airflow
   namespace: airflow
 spec:
+  releaseName: airflow
+  targetNamespace: airflow
+  interval: 5m0s
+  install:
+    remediation:
+      retries: 3
   chart:
     spec:
       chart: ./osdu-airflow
@@ -12,11 +18,6 @@ spec:
         kind: GitRepository
         name: helm-charts-azure
         namespace: flux-system
-  interval: 5m0s
-  install:
-    remediation:
-      retries: 3
-  targetNamespace: airflow
   values:
     # This file contains the essential configs for the osdu airflow on azure helm chart
     ################################################################################
