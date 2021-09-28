@@ -51,7 +51,7 @@ env:
 - name: WORKSPACE_ID
   secret:
     name: central-logging
-    key: log-workspace-id
+    key: workspace-id
 
 EOF
 
@@ -62,9 +62,9 @@ Install the helm chart.
 
 ```bash
 # Create Namespace
-NAMESPACE=debug
+NAMESPACE=osdu-debug
 kubectl create namespace $NAMESPACE
 
 # Install Charts
-helm install self-managed-osdu-debug . -n $NAMESPACE -f custom_values.yaml
+helm install osdu-tool . -n $NAMESPACE -f custom_values.yaml
 ```

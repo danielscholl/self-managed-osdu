@@ -41,4 +41,4 @@ spec:
     - name: WORKSPACE_ID
       secret:
         name: central-logging
-        key: log-workspace-id
+        key: workspace-id
