@@ -22,4 +22,4 @@ spec:
   values:
     global:
       azure:
-        odIdentityAuthEnabled: false
+        podIdentityAuthEnabled: false
