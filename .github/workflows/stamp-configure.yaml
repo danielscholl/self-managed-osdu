@@ -98,24 +98,13 @@ jobs:
             - ../base/osdu-debug
             - ../base/osdu-base
             - ../base/osdu-istio
+            - ../base/osdu-airflow
           patchesStrategicMerge:
             - osdu-debug-values.yaml
             - osdu-istio-values.yaml
+            - osdu-airflow-values.yaml
           EOF
 
-      # - name: Define Flux Sources
-      #   run: |
-      #     flux create source git self-managed-osdu \
-      #       --url $GITHUB_SERVER_URL/$GITHUB_REPOSITORY \
-      #       --interval 1m \
-      #       --branch main \
-      #       --export > $GITHUB_WORKSPACE/clusters/$CLUSTER/self-managed-osdu.yaml
-
-      #     flux create source git helm-charts-azure \
-      #       --url https://community.opengroup.org/osdu/platform/deployment-and-operations/helm-charts-azure \
-      #       --interval 1m \
-      #       --branch master \
-      #       --export > $GITHUB_WORKSPACE/clusters/$CLUSTER/helm-charts-azure.yaml
 
       # - name: sealed-secrets
       #   run: |
@@ -141,7 +130,7 @@ jobs:
       #     EOF
 
 
-      - name: osdu-debug-values
+      - name: osdu-stamp-values
         run: |
           GROUP=$(az group list --query "[?contains(name, 'ctl${{ secrets.RAND }}')].name" -otsv)
           ENV_VAULT=$(az keyvault list --resource-group $GROUP --query [].name -otsv)
@@ -180,68 +169,39 @@ jobs:
                   appid: $(az keyvault secret show --id https://${ENV_VAULT}.vault.azure.net/secrets/aad-client-id --query value -otsv)
           EOF
 
+          cat > $GITHUB_WORKSPACE/apps/$CLUSTER/osdu-airflow/override-values.yaml << EOF
+          ---
+          apiVersion: helm.toolkit.fluxcd.io/v2beta1
+          kind: HelmRelease
+          metadata:
+            name: osdu-airflow
+            namespace: airflow
+          spec:
+            values:
+              azure:
+                tenant: $(az keyvault secret show --id https://${ENV_VAULT}.vault.azure.net/secrets/tenant-id --query value -otsv)
+                subscription: $(az keyvault secret show --id https://${ENV_VAULT}.vault.azure.net/secrets/subscription-id --query value -otsv)
+                resourcegroup: $(az keyvault secret show --id https://${ENV_VAULT}.vault.azure.net/secrets/base-name-cr --query value -otsv)-rg
+                identity: $(az keyvault secret show --id https://${ENV_VAULT}.vault.azure.net/secrets/base-name-cr --query value -otsv)-osdu-identity
+                identity_id: $(az keyvault secret show --id https://${ENV_VAULT}.vault.azure.net/secrets/osdu-identity-id --query value -otsv)
+                keyvault: $ENV_VAULT
+                appid: $(az keyvault secret show --id https://${ENV_VAULT}.vault.azure.net/secrets/aad-client-id --query value -otsv)
+              airflow:
+                ingress:
+                  web:
+                    host: $DNS_HOST
+                externalDatabase:
+                  host: $(az keyvault secret show --id https://${ENV_VAULT}.vault.azure.net/secrets/base-name-sr --query value -otsv)-pg.postgres.database.azure.com
+                  user:  osdu_admin@$(az keyvault secret show --id https://${ENV_VAULT}.vault.azure.net/secrets/base-name-sr --query value -otsv)-pg
+                externalRedis:
+                  host: $(az keyvault secret show --id https://${ENV_VAULT}.vault.azure.net/secrets/base-name-sr --query value -otsv)-cache.redis.cache.windows.net
+                airflow:
+                  extraEnv:
+                    - name: AIRFLOW_VAR_AZURE_DNS_HOST
+                      value: $DNS_HOST
+          EOF
 
 
-      # - name: osdu-istio
-      #   uses: Azure/cli@1.0.4
-      #   with:
-      #     inlineScript: |
-      #       GROUP=$(az group list --query "[?contains(name, 'ctl${{ secrets.RAND }}')].name" -otsv)
-      #       ENV_VAULT=$(az keyvault list --resource-group $GROUP --query [].name -otsv)
-
-      #       cat > $GITHUB_WORKSPACE/clusters/$CLUSTER/osdu-istio.yaml << EOF
-      #       ---
-      #       apiVersion: kustomize.toolkit.fluxcd.io/v1beta1
-      #       kind: Kustomization
-      #       metadata:
-      #         name: osdu-istio
-      #         namespace: flux-system
-      #       spec:
-      #         dependsOn:
-      #         - name: osdu-base
-      #         interval: 5m0s
-      #         sourceRef:
-      #           kind: GitRepository
-      #           name: flux-system
-      #         path: ./apps/$CLUSTER/istio
-      #         prune: true
-      #         validation: client
-      #         healthChecks:
-      #         - kind: Deployment
-      #           name: istio-operator
-      #           namespace: istio-operator
-      #         - kind: Deployment
-      #           name: istiod
-      #           namespace: istio-system
-      #         - kind: Deployment
-      #           name: istio-ingressgateway
-      #           namespace: istio-system
-      #       EOF
-
-      #       cat > $GITHUB_WORKSPACE/apps/$CLUSTER/istio/kustomization.yaml << EOF
-      #       ---
-      #       apiVersion: kustomize.config.k8s.io/v1beta1
-      #       kind: Kustomization
-      #       resources:
-      #         - ../../base/osdu-istio
-      #       patchesStrategicMerge:
-      #         - override-values.yaml
-      #       EOF
-
-      #       cat > $GITHUB_WORKSPACE/apps/$CLUSTER/istio/override-values.yaml << EOF
-      #       ---
-      #       apiVersion: helm.toolkit.fluxcd.io/v2beta1
-      #       kind: HelmRelease
-      #       metadata:
-      #         name: osdu-istio
-      #         namespace: istio-system
-      #       spec:
-      #         values:
-      #           global:
-      #             azure:
-      #               tenant: $(az keyvault secret show --id https://${ENV_VAULT}.vault.azure.net/secrets/tenant-id --query value -otsv)
-      #               appid: $(az keyvault secret show --id https://${ENV_VAULT}.vault.azure.net/secrets/aad-client-id --query value -otsv)
-      #       EOF
 
       # - name: osdu-airflow
       #   uses: Azure/cli@1.0.4
