@@ -4,5 +4,5 @@ namespace: istio
 resources:
   - namespace.yaml
   - istio-base.yaml
-  - istio-operator.yaml
-  - release.yaml
+  # - istio-operator.yaml
+  # - release.yaml
