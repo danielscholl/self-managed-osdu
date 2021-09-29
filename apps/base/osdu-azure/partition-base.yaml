@@ -1,0 +1,30 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: partition-services
+  namespace: osdu-azure
+spec:
+  releaseName: partition-services
+  chart:
+    spec:
+      chart: ./osdu-azure/osdu-partition_base
+      sourceRef:
+        kind: GitRepository
+        name: helm-charts-azure
+        namespace: flux-system
+  interval: 5m0s
+  install:
+    remediation:
+      retries: 3
+  targetNamespace: osdu-azure
+  values:
+    azure:
+      podIdentityAuthEnabled: false
+      oidAuthEnabled: false
+    ingress:
+      issuer: letsencrypt-prod-dns
+      enableKeyvaultCert: false
+
+
+
