@@ -5,6 +5,7 @@ metadata:
   name: osdu-istio
   namespace: istio
 spec:
+  releaseName: osdu-istio
   dependsOn:
   - name: istio-operator
   chart:

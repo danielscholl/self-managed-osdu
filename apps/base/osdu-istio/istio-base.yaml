@@ -5,6 +5,7 @@ metadata:
   name: istio-base
   namespace: istio
 spec:
+  releaseName: istio-base
   chart:
     spec:
       chart: ./osdu-istio/istio-base

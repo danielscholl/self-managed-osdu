@@ -5,6 +5,7 @@ metadata:
   name: istio-operator
   namespace: istio
 spec:
+  releaseName: istio-operator
   dependsOn:
   - name: istio-base
   chart:
