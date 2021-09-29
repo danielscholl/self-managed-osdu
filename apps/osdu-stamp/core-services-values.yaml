@@ -1,0 +1,19 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: core-services
+  namespace: osdu-azure
+spec:
+  values:
+    replicaCount: 2
+    azure:
+      tenant: 72f988bf-86f1-41af-91ab-2d7cd011db47
+      subscription: 2e458de2-af10-484c-a5a5-6c259d9a907f
+      resourcegroup: osdu-self-ctlbecea-ddtb-rg
+      identity: osdu-self-ctlbecea-ddtb-osdu-identity
+      identity_id: a1b9f943-f5ee-4cc7-a1a3-9502b1dcd225
+      keyvault: osdu-self-ctlbec-ddtb-kv
+      appid: 0ef4dfd1-8adf-441b-aae9-ac7026333520
+    ingress:
+      dns: osdu-self-dplbecea-s6ff-gw.centralus.cloudapp.azure.com

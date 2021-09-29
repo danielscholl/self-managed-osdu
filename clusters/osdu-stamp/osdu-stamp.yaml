@@ -28,3 +28,12 @@ spec:
   - kind: Deployment
     name: partition
     namespace: osdu-azure
+  - kind: Deployment
+    name: entitlements
+    namespace: osdu-azure
+  - kind: Deployment
+    name: legal
+    namespace: osdu-azure
+  - kind: Deployment
+    name: policy
+    namespace: osdu-azure
