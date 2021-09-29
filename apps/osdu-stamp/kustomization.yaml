@@ -6,7 +6,9 @@ resources:
   - ../base/osdu-base
   - ../base/osdu-istio
   - ../base/osdu-airflow
+  - ../base/osdu-azure
 patchesStrategicMerge:
   - dev-sample-values.yaml
   - osdu-istio-values.yaml
   - osdu-airflow-values.yaml
+  - osdu-azure-values.yaml
