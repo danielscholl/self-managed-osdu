@@ -26,12 +26,16 @@ jobs:
         uses: Azure/cli@1.0.4
         with:
           inlineScript: |
-            PRINCIPAL_OID=$(az ad sp list --display-name $AZURE_PRINCIPAL_NAME --query "[?displayName=='$AZURE_PRINCIPAL_NAME'].objectId" -otsv)
-            echo $PRINCIPAL_OID
-            az deployment sub validate --name 'osdu-${{ secrets.RAND }}' --location ${{ secrets.AZURE_LOCATION }} --template-file $GITHUB_WORKSPACE/main.bicep \
-              --parameter location=${{ secrets.AZURE_LOCATION }} \
-              --parameter suffix=${{ secrets.RAND }} \
-              --parameter azurePrincipalOID=$PRINCIPAL_OID
+            az account show -ojson
+            az ad sp list --display-name $AZURE_PRINCIPAL_NAME --query "[?displayName=='$AZURE_PRINCIPAL_NAME'].objectId" -otsv
+
+
+            #PRINCIPAL_OID=$(az ad sp list --display-name $AZURE_PRINCIPAL_NAME --query "[?displayName=='$AZURE_PRINCIPAL_NAME'].objectId" -otsv)
+
+            # az deployment sub validate --name 'osdu-${{ secrets.RAND }}' --location ${{ secrets.AZURE_LOCATION }} --template-file $GITHUB_WORKSPACE/main.bicep \
+            #   --parameter location=${{ secrets.AZURE_LOCATION }} \
+            #   --parameter suffix=${{ secrets.RAND }} \
+            #   --parameter azurePrincipalOID=$PRINCIPAL_OID
 
 
       - name: Deploy Template Resources
