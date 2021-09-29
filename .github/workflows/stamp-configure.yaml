@@ -105,7 +105,8 @@ jobs:
             - dev-sample-values.yaml
             - osdu-istio-values.yaml
             - osdu-airflow-values.yaml
-            - osdu-azure-values.yaml
+            - partition-services-values.yaml
+            - security-services-values.yaml
           EOF
 
 
