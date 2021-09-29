@@ -1,0 +1,12 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: osdu-istio
+  namespace: istio
+spec:
+  values:
+    global:
+      azure:
+        tenant: 72f988bf-86f1-41af-91ab-2d7cd011db47
+        appid: 5a4b2404-447d-4e65-bbea-56d973a7b4b5
