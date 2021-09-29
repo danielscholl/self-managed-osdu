@@ -78,7 +78,7 @@ jobs:
             healthChecks:
             - kind: Deployment
               name: env-debug
-              namespace: osdu-debug
+              namespace: dev-sample
             # - kind: Deployment
             #   name: istio-operator
             #   namespace: istio
@@ -95,12 +95,12 @@ jobs:
           apiVersion: kustomize.config.k8s.io/v1beta1
           kind: Kustomization
           resources:
-            - ../base/osdu-debug
+            - ../base/dev-sample
             - ../base/osdu-base
             # - ../base/osdu-istio
             # - ../base/osdu-airflow
           patchesStrategicMerge:
-            - osdu-debug-values.yaml
+            - dev-sample-values.yaml
             # - osdu-istio-values.yaml
             # - osdu-airflow-values.yaml
           EOF
@@ -137,13 +137,13 @@ jobs:
           DP_GROUP=$(az group list --query "[?contains(name, 'dpl${{ secrets.RAND }}')].name" -otsv |grep -v MC)
           DNS_HOST=$(az network public-ip list --resource-group $DP_GROUP --query [].dnsSettings.fqdn -otsv)
 
-          cat > $GITHUB_WORKSPACE/apps/$CLUSTER/osdu-debug-values.yaml << EOF
+          cat > $GITHUB_WORKSPACE/apps/$CLUSTER/dev-sample-values.yaml << EOF
           ---
           apiVersion: helm.toolkit.fluxcd.io/v2beta1
           kind: HelmRelease
           metadata:
             name: osdu-tool
-            namespace: osdu-debug
+            namespace: dev-sample
           spec:
             values:
               azure:
