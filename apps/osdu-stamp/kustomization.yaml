@@ -11,4 +11,4 @@ patchesStrategicMerge:
   - dev-sample-values.yaml
   - osdu-istio-values.yaml
   - osdu-airflow-values.yaml
-  - partition-base-values.yaml
+  - osdu-azure-values.yaml
