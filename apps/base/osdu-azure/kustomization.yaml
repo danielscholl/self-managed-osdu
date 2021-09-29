@@ -5,3 +5,4 @@ resources:
   - namespace.yaml
   - partition-services.yaml
   - security-services.yaml
+  - core-services.yaml
