@@ -113,7 +113,7 @@ jobs:
           patchesStrategicMerge:
             - dev-sample-values.yaml
             - osdu-istio-values.yaml
-            - osdu-airflow-values.yaml
+            # - osdu-airflow-values.yaml
             - partition-services-values.yaml
             - security-services-values.yaml
             - core-services-values.yaml
