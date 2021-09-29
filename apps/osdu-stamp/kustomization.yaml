@@ -8,5 +8,5 @@ resources:
   # - ../base/osdu-airflow
 patchesStrategicMerge:
   - dev-sample-values.yaml
-  # - osdu-istio-values.yaml
+  - osdu-istio-values.yaml
   # - osdu-airflow-values.yaml
