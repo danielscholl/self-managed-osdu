@@ -78,7 +78,7 @@ airflow:
         #cert-manager.io/cluster-issuer: null
         #appgw.ingress.kubernetes.io/appgw-ssl-certificate: "appgw-ssl-cert"
       host: $DNS_HOST
-      tls: 
+      tls:
         enabled: true    #<-- Set this to false to enable keyvault certificate
   externalDatabase:
     host: $(az keyvault secret show --id https://${ENV_VAULT}.vault.azure.net/secrets/base-name-sr --query value -otsv)-pg.postgres.database.azure.com
@@ -134,7 +134,7 @@ airflow:
       - name: AIRFLOW_VAR_AZURE_DNS_HOST
         value: $DNS_HOST
       - name: AIRFLOW_VAR_AZURE_ENABLE_MSI
-        value: $AZURE_ENABLE_MSI             
+        value: $AZURE_ENABLE_MSI
       # Needed for installing python osdu python sdk. In future this will be changed
       - name: CI_COMMIT_TAG
         value: "v0.11.0"
@@ -245,5 +245,5 @@ helm install airflow osdu-airflow -n $NAMESPACE -f osdu_airflow_custom_values.ya
 __Role based access to Airflow__
 
 Airflow RBAC guide [here](https://community.opengroup.org/osdu/platform/deployment-and-operations/infra-azure-provisioning/-/blob/master/docs/airflow-rbac-guide.md).
-  
+
 
