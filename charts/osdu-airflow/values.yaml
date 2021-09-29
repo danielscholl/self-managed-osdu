@@ -96,7 +96,7 @@ airflow:
     installRequirements: true
     persistence:
       enabled: true
-      existingClaim: airflowdag-pvc
+      existingClaim: airflowdagpvc
       subPath: "dags"
 
   ###################################

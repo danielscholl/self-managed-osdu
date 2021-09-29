@@ -3,5 +3,4 @@ kind: Kustomization
 namespace: airflow
 resources:
   - namespace.yaml
-  - pvc.yaml
   - release.yaml
