@@ -3,4 +3,4 @@ kind: Kustomization
 namespace: osdu-azure
 resources:
   - namespace.yaml
-  - partition-base.yaml
+  - partition-services.yaml

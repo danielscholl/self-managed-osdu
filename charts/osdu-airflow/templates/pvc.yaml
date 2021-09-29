@@ -13,7 +13,7 @@ spec:
     - ReadOnlyMany
   azureFile:
     secretName: airflow
-    secretNamespace: {{ $namespace }}
+    secretNamespace: osdu-azure
     shareName: airflowdags
   volumeMode: Filesystem
   mountOptions:
