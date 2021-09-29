@@ -27,7 +27,7 @@ jobs:
         with:
           inlineScript: |
             az account show -ojson
-            az ad sp list --display-name $AZURE_PRINCIPAL_NAME --query "[?displayName=='$AZURE_PRINCIPAL_NAME'].objectId" -otsv
+            az ad sp list --display-name ${{ env.AZURE_PRINCIPAL_NAME }} --query "[?displayName=='${{ env.AZURE_PRINCIPAL_NAME }}'].objectId" -otsv
 
 
             #PRINCIPAL_OID=$(az ad sp list --display-name $AZURE_PRINCIPAL_NAME --query "[?displayName=='$AZURE_PRINCIPAL_NAME'].objectId" -otsv)
