@@ -79,15 +79,15 @@ jobs:
             - kind: Deployment
               name: env-debug
               namespace: osdu-debug
-            - kind: Deployment
-              name: istio-operator
-              namespace: istio-operator
-            - kind: Deployment
-              name: istiod
-              namespace: istio
-            - kind: Deployment
-              name: istio-ingressgateway
-              namespace: istio
+            # - kind: Deployment
+            #   name: istio-operator
+            #   namespace: istio
+            # - kind: Deployment
+            #   name: istiod
+            #   namespace: istio
+            # - kind: Deployment
+            #   name: istio-ingressgateway
+            #   namespace: istio
           EOF
 
           cat > $GITHUB_WORKSPACE/apps/$CLUSTER/kustomization.yaml << EOF
@@ -97,12 +97,12 @@ jobs:
           resources:
             - ../base/osdu-debug
             - ../base/osdu-base
-            - ../base/osdu-istio
-            - ../base/osdu-airflow
+            # - ../base/osdu-istio
+            # - ../base/osdu-airflow
           patchesStrategicMerge:
             - osdu-debug-values.yaml
-            - osdu-istio-values.yaml
-            - osdu-airflow-values.yaml
+            # - osdu-istio-values.yaml
+            # - osdu-airflow-values.yaml
           EOF
 
 
