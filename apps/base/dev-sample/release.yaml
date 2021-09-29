@@ -2,8 +2,8 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: osdu-tool
-  namespace: osdu-debug
+  name: env-tool
+  namespace: dev-sample
 spec:
   chart:
     spec:
@@ -16,7 +16,7 @@ spec:
   install:
     remediation:
       retries: 3
-  targetNamespace: osdu-debug
+  targetNamespace: dev-sample
   values:
     replicaCount: 1
     nameOverride: ""
