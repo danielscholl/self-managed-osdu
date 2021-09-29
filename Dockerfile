@@ -29,7 +29,7 @@ RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
 ARG INSTALL_AZURE_CLI="true"
 
 # [Option] Install Docker CLI
-ARG INSTALL_DOCKER="true"
+ARG INSTALL_DOCKER="false"
 
 # [Option] Install Node.js
 ARG INSTALL_NODE="false"
