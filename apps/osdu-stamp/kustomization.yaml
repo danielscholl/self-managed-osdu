@@ -4,7 +4,7 @@ kind: Kustomization
 resources:
   - ../base/dev-sample
   - ../base/osdu-base
-  # - ../base/osdu-istio
+  - ../base/osdu-istio
   # - ../base/osdu-airflow
 patchesStrategicMerge:
   - dev-sample-values.yaml
