@@ -61,7 +61,7 @@ jobs:
             az keyvault secret set --vault-name $VAULT --name tenant-id --value $(az account show --query homeTenantId) -o none 2>/dev/null
             az keyvault secret set --vault-name $VAULT --name terraform-id --value $(echo '${{ secrets.AZURE_CREDENTIALS }}' | jq -r ".clientId") -o none 2>/dev/null
             az keyvault secret set --vault-name $VAULT --name terraform-secret --value $(echo '${{ secrets.AZURE_CREDENTIALS }}' | jq -r ".clientSecret") -o none 2>/dev/null
-            az keyvault secret set --vault-name $VAULT --name terraform-oid --value $(az ad sp list --display-name $AZURE_PRINCIPAL_NAME --query [].objectId -otsv) -o none 2>/dev/null
+            az keyvault secret set --vault-name $VAULT --name terraform-oid --value $(az ad sp show --id $(az account show --query user.name -otsv) --query objectId -otsv) -o none 2>/dev/null
             az keyvault secret set --vault-name $VAULT --name client-id --value $(echo '${{ secrets.OSDU_CREDENTIALS }}' | jq -r ".clientId") -o none 2>/dev/null
             az keyvault secret set --vault-name $VAULT --name client-secret --value $(echo '${{ secrets.OSDU_CREDENTIALS }}' | jq -r ".clientSecret") -o none 2>/dev/null
             az keyvault secret set --vault-name $VAULT --name client-oid --value $(echo '${{ secrets.OSDU_CREDENTIAL_OID }}') -o none 2>/dev/null
