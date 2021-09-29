@@ -62,9 +62,9 @@ Install the helm chart.
 
 ```bash
 # Create Namespace
-NAMESPACE=osdu-debug
+NAMESPACE=dev-sample
 kubectl create namespace $NAMESPACE
 
 # Install Charts
-helm install osdu-tool . -n $NAMESPACE -f custom_values.yaml
+helm install env-tool . -n $NAMESPACE -f custom_values.yaml
 ```
