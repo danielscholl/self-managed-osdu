@@ -84,10 +84,10 @@ jobs:
               namespace: istio-operator
             - kind: Deployment
               name: istiod
-              namespace: istio-system
+              namespace: istio
             - kind: Deployment
               name: istio-ingressgateway
-              namespace: istio-system
+              namespace: istio
           EOF
 
           cat > $GITHUB_WORKSPACE/apps/$CLUSTER/kustomization.yaml << EOF
@@ -162,7 +162,7 @@ jobs:
           kind: HelmRelease
           metadata:
             name: osdu-istio
-            namespace: istio-system
+            namespace: istio
           spec:
             values:
               global:

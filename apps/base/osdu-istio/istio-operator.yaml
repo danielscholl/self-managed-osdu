@@ -3,7 +3,7 @@ apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
   name: istio-operator
-  namespace: istio-system
+  namespace: istio
 spec:
   dependsOn:
   - name: istio-base
@@ -18,7 +18,7 @@ spec:
   install:
     remediation:
       retries: 3
-  targetNamespace: istio-system
+  targetNamespace: istio
   values:
     hub: docker.io/istio
     tag: 1.8.2
