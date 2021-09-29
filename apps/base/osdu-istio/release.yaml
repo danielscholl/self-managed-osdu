@@ -3,7 +3,7 @@ apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
   name: osdu-istio
-  namespace: istio
+  namespace: istio-system
 spec:
   releaseName: osdu-istio
   dependsOn:
@@ -19,7 +19,7 @@ spec:
   install:
     remediation:
       retries: 3
-  targetNamespace: istio
+  targetNamespace: istio-system
   values:
     global:
       azure:

@@ -51,8 +51,6 @@ jobs:
         run: |
           mkdir -p $GITHUB_WORKSPACE/clusters/$CLUSTER
           mkdir -p $GITHUB_WORKSPACE/apps/$CLUSTER/
-          # mkdir -p $GITHUB_WORKSPACE/apps/$CLUSTER/istio
-          # mkdir -p $GITHUB_WORKSPACE/apps/$CLUSTER/osdu-airflow
 
           flux create source git helm-charts-azure \
             --url https://community.opengroup.org/osdu/platform/deployment-and-operations/helm-charts-azure \
@@ -79,15 +77,15 @@ jobs:
             - kind: Deployment
               name: env-debug
               namespace: dev-sample
-            # - kind: Deployment
-            #   name: istio-operator
-            #   namespace: istio
-            # - kind: Deployment
-            #   name: istiod
-            #   namespace: istio
-            # - kind: Deployment
-            #   name: istio-ingressgateway
-            #   namespace: istio
+            - kind: Deployment
+              name: istio-operator
+              namespace: istio-system
+            - kind: Deployment
+              name: istiod
+              namespace: istio-system
+            - kind: Deployment
+              name: istio-ingressgateway
+              namespace: istio-system
           EOF
 
           cat > $GITHUB_WORKSPACE/apps/$CLUSTER/kustomization.yaml << EOF
@@ -162,7 +160,7 @@ jobs:
           kind: HelmRelease
           metadata:
             name: osdu-istio
-            namespace: istio
+            namespace: istio-system
           spec:
             values:
               global:
@@ -180,9 +178,6 @@ jobs:
             namespace: airflow
           spec:
             values:
-              ################################################################################
-              # Specify the azure environment specific values
-              #
               azure:
                 tenant: $(az keyvault secret show --id https://${ENV_VAULT}.vault.azure.net/secrets/tenant-id --query value -otsv)
                 subscription: $(az keyvault secret show --id https://${ENV_VAULT}.vault.azure.net/secrets/subscription-id --query value -otsv)
@@ -191,142 +186,24 @@ jobs:
                 identity_id: $(az keyvault secret show --id https://${ENV_VAULT}.vault.azure.net/secrets/osdu-identity-id --query value -otsv)
                 keyvault: $ENV_VAULT
                 appid: $(az keyvault secret show --id https://${ENV_VAULT}.vault.azure.net/secrets/aad-client-id --query value -otsv)
-
-              ################################################################################
-              # Specify any optional override values
-              #
               airflowLogin:
-                name: admin                 #<-- Default Airflow Web UI username
-
-              ################################################################################
-              # Specify the airflow configuration override values
-              #
+                name: admin
               airflow:
                 ingress:
-                  host: $DNS_HOST           #<-- Set this to false to disable Admin UI ingress
+                  host: $DNS_HOST
                   web:
                     annotations:
                       cert-manager.io/cluster-issuer: letsencrypt-prod-dns
-                      # Please uncomment below two lines and comment above line to use your own certificate from keyvault
-                      #cert-manager.io/cluster-issuer: null
-                      #appgw.ingress.kubernetes.io/appgw-ssl-certificate: "appgw-ssl-cert"
-                    host: osdu-self-dplbedfb-wrt3-gw.centralus.cloudapp.azure.com
-                    tls:
-                      enabled: true    #<-- Set this to false to enable keyvault certificate
+                    host: $DNS_HOST
                 externalDatabase:
                   host: $(az keyvault secret show --id https://${ENV_VAULT}.vault.azure.net/secrets/base-name-sr --query value -otsv)-pg.postgres.database.azure.com
                   user:  osdu_admin@$(az keyvault secret show --id https://${ENV_VAULT}.vault.azure.net/secrets/base-name-sr --query value -otsv)-pg
                 externalRedis:
                   host: $(az keyvault secret show --id https://${ENV_VAULT}.vault.azure.net/secrets/base-name-sr --query value -otsv)-cache.redis.cache.windows.net
-
-                # The namespace needs to be set to where Airflow has been installed.
                 airflow:
                   extraEnv:
-                    - name: CLOUD_PROVIDER
-                      value: "azure"
-                    - name: AIRFLOW_VAR_KEYVAULT_URI
-                      valueFrom:
-                        configMapKeyRef:
-                          name: osdu-svc-config
-                          key: ENV_KEYVAULT
-                    - name: AIRFLOW__CORE__FERNET_KEY
-                      valueFrom:
-                        secretKeyRef:
-                          name: airflow
-                          key: fernet-key
-                    - name: AIRFLOW_CONN_AZ_LOG
-                      valueFrom:
-                        secretKeyRef:
-                          name: airflow
-                          key: remote-log-connection
-                    - name: AIRFLOW_VAR_AZURE_TENANT_ID
-                      valueFrom:
-                        secretKeyRef:
-                          name: active-directory
-                          key: tenantid
-                    - name: AIRFLOW_VAR_AZURE_CLIENT_ID
-                      valueFrom:
-                        secretKeyRef:
-                          name: active-directory
-                          key: principal-clientid
-                    - name: AIRFLOW_VAR_AZURE_CLIENT_SECRET
-                      valueFrom:
-                        secretKeyRef:
-                          name: active-directory
-                          key: principal-clientpassword
-                    - name: AIRFLOW_VAR_AAD_CLIENT_ID
-                      valueFrom:
-                        secretKeyRef:
-                          name: active-directory
-                          key: application-appid
-                    - name: AIRFLOW_VAR_APPINSIGHTS_KEY
-                      valueFrom:
-                        secretKeyRef:
-                          name: central-logging
-                          key: appinsights
                     - name: AIRFLOW_VAR_AZURE_DNS_HOST
                       value: "$DNS_HOST"
-                    - name: AIRFLOW_VAR_AZURE_ENABLE_MSI
-                      value: "false"
-                    - name: CI_COMMIT_TAG
-                      value: "v0.11.0"
-                    - name: AIRFLOW_VAR_ENTITLEMENTS_MODULE_NAME
-                      value: "entitlements_client"
-                    - name: AIRFLOW_VAR_CORE__CONFIG__DATALOAD_CONFIG_PATH
-                      value: "/opt/airflow/dags/configs/dataload.ini"
-                    - name: AIRFLOW_VAR_CORE__SERVICE__SCHEMA__URL
-                      value:  "http://schema.osdu-azure.svc.cluster.local/api/schema-service/v1/schema"
-                    - name: AIRFLOW_VAR_CORE__SERVICE__SEARCH__URL
-                      value: "http://search.osdu-azure.svc.cluster.local/api/search/v2/query"
-                    - name: AIRFLOW_VAR_CORE__SERVICE__STORAGE__URL
-                      value:  "http://storage.osdu-azure.svc.cluster.local/api/storage/v2/records"
-                    - name: AIRFLOW_VAR_CORE__SERVICE__FILE__HOST
-                      value: "http://file.osdu-azure.svc.cluster.local/api/file/v2"
-                    - name: AIRFLOW_VAR_CORE__SERVICE__WORKFLOW__HOST
-                      value: "http://workflow.osdu-azure.svc.cluster.local/api/workflow"
-                    - name: AIRFLOW_VAR_CORE__SERVICE__SEARCH_WITH_CURSOR__URL
-                      value: "http://search.osdu-azure.svc.cluster.local/api/search/v2/query_with_cursor"
-                  extraConfigmapMounts:
-                    - name: remote-log-config
-                      mountPath: /opt/airflow/config
-                      configMap: airflow-remote-log-config
-                      readOnly: true
-                  extraPipPackages: [
-                    "flask-bcrypt==0.7.1",
-                    "apache-airflow[statsd]",
-                    "apache-airflow[kubernetes]",
-                    "apache-airflow-backport-providers-microsoft-azure==2021.2.5",
-                    "dataclasses==0.8",
-                    "google-cloud-storage",
-                    "python-keycloak==0.24.0",
-                    "msal==1.9.0",
-                    "azure-identity==1.5.0",
-                    "azure-keyvault-secrets==4.2.0",
-                    "azure-storage-blob",
-                    "azure-servicebus==7.0.1",
-                    "toposort==1.6",
-                    "strict-rfc3339==0.7",
-                    "jsonschema==3.2.0",
-                    "pyyaml==5.4.1",
-                    "requests==2.25.1",
-                    "tenacity==8.0.1",
-                    "https://azglobalosdutestlake.blob.core.windows.net/pythonsdk/osdu_api-0.11.0.tar.gz",
-                    "https://azglobalosdutestlake.blob.core.windows.net/pythonsdk/osdu_airflow-0.0.1.tar.gz"
-                  ]
-                  extraVolumeMounts:
-                    - name: azure-keyvault
-                      mountPath: "/mnt/azure-keyvault"
-                      readOnly: true
-                    - name: dags-data
-                      mountPath: /opt/airflow/plugins
-                      subPath: plugins
-                  extraVolumes:
-                    - name: azure-keyvault
-                      csi:
-                        driver: secrets-store.csi.k8s.io
-                        readOnly: true
-                        volumeAttributes:
-                          secretProviderClass: azure-keyvault
           EOF
 
       - name: GitOps Commit
