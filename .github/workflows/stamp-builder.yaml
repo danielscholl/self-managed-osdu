@@ -22,12 +22,11 @@ jobs:
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
 
-
       - name: Validate Template Resources
         uses: Azure/cli@1.0.4
         with:
           inlineScript: |
-            PRINCIPAL_OID=$(az ad sp list --display-name $AZURE_PRINCIPAL_NAME --query [].objectId -otsv)
+            PRINCIPAL_OID=$(az ad sp list --display-name $AZURE_PRINCIPAL_NAME --query "[?displayName=='$AZURE_PRINCIPAL_NAME'].objectId" -otsv)
             az deployment sub validate --name 'osdu-${{ secrets.RAND }}' --location ${{ secrets.AZURE_LOCATION }} --template-file $GITHUB_WORKSPACE/main.bicep \
               --parameter location=${{ secrets.AZURE_LOCATION }} \
               --parameter suffix=${{ secrets.RAND }} \
@@ -38,7 +37,7 @@ jobs:
         uses: Azure/cli@1.0.4
         with:
           inlineScript: |
-            PRINCIPAL_OID=$(az ad sp list --display-name $AZURE_PRINCIPAL_NAME --query [].objectId -otsv)
+            PRINCIPAL_OID=$(az ad sp list --display-name $AZURE_PRINCIPAL_NAME --query "[?displayName=='$AZURE_PRINCIPAL_NAME'].objectId" -otsv)
             GROUP=$(az deployment sub create --name 'osdu-${{ secrets.RAND }}' --location ${{ secrets.AZURE_LOCATION }} --template-file $GITHUB_WORKSPACE/main.bicep \
               --parameter location=${{ secrets.AZURE_LOCATION }} \
               --parameter suffix=${{ secrets.RAND }} \
