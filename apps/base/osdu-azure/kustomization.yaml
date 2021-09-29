@@ -4,3 +4,4 @@ namespace: osdu-azure
 resources:
   - namespace.yaml
   - partition-services.yaml
+  - security-services.yaml
