@@ -23,7 +23,7 @@ resource_tags = {
 
 # Kubernetes Settings
 kubernetes_version = "1.19.13"
-aks_agent_vm_size  = "Standard_D2s_v3"
+aks_agent_vm_size  = "Standard_D4s_v3"
 aks_agent_vm_count = "3"
 subnet_aks_prefix  = "10.10.2.0/23"
 

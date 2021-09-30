@@ -7,7 +7,7 @@ env:
   AZURE_PRINCIPAL_NAME: osdu-azure-credentials
   OSDU_PRINCIPAL_NAME: osdu-credentials
   OSDU_APPLICATION_NAME: osdu-application
-  CONTROLPLANE_WORKSPACE: "ctl-${{ secrets.RAND }}"
+  CONTROLPLANE_WORKSPACE: "cpl-${{ secrets.RAND }}"
   DATAPLANE_WORKSPACE: "dpl-${{ secrets.RAND }}"
   PARTITION_WORKSPACE: "prt-${{ secrets.RAND }}"
   OSDU_VERSION: v0.11.0
