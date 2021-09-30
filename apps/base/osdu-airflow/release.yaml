@@ -6,6 +6,8 @@ metadata:
   namespace: airflow
 spec:
   releaseName: airflow
+  dependsOn:
+  - name: partition-services
   targetNamespace: airflow
   interval: 5m0s
   install:

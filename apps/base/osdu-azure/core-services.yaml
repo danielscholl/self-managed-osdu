@@ -6,6 +6,8 @@ metadata:
   namespace: osdu-azure
 spec:
   releaseName: core-services
+  dependsOn:
+  - name: partition-services
   chart:
     spec:
       chart: ./osdu-azure/osdu-core_services
