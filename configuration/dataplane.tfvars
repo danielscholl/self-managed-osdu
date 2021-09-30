@@ -23,8 +23,14 @@ resource_tags = {
 
 # Kubernetes Settings
 kubernetes_version = "1.19.13"
-aks_agent_vm_size  = "Standard_D4s_v3"
-aks_agent_vm_count = "3"
+
+aks_agent_vm_size           = "Standard_E4s_v3"
+aks_agent_vm_count          = "5"
+aks_agent_vm_disk           = 128
+aks_services_agent_vm_size  = "Standard_E4s_v3"
+aks_services_agent_vm_count = "5"
+aks_services_agent_vm_disk  = 128
+
 subnet_aks_prefix  = "10.10.2.0/23"
 
 # cosmos DB SQL collections
