@@ -47,7 +47,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name: Create OSDU Stamp Kustomization
+      - name: Create OSDU Stamp Software Definition
         run: |
           mkdir -p $GITHUB_WORKSPACE/clusters/$CLUSTER
           mkdir -p $GITHUB_WORKSPACE/apps/$CLUSTER/
@@ -144,7 +144,7 @@ jobs:
       #     EOF
 
 
-      - name: Create OSDU Stamp Values
+      - name: Create OSDU Stamp Software Values
         run: |
           GROUP=$(az group list --query "[?contains(name, 'ctl${{ secrets.RAND }}')].name" -otsv)
           ENV_VAULT=$(az keyvault list --resource-group $GROUP --query [].name -otsv)
