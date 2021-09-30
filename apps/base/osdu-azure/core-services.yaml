@@ -27,3 +27,15 @@ spec:
     ingress:
       issuer: letsencrypt-prod-dns
       enableKeyvaultCert: false
+    configuration:
+    - service: indexer-queue
+      env:
+        - name: AZURE_CLIENT_ID
+          secret:
+            name: active-directory
+            key: principal-clientid
+        - name: AZURE_CLIENT_SECRET
+          secret:
+            name: active-directory
+            key: principal-clientpassword
+
