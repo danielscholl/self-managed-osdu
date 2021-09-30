@@ -1,0 +1,16 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: env-tool
+  namespace: dev-sample
+spec:
+  values:
+    azure:
+      tenant: 72f988bf-86f1-41af-91ab-2d7cd011db47
+      subscription: 2e458de2-af10-484c-a5a5-6c259d9a907f
+      resourcegroup: osdu-self-cpljdfe-1jmb-rg
+      identity: osdu-self-cpljdfe-1jmb-osdu-identity
+      identity_id: 2259ca26-7f53-467d-b55f-3321b8aa494c
+      keyvault: osdu-self-cpljdf-1jmb-kv
+      appid: 0ef4dfd1-8adf-441b-aae9-ac7026333520
