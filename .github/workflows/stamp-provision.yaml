@@ -262,7 +262,7 @@ jobs:
             curl -sSL -o ${{ env.RUNNER_TEMP }}/download.gz https://community.opengroup.org/osdu/platform/system/reference/${{ env.SERVICE }}/-/archive/${{ env.OSDU_VERSION }}/${{ env.SERVICE }}-${{ env.OSDU_VERSION }}.tar.gz
             tar -xzvf ${{ env.RUNNER_TEMP }}/download.gz -C ${{ env.RUNNER_TEMP }}/results --strip-components=2 ${{ env.SERVICE }}-${{ env.OSDU_VERSION }}/data/${{ env.FILE }}
 
-            GROUP=$(az group list --query "[?contains(name, 'ctl${{ secrets.RAND }}')].name" -otsv)
+            GROUP=$(az group list --query "[?contains(name, 'cpl${{ secrets.RAND }}')].name" -otsv)
             ENV_VAULT=$(az keyvault list --resource-group $GROUP --query [].name -otsv)
 
             az storage file upload \
@@ -283,7 +283,7 @@ jobs:
             curl -sSL -o ${{ env.RUNNER_TEMP }}/download.tar.gz https://community.opengroup.org/osdu/platform/system/reference/${{ env.SERVICE }}/-/archive/${{ env.OSDU_VERSION }}/${{ env.SERVICE }}-${{ env.OSDU_VERSION }}.tar.gz
             tar -xzvf ${{ env.RUNNER_TEMP }}/download.tar.gz -C ${{ env.RUNNER_TEMP }}/results --strip-components=1 ${{ env.SERVICE }}-${{ env.OSDU_VERSION }}/${{ env.FOLDER }}
 
-            GROUP=$(az group list --query "[?contains(name, 'ctl${{ secrets.RAND }}')].name" -otsv)
+            GROUP=$(az group list --query "[?contains(name, 'cpl${{ secrets.RAND }}')].name" -otsv)
             ENV_VAULT=$(az keyvault list --resource-group $GROUP --query [].name -otsv)
 
             az storage file upload-batch \
@@ -305,7 +305,7 @@ jobs:
             curl -sSL -o ${{ env.RUNNER_TEMP }}/download.tar.gz https://community.opengroup.org/osdu/platform/data-flow/ingestion/${{ env.SERVICE }}/-/archive/${{ env.OSDU_VERSION }}/${{ env.SERVICE }}-${{ env.OSDU_VERSION }}.tar.gz
             tar -xzvf ${{ env.RUNNER_TEMP }}/download.tar.gz -C ${{ env.RUNNER_TEMP }}/results --strip-components=1 ${{ env.SERVICE }}-${{ env.OSDU_VERSION }}/${{ env.FOLDER }}
 
-            GROUP=$(az group list --query "[?contains(name, 'ctl${{ secrets.RAND }}')].name" -otsv)
+            GROUP=$(az group list --query "[?contains(name, 'cpl${{ secrets.RAND }}')].name" -otsv)
             ENV_VAULT=$(az keyvault list --resource-group $GROUP --query [].name -otsv)
 
             az storage file upload-batch \
@@ -333,7 +333,7 @@ jobs:
         uses: Azure/cli@1.0.4
         with:
           inlineScript: |
-            GROUP=$(az group list --query "[?contains(name, 'ctl${{ secrets.RAND }}')].name" -otsv)
+            GROUP=$(az group list --query "[?contains(name, 'cpl${{ secrets.RAND }}')].name" -otsv)
             ENV_VAULT=$(az keyvault list --resource-group $GROUP --query [].name -otsv)
 
             az storage blob upload \
