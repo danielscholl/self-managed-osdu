@@ -8,6 +8,7 @@ spec:
   releaseName: airflow
   dependsOn:
   - name: partition-services
+    namespace: osdu-azure
   targetNamespace: airflow
   interval: 5m0s
   install:

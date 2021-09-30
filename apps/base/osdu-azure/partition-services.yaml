@@ -8,6 +8,7 @@ spec:
   releaseName: partition-services
   dependsOn:
   - name: osdu-base
+    namespace: default
   chart:
     spec:
       chart: ./osdu-azure/osdu-partition_base
