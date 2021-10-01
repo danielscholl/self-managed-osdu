@@ -10,10 +10,10 @@ spec:
   - name: partition-services
   chart:
     spec:
-      chart: ./charts/osdu-azure/osdu-reference_helper
+      chart: ./osdu-azure/osdu-reference_helper
       sourceRef:
         kind: GitRepository
-        name: flux-system
+        name: helm-charts-azure
         namespace: flux-system
   interval: 5m0s
   install:
