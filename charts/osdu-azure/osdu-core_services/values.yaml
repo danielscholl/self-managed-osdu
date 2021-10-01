@@ -1,0 +1,715 @@
+#  Copyright © Microsoft Corporation
+#
+#  Licensed under the Apache License, Version 2.0 (the "License");
+#  you may not use this file except in compliance with the License.
+#  You may obtain a copy of the License at
+#
+#       http://www.apache.org/licenses/LICENSE-2.0
+#
+#  Unless required by applicable law or agreed to in writing, software
+#  distributed under the License is distributed on an "AS IS" BASIS,
+#  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+#  See the License for the specific language governing permissions and
+#  limitations under the License.
+
+# Default values for osdu-azure.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+global:
+  replicaCount: 1
+  nodepool: services
+  isAutoscalingEnabled: false
+
+
+################################################################################
+# Specify KEDA configuration
+#
+keda:
+  version_2_enabled: false
+
+
+################################################################################
+# Specify the azure environment specific values
+#
+azure:
+  tenant: <azure_tenant>
+  subscription: <azure_subscription>
+  resourcegroup: <azure_resourcegroup>
+  identity: <azure_identity>
+  identity_id: <azure_identity_id>
+  keyvault: <azure_keyvault>
+  appid: <azure_appid>
+  podIdentityAuthEnabled: <azure_podIdentityAuthEnabled>
+
+
+################################################################################
+# Specify the Ingress Settings
+#
+ingress:
+  dns: <ingress_dns>
+  issuer: letsencrypt-prod-dns
+  enableKeyvaultCert: false
+
+
+################################################################################
+# Specify the Pod Identity
+#
+identity:
+  name: osdu-identity
+
+
+################################################################################
+# Specify the Service Settings
+#
+service:
+  type: ClusterIP
+  port: 80
+
+
+################################################################################
+# Specify the OSDU Services to Load
+#
+configuration:
+
+  ########################
+  ##  STORAGE SERVICE
+  #
+  - service: storage
+    repository: msosdu.azurecr.io/storage
+    tag: oak
+    path: /api/storage/v2/*
+    probe: /api/storage/v2/swagger-ui.html
+    keyvault: true
+    auth:
+      disable:
+        - "/"
+        - "*/index.html"
+        - "*/v2/api-docs"
+        - "*/configuration/ui"
+        - "*/configuration/security"
+        - "*/swagger"
+        - "*/swagger-ui.html"
+        - "*/swagger-resources"
+        - "/api/storage/v2/swagger-resources/*"
+        - "/api/storage/v2/webjars/*"
+        - "*/actuator/health"
+        - "*/_ah/**"
+    env:
+    - name: spring_application_name
+      value: storage
+    - name: server.servlet.contextPath
+      value: /api/storage/v2/
+    - name: server_port
+      value: 80
+    - name: ACCEPT_HTTP
+      value: true
+    - name: cosmosdb_database
+      value: osdu-db
+    - name: servicebus_topic_name
+      value: recordstopic
+    - name: legal_servicebus_topic_name
+      value: legaltagschangedtopiceg
+    - name: legal_servicebus_topic_subscription
+      value: eg_sb_legaltagchangedsubscription
+    - name: entitlements_service_endpoint
+      value: http://entitlements/api/entitlements/v2
+    - name: crs_conversion_service_endpoint
+      value: http://crs-conversion-service/api/crs/converter/v2
+    - name: entitlements_service_api_key
+      value: "OBSOLETE"
+    - name: legal_service_endpoint
+      value: http://legal/api/legal/v1
+    - name: legal_service_region
+      value: southcentralus
+    - name: partition_service_endpoint
+      value: http://partition/api/partition/v1
+    - name: policy_enabled
+      value: "false"
+    - name: policy_service_endpoint
+      value: http://policy/api/policy/v1
+    - name: azure_istioauth_enabled
+      value: "true"
+    - name: azure_activedirectory_AppIdUri
+      value: "api://$(aad_client_id)"
+    - name: JAVA_OPTS
+      value: "-XX:InitialRAMPercentage=25.0 -XX:MaxRAMPercentage=50.0"
+    - name: "SERVER_TOMCAT_MAXTHREADS"
+      value: "400"
+    - name: "SERVER_TOMCAT_MINSPARETHREADS"
+      value: "200"
+    - name: azure_paas_podIdentity_isEnabled
+      value: "{{ .Values.azure.podIdentityAuthEnabled }}"
+    - name: KEYVAULT_URI
+      config:
+        name: osdu-svc-config
+        key: ENV_KEYVAULT
+    - name: REDIS_DATABASE
+      config:
+        name: osdu-svc-config
+        key: REDIS_DB_STORAGE
+    - name: aad_client_id
+      secret:
+        name: active-directory
+        key: application-appid
+    - name: appinsights_key
+      secret:
+        name: central-logging
+        key: appinsights
+
+  ########################
+  ##  SCHEMA SERVICE
+  #
+  - service: schema
+    repository: msosdu.azurecr.io/schema
+    tag: oak
+    path: /api/schema-service/v1/*
+    probe: /api/schema-service/v1/swagger-ui.html
+    keyvault: true
+    auth:
+      disable:
+        - "/"
+        - "*/index.html"
+        - "*/v2/api-docs"
+        - "*/configuration/ui"
+        - "*/configuration/security"
+        - "*/swagger"
+        - "*/swagger-ui.html"
+        - "*/swagger-resources"
+        - "/api/schema-service/v1/swagger-resources/*"
+        - "/api/schema-service/v1/webjars/*"
+        - "*/actuator/health"
+        - "*/_ah/**"
+    env:
+    - name: spring_application_name
+      value: schema
+    - name: server.servlet.contextPath
+      value: /api/schema-service/v1/
+    - name: server_port
+      value: 80
+    - name: ACCEPT_HTTP
+      value: true
+    - name: cosmosdb_database
+      value: osdu-db
+    - name: LOG_PREFIX
+      value: schema
+    - name: entitlements_service_endpoint
+      value: http://entitlements/api/entitlements/v2
+    - name: entitlements_service_api_key
+      value: "OBSOLETE"
+    - name: partition_service_endpoint
+      value: "http://partition/api/partition/v1"
+    - name: shared_partition
+      value: opendes    # Make this configurable
+    - name: azure_istioauth_enabled
+      value: "true"
+    - name: event_grid_enabled
+      value: "false"
+    - name: event_grid_topic
+      value: "schemachangedtopic"
+    - name: azure_activedirectory_AppIdUri
+      value: "api://$(aad_client_id)"
+    - name: azure_paas_podIdentity_isEnabled
+      value: "{{ .Values.azure.podIdentityAuthEnabled }}"
+    - name: KEYVAULT_URI
+      config:
+        name: osdu-svc-config
+        key: ENV_KEYVAULT
+    - name: aad_client_id
+      secret:
+        name: active-directory
+        key: application-appid
+    - name: appinsights_key
+      secret:
+        name: central-logging
+        key: appinsights
+
+  ########################
+  ##  FILE SERVICE
+  #
+  - service: file
+    repository: msosdu.azurecr.io/file
+    tag: oak
+    path: /api/file/*
+    probe: /api/file/v2/readiness_check
+    keyvault: true
+    auth:
+      disable:
+        - "/"
+        - "*/index.html"
+        - "*/api-docs"
+        - "*/configuration/ui"
+        - "*/configuration/security"
+        - "*/swagger"
+        - "*/swagger-ui.html"
+        - "*/swagger-resources"
+        - "/api/file/swagger-resources/*"
+        - "/api/file/webjars/*"
+        - "*/actuator/health"
+        - "*/readiness_check"
+        - "*/_ah/**"
+    env:
+    - name: spring_application_name
+      value: file
+    - name: server.servlet.contextPath
+      value: /api/file/
+    - name: server_port
+      value: 80
+    - name: ACCEPT_HTTP
+      value: true
+    - name: cosmosdb_database
+      value: osdu-db
+    - name: LOG_PREFIX
+      value: file
+    - name: osdu_entitlements_url
+      value: http://entitlements/api/entitlements/v2
+    - name: osdu_entitlements_app_key
+      value: OBSOLETE
+    - name: APPLICATION_PORT
+      value: $(server_port)
+    - name: SEARCH_HOST
+      value: http://search/api/search/v2
+    - name: JAVA_HEAP_MEMORY
+      value: 4096
+    - name: osdu_storage_url
+      value: http://storage/api/storage/v2
+    - name: partition_service_endpoint
+      value: http://partition/api/partition/v1
+    - name: azure_istioauth_enabled
+      value: "true"
+    - name: BATCH_SIZE
+      value: "100"
+    - name: SEARCH_QUERY_LIMIT
+      value: "1000"
+    - name: azure_paas_podIdentity_isEnabled
+      value: "{{ .Values.azure.podIdentityAuthEnabled }}"
+    - name: KEYVAULT_URL
+      config:
+        name: osdu-svc-config
+        key: ENV_KEYVAULT
+    - name: AZURE_AD_APP_RESOURCE_ID
+      secret:
+        name: active-directory
+        key: application-appid
+    - name: appinsights_key
+      secret:
+        name: central-logging
+        key: appinsights
+
+  ########################
+  ##  INDEXER SERVICE
+  #
+  - service: indexer
+    repository: msosdu.azurecr.io/indexer
+    tag: oak
+    path: /api/indexer/v2/*
+    probe: /api/indexer/v2/swagger-ui.html
+    keyvault: true
+    auth:
+      disable:
+        - "/"
+        - "*/index.html"
+        - "*/v2/api-docs"
+        - "*/configuration/ui"
+        - "*/configuration/security"
+        - "*/swagger"
+        - "*/swagger-ui.html"
+        - "*/swagger-resources"
+        - "/api/indexer/v2/swagger-resources/*"
+        - "/api/indexer/v2/webjars/*"
+        - "*/actuator/health"
+        - "*/_ah/**"
+        - "*/index-worker"
+        - "*/_dps/task-handlers"
+        - "*/reindex"
+    env:
+    - name: spring_application_name
+      value: indexer
+    - name: server.servlet.contextPath
+      value: /api/indexer/v2/
+    - name: server_port
+      value: 80
+    - name: ACCEPT_HTTP
+      value: true
+    - name: cosmosdb_database
+      value: osdu-db
+    - name: servicebus_topic_name
+      value: indexing-progress
+    - name: reindex_topic_name
+      value: recordstopic
+    - name: entitlements_service_endpoint
+      value: http://entitlements/api/entitlements/v2
+    - name: entitlements_service_api_key
+      value: OBSOLETE
+    - name: schema_service_url
+      value: http://schema/api/schema-service/v1
+    - name: storage_service_url
+      value: http://storage/api/storage/v2
+    - name: STORAGE_SCHEMA_HOST
+      value: http://storage/api/storage/v2/schemas
+    - name: STORAGE_QUERY_RECORD_FOR_CONVERSION_HOST
+      value: http://storage/api/storage/v2/query/records:batch
+    - name: STORAGE_QUERY_RECORD_HOST
+      value: http://storage/api/storage/v2/records
+    - name: partition_service_endpoint
+      value: http://partition/api/partition/v1
+    - name: azure_istioauth_enabled
+      value: true
+    - name: azure_activedirectory_AppIdUri
+      value: api://$(aad_client_id)
+    - name: azure_paas_podIdentity_isEnabled
+      value: "{{ .Values.azure.podIdentityAuthEnabled }}"
+    - name: KEYVAULT_URI
+      config:
+        name: osdu-svc-config
+        key: ENV_KEYVAULT
+    - name: REDIS_DATABASE
+      config:
+        name: osdu-svc-config
+        key: REDIS_DB_INDEXER
+    - name: aad_client_id
+      secret:
+        name: active-directory
+        key: application-appid
+    - name: appinsights_key
+      secret:
+        name: central-logging
+        key: appinsights
+
+  ########################
+  ##  SEARCH SERVICE
+  #
+  - service: search
+    repository: msosdu.azurecr.io/search
+    tag: oak
+    path: /api/search/v2/*
+    probe: /api/search/v2/swagger-ui.html
+    keyvault: true
+    auth:
+      disable:
+        - "/"
+        - "*/index.html"
+        - "*/v2/api-docs"
+        - "*/configuration/ui"
+        - "*/configuration/security"
+        - "*/swagger"
+        - "*/swagger-ui.html"
+        - "*/swagger-resources"
+        - "/api/search/v2/swagger-resources/*"
+        - "/api/search/v2/webjars/*"
+        - "*/actuator/health"
+        - "*/_ah/**"
+    env:
+    - name: spring_application_name
+      value: search
+    - name: server.servlet.contextPath
+      value: /api/search/v2/
+    - name: server_port
+      value: 80
+    - name: ACCEPT_HTTP
+      value: true
+    - name: APPLICATIONINSIGHTS_CONNECTION_STRING
+      value: InstrumentationKey=$(appinsights_key)
+    - name: cosmosdb_database
+      value: osdu-db
+    - name: entitlements_service_endpoint
+      value: http://entitlements/api/entitlements/v2
+    - name: entitlements_service_api_key
+      value: OBSOLETE
+    - name: ENVIRONMENT
+      value: evt
+    - name: LOG_PREFIX
+      value: search
+    - name: ELASTIC_CACHE_EXPIRATION
+      value: 1
+    - name: MAX_CACHE_VALUE_SIZE
+      value: 60
+    - name: search_service_spring_logging_level
+      value: debug
+    - name: partition_service_endpoint
+      value: http://partition/api/partition/v1
+    - name: policy_enabled
+      value: "false"
+    - name: policy_service_endpoint
+      value: http://policy/api/policy/v1
+    - name: azure_istioauth_enabled
+      value: true
+    - name: azure_activedirectory_AppIdUri
+      value: api://$(aad_client_id)
+    - name: azure_paas_podIdentity_isEnabled
+      value: "{{ .Values.azure.podIdentityAuthEnabled }}"
+    - name: KEYVAULT_URI
+      config:
+        name: osdu-svc-config
+        key: ENV_KEYVAULT
+    - name: REDIS_DATABASE
+      config:
+        name: osdu-svc-config
+        key: REDIS_DB_SEARCH
+    - name: aad_client_id
+      secret:
+        name: active-directory
+        key: application-appid
+    - name: appinsights_key
+      secret:
+        name: central-logging
+        key: appinsights
+
+  ########################
+  ##  REGISTER SERVICE
+  #
+  - service: register
+    repository: msosdu.azurecr.io/register
+    path: /api/register/v1/*
+    probe: /api/register/v1/swagger-ui.html
+    keyvault: true
+    auth:
+      disable:
+        - "/"
+        - "*/v2/api-docs"
+        - "*/swagger"
+        - "*/swagger-ui.html"
+        - "*/swagger-resources"
+        - "*/actuator/health"
+        - "/api/register/v1/swagger-resources/*"
+        - "/api/register/v1/webjars/*"
+        - "/api/register/v1/test/challenge/*"
+    env:
+    - name: spring_application_name
+      value: register
+    - name: server.servlet.contextPath
+      value: /api/register/v1/
+    - name: server_port
+      value: 80
+    - name: ACCEPT_HTTP
+      value: true
+    - name: LOG_PREFIX
+      value: register
+    - name: cosmosdb_database
+      value: osdu-db
+    - name: ENTITLEMENTS_API
+      value: http://entitlements/api/entitlements/v2
+    - name: partition_service_endpoint
+      value: http://partition/api/partition/v1
+    - name: azure_istioauth_enabled
+      value: "true"
+    - name: azure_serviceBus_enabled
+      value: "false"
+    - name: azure_eventGrid_enabled
+      value: "true"
+    - name: azure_paas_podIdentity_isEnabled
+      value: "{{ .Values.azure.podIdentityAuthEnabled }}"
+    - name: KEYVAULT_URI
+      config:
+        name: osdu-svc-config
+        key: ENV_KEYVAULT
+    - name: aad_client_id
+      secret:
+        name: active-directory
+        key: application-appid
+    - name: appinsights_key
+      secret:
+        name: central-logging
+        key: appinsights
+    # These are env variables that will prepend https://{{ DNS }} to the value.
+    env_with_dns:
+      - name: RECORDS_CHANGE_PUBSUB_ENDPOINT
+        value: /api/notification/v1/push-handlers/records-changed
+
+  ########################
+  ##  NOTIFICATION SERVICE
+  #
+  - service: notification
+    repository: msosdu.azurecr.io/notification
+    tag: oak
+    path: /api/notification/v1/*
+    probe: /api/notification/v1/swagger-ui.html
+    keyvault: true
+    auth:
+      disable:
+        - "/"
+        - "*/v2/api-docs"
+        - "*/swagger"
+        - "*/swagger-ui.html"
+        - "*/swagger-resources"
+        - "*/actuator/health"
+        - "/api/notification/v1/swagger-resources/*"
+        - "/api/notification/v1/webjars/*"
+    env:
+    - name: spring_application_name
+      value: notification-azure
+    - name: server.servlet.contextPath
+      value: /api/notification/v1/
+    - name: server_port
+      value: 80
+    - name: ACCEPT_HTTP
+      value: true
+    - name: cosmosdb_database
+      value: osdu-db
+    - name: entitlements_service_endpoint
+      value: http://entitlements/api/entitlements/v2
+    - name: registeration_service_endpoint
+      value: http://register/api/register/v1
+    - name: maxCacheSize
+      value:  "20"
+    - name: partition_service_endpoint
+      value: http://partition/api/partition/v1
+    - name: policy_enabled
+      value: "false"
+    - name: policy_service_endpoint
+      value: http://policy/api/policy/v1
+    - name: azure_istioauth_enabled
+      value: "true"
+    - name: LOG_PREFIX
+      value: "notification"
+    - name: service_bus_enabled
+      value: "false"
+    - name: event_grid_to_service_bus_enabled
+      value: "false"
+    - name: event_grid_enabled
+      value: "true"
+    - name: initial_subscription_manager_delay_seconds
+      value: "0"
+    - name: consecutive_subscription_manager_delay_seconds
+      value: "1800"
+    - name: max_concurrent_calls
+      value: "3"
+    - name: executor_n_threads
+      value: "32"
+    - name: max_lock_renew_duration_seconds
+      value: "2000"
+    - name: azure_paas_podIdentity_isEnabled
+      value: "{{ .Values.azure.podIdentityAuthEnabled }}"
+    - name: KEYVAULT_URI
+      config:
+        name: osdu-svc-config
+        key: ENV_KEYVAULT
+    - name: aad_client_id
+      secret:
+        name: active-directory
+        key: application-appid
+    - name: appinsights_key
+      secret:
+        name: central-logging
+        key: appinsights
+
+  ########################
+  ##  DATASET SERVICE
+  #
+  - service: dataset
+    repository: msosdu.azurecr.io/dataset
+    path: /api/dataset/*
+    probe: /api/dataset/v1/info
+    keyvault: true
+    auth:
+      disable:
+        - "/"
+        - "*/index.html"
+        - "*/api-docs"
+        - "*/configuration/ui"
+        - "*/configuration/security"
+        - "*/swagger"
+        - "*/swagger-ui.html"
+        - "*/swagger-resources"
+        - "/api/dataset/swagger-resources/*"
+        - "/api/dataset/webjars/*"
+        - "*/actuator/health"
+        - "*/readiness_check"
+        - "*/_ah/**"
+    env:
+    - name: spring.application.name
+      value: dataset
+    - name: server.servlet.contextPath
+      value: /api/dataset/v1
+    - name: server_port
+      value: "80"
+    - name: ACCEPT_HTTP  # TEMPORARY UNTIL HTTPS
+      value: "true"
+    - name: KEYVAULT_URI
+      config:
+        name: osdu-svc-config
+        key: ENV_KEYVAULT
+    - name: aad_client_id
+      secret:
+        name: active-directory
+        key: application-appid
+    - name: AZURE_APP_RESOURCE_ID
+      secret:
+        name: active-directory
+        key: application-appid
+    - name: appinsights_key
+      secret:
+        name: central-logging
+        key: appinsights
+    - name: entitlements_service_endpoint
+      value: http://entitlements/api/entitlements/v2
+    - name: entitlements_app_key
+      value: "OBSOLETE"
+    - name: storage_service_endpoint
+      value: http://storage/api/storage/v2
+    - name: partition_service_endpoint
+      value: http://partition/api/partition/v1
+    - name: azure_istioauth_enabled
+      value: "true"
+    - name: schema_service_endpoint
+      value: http://schema/api/schema-service/v1
+    - name: file_service_endpoint
+      value: http://file/api/file/v2/files
+
+    #
+    ##
+    ######################## OSDU Worker Service ############################
+    ##  Indexer Queue
+    #
+  - service: indexer-queue
+    repository: msosdu.azurecr.io/indexer-queue
+    keyvault: true
+    env:
+    - name: spring_application_name
+      value: indexer-queue
+    - name: server_port
+      value: 80
+    - name: azure_servicebus_topic_name
+      value: recordstopic
+    - name: azure_servicebus_topic_subscription
+      value: recordstopicsubscription
+    - name: indexer_worker_url
+      value: http://indexer-service/api/indexer/v2/_dps/task-handlers/index-worker
+    - name: PARTITION_API
+      value: http://partition/api/partition/v1
+    - name: max_concurrent_calls
+      value: "32"
+    - name: executor_n_threads
+      value: "32"
+    - name: max_lock_renew_duration_seconds
+      value: "600"
+    - name: max_delivery_count
+      value: "5"
+    - name: KEYVAULT_URI
+      config:
+        name: osdu-svc-config
+        key: ENV_KEYVAULT
+    - name: aad_client_id
+      secret:
+        name: active-directory
+        key: application-appid
+    - name: AZURE_APP_RESOURCE_ID
+      secret:
+        name: active-directory
+        key: application-appid
+    - name: azure_application_insights_instrumentation_key
+      secret:
+        name: central-logging
+        key: appinsights
+    - name: AZURE_TENANT_ID
+      secret:
+        name: active-directory
+        key: tenantid
+    - name: AZURE_CLIENT_ID
+      secret:
+        name: active-directory
+        key: principal-clientid
+    - name: AZURE_CLIENT_SECRET
+      secret:
+        name: active-directory
+        key: principal-clientpassword
