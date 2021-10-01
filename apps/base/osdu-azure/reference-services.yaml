@@ -2,10 +2,10 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: security-services
+  name: reference-services
   namespace: osdu-azure
 spec:
-  releaseName: security-services
+  releaseName: reference-services
   dependsOn:
   - name: partition-services
   chart:
