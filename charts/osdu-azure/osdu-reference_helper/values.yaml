@@ -1,0 +1,229 @@
+#  Copyright © Microsoft Corporation
+#
+#  Licensed under the Apache License, Version 2.0 (the "License");
+#  you may not use this file except in compliance with the License.
+#  You may obtain a copy of the License at
+#
+#       http://www.apache.org/licenses/LICENSE-2.0
+#
+#  Unless required by applicable law or agreed to in writing, software
+#  distributed under the License is distributed on an "AS IS" BASIS,
+#  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+#  See the License for the specific language governing permissions and
+#  limitations under the License.
+
+# Default values for osdu-azure.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+global:
+  replicaCount: 1
+  nodepool: services
+  isAutoscalingEnabled: false
+
+################################################################################
+# Specify the azure environment specific values
+#
+azure:
+  tenant: <azure_tenant>
+  subscription: <azure_subscription>
+  resourcegroup: <azure_resourcegroup>
+  identity: <azure_identity>
+  identity_id: <azure_identity_id>
+  keyvault: <azure_keyvault>
+  appid: <azure_appid>
+
+
+################################################################################
+# Specify the Ingress Settings
+#
+ingress:
+  dns: <ingress_dns>
+  issuer: letsencrypt-prod-dns
+
+
+################################################################################
+# Specify the Pod Identity
+#
+identity:
+  name: osdu-identity
+
+
+################################################################################
+# Specify the Service Settings
+#
+service:
+  type: ClusterIP
+  port: 80
+
+################################################################################
+# Specify the OSDU Services to Load
+#
+configuration:
+
+  #######################
+  #  UNIT SERVICE
+  - service: unit
+    repository: msosdu.azurecr.io/unit
+    path: /api/unit/*
+    probe: /api/unit/_ah/readiness_check
+    keyvault: true
+    auth:
+      disable:
+        - "/"
+        - "*/index.html"
+        - "*/v2/api-docs"
+        - "*/configuration/ui"
+        - "*/configuration/security"
+        - "*/swagger"
+        - "*/swagger-ui.html"
+        - "*/swagger-resources"
+        - "*/actuator/health"
+        - "*/_ah/**"
+        - "/api/unit/swagger-resources/*"
+        - "/api/unit/webjars/*"
+    pvc:
+      - name: unit
+        volume: shared-data
+    mount:
+      - name: shared-data
+        path: /mnt/unit_catalogs
+    env:
+    - name: spring_application_name
+      value: unit-service
+    - name: server.servlet.contextPath
+      value: /api/unit/
+    - name: server_port
+      value: 80
+    - name: ACCEPT_HTTP
+      value: true
+    - name: ENTITLEMENT_URL
+      value: http://entitlements/api/entitlements/v2
+    - name: azure_istioauth_enabled
+      value: "true"
+    - name: KEYVAULT_URI
+      config:
+        name: osdu-svc-config
+        key: ENV_KEYVAULT
+    - name: aad_client_id
+      secret:
+        name: active-directory
+        key: application-appid
+    - name: appinsights_key
+      secret:
+        name: central-logging
+        key: appinsights
+
+  #######################
+  #  CRS CATALOG SERVICE
+  - service: crs-catalog
+    repository: msosdu.azurecr.io/crs-catalog
+    path: /api/crs/catalog/*
+    probe: /api/crs/catalog/swagger-ui.html
+    keyvault: true
+    auth:
+      disable:
+        - "/"
+        - "*/index.html"
+        - "*/v2/api-docs"
+        - "*/configuration/ui"
+        - "*/configuration/security"
+        - "*/swagger"
+        - "*/swagger-ui.html"
+        - "*/swagger-resources"
+        - "*/actuator/health"
+        - "*/_ah/**"
+        - "/api/crs/catalog/swagger-resources/*"
+        - "/api/crs/catalog/webjars/*"
+    pvc:
+      - name: crs
+        volume: shared-data
+    mount:
+      - name: shared-data
+        path: /mnt/crs_catalogs
+    env:
+    - name: spring_application_name
+      value: crs-catalog-service
+    - name: server.servlet.contextPath
+      value: /api/crs/catalog/
+    - name: server_port
+      value: 80
+    - name: ACCEPT_HTTP
+      value: true
+    - name: ENTITLEMENT_URL
+      value: http://entitlements/api/entitlements/v2
+    - name: azure_istioauth_enabled
+      value: "true"
+    - name: KEYVAULT_URI
+      config:
+        name: osdu-svc-config
+        key: ENV_KEYVAULT
+    - name: aad_client_id
+      secret:
+        name: active-directory
+        key: application-appid
+    - name: appinsights_key
+      secret:
+        name: central-logging
+        key: appinsights
+
+  #######################
+  #  CRS CONVERSION SERVICE
+  - service: crs-conversion
+    repository: msosdu.azurecr.io/crs-conversion
+    path: /api/crs/converter/*
+    probe: /api/crs/converter/swagger-ui.html
+    keyvault: true
+    auth:
+      disable:
+        - "/"
+        - "*/index.html"
+        - "*/v2/api-docs"
+        - "*/configuration/ui"
+        - "*/configuration/security"
+        - "*/swagger"
+        - "*/swagger-ui.html"
+        - "*/swagger-resources"
+        - "*/actuator/health"
+        - "*/_ah/**"
+        - "/api/crs/converter/swagger-resources/*"
+        - "/api/crs/converter/webjars/*"
+    pvc:
+      - name: crs-conversion
+        volume: shared-data
+    mount:
+      - name: shared-data
+        path: /mnt/crs_conversion
+    env:
+    - name: spring_application_name
+      value: crs-conversion-service
+    - name: server.servlet.contextPath
+      value: /api/crs/converter/
+    - name: server_port
+      value: 80
+    - name: ACCEPT_HTTP
+      value: true
+    - name: cosmosdb_database
+      value: osdu-db
+    - name: ENTITLEMENT_URL
+      value: http://entitlements/api/entitlements/v2
+    - name: ESRI_DATA_PATH
+      value: /crs-conversion-service
+    - name: service_domain_name
+      value: contoso.com
+    - name: SIS_DATA
+      value: /mnt/crs_conversion/apachesis_setup/SIS_DATA
+    - name: azure_istioauth_enabled
+      value: "true"
+    - name: KEYVAULT_URI
+      config:
+        name: osdu-svc-config
+        key: ENV_KEYVAULT
+    - name: aad_client_id
+      secret:
+        name: active-directory
+        key: application-appid
+    - name: appinsights_key
+      secret:
+        name: central-logging
+        key: appinsights
