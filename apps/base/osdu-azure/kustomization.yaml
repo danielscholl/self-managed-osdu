@@ -6,3 +6,4 @@ resources:
   - partition-services.yaml
   - security-services.yaml
   - core-services.yaml
+  - reference-services.yaml
