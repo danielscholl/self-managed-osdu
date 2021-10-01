@@ -14,4 +14,4 @@ patchesStrategicMerge:
   - security-services-values.yaml
   - core-services-values.yaml
   - reference-services-values.yaml
-  # - osdu-airflow-values.yaml
+  - osdu-airflow-values.yaml
