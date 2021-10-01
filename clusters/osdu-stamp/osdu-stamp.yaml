@@ -37,3 +37,30 @@ spec:
   - kind: Deployment
     name: policy
     namespace: osdu-azure
+  - kind: Deployment
+    name: storage
+    namespace: osdu-azure
+  - kind: Deployment
+    name: indexer
+    namespace: osdu-azure
+  - kind: Deployment
+    name: indexer-queue
+    namespace: osdu-azure
+  - kind: Deployment
+    name: search
+    namespace: osdu-azure
+  - kind: Deployment
+    name: schema
+    namespace: osdu-azure
+  - kind: Deployment
+    name: file
+    namespace: osdu-azure
+  - kind: Deployment
+    name: register
+    namespace: osdu-azure
+  - kind: Deployment
+    name: notification
+    namespace: osdu-azure
+  - kind: Deployment
+    name: dataset
+    namespace: osdu-azure
