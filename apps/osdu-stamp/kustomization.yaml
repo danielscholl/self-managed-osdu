@@ -5,12 +5,13 @@ resources:
   - ../base/dev-sample
   - ../base/osdu-base
   - ../base/osdu-istio
-  - ../base/osdu-airflow
   - ../base/osdu-azure
+  - ../base/osdu-airflow
 patchesStrategicMerge:
   - dev-sample-values.yaml
   - osdu-istio-values.yaml
-  # - osdu-airflow-values.yaml
   - partition-services-values.yaml
   - security-services-values.yaml
   - core-services-values.yaml
+  - reference-services-values.yaml
+  # - osdu-airflow-values.yaml
