@@ -92,12 +92,12 @@ airflow:
   ###################################
   # Airflow - DAGs Configs
   ###################################
-  dags:
-    installRequirements: true
-    persistence:
-      enabled: true
-      existingClaim: airflowdagpvc
-      subPath: "dags"
+  # dags:
+  #   installRequirements: true
+  #   persistence:
+  #     enabled: true
+  #     existingClaim: airflowdagpvc
+  #     subPath: "dags"
 
   ###################################
   # Airflow - WebUI Configs
