@@ -19,8 +19,7 @@ spec:
 {{- if not .autoscale }}
   replicas: {{ .replicaCount | default $replicaCount }}
   selector:
-    matchLabels:
-      app: {{ .service }}
+    matchLabels: {{ $selectorLabels }}
 {{- end }}
   template:
     metadata:

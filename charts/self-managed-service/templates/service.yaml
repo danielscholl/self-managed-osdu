@@ -1,20 +1,22 @@
 {{- $serviceType := .Values.service.type }}
 {{- $servicePort := .Values.service.port }}
 {{- $labels := include "self-managed-osdu.labels" . | nindent 4 }}
+{{- $selectorLabels := include "self-managed-osdu.selectorLabels" . | nindent 4 }}
 {{- range .Values.configuration }}
+---
 apiVersion: v1
 kind: Service
 metadata:
   name: {{ .service }}
   labels: {{ $labels }}
-  type: {{ $serviceType | default 80 }}
+    app: {{ .service }}
+spec:
+  type: {{ $serviceType }}
   ports:
-    - port: {{ $servicePort | default 80 }}
+    - port: {{ $servicePort }}
       targetPort: http
       protocol: TCP
       name: http
-  selector:
-    {{ .service }}
+  selector: {{ $selectorLabels }}
 
----
 {{- end }}

@@ -19,7 +19,6 @@ replicaCount: 2
 # nodePool: internal
 podIdentity: osdu-identity
 
-
 ################################################################################
 # Specify the Ingress Settings
 #
@@ -35,7 +34,6 @@ service:
   type: ClusterIP
   port: 80
 
-
 ################################################################################
 # Specify the Self Managed OSDU Services to Load
 #
@@ -49,20 +47,19 @@ configuration:
     repository: neilpeterson/aks-helloworld
     tag: v1
     path: /*
-    probe: /
+    # probe: /
 
     ################################################################################
     # Specify specific service overrides from default settings. (optional)
     #
     # nodePool: internal
     # podIdentity: osdu-identity
-    # replicaCount: 1
+    replicaCount: 1
 
     ################################################################################
     # Specify if KeyVault Secrets should be used (optional)
     #
     # keyvault: true
-
 
     ################################################################################
     # Specify custom replica count or if autscaling should be used. (optional)
@@ -72,7 +69,6 @@ configuration:
     #   maxReplicas: 5
     #   targetCPUUtilizationPercentage: 80
     replicaCount: 1
-
 
     ################################################################################
     # Specify Pod Resource Allocations (optional)
@@ -84,7 +80,6 @@ configuration:
     #   cpu: 1000m
     #   memory: 1300Mi
 
-
     ################################################################################
     # Specify Persistent Volumes with additional mounts to be used. (optional)
     #
@@ -94,7 +89,6 @@ configuration:
     # mount:
     #   - name: shared-data
     #     path: /mnt/sample
-
 
     ################################################################################
     # Specify if Istio Auth should be enabled with bypass paths. (optional)
@@ -113,7 +107,6 @@ configuration:
     #     - "/api/search/v2/webjars/*"
     #     - "*/actuator/health"
     #     - "*/_ah/**"
-
 
     ################################################################################
     # Specify any Environment Variables to enable for the pod. (optional)
