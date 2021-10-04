@@ -1,0 +1,25 @@
+{{- range .Values.configuration }}
+{{- if .auth }}
+apiVersion: security.istio.io/v1beta1
+kind: AuthorizationPolicy
+metadata:
+  name: {{ .service }}-jwt-authz
+spec:
+  selector:
+    matchLabels:
+      app: {{ .service }}
+  action: DENY
+  rules:
+    - from:
+        - source:
+            notRequestPrincipals: ["*"]
+      to:
+        - operation:
+            notPaths: [
+              {{- range .auth.disable }}
+              {{ . | quote }},
+              {{- end }}
+            ]
+{{- end }}
+---
+{{- end }}

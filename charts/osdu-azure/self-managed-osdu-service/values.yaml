@@ -1,0 +1,76 @@
+#  Copyright © Microsoft Corporation
+#
+#  Licensed under the Apache License, Version 2.0 (the "License");
+#  you may not use this file except in compliance with the License.
+#  You may obtain a copy of the License at
+#
+#       http://www.apache.org/licenses/LICENSE-2.0
+#
+#  Unless required by applicable law or agreed to in writing, software
+#  distributed under the License is distributed on an "AS IS" BASIS,
+#  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+#  See the License for the specific language governing permissions and
+#  limitations under the License.
+
+nameOverride: ""
+fullnameOverride: "default"
+nodepool: services
+
+################################################################################
+# Specify Autoscaling
+#
+autoscaling:
+  enabled: true
+  minReplicas: 2
+  maxReplicas: 5
+  targetCPUUtilizationPercentage: 80
+
+################################################################################
+# Specify the Pod Identity
+#
+identity:
+  name: osdu-identity
+
+################################################################################
+# Specify the Ingress Settings
+#
+ingress:
+  dns: <ingress_dns>
+  issuer: letsencrypt-prod-dns
+  enableKeyvaultCert: false
+
+################################################################################
+# Specify the Service Settings
+#
+service:
+  type: ClusterIP
+  port: 80
+
+
+################################################################################
+# Specify the OSDU Services to Load
+#
+configuration:
+
+  ######################
+  ##  DEFAULT SERVICE
+  #
+  - service: default
+    repository: neilpeterson/aks-helloworld
+    tag: v1
+    path: /*
+    probe: /
+    keyvault: true
+    autoscale: true
+    replicaCount: 1
+    pvc:
+      - name: fileshare
+        volume: shared-data
+    mount:
+      - name: shared-data
+        path: /mnt/sample
+    env:
+      - name: TITLE
+        value: "Azure OSDU Platform - (AKS)"
+
+
