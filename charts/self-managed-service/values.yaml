@@ -16,7 +16,7 @@
 # Specify the Default settings to be used.
 #
 replicaCount: 2
-nodePool: internal
+# nodePool: internal
 podIdentity: osdu-identity
 
 

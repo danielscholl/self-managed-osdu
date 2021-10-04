@@ -7,9 +7,9 @@ kind: Service
 metadata:
   name: {{ .service }}
   labels: {{ $labels }}
-  type: {{ $serviceType }}
+  type: {{ $serviceType | default 80 }}
   ports:
-    - port: {{ $servicePort }}
+    - port: {{ $servicePort | default 80 }}
       targetPort: http
       protocol: TCP
       name: http
