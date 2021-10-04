@@ -18,7 +18,7 @@ spec:
     namespace: dev-sample
   - kind: Deployment
     name: istio-operator
-    namespace: istio-system
+    namespace: istio-operator
   - kind: Deployment
     name: istiod
     namespace: istio-system
