@@ -23,9 +23,9 @@ spec:
   targetNamespace: osdu-azure
   values:
     replicaCount: 1
-    ingress:
-      issuer: letsencrypt-prod-dns
-      enableKeyvaultCert: false
+    # ingress:
+    #   issuer: letsencrypt-prod-dns
+    #   enableKeyvaultCert: false
     configuration:
     - service: default
       repository: neilpeterson/aks-helloworld

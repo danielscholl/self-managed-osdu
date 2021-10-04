@@ -5,6 +5,6 @@ metadata:
   name: default-service
   namespace: osdu-azure
 spec:
-  values:
-    ingress:
-      dns: osdu-self-dpljdfe-4zis-gw.centralus.cloudapp.azure.com
+  # values:
+  #   ingress:
+  #     dns: osdu-self-dpljdfe-4zis-gw.centralus.cloudapp.azure.com
