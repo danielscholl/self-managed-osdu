@@ -4,4 +4,3 @@ namespace: osdu-azure
 resources:
   - namespace.yaml
   - self-managed-base.yaml
-  - self-managed-service.yaml
