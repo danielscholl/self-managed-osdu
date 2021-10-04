@@ -9,3 +9,4 @@ resources:
 patchesStrategicMerge:
   - dev-sample-values.yaml
   - osdu-istio-values.yaml
+  - self-managed-osdu-values.yaml
