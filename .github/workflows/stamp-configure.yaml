@@ -143,6 +143,32 @@ jobs:
                   appid: $(az keyvault secret show --id https://${ENV_VAULT}.vault.azure.net/secrets/aad-client-id --query value -otsv)
           EOF
 
+          cat > $GITHUB_WORKSPACE/apps/$CLUSTER/self-managed-osdu-values.yaml << EOF
+          ---
+          apiVersion: helm.toolkit.fluxcd.io/v2beta1
+          kind: HelmRelease
+          metadata:
+            name: self-managed-osdu-base
+            namespace: osdu-azure
+          spec:
+            values:
+              azure:
+                tenant: $(az keyvault secret show --id https://${ENV_VAULT}.vault.azure.net/secrets/tenant-id --query value -otsv)
+                subscription: $(az keyvault secret show --id https://${ENV_VAULT}.vault.azure.net/secrets/subscription-id --query value -otsv)
+                resourcegroup: $(az keyvault secret show --id https://${ENV_VAULT}.vault.azure.net/secrets/base-name-cr --query value -otsv)-rg
+                identity: $(az keyvault secret show --id https://${ENV_VAULT}.vault.azure.net/secrets/base-name-cr --query value -otsv)-osdu-identity
+                identity_id: $(az keyvault secret show --id https://${ENV_VAULT}.vault.azure.net/secrets/osdu-identity-id --query value -otsv)
+                keyvault: $ENV_VAULT
+                appid: $(az keyvault secret show --id https://${ENV_VAULT}.vault.azure.net/secrets/aad-client-id --query value -otsv)
+              resourceLimits:
+                defaultCpuRequests: "0.5"
+                defaultMemoryRequests: "4Gi"
+                defaultCpuLimits: "1"
+                defaultMemoryLimits: "4Gi"
+              identity:
+                name: osdu-identity
+          EOF
+
 
 
       # - name: sealed-secrets

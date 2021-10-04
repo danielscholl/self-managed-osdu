@@ -21,10 +21,3 @@ spec:
     remediation:
       retries: 3
   targetNamespace: osdu-azure
-  values:
-    azure:
-      podIdentityAuthEnabled: false
-      oidAuthEnabled: false
-    ingress:
-      issuer: letsencrypt-prod-dns
-      enableKeyvaultCert: false

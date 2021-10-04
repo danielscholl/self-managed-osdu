@@ -3,3 +3,4 @@ kind: Kustomization
 namespace: osdu-azure
 resources:
   - namespace.yaml
+  - self-managed-base.yaml
