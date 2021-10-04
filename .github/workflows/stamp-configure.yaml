@@ -100,6 +100,7 @@ jobs:
           patchesStrategicMerge:
             - dev-sample-values.yaml
             - osdu-istio-values.yaml
+            - self-managed-base-values.yaml
           EOF
 
       - name: Create OSDU Stamp Software Values
@@ -143,12 +144,12 @@ jobs:
                   appid: $(az keyvault secret show --id https://${ENV_VAULT}.vault.azure.net/secrets/aad-client-id --query value -otsv)
           EOF
 
-          cat > $GITHUB_WORKSPACE/apps/$CLUSTER/self-managed-osdu-values.yaml << EOF
+          cat > $GITHUB_WORKSPACE/apps/$CLUSTER/self-managed-base-values.yaml << EOF
           ---
           apiVersion: helm.toolkit.fluxcd.io/v2beta1
           kind: HelmRelease
           metadata:
-            name: self-managed-osdu-base
+            name: self-managed-base
             namespace: osdu-azure
           spec:
             values:
