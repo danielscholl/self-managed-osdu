@@ -180,9 +180,6 @@ jobs:
             name: default-service
             namespace: osdu-azure
           spec:
-            values:
-              ingress:
-                dns: $DNS_HOST
           EOF
 
 
