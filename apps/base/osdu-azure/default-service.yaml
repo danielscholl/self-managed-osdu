@@ -1,0 +1,41 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: default-service
+  namespace: osdu-azure
+spec:
+  releaseName: default-service
+  dependsOn:
+  - name: self-managed-base
+    namespace: osdu-azure
+  chart:
+    spec:
+      chart: ./charts/self-managed-service
+      sourceRef:
+        kind: GitRepository
+        name: flux-system
+        namespace: flux-system
+  interval: 5m0s
+  install:
+    remediation:
+      retries: 3
+  targetNamespace: osdu-azure
+  values:
+    replicaCount: 1
+    ingress:
+      issuer: letsencrypt-prod-dns
+      enableKeyvaultCert: false
+    service:
+      type: ClusterIP
+      port: 80
+    configuration:
+    - service: default
+      repository: neilpeterson/aks-helloworld
+      tag: v1
+      path: /*
+      probe: /
+      replicaCount: 1
+      env:
+      - name: TITLE
+        value: "Azure OSDU Platform - (AKS)"
