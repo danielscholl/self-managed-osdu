@@ -101,7 +101,6 @@ jobs:
             - dev-sample-values.yaml
             - osdu-istio-values.yaml
             - self-managed-base-values.yaml
-            - default-service-values.yaml
           EOF
 
       - name: Create OSDU Stamp Software Values
@@ -171,17 +170,6 @@ jobs:
               identity:
                 name: osdu-identity
           EOF
-
-          cat > $GITHUB_WORKSPACE/apps/$CLUSTER/default-service-values.yaml << EOF
-          ---
-          apiVersion: helm.toolkit.fluxcd.io/v2beta1
-          kind: HelmRelease
-          metadata:
-            name: default-service
-            namespace: osdu-azure
-          spec:
-          EOF
-
 
 
       # - name: sealed-secrets
