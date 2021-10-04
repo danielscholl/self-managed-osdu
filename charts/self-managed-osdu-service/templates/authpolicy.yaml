@@ -1,9 +1,11 @@
+{{- $labels := include "self-managed-osdu.labels" . | nindent 4 }}
 {{- range .Values.configuration }}
 {{- if .auth }}
 apiVersion: security.istio.io/v1beta1
 kind: AuthorizationPolicy
 metadata:
   name: {{ .service }}-jwt-authz
+  labels: {{ $labels }}
 spec:
   selector:
     matchLabels:

@@ -1,10 +1,9 @@
 {{- $namespace := .Release.Namespace }}
 {{- $pullPolicy := .Values.pullPolicy -}}
 {{- $servicePort := .Values.service.port -}}
-{{- $hostName := .Values.ingress.dns -}}
 {{- $replicaCount := .Values.replicaCount -}}
-{{- $isAutoscalingEnabled := .Values.autoscaling.enabled}}
-{{- $nodepool := .Values.nodepool}}
+{{- $nodePool := .Values.nodePool}}
+{{- $podIdentity := .Values.podIdentity}}
 {{- $podAnnotations := .Values.podAnnotations}}
 {{- $version := .Chart.AppVersion -}}
 {{- $selectorLabels := include "self-managed-osdu.selectorLabels" . | nindent 8 }}
@@ -27,11 +26,14 @@ spec:
         {{- toYaml . | nindent 8 }}
     {{- end }}
       labels: {{ $selectorLabels }}
+      {{- if .podIdentity }}
+        aadpodidbinding: {{ .podIdentity | default $podIdentity }}
+      {{- end }}
     spec:
-      {{- if $nodepool }}
+      {{- if $nodePool }}
       nodeSelector:
-        nodepool: {{  $nodepool }}
-      {{- end }}        
+        nodepool: {{ .nodePool | default  $nodePool }}
+      {{- end }}
       volumes:
       {{- if .keyvault }}
         - name: azure-keyvault
@@ -65,10 +67,12 @@ spec:
           {{- if .request }}
             requests:
               cpu: {{ .request.cpu | quote }}
+              memory: {{ .request.memory | quote }}
           {{- end }}
           {{- if .limit }}
             limits:
               cpu: {{ .limit.cpu | quote }}
+              memory: {{ .limit.memory | quote }}
           {{- end }}
           volumeMounts:
           {{- if .keyvault }}
@@ -100,14 +104,6 @@ spec:
                   name: {{ .secret.name | quote }}
                   key: {{ .secret.key | quote }}
               {{- end }}
-            {{- end }}
-            {{- if .env_with_dns }}
-            {{- range .env_with_dns }}
-            - name: {{ .name }}
-              {{- if .value }}
-              value: "https://{{ $hostName }}{{ .value }}"
-              {{- end }}
-            {{- end }}
             {{- end }}
           {{- end }}
 ---

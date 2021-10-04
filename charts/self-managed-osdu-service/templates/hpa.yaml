@@ -1,0 +1,32 @@
+{{- $labels := include "self-managed-osdu.labels" . | nindent 4 }}
+{{- range .Values.configuration }}
+{{- $name := .service }}
+{{- if .autoscale }}
+apiVersion: autoscaling/v2beta1
+kind: HorizontalPodAutoscaler
+metadata:
+  name: {{ $name }}-scaler
+  labels: {{ $labels }}
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: {{ $name }}
+  minReplicas: {{ .autoscale.minReplicas }}
+  maxReplicas: {{ .autoscale.maxReplicas }}
+  metrics:
+  {{- if .autoscale.targetCPUUtilizationPercentage }}
+    - type: Resource
+      resource:
+        name: cpu
+        targetAverageUtilization: {{ .autoscale.targetCPUUtilizationPercentage }}
+  {{- end }}
+  {{- if .targetMemoryUtilizationPercentage }}
+    - type: Resource
+      resource:
+        name: memory
+        targetAverageUtilization: {{ .autoscale.targetMemoryUtilizationPercentage }}
+  {{- end }}
+{{- end }}
+---
+{{- end }}

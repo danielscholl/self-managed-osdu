@@ -1,11 +1,11 @@
-{{- $namespace := .Release.Namespace }}
+{{- $labels := include "self-managed-osdu.labels" . | nindent 4 }}
 {{- $svcPort := .Values.service.port -}}
-{{- $release := .Release.ame -}}
+{{- if .Values.ingress }}
 apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
 metadata:
   name: {{ .Release.Name }}-ingress
-  namespace: {{ $namespace }}
+  labels: {{ $labels }}
   annotations:
     kubernetes.io/ingress.class: azure/application-gateway
     appgw.ingress.kubernetes.io/request-timeout: "300"
@@ -34,3 +34,5 @@ spec:
             serviceName: {{ .service }}
             servicePort: {{ $svcPort }}
         {{- end }}
+---
+{{- end }}

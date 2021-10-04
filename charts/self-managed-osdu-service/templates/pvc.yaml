@@ -1,5 +1,4 @@
-{{- $namespace := .Release.Namespace }}
-{{- $fullname := include "self-managed-osdu.fullname" . }}
+{{- $labels := include "self-managed-osdu.labels" . | nindent 4 }}
 {{- range .Values.configuration }}
 {{- if .pvc }}
 {{- range .pvc }}
@@ -7,8 +6,8 @@ apiVersion: v1
 kind: PersistentVolume
 metadata:
 
-  name: {{ $fullname }}-pv
-  labels:
+  name: {{ .name }}-pv
+  labels: {{ $labels }}
     usage: {{ .name }}-pv
 spec:
   capacity:
@@ -30,7 +29,8 @@ spec:
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: {{ $fullname }}-pvc
+  name: {{ .name }}-pvc
+  labels: {{ $labels }}
   annotations:
     volume.beta.kubernetes.io/storage-class: ""
 spec:
@@ -41,7 +41,7 @@ spec:
       storage: 5Gi
   selector:
     matchLabels:
-      usage: {{ $fullname }}-pv
+      usage: {{ .name }}-pv
 {{- end }}
 {{- end }}
 ---

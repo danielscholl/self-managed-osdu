@@ -1,0 +1,136 @@
+#  Copyright © Microsoft Corporation
+#
+#  Licensed under the Apache License, Version 2.0 (the "License");
+#  you may not use this file except in compliance with the License.
+#  You may obtain a copy of the License at
+#
+#       http://www.apache.org/licenses/LICENSE-2.0
+#
+#  Unless required by applicable law or agreed to in writing, software
+#  distributed under the License is distributed on an "AS IS" BASIS,
+#  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+#  See the License for the specific language governing permissions and
+#  limitations under the License.
+
+################################################################################
+# Specify the Default settings to be used.
+#
+replicaCount: 2
+nodePool: internal
+podIdentity: osdu-identity
+
+
+################################################################################
+# Specify the Ingress Settings
+#
+# ingress:
+#   dns: <ingress_dns>
+#   issuer: letsencrypt-prod-dns
+#   enableKeyvaultCert: false
+
+################################################################################
+# Specify the Service Settings
+#
+service:
+  type: ClusterIP
+  port: 80
+
+
+################################################################################
+# Specify the Self Managed OSDU Services to Load
+#
+configuration:
+
+  ################################
+  ##  SERVICE CONFIGURATION SAMPLE
+  #  Specify the Image Repository, tag, ingress path and health probe. (required)
+  #
+  - service: default
+    repository: neilpeterson/aks-helloworld
+    tag: v1
+    path: /*
+    probe: /
+
+    ################################################################################
+    # Specify specific service overrides from default settings. (optional)
+    #
+    # nodePool: internal
+    # podIdentity: osdu-identity
+    # replicaCount: 1
+
+    ################################################################################
+    # Specify if KeyVault Secrets should be used (optional)
+    #
+    # keyvault: true
+
+
+    ################################################################################
+    # Specify custom replica count or if autscaling should be used. (optional)
+    #
+    # autoscale:
+    #   minReplicas: 2
+    #   maxReplicas: 5
+    #   targetCPUUtilizationPercentage: 80
+    replicaCount: 1
+
+
+    ################################################################################
+    # Specify Pod Resource Allocations (optional)
+    #
+    # request:
+    #   cpu: 100m
+    #   memory: 600Mi
+    # limit:
+    #   cpu: 1000m
+    #   memory: 1300Mi
+
+
+    ################################################################################
+    # Specify Persistent Volumes with additional mounts to be used. (optional)
+    #
+    # pvc:
+    #   - name: fileshare
+    #     volume: shared-data
+    # mount:
+    #   - name: shared-data
+    #     path: /mnt/sample
+
+
+    ################################################################################
+    # Specify if Istio Auth should be enabled with bypass paths. (optional)
+    #
+    # auth:
+    #   disable:
+    #     - "/"
+    #     - "*/index.html"
+    #     - "*/v2/api-docs"
+    #     - "*/configuration/ui"
+    #     - "*/configuration/security"
+    #     - "*/swagger"
+    #     - "*/swagger-ui.html"
+    #     - "*/swagger-resources"
+    #     - "/api/search/v2/swagger-resources/*"
+    #     - "/api/search/v2/webjars/*"
+    #     - "*/actuator/health"
+    #     - "*/_ah/**"
+
+
+    ################################################################################
+    # Specify any Environment Variables to enable for the pod. (optional)
+    #
+    env:
+      # Sample Environment Variable with Direct Value
+      - name: TITLE
+        value: "Azure OSDU Platform - (AKS)"
+
+      # Sample Environment Variable with Value from Config Map
+      # - name: KEYVAULT_URI
+      #   config:
+      #     name: osdu-svc-config
+      #     key: ENV_KEYVAULT
+
+      # Sample Environment Variable from Secret using KeyVault
+      # - name: AZURE_TENANT_ID
+      #   secret:
+      #     name: active-directory
+      #     key: tenantid
