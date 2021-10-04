@@ -153,7 +153,7 @@ jobs:
             namespace: osdu-azure
           spec:
             values:
-              fullname: osdu-svc-config
+              fullnameOverride: osdu-svc
               azure:
                 tenant: $(az keyvault secret show --id https://${ENV_VAULT}.vault.azure.net/secrets/tenant-id --query value -otsv)
                 subscription: $(az keyvault secret show --id https://${ENV_VAULT}.vault.azure.net/secrets/subscription-id --query value -otsv)
