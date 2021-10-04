@@ -2,16 +2,16 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: osdu-base
+  name: self-managed-base
   namespace: osdu-azure
 spec:
-  releaseName: osdu-base
+  releaseName: self-managed-base
   dependsOn:
   - name: osdu-base
     namespace: default
   chart:
     spec:
-      chart: ./charts/self-managed-osdu-base
+      chart: ./charts/self-managed-base
       sourceRef:
         kind: GitRepository
         name: flux-system

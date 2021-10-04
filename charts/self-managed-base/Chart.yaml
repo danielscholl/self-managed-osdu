@@ -13,8 +13,8 @@
 #  limitations under the License.
 
 apiVersion: v2
-name: self-managed-osdu-service
+name: self-managed-base
 type: application
-description: Installs self managed OSDU Services
+description: Installs the self managed OSDU Base Components
 version: 1.11.0
 appVersion: 0.11.0
