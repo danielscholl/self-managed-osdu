@@ -10,4 +10,3 @@ patchesStrategicMerge:
   - dev-sample-values.yaml
   - osdu-istio-values.yaml
   - self-managed-base-values.yaml
-  - default-service-values.yaml
