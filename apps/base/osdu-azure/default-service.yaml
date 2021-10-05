@@ -23,19 +23,11 @@ spec:
   targetNamespace: osdu-azure
   values:
     podIdentity: osdu-identity
+    nodePool: internal
+    replicaCount: 1
     ingress:
       issuer: letsencrypt-prod-dns
       enableKeyvaultCert: false
     service:
       type: ClusterIP
       port: 80
-    configuration:
-    - service: default
-      repository: neilpeterson/aks-helloworld
-      tag: v1
-      path: /*
-      replicaCount: 1
-      env:
-      - name: TITLE
-        value: "Azure Self Managed OSDU - (AKS)"
-

@@ -8,3 +8,12 @@ spec:
   values:
     ingress:
       dns: osdu-self-dpldabdc-gs7m-gw.centralus.cloudapp.azure.com
+    configuration:
+    - service: default
+      repository: neilpeterson/aks-helloworld
+      tag: v1
+      path: /*
+      replicaCount: 1
+      env:
+      - name: TITLE
+        value: "Azure Self Managed OSDU - (AKS)"

@@ -1,7 +1,11 @@
 {{- $labels := include "self-managed-service.labels" . | nindent 4 }}
+
+{{- if .Values.autoscale }}
+{{- $minReplicas := .Values.autoscale.minReplicas -}}
+{{- $maxReplicas := .Values.autoscale.maxReplicas -}}
+{{- $targetCPU := .Values.autoscale.targetUtilization -}}
 {{- range .Values.configuration }}
 {{- $name := .service }}
-{{- if .autoscale }}
 apiVersion: autoscaling/v2beta1
 kind: HorizontalPodAutoscaler
 metadata:
@@ -12,20 +16,14 @@ spec:
     apiVersion: apps/v1
     kind: Deployment
     name: {{ $name }}
-  minReplicas: {{ .autoscale.minReplicas }}
-  maxReplicas: {{ .autoscale.maxReplicas }}
+  minReplicas: {{ $minReplicas}}
+  maxReplicas: {{ $maxReplicas }}
   metrics:
-  {{- if .autoscale.targetCPUUtilizationPercentage }}
+  {{- if $targetCPU }}
     - type: Resource
       resource:
         name: cpu
-        targetAverageUtilization: {{ .autoscale.targetCPUUtilizationPercentage }}
-  {{- end }}
-  {{- if .targetMemoryUtilizationPercentage }}
-    - type: Resource
-      resource:
-        name: memory
-        targetAverageUtilization: {{ .autoscale.targetMemoryUtilizationPercentage }}
+        averageUtilization: {{ $targetCPU }}
   {{- end }}
 {{- end }}
 ---
