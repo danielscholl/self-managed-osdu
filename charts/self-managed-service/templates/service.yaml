@@ -1,7 +1,7 @@
 {{- $serviceType := .Values.service.type }}
 {{- $servicePort := .Values.service.port }}
-{{- $labels := include "self-managed-osdu.labels" . | nindent 4 }}
-{{- $selectorLabels := include "self-managed-osdu.selectorLabels" . | nindent 4 }}
+{{- $labels := include "self-managed-service.labels" . | nindent 4 }}
+{{- $selectorLabels := include "self-managed-service.selectorLabels" . | nindent 4 }}
 {{- range .Values.configuration }}
 ---
 apiVersion: v1

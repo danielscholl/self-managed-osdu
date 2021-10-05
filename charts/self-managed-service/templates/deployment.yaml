@@ -6,8 +6,8 @@
 {{- $podIdentity := .Values.podIdentity}}
 {{- $podAnnotations := .Values.podAnnotations}}
 {{- $version := .Chart.AppVersion -}}
-{{- $selectorLabels := include "self-managed-osdu.selectorLabels" . | nindent 8 }}
-{{- $labels := include "self-managed-osdu.labels" . | nindent 4 }}
+{{- $selectorLabels := include "self-managed-service.selectorLabels" . | nindent 8 }}
+{{- $labels := include "self-managed-service.labels" . | nindent 4 }}
 {{- range .Values.configuration }}
 apiVersion: apps/v1
 kind: Deployment
