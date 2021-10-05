@@ -15,9 +15,6 @@ metadata:
   name: {{ .service }}
   labels: {{ $labels }}
     app: {{ .service }}
-    {{- if $podIdentity }}
-    aadpodidbinding: {{ $podIdentity }}
-    {{- end }}
 spec:
 {{- if not .autoscale }}
   replicas: {{ .replicaCount | default $replicaCount }}
@@ -31,6 +28,9 @@ spec:
         {{- toYaml . | nindent 8 }}
     {{- end }}
       labels: {{ $selectorLabels }}
+        {{- if $podIdentity }}
+        aadpodidbinding: {{ $podIdentity }}
+        {{- end }}
     spec:
       {{- if $nodePool }}
       nodeSelector:
