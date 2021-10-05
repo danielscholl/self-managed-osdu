@@ -64,7 +64,9 @@ spec:
       - name: azure_activedirectory_session_stateless
         value: "false"
       - name: azure_paas_podIdentity_isEnabled
-        value: "{{ .Values.azure.podIdentityAuthEnabled }}"
+        value: "true"
+      - name: azure_istioauth_enabled
+        value: "true"
       - name: KEYVAULT_URI
         config:
           name: osdu-svc-config
@@ -81,6 +83,5 @@ spec:
         secret:
           name: active-directory
           key: application-appid
-      - name: azure_istioauth_enabled
-        value: "true"
+
 
