@@ -16,12 +16,12 @@
 # Specify the Default settings to be used.
 #
 nodePool: default
-podIdentity: osdu-identity
+# podIdentity: osdu-identity
 replicaCount: 1
-autoscale:
-  minReplicas: 2
-  maxReplicas: 5
-  targetUtilization: 80
+# autoscale:
+#   minReplicas: 2
+#   maxReplicas: 5
+#   targetUtilization: 80
 
 
 ################################################################################

@@ -22,7 +22,6 @@ spec:
       retries: 3
   targetNamespace: osdu-azure
   values:
-    podIdentity: osdu-identity
     nodePool: internal
     replicaCount: 1
     ingress:
