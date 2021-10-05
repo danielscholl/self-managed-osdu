@@ -24,7 +24,6 @@ spec:
   values:
     podIdentity: osdu-identity
     ingress:
-      dns: osdu-self-dpldabdc-gs7m-gw.centralus.cloudapp.azure.com
       issuer: letsencrypt-prod-dns
       enableKeyvaultCert: false
     service:
