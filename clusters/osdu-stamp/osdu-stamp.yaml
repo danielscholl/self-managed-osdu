@@ -25,3 +25,6 @@ spec:
   - kind: Deployment
     name: istio-ingressgateway
     namespace: istio-system
+  - kind: Deployment
+    name: default
+    namespace: osdu-azure
