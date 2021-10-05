@@ -23,6 +23,9 @@ spec:
   targetNamespace: osdu-azure
   values:
     podIdentity: osdu-identity
+    ingress:
+      issuer: letsencrypt-prod-dns
+      enableKeyvaultCert: false
     service:
       type: ClusterIP
       port: 80
