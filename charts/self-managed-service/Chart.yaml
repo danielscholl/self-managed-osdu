@@ -16,5 +16,5 @@ apiVersion: v2
 name: self-managed-service
 type: application
 description: Installs self managed OSDU Services
-version: 0.11.0
-appVersion: 0.11.0
+version: 0.11.1
+appVersion: oak
