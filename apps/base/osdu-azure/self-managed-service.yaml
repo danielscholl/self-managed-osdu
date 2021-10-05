@@ -21,3 +21,18 @@ spec:
     remediation:
       retries: 3
   targetNamespace: osdu-azure
+  values:
+    podIdentity: osdu-identity
+    service:
+      type: ClusterIP
+      port: 80
+    configuration:
+    - service: default
+      repository: neilpeterson/aks-helloworld
+      tag: v1
+      path: /*
+      replicaCount: 1
+      env:
+      - name: TITLE
+        value: "Azure Self Managed OSDU - (AKS)"
+

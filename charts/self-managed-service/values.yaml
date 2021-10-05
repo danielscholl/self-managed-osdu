@@ -54,7 +54,6 @@ configuration:
     #
     # nodePool: internal
     # podIdentity: osdu-identity
-    replicaCount: 1
 
     ################################################################################
     # Specify if KeyVault Secrets should be used (optional)
