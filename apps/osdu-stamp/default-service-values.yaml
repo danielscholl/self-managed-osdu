@@ -2,10 +2,9 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: self-managed-service
+  name: default-service
   namespace: osdu-azure
 spec:
   values:
-    fullnameOverride: default-service
     ingress:
       dns: osdu-self-dpldabdc-gs7m-gw.centralus.cloudapp.azure.com

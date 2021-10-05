@@ -2,10 +2,10 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: self-managed-service
+  name: default-service
   namespace: osdu-azure
 spec:
-  releaseName: self-managed-service
+  releaseName: default-service
   dependsOn:
   - name: self-managed-base
     namespace: osdu-azure
