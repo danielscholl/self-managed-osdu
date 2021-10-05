@@ -49,8 +49,4 @@ Selector labels
 {{- define "self-managed-service.selectorLabels" -}}
 app.kubernetes.io/name: {{ include "self-managed-service.name" . }}
 app.kubernetes.io/instance: {{ .Release.Name }}
-{{- if .Values.podIdentity }}
-aadpodidbinding: {{ .Values.podIdentity }}
-{{- end }}
-
 {{- end }}
