@@ -238,7 +238,7 @@ jobs:
                 repository: msosdu.azurecr.io/partition
                 tag: oak
                 path: /api/partition/v1/*
-                probe: /api/partition/v1/swagger-ui.html
+                probe: /actuator/health
                 keyvault: true
                 auth:
                   disable:
@@ -263,6 +263,8 @@ jobs:
                   value: "80"
                 - name: ACCEPT_HTTP
                   value: "true"
+                - name: partition_spring_logging_level
+                  value: INFO
                 - name: azure_activedirectory_AppIdUri
                   value: "api://$(az keyvault secret show --id https://${ENV_VAULT}.vault.azure.net/secrets/aad-client-id --query value -otsv)"
                 - name: azure_activedirectory_session_stateless
@@ -306,8 +308,8 @@ jobs:
               - service: entitlements
                 repository: msosdu.azurecr.io/entitlements
                 tag: oak
-                path: /api/entitlements/v1/*
-                probe: /api/entitlements/v1/swagger-ui.html
+                path: /api/entitlements/v2/*
+                probe: /_ah/readiness_check
                 keyvault: true
                 request:
                   cpu: 100m
@@ -318,11 +320,15 @@ jobs:
                 auth:
                   disable:
                     - "/"
+                    - "*/index.html"
                     - "*/v2/api-docs"
                     - "*/swagger-resources"
                     - "*/swagger-ui.html"
                     - "*/actuator/health"
                     - "*/health"
+                    - "*/configuration/ui"
+                    - "*/configuration/security",
+                    - "/api/entitlements/v2/info"
                     - "/api/entitlements/v2/swagger-resources/*"
                     - "/api/entitlements/v2/webjars/*"
                 env:
@@ -330,6 +336,8 @@ jobs:
                   value: entitlements
                 - name: server.servlet.contextPath
                   value: /api/entitlements/v2/
+                - name: LOGGING_LEVEL
+                  value: INFO
                 - name: server_port
                   value: "80"
                 - name: service_domain_name
