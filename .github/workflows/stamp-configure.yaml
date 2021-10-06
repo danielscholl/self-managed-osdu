@@ -92,6 +92,9 @@ jobs:
             - kind: Deployment
               name: partition
               namespace: osdu-azure
+            - kind: Deployment
+              name: entitlements
+              namespace: osdu-azure
           EOF
 
           cat > $GITHUB_WORKSPACE/apps/$CLUSTER/kustomization.yaml << EOF
@@ -109,15 +112,24 @@ jobs:
             - self-managed-base-values.yaml
             - default-service-values.yaml
             - partition-service-values.yaml
+            - entitlement-service-values.yaml
           EOF
 
-      - name: Create OSDU Stamp Software Values
+      - name: Retrieve Stamp Env Variables
         run: |
           GROUP=$(az group list --query "[?contains(name, 'cpl${{ secrets.RAND }}')].name" -otsv)
           ENV_VAULT=$(az keyvault list --resource-group $GROUP --query [].name -otsv)
           DP_GROUP=$(az group list --query "[?contains(name, 'dpl${{ secrets.RAND }}')].name" -otsv |grep -v MC)
           DNS_HOST=$(az network public-ip list --resource-group $DP_GROUP --query [].dnsSettings.fqdn -otsv)
 
+          echo "GROUP=$GROUP" >> $GITHUB_ENV
+          echo "ENV_VAULT=$ENV_VAULT" >> $GITHUB_ENV
+          echo "DP_GROUP=$DP_GROUP" >> $GITHUB_ENV
+          echo "DNS_HOST=$DNS_HOST" >> $GITHUB_ENV
+
+
+      - name: Create Helm Values - dev-sample
+        run: |
           cat > $GITHUB_WORKSPACE/apps/$CLUSTER/dev-sample-values.yaml << EOF
           ---
           apiVersion: helm.toolkit.fluxcd.io/v2beta1
@@ -137,6 +149,8 @@ jobs:
                 appid: $(az keyvault secret show --id https://${ENV_VAULT}.vault.azure.net/secrets/aad-client-id --query value -otsv)
           EOF
 
+      - name: Create Helm Values - osdu-istio
+        run: |
           cat > $GITHUB_WORKSPACE/apps/$CLUSTER/osdu-istio-values.yaml << EOF
           ---
           apiVersion: helm.toolkit.fluxcd.io/v2beta1
@@ -152,6 +166,8 @@ jobs:
                   appid: $(az keyvault secret show --id https://${ENV_VAULT}.vault.azure.net/secrets/aad-client-id --query value -otsv)
           EOF
 
+      - name: Create Helm Values - self-managed-base
+        run: |
           cat > $GITHUB_WORKSPACE/apps/$CLUSTER/self-managed-base-values.yaml << EOF
           ---
           apiVersion: helm.toolkit.fluxcd.io/v2beta1
@@ -180,6 +196,8 @@ jobs:
                 name: osdu-identity
           EOF
 
+      - name: Create Helm Values - default-service
+        run: |
           cat > $GITHUB_WORKSPACE/apps/$CLUSTER/default-service-values.yaml << EOF
           ---
           apiVersion: helm.toolkit.fluxcd.io/v2beta1
@@ -202,6 +220,8 @@ jobs:
                   value: "Self Managed OSDU - (v0.11)"
           EOF
 
+      - name: Create Helm Values - partition-service
+        run: |
           cat > $GITHUB_WORKSPACE/apps/$CLUSTER/partition-service-values.yaml << EOF
           ---
           apiVersion: helm.toolkit.fluxcd.io/v2beta1
@@ -269,6 +289,75 @@ jobs:
                     key: application-appid
           EOF
 
+      - name: Create Helm Values - entitlement-service
+        run: |
+          cat > $GITHUB_WORKSPACE/apps/$CLUSTER/entitlement-service-values.yaml << EOF
+          ---
+          apiVersion: helm.toolkit.fluxcd.io/v2beta1
+          kind: HelmRelease
+          metadata:
+            name: entitlement-service
+            namespace: osdu-azure
+          spec:
+            values:
+              ingress:
+                dns: $DNS_HOST
+              configuration:
+              - service: entitlements
+                repository: msosdu.azurecr.io/entitlements
+                tag: oak
+                path: /api/entitlements/v1/*
+                probe: /api/entitlements/v1/swagger-ui.html
+                keyvault: true
+                request:
+                  cpu: 100m
+                  memory: 600Mi
+                limit:
+                  cpu: 1000m
+                  memory: 1300Mi
+                auth:
+                  disable:
+                    - "/"
+                    - "*/v2/api-docs"
+                    - "*/swagger-resources"
+                    - "*/swagger-ui.html"
+                    - "*/actuator/health"
+                    - "*/health"
+                    - "/api/entitlements/v2/swagger-resources/*"
+                    - "/api/entitlements/v2/webjars/*"
+                env:
+                  - name: spring_application_name
+                    value: entitlements
+                  - name: server.servlet.contextPath
+                    value: /api/entitlements/v2/
+                  - name: server_port
+                    value: "80"
+                  - name: service_domain_name
+                    value: contoso.com
+                  - name: root_data_group_quota
+                    value: "5000"
+                  - name: redis_ttl_seconds
+                    value: "1"
+                  - name: partition_service_endpoint
+                    value: http://partition/api/partition/v1
+                  - name: azure_istioauth_enabled
+                    value: "true"
+                  - name: azure_activedirectory_AppIdUri
+                    value: "api://$(az keyvault secret show --id https://${ENV_VAULT}.vault.azure.net/secrets/aad-client-id --query value -otsv)"
+                  - name: azure_paas_podIdentity_isEnabled
+                    value: "false"
+                  - name: KEYVAULT_URI
+                    config:
+                      name: osdu-svc-config
+                      key: ENV_KEYVAULT
+                  - name: aad_client_id
+                    secret:
+                      name: active-directory
+                      key: application-appid
+                  - name: appinsights_key
+                    secret:
+                      name: central-logging
+                      key: appinsights
 
       # - name: sealed-secrets
       #   run: |
