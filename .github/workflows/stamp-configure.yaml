@@ -89,6 +89,9 @@ jobs:
             - kind: Deployment
               name: default
               namespace: osdu-azure
+            - kind: Deployment
+              name: partition
+              namespace: osdu-azure
           EOF
 
           cat > $GITHUB_WORKSPACE/apps/$CLUSTER/kustomization.yaml << EOF
@@ -195,7 +198,7 @@ jobs:
                 replicaCount: 1
                 env:
                 - name: TITLE
-                  value: "Azure Self Managed OSDU - (AKS)"
+                  value: "Self Managed OSDU - (AKS)"
           EOF
 
           cat > $GITHUB_WORKSPACE/apps/$CLUSTER/partition-service-values.yaml << EOF

@@ -23,7 +23,7 @@ spec:
   targetNamespace: osdu-azure
   values:
     podIdentity: osdu-identity
-    replicaCount: 1
+    replicaCount: 2
     ingress:
       issuer: letsencrypt-prod-dns
       enableKeyvaultCert: false
