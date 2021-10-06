@@ -1,0 +1,33 @@
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1beta1
+kind: Kustomization
+metadata:
+  name: osdu-stamp
+  namespace: flux-system
+spec:
+  interval: 5m0s
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+  path: ./apps/osdu-stamp/
+  prune: true
+  validation: client
+  healthChecks:
+  - kind: Deployment
+    name: env-debug
+    namespace: dev-sample
+  - kind: Deployment
+    name: istio-operator
+    namespace: istio-operator
+  - kind: Deployment
+    name: istiod
+    namespace: istio-system
+  - kind: Deployment
+    name: istio-ingressgateway
+    namespace: istio-system
+  - kind: Deployment
+    name: default
+    namespace: osdu-azure
+  - kind: Deployment
+    name: partition
+    namespace: osdu-azure
