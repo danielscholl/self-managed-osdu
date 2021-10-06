@@ -12,8 +12,8 @@ spec:
     - service: entitlements
       repository: msosdu.azurecr.io/entitlements
       tag: oak
-      path: /api/entitlements/v1/*
-      probe: /api/entitlements/v1/swagger-ui.html
+      path: /api/entitlements/v2/*
+      probe: /_ah/readiness_check
       keyvault: true
       request:
         cpu: 100m
@@ -36,6 +36,8 @@ spec:
         value: entitlements
       - name: server.servlet.contextPath
         value: /api/entitlements/v2/
+      - name: LOGGING_LEVEL
+        value: INFO
       - name: server_port
         value: "80"
       - name: service_domain_name

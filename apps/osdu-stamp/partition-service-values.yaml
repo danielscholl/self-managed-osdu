@@ -38,6 +38,8 @@ spec:
         value: "80"
       - name: ACCEPT_HTTP
         value: "true"
+      - name: partition_spring_logging_level
+        value: INFO
       - name: azure_activedirectory_AppIdUri
         value: "api://0ef4dfd1-8adf-441b-aae9-ac7026333520"
       - name: azure_activedirectory_session_stateless
