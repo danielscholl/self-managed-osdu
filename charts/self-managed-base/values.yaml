@@ -30,6 +30,7 @@ azure:
   identity_id: <azure_identity_id>
   keyvault: <azure_keyvault>
   appid: <azure_appid>
+  oidAuthEnabled: false
 
 ################################################################################
 # Specify the resource limits

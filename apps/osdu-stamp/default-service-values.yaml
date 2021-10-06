@@ -16,4 +16,4 @@ spec:
       replicaCount: 1
       env:
       - name: TITLE
-        value: "Self Managed OSDU - (AKS)"
+        value: "Self Managed OSDU - (v0.11)"

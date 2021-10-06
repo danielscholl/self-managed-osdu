@@ -170,6 +170,7 @@ jobs:
                 identity_id: $(az keyvault secret show --id https://${ENV_VAULT}.vault.azure.net/secrets/osdu-identity-id --query value -otsv)
                 keyvault: $ENV_VAULT
                 appid: $(az keyvault secret show --id https://${ENV_VAULT}.vault.azure.net/secrets/aad-client-id --query value -otsv)
+                oidAuthEnabled: false
               resourceLimits:
                 defaultCpuRequests: "0.5"
                 defaultMemoryRequests: "4Gi"
@@ -198,7 +199,7 @@ jobs:
                 replicaCount: 1
                 env:
                 - name: TITLE
-                  value: "Self Managed OSDU - (AKS)"
+                  value: "Self Managed OSDU - (v0.11)"
           EOF
 
           cat > $GITHUB_WORKSPACE/apps/$CLUSTER/partition-service-values.yaml << EOF

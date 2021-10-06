@@ -15,6 +15,7 @@ spec:
       identity_id: a7f62831-4571-4489-8782-1b9f8cb35062
       keyvault: osdu-self-cplbcg-78uy-kv
       appid: 0ef4dfd1-8adf-441b-aae9-ac7026333520
+      oidAuthEnabled: false
     resourceLimits:
       defaultCpuRequests: "0.5"
       defaultMemoryRequests: "4Gi"
