@@ -24,11 +24,15 @@ spec:
       auth:
         disable:
           - "/"
+          - "*/index.html"
           - "*/v2/api-docs"
           - "*/swagger-resources"
           - "*/swagger-ui.html"
           - "*/actuator/health"
           - "*/health"
+          - "*/configuration/ui"
+          - "*/configuration/security",
+          - "/api/entitlements/v2/info"
           - "/api/entitlements/v2/swagger-resources/*"
           - "/api/entitlements/v2/webjars/*"
       env:

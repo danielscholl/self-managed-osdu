@@ -13,7 +13,7 @@ spec:
       repository: msosdu.azurecr.io/partition
       tag: oak
       path: /api/partition/v1/*
-      probe: /api/partition/v1/swagger-ui.html
+      probe: /actuator/health
       keyvault: true
       auth:
         disable:
