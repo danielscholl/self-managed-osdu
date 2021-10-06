@@ -13,7 +13,7 @@ spec:
       repository: msosdu.azurecr.io/partition
       tag: oak
       path: /api/partition/v1/*
-      probe: /actuator/health
+      probe: /api/partition/v1/actuator/health
       keyvault: true
       auth:
         disable:
