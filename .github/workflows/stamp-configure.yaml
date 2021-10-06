@@ -238,7 +238,7 @@ jobs:
                 repository: msosdu.azurecr.io/partition
                 tag: oak
                 path: /api/partition/v1/*
-                probe: /actuator/health
+                probe: /api/partition/v1/actuator/health
                 keyvault: true
                 auth:
                   disable:
@@ -309,7 +309,7 @@ jobs:
                 repository: msosdu.azurecr.io/entitlements
                 tag: oak
                 path: /api/entitlements/v2/*
-                probe: /_ah/readiness_check
+                probe: /api/entitlements/v2/_ah/readiness_check
                 keyvault: true
                 request:
                   cpu: 100m
