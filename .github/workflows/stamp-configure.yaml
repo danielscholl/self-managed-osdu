@@ -238,7 +238,7 @@ jobs:
                 repository: msosdu.azurecr.io/partition
                 tag: oak
                 path: /api/partition/v1/*
-                probe: /api/partition/v1/actuator/health
+                probe: /api/partition/v1/swagger-ui.html
                 keyvault: true
                 auth:
                   disable:
@@ -253,7 +253,7 @@ jobs:
                     - "/api/partition/v1/swagger-resources/*"
                     - "/api/partition/v1/webjars/*"
                     - "*/actuator/health"
-                    - "*/_ah/**"
+                    - "*/health"
                 env:
                 - name: spring_application_name
                   value: partition
