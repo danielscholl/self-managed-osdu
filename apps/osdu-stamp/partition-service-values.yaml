@@ -15,12 +15,6 @@ spec:
       path: /api/partition/v1/*
       probe: /api/partition/v1/swagger-ui.html
       keyvault: true
-      request:
-        cpu: 100m
-        memory: 600Mi
-      limit:
-        cpu: 1000m
-        memory: 1Gi
       auth:
         disable:
           - "/"
@@ -49,7 +43,7 @@ spec:
       - name: azure_activedirectory_session_stateless
         value: "false"
       - name: azure_paas_podIdentity_isEnabled
-        value: "false"
+        value: "true"
       - name: azure_istioauth_enabled
         value: "true"
       - name: KEYVAULT_URI

@@ -12,8 +12,8 @@ spec:
     - service: entitlements
       repository: msosdu.azurecr.io/entitlements
       tag: oak
-      path: /api/entitlements/v2/*
-      probe: /api/entitlements/v2/_ah/readiness_check
+      path: /api/entitlements/v1/*
+      probe: /api/entitlements/v1/swagger-ui.html
       keyvault: true
       request:
         cpu: 100m
