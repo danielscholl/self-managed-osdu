@@ -20,9 +20,6 @@ spec:
   replicas: {{ .replicaCount | default $replicaCount }}
   selector:
     matchLabels: {{ $selectorLabels }}
-    {{- if $podIdentity }}
-    aadpodidbinding: {{ $podIdentity }}
-    {{- end }}
 {{- end }}
   template:
     metadata:
