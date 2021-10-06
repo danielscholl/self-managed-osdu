@@ -59,8 +59,6 @@ configuration:
     #
     # keyvault: true
 
-
-
     ################################################################################
     # Specify Pod Resource Allocations (optional)
     #

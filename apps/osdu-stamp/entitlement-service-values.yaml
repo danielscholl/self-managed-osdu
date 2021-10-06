@@ -15,6 +15,12 @@ spec:
       path: /api/entitlements/v2/*
       probe: /api/entitlements/v2/_ah/readiness_check
       keyvault: true
+      request:
+        cpu: 100m
+        memory: 600Mi
+      limit:
+        cpu: 1000m
+        memory: 1300Mi
       auth:
         disable:
           - "/"

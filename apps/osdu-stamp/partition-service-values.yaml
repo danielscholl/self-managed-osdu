@@ -15,6 +15,12 @@ spec:
       path: /api/partition/v1/*
       probe: /api/partition/v1/swagger-ui.html
       keyvault: true
+      request:
+        cpu: 100m
+        memory: 600Mi
+      limit:
+        cpu: 1000m
+        memory: 1Gi
       auth:
         disable:
           - "/"
