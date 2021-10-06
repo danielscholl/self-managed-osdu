@@ -22,7 +22,6 @@ spec:
       retries: 3
   targetNamespace: osdu-azure
   values:
-    # nodePool: services
     replicaCount: 1
     ingress:
       issuer: letsencrypt-prod-dns
