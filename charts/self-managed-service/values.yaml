@@ -15,7 +15,7 @@
 ################################################################################
 # Specify the Default settings to be used.
 #
-nodePool: default
+# nodePool: default
 # podIdentity: osdu-identity
 replicaCount: 1
 # autoscale:
