@@ -1,0 +1,60 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: partition-service
+  namespace: osdu-azure
+spec:
+  values:
+    ingress:
+      dns: osdu-self-dplbcgdb-c6hz-gw.centralus.cloudapp.azure.com
+    configuration:
+    - service: entitlements
+      repository: msosdu.azurecr.io/entitlements
+      tag: oak
+      path: /api/entitlements/v2/*
+      probe: /api/entitlements/v2/_ah/readiness_check
+      keyvault: true
+      auth:
+        disable:
+          - "/"
+          - "*/v2/api-docs"
+          - "*/swagger-resources"
+          - "*/swagger-ui.html"
+          - "*/actuator/health"
+          - "*/health"
+          - "/api/entitlements/v2/swagger-resources/*"
+          - "/api/entitlements/v2/webjars/*"
+      env:
+        - name: spring_application_name
+          value: entitlements
+        - name: server.servlet.contextPath
+          value: /api/entitlements/v2/
+        - name: server_port
+          value: "80"
+        - name: service_domain_name
+          value: contoso.com
+        - name: root_data_group_quota
+          value: "5000"
+        - name: redis_ttl_seconds
+          value: "1"
+        - name: partition_service_endpoint
+          value: http://partition/api/partition/v1
+        - name: azure_istioauth_enabled
+          value: "true"
+        - name: azure_activedirectory_AppIdUri
+          value: "api://0ef4dfd1-8adf-441b-aae9-ac7026333520"
+        - name: azure_paas_podIdentity_isEnabled
+          value: "false"
+        - name: KEYVAULT_URI
+          config:
+            name: osdu-svc-config
+            key: ENV_KEYVAULT
+        - name: aad_client_id
+          secret:
+            name: active-directory
+            key: application-appid
+        - name: appinsights_key
+          secret:
+            name: central-logging
+            key: appinsights

@@ -12,3 +12,4 @@ patchesStrategicMerge:
   - self-managed-base-values.yaml
   - default-service-values.yaml
   - partition-service-values.yaml
+  - entitlement-service-values.yaml

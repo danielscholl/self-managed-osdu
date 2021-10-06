@@ -6,3 +6,4 @@ resources:
   - self-managed-base.yaml
   - default-service.yaml
   - partition-service.yaml
+  - entitlement-service.yaml

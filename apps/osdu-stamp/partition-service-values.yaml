@@ -43,7 +43,7 @@ spec:
       - name: azure_activedirectory_session_stateless
         value: "false"
       - name: azure_paas_podIdentity_isEnabled
-        value: "true"
+        value: "false"
       - name: azure_istioauth_enabled
         value: "true"
       - name: KEYVAULT_URI
