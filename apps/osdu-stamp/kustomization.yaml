@@ -1,0 +1,15 @@
+---
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - ../base/dev-sample
+  - ../base/osdu-base
+  - ../base/osdu-istio
+  - ../base/osdu-azure
+patchesStrategicMerge:
+  - dev-sample-values.yaml
+  - osdu-istio-values.yaml
+  - self-managed-base-values.yaml
+  - default-service-values.yaml
+  - partition-service-values.yaml
+  - entitlement-service-values.yaml
