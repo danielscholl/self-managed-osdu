@@ -412,7 +412,7 @@ jobs:
           spec:
             values:
               ingress:
-                dns: osdu-self-dplcedah-4ya0-gw.centralus.cloudapp.azure.com
+                dns: $DNS_HOST
               configuration:
               - service: legal
                 repository: msosdu.azurecr.io/legal
@@ -476,7 +476,7 @@ jobs:
                 - name: SPRING_CONFIG_NAME
                   value: "common,application"
                 - name: azure_activedirectory_AppIdUri
-                  value: "api://0ef4dfd1-8adf-441b-aae9-ac7026333520"
+                  value: "api://$(az keyvault secret show --id https://${ENV_VAULT}.vault.azure.net/secrets/aad-client-id --query value -otsv)"
                 - name: azure_paas_podIdentity_isEnabled
                   value: "false"
                 - name: KEYVAULT_URI
