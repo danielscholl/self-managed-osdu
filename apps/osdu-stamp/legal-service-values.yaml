@@ -13,7 +13,7 @@ spec:
       repository: msosdu.azurecr.io/legal
       tag: oak
       path: /api/legal/v1/*
-      probe: /api/legal/v1/_ah/swagger-ui.html
+      probe: /api/legal/v1/swagger-ui.html
       keyvault: true
       request:
         cpu: 100m
