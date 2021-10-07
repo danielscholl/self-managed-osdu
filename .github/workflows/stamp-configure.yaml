@@ -133,6 +133,9 @@ jobs:
             - kind: Deployment
               name: legal
               namespace: osdu-azure
+            - kind: Deployment
+              name: storage
+              namespace: osdu-azure
           EOF
 
           cat > $GITHUB_WORKSPACE/apps/$CLUSTER/kustomization.yaml << EOF
