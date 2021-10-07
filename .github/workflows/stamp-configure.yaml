@@ -47,6 +47,29 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
+      - name: Install sealed-secrets
+        run: |
+          cat > $GITHUB_WORKSPACE/clusters/$CLUSTER/sealed-secrets.yaml <<EOF
+          ---
+          apiVersion: kustomize.toolkit.fluxcd.io/v1beta1
+          kind: Kustomization
+          metadata:
+            name: sealed-secrets
+            namespace: flux-system
+          spec:
+            interval: 5m0s
+            sourceRef:
+              kind: GitRepository
+              name: self-managed-osdu
+            path: ./apps/base/sealed-secrets
+            prune: true
+            validation: client
+            healthChecks:
+              - kind: Deployment
+                name: sealed-secrets
+                namespace: kube-system
+          EOF
+
       - name: Create OSDU Stamp Software Definition
         run: |
           mkdir -p $GITHUB_WORKSPACE/clusters/$CLUSTER
@@ -94,6 +117,9 @@ jobs:
               namespace: osdu-azure
             - kind: Deployment
               name: entitlements
+              namespace: osdu-azure
+            - kind: Deployment
+              name: legal
               namespace: osdu-azure
           EOF
 
@@ -238,7 +264,12 @@ jobs:
                 repository: msosdu.azurecr.io/partition
                 tag: oak
                 path: /api/partition/v1/*
-                probe: /api/partition/v1/swagger-ui.html
+                probe:
+                  path: /actuator/health
+                  port: 8081
+                  liveness:
+                    delay: 250
+                    seconds: 10
                 keyvault: true
                 auth:
                   disable:
@@ -309,7 +340,9 @@ jobs:
                 repository: msosdu.azurecr.io/entitlements
                 tag: oak
                 path: /api/entitlements/v2/*
-                probe: /api/entitlements/v2/_ah/readiness_check
+                probe:
+                  path: /api/entitlements/v2/_ah/readiness_check
+                  port: http
                 keyvault: true
                 request:
                   cpu: 100m
@@ -366,159 +399,107 @@ jobs:
                   secret:
                     name: central-logging
                     key: appinsights
+          EOF
 
-      # - name: sealed-secrets
-      #   run: |
-      #     cat > $GITHUB_WORKSPACE/clusters/$CLUSTER/sealed-secrets.yaml <<EOF
-      #     ---
-      #     apiVersion: kustomize.toolkit.fluxcd.io/v1beta1
-      #     kind: Kustomization
-      #     metadata:
-      #       name: sealed-secrets
-      #       namespace: flux-system
-      #     spec:
-      #       interval: 5m0s
-      #       sourceRef:
-      #         kind: GitRepository
-      #         name: self-managed-osdu
-      #       path: ./apps/base/sealed-secrets
-      #       prune: true
-      #       validation: client
-      #       healthChecks:
-      #         - kind: Deployment
-      #           name: sealed-secrets
-      #           namespace: kube-system
-      #     EOF
+      - name: Create Helm Values - legal-service
+        run: |
+          cat > $GITHUB_WORKSPACE/apps/$CLUSTER/legal-service-values.yaml << EOF
+          ---
+          apiVersion: helm.toolkit.fluxcd.io/v2beta1
+          kind: HelmRelease
+          metadata:
+            name: legal-service
+            namespace: osdu-azure
+          spec:
+            values:
+              ingress:
+                dns: osdu-self-dplcedah-4ya0-gw.centralus.cloudapp.azure.com
+              configuration:
+              - service: legal
+                repository: msosdu.azurecr.io/legal
+                tag: oak
+                path: /api/legal/v1/*
+                probe:
+                  path: /actuator/health
+                  port: 8081
+                  liveness:
+                    delay: 250
+                    seconds: 10
+                keyvault: true
+                request:
+                  cpu: 100m
+                  memory: 1500Mi
+                limit:
+                  cpu: 500m
+                  memory: 1500Mi
+                auth:
+                  disable:
+                    - "/"
+                    - "*/index.html"
+                    - "*/v2/api-docs"
+                    - "*/swagger-resources"
+                    - "*/swagger-ui.html"
+                    - "*/actuator/health"
+                    - "*/health"
+                    - "*/_ah/**"
+                    - "*/configuration/ui"
+                    - "*/configuration/security"
+                    - "/api/legal/v1/swagger-resources/*"
+                    - "/api/legal/v1/webjars/*"
+                env:
+                - name: spring_application_name
+                  value: legal
+                - name: server.servlet.contextPath
+                  value: /api/legal/v1/
+                - name: server_port
+                  value: 80
+                - name: ACCEPT_HTTP
+                  value: true
+                - name: cosmosdb_database
+                  value: osdu-db
+                - name: LOG_PREFIX
+                  value: legal
+                - name: azure_storage_container_name
+                  value: legal-service-azure-configuration
+                - name: azure_storage_enable_https
+                  value: true
+                - name: legal_service_region
+                  value: us
+                - name: servicebus_topic_name
+                  value: legaltags
+                - name: entitlements_service_endpoint
+                  value: http://entitlements/api/entitlements/v2
+                - name: entitlements_service_api_key
+                  value: OBSOLETE
+                - name: partition_service_endpoint
+                  value: http://partition/api/partition/v1
+                - name: azure_istioauth_enabled
+                  value: true
+                - name: SPRING_CONFIG_NAME
+                  value: "common,application"
+                - name: azure_activedirectory_AppIdUri
+                  value: "api://0ef4dfd1-8adf-441b-aae9-ac7026333520"
+                - name: azure_paas_podIdentity_isEnabled
+                  value: "false"
+                - name: KEYVAULT_URI
+                  config:
+                    name: osdu-svc-config
+                    key: ENV_KEYVAULT
+                - name: REDIS_DATABASE
+                  config:
+                    name: osdu-svc-config
+                    key: REDIS_DB_LEGAL
+                - name: aad_client_id
+                  secret:
+                    name: active-directory
+                    key: application-appid
+                - name: appinsights_key
+                  secret:
+                    name: central-logging
+                    key: appinsights
+          EOF
 
 
-      # - name: Create OSDU Stamp Software Values
-      #   run: |
-      #     GROUP=$(az group list --query "[?contains(name, 'cpl${{ secrets.RAND }}')].name" -otsv)
-      #     ENV_VAULT=$(az keyvault list --resource-group $GROUP --query [].name -otsv)
-      #     DP_GROUP=$(az group list --query "[?contains(name, 'dpl${{ secrets.RAND }}')].name" -otsv |grep -v MC)
-      #     DNS_HOST=$(az network public-ip list --resource-group $DP_GROUP --query [].dnsSettings.fqdn -otsv)
-
-      #     cat > $GITHUB_WORKSPACE/apps/$CLUSTER/dev-sample-values.yaml << EOF
-      #     ---
-      #     apiVersion: helm.toolkit.fluxcd.io/v2beta1
-      #     kind: HelmRelease
-      #     metadata:
-      #       name: env-tool
-      #       namespace: dev-sample
-      #     spec:
-      #       values:
-      #         azure:
-      #           tenant: $(az keyvault secret show --id https://${ENV_VAULT}.vault.azure.net/secrets/tenant-id --query value -otsv)
-      #           subscription: $(az keyvault secret show --id https://${ENV_VAULT}.vault.azure.net/secrets/subscription-id --query value -otsv)
-      #           resourcegroup: $(az keyvault secret show --id https://${ENV_VAULT}.vault.azure.net/secrets/base-name-cr --query value -otsv)-rg
-      #           identity: $(az keyvault secret show --id https://${ENV_VAULT}.vault.azure.net/secrets/base-name-cr --query value -otsv)-osdu-identity
-      #           identity_id: $(az keyvault secret show --id https://${ENV_VAULT}.vault.azure.net/secrets/osdu-identity-id --query value -otsv)
-      #           keyvault: $ENV_VAULT
-      #           appid: $(az keyvault secret show --id https://${ENV_VAULT}.vault.azure.net/secrets/aad-client-id --query value -otsv)
-      #     EOF
-
-      #     cat > $GITHUB_WORKSPACE/apps/$CLUSTER/osdu-istio-values.yaml << EOF
-      #     ---
-      #     apiVersion: helm.toolkit.fluxcd.io/v2beta1
-      #     kind: HelmRelease
-      #     metadata:
-      #       name: osdu-istio
-      #       namespace: istio-system
-      #     spec:
-      #       values:
-      #         global:
-      #           azure:
-      #             tenant: $(az keyvault secret show --id https://${ENV_VAULT}.vault.azure.net/secrets/tenant-id --query value -otsv)
-      #             appid: $(az keyvault secret show --id https://${ENV_VAULT}.vault.azure.net/secrets/aad-client-id --query value -otsv)
-      #     EOF
-
-      #     cat > $GITHUB_WORKSPACE/apps/$CLUSTER/partition-services-values.yaml << EOF
-      #     ---
-      #     apiVersion: helm.toolkit.fluxcd.io/v2beta1
-      #     kind: HelmRelease
-      #     metadata:
-      #       name: partition-services
-      #       namespace: osdu-azure
-      #     spec:
-      #       values:
-      #         replicaCount: 2
-      #         azure:
-      #           tenant: $(az keyvault secret show --id https://${ENV_VAULT}.vault.azure.net/secrets/tenant-id --query value -otsv)
-      #           subscription: $(az keyvault secret show --id https://${ENV_VAULT}.vault.azure.net/secrets/subscription-id --query value -otsv)
-      #           resourcegroup: $(az keyvault secret show --id https://${ENV_VAULT}.vault.azure.net/secrets/base-name-cr --query value -otsv)-rg
-      #           identity: $(az keyvault secret show --id https://${ENV_VAULT}.vault.azure.net/secrets/base-name-cr --query value -otsv)-osdu-identity
-      #           identity_id: $(az keyvault secret show --id https://${ENV_VAULT}.vault.azure.net/secrets/osdu-identity-id --query value -otsv)
-      #           keyvault: $ENV_VAULT
-      #           appid: $(az keyvault secret show --id https://${ENV_VAULT}.vault.azure.net/secrets/aad-client-id --query value -otsv)
-      #         ingress:
-      #           dns: $DNS_HOST
-      #     EOF
-
-      #     cat > $GITHUB_WORKSPACE/apps/$CLUSTER/security-services-values.yaml << EOF
-      #     ---
-      #     apiVersion: helm.toolkit.fluxcd.io/v2beta1
-      #     kind: HelmRelease
-      #     metadata:
-      #       name: security-services
-      #       namespace: osdu-azure
-      #     spec:
-      #       values:
-      #         replicaCount: 2
-      #         azure:
-      #           tenant: $(az keyvault secret show --id https://${ENV_VAULT}.vault.azure.net/secrets/tenant-id --query value -otsv)
-      #           subscription: $(az keyvault secret show --id https://${ENV_VAULT}.vault.azure.net/secrets/subscription-id --query value -otsv)
-      #           resourcegroup: $(az keyvault secret show --id https://${ENV_VAULT}.vault.azure.net/secrets/base-name-cr --query value -otsv)-rg
-      #           identity: $(az keyvault secret show --id https://${ENV_VAULT}.vault.azure.net/secrets/base-name-cr --query value -otsv)-osdu-identity
-      #           identity_id: $(az keyvault secret show --id https://${ENV_VAULT}.vault.azure.net/secrets/osdu-identity-id --query value -otsv)
-      #           keyvault: $ENV_VAULT
-      #           appid: $(az keyvault secret show --id https://${ENV_VAULT}.vault.azure.net/secrets/aad-client-id --query value -otsv)
-      #         ingress:
-      #           dns: $DNS_HOST
-      #     EOF
-
-      #     cat > $GITHUB_WORKSPACE/apps/$CLUSTER/core-services-values.yaml << EOF
-      #     ---
-      #     apiVersion: helm.toolkit.fluxcd.io/v2beta1
-      #     kind: HelmRelease
-      #     metadata:
-      #       name: core-services
-      #       namespace: osdu-azure
-      #     spec:
-      #       values:
-      #         replicaCount: 2
-      #         azure:
-      #           tenant: $(az keyvault secret show --id https://${ENV_VAULT}.vault.azure.net/secrets/tenant-id --query value -otsv)
-      #           subscription: $(az keyvault secret show --id https://${ENV_VAULT}.vault.azure.net/secrets/subscription-id --query value -otsv)
-      #           resourcegroup: $(az keyvault secret show --id https://${ENV_VAULT}.vault.azure.net/secrets/base-name-cr --query value -otsv)-rg
-      #           identity: $(az keyvault secret show --id https://${ENV_VAULT}.vault.azure.net/secrets/base-name-cr --query value -otsv)-osdu-identity
-      #           identity_id: $(az keyvault secret show --id https://${ENV_VAULT}.vault.azure.net/secrets/osdu-identity-id --query value -otsv)
-      #           keyvault: $ENV_VAULT
-      #           appid: $(az keyvault secret show --id https://${ENV_VAULT}.vault.azure.net/secrets/aad-client-id --query value -otsv)
-      #         ingress:
-      #           dns: $DNS_HOST
-      #     EOF
-
-      #     cat > $GITHUB_WORKSPACE/apps/$CLUSTER/reference-services-values.yaml << EOF
-      #     ---
-      #     apiVersion: helm.toolkit.fluxcd.io/v2beta1
-      #     kind: HelmRelease
-      #     metadata:
-      #       name: reference-services
-      #       namespace: osdu-azure
-      #     spec:
-      #       values:
-      #         replicaCount: 2
-      #         azure:
-      #           tenant: $(az keyvault secret show --id https://${ENV_VAULT}.vault.azure.net/secrets/tenant-id --query value -otsv)
-      #           subscription: $(az keyvault secret show --id https://${ENV_VAULT}.vault.azure.net/secrets/subscription-id --query value -otsv)
-      #           resourcegroup: $(az keyvault secret show --id https://${ENV_VAULT}.vault.azure.net/secrets/base-name-cr --query value -otsv)-rg
-      #           identity: $(az keyvault secret show --id https://${ENV_VAULT}.vault.azure.net/secrets/base-name-cr --query value -otsv)-osdu-identity
-      #           identity_id: $(az keyvault secret show --id https://${ENV_VAULT}.vault.azure.net/secrets/osdu-identity-id --query value -otsv)
-      #           keyvault: $ENV_VAULT
-      #           appid: $(az keyvault secret show --id https://${ENV_VAULT}.vault.azure.net/secrets/aad-client-id --query value -otsv)
-      #         ingress:
-      #           dns: $DNS_HOST
-      #     EOF
 
       #     cat > $GITHUB_WORKSPACE/apps/$CLUSTER/osdu-airflow-values.yaml << EOF
       #     ---
