@@ -49,6 +49,9 @@ jobs:
 
       - name: Retrieve Stamp Env Variables
         run: |
+          mkdir -p $GITHUB_WORKSPACE/clusters/$CLUSTER
+          mkdir -p $GITHUB_WORKSPACE/apps/$CLUSTER/
+
           GROUP=$(az group list --query "[?contains(name, 'cpl${{ secrets.RAND }}')].name" -otsv)
           ENV_VAULT=$(az keyvault list --resource-group $GROUP --query [].name -otsv)
           DP_GROUP=$(az group list --query "[?contains(name, 'dpl${{ secrets.RAND }}')].name" -otsv |grep -v MC)
@@ -84,9 +87,6 @@ jobs:
 
       - name: Configure OSDU Stamp
         run: |
-          mkdir -p $GITHUB_WORKSPACE/clusters/$CLUSTER
-          mkdir -p $GITHUB_WORKSPACE/apps/$CLUSTER/
-
           flux create source git helm-charts-azure \
             --url https://community.opengroup.org/osdu/platform/deployment-and-operations/helm-charts-azure \
             --interval 1m \
