@@ -438,13 +438,12 @@ jobs:
                     - "*/v2/api-docs"
                     - "*/swagger-resources"
                     - "*/swagger-ui.html"
-                    - "*/actuator/health"
-                    - "*/health"
-                    - "*/_ah/**"
                     - "*/configuration/ui"
                     - "*/configuration/security"
                     - "/api/legal/v1/swagger-resources/*"
                     - "/api/legal/v1/webjars/*"
+                    - "*/actuator/health"
+                    - "*/health"
                 env:
                 - name: spring_application_name
                   value: legal
