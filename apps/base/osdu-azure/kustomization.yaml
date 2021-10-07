@@ -8,3 +8,4 @@ resources:
   - partition-service.yaml
   - entitlement-service.yaml
   - legal-service.yaml
+  - storage-service.yaml
