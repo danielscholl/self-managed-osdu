@@ -34,3 +34,6 @@ spec:
   - kind: Deployment
     name: entitlements
     namespace: osdu-azure
+  - kind: Deployment
+    name: legal
+    namespace: osdu-azure
