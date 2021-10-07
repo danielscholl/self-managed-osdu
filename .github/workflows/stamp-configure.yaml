@@ -72,7 +72,7 @@ jobs:
             interval: 5m0s
             sourceRef:
               kind: GitRepository
-              name: self-managed-osdu
+              name: flux-system
             path: ./apps/base/sealed-secrets
             prune: true
             validation: client
