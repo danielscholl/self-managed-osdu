@@ -7,3 +7,4 @@ resources:
   - default-service.yaml
   - partition-service.yaml
   - entitlement-service.yaml
+  - legal-service.yaml
