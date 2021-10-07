@@ -784,7 +784,7 @@ jobs:
                   value: "statuschangedtopic"
                 - name: SPRING_CONFIG_NAME
                   value: "common,application"
-                - name: KEYVAULT_URI
+                - name: KEYVAULT_URL
                   config:
                     name: osdu-svc-config
                     key: ENV_KEYVAULT
