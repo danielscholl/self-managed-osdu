@@ -10,3 +10,4 @@ resources:
   - legal-service.yaml
   - storage-service.yaml
   - schema-service.yaml
+  - file-service.yaml
