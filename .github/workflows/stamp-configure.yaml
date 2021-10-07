@@ -44,10 +44,22 @@ jobs:
       - name: Bootstrap Flux
         run: flux bootstrap github --owner=${{ github.repository_owner }} --repository=$(echo $GITHUB_REPOSITORY | cut -d'/' -f2	) --branch=main --path=./clusters/${{ env.CLUSTER }}
 
-      - name: Checkout
+      - name: GitOps Checkout
         uses: actions/checkout@v2
 
-      - name: Install sealed-secrets
+      - name: Retrieve Stamp Env Variables
+        run: |
+          GROUP=$(az group list --query "[?contains(name, 'cpl${{ secrets.RAND }}')].name" -otsv)
+          ENV_VAULT=$(az keyvault list --resource-group $GROUP --query [].name -otsv)
+          DP_GROUP=$(az group list --query "[?contains(name, 'dpl${{ secrets.RAND }}')].name" -otsv |grep -v MC)
+          DNS_HOST=$(az network public-ip list --resource-group $DP_GROUP --query [].dnsSettings.fqdn -otsv)
+
+          echo "GROUP=$GROUP" >> $GITHUB_ENV
+          echo "ENV_VAULT=$ENV_VAULT" >> $GITHUB_ENV
+          echo "DP_GROUP=$DP_GROUP" >> $GITHUB_ENV
+          echo "DNS_HOST=$DNS_HOST" >> $GITHUB_ENV
+
+      - name: Configure Sealed Secrets
         run: |
           cat > $GITHUB_WORKSPACE/clusters/$CLUSTER/sealed-secrets.yaml <<EOF
           ---
@@ -70,7 +82,7 @@ jobs:
                 namespace: kube-system
           EOF
 
-      - name: Create OSDU Stamp Software Definition
+      - name: Configure OSDU Stamp
         run: |
           mkdir -p $GITHUB_WORKSPACE/clusters/$CLUSTER
           mkdir -p $GITHUB_WORKSPACE/apps/$CLUSTER/
@@ -140,19 +152,6 @@ jobs:
             - partition-service-values.yaml
             - entitlement-service-values.yaml
           EOF
-
-      - name: Retrieve Stamp Env Variables
-        run: |
-          GROUP=$(az group list --query "[?contains(name, 'cpl${{ secrets.RAND }}')].name" -otsv)
-          ENV_VAULT=$(az keyvault list --resource-group $GROUP --query [].name -otsv)
-          DP_GROUP=$(az group list --query "[?contains(name, 'dpl${{ secrets.RAND }}')].name" -otsv |grep -v MC)
-          DNS_HOST=$(az network public-ip list --resource-group $DP_GROUP --query [].dnsSettings.fqdn -otsv)
-
-          echo "GROUP=$GROUP" >> $GITHUB_ENV
-          echo "ENV_VAULT=$ENV_VAULT" >> $GITHUB_ENV
-          echo "DP_GROUP=$DP_GROUP" >> $GITHUB_ENV
-          echo "DNS_HOST=$DNS_HOST" >> $GITHUB_ENV
-
 
       - name: Create Helm Values - dev-sample
         run: |
@@ -538,7 +537,7 @@ jobs:
       #                 value: "$DNS_HOST"
       #     EOF
 
-      - name: GitOps Commit
+      - name: GitOps CheckIn
         uses: EndBug/add-and-commit@v7
         with:
           message: 'Initialize Software Install'
