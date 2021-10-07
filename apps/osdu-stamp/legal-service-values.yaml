@@ -13,7 +13,12 @@ spec:
       repository: msosdu.azurecr.io/legal
       tag: oak
       path: /api/legal/v1/*
-      probe: /api/legal/v1/swagger-ui.html
+      probe:
+        path: /actuator/health
+        port: 8081
+        liveness:
+          delay: 250
+          seconds: 10
       keyvault: true
       request:
         cpu: 100m

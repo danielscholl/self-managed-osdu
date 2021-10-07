@@ -61,9 +61,17 @@ spec:
           {{- if .probe }}
           readinessProbe:
             httpGet:
-              path: {{ .probe }}
-              port: http
+              path: {{ .probe.path }}
+              port: {{ .probe.port }}
             initialDelaySeconds: 20
+          {{- if .probe.liveness }}
+          livenessProbe:
+            httpGet:
+              path: {{ .probe.path }}
+              port: {{ .probe.port }}
+            initialDelaySeconds: {{ .probe.liveness.delay }}
+            periodSeconds: {{ .probe.liveness.seconds }}
+          {{- end }}
           {{- end }}
           resources:
           {{- if .request }}

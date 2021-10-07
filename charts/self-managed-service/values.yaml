@@ -52,7 +52,16 @@ configuration:
     repository: neilpeterson/aks-helloworld
     tag: v1
     path: /*
-    # probe: /
+
+    ################################################################################
+    # Specify Readiness and Health Probes (optional)
+    #
+    # probe:
+    #   path: /
+    #   port: http
+    #   liveness:
+    #     delay: 250
+    #     seconds: 10
 
     ################################################################################
     # Specify if KeyVault Secrets should be used (optional)

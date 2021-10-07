@@ -13,7 +13,9 @@ spec:
       repository: msosdu.azurecr.io/entitlements
       tag: oak
       path: /api/entitlements/v2/*
-      probe: /api/entitlements/v2/_ah/readiness_check
+      probe:
+        path: /api/entitlements/v2/_ah/readiness_check
+        port: http
       keyvault: true
       request:
         cpu: 100m
