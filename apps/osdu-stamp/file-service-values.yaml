@@ -84,7 +84,7 @@ spec:
         config:
           name: osdu-svc-config
           key: ENV_KEYVAULT
-      - name: aad_client_id
+      - name: AZURE_AD_APP_RESOURCE_ID
         secret:
           name: active-directory
           key: application-appid
