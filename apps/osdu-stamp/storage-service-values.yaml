@@ -76,8 +76,6 @@ spec:
         value: "false"
       - name: azure_istioauth_enabled
         value: true
-      - name: azure_paas_podIdentity_isEnabled
-        value: "false"
       - name: azure_activedirectory_AppIdUri
         value: "api://0ef4dfd1-8adf-441b-aae9-ac7026333520"
       - name: azure_paas_podIdentity_isEnabled
