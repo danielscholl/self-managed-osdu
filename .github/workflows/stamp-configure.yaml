@@ -572,7 +572,7 @@ jobs:
                   value: http://partition/api/partition/v1
                 - name: crs_conversion_service_endpoint
                   value: http://crs-conversion-service/api/crs/converter/v2
-                 - name: policy_enabled
+                - name: policy_enabled
                   value: "false"
                 - name: policy_service_endpoint
                   value: http://policy-service/api/policy/v1
