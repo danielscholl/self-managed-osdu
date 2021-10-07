@@ -37,12 +37,3 @@ spec:
   - kind: Deployment
     name: legal
     namespace: osdu-azure
-  - kind: Deployment
-    name: storage
-    namespace: osdu-azure
-  - kind: Deployment
-    name: schema
-    namespace: osdu-azure
-  - kind: Deployment
-    name: file
-    namespace: osdu-azure
