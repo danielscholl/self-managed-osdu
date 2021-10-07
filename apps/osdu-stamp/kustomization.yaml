@@ -16,3 +16,4 @@ patchesStrategicMerge:
   - legal-service-values.yaml
   - storage-service-values.yaml
   - schema-service-values.yaml
+  - file-service-values.yaml
