@@ -13,3 +13,4 @@ patchesStrategicMerge:
   - default-service-values.yaml
   - partition-service-values.yaml
   - entitlement-service-values.yaml
+  - legal-service-values.yaml
