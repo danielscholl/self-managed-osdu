@@ -9,3 +9,4 @@ resources:
   - entitlement-service.yaml
   - legal-service.yaml
   - storage-service.yaml
+  - schema-service.yaml
