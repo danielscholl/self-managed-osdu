@@ -14,11 +14,8 @@ spec:
       tag: oak
       path: /api/file/*
       probe:
-        path: /actuator/health
-        port: 8081
-        liveness:
-          delay: 250
-          seconds: 10
+        path: /api/file/v2/readiness_check
+        port: http
       keyvault: true
       auth:
         disable:
