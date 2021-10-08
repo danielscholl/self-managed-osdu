@@ -23,7 +23,9 @@ spec:
     - type: Resource
       resource:
         name: cpu
-        averageUtilization: {{ $targetCPU }}
+        target:
+          type: Utilization
+          averageUtilization: {{ $targetCPU }}
   {{- end }}
 {{- end }}
 ---
