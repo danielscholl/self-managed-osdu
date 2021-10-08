@@ -973,7 +973,7 @@ jobs:
                 - name: REDIS_DATABASE
                   config:
                     name: osdu-svc-config
-                    key: REDIS_DB_INDEXER
+                    key: REDIS_DB_SEARCH
                 - name: aad_client_id
                   secret:
                     name: active-directory
