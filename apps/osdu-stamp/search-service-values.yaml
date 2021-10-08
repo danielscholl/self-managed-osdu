@@ -61,7 +61,7 @@ spec:
       - name: MAX_CACHE_VALUE_SIZE
         value: 60
       - name: search_service_spring_logging_level
-        value: info
+        value: debug
       - name: policy_service_endpoint
         value: http://policy/api/policy/v1
       - name: partition_service_endpoint
