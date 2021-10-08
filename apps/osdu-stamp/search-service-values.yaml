@@ -47,7 +47,7 @@ spec:
       - name: cosmosdb_database
         value: osdu-db
       - name: APPLICATIONINSIGHTS_CONNECTION_STRING
-        value: InstrumentationKey=
+        value: InstrumentationKey=$(appinsights_key)
       - name: entitlements_service_endpoint
         value: http://entitlements/api/entitlements/v2
       - name: entitlements_service_api_key
