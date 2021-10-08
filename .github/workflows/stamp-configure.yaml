@@ -145,6 +145,9 @@ jobs:
             - kind: Deployment
               name: indexer
               namespace: osdu-azure
+            - kind: Deployment
+              name: search
+              namespace: osdu-azure
           EOF
 
           cat > $GITHUB_WORKSPACE/apps/$CLUSTER/kustomization.yaml << EOF
@@ -168,6 +171,7 @@ jobs:
             - schema-service-values.yaml
             - file-service-values.yaml
             - indexer-service-values.yaml
+            - search-service-values.yaml
           EOF
 
       - name: Create Helm Values - dev-sample
@@ -863,6 +867,103 @@ jobs:
                   value: "true"
                 - name: azure_activedirectory_AppIdUri
                   value: "api://$(az keyvault secret show --id https://${ENV_VAULT}.vault.azure.net/secrets/aad-client-id --query value -otsv)"
+                - name: azure_paas_podIdentity_isEnabled
+                  value: "false"
+                - name: KEYVAULT_URI
+                  config:
+                    name: osdu-svc-config
+                    key: ENV_KEYVAULT
+                - name: REDIS_DATABASE
+                  config:
+                    name: osdu-svc-config
+                    key: REDIS_DB_INDEXER
+                - name: aad_client_id
+                  secret:
+                    name: active-directory
+                    key: application-appid
+                - name: appinsights_key
+                  secret:
+                    name: central-logging
+                    key: appinsights
+          EOF
+
+      - name: Create Helm Values - search-service
+        run: |
+          cat > $GITHUB_WORKSPACE/apps/$CLUSTER/search-service-values.yaml << EOF
+          ---
+          apiVersion: helm.toolkit.fluxcd.io/v2beta1
+          kind: HelmRelease
+          metadata:
+            name: search-service
+            namespace: osdu-azure
+          spec:
+            values:
+              ingress:
+                dns: $DNS_HOST
+              configuration:
+              - service: search
+                repository: msosdu.azurecr.io/search
+                tag: oak
+                path: /api/search/v2/*
+                probe:
+                  path: /api/search/v2/actuator/health
+                  port: http
+                keyvault: true
+                request:
+                  cpu: 100m
+                limit:
+                  cpu: 300m
+                auth:
+                  disable:
+                    - "/"
+                    - "*/index.html"
+                    - "*/v2/api-docs"
+                    - "*/swagger-resources"
+                    - "*/swagger-ui.html"
+                    - "*/configuration/ui"
+                    - "*/configuration/security"
+                    - "/api/search/v2/swagger-resources/*"
+                    - "/api/search/v2/webjars/*"
+                    - "*/actuator/health"
+                    - "*/health"
+                    - "*/_ah/**"
+                env:
+                - name: spring_application_name
+                  value: search
+                - name: server.servlet.contextPath
+                  value: /api/search/v2/
+                - name: server_port
+                  value: 80
+                - name: ACCEPT_HTTP
+                  value: true
+                - name: cosmosdb_database
+                  value: osdu-db
+                - name: APPLICATIONINSIGHTS_CONNECTION_STRING
+                  value: InstrumentationKey=$(appinsights_key)
+                - name: entitlements_service_endpoint
+                  value: http://entitlements/api/entitlements/v2
+                - name: entitlements_service_api_key
+                  value: OBSOLETE
+                - name: ENVIRONMENT
+                  value: evt
+                - name: LOG_PREFIX
+                  value: search
+                - name: ELASTIC_CACHE_EXPIRATION
+                  value: 1
+                - name: MAX_CACHE_VALUE_SIZE
+                  value: 60
+                - name: search_service_spring_logging_level
+                  value: info
+                - name: policy_service_endpoint
+                  value: http://policy/api/policy/v1
+                - name: partition_service_endpoint
+                  value: http://partition/api/partition/v1
+                - name: azure_istioauth_enabled
+                  value: "true"
+                - name: azure_activedirectory_AppIdUri
+                  value: "api://$(az keyvault secret show --id https://${ENV_VAULT}.vault.azure.net/secrets/aad-client-id --query value -otsv)"
+                - name: policy_enabled
+                  value: "false"
                 - name: azure_paas_podIdentity_isEnabled
                   value: "false"
                 - name: KEYVAULT_URI

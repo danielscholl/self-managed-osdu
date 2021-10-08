@@ -12,3 +12,4 @@ resources:
   - schema-service.yaml
   - file-service.yaml
   - indexer-service.yaml
+  - search-service.yaml
