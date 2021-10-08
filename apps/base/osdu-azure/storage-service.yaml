@@ -7,7 +7,7 @@ metadata:
 spec:
   releaseName: storage-service
   dependsOn:
-  - name: partition-service
+  - name: entitlement-service
     namespace: osdu-azure
   chart:
     spec:
