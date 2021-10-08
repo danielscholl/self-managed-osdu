@@ -6,7 +6,7 @@
 {{- $targetCPU := .Values.autoscale.targetUtilization -}}
 {{- range .Values.configuration }}
 {{- $name := .service }}
-apiVersion: autoscaling/v2beta1
+apiVersion: autoscaling/v2beta2
 kind: HorizontalPodAutoscaler
 metadata:
   name: {{ $name }}-scaler
