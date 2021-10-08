@@ -939,7 +939,7 @@ jobs:
                 - name: cosmosdb_database
                   value: osdu-db
                 - name: APPLICATIONINSIGHTS_CONNECTION_STRING
-                  value: InstrumentationKey=$(appinsights_key)
+                  value: InstrumentationKey%3D%24%28appinsights_key%29
                 - name: entitlements_service_endpoint
                   value: http://entitlements/api/entitlements/v2
                 - name: entitlements_service_api_key
