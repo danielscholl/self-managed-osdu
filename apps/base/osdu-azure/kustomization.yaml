@@ -11,3 +11,4 @@ resources:
   - storage-service.yaml
   - schema-service.yaml
   - file-service.yaml
+  - indexer-service.yaml
