@@ -46,3 +46,6 @@ spec:
   - kind: Deployment
     name: file
     namespace: osdu-azure
+  - kind: Deployment
+    name: indexer
+    namespace: osdu-azure
