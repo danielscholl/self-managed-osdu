@@ -76,13 +76,21 @@ spec:
           resources:
           {{- if .request }}
             requests:
+              {{- if .request.cpu }}
               cpu: {{ .request.cpu | quote }}
+              {{- end }}
+              {{- if .request.memory }}
               memory: {{ .request.memory | quote }}
+              {{- end }}
           {{- end }}
           {{- if .limit }}
             limits:
+              {{- if .limit.cpu }}
               cpu: {{ .limit.cpu | quote }}
+              {{- end }}
+              {{- if .limit.memory }}
               memory: {{ .limit.memory | quote }}
+              {{- end }}
           {{- end }}
           volumeMounts:
           {{- if .keyvault }}
