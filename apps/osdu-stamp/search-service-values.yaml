@@ -14,7 +14,7 @@ spec:
       tag: oak
       path: /api/search/v2/*
       probe:
-        path: /api/search/v2/actuator/health
+        path: /api/search/v2/swagger-ui.html
         port: http
       keyvault: true
       request:
