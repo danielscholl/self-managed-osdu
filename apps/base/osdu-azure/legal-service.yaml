@@ -7,7 +7,7 @@ metadata:
 spec:
   releaseName: legal-service
   dependsOn:
-  - name: default-service
+  - name: partition-service
     namespace: osdu-azure
   chart:
     spec:
