@@ -7,7 +7,7 @@ metadata:
 spec:
   values:
     ingress:
-      dns: osdu-self-dplcedah-ov7y-gw.centralus.cloudapp.azure.com
+      dns: osdu-self-dplcedah-59t9-gw.centralus.cloudapp.azure.com
     configuration:
     - service: search
       repository: msosdu.azurecr.io/search
