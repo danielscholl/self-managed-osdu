@@ -1287,6 +1287,8 @@ jobs:
                   value: register
                 - name: cosmosdb_database
                   value: osdu-db
+                - name: RECORDS_CHANGE_PUBSUB_ENDPOINT
+                  value: https://notification/api/notification/v1/push-handlers/records-changed
                 - name: ENTITLEMENTS_API
                   value: http://entitlements/api/entitlements/v2
                 - name: partition_service_endpoint
