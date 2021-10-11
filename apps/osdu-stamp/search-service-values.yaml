@@ -44,7 +44,7 @@ spec:
       - name: ACCEPT_HTTP
         value: true
       - name: APPLICATIONINSIGHTS_CONNECTION_STRING
-        value: InstrumentationKey=
+        value: InstrumentationKey=d0f39c9d-4876-4c7e-8ed1-4f0b8aea0a77
       - name: cosmosdb_database
         value: osdu-db
       - name: entitlements_service_endpoint
