@@ -1,0 +1,90 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: notification-service
+  namespace: osdu-azure
+spec:
+  values:
+    ingress:
+      dns: osdu-self-dplcedah-59t9-gw.centralus.cloudapp.azure.com
+    configuration:
+    - service: notification
+      repository: msosdu.azurecr.io/notification
+      tag: oak
+      path: /api/notification/v1/*
+      probe:
+        path: /api/notification/v1/swagger-ui.html
+        port: http
+      keyvault: true
+      auth:
+        disable:
+          - "/"
+          - "*/index.html"
+          - "*/v2/api-docs"
+          - "*/swagger-resources"
+          - "*/swagger-ui.html"
+          - "*/configuration/ui"
+          - "*/configuration/security"
+          - "/api/notification/v1/swagger-resources/*"
+          - "/api/notification/v1/webjars/*"
+          - "*/actuator/health"
+          - "*/health"
+          - "*/_ah/**"
+      env:
+      - name: spring_application_name
+        value: notification-azure
+      - name: server.servlet.contextPath
+        value: /api/notification/v1/
+      - name: server_port
+        value: 80
+      - name: ACCEPT_HTTP
+        value: true
+      - name: cosmosdb_database
+        value: osdu-db
+      - name: entitlements_service_endpoint
+        value: http://entitlements/api/entitlements/v2
+      - name: registeration_service_endpoint
+        value: http://register/api/register/v1
+      - name: partition_service_endpoint
+        value: http://partition/api/partition/v1
+      - name: policy_service_endpoint
+        value: http://policy/api/policy/v1
+      - name: azure_istioauth_enabled
+        value: "true"
+      - name: policy_enabled
+        value: "false"
+      - name: service_bus_enabled
+        value: "false"
+      - name: event_grid_to_service_bus_enabled
+        alue: "false"
+      - name: event_grid_enabled
+        value: "true"
+      - name: azure_paas_podIdentity_isEnabled
+        value: "false"
+      - name: LOG_PREFIX
+        value: "notification"
+      - name: maxCacheSize
+        value:  "20"
+      - name: initial_subscription_manager_delay_seconds
+        value: "0"
+      - name: consecutive_subscription_manager_delay_seconds
+        value: "1800"
+      - name: max_concurrent_calls
+        value: "3"
+      - name: executor_n_threads
+        value: "32"
+      - name: max_lock_renew_duration_seconds
+        value: "2000"
+      - name: KEYVAULT_URI
+        config:
+          name: osdu-svc-config
+          key: ENV_KEYVAULT
+      - name: aad_client_id
+        secret:
+          name: active-directory
+          key: application-appid
+      - name: appinsights_key
+        secret:
+          name: central-logging
+          key: appinsights
