@@ -143,10 +143,19 @@ jobs:
               name: file
               namespace: osdu-azure
             - kind: Deployment
+              name: dataset
+              namespace: osdu-azure
+            - kind: Deployment
               name: indexer
               namespace: osdu-azure
             - kind: Deployment
               name: search
+              namespace: osdu-azure
+            - kind: Deployment
+              name: notification
+              namespace: osdu-azure
+            - kind: Deployment
+              name: register
               namespace: osdu-azure
           EOF
 
@@ -170,8 +179,11 @@ jobs:
             - storage-service-values.yaml
             - schema-service-values.yaml
             - file-service-values.yaml
+            - dataset-service-values.yaml
             - indexer-service-values.yaml
             - search-service-values.yaml
+            - notification-service-values.yaml
+            - register-service-values.yaml
           EOF
 
       - name: Create Helm Values - dev-sample
@@ -791,6 +803,89 @@ jobs:
                     key: appinsights
           EOF
 
+      - name: Create Helm Values - dataset-service
+        run: |
+          cat > $GITHUB_WORKSPACE/apps/$CLUSTER/dataset-service-values.yaml << EOF
+          ---
+          apiVersion: helm.toolkit.fluxcd.io/v2beta1
+          kind: HelmRelease
+          metadata:
+            name: dataset-service
+            namespace: osdu-azure
+          spec:
+            values:
+              ingress:
+                dns: $DNS_HOST
+              configuration:
+              - service: dataset
+                repository: msosdu.azurecr.io/dataset
+                tag: oak
+                path: /api/dataset/*
+                probe:
+                  path: /actuator/health
+                  port: 8081
+                  liveness:
+                    delay: 250
+                    seconds: 10
+                keyvault: true
+                auth:
+                  disable:
+                    - "/"
+                    - "*/index.html"
+                    - "*/v2/api-docs"
+                    - "*/swagger-resources"
+                    - "*/swagger-ui.html"
+                    - "*/configuration/ui"
+                    - "*/configuration/security"
+                    - "/api/dataset/swagger-resources/*"
+                    - "/api/dataset/webjars/*"
+                    - "*/actuator/health"
+                    - "*/health"
+                    - "*/readiness_check"
+                    - "*/_ah/**"
+                env:
+                - name: spring_application_name
+                  value: dataset
+                - name: server.servlet.contextPath
+                  value: /api/dataset/v1/
+                - name: server_port
+                  value: 80
+                - name: ACCEPT_HTTP
+                  value: true
+                - name: entitlements_service_endpoint
+                  value: http://entitlements/api/entitlements/v2
+                - name: entitlements_app_key
+                  value: "OBSOLETE"
+                - name: storage_service_endpoint
+                  value: http://storage/api/storage/v2
+                - name: partition_service_endpoint
+                  value: http://partition/api/partition/v1
+                - name: schema_service_endpoint
+                  value: http://schema-service/api/schema-service/v1
+                - name: file_service_endpoint
+                  value: http://file/api/file/v2/files
+                - name: azure_istioauth_enabled
+                  value: "true"
+                - name: azure_paas_podIdentity_isEnabled
+                  value: "false"
+                - name: KEYVAULT_URI
+                  config:
+                    name: osdu-svc-config
+                    key: ENV_KEYVAULT
+                - name: AZURE_APP_RESOURCE_ID
+                  secret:
+                    name: active-directory
+                    key: application-appid
+                - name: aad_client_id
+                  secret:
+                    name: active-directory
+                    key: application-appid
+                - name: azure_application_insights_instrumentation_key
+                  secret:
+                    name: central-logging
+                    key: appinsights
+          EOF
+
       - name: Create Helm Values - indexer-service
         run: |
           cat > $GITHUB_WORKSPACE/apps/$CLUSTER/indexer-service-values.yaml << EOF
@@ -974,6 +1069,182 @@ jobs:
                   config:
                     name: osdu-svc-config
                     key: REDIS_DB_SEARCH
+                - name: aad_client_id
+                  secret:
+                    name: active-directory
+                    key: application-appid
+                - name: appinsights_key
+                  secret:
+                    name: central-logging
+                    key: appinsights
+          EOF
+
+      - name: Create Helm Values - notification-service
+        run: |
+          cat > $GITHUB_WORKSPACE/apps/$CLUSTER/notification-service-values.yaml << EOF
+          ---
+          apiVersion: helm.toolkit.fluxcd.io/v2beta1
+          kind: HelmRelease
+          metadata:
+            name: notification-service
+            namespace: osdu-azure
+          spec:
+            values:
+              ingress:
+                dns: $DNS_HOST
+              configuration:
+              - service: notification
+                repository: msosdu.azurecr.io/notification
+                tag: oak
+                path: /api/notification/v1/*
+                probe:
+                  path: /api/notification/v1/swagger-ui.html
+                  port: http
+                keyvault: true
+                auth:
+                  disable:
+                    - "/"
+                    - "*/index.html"
+                    - "*/v2/api-docs"
+                    - "*/swagger-resources"
+                    - "*/swagger-ui.html"
+                    - "*/configuration/ui"
+                    - "*/configuration/security"
+                    - "/api/notification/v1/swagger-resources/*"
+                    - "/api/notification/v1/webjars/*"
+                    - "*/actuator/health"
+                    - "*/health"
+                    - "*/_ah/**"
+                env:
+                - name: spring_application_name
+                  value: notification-azure
+                - name: server.servlet.contextPath
+                  value: /api/notification/v1/
+                - name: server_port
+                  value: 80
+                - name: ACCEPT_HTTP
+                  value: true
+                - name: cosmosdb_database
+                  value: osdu-db
+                - name: entitlements_service_endpoint
+                  value: http://entitlements/api/entitlements/v2
+                - name: registeration_service_endpoint
+                  value: http://register/api/register/v1
+                - name: partition_service_endpoint
+                  value: http://partition/api/partition/v1
+                - name: policy_service_endpoint
+                  value: http://policy/api/policy/v1
+                - name: azure_istioauth_enabled
+                  value: "true"
+                - name: policy_enabled
+                  value: "false"
+                - name: azure_serviceBus_enabled
+                  value: "false"
+                - name: azure_eventGrid_enabled
+                  value: "true"
+                - name: event_grid_to_service_bus_enabled
+                  alue: "false"
+                - name: azure_paas_podIdentity_isEnabled
+                  value: "false"
+                - name: LOG_PREFIX
+                  value: "notification"
+                - name: maxCacheSize
+                  value:  "20"
+                - name: initial_subscription_manager_delay_seconds
+                  value: "0"
+                - name: consecutive_subscription_manager_delay_seconds
+                  value: "1800"
+                - name: max_concurrent_calls
+                  value: "3"
+                - name: executor_n_threads
+                  value: "32"
+                - name: max_lock_renew_duration_seconds
+                  value: "2000"
+                - name: KEYVAULT_URI
+                  config:
+                    name: osdu-svc-config
+                    key: ENV_KEYVAULT
+                - name: aad_client_id
+                  secret:
+                    name: active-directory
+                    key: application-appid
+                - name: appinsights_key
+                  secret:
+                    name: central-logging
+                    key: appinsights
+          EOF
+
+      - name: Create Helm Values - register-service
+        run: |
+          cat > $GITHUB_WORKSPACE/apps/$CLUSTER/register-service-values.yaml << EOF
+          ---
+          apiVersion: helm.toolkit.fluxcd.io/v2beta1
+          kind: HelmRelease
+          metadata:
+            name: register-service
+            namespace: osdu-azure
+          spec:
+            values:
+              ingress:
+                dns: $DNS_HOST
+              configuration:
+              - service: register
+                repository: msosdu.azurecr.io/register
+                tag: oak
+                path: /api/register/v1/*
+                probe:
+                  path: /actuator/health
+                  port: 8081
+                  liveness:
+                    delay: 250
+                    seconds: 10
+                keyvault: true
+                auth:
+                  disable:
+                    - "/"
+                    - "*/index.html"
+                    - "*/v2/api-docs"
+                    - "*/swagger-resources"
+                    - "*/swagger-ui.html"
+                    - "*/configuration/ui"
+                    - "*/configuration/security"
+                    - "/api/register/v1/swagger-resources/*"
+                    - "/api/register/v1/webjars/*"
+                    - "/api/register/v1/test/challenge/*"
+                    - "*/actuator/health"
+                    - "*/health"
+                    - "*/_ah/**"
+                env:
+                - name: spring_application_name
+                  value: register
+                - name: server.servlet.contextPath
+                  value: /api/register/v1/
+                - name: server_port
+                  value: 80
+                - name: ACCEPT_HTTP
+                  value: true
+                - name: cosmosdb_database
+                  value: osdu-db
+                - name: ENTITLEMENTS_API
+                  value: http://entitlements/api/entitlements/v2
+                - name: partition_service_endpoint
+                  value: http://partition/api/partition/v1
+                - name: azure_activedirectory_AppIdUri
+                  value: "api://$(az keyvault secret show --id https://${ENV_VAULT}.vault.azure.net/secrets/aad-client-id --query value -otsv)"
+                - name: azure_istioauth_enabled
+                  value: "true"
+                - name: azure_serviceBus_enabled
+                  value: "false"
+                - name: azure_eventGrid_enabled
+                  value: "true"
+                - name: azure_paas_podIdentity_isEnabled
+                  value: "false"
+                - name: RECORDS_CHANGE_PUBSUB_ENDPOINT
+                  value: http://notification/api/notification/v1/push-handlers/records-changed
+                - name: KEYVAULT_URI
+                  config:
+                    name: osdu-svc-config
+                    key: ENV_KEYVAULT
                 - name: aad_client_id
                   secret:
                     name: active-directory
