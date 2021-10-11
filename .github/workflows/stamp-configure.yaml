@@ -1037,7 +1037,7 @@ jobs:
                 - name: ACCEPT_HTTP
                   value: true
                 - name: APPLICATIONINSIGHTS_CONNECTION_STRING
-                  value: InstrumentationKey=$(APP_INSIGHTS_KEY)
+                  value: InstrumentationKey=$APP_INSIGHTS_KEY
                 - name: cosmosdb_database
                   value: osdu-db
                 - name: entitlements_service_endpoint
