@@ -11,7 +11,6 @@ spec:
     configuration:
     - service: dataset
       repository: msosdu.azurecr.io/dataset
-      tag: oak
       path: /api/dataset/*
       probe:
         path: /actuator/health
