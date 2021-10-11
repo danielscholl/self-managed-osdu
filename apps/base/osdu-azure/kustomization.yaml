@@ -16,3 +16,4 @@ resources:
   - search-service.yaml
   - notification-service.yaml
   - register-service.yaml
+  - indexer-queue.yaml
