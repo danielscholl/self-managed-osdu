@@ -11,7 +11,6 @@ spec:
     configuration:
     - service: notification
       repository: msosdu.azurecr.io/notification
-      tag: oak
       path: /api/notification/v1/*
       probe:
         path: /api/notification/v1/swagger-ui.html
@@ -44,38 +43,36 @@ spec:
         value: osdu-db
       - name: entitlements_service_endpoint
         value: http://entitlements/api/entitlements/v2
+      - name: entitlements_service_api_key
+        value: "OBSOLETE"
       - name: registeration_service_endpoint
         value: http://register/api/register/v1
       - name: partition_service_endpoint
         value: http://partition/api/partition/v1
-      - name: policy_service_endpoint
-        value: http://policy/api/policy/v1
       - name: azure_istioauth_enabled
         value: "true"
-      - name: policy_enabled
-        value: "false"
       - name: service_bus_enabled
         value: "false"
       - name: event_grid_to_service_bus_enabled
         alue: "false"
       - name: event_grid_enabled
         value: "true"
-      - name: azure_paas_podIdentity_isEnabled
-        value: "false"
       - name: LOG_PREFIX
         value: "notification"
+      - name: notification_spring_logging_level
+        value: INFO
       - name: maxCacheSize
         value:  "20"
-      - name: initial_subscription_manager_delay_seconds
-        value: "0"
-      - name: consecutive_subscription_manager_delay_seconds
-        value: "1800"
       - name: max_concurrent_calls
         value: "3"
       - name: executor_n_threads
         value: "32"
       - name: max_lock_renew_duration_seconds
         value: "2000"
+      - name: initial_subscription_manager_delay_seconds
+        value: "0"
+      - name: consecutive_subscription_manager_delay_seconds
+        value: "1800"
       - name: KEYVAULT_URI
         config:
           name: osdu-svc-config

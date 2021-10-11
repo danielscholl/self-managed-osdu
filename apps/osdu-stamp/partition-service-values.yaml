@@ -11,7 +11,6 @@ spec:
     configuration:
     - service: partition
       repository: msosdu.azurecr.io/partition
-      tag: oak
       path: /api/partition/v1/*
       probe:
         path: /actuator/health

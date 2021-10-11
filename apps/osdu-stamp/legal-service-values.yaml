@@ -11,7 +11,6 @@ spec:
     configuration:
     - service: legal
       repository: msosdu.azurecr.io/legal
-      tag: oak
       path: /api/legal/v1/*
       probe:
         path: /actuator/health

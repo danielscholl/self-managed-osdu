@@ -11,7 +11,6 @@ spec:
     configuration:
     - service: entitlements
       repository: msosdu.azurecr.io/entitlements
-      tag: oak
       path: /api/entitlements/v2/*
       probe:
         path: /api/entitlements/v2/_ah/readiness_check

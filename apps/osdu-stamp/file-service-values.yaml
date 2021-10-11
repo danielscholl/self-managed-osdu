@@ -11,7 +11,6 @@ spec:
     configuration:
     - service: file
       repository: msosdu.azurecr.io/file
-      tag: oak
       path: /api/file/*
       probe:
         path: /api/file/v2/readiness_check

@@ -11,7 +11,6 @@ spec:
     configuration:
     - service: schema
       repository: msosdu.azurecr.io/schema
-      tag: oak
       path: /api/schema-service/v1/*
       probe:
         path: /api/schema-service/v1/swagger-ui.html

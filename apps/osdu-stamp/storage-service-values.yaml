@@ -11,7 +11,6 @@ spec:
     configuration:
     - service: storage
       repository: msosdu.azurecr.io/storage
-      tag: oak
       path: /api/storage/v2/*
       probe:
         path: /actuator/health

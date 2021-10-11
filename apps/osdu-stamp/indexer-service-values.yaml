@@ -11,7 +11,6 @@ spec:
     configuration:
     - service: indexer
       repository: msosdu.azurecr.io/indexer
-      tag: oak
       path: /api/indexer/v2/*
       probe:
         path: /api/indexer/v2/swagger-ui.html
