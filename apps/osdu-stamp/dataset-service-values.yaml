@@ -1,0 +1,78 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: dataset-service
+  namespace: osdu-azure
+spec:
+  values:
+    ingress:
+      dns: osdu-self-dplcedah-59t9-gw.centralus.cloudapp.azure.com
+    configuration:
+    - service: dataset
+      repository: msosdu.azurecr.io/dataset
+      tag: oak
+      path: /api/dataset/*
+      probe:
+        path: /actuator/health
+        port: 8081
+        liveness:
+          delay: 250
+          seconds: 10
+      keyvault: true
+      auth:
+        disable:
+          - "/"
+          - "*/index.html"
+          - "*/v2/api-docs"
+          - "*/swagger-resources"
+          - "*/swagger-ui.html"
+          - "*/configuration/ui"
+          - "*/configuration/security"
+          - "/api/dataset/swagger-resources/*"
+          - "/api/dataset/webjars/*"
+          - "*/actuator/health"
+          - "*/health"
+          - "*/readiness_check"
+          - "*/_ah/**"
+      env:
+      - name: spring_application_name
+        value: dataset
+      - name: server.servlet.contextPath
+        value: /api/dataset/v1/
+      - name: server_port
+        value: 80
+      - name: ACCEPT_HTTP
+        value: true
+      - name: entitlements_service_endpoint
+        value: http://entitlements/api/entitlements/v2
+      - name: entitlements_app_key
+        value: "OBSOLETE"
+      - name: storage_service_endpoint
+        value: http://storage/api/storage/v2
+      - name: partition_service_endpoint
+        value: http://partition/api/partition/v1
+      - name: schema_service_endpoint
+        value: http://schema-service/api/schema-service/v1
+      - name: file_service_endpoint
+        value: http://file/api/file/v2/files
+      - name: azure_istioauth_enabled
+        value: "true"
+      - name: azure_paas_podIdentity_isEnabled
+        value: "false"
+      - name: KEYVAULT_URI
+        config:
+          name: osdu-svc-config
+          key: ENV_KEYVAULT
+      - name: AZURE_APP_RESOURCE_ID
+        secret:
+          name: active-directory
+          key: application-appid
+      - name: aad_client_id
+        secret:
+          name: active-directory
+          key: application-appid
+      - name: azure_application_insights_instrumentation_key
+        secret:
+          name: central-logging
+          key: appinsights

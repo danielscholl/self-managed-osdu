@@ -47,8 +47,17 @@ spec:
     name: file
     namespace: osdu-azure
   - kind: Deployment
+    name: dataset
+    namespace: osdu-azure
+  - kind: Deployment
     name: indexer
     namespace: osdu-azure
   - kind: Deployment
     name: search
+    namespace: osdu-azure
+  - kind: Deployment
+    name: notification
+    namespace: osdu-azure
+  - kind: Deployment
+    name: register
     namespace: osdu-azure
