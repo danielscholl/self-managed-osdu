@@ -22,3 +22,4 @@ patchesStrategicMerge:
   - search-service-values.yaml
   - notification-service-values.yaml
   - register-service-values.yaml
+  - indexer-queue-values.yaml
