@@ -54,7 +54,7 @@ spec:
         value: "true"
       - name: policy_enabled
         value: "false"
-      - name: azure_serviceBus_enabled
+      - name: service_bus_enabled
         value: "false"
       - name: azure_eventGrid_enabled
         value: "true"
