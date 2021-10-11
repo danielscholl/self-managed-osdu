@@ -1139,10 +1139,10 @@ jobs:
                   value: "false"
                 - name: service_bus_enabled
                   value: "false"
-                - name: azure_eventGrid_enabled
-                  value: "true"
                 - name: event_grid_to_service_bus_enabled
                   alue: "false"
+                - name: event_grid_enabled
+                  value: "true"
                 - name: azure_paas_podIdentity_isEnabled
                   value: "false"
                 - name: LOG_PREFIX
