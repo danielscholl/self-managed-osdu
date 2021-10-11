@@ -1283,24 +1283,20 @@ jobs:
                   value: 80
                 - name: ACCEPT_HTTP
                   value: true
+                - name: LOG_PREFIX
+                  value: register
                 - name: cosmosdb_database
                   value: osdu-db
                 - name: ENTITLEMENTS_API
                   value: http://entitlements/api/entitlements/v2
                 - name: partition_service_endpoint
                   value: http://partition/api/partition/v1
-                - name: azure_activedirectory_AppIdUri
-                  value: "api://$(az keyvault secret show --id https://${ENV_VAULT}.vault.azure.net/secrets/aad-client-id --query value -otsv)"
                 - name: azure_istioauth_enabled
                   value: "true"
                 - name: azure_serviceBus_enabled
                   value: "false"
                 - name: azure_eventGrid_enabled
                   value: "true"
-                - name: azure_paas_podIdentity_isEnabled
-                  value: "false"
-                - name: RECORDS_CHANGE_PUBSUB_ENDPOINT
-                  value: http://notification/api/notification/v1/push-handlers/records-changed
                 - name: KEYVAULT_URI
                   config:
                     name: osdu-svc-config
