@@ -56,18 +56,30 @@ spec:
         value: http://storage/api/storage/v2
       - name: partition_service_endpoint
         value: http://partition/api/partition/v1
+      - name: authorizeAPI
+        value: http://entitlements/api/entitlements/v2
       - name: azure_istioauth_enabled
         value: "true"
       - name: BATCH_SIZE
         value: "100"
       - name: SEARCH_QUERY_LIMIT
         value: "1000"
-      - name: azure_paas_podIdentity_isEnabled
-        value: "false"
       - name: KEYVAULT_URL
         config:
           name: osdu-svc-config
           key: ENV_KEYVAULT
+      - name: AZURE_CLIENT_ID
+        secret:
+          name: active-directory
+          key: principal-clientid
+      - name: AZURE_CLIENT_SECRET
+        secret:
+          name: active-directory
+          key: principal-clientpassword
+      - name: AZURE_TENANT_ID
+        secret:
+          name: active-directory
+          key: tenantid
       - name: AZURE_AD_APP_RESOURCE_ID
         secret:
           name: active-directory

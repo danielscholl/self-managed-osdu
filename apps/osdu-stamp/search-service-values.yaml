@@ -43,6 +43,65 @@ spec:
         value: 80
       - name: ACCEPT_HTTP
         value: true
+      - name: APPLICATIONINSIGHTS_CONNECTION_STRING
+        value: InstrumentationKey=
+      - name: cosmosdb_database
+        value: osdu-db
+      - name: entitlements_service_endpoint
+        value: http://entitlements/api/entitlements/v2
+      - name: entitlements_service_api_key
+        value: OBSOLETE
+      - name: ENVIRONMENT
+        value: evt
+      - name: LOG_PREFIX
+        value: search
+      - name: ELASTIC_CACHE_EXPIRATION
+        value: 1
+      - name: MAX_CACHE_VALUE_SIZE
+        value: 60
+      - name: search_service_spring_logging_level
+        value: debug
+      - name: partition_service_endpoint
+        value: http://partition/api/partition/v1
+      - name: policy_enabled
+        value: "false"
+      - name: policy_service_endpoint
+        value: http://policy/api/policy/v1
+      - name: azure_istioauth_enabled
+        value: true
+      - name: azure_activedirectory_AppIdUri
+        value: api://0ef4dfd1-8adf-441b-aae9-ac7026333520"
+      - name: KEYVAULT_URI
+        config:
+          name: osdu-svc-config
+          key: ENV_KEYVAULT
+      - name: REDIS_DATABASE
+        config:
+          name: osdu-svc-config
+          key: REDIS_DB_SEARCH
+      - name: aad_client_id
+        secret:
+          name: active-directory
+          key: application-appid
+      - name: appinsights_key
+        secret:
+          name: central-logging
+          key: appinsights
+
+
+
+
+
+
+
+      - name: spring_application_name
+        value: search
+      - name: server.servlet.contextPath
+        value: /api/search/v2/
+      - name: server_port
+        value: 80
+      - name: ACCEPT_HTTP
+        value: true
       - name: cosmosdb_database
         value: osdu-db
       - name: APPLICATIONINSIGHTS_CONNECTION_STRING
