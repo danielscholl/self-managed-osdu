@@ -294,7 +294,6 @@ jobs:
               configuration:
               - service: partition
                 repository: msosdu.azurecr.io/partition
-                tag: oak
                 path: /api/partition/v1/*
                 probe:
                   path: /actuator/health
@@ -370,7 +369,6 @@ jobs:
               configuration:
               - service: entitlements
                 repository: msosdu.azurecr.io/entitlements
-                tag: oak
                 path: /api/entitlements/v2/*
                 probe:
                   path: /api/entitlements/v2/_ah/readiness_check
@@ -449,7 +447,6 @@ jobs:
               configuration:
               - service: legal
                 repository: msosdu.azurecr.io/legal
-                tag: oak
                 path: /api/legal/v1/*
                 probe:
                   path: /actuator/health
@@ -546,7 +543,6 @@ jobs:
               configuration:
               - service: storage
                 repository: msosdu.azurecr.io/storage
-                tag: oak
                 path: /api/storage/v2/*
                 probe:
                   path: /actuator/health
@@ -655,7 +651,6 @@ jobs:
               configuration:
               - service: schema
                 repository: msosdu.azurecr.io/schema
-                tag: oak
                 path: /api/schema-service/v1/*
                 probe:
                   path: /api/schema-service/v1/swagger-ui.html
@@ -735,7 +730,6 @@ jobs:
               configuration:
               - service: file
                 repository: msosdu.azurecr.io/file
-                tag: oak
                 path: /api/file/*
                 probe:
                   path: /api/file/v2/readiness_check
@@ -901,7 +895,6 @@ jobs:
               configuration:
               - service: indexer
                 repository: msosdu.azurecr.io/indexer
-                tag: oak
                 path: /api/indexer/v2/*
                 probe:
                   path: /api/indexer/v2/swagger-ui.html
@@ -997,7 +990,6 @@ jobs:
               configuration:
               - service: search
                 repository: msosdu.azurecr.io/search
-                tag: oak
                 path: /api/search/v2/*
                 probe:
                   path: /api/search/v2/swagger-ui.html
@@ -1094,7 +1086,6 @@ jobs:
               configuration:
               - service: notification
                 repository: msosdu.azurecr.io/notification
-                tag: oak
                 path: /api/notification/v1/*
                 probe:
                   path: /api/notification/v1/swagger-ui.html
@@ -1189,7 +1180,6 @@ jobs:
               configuration:
               - service: register
                 repository: msosdu.azurecr.io/register
-                tag: oak
                 path: /api/register/v1/*
                 probe:
                   path: /actuator/health
