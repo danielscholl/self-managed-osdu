@@ -819,7 +819,6 @@ jobs:
               configuration:
               - service: dataset
                 repository: msosdu.azurecr.io/dataset
-                tag: oak
                 path: /api/dataset/*
                 probe:
                   path: /actuator/health
@@ -1138,7 +1137,7 @@ jobs:
                   value: "true"
                 - name: policy_enabled
                   value: "false"
-                - name: azure_serviceBus_enabled
+                - name: service_bus_enabled
                   value: "false"
                 - name: azure_eventGrid_enabled
                   value: "true"
