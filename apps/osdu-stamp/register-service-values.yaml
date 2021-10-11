@@ -1,0 +1,75 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: register-service
+  namespace: osdu-azure
+spec:
+  values:
+    ingress:
+      dns: osdu-self-dplcedah-59t9-gw.centralus.cloudapp.azure.com
+    configuration:
+    - service: register
+      repository: msosdu.azurecr.io/register
+      path: /api/register/v1/*
+      probe:
+        path: /actuator/health
+        port: 8081
+        liveness:
+          delay: 250
+          seconds: 10
+      keyvault: true
+      auth:
+        disable:
+          - "/"
+          - "*/index.html"
+          - "*/v2/api-docs"
+          - "*/swagger-resources"
+          - "*/swagger-ui.html"
+          - "*/configuration/ui"
+          - "*/configuration/security"
+          - "/api/register/v1/swagger-resources/*"
+          - "/api/register/v1/webjars/*"
+          - "/api/register/v1/test/challenge/*"
+          - "*/actuator/health"
+          - "*/health"
+          - "*/_ah/**"
+      env:
+      - name: spring_application_name
+        value: register
+      - name: server.servlet.contextPath
+        value: /api/register/v1/
+      - name: server_port
+        value: 80
+      - name: ACCEPT_HTTP
+        value: true
+      - name: cosmosdb_database
+        value: osdu-db
+      - name: ENTITLEMENTS_API
+        value: http://entitlements/api/entitlements/v2
+      - name: partition_service_endpoint
+        value: http://partition/api/partition/v1
+      - name: azure_activedirectory_AppIdUri
+        value: "api://0ef4dfd1-8adf-441b-aae9-ac7026333520"
+      - name: azure_istioauth_enabled
+        value: "true"
+      - name: azure_serviceBus_enabled
+        value: "false"
+      - name: azure_eventGrid_enabled
+        value: "true"
+      - name: azure_paas_podIdentity_isEnabled
+        value: "false"
+      - name: RECORDS_CHANGE_PUBSUB_ENDPOINT
+        value: http://notification/api/notification/v1/push-handlers/records-changed
+      - name: KEYVAULT_URI
+        config:
+          name: osdu-svc-config
+          key: ENV_KEYVAULT
+      - name: aad_client_id
+        secret:
+          name: active-directory
+          key: application-appid
+      - name: appinsights_key
+        secret:
+          name: central-logging
+          key: appinsights
