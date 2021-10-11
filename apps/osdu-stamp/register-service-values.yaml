@@ -13,11 +13,8 @@ spec:
       repository: msosdu.azurecr.io/register
       path: /api/register/v1/*
       probe:
-        path: /actuator/health
-        port: 8081
-        liveness:
-          delay: 250
-          seconds: 10
+        path: /api/register/v1/swagger-ui.html
+        port: http
       keyvault: true
       auth:
         disable:
