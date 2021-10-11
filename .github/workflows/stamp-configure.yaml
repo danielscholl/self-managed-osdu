@@ -775,18 +775,30 @@ jobs:
                   value: http://storage/api/storage/v2
                 - name: partition_service_endpoint
                   value: http://partition/api/partition/v1
+                - name: authorizeAPI
+                  value: http://entitlements/api/entitlements/v2
                 - name: azure_istioauth_enabled
                   value: "true"
                 - name: BATCH_SIZE
                   value: "100"
                 - name: SEARCH_QUERY_LIMIT
                   value: "1000"
-                - name: azure_paas_podIdentity_isEnabled
-                  value: "false"
                 - name: KEYVAULT_URL
                   config:
                     name: osdu-svc-config
                     key: ENV_KEYVAULT
+                - name: AZURE_CLIENT_ID
+                  secret:
+                    name: active-directory
+                    key: principal-clientid
+                - name: AZURE_CLIENT_SECRET
+                  secret:
+                    name: active-directory
+                    key: principal-clientpassword
+                - name: AZURE_TENANT_ID
+                  secret:
+                    name: active-directory
+                    key: tenantid
                 - name: AZURE_AD_APP_RESOURCE_ID
                   secret:
                     name: active-directory
@@ -976,6 +988,8 @@ jobs:
 
       - name: Create Helm Values - search-service
         run: |
+
+          APP_INSIGHTS_KEY=$(az keyvault secret show --id https://${ENV_VAULT}.vault.azure.net/secrets/appinsights-key --query value -otsv)
           cat > $GITHUB_WORKSPACE/apps/$CLUSTER/search-service-values.yaml << EOF
           ---
           apiVersion: helm.toolkit.fluxcd.io/v2beta1
@@ -1014,6 +1028,65 @@ jobs:
                     - "*/health"
                     - "*/_ah/**"
                 env:
+                - name: spring_application_name
+                  value: search
+                - name: server.servlet.contextPath
+                  value: /api/search/v2/
+                - name: server_port
+                  value: 80
+                - name: ACCEPT_HTTP
+                  value: true
+                - name: APPLICATIONINSIGHTS_CONNECTION_STRING
+                  value: InstrumentationKey=$(APP_INSIGHTS_KEY)
+                - name: cosmosdb_database
+                  value: osdu-db
+                - name: entitlements_service_endpoint
+                  value: http://entitlements/api/entitlements/v2
+                - name: entitlements_service_api_key
+                  value: OBSOLETE
+                - name: ENVIRONMENT
+                  value: evt
+                - name: LOG_PREFIX
+                  value: search
+                - name: ELASTIC_CACHE_EXPIRATION
+                  value: 1
+                - name: MAX_CACHE_VALUE_SIZE
+                  value: 60
+                - name: search_service_spring_logging_level
+                  value: debug
+                - name: partition_service_endpoint
+                  value: http://partition/api/partition/v1
+                - name: policy_enabled
+                  value: "false"
+                - name: policy_service_endpoint
+                  value: http://policy/api/policy/v1
+                - name: azure_istioauth_enabled
+                  value: true
+                - name: azure_activedirectory_AppIdUri
+                  value: api://$(az keyvault secret show --id https://${ENV_VAULT}.vault.azure.net/secrets/aad-client-id --query value -otsv)"
+                - name: KEYVAULT_URI
+                  config:
+                    name: osdu-svc-config
+                    key: ENV_KEYVAULT
+                - name: REDIS_DATABASE
+                  config:
+                    name: osdu-svc-config
+                    key: REDIS_DB_SEARCH
+                - name: aad_client_id
+                  secret:
+                    name: active-directory
+                    key: application-appid
+                - name: appinsights_key
+                  secret:
+                    name: central-logging
+                    key: appinsights
+
+
+
+
+
+
+
                 - name: spring_application_name
                   value: search
                 - name: server.servlet.contextPath
