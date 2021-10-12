@@ -6,7 +6,7 @@ on:
 jobs:
 
   cosmos-data:
-    name: CosmosDB Load - Tenant Info
+    name: Load - TenantInfo
     runs-on: ubuntu-latest
 
     steps:
@@ -49,15 +49,13 @@ jobs:
             import os
             import time
 
-            for k, v in sorted(os.environ.items()):
-                print(k+':', v)
-            print('\n')
-            # list elements in path environment variable
-            [print(item) for item in os.environ['PATH'].split(';')]
+            cosmos_url = os.environ['COSMOS_ENDPOINT']
+            cosmos_key = os.environ['COSMOS_KEY']
+            service_principal_id = os.environ['SERVICE_PRINCIPAL_ID']
+            service_principal_oid = os.environ['SERVICE_PRINCIPAL_OID']
 
-            # print("Directory contents:")
-            # for f in os.listdir():
-            #   print(f)
+            cosmos_client = CosmosClient(cosmos_url, credential = cosmos_key)
+            db = cosmos_client.get_database_client('osdu-db')
 
 
 
