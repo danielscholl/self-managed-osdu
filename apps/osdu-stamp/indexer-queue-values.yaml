@@ -9,6 +9,13 @@ spec:
     configuration:
     - service: indexer-queue
       repository: msosdu.azurecr.io/indexer-queue
+      keyvault: true
+      request:
+        cpu: 1000m
+        memory: 2Gi
+      limit:
+        cpu: 1000m
+        memory: 2Gi
       env:
       - name: spring_application_name
         value: indexer-queue
