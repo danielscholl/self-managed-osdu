@@ -12,6 +12,8 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-python@v2
+        with:
+          python-version: '3.x'
 
       - name: Azure Login
         uses: Azure/login@v1
@@ -33,6 +35,8 @@ jobs:
           export SERVICE_PRINCIPAL_ID=$(az keyvault secret show --id https://${ENV_VAULT}.vault.azure.net/secrets/app-dev-sp-username --query value -otsv)
           export SERVICE_PRINCIPAL_OID=$(az keyvault secret show --id https://${ENV_VAULT}.vault.azure.net/secrets/app-dev-sp-id --query value -otsv)
 
+      - name: Check
+        run: echo $SERVICE_PRINCIPAL_OID
 
       - name: Install dependencies
         run: python -m pip install --upgrade pip azure-cosmos
@@ -45,13 +49,6 @@ jobs:
             import pprint
             import os
             import time
-
-            cosmos_url = os.environ['COSMOS_ENDPOINT']
-            cosmos_key = os.environ['COSMOS_KEY']
-            service_principal_id = os.environ['SERVICE_PRINCIPAL_ID']
-            service_principal_oid = os.environ['SERVICE_PRINCIPAL_OID']
-
-            print(service_principal_oid)
 
             print("Directory contents:")
             for f in os.listdir():
