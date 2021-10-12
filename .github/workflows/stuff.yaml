@@ -11,6 +11,7 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
+      - uses: actions/setup-python@v2
 
       - name: Azure Login
         uses: Azure/login@v1
@@ -32,13 +33,31 @@ jobs:
           export SERVICE_PRINCIPAL_ID=$(az keyvault secret show --id https://${ENV_VAULT}.vault.azure.net/secrets/app-dev-sp-username --query value -otsv)
           export SERVICE_PRINCIPAL_OID=$(az keyvault secret show --id https://${ENV_VAULT}.vault.azure.net/secrets/app-dev-sp-id --query value -otsv)
 
-
-
-      - uses: actions/setup-python@v2
       - uses: jannekem/run-python-script-action@v1
         with:
           script: |
+            from azure.cosmos import CosmosClient, PartitionKey
+            import json
+            import pprint
             import os
+            import time
+
+            cosmos_url = os.environ['COSMOS_ENDPOINT']
+            cosmos_key = os.environ['COSMOS_KEY']
+            service_principal_id = os.environ['SERVICE_PRINCIPAL_ID']
+            service_principal_oid = os.environ['SERVICE_PRINCIPAL_OID']
+            no_data_access_tester = os.environ['NO_DATA_ACCESS_TESTER']
+
             print("Directory contents:")
             for f in os.listdir():
-                print(f)
+              print(f)
+
+
+
+      # - uses: jannekem/run-python-script-action@v1
+      #   with:
+      #     script: |
+      #       import os
+      #       print("Directory contents:")
+      #       for f in os.listdir():
+      #           print(f)
