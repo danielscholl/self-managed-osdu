@@ -46,7 +46,6 @@ jobs:
             cosmos_key = os.environ['COSMOS_KEY']
             service_principal_id = os.environ['SERVICE_PRINCIPAL_ID']
             service_principal_oid = os.environ['SERVICE_PRINCIPAL_OID']
-            no_data_access_tester = os.environ['NO_DATA_ACCESS_TESTER']
 
             print("Directory contents:")
             for f in os.listdir():
