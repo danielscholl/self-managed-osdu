@@ -35,9 +35,6 @@ jobs:
           export SERVICE_PRINCIPAL_ID=$(az keyvault secret show --id https://${ENV_VAULT}.vault.azure.net/secrets/app-dev-sp-username --query value -otsv)
           export SERVICE_PRINCIPAL_OID=$(az keyvault secret show --id https://${ENV_VAULT}.vault.azure.net/secrets/app-dev-sp-id --query value -otsv)
 
-      - name: Check
-        run: echo $SERVICE_PRINCIPAL_OID
-
       - name: Install dependencies
         run: python -m pip install --upgrade pip azure-cosmos
 
@@ -50,9 +47,15 @@ jobs:
             import os
             import time
 
-            print("Directory contents:")
-            for f in os.listdir():
-              print(f)
+            for k, v in sorted(os.environ.items()):
+                print(k+':', v)
+            print('\n')
+            # list elements in path environment variable
+            [print(item) for item in os.environ['PATH'].split(';')]
+
+            # print("Directory contents:")
+            # for f in os.listdir():
+            #   print(f)
 
 
 
