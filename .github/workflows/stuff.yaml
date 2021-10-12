@@ -57,6 +57,17 @@ jobs:
             cosmos_client = CosmosClient(cosmos_url, credential = cosmos_key)
             db = cosmos_client.get_database_client('osdu-db')
 
+            def tenant_info(db):
+              container = db.get_container_client("TenantInfo")
+              with open("../configuration/tenant_info_1.json", "r") as f :
+                tenant_info_1 = json.load(f)
+              tenant_info_1["serviceprincipalAppId"] = service_principal_id
+              container.upsert_item(tenant_info_1)
+              return
+
+            if __name__ == "__main__":
+              tenant_info(db)
+
 
 
       # - uses: jannekem/run-python-script-action@v1
