@@ -6,7 +6,7 @@ on:
 jobs:
 
   cosmos-data:
-    name: Load - TenantInfo
+    name: Load Cosmos DB - TenantInfo
     runs-on: ubuntu-latest
 
     steps:
@@ -20,7 +20,7 @@ jobs:
       - name: Install dependencies
         run: python -m pip install --upgrade pip azure-cosmos
 
-      - name: Retrieve Stamp Env Variables
+      - name: Load Record
         env:
           PARTITION_NAME: opendes
         run: |
@@ -35,40 +35,27 @@ jobs:
           python3 scripts/upload-data.py
 
 
-      # - uses: jannekem/run-python-script-action@v1
-      #   with:
-      #     script: |
-      #       from azure.cosmos import CosmosClient, PartitionKey
-      #       import json
-      #       import pprint
-      #       import os
-      #       import time
+  partition-data:
+    name: Load Table Storage - PartitionInfo
+    runs-on: ubuntu-latest
+    steps:
 
-      #       cosmos_url = os.environ['COSMOS_ENDPOINT']
-      #       cosmos_key = os.environ['COSMOS_KEY']
-      #       service_principal_id = os.environ['SERVICE_PRINCIPAL_ID']
-      #       service_principal_oid = os.environ['SERVICE_PRINCIPAL_OID']
+      - name: Azure Login
+        uses: Azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
 
-      #       cosmos_client = CosmosClient(cosmos_url, credential = cosmos_key)
-      #       db = cosmos_client.get_database_client('osdu-db')
+      - name: Upload CRS Catalog
+        env:
+          TABLE: PartitionInfo
+        uses: Azure/cli@1.0.4
+        with:
+          inlineScript: |
+            GROUP=$(az group list --query "[?contains(name, 'cpl${{ secrets.RAND }}')].name" -otsv)
+            ENV_VAULT=$(az keyvault list --resource-group $GROUP --query [].name -otsv)
+            STORAGE_NAME=$(az keyvault secret show --id https://${ENV_VAULT}.vault.azure.net/secrets/airflow-storage --query value -otsv)
+            STORAGE_KEY=$(az keyvault secret show --id https://${ENV_VAULT}.vault.azure.net/secrets/airflow-storage-key --query value -otsv)
 
-      #       def tenant_info(db):
-      #         container = db.get_container_client("TenantInfo")
-      #         with open("configuration/tenant_info.json", "r") as f :
-      #           tenant_info_1 = json.load(f)
-      #         tenant_info_1["serviceprincipalAppId"] = service_principal_id
-      #         container.upsert_item(tenant_info_1)
-      #         return
-
-      #       if __name__ == "__main__":
-      #         tenant_info(db)
-
-
-
-      # - uses: jannekem/run-python-script-action@v1
-      #   with:
-      #     script: |
-      #       import os
-      #       print("Directory contents:")
-      #       for f in os.listdir():
-      #           print(f)
+            az storage table exists --name $TABLE \
+              --account-name $STORAGE_NAME \
+              --account-key $STORAGE_KEY -ojson
