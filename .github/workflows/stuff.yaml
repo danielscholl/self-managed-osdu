@@ -52,15 +52,19 @@ jobs:
         with:
           inlineScript: |
             GROUP=$(az group list --query "[?contains(name, 'cpl${{ secrets.RAND }}')].name" -otsv)
-            STORAGE_NAME=$(az storage list --resource-group $GROUP --query [].name -otsv)
+            STORAGE_NAME=$(az storage account list --resource-group $GROUP --query [].name -otsv)
+            STORAGE_KEY=$(az storage account keys list -g $GROUP -n $STORAGE_NAME --query [0].value -otsv)
 
+            DATASET=('compliance-ruleset false shared' \
+                         'cosmos-connection true opendes-cosmos-connection' \
+                         'cosmos-endpoint true opendes-cosmos-endpoint')
 
-            TIME=$(date +"%Y-%m-%dT%H:%M:%S.0000000Z")
-            echo $TIME
-            echo $STORAGE_NAME
+            for row in "${DATASET[@]}"
+            do
+              sentence="this is a story"
+              items=($row)
 
-            #az storage entity insert --account-name $STORAGE_NAME --account-key $STORAGE_KEY --entity PartitionKey=opendes RowKey=compliance-ruleset Content=ASDF2 --if-exists replace --table-name $TABLE
-
-
-            # PARTITIONKEY  ROWKEY              TIMESTAMP                     SENSITIVE   VALUE
-            # opendes       compliance-ruleset  2021-03-01T20:36:57.1474948Z  false       shared
+              az storage entity insert --account-name $STORAGE_NAME --account-key $STORAGE_KEY \
+                --if-exists replace --table-name $TABLE \
+                --entity PARTITIONKEY=opendes ROWKEY=${items[0]} SENSITIVE=${items[1]} VALUE=${items[2]}
+            done
