@@ -18,16 +18,20 @@ jobs:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
 
       - name: Retrieve Stamp Env Variables
+        env:
+          PARTITION_NAME: opendes
         run: |
-
           GROUP=$(az group list --query "[?contains(name, 'cpl${{ secrets.RAND }}')].name" -otsv)
           ENV_VAULT=$(az keyvault list --resource-group $GROUP --query [].name -otsv)
-          DP_GROUP=$(az group list --query "[?contains(name, 'dpl${{ secrets.RAND }}')].name" -otsv |grep -v MC)
-          DNS_HOST=$(az network public-ip list --resource-group $DP_GROUP --query [].dnsSettings.fqdn -otsv)
 
           echo "GROUP=$GROUP" >> $GITHUB_ENV
           echo "ENV_VAULT=$ENV_VAULT" >> $GITHUB_ENV
-          echo "DP_GROUP=$DP_GROUP" >> $GITHUB_ENV
+
+          export COSMOS_ENDPOINT=$(az keyvault secret show --id https://${ENV_VAULT}.vault.azure.net/secrets/${PARTITION_NAME}-cosmos-endpoint --query value -otsv)
+          export COSMOS_KEY=$(az keyvault secret show --id https://${ENV_VAULT}.vault.azure.net/secrets/${PARTITION_NAME}-cosmos-primary-key --query value -otsv)
+          export SERVICE_PRINCIPAL_ID=$(az keyvault secret show --id https://${ENV_VAULT}.vault.azure.net/secrets/app-dev-sp-username --query value -otsv)
+          export SERVICE_PRINCIPAL_OID=$(az keyvault secret show --id https://${ENV_VAULT}.vault.azure.net/secrets/app-dev-sp-id --query value -otsv)
+
 
 
       - uses: actions/setup-python@v2
