@@ -56,11 +56,11 @@ jobs:
             STORAGE_NAME=$(az keyvault secret show --id https://${ENV_VAULT}.vault.azure.net/secrets/airflow-storage --query value -otsv)
             STORAGE_KEY=$(az keyvault secret show --id https://${ENV_VAULT}.vault.azure.net/secrets/airflow-storage-key --query value -otsv)
 
-            TIME=$(date +"%Y-%m-%dT%H:%M:%S.NZ")
+            TIME=$(date +"%Y-%m-%dT%H:%M:%S.0000000Z")
             echo $TIME
 
-            az storage entity insert --account-name $STORAGE_NAME --account-key $STORAGE_KEY --table-name $PartitionInfo \
-              --entity PartitionKey=opendes RowKey=compliance-ruleset TIMESTAMP=$TIME SENSITIVE=false VALUE=shared --if-exists replace
+            az storage entity insert --account-name $STORAGE_NAME --account-key $STORAGE_KEY --entity PartitionKey=opendes RowKey=compliance-ruleset Content=ASDF2 --if-exists replace --table-name $TABLE
+
 
             # PARTITIONKEY  ROWKEY              TIMESTAMP                     SENSITIVE   VALUE
             # opendes       compliance-ruleset  2021-03-01T20:36:57.1474948Z  false       shared
