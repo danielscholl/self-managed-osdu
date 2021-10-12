@@ -6,7 +6,7 @@ on:
 jobs:
 
   cosmos-data:
-    name: Load Cosmos Database - TenantInfo
+    name: Load Data - TenantInfo
     runs-on: ubuntu-latest
 
     steps:
@@ -36,7 +36,7 @@ jobs:
 
 
   partition-data:
-    name: Load Table Storage - PartitionInfo
+    name: Load Data - PartitionInfo
     runs-on: ubuntu-latest
     steps:
 
@@ -55,8 +55,11 @@ jobs:
             ENV_VAULT=$(az keyvault list --resource-group $GROUP --query [].name -otsv)
             STORAGE_NAME=$(az keyvault secret show --id https://${ENV_VAULT}.vault.azure.net/secrets/airflow-storage --query value -otsv)
             STORAGE_KEY=$(az keyvault secret show --id https://${ENV_VAULT}.vault.azure.net/secrets/airflow-storage-key --query value -otsv)
-            EXISTS=$(az storage table exists --name $TABLE --account-name $STORAGE_NAME --account-key $STORAGE_KEY --query exists -otsv)
 
-            if [ "$EXISTS" = false ] ; then
-                az storage table exists --name $TABLE --account-name $STORAGE_NAME --account-key $STORAGE_KEY
-            fi
+            TIME=$(date +"%Y-%m-%dT%H:%M:%S.NZ")
+
+            az storage entity insert --account-name $STORAGE_NAME --account-key $STORAGE_KEY --table-name $TABLE \
+              --entity PartitionKey=opendes RowKey=compliance-ruleset TIMESTAMP=$TIME SENSITIVE=false VALUE=shared --if-exists replace
+
+            # PARTITIONKEY  ROWKEY              TIMESTAMP                     SENSITIVE   VALUE
+            # opendes       compliance-ruleset  2021-03-01T20:36:57.1474948Z  false       shared
