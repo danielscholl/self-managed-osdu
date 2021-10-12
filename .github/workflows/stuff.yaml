@@ -6,7 +6,7 @@ on:
 jobs:
 
   cosmos-data:
-    name: Load Cosmos DB - TenantInfo
+    name: Load Cosmos Database - TenantInfo
     runs-on: ubuntu-latest
 
     steps:
