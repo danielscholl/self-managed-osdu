@@ -52,14 +52,14 @@ jobs:
         with:
           inlineScript: |
             GROUP=$(az group list --query "[?contains(name, 'cpl${{ secrets.RAND }}')].name" -otsv)
-            ENV_VAULT=$(az keyvault list --resource-group $GROUP --query [].name -otsv)
-            STORAGE_NAME=$(az keyvault secret show --id https://${ENV_VAULT}.vault.azure.net/secrets/airflow-storage --query value -otsv)
-            STORAGE_KEY=$(az keyvault secret show --id https://${ENV_VAULT}.vault.azure.net/secrets/airflow-storage-key --query value -otsv)
+            STORAGE_NAME=$(az storage list --resource-group $GROUP --query [].name -otsv)
+
 
             TIME=$(date +"%Y-%m-%dT%H:%M:%S.0000000Z")
             echo $TIME
+            echo $STORAGE_NAME
 
-            az storage entity insert --account-name $STORAGE_NAME --account-key $STORAGE_KEY --entity PartitionKey=opendes RowKey=compliance-ruleset Content=ASDF2 --if-exists replace --table-name $TABLE
+            #az storage entity insert --account-name $STORAGE_NAME --account-key $STORAGE_KEY --entity PartitionKey=opendes RowKey=compliance-ruleset Content=ASDF2 --if-exists replace --table-name $TABLE
 
 
             # PARTITIONKEY  ROWKEY              TIMESTAMP                     SENSITIVE   VALUE
