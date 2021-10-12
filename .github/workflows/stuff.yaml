@@ -59,7 +59,7 @@ jobs:
 
             def tenant_info(db):
               container = db.get_container_client("TenantInfo")
-              with open("../configuration/tenant_info_1.json", "r") as f :
+              with open("./configuration/tenant_info_1.json", "r") as f :
                 tenant_info_1 = json.load(f)
               tenant_info_1["serviceprincipalAppId"] = service_principal_id
               container.upsert_item(tenant_info_1)
