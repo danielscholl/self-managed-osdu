@@ -48,6 +48,7 @@ jobs:
       - name: Upload Partition Info
         env:
           TABLE: PartitionInfo
+          PARTITION_NAME: opendes
         uses: Azure/cli@1.0.4
         with:
           inlineScript: |
@@ -55,16 +56,52 @@ jobs:
             STORAGE_NAME=$(az storage account list --resource-group $GROUP --query [].name -otsv)
             STORAGE_KEY=$(az storage account keys list -g $GROUP -n $STORAGE_NAME --query [0].value -otsv)
 
-            DATASET=('compliance-ruleset false shared' \
-                         'cosmos-connection true opendes-cosmos-connection' \
-                         'cosmos-endpoint true opendes-cosmos-endpoint')
+            az storage entity insert --account-name $STORAGE_NAME --account-key $STORAGE_KEY \
+                --if-exists replace --table-name $TABLE \
+                --entity PARTITIONKEY=opendes ROWKEY=id SENSITIVE=false VALUE=$PARTITION_NAME
 
-            for row in "${DATASET[@]}"
+            az storage entity insert --account-name $STORAGE_NAME --account-key $STORAGE_KEY \
+                --if-exists replace --table-name $TABLE \
+                --entity PARTITIONKEY=opendes ROWKEY=compliance-ruleset SENSITIVE=false VALUE=shared
+
+            DATASET=('elastic-endpoint' \
+                     'elastic-username' \
+                     'elastic-password' \
+                     'cosmos-connection' \
+                     'cosmos-endpoint' \
+                     'cosmos-primary-key' \
+                     'sb-connection' \
+                     'sb-namespace' \
+                     'storage-account-key' \
+                     'storage-account-name' \
+                     'ingest-storage-account-name' \
+                     'ingest-storage-account-key' \
+                     'eventgrid-recordstopic' \
+                     'eventgrid-recordstopic-accesskey' \
+                     'eventgrid-legaltagschangedtopic' \
+                     'eventgrid-legaltagschangedtopic-accesskey' \
+                     'eventgrid-resourcegroup' \
+                     'encryption-key-identifier' \
+                     'sdms-storage-account-name' \
+                     'sdms-storage-account-key' \
+                     'eventgrid-schemanotificationtopic' \
+                     'eventgrid-schemanotificationtopic-accesskey' \
+                     'eventgrid-gsmtopic' \
+                     'eventgrid-gsmtopic-accesskey' \
+                     'eventgrid-statuschangedtopic' \
+                     'eventgrid-statuschangedtopic-accesskey' \
+                     'eventgrid-schemachangedtopic' \
+                     'eventgrid-schemachangedtopic-accesskey')
+
+            for item in "${DATASET[@]}"
             do
-              sentence="this is a story"
-              items=($row)
-
               az storage entity insert --account-name $STORAGE_NAME --account-key $STORAGE_KEY \
                 --if-exists replace --table-name $TABLE \
-                --entity PARTITIONKEY=opendes ROWKEY=${items[0]} SENSITIVE=${items[1]} VALUE=${items[2]}
+                --entity PARTITIONKEY=$PARTITION_NAME ROWKEY=$item SENSITIVE=true VALUE=$PARTITION_NAME-$item
             done
+
+
+
+
+
+
