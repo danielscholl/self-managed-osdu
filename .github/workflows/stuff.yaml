@@ -1,0 +1,23 @@
+name: '3. Stamp Provision'
+
+on:
+  workflow_dispatch:
+
+env:
+
+jobs:
+
+  cosmos-data:
+    name: Load Cosmos Data - Tenant Info
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v2
+      - uses: jannekem/run-python-script-action@v1
+        with:
+          script: |
+            import os
+            print("Directory contents:")
+            for f in os.listdir():
+                print(f)

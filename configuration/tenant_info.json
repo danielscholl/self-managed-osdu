@@ -1,0 +1,30 @@
+{
+  "id": "opendes",
+  "complianceRuleSet": "shared",
+  "serviceprincipalAppId": "$SERVICE_PRINCIPAL_ID",
+  "groups": [
+    "service.storage.admin",
+    "service.legal.admin",
+    "data.datalake.viewer",
+    "data.test1",
+    "data.datalake.viewer",
+    "data.default.viewer",
+    "data.default.owner",
+    "service.search.admin",
+    "service.search.user",
+    "data.default.viewers",
+    "data.default.owners",
+    "service.schema-service.viewers",
+    "service.schema-service.editors",
+    "service.entitlements.admin",
+    "service.workflow.creator",
+    "service.workflow.viewer",
+    "service.workflow.admin",
+    "users.datalake.admins",
+    "users.datalake.ops",
+    "cron.job",
+    "notification.pubsub",
+    "service.file.viewers",
+    "service.file.editors"
+  ]
+}
