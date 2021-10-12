@@ -3,8 +3,6 @@ name: 'Stuff'
 on:
   workflow_dispatch:
 
-env:
-
 jobs:
 
   cosmos-data:
