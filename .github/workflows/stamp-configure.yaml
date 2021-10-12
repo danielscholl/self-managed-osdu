@@ -1323,7 +1323,7 @@ jobs:
           spec:
             values:
               configuration:
-              - service: indexer
+              - service: indexer-queue
                 repository: msosdu.azurecr.io/indexer-queue
                 env:
                 - name: spring_application_name
