@@ -45,7 +45,7 @@ jobs:
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
 
-      - name: Upload CRS Catalog
+      - name: Upload Partition Info
         env:
           TABLE: PartitionInfo
         uses: Azure/cli@1.0.4
@@ -55,7 +55,8 @@ jobs:
             ENV_VAULT=$(az keyvault list --resource-group $GROUP --query [].name -otsv)
             STORAGE_NAME=$(az keyvault secret show --id https://${ENV_VAULT}.vault.azure.net/secrets/airflow-storage --query value -otsv)
             STORAGE_KEY=$(az keyvault secret show --id https://${ENV_VAULT}.vault.azure.net/secrets/airflow-storage-key --query value -otsv)
+            EXISTS=$(az storage table exists --name $TABLE --account-name $STORAGE_NAME --account-key $STORAGE_KEY --query exists -otsv)
 
-            az storage table exists --name $TABLE \
-              --account-name $STORAGE_NAME \
-              --account-key $STORAGE_KEY -ojson
+            if [ "$EXISTS" = false ] ; then
+                az storage table exists --name $TABLE --account-name $STORAGE_NAME --account-key $STORAGE_KEY
+            fi
