@@ -1,5 +1,5 @@
 {
-  "id": "opendes",
+  "id": "$PARTITION_NAME",
   "complianceRuleSet": "shared",
   "serviceprincipalAppId": "$SERVICE_PRINCIPAL_ID",
   "groups": [
