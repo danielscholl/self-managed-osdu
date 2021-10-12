@@ -6,6 +6,9 @@ metadata:
   namespace: osdu-azure
 spec:
   releaseName: indexer-queue
+  dependsOn:
+  - name: indexer-service
+    namespace: osdu-azure
   chart:
     spec:
       chart: ./charts/self-managed-service
