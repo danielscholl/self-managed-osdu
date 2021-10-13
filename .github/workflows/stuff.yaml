@@ -196,3 +196,14 @@ jobs:
           context: src/
           tags: self-managed-osdu-login:latest
           outputs: type=docker,dest=/tmp/self-managed-osdu-login.tar
+
+      - name: Load Docker Image
+        run: docker load --input /tmp/self-managed-osdu-login.tar
+
+      - name: Retrieve Environment Settings
+        uses: Azure/cli@1.0.4
+        with:
+          inlineScript: |
+            REGISTRY=$(az acr list --resource-group ${{ secrets.BUILDER_GROUP }} --query [].name -otsv)
+            az acr login -n $REGISTRY
+            docker images
