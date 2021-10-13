@@ -1,0 +1,91 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: legal-service
+  namespace: osdu-azure
+spec:
+  values:
+    ingress:
+      dns: osdu-self-dplcedah-7d3a-gw.centralus.cloudapp.azure.com
+    configuration:
+    - service: legal
+      repository: msosdu.azurecr.io/legal
+      path: /api/legal/v1/*
+      probe:
+        path: /actuator/health
+        port: 8081
+        liveness:
+          delay: 250
+          seconds: 10
+      keyvault: true
+      request:
+        cpu: 100m
+        memory: 1500Mi
+      limit:
+        cpu: 500m
+        memory: 1500Mi
+      auth:
+        disable:
+          - "/"
+          - "*/index.html"
+          - "*/v2/api-docs"
+          - "*/swagger-resources"
+          - "*/swagger-ui.html"
+          - "*/configuration/ui"
+          - "*/configuration/security"
+          - "/api/legal/v1/swagger-resources/*"
+          - "/api/legal/v1/webjars/*"
+          - "*/actuator/health"
+          - "*/health"
+      env:
+      - name: spring_application_name
+        value: legal
+      - name: server.servlet.contextPath
+        value: /api/legal/v1/
+      - name: server_port
+        value: 80
+      - name: ACCEPT_HTTP
+        value: true
+      - name: cosmosdb_database
+        value: osdu-db
+      - name: LOG_PREFIX
+        value: legal
+      - name: azure_storage_container_name
+        value: legal-service-azure-configuration
+      - name: azure_storage_enable_https
+        value: true
+      - name: legal_service_region
+        value: us
+      - name: servicebus_topic_name
+        value: legaltags
+      - name: entitlements_service_endpoint
+        value: http://entitlements/api/entitlements/v2
+      - name: entitlements_service_api_key
+        value: OBSOLETE
+      - name: partition_service_endpoint
+        value: http://partition/api/partition/v1
+      - name: azure_istioauth_enabled
+        value: true
+      - name: SPRING_CONFIG_NAME
+        value: "common,application"
+      - name: azure_activedirectory_AppIdUri
+        value: "api://0ef4dfd1-8adf-441b-aae9-ac7026333520"
+      - name: azure_paas_podIdentity_isEnabled
+        value: "false"
+      - name: KEYVAULT_URI
+        config:
+          name: osdu-svc-config
+          key: ENV_KEYVAULT
+      - name: REDIS_DATABASE
+        config:
+          name: osdu-svc-config
+          key: REDIS_DB_LEGAL
+      - name: aad_client_id
+        secret:
+          name: active-directory
+          key: application-appid
+      - name: appinsights_key
+        secret:
+          name: central-logging
+          key: appinsights
