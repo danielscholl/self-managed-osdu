@@ -392,6 +392,11 @@ jobs:
             STORAGE_NAME=$(az storage account list --resource-group $GROUP --query [].name -otsv)
             STORAGE_KEY=$(az storage account keys list -g $GROUP -n $STORAGE_NAME --query [0].value -otsv)
 
+            EXISTS=$(az storage table exists -n $TABLE --account-name $STORAGE_NAME --account-key $STORAGE_KEY --query exists -otsv)
+            if [ "${EXISTS}" == "false" ]; then
+              az storage table create -n $TABLE --account-name $STORAGE_NAME --account-key $STORAGE_KEY
+            fi
+
             az storage entity insert --account-name $STORAGE_NAME --account-key $STORAGE_KEY \
                 --if-exists replace --table-name $TABLE \
                 --entity PARTITIONKEY=opendes ROWKEY=id SENSITIVE=false VALUE=$PARTITION_NAME
