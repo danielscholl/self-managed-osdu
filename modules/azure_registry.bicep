@@ -42,9 +42,11 @@ var role = {
   Reader: '/subscriptions/${subscription().subscriptionId}/providers/Microsoft.Authorization/roleDefinitions/acdd72a7-3385-48ef-bd42-f606fba81ae7'
 }
 
+var registryName = take(replace('${name}', '-', ''), 23)
+
 // Create Azure Container Registry
 resource acr 'Microsoft.ContainerRegistry/registries@2019-12-01-preview' = {
-  name: replace('${name}', '-', '')
+  name: registryName
   location: location
   tags: tags
   sku: {
