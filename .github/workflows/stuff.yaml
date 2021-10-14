@@ -27,11 +27,11 @@ jobs:
             ENV_VAULT=$(az keyvault list --resource-group $GROUP --query [].name -otsv)
             CLIENT_ID=$(az keyvault secret show --id https://${ENV_VAULT}.vault.azure.net/secrets/aad-client-id --query value -otsv)
             TENANT_ID=$(az account show --query tenantId -otsv)
-            REGISTRY=$(az acr list -g $GROUP --query [0].loginServer -otsv)
+
 
             echo "CLIENT_ID=$CLIENT_ID" >> $GITHUB_ENV
             echo "TENANT_ID=$TENANT_ID" >> $GITHUB_ENV
-            echo "REGISTRY=$REGISTRY" >> $GITHUB_ENV
+
 
       - name: Custom Login HTML Page
         run: |
@@ -200,12 +200,14 @@ jobs:
         uses: Azure/cli@1.0.4
         with:
           inlineScript: |
+            REGISTRY=$(az acr list -g $GROUP --query [0].loginServer -otsv)
             az acr build --registry $REGISTRY --image self-managed-osdu-login:latest -f src/Dockerfile src
 
       - name: Push OSDU Images
         uses: Azure/cli@1.0.4
         with:
           inlineScript: |
+            REGISTRY=$(az acr list -g $GROUP --query [0].name -otsv)
             IMAGES=('dataset' \
                     'entitlements' \
                     'file' \
