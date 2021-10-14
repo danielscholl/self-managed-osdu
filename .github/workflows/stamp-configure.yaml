@@ -296,8 +296,8 @@ jobs:
               ingress:
                 dns: $DNS_HOST
               configuration:
-              - service: default
-                repository: $REGISTRY/self-service-osdu-login
+              - service: token
+                repository: $REGISTRY/self-managed-osdu-login
                 tag: latest
                 path: /login/*
                 replicaCount: 1
