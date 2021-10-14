@@ -661,5 +661,6 @@ jobs:
               az acr import \
               --name $REGISTRY \
               --source msosdu.azurecr.io/$IMAGE:$OSDU_VERSION \
-              --image $IMAGE:$OSDU_VERSION
+              --image $IMAGE:$OSDU_VERSION \
+              --force --no-wait
             done
