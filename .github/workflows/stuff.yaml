@@ -221,12 +221,12 @@ jobs:
                     'search' \
                     'storage' )
 
-            for image in "${IMAGES[@]}"
+            for IMAGE in "${IMAGES[@]}"
             do
               az acr import \
               --name $REGISTRY \
-              --source msosdu.azurecr.io/$ITEM:$OSDU_VERSION \
-              --image $ITEM:$OSDU_VERSION
+              --source msosdu.azurecr.io/$IMAGE:$OSDU_VERSION \
+              --image $IMAGE:$OSDU_VERSION
             done
 
 
