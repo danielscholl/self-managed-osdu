@@ -4,4 +4,4 @@ namespace: dev-sample
 resources:
   - namespace.yaml
   - release.yaml
-  - login.yaml
+  - token.yaml

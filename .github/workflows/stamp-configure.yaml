@@ -282,9 +282,9 @@ jobs:
                   value: "Self Managed OSDU - (v0.11)"
           EOF
 
-      - name: Create Helm Values - login-service
+      - name: Create Helm Values - token-service
         run: |
-          cat > $GITHUB_WORKSPACE/apps/$CLUSTER/login-service-values.yaml << EOF
+          cat > $GITHUB_WORKSPACE/apps/$CLUSTER/token-service-values.yaml << EOF
           ---
           apiVersion: helm.toolkit.fluxcd.io/v2beta1
           kind: HelmRelease
