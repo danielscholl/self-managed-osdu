@@ -3,7 +3,9 @@ name: 'Login Stuff'
 on:
   workflow_dispatch:
 
-
+env:
+  OSDU_VERSION: v0.11.0
+  CLUSTER: osdu-stamp
 
 jobs:
 
@@ -16,7 +18,6 @@ jobs:
       - uses: Azure/login@v1
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
-      # - uses: docker/setup-buildx-action@v1
 
       - name: Retrieve Env Variables
         uses: Azure/cli@1.0.4
@@ -32,7 +33,7 @@ jobs:
             echo "TENANT_ID=$TENANT_ID" >> $GITHUB_ENV
             echo "REGISTRY=$REGISTRY" >> $GITHUB_ENV
 
-      - name: Create HTML Page
+      - name: Custom Login HTML Page
         run: |
           cat > src/index.html << EOF
           <!DOCTYPE html>
@@ -195,21 +196,35 @@ jobs:
 
           EOF
 
-      # - name: Build Docker Image
-      #   uses: docker/build-push-action@v2
-      #   with:
-      #     push: false
-      #     file: src/Dockerfile
-      #     context: src/
-      #     tags: self-managed-osdu-login:latest
-      #     outputs: type=docker,dest=/tmp/self-managed-osdu-login.tar
-
-      # - name: Load Docker Image
-      #   run: docker load --input /tmp/self-managed-osdu-login.tar
-
-      - name: Retrieve Environment Settings
+      - name: Build Docker Image - Login
         uses: Azure/cli@1.0.4
         with:
           inlineScript: |
             az acr build --registry $REGISTRY --image self-managed-osdu-login:latest -f src/Dockerfile src
+
+      - name: Push OSDU Images
+        uses: Azure/cli@1.0.4
+        with:
+          inlineScript: |
+            IMAGES=('dataset' \
+                    'entitlements' \
+                    'file' \
+                    'indexer-queue' \
+                    'indexer' \
+                    'legal' \
+                    'notification' \
+                    'partition' \
+                    'register' \
+                    'schema' \
+                    'search' \
+                    'storage' )
+
+            for image in "${IMAGES[@]}"
+            do
+              az acr import \
+              --name $REGISTRY \
+              --source msosdu.azurecr.io/$ITEM:$OSDU_VERSION \
+              --image $ITEM:$OSDU_VERSION
+            done
+
 
