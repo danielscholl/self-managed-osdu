@@ -9,8 +9,8 @@ spec:
     ingress:
       dns: osdu-self-dplcedah-7deg-gw.centralus.cloudapp.azure.com
     configuration:
-    - service: default
-      repository: osduselfcplcedohaycr.azurecr.io/self-service-osdu-login
+    - service: token
+      repository: osduselfcplcedohaycr.azurecr.io/self-managed-osdu-login
       tag: latest
       path: /login/*
       replicaCount: 1
