@@ -28,7 +28,7 @@ jobs:
             CLIENT_ID=$(az keyvault secret show --id https://${ENV_VAULT}.vault.azure.net/secrets/aad-client-id --query value -otsv)
             TENANT_ID=$(az account show --query tenantId -otsv)
 
-
+            echo "GROUP=$GROUP" >> $GITHUB_ENV
             echo "CLIENT_ID=$CLIENT_ID" >> $GITHUB_ENV
             echo "TENANT_ID=$TENANT_ID" >> $GITHUB_ENV
 
