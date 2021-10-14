@@ -575,7 +575,7 @@ jobs:
                 data: {
                   tenantId: '${TENANT_ID}',
                   clientId: '${CLIENT_ID}',
-                  redirectUrl: 'https://$DNS_HOST',
+                  redirectUrl: 'https://$DNS_HOST/login',
                   responseType: 'code',
                   responseMode: 'fragment',
                   scope: '${CLIENT_ID}/.default openid profile offline_access',
