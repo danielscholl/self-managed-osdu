@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
 
 env:
-  OSDU_VERSION: v0.11.0
+  OSDU_VERSION: 0.11.0
   CLUSTER: osdu-stamp
 
 jobs:
