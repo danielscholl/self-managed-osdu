@@ -2,8 +2,8 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: login-service
-  namespace: osdu-azure
+  name: token-service
+  namespace: dev-sample
 spec:
   values:
     ingress:
