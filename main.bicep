@@ -75,11 +75,11 @@ module storage 'modules/azure_storage.bicep' = {
 }
 
 // Create Container Registry
-module acr 'modules/azure_registry.bicep' = {
-  name: 'container_registry'
-  scope: resourceGroup
-  params: {
-    principalId: azurePrincipalOID
-    acrAdminUserEnabled: true
-  }
-}
+// module acr 'modules/azure_registry.bicep' = {
+//   name: 'container_registry'
+//   scope: resourceGroup
+//   params: {
+//     principalId: azurePrincipalOID
+//     acrAdminUserEnabled: true
+//   }
+// }
