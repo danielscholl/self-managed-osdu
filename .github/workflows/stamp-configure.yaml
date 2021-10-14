@@ -127,6 +127,9 @@ jobs:
               name: default
               namespace: osdu-azure
             - kind: Deployment
+              name: token
+              namespace: dev-sample
+            - kind: Deployment
               name: partition
               namespace: osdu-azure
             - kind: Deployment
