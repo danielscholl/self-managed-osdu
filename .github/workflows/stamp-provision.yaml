@@ -222,7 +222,7 @@ jobs:
   fileshare-data:
     name: Load Data - File Shares
     runs-on: ubuntu-latest
-    needs: data-plane
+    needs: partition
     steps:
 
       - name: Azure Login
