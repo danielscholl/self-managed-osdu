@@ -1,0 +1,31 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: login-service
+  namespace: osdu-azure
+spec:
+  releaseName: login-service
+  dependsOn:
+  - name: self-managed-base
+    namespace: osdu-azure
+  chart:
+    spec:
+      chart: ./charts/self-managed-service
+      sourceRef:
+        kind: GitRepository
+        name: flux-system
+        namespace: flux-system
+  interval: 5m0s
+  install:
+    remediation:
+      retries: 3
+  targetNamespace: osdu-azure
+  values:
+    replicaCount: 1
+    ingress:
+      issuer: letsencrypt-prod-dns
+      enableKeyvaultCert: false
+    service:
+      type: ClusterIP
+      port: 80
