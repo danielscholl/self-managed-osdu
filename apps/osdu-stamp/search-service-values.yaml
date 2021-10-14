@@ -7,7 +7,7 @@ metadata:
 spec:
   values:
     ingress:
-      dns: osdu-self-dplcedah-7d3a-gw.centralus.cloudapp.azure.com
+      dns: osdu-self-dplcedah-7deg-gw.centralus.cloudapp.azure.com
     configuration:
     - service: search
       repository: msosdu.azurecr.io/search
@@ -44,7 +44,7 @@ spec:
       - name: ACCEPT_HTTP
         value: true
       - name: APPLICATIONINSIGHTS_CONNECTION_STRING
-        value: InstrumentationKey=7cd0966f-cc2c-43f6-9827-1daa80dec576
+        value: InstrumentationKey=6227d06c-d0d0-4746-a89e-4990d52b429b
       - name: cosmosdb_database
         value: osdu-db
       - name: entitlements_service_endpoint

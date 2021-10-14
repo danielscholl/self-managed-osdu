@@ -7,7 +7,7 @@ metadata:
 spec:
   values:
     ingress:
-      dns: osdu-self-dplcedah-7d3a-gw.centralus.cloudapp.azure.com
+      dns: osdu-self-dplcedah-7deg-gw.centralus.cloudapp.azure.com
     configuration:
     - service: register
       repository: msosdu.azurecr.io/register
@@ -45,7 +45,7 @@ spec:
       - name: cosmosdb_database
         value: osdu-db
       - name: RECORDS_CHANGE_PUBSUB_ENDPOINT
-        value: https://osdu-self-dplcedah-7d3a-gw.centralus.cloudapp.azure.com/api/notification/v1/push-handlers/records-changed
+        value: https://osdu-self-dplcedah-7deg-gw.centralus.cloudapp.azure.com/api/notification/v1/push-handlers/records-changed
       - name: ENTITLEMENTS_API
         value: http://entitlements/api/entitlements/v2
       - name: partition_service_endpoint
