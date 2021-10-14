@@ -11,6 +11,7 @@ patchesStrategicMerge:
   - osdu-istio-values.yaml
   - self-managed-base-values.yaml
   - default-service-values.yaml
+  - token-service-values.yaml
   - partition-service-values.yaml
   - entitlement-service-values.yaml
   - legal-service-values.yaml
