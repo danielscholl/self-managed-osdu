@@ -7,7 +7,7 @@ metadata:
 spec:
   values:
     ingress:
-      dns: osdu-self-dplcedah-7d3a-gw.centralus.cloudapp.azure.com
+      dns: osdu-self-dplcedah-7deg-gw.centralus.cloudapp.azure.com
     configuration:
     - service: partition
       repository: msosdu.azurecr.io/partition
