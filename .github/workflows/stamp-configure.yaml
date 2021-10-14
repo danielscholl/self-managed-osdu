@@ -127,6 +127,9 @@ jobs:
               name: default
               namespace: osdu-azure
             - kind: Deployment
+              name: token
+              namespace: dev-sample
+            - kind: Deployment
               name: partition
               namespace: osdu-azure
             - kind: Deployment
@@ -296,8 +299,8 @@ jobs:
               ingress:
                 dns: $DNS_HOST
               configuration:
-              - service: default
-                repository: $REGISTRY/self-service-osdu-login
+              - service: token
+                repository: $REGISTRY/self-managed-osdu-login
                 tag: latest
                 path: /login/*
                 replicaCount: 1
