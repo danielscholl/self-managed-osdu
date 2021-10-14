@@ -444,7 +444,7 @@ jobs:
   image-data:
     name: Load ACR - Images
     runs-on: ubuntu-latest
-    needs: control-plane
+    needs: data-plane
     steps:
       - uses: actions/checkout@v2
       - uses: Azure/login@v1
@@ -459,10 +459,13 @@ jobs:
             ENV_VAULT=$(az keyvault list --resource-group $GROUP --query [].name -otsv)
             CLIENT_ID=$(az keyvault secret show --id https://${ENV_VAULT}.vault.azure.net/secrets/aad-client-id --query value -otsv)
             TENANT_ID=$(az account show --query tenantId -otsv)
+            DP_GROUP=$(az group list --query "[?contains(name, 'dpl${{ secrets.RAND }}')].name" -otsv |grep -v MC)
+            DNS_HOST=$(az network public-ip list --resource-group $DP_GROUP --query [].dnsSettings.fqdn -otsv)
 
             echo "GROUP=$GROUP" >> $GITHUB_ENV
             echo "CLIENT_ID=$CLIENT_ID" >> $GITHUB_ENV
             echo "TENANT_ID=$TENANT_ID" >> $GITHUB_ENV
+            echo "DNS_HOST=$DNS_HOST" >> $GITHUB_ENV
 
       - name: Custom Login HTML Page
         run: |
@@ -572,7 +575,7 @@ jobs:
                 data: {
                   tenantId: '${TENANT_ID}',
                   clientId: '${CLIENT_ID}',
-                  redirectUrl: 'http://localhost:8080',
+                  redirectUrl: 'https://$DNS_HOST',
                   responseType: 'code',
                   responseMode: 'fragment',
                   scope: '${CLIENT_ID}/.default openid profile offline_access',
