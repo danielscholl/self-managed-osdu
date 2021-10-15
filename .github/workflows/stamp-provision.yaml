@@ -7,9 +7,9 @@ env:
   CONTROLPLANE_WORKSPACE: "cpl-${{ secrets.RAND }}"
   DATAPLANE_WORKSPACE: "dpl-${{ secrets.RAND }}"
   PARTITION_WORKSPACE: "prt-${{ secrets.RAND }}"
+
   OSDU_VERSION: 0.11.0
   PARTITION_NAME: opendes
-
   IMAGE_TAG: latest
 
 jobs:
@@ -88,17 +88,11 @@ jobs:
     runs-on: ubuntu-latest
     needs: control-plane
     steps:
-
-      - name: Checkout
-        uses: actions/checkout@v2
-
-      - name: Azure Login
-        uses: Azure/login@v1
+      - uses: actions/checkout@v2
+      - uses: Azure/login@v1
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
-
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v1
+      - uses: docker/setup-buildx-action@v1
 
       - name: Build Docker Image
         uses: docker/build-push-action@v2
@@ -134,7 +128,6 @@ jobs:
             TF_VAR_cosmosdb_replica_location=$(az account list-locations --query "[?name == '${{ secrets.AZURE_LOCATION }}'].metadata.pairedRegion[0].name" -otsv)
             EOF
 
-
       - name: Deploy Resources
         run: |
           docker run --rm --env-file $GITHUB_WORKSPACE/.env \
@@ -157,17 +150,11 @@ jobs:
     runs-on: ubuntu-latest
     needs: data-plane
     steps:
-
-      - name: Checkout
-        uses: actions/checkout@v2
-
-      - name: Azure Login
-        uses: Azure/login@v1
+      - uses: actions/checkout@v2
+      - uses: Azure/login@v1
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
-
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v1
+      - uses: docker/setup-buildx-action@v1
 
       - name: Build Docker Image
         uses: docker/build-push-action@v2
@@ -221,9 +208,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: partition
     steps:
-
-      - name: Azure Login
-        uses: Azure/login@v1
+      - uses: Azure/login@v1
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
 
@@ -353,6 +338,7 @@ jobs:
       - uses: Azure/login@v1
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
+
       - name: Install dependencies
         run: python -m pip install --upgrade pip azure-cosmos
 
@@ -373,9 +359,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: data-plane
     steps:
-
-      - name: Azure Login
-        uses: Azure/login@v1
+      - uses: Azure/login@v1
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
 

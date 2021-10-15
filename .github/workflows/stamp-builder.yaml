@@ -27,7 +27,6 @@ jobs:
               --parameter suffix=${{ secrets.RAND }} \
               --parameter azurePrincipalOID=$PRINCIPAL_OID
 
-
       - name: Deploy Template Resources
         uses: Azure/cli@1.0.4
         with:
@@ -45,7 +44,6 @@ jobs:
           name: BUILDER_GROUP
           value: ${{ env.RESOURCE_GROUP }}
           pa_token: ${{ secrets.GH_REPO_TOKEN }}
-
 
       - name: Save Secrets to Vault
         uses: Azure/cli@1.0.4
