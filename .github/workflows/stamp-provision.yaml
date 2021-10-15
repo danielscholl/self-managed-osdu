@@ -664,3 +664,38 @@ jobs:
               --image $IMAGE:$OSDU_VERSION \
               --force --no-wait
             done
+
+  env-data:
+    name: Load Builder KV with Settings
+    runs-on: ubuntu-latest
+    needs: partition
+    steps:
+      - uses: actions/checkout@v2
+      - uses: Azure/login@v1
+
+      - name: Save Rest-Client Environment to Common Vault
+        uses: Azure/cli@1.0.4
+        with:
+          inlineScript: |
+            DP_GROUP=$(az group list --query "[?contains(name, 'dpl${{ secrets.RAND }}')].name" -otsv |grep -v MC)
+            DNS_HOST=$(az network public-ip list --resource-group $DP_GROUP --query [].dnsSettings.fqdn -otsv)
+            VAULT=$(az keyvault list --resource-group ${{ secrets.BUILDER_GROUP }} --query [].name -otsv)
+            BASE_64_TOKEN=$(echo "elastic:${{ secrets.ELASTIC_PASSWORD }}" | base64)
+            CLIENT_SECRET=$(az ad app credential reset --id $(az keyvault secret show --id https://${VAULT}.vault.azure.net/secrets/aad-client-id --query value -otsv) --query password -otsv)
+
+
+            cat > settings << EOF
+            "self-managed-osdu": {
+              "TENANT_ID": "$(az account show --query homeTenantId -otsv)",
+              "PRINCIPAL_ID": "$(az keyvault secret show --id https://$VAULT.vault.azure.net/secrets/client-id --query value -otsv)",
+              "PRINCIPAL_SECRET": "$(az keyvault secret show --id https://$VAULT.vault.azure.net/secrets/client-secret --query value -otsv)",
+              "CLIENT_ID": "$(az keyvault secret show --id https://$VAULT.vault.azure.net/secrets/application-id --query value -otsv)",
+              "CLIENT_SECRET": "$CLIENT_SECRET",
+              "OSDU_HOST": "$DNS_HOST",
+              "REGION": "${{ secrets.AZURE_LOCATION }}",
+              "ES_HOST": "${{ secrets.ELASTIC_ENDPOINT }}",
+              "ES_AUTH_TOKEN": "$BASE_64_TOKEN",
+              "INITIAL_TOKEN": ""
+            }
+            EOF
+            az keyvault secret set --vault-name $VAULT --name "restclient" --file settings
