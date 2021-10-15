@@ -3,11 +3,6 @@ name: '1. Stamp Initialize'
 on:
   workflow_dispatch:
 
-env:
-  AZURE_PRINCIPAL_NAME: osdu-azure-credentials
-  OSDU_PRINCIPAL_NAME: osdu-credentials
-  OSDU_APPLICATION_NAME: osdu-application
-
 jobs:
 
   generator:

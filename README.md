@@ -102,7 +102,7 @@ az ad sp list --display-name $OSDU_CREDENTIALS --query [].objectId -otsv
 6. `OSDU_APPLICATION`: The json output of an Azure AD Application.
 
 ```bash
-OSDU_APPLICATION="osdu-application-$(az account show --query user.name -otsv | awk -F "@" '{print $1}')"
+OSDU_APPLICATION="self-managed-osdu-stamp-application-$(az account show --query user.name -otsv | awk -F "@" '{print $1}')"
 
 az ad app create --display-name $OSDU_APPLICATION \
   --oauth2-allow-implicit-flow \
