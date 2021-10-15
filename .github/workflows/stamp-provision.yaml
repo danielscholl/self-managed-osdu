@@ -666,12 +666,13 @@ jobs:
             done
 
   env-data:
-    name: Load Builder KV with Settings
+    name: Load KV - Settings
     runs-on: ubuntu-latest
     needs: partition
     steps:
-      - uses: actions/checkout@v2
       - uses: Azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
 
       - name: Save Rest-Client Environment to Common Vault
         uses: Azure/cli@1.0.4
