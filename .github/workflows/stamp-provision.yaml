@@ -682,7 +682,7 @@ jobs:
             DNS_HOST=$(az network public-ip list --resource-group $DP_GROUP --query [].dnsSettings.fqdn -otsv)
             VAULT=$(az keyvault list --resource-group ${{ secrets.BUILDER_GROUP }} --query [].name -otsv)
             BASE_64_TOKEN=$(echo "elastic:${{ secrets.ELASTIC_PASSWORD }}" | base64)
-            CLIENT_SECRET=$(az ad app credential reset --id $(az keyvault secret show --id https://${VAULT}.vault.azure.net/secrets/aad-client-id --query value -otsv) --query password -otsv)
+            CLIENT_SECRET=$(az ad app credential reset --id $(az keyvault secret show --id https://${VAULT}.vault.azure.net/secrets/application-id --query value -otsv) --query password -otsv)
 
 
             cat > settings << EOF
