@@ -50,9 +50,6 @@ jobs:
             VAULT=$(az keyvault list --resource-group ${{ secrets.BUILDER_GROUP }} --query [].name -otsv)
             STORAGE=$(az keyvault secret show --id https://$VAULT.vault.azure.net/secrets/storage --query value -otsv)
 
-            OSDU_PRINCIPAL_NAME=$(az ad sp show --id $(echo '${{ secrets.OSDU_CREDENTIALS }}' | jq -r ".clientId") --query appDisplayName -otsv)
-            echo "OSDU_PRINCIPAL_NAME=$OSDU_PRINCIPAL_NAME" >> $GITHUB_ENV
-
             cat > $GITHUB_WORKSPACE/.env << EOF
             ## These variables support AzureRM Backend Storage State
             ARM_TENANT_ID=$(az account show --query homeTenantId -otsv)
@@ -78,7 +75,7 @@ jobs:
           docker run --rm --env-file $GITHUB_WORKSPACE/.env \
             --env TF_VAR_workspace=${{ env.CONTROLPLANE_WORKSPACE }} \
             --env TF_VAR_resource_group_location="${{ secrets.AZURE_LOCATION }}" \
-            --env TF_VAR_principal_name=${{ env.OSDU_PRINCIPAL_NAME }} \
+            --env TF_VAR_principal_name=$(echo '${{ secrets.OSDU_CREDENTIALS }}' | jq -r ".displayName") \
             self-managed-osdu:${{ env.IMAGE_TAG }}
 
           rm $GITHUB_WORKSPACE/.env
@@ -122,9 +119,6 @@ jobs:
           inlineScript: |
             VAULT=$(az keyvault list --resource-group ${{ secrets.BUILDER_GROUP }} --query [].name -otsv)
             STORAGE=$(az keyvault secret show --id https://$VAULT.vault.azure.net/secrets/storage --query value -otsv)
-
-            OSDU_PRINCIPAL_NAME=$(az ad sp show --id $(echo '${{ secrets.OSDU_CREDENTIALS }}' | jq -r ".clientId") --query appDisplayName -otsv)
-            echo "OSDU_PRINCIPAL_NAME=$OSDU_PRINCIPAL_NAME" >> $GITHUB_ENV
 
             cat > $GITHUB_WORKSPACE/.env << EOF
             ## These variables support AzureRM Backend Storage State
@@ -192,9 +186,6 @@ jobs:
           inlineScript: |
             VAULT=$(az keyvault list --resource-group ${{ secrets.BUILDER_GROUP }} --query [].name -otsv)
             STORAGE=$(az keyvault secret show --id https://$VAULT.vault.azure.net/secrets/storage --query value -otsv)
-
-            OSDU_PRINCIPAL_NAME=$(az ad sp show --id $(echo '${{ secrets.OSDU_CREDENTIALS }}' | jq -r ".clientId") --query appDisplayName -otsv)
-            echo "OSDU_PRINCIPAL_NAME=$OSDU_PRINCIPAL_NAME" >> $GITHUB_ENV
 
             cat > $GITHUB_WORKSPACE/.env << EOF
             ## These variables support AzureRM Backend Storage State

@@ -99,6 +99,7 @@ az ad sp create-for-rbac --name $OSDU_CREDENTIALS \
 az ad sp list --display-name $OSDU_CREDENTIALS --query [].objectId -otsv
 ```
 
+
 6. `OSDU_APPLICATION`: The json output of an Azure AD Application.
 
 ```bash
