@@ -399,11 +399,11 @@ jobs:
 
             az storage entity insert --account-name $STORAGE_NAME --account-key $STORAGE_KEY \
                 --if-exists replace --table-name $TABLE \
-                --entity PARTITIONKEY=opendes ROWKEY=id SENSITIVE=false VALUE=$PARTITION_NAME
+                --entity PartitionKey=opendes RowKey=id sensitive=false value=$PARTITION_NAME
 
             az storage entity insert --account-name $STORAGE_NAME --account-key $STORAGE_KEY \
                 --if-exists replace --table-name $TABLE \
-                --entity PARTITIONKEY=opendes ROWKEY=compliance-ruleset SENSITIVE=false VALUE=shared
+                --entity PartitionKey=opendes RowKey=compliance-ruleset sensitive=false value=shared
 
             DATASET=('elastic-endpoint' \
                      'elastic-username' \
@@ -438,7 +438,7 @@ jobs:
             do
               az storage entity insert --account-name $STORAGE_NAME --account-key $STORAGE_KEY \
                 --if-exists replace --table-name $TABLE \
-                --entity PARTITIONKEY=$PARTITION_NAME ROWKEY=$item SENSITIVE=true VALUE=$PARTITION_NAME-$item
+                --entity PartitionKey=$PARTITION_NAME RowKey=$item Sensitive=true Value=$PARTITION_NAME-$item
             done
 
   image-data:

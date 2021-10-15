@@ -42,8 +42,9 @@ __Manually Created Secrets__
 
 ```bash
 SUBSCRIPTION_ID=$(az account show --query id --output tsv)
+AZURE_CREDENTIALS="self-managed-osdu-azure-credentials-$(az account show --query user.name -otsv | awk -F "@" '{print $1}')"
 
-az ad sp create-for-rbac --name "osdu-azure-credentials" \
+az ad sp create-for-rbac --name $AZURE_CREDENTIALS \
   --role "Owner" \
   --scopes /subscriptions/$SUBSCRIPTION_ID \
   --sdk-auth \
@@ -69,8 +70,9 @@ az ad sp create-for-rbac --name "osdu-azure-credentials" \
 
 ```bash
 SUBSCRIPTION_ID=$(az account show --query id --output tsv)
+OSDU_CREDENTIALS="self-managed-osdu-stamp-credentials-$(az account show --query user.name -otsv | awk -F "@" '{print $1}')"
 
-az ad sp create-for-rbac --name "osdu-credentials" \
+az ad sp create-for-rbac --name $OSDU_CREDENTIALS \
   --role "Contributor" \
   --scopes /subscriptions/$SUBSCRIPTION_ID \
   --sdk-auth \
@@ -94,16 +96,20 @@ az ad sp create-for-rbac --name "osdu-credentials" \
 5. `OSDU_CREDENTIAL_OID`: The Object ID of the _OSDU_CREDENTIALS_ Service Principal.
 
 ```bash
-az ad sp list --display-name "osdu-credentials" --query [].objectId -otsv
+az ad sp list --display-name $OSDU_CREDENTIALS --query [].objectId -otsv
 ```
 
 6. `OSDU_APPLICATION`: The json output of an Azure AD Application.
 
 ```bash
-az ad app create --display-name "osdu-application" \
-  --available-to-other-tenants true  \
+OSDU_APPLICATION="osdu-application-$(az account show --query user.name -otsv | awk -F "@" '{print $1}')"
+
+az ad app create --display-name $OSDU_APPLICATION \
+  --oauth2-allow-implicit-flow \
+  --required-resource-accesses @configuration/manifest.json \
   --query '{appId:appId, displayName:displayName, objectId:objectId}' \
   -ojson
+
 
   # Sample Format
   {
