@@ -17,9 +17,9 @@ spec:
         port: http
       keyvault: true
       request:
-        cpu: 100m
+        cpu: 500m
       limit:
-        cpu: 300m
+        cpu: 1000m
       auth:
         disable:
           - "/"
