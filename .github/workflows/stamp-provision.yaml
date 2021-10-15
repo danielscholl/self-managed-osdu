@@ -419,7 +419,7 @@ jobs:
             do
               az storage entity insert --account-name $STORAGE_NAME --account-key $STORAGE_KEY \
                 --if-exists replace --table-name $TABLE \
-                --entity PartitionKey=$PARTITION_NAME RowKey=$item Sensitive=true Value=$PARTITION_NAME-$item
+                --entity PartitionKey=$PARTITION_NAME RowKey=$item sensitive=true value=$PARTITION_NAME-$item
             done
 
   image-data:
