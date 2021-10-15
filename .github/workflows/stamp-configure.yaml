@@ -319,7 +319,7 @@ jobs:
                 dns: $DNS_HOST
               configuration:
               - service: partition
-                repository: msosdu.azurecr.io/partition
+                repository: $REGISTRY/partition
                 path: /api/partition/v1/*
                 probe:
                   path: /actuator/health
@@ -394,7 +394,7 @@ jobs:
                 dns: $DNS_HOST
               configuration:
               - service: entitlements
-                repository: msosdu.azurecr.io/entitlements
+                repository: $REGISTRY/entitlements
                 path: /api/entitlements/v2/*
                 probe:
                   path: /api/entitlements/v2/_ah/readiness_check
@@ -472,7 +472,7 @@ jobs:
                 dns: $DNS_HOST
               configuration:
               - service: legal
-                repository: msosdu.azurecr.io/legal
+                repository: $REGISTRY/legal
                 path: /api/legal/v1/*
                 probe:
                   path: /actuator/health
@@ -568,7 +568,7 @@ jobs:
                 dns: $DNS_HOST
               configuration:
               - service: storage
-                repository: msosdu.azurecr.io/storage
+                repository: $REGISTRY/storage
                 path: /api/storage/v2/*
                 probe:
                   path: /actuator/health
@@ -676,7 +676,7 @@ jobs:
                 dns: $DNS_HOST
               configuration:
               - service: schema
-                repository: msosdu.azurecr.io/schema
+                repository: $REGISTRY/schema
                 path: /api/schema-service/v1/*
                 probe:
                   path: /api/schema-service/v1/swagger-ui.html
@@ -755,7 +755,7 @@ jobs:
                 dns: $DNS_HOST
               configuration:
               - service: file
-                repository: msosdu.azurecr.io/file
+                repository: $REGISTRY/file
                 path: /api/file/*
                 probe:
                   path: /api/file/v2/readiness_check
@@ -850,7 +850,7 @@ jobs:
                 dns: $DNS_HOST
               configuration:
               - service: dataset
-                repository: msosdu.azurecr.io/dataset
+                repository: $REGISTRY/dataset
                 path: /api/dataset/*
                 probe:
                   path: /actuator/health
@@ -932,7 +932,7 @@ jobs:
                 dns: $DNS_HOST
               configuration:
               - service: indexer
-                repository: msosdu.azurecr.io/indexer
+                repository: $REGISTRY/indexer
                 path: /api/indexer/v2/*
                 probe:
                   path: /api/indexer/v2/swagger-ui.html
@@ -1029,7 +1029,7 @@ jobs:
                 dns: $DNS_HOST
               configuration:
               - service: search
-                repository: msosdu.azurecr.io/search
+                repository: $REGISTRY/search
                 path: /api/search/v2/*
                 probe:
                   path: /api/search/v2/swagger-ui.html
@@ -1135,7 +1135,7 @@ jobs:
                 dns: $DNS_HOST
               configuration:
               - service: notification
-                repository: msosdu.azurecr.io/notification
+                repository: $REGISTRY/notification
                 path: /api/notification/v1/*
                 probe:
                   path: /api/notification/v1/swagger-ui.html
@@ -1227,7 +1227,7 @@ jobs:
                 dns: $DNS_HOST
               configuration:
               - service: register
-                repository: msosdu.azurecr.io/register
+                repository: $REGISTRY/register
                 path: /api/register/v1/*
                 probe:
                   path: /api/register/v1/swagger-ui.html
@@ -1300,7 +1300,7 @@ jobs:
             values:
               configuration:
               - service: indexer-queue
-                repository: msosdu.azurecr.io/indexer-queue
+                repository: $REGISTRY/indexer-queue
                 keyvault: true
                 request:
                   cpu: 1000m
