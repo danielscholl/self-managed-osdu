@@ -10,7 +10,7 @@ spec:
       dns: osdu-self-dplbfhgc-vxsz-gw.centralus.cloudapp.azure.com
     configuration:
     - service: schema
-      repository: msosdu.azurecr.io/schema
+      repository: osduselfcplbfh9sgscr.azurecr.io/schema
       path: /api/schema-service/v1/*
       probe:
         path: /api/schema-service/v1/swagger-ui.html
@@ -57,7 +57,7 @@ spec:
       - name: event_grid_topic
         value: "schemachangedtopic"
       - name: azure_activedirectory_AppIdUri
-        value: "api://83693505-46ef-4824-b21d-e95daad4487a"
+        value: "api://3b0cf063-fc2c-4e89-a5d3-b21ccdf1daef"
       - name: azure_paas_podIdentity_isEnabled
         value: "false"
       - name: KEYVAULT_URI

@@ -10,7 +10,7 @@ spec:
       dns: osdu-self-dplbfhgc-vxsz-gw.centralus.cloudapp.azure.com
     configuration:
     - service: partition
-      repository: msosdu.azurecr.io/partition
+      repository: osduselfcplbfh9sgscr.azurecr.io/partition
       path: /api/partition/v1/*
       probe:
         path: /actuator/health
@@ -45,7 +45,7 @@ spec:
       - name: partition_spring_logging_level
         value: INFO
       - name: azure_activedirectory_AppIdUri
-        value: "api://83693505-46ef-4824-b21d-e95daad4487a"
+        value: "api://3b0cf063-fc2c-4e89-a5d3-b21ccdf1daef"
       - name: azure_activedirectory_session_stateless
         value: "false"
       - name: azure_paas_podIdentity_isEnabled

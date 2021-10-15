@@ -14,7 +14,7 @@ spec:
       identity: osdu-self-cplbfhgc-9sgs-osdu-identity
       identity_id: 6715193a-2c89-46c7-a6a2-7315a9adcde1
       keyvault: osdu-self-cplbfh-9sgs-kv
-      appid: 83693505-46ef-4824-b21d-e95daad4487a
+      appid: 3b0cf063-fc2c-4e89-a5d3-b21ccdf1daef
       oidAuthEnabled: false
     resourceLimits:
       defaultCpuRequests: "0.5"

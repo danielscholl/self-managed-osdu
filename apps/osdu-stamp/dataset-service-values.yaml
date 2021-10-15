@@ -10,7 +10,7 @@ spec:
       dns: osdu-self-dplbfhgc-vxsz-gw.centralus.cloudapp.azure.com
     configuration:
     - service: dataset
-      repository: msosdu.azurecr.io/dataset
+      repository: osduselfcplbfh9sgscr.azurecr.io/dataset
       path: /api/dataset/*
       probe:
         path: /actuator/health

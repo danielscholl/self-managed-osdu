@@ -10,7 +10,7 @@ spec:
       dns: osdu-self-dplbfhgc-vxsz-gw.centralus.cloudapp.azure.com
     configuration:
     - service: search
-      repository: msosdu.azurecr.io/search
+      repository: osduselfcplbfh9sgscr.azurecr.io/search
       path: /api/search/v2/*
       probe:
         path: /api/search/v2/swagger-ui.html
@@ -70,7 +70,7 @@ spec:
       - name: azure_istioauth_enabled
         value: true
       - name: azure_activedirectory_AppIdUri
-        value: api://83693505-46ef-4824-b21d-e95daad4487a"
+        value: api://3b0cf063-fc2c-4e89-a5d3-b21ccdf1daef"
       - name: KEYVAULT_URI
         config:
           name: osdu-svc-config

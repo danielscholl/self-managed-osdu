@@ -10,7 +10,7 @@ spec:
       dns: osdu-self-dplbfhgc-vxsz-gw.centralus.cloudapp.azure.com
     configuration:
     - service: register
-      repository: msosdu.azurecr.io/register
+      repository: osduselfcplbfh9sgscr.azurecr.io/register
       path: /api/register/v1/*
       probe:
         path: /api/register/v1/swagger-ui.html
