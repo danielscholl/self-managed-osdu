@@ -6,7 +6,7 @@ on:
 jobs:
 
   builder:
-    name: Provision Builder
+    name: Provision - Builder
     runs-on: ubuntu-latest
 
     steps:
