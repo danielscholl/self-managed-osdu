@@ -4,9 +4,6 @@ on:
   workflow_dispatch:
 
 env:
-  AZURE_PRINCIPAL_NAME: osdu-azure-credentials
-  OSDU_PRINCIPAL_NAME: osdu-credentials
-  OSDU_APPLICATION_NAME: osdu-application
   CONTROLPLANE_WORKSPACE: "cpl-${{ secrets.RAND }}"
   DATAPLANE_WORKSPACE: "dpl-${{ secrets.RAND }}"
   PARTITION_WORKSPACE: "prt-${{ secrets.RAND }}"
@@ -52,6 +49,9 @@ jobs:
           inlineScript: |
             VAULT=$(az keyvault list --resource-group ${{ secrets.BUILDER_GROUP }} --query [].name -otsv)
             STORAGE=$(az keyvault secret show --id https://$VAULT.vault.azure.net/secrets/storage --query value -otsv)
+
+            OSDU_PRINCIPAL_NAME=$(az ad sp show --id $(echo '${{ secrets.OSDU_CREDENTIALS }}' | jq -r ".clientId") --query appDisplayName -otsv)
+            echo "OSDU_PRINCIPAL_NAME=$OSDU_PRINCIPAL_NAME" >> $GITHUB_ENV
 
             cat > $GITHUB_WORKSPACE/.env << EOF
             ## These variables support AzureRM Backend Storage State
@@ -123,6 +123,9 @@ jobs:
             VAULT=$(az keyvault list --resource-group ${{ secrets.BUILDER_GROUP }} --query [].name -otsv)
             STORAGE=$(az keyvault secret show --id https://$VAULT.vault.azure.net/secrets/storage --query value -otsv)
 
+            OSDU_PRINCIPAL_NAME=$(az ad sp show --id $(echo '${{ secrets.OSDU_CREDENTIALS }}' | jq -r ".clientId") --query appDisplayName -otsv)
+            echo "OSDU_PRINCIPAL_NAME=$OSDU_PRINCIPAL_NAME" >> $GITHUB_ENV
+
             cat > $GITHUB_WORKSPACE/.env << EOF
             ## These variables support AzureRM Backend Storage State
             ARM_TENANT_ID=$(az account show --query homeTenantId -otsv)
@@ -189,6 +192,9 @@ jobs:
           inlineScript: |
             VAULT=$(az keyvault list --resource-group ${{ secrets.BUILDER_GROUP }} --query [].name -otsv)
             STORAGE=$(az keyvault secret show --id https://$VAULT.vault.azure.net/secrets/storage --query value -otsv)
+
+            OSDU_PRINCIPAL_NAME=$(az ad sp show --id $(echo '${{ secrets.OSDU_CREDENTIALS }}' | jq -r ".clientId") --query appDisplayName -otsv)
+            echo "OSDU_PRINCIPAL_NAME=$OSDU_PRINCIPAL_NAME" >> $GITHUB_ENV
 
             cat > $GITHUB_WORKSPACE/.env << EOF
             ## These variables support AzureRM Backend Storage State
