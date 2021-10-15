@@ -192,3 +192,36 @@ jobs:
       #     name: ENV_FILE
       #     value: ${{ steps.passphrase.envfile.content }}
       #     pa_token: ${{ secrets.GH_REPO_TOKEN }}
+
+  env-data:
+    name: Load KV - Settings
+    runs-on: ubuntu-latest
+    steps:
+      - uses: Azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - name: Save Rest-Client Environment to Common Vault
+        uses: Azure/cli@1.0.4
+        with:
+          inlineScript: |
+            VAULT=$(az keyvault list --resource-group ${{ secrets.BUILDER_GROUP }} --query [].name -otsv)
+            BASE_64_TOKEN=$(echo "elastic:${{ secrets.ELASTIC_PASSWORD }}" | base64)
+            CLIENT_SECRET=$(az ad app credential reset --id $(az keyvault secret show --id https://${VAULT}.vault.azure.net/secrets/application-id --query value -otsv) --query password -otsv)
+
+
+            cat > settings << EOF
+            "self-managed-osdu": {
+              "TENANT_ID": "$(az account show --query homeTenantId -otsv)",
+              "PRINCIPAL_ID": "$(az keyvault secret show --id https://$VAULT.vault.azure.net/secrets/client-id --query value -otsv)",
+              "PRINCIPAL_SECRET": "$(az keyvault secret show --id https://$VAULT.vault.azure.net/secrets/client-secret --query value -otsv)",
+              "CLIENT_ID": "$(az keyvault secret show --id https://$VAULT.vault.azure.net/secrets/application-id --query value -otsv)",
+              "CLIENT_SECRET": "$CLIENT_SECRET",
+              "OSDU_HOST": "",
+              "REGION": "${{ secrets.AZURE_LOCATION }}",
+              "ES_HOST": "${{ secrets.ELASTIC_ENDPOINT }}",
+              "ES_AUTH_TOKEN": "$BASE_64_TOKEN",
+              "INITIAL_TOKEN": ""
+            }
+            EOF
+            az keyvault secret set --vault-name $VAULT --name "restclient" --file settings
