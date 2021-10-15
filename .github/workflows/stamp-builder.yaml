@@ -196,6 +196,7 @@ jobs:
   env-data:
     name: Load KV - Settings
     runs-on: ubuntu-latest
+    needs: builder
     steps:
       - uses: Azure/login@v1
         with:
