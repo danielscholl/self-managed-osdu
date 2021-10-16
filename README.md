@@ -37,8 +37,16 @@ Secrets are managed using [Github Repository Secrets](https://docs.github.com/en
 __Manually Created Secrets__
 
 1. `GH_REPO_TOKEN`: A personal access token with `repo` scope.
-2. `AZURE_LOCATION`: The Azure Region to deploy the resources to.
-3. `AZURE_CREDENTIALS`: The json output of a Service Principal with _Owner_ Subscription Scope.
+2. `ELASTIC_ENDPOINT`: The endpoint of the Elasticsearch cluster.
+
+```bash
+# Sample Format
+https://my-osdu.es.southcentralus.azure.elastic-cloud.com:9243
+```
+
+3. `ELASTIC_PASSWORD`: The password of the Elasticsearch cluster.
+4. `AZURE_LOCATION`: The Azure Region to deploy the resources to.
+5. `AZURE_CREDENTIALS`: The json output of a Service Principal with _Owner_ Subscription Scope.
 
 ```bash
 SUBSCRIPTION_ID=$(az account show --query id --output tsv)
@@ -65,7 +73,7 @@ az ad sp create-for-rbac --name $AZURE_CREDENTIALS \
 }
 ```
 
-4. `OSDU_CREDENTIALS`: The json output a Service Principal with _Contributor_ Subscription Scope.
+6. `OSDU_CREDENTIALS`: The json output a Service Principal with _Contributor_ Subscription Scope.
 
 
 ```bash
@@ -93,14 +101,14 @@ az ad sp create-for-rbac --name $OSDU_CREDENTIALS \
 }
 ```
 
-5. `OSDU_CREDENTIAL_OID`: The Object ID of the _OSDU_CREDENTIALS_ Service Principal.
+7. `OSDU_CREDENTIAL_OID`: The Object ID of the _OSDU_CREDENTIALS_ Service Principal.
 
 ```bash
 az ad sp list --display-name $OSDU_CREDENTIALS --query [].objectId -otsv
 ```
 
 
-6. `OSDU_APPLICATION`: The json output of an Azure AD Application.
+8. `OSDU_APPLICATION`: The json output of an Azure AD Application.
 
 ```bash
 OSDU_APPLICATION="self-managed-osdu-stamp-application-$(az account show --query user.name -otsv | awk -F "@" '{print $1}')"
@@ -119,15 +127,6 @@ az ad app create --display-name $OSDU_APPLICATION \
   "objectId": "00000000-0000-0000-0000-000000000000"
 }
 ```
-
-7. `ELASTIC_ENDPOINT`: The endpoint of the Elasticsearch cluster.
-
-```bash
-# Sample Format
-https://my-osdu.es.southcentralus.azure.elastic-cloud.com:9243
-```
-
-8. `ELASTIC_PASSWORD`: The password of the Elasticsearch cluster.
 
 
 ![secrets](./docs/images/secrets.png)
