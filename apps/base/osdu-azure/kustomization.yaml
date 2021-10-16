@@ -13,7 +13,10 @@ resources:
   - file-service.yaml
   - dataset-service.yaml
   - indexer-service.yaml
+  - indexer-queue.yaml
   - search-service.yaml
   - notification-service.yaml
   - register-service.yaml
-  - indexer-queue.yaml
+  - unit-service.yaml
+  - crs-catalog.yaml
+  - crs-conversion.yaml

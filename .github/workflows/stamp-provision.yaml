@@ -623,18 +623,21 @@ jobs:
         with:
           inlineScript: |
             REGISTRY=$(az acr list -g $GROUP --query [0].name -otsv)
-            IMAGES=('dataset' \
+            IMAGES=('partition' \
                     'entitlements' \
-                    'file' \
-                    'indexer-queue' \
-                    'indexer' \
                     'legal' \
-                    'notification' \
-                    'partition' \
-                    'register' \
                     'schema' \
+                    'storage' \
+                    'file' \
+                    'dataset' \
+                    'indexer' \
+                    'indexer-queue' \
                     'search' \
-                    'storage' )
+                    'register' \
+                    'notification' \
+                    'unit' \
+                    'crs-catalog' \
+                    'crs-conversion' )
 
             for IMAGE in "${IMAGES[@]}"
             do

@@ -152,6 +152,9 @@ jobs:
               name: indexer
               namespace: osdu-azure
             - kind: Deployment
+              name: indexer-queue
+              namespace: osdu-azure
+            - kind: Deployment
               name: search
               namespace: osdu-azure
             - kind: Deployment
@@ -159,6 +162,9 @@ jobs:
               namespace: osdu-azure
             - kind: Deployment
               name: register
+              namespace: osdu-azure
+            - kind: Deployment
+              name: unit
               namespace: osdu-azure
           EOF
 
@@ -185,10 +191,14 @@ jobs:
             - file-service-values.yaml
             - dataset-service-values.yaml
             - indexer-service-values.yaml
+            - indexer-queue-values.yaml
             - search-service-values.yaml
             - notification-service-values.yaml
             - register-service-values.yaml
-            - indexer-queue-values.yaml
+            - unit-service-values.yaml
+            - crs-catalog-values.yaml
+            - crs-conversion-values.yaml
+            
           EOF
 
       - name: Create Helm Values - dev-sample
@@ -1012,6 +1022,78 @@ jobs:
                     key: appinsights
           EOF
 
+      - name: Create Helm Values - indexer-queue
+        run: |
+          cat > $GITHUB_WORKSPACE/apps/$CLUSTER/indexer-queue-values.yaml << EOF
+          ---
+          apiVersion: helm.toolkit.fluxcd.io/v2beta1
+          kind: HelmRelease
+          metadata:
+            name: indexer-queue
+            namespace: osdu-azure
+          spec:
+            values:
+              configuration:
+              - service: indexer-queue
+                repository: $REGISTRY/indexer-queue
+                keyvault: true
+                request:
+                  cpu: 1000m
+                  memory: 2Gi
+                limit:
+                  cpu: 1000m
+                  memory: 2Gi
+                env:
+                - name: spring_application_name
+                  value: indexer-queue
+                - name: server_port
+                  value: 80
+                - name: azure_servicebus_topic_name
+                  value: recordstopic
+                - name: azure_servicebus_topic_subscription
+                  value: recordstopicsubscription
+                - name: indexer_worker_url
+                  value: http://indexer/api/indexer/v2/_dps/task-handlers/index-worker
+                - name: PARTITION_API
+                  value: http://partition/api/partition/v1
+                - name: max_concurrent_calls
+                  value: "32"
+                - name: executor_n_threads
+                  value: "32"
+                - name: max_lock_renew_duration_seconds
+                  value: "600"
+                - name: max_delivery_count
+                  value: "5"
+                - name: AZURE_CLIENT_ID
+                  secret:
+                    name: active-directory
+                    key: principal-clientid
+                - name: AZURE_CLIENT_SECRET
+                  secret:
+                    name: active-directory
+                    key: principal-clientpassword
+                - name: AZURE_TENANT_ID
+                  secret:
+                    name: active-directory
+                    key: tenantid
+                - name: KEYVAULT_URI
+                  config:
+                    name: osdu-svc-config
+                    key: ENV_KEYVAULT
+                - name: aad_client_id
+                  secret:
+                    name: active-directory
+                    key: application-appid
+                - name: AZURE_APP_RESOURCE_ID
+                  secret:
+                    name: active-directory
+                    key: application-appid
+                - name: azure_application_insights_instrumentation_key
+                  secret:
+                    name: central-logging
+                    key: appinsights
+          EOF
+
       - name: Create Helm Values - search-service
         run: |
 
@@ -1287,60 +1369,60 @@ jobs:
                     key: appinsights
           EOF
 
-      - name: Create Helm Values - indexer-queue
+      - name: Create Helm Values - unit-service
         run: |
-          cat > $GITHUB_WORKSPACE/apps/$CLUSTER/indexer-queue-values.yaml << EOF
+          cat > $GITHUB_WORKSPACE/apps/$CLUSTER/unit-service-values.yaml << EOF
           ---
           apiVersion: helm.toolkit.fluxcd.io/v2beta1
           kind: HelmRelease
           metadata:
-            name: indexer-queue
+            name: unit-service
             namespace: osdu-azure
           spec:
             values:
+              ingress:
+                dns: $DNS_HOST
               configuration:
-              - service: indexer-queue
-                repository: $REGISTRY/indexer-queue
+              - service: unit
+                repository: $REGISTRY/unit
+                path: /api/unit/*
+                probe:
+                  path: /api/unit/_ah/readiness_check
+                  port: http
                 keyvault: true
-                request:
-                  cpu: 1000m
-                  memory: 2Gi
-                limit:
-                  cpu: 1000m
-                  memory: 2Gi
+                auth:
+                  disable:
+                    - "/"
+                    - "*/index.html"
+                    - "*/v2/api-docs"
+                    - "*/swagger-resources"
+                    - "*/swagger-ui.html"
+                    - "*/configuration/ui"
+                    - "*/configuration/security"
+                    - "/api/unit/swagger-resources/*"
+                    - "/api/unit/webjars/*"
+                    - "*/actuator/health"
+                    - "*/health"
+                    - "*/_ah/**"
+                pvc:
+                  - name: unit
+                    volume: shared-data
+                mount:
+                  - name: shared-data
+                    path: /mnt/unit_catalogs
                 env:
                 - name: spring_application_name
-                  value: indexer-queue
+                  value: unit-service
+                - name: server.servlet.contextPath
+                  value: /api/unit/
                 - name: server_port
                   value: 80
-                - name: azure_servicebus_topic_name
-                  value: recordstopic
-                - name: azure_servicebus_topic_subscription
-                  value: recordstopicsubscription
-                - name: indexer_worker_url
-                  value: http://indexer/api/indexer/v2/_dps/task-handlers/index-worker
-                - name: PARTITION_API
-                  value: http://partition/api/partition/v1
-                - name: max_concurrent_calls
-                  value: "32"
-                - name: executor_n_threads
-                  value: "32"
-                - name: max_lock_renew_duration_seconds
-                  value: "600"
-                - name: max_delivery_count
-                  value: "5"
-                - name: AZURE_CLIENT_ID
-                  secret:
-                    name: active-directory
-                    key: principal-clientid
-                - name: AZURE_CLIENT_SECRET
-                  secret:
-                    name: active-directory
-                    key: principal-clientpassword
-                - name: AZURE_TENANT_ID
-                  secret:
-                    name: active-directory
-                    key: tenantid
+                - name: ACCEPT_HTTP
+                  value: true
+                - name: ENTITLEMENT_URL
+                  value: http://entitlements/api/entitlements/v2
+                - name: azure_istioauth_enabled
+                  value: "true"
                 - name: KEYVAULT_URI
                   config:
                     name: osdu-svc-config
@@ -1349,16 +1431,158 @@ jobs:
                   secret:
                     name: active-directory
                     key: application-appid
-                - name: AZURE_APP_RESOURCE_ID
-                  secret:
-                    name: active-directory
-                    key: application-appid
-                - name: azure_application_insights_instrumentation_key
+                - name: appinsights_key
                   secret:
                     name: central-logging
                     key: appinsights
           EOF
 
+      - name: Create Helm Values - crs-catalog
+        run: |
+          cat > $GITHUB_WORKSPACE/apps/$CLUSTER/crs-catalog-values.yaml << EOF
+          ---
+          apiVersion: helm.toolkit.fluxcd.io/v2beta1
+          kind: HelmRelease
+          metadata:
+            name: crs-catalog
+            namespace: osdu-azure
+          spec:
+            values:
+              ingress:
+                dns: $DNS_HOST
+              configuration:
+              - service: crs-catalog
+                repository: $REGISTRY/crs-catalog
+                path: /api/crs/catalog/*
+                probe:
+                  path: /api/crs/catalog/swagger-ui.html
+                  port: http
+                keyvault: true
+                auth:
+                  disable:
+                    - "/"
+                    - "*/index.html"
+                    - "*/v2/api-docs"
+                    - "*/swagger-resources"
+                    - "*/swagger-ui.html"
+                    - "*/configuration/ui"
+                    - "*/configuration/security"
+                     - "/api/crs/catalog/swagger-resources/*"
+                     - "/api/crs/catalog/webjars/*"
+                    - "*/actuator/health"
+                    - "*/health"
+                    - "*/_ah/**"
+                pvc:
+                  - name: crs
+                    volume: shared-data
+                mount:
+                  - name: shared-data
+                    path: /mnt/crs_catalogs
+                env:
+                - name: spring_application_name
+                  value: crs-catalog-service
+                - name: server.servlet.contextPath
+                  value: /api/crs/catalog/
+                - name: server_port
+                  value: 80
+                - name: ACCEPT_HTTP
+                  value: true
+                - name: ENTITLEMENT_URL
+                  value: http://entitlements/api/entitlements/v2
+                - name: azure_istioauth_enabled
+                  value: "true"
+                - name: KEYVAULT_URI
+                  config:
+                    name: osdu-svc-config
+                    key: ENV_KEYVAULT
+                - name: aad_client_id
+                  secret:
+                    name: active-directory
+                    key: application-appid
+                - name: appinsights_key
+                  secret:
+                    name: central-logging
+                    key: appinsights
+
+          EOF
+
+      - name: Create Helm Values - crs-conversion
+        run: |
+          cat > $GITHUB_WORKSPACE/apps/$CLUSTER/crs-conversion-values.yaml << EOF
+          ---
+          apiVersion: helm.toolkit.fluxcd.io/v2beta1
+          kind: HelmRelease
+          metadata:
+            name: crs-conversion
+            namespace: osdu-azure
+          spec:
+            values:
+              ingress:
+                dns: $DNS_HOST
+              configuration:
+              - service: crs-conversion
+                repository: $REGISTRY/crs-conversion
+                path: /api/crs/converter/*
+                probe:
+                  path: /api/crs/converter/swagger-ui.html
+                  port: http
+                keyvault: true
+                auth:
+                  disable:
+                    - "/"
+                    - "*/index.html"
+                    - "*/v2/api-docs"
+                    - "*/swagger-resources"
+                    - "*/swagger-ui.html"
+                    - "*/configuration/ui"
+                    - "*/configuration/security"
+                     - "/api/crs/converter/swagger-resources/*"
+                     - "/api/crs/converter/webjars/*"
+                    - "*/actuator/health"
+                    - "*/health"
+                    - "*/_ah/**"
+                pvc:
+                  - name: crs-conversion
+                    volume: shared-data
+                mount:
+                  - name: shared-data
+                    path: /mnt/crs-conversion
+                env:
+                - name: spring_application_name
+                  value: crs-conversion-service
+                - name: server.servlet.contextPath
+                  value: /api/crs/converter/
+                - name: server_port
+                  value: 80
+                - name: ACCEPT_HTTP
+                  value: true
+                - name: cosmosdb_database
+                  value: osdu-db
+                - name: ENTITLEMENT_URL
+                  value: http://entitlements/api/entitlements/v2
+                - name: ESRI_DATA_PATH
+                  value: /crs-conversion-service
+                - name: service_domain_name
+                  value: contoso.com
+                - name: SIS_DATA
+                  value: /mnt/crs_conversion/apachesis_setup/SIS_DATA
+                - name: azure_istioauth_enabled
+                  value: "true"
+                - name: KEYVAULT_URI
+                  config:
+                    name: osdu-svc-config
+                    key: ENV_KEYVAULT
+                - name: aad_client_id
+                  secret:
+                    name: active-directory
+                    key: application-appid
+                - name: appinsights_key
+                  secret:
+                    name: central-logging
+                    key: appinsights
+
+
+          EOF
 
       #     cat > $GITHUB_WORKSPACE/apps/$CLUSTER/osdu-airflow-values.yaml << EOF
       #     ---
