@@ -20,7 +20,11 @@ patchesStrategicMerge:
   - file-service-values.yaml
   - dataset-service-values.yaml
   - indexer-service-values.yaml
+  - indexer-queue-values.yaml
   - search-service-values.yaml
   - notification-service-values.yaml
   - register-service-values.yaml
-  - indexer-queue-values.yaml
+  - unit-service-values.yaml
+  - crs-catalog-values.yaml
+  - crs-conversion-values.yaml
+  
