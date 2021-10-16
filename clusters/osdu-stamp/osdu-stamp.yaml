@@ -56,6 +56,9 @@ spec:
     name: indexer
     namespace: osdu-azure
   - kind: Deployment
+    name: indexer-queue
+    namespace: osdu-azure
+  - kind: Deployment
     name: search
     namespace: osdu-azure
   - kind: Deployment
@@ -63,4 +66,7 @@ spec:
     namespace: osdu-azure
   - kind: Deployment
     name: register
+    namespace: osdu-azure
+  - kind: Deployment
+    name: unit
     namespace: osdu-azure
