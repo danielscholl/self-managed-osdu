@@ -1405,11 +1405,11 @@ jobs:
                     - "*/health"
                     - "*/_ah/**"
                 pvc:
-                  - name: unit
-                    volume: shared-data
+                - name: unit
+                  volume: shared-data
                 mount:
-                  - name: shared-data
-                    path: /mnt/unit_catalogs
+                - name: shared-data
+                  path: /mnt/unit_catalogs
                 env:
                 - name: spring_application_name
                   value: unit-service
@@ -1473,11 +1473,11 @@ jobs:
                     - "*/health"
                     - "*/_ah/**"
                 pvc:
-                  - name: crs
-                    volume: shared-data
+                - name: crs
+                  volume: shared-data
                 mount:
-                  - name: shared-data
-                    path: /mnt/crs_catalogs
+                - name: shared-data
+                  path: /mnt/crs_catalogs
                 env:
                 - name: spring_application_name
                   value: crs-catalog-service
@@ -1503,7 +1503,6 @@ jobs:
                   secret:
                     name: central-logging
                     key: appinsights
-
           EOF
 
       - name: Create Helm Values - crs-conversion
@@ -1542,11 +1541,11 @@ jobs:
                     - "*/health"
                     - "*/_ah/**"
                 pvc:
-                  - name: crs-conversion
-                    volume: shared-data
+                - name: crs-conversion
+                  volume: shared-data
                 mount:
-                  - name: shared-data
-                    path: /mnt/crs-conversion
+                - name: shared-data
+                  path: /mnt/crs-conversion
                 env:
                 - name: spring_application_name
                   value: crs-conversion-service
@@ -1580,8 +1579,6 @@ jobs:
                   secret:
                     name: central-logging
                     key: appinsights
-
-
           EOF
 
       #     cat > $GITHUB_WORKSPACE/apps/$CLUSTER/osdu-airflow-values.yaml << EOF
