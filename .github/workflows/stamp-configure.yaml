@@ -1518,10 +1518,10 @@ jobs:
           spec:
             values:
               ingress:
-                dns: $DNS_HOST
+                dns: osdu-self-dplceicj-7s8e-gw.centralus.cloudapp.azure.com
               configuration:
-              - service: crs-conversion
-                repository: $REGISTRY/crs-conversion
+              - service: unit
+                repository: osduselfcplceiebkacr.azurecr.io/crs-conversion
                 path: /api/crs/converter/*
                 probe:
                   path: /api/crs/converter/swagger-ui.html
@@ -1536,8 +1536,8 @@ jobs:
                     - "*/swagger-ui.html"
                     - "*/configuration/ui"
                     - "*/configuration/security"
-                     - "/api/crs/converter/swagger-resources/*"
-                     - "/api/crs/converter/webjars/*"
+                    - "/api/crs/converter/swagger-resources/*"
+                    - "/api/crs/converter/webjars/*"
                     - "*/actuator/health"
                     - "*/health"
                     - "*/_ah/**"
@@ -1546,7 +1546,7 @@ jobs:
                   volume: shared-data
                 mount:
                 - name: shared-data
-                  path: /mnt/crs-conversion
+                  path: /mnt/crs_conversion
                 env:
                 - name: spring_application_name
                   value: crs-conversion-service
@@ -1556,8 +1556,6 @@ jobs:
                   value: 80
                 - name: ACCEPT_HTTP
                   value: true
-                - name: cosmosdb_database
-                  value: osdu-db
                 - name: ENTITLEMENT_URL
                   value: http://entitlements/api/entitlements/v2
                 - name: ESRI_DATA_PATH
