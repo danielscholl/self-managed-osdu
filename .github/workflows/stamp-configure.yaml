@@ -1449,10 +1449,10 @@ jobs:
           spec:
             values:
               ingress:
-                dns: $DNS_HOST
+                dns: osdu-self-dplceicj-7s8e-gw.centralus.cloudapp.azure.com
               configuration:
-              - service: crs-catalog
-                repository: $REGISTRY/crs-catalog
+              - service: unit
+                repository: osduselfcplceiebkacr.azurecr.io/crs-catalog
                 path: /api/crs/catalog/*
                 probe:
                   path: /api/crs/catalog/swagger-ui.html
@@ -1467,8 +1467,8 @@ jobs:
                     - "*/swagger-ui.html"
                     - "*/configuration/ui"
                     - "*/configuration/security"
-                     - "/api/crs/catalog/swagger-resources/*"
-                     - "/api/crs/catalog/webjars/*"
+                    - "/api/crs/catalog/swagger-resources/*"
+                    - "/api/crs/catalog/webjars/*"
                     - "*/actuator/health"
                     - "*/health"
                     - "*/_ah/**"
@@ -1503,6 +1503,7 @@ jobs:
                   secret:
                     name: central-logging
                     key: appinsights
+
           EOF
 
       - name: Create Helm Values - crs-conversion
