@@ -9,7 +9,7 @@ spec:
     ingress:
       dns: osdu-self-dplceicj-7s8e-gw.centralus.cloudapp.azure.com
     configuration:
-    - service: unit
+    - service: crs-conversion
       repository: osduselfcplceiebkacr.azurecr.io/crs-conversion
       path: /api/crs/converter/*
       probe:
