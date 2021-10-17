@@ -1,32 +1,32 @@
----
-apiVersion: helm.toolkit.fluxcd.io/v2beta1
-kind: HelmRelease
-metadata:
-  name: crs-catalog
-  namespace: osdu-azure
-spec:
-  releaseName: crs-catalog
-  dependsOn:
-  - name: search-service
-    namespace: osdu-azure
-  chart:
-    spec:
-      chart: ./charts/self-managed-service
-      sourceRef:
-        kind: GitRepository
-        name: flux-system
-        namespace: flux-system
-  interval: 5m0s
-  install:
-    remediation:
-      retries: 3
-  targetNamespace: osdu-azure
-  values:
-    podIdentity: osdu-identity
-    replicaCount: 2
-    ingress:
-      issuer: letsencrypt-prod-dns
-      enableKeyvaultCert: false
-    service:
-      type: ClusterIP
-      port: 80
+# ---
+# apiVersion: helm.toolkit.fluxcd.io/v2beta1
+# kind: HelmRelease
+# metadata:
+#   name: crs-catalog
+#   namespace: osdu-azure
+# spec:
+#   releaseName: crs-catalog
+#   dependsOn:
+#   - name: search-service
+#     namespace: osdu-azure
+#   chart:
+#     spec:
+#       chart: ./charts/self-managed-service
+#       sourceRef:
+#         kind: GitRepository
+#         name: flux-system
+#         namespace: flux-system
+#   interval: 5m0s
+#   install:
+#     remediation:
+#       retries: 3
+#   targetNamespace: osdu-azure
+#   values:
+#     podIdentity: osdu-identity
+#     replicaCount: 2
+#     ingress:
+#       issuer: letsencrypt-prod-dns
+#       enableKeyvaultCert: false
+#     service:
+#       type: ClusterIP
+#       port: 80
