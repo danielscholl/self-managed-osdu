@@ -31,11 +31,11 @@ spec:
           - "*/health"
           - "*/_ah/**"
       pvc:
-        - name: crs
-          volume: shared-data
+      - name: crs
+        volume: shared-data
       mount:
-        - name: shared-data
-          path: /mnt/crs_catalogs
+      - name: shared-data
+        path: /mnt/crs_catalogs
       env:
       - name: spring_application_name
         value: crs-catalog-service
