@@ -1,0 +1,64 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: crs-catalog
+  namespace: osdu-azure
+spec:
+  values:
+    ingress:
+      dns: osdu-self-dplceicj-s29z-gw.centralus.cloudapp.azure.com
+    configuration:
+    - service: crs-catalog
+      repository: osduselfcplceip5q9cr.azurecr.io/crs-catalog
+      path: /api/crs/catalog/*
+      probe:
+        path: /api/crs/catalog/swagger-ui.html
+        port: http
+      keyvault: true
+      auth:
+        disable:
+          - "/"
+          - "*/index.html"
+          - "*/v2/api-docs"
+          - "*/swagger-resources"
+          - "*/swagger-ui.html"
+          - "*/configuration/ui"
+          - "*/configuration/security"
+           - "/api/crs/catalog/swagger-resources/*"
+           - "/api/crs/catalog/webjars/*"
+          - "*/actuator/health"
+          - "*/health"
+          - "*/_ah/**"
+      pvc:
+        - name: crs
+          volume: shared-data
+      mount:
+        - name: shared-data
+          path: /mnt/crs_catalogs
+      env:
+      - name: spring_application_name
+        value: crs-catalog-service
+      - name: server.servlet.contextPath
+        value: /api/crs/catalog/
+      - name: server_port
+        value: 80
+      - name: ACCEPT_HTTP
+        value: true
+      - name: ENTITLEMENT_URL
+        value: http://entitlements/api/entitlements/v2
+      - name: azure_istioauth_enabled
+        value: "true"
+      - name: KEYVAULT_URI
+        config:
+          name: osdu-svc-config
+          key: ENV_KEYVAULT
+      - name: aad_client_id
+        secret:
+          name: active-directory
+          key: application-appid
+      - name: appinsights_key
+        secret:
+          name: central-logging
+          key: appinsights
+
