@@ -25,5 +25,3 @@ patchesStrategicMerge:
   - notification-service-values.yaml
   - register-service-values.yaml
   - unit-service-values.yaml
-  - crs-conversion-values.yaml
-  
