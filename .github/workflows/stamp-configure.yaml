@@ -1599,9 +1599,8 @@ jobs:
           spec:
             values:
               configuration:
-              - service: wks-service
+              - scaledObject: wks-service
                 repository: $REGISTRY/wks
-                scaledObject: true
                 servicebusSubscription: eg_sb_wkssubscription
                 servicebusTopic: recordstopiceg
                 keyvault: true
