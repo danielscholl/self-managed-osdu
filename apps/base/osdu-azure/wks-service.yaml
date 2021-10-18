@@ -24,9 +24,6 @@ spec:
   values:
     podIdentity: osdu-identity
     replicaCount: 2
-    ingress:
-      issuer: letsencrypt-prod-dns
-      enableKeyvaultCert: false
     service:
       type: ClusterIP
       port: 80
