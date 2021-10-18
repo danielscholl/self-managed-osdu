@@ -3,9 +3,10 @@
 To uninstall the application, run the following command:
 
 ```bash
+# Suspend and remove kustomizations
 flux suspend kustomization flux-system
-flux delete kustomization osdu-stamp
-flux delete kustomization sealed-secrets
+flux delete kustomization osdu-stamp --silent
+flux delete kustomization sealed-secrets --silent
 
 # Remove Helmreleases
 flux delete helmrelease crs-catalog -n osdu-azure --silent
