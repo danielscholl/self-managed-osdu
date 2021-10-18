@@ -1,10 +1,11 @@
+---
 apiVersion: source.toolkit.fluxcd.io/v1beta1
-kind: HelmRepository
+kind: GitRepository
 metadata:
-  name: private
-  namespace: default
+  name: airflow-charts
+  namespace: flux-system
 spec:
-  url: https://airflow.apache.org
-  secretRef:
-    name: https-credentials
-  interval: 1m
+  interval: 1m0s
+  ref:
+    tag: airflow-7.16.0
+  url: https://github.com/airflow-helm

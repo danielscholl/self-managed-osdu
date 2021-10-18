@@ -182,6 +182,7 @@ jobs:
             - ../base/dev-sample
             - ../base/osdu-base
             - ../base/osdu-istio
+            - ../base/osdu-airflow
             - ../base/osdu-azure
           patchesStrategicMerge:
             - dev-sample-values.yaml
