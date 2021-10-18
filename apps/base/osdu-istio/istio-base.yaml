@@ -11,7 +11,7 @@ spec:
       sourceRef:
         kind: GitRepository
         name: istio-charts
-        namespace: flux-system
+        namespace: istio-system
   interval: 5m0s
   install:
     remediation:
