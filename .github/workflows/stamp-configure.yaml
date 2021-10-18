@@ -198,7 +198,7 @@ jobs:
             - unit-service-values.yaml
             - crs-catalog-values.yaml
             - crs-conversion-values.yaml
-            
+
           EOF
 
       - name: Create Helm Values - dev-sample
@@ -1449,10 +1449,10 @@ jobs:
           spec:
             values:
               ingress:
-                dns: osdu-self-dplceicj-7s8e-gw.centralus.cloudapp.azure.com
+                dns: $DNS_HOST
               configuration:
               - service: crs-catalog
-                repository: osduselfcplceiebkacr.azurecr.io/crs-catalog
+                repository: $REGISTRY/crs-catalog
                 path: /api/crs/catalog/*
                 probe:
                   path: /api/crs/catalog/swagger-ui.html
@@ -1518,10 +1518,10 @@ jobs:
           spec:
             values:
               ingress:
-                dns: osdu-self-dplceicj-7s8e-gw.centralus.cloudapp.azure.com
+                dns: $DNS_HOST
               configuration:
               - service: crs-conversion
-                repository: osduselfcplceiebkacr.azurecr.io/crs-conversion
+                repository: $REGISTRY/crs-conversion
                 path: /api/crs/converter/*
                 probe:
                   path: /api/crs/converter/swagger-ui.html
