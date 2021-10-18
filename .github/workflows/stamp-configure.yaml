@@ -166,6 +166,12 @@ jobs:
             - kind: Deployment
               name: unit
               namespace: osdu-azure
+            - kind: Deployment
+              name: crs-catalog
+              namespace: osdu-azure
+            - kind: Deployment
+              name: crs-conversion
+              namespace: osdu-azure
           EOF
 
           cat > $GITHUB_WORKSPACE/apps/$CLUSTER/kustomization.yaml << EOF
