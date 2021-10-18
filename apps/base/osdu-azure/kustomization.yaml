@@ -20,3 +20,4 @@ resources:
   - unit-service.yaml
   - crs-catalog.yaml
   - crs-conversion.yaml
+  - wks-service.yaml
