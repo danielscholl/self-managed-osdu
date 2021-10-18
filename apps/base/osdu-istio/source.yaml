@@ -7,6 +7,6 @@ metadata:
 spec:
   interval: 1m0s
   ref:
-    branch: release-1.11
+    tag: 1.11.4
   url: https://github.com/istio/istio
 
