@@ -637,7 +637,11 @@ jobs:
                     'notification' \
                     'unit' \
                     'crs-catalog' \
-                    'crs-conversion' )
+                    'crs-conversion' \
+                    'wks' \
+                    'workflow' \
+                    'wellbore-ddms' \
+                    'sdms')
 
             for IMAGE in "${IMAGES[@]}"
             do

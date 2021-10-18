@@ -1,0 +1,10 @@
+apiVersion: source.toolkit.fluxcd.io/v1beta1
+kind: HelmRepository
+metadata:
+  name: private
+  namespace: default
+spec:
+  url: https://airflow.apache.org
+  secretRef:
+    name: https-credentials
+  interval: 1m

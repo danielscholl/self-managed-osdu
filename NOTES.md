@@ -33,9 +33,9 @@ flux delete helmrelease istio-base -n istio-system --silent
 flux delete helmrelease osdu-istio -n istio-system --silent
 flux delete helmrelease sealed-secrets -n flux-system --silent
 
-kubeclt delete namespace osdu-azure
+kubectl delete namespace osdu-azure
 kubectl delete namespace dev-sample
-kubeclt delete namespace istio-system
+kubectl delete namespace istio-system
 
 
 # An istio clean up issue requires cleanup of the istio-system namespace.
