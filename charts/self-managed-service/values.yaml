@@ -69,6 +69,11 @@ configuration:
     # keyvault: true
 
     ################################################################################
+    # Specify if the service should be a scaled object (optional)
+    #
+    scaledObject: true
+
+    ################################################################################
     # Specify Pod Resource Allocations (optional)
     #
     # request:
