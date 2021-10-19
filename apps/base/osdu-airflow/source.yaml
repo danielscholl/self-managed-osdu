@@ -4,7 +4,7 @@ kind: GitRepository
 metadata:
   name: airflow-charts
 spec:
-  interval: 1m0s
+  interval: 5m0s
   ref:
     tag: airflow-7.16.0
   url: https://github.com/airflow-helm/charts

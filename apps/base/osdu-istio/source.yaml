@@ -3,8 +3,9 @@ apiVersion: source.toolkit.fluxcd.io/v1beta1
 kind: GitRepository
 metadata:
   name: istio-charts
+  namespace: istio-system
 spec:
-  interval: 1m0s
+  interval: 5m0s
   ref:
     tag: 1.11.4
   url: https://github.com/istio/istio
