@@ -268,10 +268,10 @@ jobs:
                 appid: $(az keyvault secret show --id https://${ENV_VAULT}.vault.azure.net/secrets/aad-client-id --query value -otsv)
                 oidAuthEnabled: false
               resourceLimits:
-                defaultCpuRequests: "0.5"
-                defaultMemoryRequests: "4Gi"
-                defaultCpuLimits: "1"
-                defaultMemoryLimits: "4Gi"
+                defaultCpuRequests: "500m"
+                defaultMemoryRequests: "1000Mi"
+                defaultCpuLimits: "1000m"
+                defaultMemoryLimits: "2Gi"
               identity:
                 name: osdu-identity
           EOF
