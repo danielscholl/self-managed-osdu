@@ -47,6 +47,18 @@ spec:
         config:
           name: osdu-svc-config
           key: ENV_KEYVAULT
+      - name: AZURE_CLIENT_ID
+        secret:
+          name: active-directory
+          key: principal-clientid
+      - name: AZURE_CLIENT_SECRET
+        secret:
+          name: active-directory
+          key: principal-clientpassword
+      - name: AZURE_TENANT_ID
+        secret:
+          name: active-directory
+          key: tenantid
       - name: aad_client_id
         secret:
           name: active-directory
