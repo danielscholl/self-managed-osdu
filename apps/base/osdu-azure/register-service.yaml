@@ -5,7 +5,7 @@ metadata:
   name: register-service
   namespace: osdu-azure
 spec:
-  releaseName: storage-service
+  releaseName: register-service
   dependsOn:
   - name: notification-service
     namespace: osdu-azure
