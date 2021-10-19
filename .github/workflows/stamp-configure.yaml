@@ -1318,9 +1318,9 @@ jobs:
               - service: register
                 repository: $REGISTRY/register
                 path: /api/register/v1/*
-                probe:
-                  path: /api/register/v1/swagger-ui.html
-                  port: http
+                # probe:
+                #   path: /api/register/v1/swagger-ui.html
+                #   port: http
                 keyvault: true
                 auth:
                   disable:
