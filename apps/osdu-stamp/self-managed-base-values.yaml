@@ -17,9 +17,9 @@ spec:
       appid: 986292aa-2ecd-4d87-a7dc-e24b92e501bc
       oidAuthEnabled: false
     resourceLimits:
-      defaultCpuRequests: "0.5"
-      defaultMemoryRequests: "4Gi"
+      defaultCpuRequests: "100m"
+      defaultMemoryRequests: "800Mi"
       defaultCpuLimits: "1"
-      defaultMemoryLimits: "4Gi"
+      defaultMemoryLimits: "2Gi"
     identity:
       name: osdu-identity
