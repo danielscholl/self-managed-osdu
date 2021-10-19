@@ -213,11 +213,11 @@ The Partition should be initialized automatically.  Validate the Partition is ac
 
 __Configure RBAC Access__
 
----
 Entitlements needs to be initialized.  This can be done by running the `manage-user.http` script.
+
 ---
 
-- __Retrieve a OAuth Token__
+- __Retrieve an OAuth Token__
 
 ![user1](./docs/images/user1.png)
 
@@ -233,4 +233,31 @@ Entitlements needs to be initialized.  This can be done by running the `manage-u
 
 ![user4](./docs/images/user4.png)
 
+- __Assign the User to the desired RBAC Group__
+
+![user5](./docs/images/user5.png)
+
 ---
+
+__Login the First User__
+
+User authentication leverages the [Microsoft Identity Platform and OpenID Connect](https://docs.microsoft.com/en-us/azure/active-directory/develop/v2-protocols-oidc) procotol.  To enable an easier method of obtaining the required tokens an authcode login page with a rest-client http script are used to obtain API tokens.
+
+- __Retrieve an Authorization Code__
+
+Access the /login page from the `self-managed-osdu` instance and click the `authorize` button. Approve the access by the AD Application if required (only required for the first time) and retrieve the code.
+
+![login](./docs/images/login.png)
+
+---
+
+- __Retrieve an Initial Token__
+
+Using the Rest-Client HTTP Script `auth-token.http` add the auth_code obtained from the previous step to the `AUTH_CODE` parameter and post the authorize request.  The returned `refresh_token` value then can be saved in the `.vscode/settings.json` file as the INITIAL_TOKEN parameter.
+
+![auth_token](./docs/images/auth_token.png)
+
+- __Execute the Platform Core Check Script__
+
+Using the Rest-Client HTTP Script `check_core.http` validate the functionality for the platform core APIs.
+

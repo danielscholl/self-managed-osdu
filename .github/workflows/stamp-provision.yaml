@@ -386,41 +386,124 @@ jobs:
                 --if-exists replace --table-name $TABLE \
                 --entity PartitionKey=opendes RowKey=compliance-ruleset sensitive=false value=shared
 
-            DATASET=('elastic-endpoint' \
-                     'elastic-username' \
-                     'elastic-password' \
-                     'cosmos-connection' \
-                     'cosmos-endpoint' \
-                     'cosmos-primary-key' \
-                     'sb-connection' \
-                     'sb-namespace' \
-                     'storage-account-key' \
-                     'storage-account-name' \
-                     'ingest-storage-account-name' \
-                     'ingest-storage-account-key' \
-                     'eventgrid-recordstopic' \
-                     'eventgrid-recordstopic-accesskey' \
-                     'eventgrid-legaltagschangedtopic' \
-                     'eventgrid-legaltagschangedtopic-accesskey' \
-                     'eventgrid-resourcegroup' \
-                     'encryption-key-identifier' \
-                     'sdms-storage-account-name' \
-                     'sdms-storage-account-key' \
-                     'eventgrid-schemanotificationtopic' \
-                     'eventgrid-schemanotificationtopic-accesskey' \
-                     'eventgrid-gsmtopic' \
-                     'eventgrid-gsmtopic-accesskey' \
-                     'eventgrid-statuschangedtopic' \
-                     'eventgrid-statuschangedtopic-accesskey' \
-                     'eventgrid-schemachangedtopic' \
-                     'eventgrid-schemachangedtopic-accesskey')
-
-            for item in "${DATASET[@]}"
-            do
-              az storage entity insert --account-name $STORAGE_NAME --account-key $STORAGE_KEY \
+            az storage entity insert --account-name $STORAGE_NAME --account-key $STORAGE_KEY \
                 --if-exists replace --table-name $TABLE \
-                --entity PartitionKey=$PARTITION_NAME RowKey=$item sensitive=true value=$PARTITION_NAME-$item
-            done
+                --entity PartitionKey=$PARTITION_NAME RowKey=elastic-endpoint sensitive=true value=$PARTITION_NAME-elastic-endpoint
+
+            az storage entity insert --account-name $STORAGE_NAME --account-key $STORAGE_KEY \
+                --if-exists replace --table-name $TABLE \
+                --entity PartitionKey=$PARTITION_NAME RowKey=elastic-username sensitive=true value=$PARTITION_NAME-elastic-username
+
+            az storage entity insert --account-name $STORAGE_NAME --account-key $STORAGE_KEY \
+                --if-exists replace --table-name $TABLE \
+                --entity PartitionKey=$PARTITION_NAME RowKey=elastic-password sensitive=true value=$PARTITION_NAME-elastic-password
+
+            az storage entity insert --account-name $STORAGE_NAME --account-key $STORAGE_KEY \
+                --if-exists replace --table-name $TABLE \
+                --entity PartitionKey=$PARTITION_NAME RowKey=cosmos-connection sensitive=true value=$PARTITION_NAME-cosmos-connection
+
+            az storage entity insert --account-name $STORAGE_NAME --account-key $STORAGE_KEY \
+                --if-exists replace --table-name $TABLE \
+                --entity PartitionKey=$PARTITION_NAME RowKey=cosmos-endpoint sensitive=true value=$PARTITION_NAME-cosmos-endpoint
+
+            az storage entity insert --account-name $STORAGE_NAME --account-key $STORAGE_KEY \
+                --if-exists replace --table-name $TABLE \
+                --entity PartitionKey=$PARTITION_NAME RowKey=cosmos-primary-key sensitive=true value=$PARTITION_NAME-cosmos-primary-key
+
+            az storage entity insert --account-name $STORAGE_NAME --account-key $STORAGE_KEY \
+                --if-exists replace --table-name $TABLE \
+                --entity PartitionKey=$PARTITION_NAME RowKey=sb-connection sensitive=true value=$PARTITION_NAME-sb-connection
+
+            az storage entity insert --account-name $STORAGE_NAME --account-key $STORAGE_KEY \
+                --if-exists replace --table-name $TABLE \
+                --entity PartitionKey=$PARTITION_NAME RowKey=sb-namespace sensitive=true value=$PARTITION_NAME-sb-namespace
+
+            az storage entity insert --account-name $STORAGE_NAME --account-key $STORAGE_KEY \
+                --if-exists replace --table-name $TABLE \
+                --entity PartitionKey=$PARTITION_NAME RowKey=storage-account-name sensitive=true value=$PARTITION_NAME-storage
+
+            az storage entity insert --account-name $STORAGE_NAME --account-key $STORAGE_KEY \
+                --if-exists replace --table-name $TABLE \
+                --entity PartitionKey=$PARTITION_NAME RowKey=storage-account-key sensitive=true value=$PARTITION_NAME-storage-key
+
+            az storage entity insert --account-name $STORAGE_NAME --account-key $STORAGE_KEY \
+                --if-exists replace --table-name $TABLE \
+                --entity PartitionKey=$PARTITION_NAME RowKey=ingest-storage-account-name sensitive=true value=$PARTITION_NAME-ingest-storage
+
+            az storage entity insert --account-name $STORAGE_NAME --account-key $STORAGE_KEY \
+                --if-exists replace --table-name $TABLE \
+                --entity PartitionKey=$PARTITION_NAME RowKey=ingest-storage-account-key sensitive=true value=$PARTITION_NAME-ingest-storage-key
+
+            az storage entity insert --account-name $STORAGE_NAME --account-key $STORAGE_KEY \
+                --if-exists replace --table-name $TABLE \
+                --entity PartitionKey=$PARTITION_NAME RowKey=sdms-storage-account-name sensitive=true value=$PARTITION_NAME-sdms-storage
+
+            az storage entity insert --account-name $STORAGE_NAME --account-key $STORAGE_KEY \
+                --if-exists replace --table-name $TABLE \
+                --entity PartitionKey=$PARTITION_NAME RowKey=sdms-storage-account-key sensitive=true value=$PARTITION_NAME-sdms-storage-key
+
+            az storage entity insert --account-name $STORAGE_NAME --account-key $STORAGE_KEY \
+                --if-exists replace --table-name $TABLE \
+                --entity PartitionKey=$PARTITION_NAME RowKey=encryption-key-identifier sensitive=true value=$PARTITION_NAME-encryption-key-identifier
+
+            az storage entity insert --account-name $STORAGE_NAME --account-key $STORAGE_KEY \
+                --if-exists replace --table-name $TABLE \
+                --entity PartitionKey=$PARTITION_NAME RowKey=eventgrid-statuschangedtopic-accesskey sensitive=true value=$PARTITION_NAME-eventgrid-statuschangedtopic-accesskey
+
+            az storage entity insert --account-name $STORAGE_NAME --account-key $STORAGE_KEY \
+                --if-exists replace --table-name $TABLE \
+                --entity PartitionKey=$PARTITION_NAME RowKey=eventgrid-resourcegroup sensitive=true value=$PARTITION_NAME-eventgrid-resourcegroup
+
+            az storage entity insert --account-name $STORAGE_NAME --account-key $STORAGE_KEY \
+                --if-exists replace --table-name $TABLE \
+                --entity PartitionKey=$PARTITION_NAME RowKey=eventgrid-legaltagschangedtopic-accesskey sensitive=true value=$PARTITION_NAME-eventgrid-legaltagschangedtopic-accesskey
+
+            az storage entity insert --account-name $STORAGE_NAME --account-key $STORAGE_KEY \
+                --if-exists replace --table-name $TABLE \
+                --entity PartitionKey=$PARTITION_NAME RowKey=eventgrid-legaltagschangedtopic sensitive=true value=$PARTITION_NAME-eventgrid-legaltagschangedtopic
+
+            az storage entity insert --account-name $STORAGE_NAME --account-key $STORAGE_KEY \
+                --if-exists replace --table-name $TABLE \
+                --entity PartitionKey=$PARTITION_NAME RowKey=eventgrid-schemachangedtopic-accesskey sensitive=true value=$PARTITION_NAME-eventgrid-schemachangedtopic-accesskey
+
+            az storage entity insert --account-name $STORAGE_NAME --account-key $STORAGE_KEY \
+                --if-exists replace --table-name $TABLE \
+                --entity PartitionKey=$PARTITION_NAME RowKey=eventgrid-schemachangedtopic sensitive=true value=$PARTITION_NAME-eventgrid-schemachangedtopic
+
+            az storage entity insert --account-name $STORAGE_NAME --account-key $STORAGE_KEY \
+                --if-exists replace --table-name $TABLE \
+                --entity PartitionKey=$PARTITION_NAME RowKey=eventgrid-recordstopic-accesskey sensitive=true value=$PARTITION_NAME-eventgrid-recordstopic-accesskey
+
+            az storage entity insert --account-name $STORAGE_NAME --account-key $STORAGE_KEY \
+                --if-exists replace --table-name $TABLE \
+                --entity PartitionKey=$PARTITION_NAME RowKey=eventgrid-recordstopic sensitive=true value=$PARTITION_NAME-eventgrid-recordstopic
+
+            az storage entity insert --account-name $STORAGE_NAME --account-key $STORAGE_KEY \
+                --if-exists replace --table-name $TABLE \
+                --entity PartitionKey=$PARTITION_NAME RowKey=eventgrid-schemanotificationtopic-accesskey sensitive=true value=$PARTITION_NAME-eventgrid-schemachangedtopic-accesskey
+
+            az storage entity insert --account-name $STORAGE_NAME --account-key $STORAGE_KEY \
+                --if-exists replace --table-name $TABLE \
+                --entity PartitionKey=$PARTITION_NAME RowKey=eventgrid-schemanotificationtopic sensitive=true value=$PARTITION_NAME-eventgrid-schemachangedtopic
+
+            az storage entity insert --account-name $STORAGE_NAME --account-key $STORAGE_KEY \
+                --if-exists replace --table-name $TABLE \
+                --entity PartitionKey=$PARTITION_NAME RowKey=eventgrid-statuschangedtopic-accesskey sensitive=true value=$PARTITION_NAME-eventgrid-statuschangedtopic-accesskey
+
+            az storage entity insert --account-name $STORAGE_NAME --account-key $STORAGE_KEY \
+                --if-exists replace --table-name $TABLE \
+                --entity PartitionKey=$PARTITION_NAME RowKey=eventgrid-statuschangedtopic sensitive=true value=$PARTITION_NAME-eventgrid-statuschangedtopic
+
+            az storage entity insert --account-name $STORAGE_NAME --account-key $STORAGE_KEY \
+                --if-exists replace --table-name $TABLE \
+                --entity PartitionKey=$PARTITION_NAME RowKey=eventgrid-gsmtopic-accesskey sensitive=true value=$PARTITION_NAME-eventgrid-statuschangedtopic-accesskey
+
+            az storage entity insert --account-name $STORAGE_NAME --account-key $STORAGE_KEY \
+                --if-exists replace --table-name $TABLE \
+                --entity PartitionKey=$PARTITION_NAME RowKey=eventgrid-gsmtopic sensitive=true value=$PARTITION_NAME-eventgrid-statuschangedtopic
+
+
+
 
   image-data:
     name: Load ACR - Images
