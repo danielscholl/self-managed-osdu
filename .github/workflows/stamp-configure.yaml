@@ -268,8 +268,8 @@ jobs:
                 appid: $(az keyvault secret show --id https://${ENV_VAULT}.vault.azure.net/secrets/aad-client-id --query value -otsv)
                 oidAuthEnabled: false
               resourceLimits:
-                defaultCpuRequests: "500m"
-                defaultMemoryRequests: "1000Mi"
+                defaultCpuRequests: "100m"
+                defaultMemoryRequests: "800Mi"
                 defaultCpuLimits: "1000m"
                 defaultMemoryLimits: "2Gi"
               identity:
@@ -417,12 +417,6 @@ jobs:
                   path: /api/entitlements/v2/_ah/readiness_check
                   port: http
                 keyvault: true
-                request:
-                  cpu: 100m
-                  memory: 600Mi
-                limit:
-                  cpu: 1000m
-                  memory: 1300Mi
                 auth:
                   disable:
                     - "/"
@@ -498,12 +492,6 @@ jobs:
                     delay: 250
                     seconds: 10
                 keyvault: true
-                request:
-                  cpu: 100m
-                  memory: 1500Mi
-                limit:
-                  cpu: 500m
-                  memory: 1500Mi
                 auth:
                   disable:
                     - "/"
@@ -596,7 +584,7 @@ jobs:
                 keyvault: true
                 request:
                   cpu: 500m
-                  memory: 4Gi
+                  memory: 1Gi
                 limit:
                   cpu: 1000m
                   memory: 4Gi
@@ -955,10 +943,6 @@ jobs:
                   path: /api/indexer/v2/swagger-ui.html
                   port: http
                 keyvault: true
-                request:
-                  cpu: 100m
-                limit:
-                  cpu: 500m
                 auth:
                   disable:
                     - "/"
@@ -1126,8 +1110,6 @@ jobs:
                 keyvault: true
                 request:
                   cpu: 500m
-                limit:
-                  cpu: 1000m
                 auth:
                   disable:
                     - "/"

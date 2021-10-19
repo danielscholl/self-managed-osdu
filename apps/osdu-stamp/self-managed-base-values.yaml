@@ -17,8 +17,8 @@ spec:
       appid: 986292aa-2ecd-4d87-a7dc-e24b92e501bc
       oidAuthEnabled: false
     resourceLimits:
-      defaultCpuRequests: "500m"
-      defaultMemoryRequests: "1000Mi"
+      defaultCpuRequests: "100m"
+      defaultMemoryRequests: "800Mi"
       defaultCpuLimits: "1000m"
       defaultMemoryLimits: "2Gi"
     identity:
