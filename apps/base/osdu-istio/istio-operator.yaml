@@ -13,8 +13,8 @@ spec:
       chart: ./manifests/charts/istio-operator
       sourceRef:
         kind: GitRepository
-        name: istio-charts
-        namespace: istio-system
+        name: helm-charts-azure
+        namespace: flux-system
   interval: 5m0s
   install:
     remediation:

@@ -7,7 +7,7 @@ metadata:
 spec:
   releaseName: schema-service
   dependsOn:
-  - name: entitlement-service
+  - name: legal-service
     namespace: osdu-azure
   chart:
     spec:

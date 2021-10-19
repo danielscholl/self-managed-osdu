@@ -44,9 +44,10 @@ service:
 #
 configuration:
 
-  ################################
+  ##############################################################################
   ##  SERVICE CONFIGURATION SAMPLE
   #  Specify the Image Repository, tag, ingress path and health probe. (required)
+  #  - service:  or  - scaledObject:
   #
   - service: default
     repository: neilpeterson/aks-helloworld
@@ -67,11 +68,6 @@ configuration:
     # Specify if KeyVault Secrets should be used (optional)
     #
     # keyvault: true
-
-    ################################################################################
-    # Specify if the service should be a scaled object (optional)
-    #
-    scaledObject: true
 
     ################################################################################
     # Specify Pod Resource Allocations (optional)

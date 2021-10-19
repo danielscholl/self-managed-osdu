@@ -12,9 +12,9 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ .service }}
+  name: {{ or .service .scaledObject }}
   labels: {{ $labels }}
-    app: {{ .service }}
+    app: {{ or .service .scaledObject }}
 spec:
 {{- if not .autoscale }}
   replicas: {{ .replicaCount | default $replicaCount }}
@@ -51,7 +51,7 @@ spec:
             claimName: {{ .name }}-pvc
       {{- end }}
       containers:
-        - name: {{ .service }}
+        - name: {{ or .service .scaledObject }}
           image: {{ .repository }}:{{ .tag | default $version }}
           imagePullPolicy: {{ $pullPolicy | default "Always" }}
           ports:
