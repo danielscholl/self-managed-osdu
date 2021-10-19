@@ -7,7 +7,7 @@ metadata:
 spec:
   releaseName: wks-service
   dependsOn:
-  - name: notification-service
+  - name: register-service
     namespace: osdu-azure
   chart:
     spec:
