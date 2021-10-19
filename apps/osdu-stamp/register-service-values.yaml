@@ -12,9 +12,9 @@ spec:
     - service: register
       repository: osduselfcplidd9uaqcr.azurecr.io/register
       path: /api/register/v1/*
-      probe:
-        path: /api/register/v1/swagger-ui.html
-        port: http
+      # probe:
+      #   path: /api/register/v1/swagger-ui.html
+      #   port: http
       keyvault: true
       auth:
         disable:
