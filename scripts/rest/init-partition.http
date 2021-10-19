@@ -22,7 +22,6 @@ grant_type=client_credentials
 &resource={{CLIENT_ID}}
 
 
-
 # -----------------------
 # API (Variables)
 # -----------------------

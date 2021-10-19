@@ -128,7 +128,6 @@ az ad app create --display-name $OSDU_APPLICATION \
 }
 ```
 
-
 ![secrets](./docs/images/secrets.png)
 
 
@@ -138,13 +137,15 @@ az ad app create --display-name $OSDU_APPLICATION \
 Deployment of a self managed osdu instance is performed by executing github actions to work with a [Deployment Stamp](https://docs.microsoft.com/en-us/azure/architecture/patterns/deployment-stamp).  Currently there is only support for the deployment of 1 stamp.
 
 
-1. __[Stamp Initialize](../../actions/workflows/stamp-init.yaml)__: This action initializes the neccesary items in the github that are necessary in the provisioning process of a Deployment Stamp.
+1. __[Stamp Initialize](../../actions/workflows/stamp-init.yaml)__: This action initializes the neccesary items in the github that are necessary in the provisioning process of a Deployment Stamp. _(Time: ~30s)_
 
-2. __[Stamp Builder](../../actions/workflows/stamp-builder.yaml)__: This action provisions builder resources necessary in the provisioning process of a Deployment Stamp.
+2. __[Stamp Builder](../../actions/workflows/stamp-builder.yaml)__: This action provisions builder resources necessary in the provisioning process of a Deployment Stamp. _(Time: ~3m)_
 
-3. __[Stamp Provision](../../actions/workflows/stamp-provision.yaml)__: This action provisions resources for the Deployment Stamp.
+3. __[Stamp Provision](../../actions/workflows/stamp-provision.yaml)__: This action provisions resources for the Deployment Stamp.  _(Time: ~1h)_
 
-4. __[Stamp Configure](../../actions/workflows/stamp-configure.yaml)__: This action initializes the GitOps Configruation process for the Deployment Stamp.
+4. __[Stamp Configure](../../actions/workflows/stamp-configure.yaml)__: This action initializes the GitOps Configruation process for the Deployment Stamp.  _(Time: ~20m)_
+
+> Note: The pipeline creates the software configuration definition which is performed by Flux and will complete in ~2m. Flux will manage the installation process from within the cluster and will complete in about ~18m.
 
 
 ## Azure Resources
@@ -161,3 +162,75 @@ The following resources are created in Azure for the Deployment Stamp.
 ---
 ![secrets](./docs/images/partition.png)
 
+
+## Platform Access
+
+### Verify the `osdu-azure` services have successfully started.
+
+![deployments](./docs/images/deployments.png)
+---
+
+### Verify the `self-managed-osdu` instance is available.
+
+![access](./docs/images/access.png)
+---
+![default_web](./docs/images/default_web.png)
+---
+
+### Configure the AD Application for `Web Platform` access.
+
+![authenticate](./docs/images/authenticate.png)
+---
+
+### HTTP Rest Scripts
+
+The simpliest way to execute against the Platform is to leverage the HTTP Rest Scripts that make testing and executing API calls easier.  These scripts are compatable with the VS Code Extension [REST Client](https://marketplace.visualstudio.com/items?itemName=humao.rest-client).
+
+[Rest Client Settings](https://github.com/Huachao/vscode-restclient#environment-variables) can be set to create environments and saved in [VS Code Settings](https://vscode.readthedocs.io/en/latest/getstarted/settings/).
+
+__Retrieve the Rest Client Environment Setings__
+
+For convenience the Rest Client Environment Settings can be retrieved from the `builder` keyvault. _(An access policy must be created to retrieve secrets)_
+
+![kv_access](./docs/images/kv_access.png)
+---
+![resetclient_secret](./docs/images/restclient_secret.png)
+
+These settings can now be placed in the `.vscode/settings.json` file along with a `Client Secret` that is used to authenticate the Rest Client.
+
+---
+![ad_secret](./docs/images/app_secret.png)
+---
+![resetclient_settings](./docs/images/restclient_settings.png)
+
+
+__Validate Partition Access__
+
+The Partition should be initialized automatically.  Validate the Partition is accessible.
+
+---
+![partition](./docs/images/partition.png)
+
+__Configure RBAC Access__
+
+---
+Entitlements needs to be initialized.  This can be done by running the `manage-user.http` script.
+---
+
+- __Retrieve a OAuth Token__
+
+![user1](./docs/images/user1.png)
+
+- __Define Intial OpenID Connect User__
+
+![user2](./docs/images/user2.png)
+
+- __Initialize the Entitlement Tenant__
+
+![user3](./docs/images/user3.png)
+
+- __Create the Intial OpenID Connect User__
+
+![user4](./docs/images/user4.png)
+
+---
