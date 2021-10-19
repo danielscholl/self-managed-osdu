@@ -3,7 +3,6 @@ kind: Kustomization
 namespace: istio-system
 resources:
   - namespace.yaml
-  - source.yaml
   - istio-base.yaml
   - istio-operator.yaml
   - release.yaml

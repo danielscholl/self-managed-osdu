@@ -10,7 +10,7 @@ spec:
   - name: istio-base
   chart:
     spec:
-      chart: ./manifests/charts/istio-operator
+      chart: ./osdu-istio/istio-operator
       sourceRef:
         kind: GitRepository
         name: helm-charts-azure
