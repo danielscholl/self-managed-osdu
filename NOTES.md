@@ -9,6 +9,7 @@ flux delete kustomization osdu-stamp --silent
 flux delete kustomization sealed-secrets --silent
 
 # Remove Helmreleases
+flux delete helmrelease wks-service -n osdu-azure --silent
 flux delete helmrelease crs-catalog -n osdu-azure --silent
 flux delete helmrelease crs-conversion -n osdu-azure --silent
 flux delete helmrelease unit-service -n osdu-azure --silent
