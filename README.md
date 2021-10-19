@@ -30,6 +30,8 @@ The solution is designed to operate from a fork instance of the project.
 3. Add any customizations (Optional) _(see [Customizations](customizations))_
 
 
+
+
 ## Configure GitHub Secrets
 
 Secrets are managed using [Github Repository Secrets](https://docs.github.com/en/actions/reference/encrypted-secrets) some secrets are required to be created manually while others are created automatically by running Github Actions
@@ -75,7 +77,6 @@ az ad sp create-for-rbac --name $AZURE_CREDENTIALS \
 
 6. `OSDU_CREDENTIALS`: The json output a Service Principal with _Contributor_ Subscription Scope.
 
-
 ```bash
 SUBSCRIPTION_ID=$(az account show --query id --output tsv)
 OSDU_CREDENTIALS="self-managed-osdu-stamp-credentials-$(az account show --query user.name -otsv | awk -F "@" '{print $1}')"
@@ -107,7 +108,6 @@ az ad sp create-for-rbac --name $OSDU_CREDENTIALS \
 az ad sp list --display-name $OSDU_CREDENTIALS --query [].objectId -otsv
 ```
 
-
 8. `OSDU_APPLICATION`: The json output of an Azure AD Application.
 
 ```bash
@@ -132,6 +132,7 @@ az ad app create --display-name $OSDU_APPLICATION \
 
 
 
+
 ## Execute Github Actions
 
 Deployment of a self managed osdu instance is performed by executing github actions to work with a [Deployment Stamp](https://docs.microsoft.com/en-us/azure/architecture/patterns/deployment-stamp).  Currently there is only support for the deployment of 1 stamp.
@@ -145,7 +146,7 @@ Deployment of a self managed osdu instance is performed by executing github acti
 
 4. __[Stamp Configure](../../actions/workflows/stamp-configure.yaml)__: This action initializes the GitOps Configruation process for the Deployment Stamp.  _(Time: ~20m)_
 
-> Note: The pipeline creates the software configuration definition which is performed by Flux and will complete in ~2m. Flux will manage the installation process from within the cluster and will complete in about ~18m.
+> Note: The pipeline creates the software configuration definition which is performed by Flux and will complete in ~2m. Flux will then manage the installation process from within the cluster and will complete in ~18m.
 
 
 ## Azure Resources
