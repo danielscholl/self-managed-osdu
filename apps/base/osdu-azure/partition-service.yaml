@@ -9,6 +9,8 @@ spec:
   dependsOn:
   - name: default-service
     namespace: osdu-azure
+  - name: osdu-istio
+    namespace: istio-system
   chart:
     spec:
       chart: ./charts/self-managed-service
