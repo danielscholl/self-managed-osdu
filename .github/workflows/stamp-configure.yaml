@@ -172,6 +172,9 @@ jobs:
             - kind: Deployment
               name: crs-conversion
               namespace: osdu-azure
+            - kind: Deployment
+              name: wks
+              namespace: osdu-azure
           EOF
 
           cat > $GITHUB_WORKSPACE/apps/$CLUSTER/kustomization.yaml << EOF
@@ -1581,7 +1584,7 @@ jobs:
           spec:
             values:
               configuration:
-              - scaledObject: wks-service
+              - scaledObject: wks
                 repository: $REGISTRY/wks
                 servicebusSubscription: eg_sb_wkssubscription
                 servicebusTopic: recordstopiceg

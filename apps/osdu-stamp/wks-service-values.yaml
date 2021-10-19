@@ -7,7 +7,7 @@ metadata:
 spec:
   values:
     configuration:
-    - scaledObject: wks-service
+    - scaledObject: wks
       repository: osduselfcplidd9uaqcr.azurecr.io/wks
       servicebusSubscription: eg_sb_wkssubscription
       servicebusTopic: recordstopiceg
