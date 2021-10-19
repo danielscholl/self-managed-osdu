@@ -90,7 +90,7 @@ jobs:
           flux create source git helm-charts-azure \
             --url https://community.opengroup.org/osdu/platform/deployment-and-operations/helm-charts-azure \
             --interval 1m \
-            --branch 0.11 \
+            --branch release/0.11 \
             --export > $GITHUB_WORKSPACE/clusters/$CLUSTER/helm-charts-azure.yaml
 
           cat > $GITHUB_WORKSPACE/clusters/$CLUSTER/osdu-stamp.yaml <<EOF
