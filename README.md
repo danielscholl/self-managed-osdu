@@ -210,7 +210,7 @@ __Validate Partition Access__
 The Partition should be initialized automatically.  Validate the Partition is accessible.
 
 ---
-![partition](./docs/images/partition.png)
+![partition-init](./docs/images/partition-init.png)
 
 __Configure RBAC Access__
 
