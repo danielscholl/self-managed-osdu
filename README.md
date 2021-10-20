@@ -21,6 +21,8 @@ __Goals:__
 ![architecture](./docs/images/architecture.png)
 
 
+
+
 ## Initialize the project
 
 The solution is designed to operate from a fork instance of the project.
@@ -110,6 +112,8 @@ az ad sp list --display-name $OSDU_CREDENTIALS --query [].objectId -otsv
 
 8. `OSDU_APPLICATION`: The json output of an Azure AD Application.
 
+>Note: This requires access to the manifest.json file.  If necessary copy it to the location where the CLI command is being run from.
+
 ```bash
 OSDU_APPLICATION="self-managed-osdu-stamp-application-$(az account show --query user.name -otsv | awk -F "@" '{print $1}')"
 
@@ -149,6 +153,9 @@ Deployment of a self managed osdu instance is performed by executing github acti
 > Note: The pipeline creates the software configuration definition which is performed by Flux and will complete in ~2m. Flux will then manage the installation process from within the cluster and will complete in ~18m.
 
 
+
+
+
 ## Azure Resources
 
 The following resources are created in Azure for the Deployment Stamp.
@@ -162,6 +169,9 @@ The following resources are created in Azure for the Deployment Stamp.
 ![secrets](./docs/images/dataplane.png)
 ---
 ![secrets](./docs/images/partition.png)
+
+
+
 
 
 ## Platform Access
