@@ -6,7 +6,7 @@
 */
 
 
-prefix = "osdu-self"
+prefix = "osdu-self-nur"
 
 resource_tags = {
   environment = "Self Managed OSDU"
