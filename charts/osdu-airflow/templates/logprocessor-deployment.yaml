@@ -5,21 +5,38 @@ metadata:
   name: log-processor
   namespace: {{ $namespace }}
   labels:
-    app: log-processor
+    helm.sh/chart: {{ include "osdu-airflow.chart" . }}
+    app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/name: log-processor
 spec:
   selector:
     matchLabels:
-      app: log-processor
+      app.kubernetes.io/instance: {{ .Release.Name }}
+      app.kubernetes.io/name: log-processor
   template:
     metadata:
       labels:
-        app: log-processor
+        app.kubernetes.io/instance: {{ .Release.Name }}
+        app.kubernetes.io/name: log-processor
         aadpodidbinding: "osdu-identity"
     spec:
+      volumes:
+        - name: azure-keyvault
+          csi:
+            driver: secrets-store.csi.k8s.io
+            readOnly: true
+            volumeAttributes:
+              secretProviderClass: azure-keyvault
       containers:
       - name: log-processor
         image: {{ .Values.image.repository }}/airflow-function:{{ .Values.image.tag | default .Chart.AppVersion }}
         imagePullPolicy: Always
+        volumeMounts:
+          - name: azure-keyvault
+            mountPath: "/mnt/azure-keyvault"
+            readOnly: true
         env:
           - name: AzureFunctionsJobHost__functions__0
             value: queueTrigger

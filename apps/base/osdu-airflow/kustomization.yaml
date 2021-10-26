@@ -4,3 +4,4 @@ namespace: airflow
 resources:
   - namespace.yaml
   - source.yaml
+  - release.yaml

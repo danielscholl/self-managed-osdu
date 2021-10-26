@@ -2,7 +2,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: statsd-configmap
+  name: statsd-config
   namespace: {{ $namespace }}
 data:
   appinsightsconfig.js: |

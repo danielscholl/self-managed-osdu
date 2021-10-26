@@ -7,6 +7,6 @@ metadata:
 spec:
   interval: 5m0s
   ref:
-    tag: 1.11.4
+    tag: 1.7.0
   url: https://github.com/istio/istio
 

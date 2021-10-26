@@ -1,10 +1,6 @@
 apiVersion: v2
-appVersion: 1.0.0
-dependencies:
-- name: airflow
-  repository: ""
-  version: 7.5.0
-description: Installs airflow for osdu on Azure"
 name: osdu-airflow
 type: application
-version: 1.0.9
+description: Installs airflow for osdu on Azure"
+appVersion: 1.0.0
+version: 1.0.0
