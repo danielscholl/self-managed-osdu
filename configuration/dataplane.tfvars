@@ -15,7 +15,7 @@ feature_flag = {
 
 keda_v2_enabled = false
 
-prefix = "osdu-self"
+prefix = "osdu-self-nur"
 
 resource_tags = {
   environment = "Self Managed OSDU"
