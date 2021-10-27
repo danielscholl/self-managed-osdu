@@ -1,0 +1,86 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: indexer-service
+  namespace: osdu-azure
+spec:
+  values:
+    ingress:
+      dns: osdu-self-nur-dplbbcbd-kxg3-gw.eastus.cloudapp.azure.com
+    configuration:
+    - service: indexer
+      repository: osduselfcplbbc1gqpcr.azurecr.io/indexer
+      path: /api/indexer/v2/*
+      probe:
+        path: /api/indexer/v2/swagger-ui.html
+        port: http
+      keyvault: true
+      auth:
+        disable:
+          - "/"
+          - "*/index.html"
+          - "*/v2/api-docs"
+          - "*/swagger-resources"
+          - "*/swagger-ui.html"
+          - "*/configuration/ui"
+          - "*/configuration/security"
+          - "/api/indexer/v2/swagger-resources/*"
+          - "/api/indexer/v2/webjars/*"
+          - "*/_dps/task-handlers"
+          - "*/reindex"
+          - "*/actuator/health"
+          - "*/health"
+      env:
+      - name: spring_application_name
+        value: indexer
+      - name: server.servlet.contextPath
+        value: /api/indexer/v2/
+      - name: server_port
+        value: 80
+      - name: ACCEPT_HTTP
+        value: true
+      - name: cosmosdb_database
+        value: osdu-db
+      - name: servicebus_topic_name
+        value: indexing-progress
+      - name: reindex_topic_name
+        value: recordstopic
+      - name: entitlements_service_endpoint
+        value: http://entitlements/api/entitlements/v2
+      - name: entitlements_service_api_key
+        value: OBSOLETE
+      - name: schema_service_url
+        value: http://schema/api/schema-service/v1
+      - name: storage_service_url
+        value: http://storage/api/storage/v2
+      - name: STORAGE_SCHEMA_HOST
+        value: http://storage/api/storage/v2/schemas
+      - name: STORAGE_QUERY_RECORD_FOR_CONVERSION_HOST
+        value: http://storage/api/storage/v2/query/records:batch
+      - name: STORAGE_QUERY_RECORD_HOST
+        value: http://storage/api/storage/v2/records
+      - name: partition_service_endpoint
+        value: http://partition/api/partition/v1
+      - name: azure_istioauth_enabled
+        value: "true"
+      - name: azure_activedirectory_AppIdUri
+        value: "api://b573bfdc-543a-48ef-b1b8-126387b8b4d6"
+      - name: azure_paas_podIdentity_isEnabled
+        value: "false"
+      - name: KEYVAULT_URI
+        config:
+          name: osdu-svc-config
+          key: ENV_KEYVAULT
+      - name: REDIS_DATABASE
+        config:
+          name: osdu-svc-config
+          key: REDIS_DB_INDEXER
+      - name: aad_client_id
+        secret:
+          name: active-directory
+          key: application-appid
+      - name: appinsights_key
+        secret:
+          name: central-logging
+          key: appinsights
