@@ -21,8 +21,6 @@ __Goals:__
 ![architecture](./docs/images/architecture.png)
 
 
-
-
 ## Initialize the project
 
 The solution is designed to operate from a fork instance of the project.

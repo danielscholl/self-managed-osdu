@@ -8,11 +8,11 @@ spec:
   releaseName: istio-base
   chart:
     spec:
-      chart: ./osdu-istio/istio-base
+      chart: ./manifests/charts/base
       sourceRef:
         kind: GitRepository
-        name: helm-charts-azure
-        namespace: flux-system
+        name: istio-charts
+        namespace: istio-system
   interval: 5m0s
   install:
     remediation:

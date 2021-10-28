@@ -2,47 +2,65 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: statsd
-  namespace: {{ $namespace }}
+  name: appinsights-statsd
   labels:
-    app: statsd
+    helm.sh/chart: {{ include "osdu-airflow.chart" . }}
+    app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/name: appinsights-statsd
 spec:
-  replicas: 1
+  replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
-      app: statsd
+      app.kubernetes.io/instance: {{ .Release.Name }}
+      app.kubernetes.io/name: appinsights-statsd
   template:
     metadata:
+    {{- with .Values.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
       labels:
-        app: statsd
+        app.kubernetes.io/instance: {{ .Release.Name }}
+        app.kubernetes.io/name: appinsights-statsd
         aadpodidbinding: "osdu-identity"
     spec:
-      containers:
-      - name: statsd
-        image: {{ .Values.image.repository }}/statsd:{{ .Values.image.tag | default .Chart.AppVersion }}
-        imagePullPolicy: Always
-        command: ["node"]
-        args: ["/usr/src/app/statsd/stats.js", "/usr/src/app/statsd/backends/config/appinsightsconfig.js"]
-        volumeMounts:
-          - name: config-volume
-            mountPath: /usr/src/app/statsd/backends/config
-        env:
-          - name: APPLICATION_INSIGHTS_INSTRUMENTATION_KEY
-            valueFrom:
-              secretKeyRef:
-                name: central-logging
-                key: appinsights
-        ports:
-          - containerPort: 8125
-            protocol: UDP
-        resources:
-          requests:
-            cpu: 100m
-            memory: 128Mi
-          limits:
-            cpu: 250m
-            memory: 256Mi
       volumes:
         - name: config-volume
           configMap:
-            name: statsd-configmap
+            name: statsd-config
+        - name: azure-keyvault
+          csi:
+            driver: secrets-store.csi.k8s.io
+            readOnly: true
+            volumeAttributes:
+              secretProviderClass: azure-keyvault
+      containers:
+        - name: statsd
+          image: {{ .Values.image.repository }}/statsd:{{ .Values.image.tag | default .Chart.AppVersion }}
+          imagePullPolicy: Always
+          command: ["node"]
+          args: ["/usr/src/app/statsd/stats.js", "/usr/src/app/statsd/backends/config/appinsightsconfig.js"]
+          ports:
+            - containerPort: 8125
+              protocol: UDP
+          volumeMounts:
+            - name: config-volume
+              mountPath: /usr/src/app/statsd/backends/config
+            - name: azure-keyvault
+              mountPath: "/mnt/azure-keyvault"
+              readOnly: true
+          resources:
+            requests:
+              cpu: 100m
+              memory: 128Mi
+            limits:
+              cpu: 250m
+              memory: 256Mi
+          env:
+            - name: APPLICATION_INSIGHTS_INSTRUMENTATION_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: central-logging
+                  key: appinsights

@@ -1,13 +1,20 @@
-{{- $namespace := .Release.Namespace }}
+{{- $serviceType := .Values.service.type }}
+{{- $servicePort := .Values.service.port }}
 apiVersion: v1
 kind: Service
 metadata:
-  name: statsd
-  namespace: {{ $namespace }}
+  name: appinsights-statsd
+  labels:
+    helm.sh/chart: {{ include "osdu-airflow.chart" . }}
+    app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+    app.kubernetes.io/name: appinsights-statsd
+    app.kubernetes.io/instance: {{ .Release.Name }}
 spec:
-  type: ClusterIP
+  type: {{ $serviceType }}
   ports:
-  - port: 8125
-    protocol: UDP
+    - port: {{ $servicePort }}
+      protocol: UDP
   selector:
-    app: statsd
+    app.kubernetes.io/name: appinsights-statsd
+    app.kubernetes.io/instance: {{ .Release.Name }}

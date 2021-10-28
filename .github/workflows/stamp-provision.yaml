@@ -736,6 +736,9 @@ jobs:
               --force --no-wait
             done
 
+            az acr import --name $REGISTRY --source msosdu.azurecr.io/statsd:1.0.0 --image statsd:1.0.0 --force --no-wait
+            az acr import --name $REGISTRY --source msosdu.azurecr.io/airflow-function:1.0.0 --image airflow-function:1.0.0 --force --no-wait
+
   env-data:
     name: Load KV - Settings
     runs-on: ubuntu-latest
