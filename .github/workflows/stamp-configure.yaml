@@ -4,8 +4,10 @@ on:
   workflow_dispatch:
 
 env:
+  CLI_VERSION: 2.27.0
   OSDU_VERSION: v0.11.0
   CLUSTER: osdu-stamp
+  PARTITION_NAME: opendes
 
 jobs:
 
@@ -16,13 +18,16 @@ jobs:
 
     runs-on: ubuntu-latest
     steps:
-      - uses: Azure/login@v1
+      - uses: Azure/login@v1.1
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - uses: azure/setup-helm@v1
 
       - name: Environment Settings
         uses: Azure/cli@1.0.4
         with:
+          azcliversion: ${{ env.CLI_VERSION }}
           inlineScript: |
             GROUP=$(az group list --query "[?contains(name, 'dpl${{ secrets.RAND }}')].name" -otsv |grep -v MC)
             ENV_CLUSTER=$(az aks list --resource-group $GROUP --query [].name -otsv)
@@ -181,6 +186,9 @@ jobs:
             - kind: Deployment
               name: wks
               namespace: osdu-azure
+            - kind: Deployment
+              name: workflow
+              namespace: osdu-azure
           EOF
 
           cat > $GITHUB_WORKSPACE/apps/$CLUSTER/kustomization.yaml << EOF
@@ -188,15 +196,15 @@ jobs:
           apiVersion: kustomize.config.k8s.io/v1beta1
           kind: Kustomization
           resources:
-            - ../base/dev-sample
             - ../base/osdu-base
             - ../base/osdu-istio
             - ../base/osdu-airflow
+            - ../base/dev-sample
             - ../base/osdu-azure
           patchesStrategicMerge:
+            - istio-values.yaml
             - dev-sample-values.yaml
-            - osdu-istio-values.yaml
-            - osdu-airflow-values.yaml
+            - airflow-base-values.yaml
             - self-managed-base-values.yaml
             - default-service-values.yaml
             - token-service-values.yaml
@@ -216,6 +224,24 @@ jobs:
             - crs-catalog-values.yaml
             - crs-conversion-values.yaml
             - wks-service-values.yaml
+            - workflow-service-values.yaml
+          EOF
+
+      - name: Create Helm Values - osdu-istio
+        run: |
+          cat > $GITHUB_WORKSPACE/apps/$CLUSTER/istio-values.yaml << EOF
+          ---
+          apiVersion: helm.toolkit.fluxcd.io/v2beta1
+          kind: HelmRelease
+          metadata:
+            name: osdu-istio
+            namespace: istio-system
+          spec:
+            values:
+              global:
+                azure:
+                  tenant: $(az keyvault secret show --id https://${ENV_VAULT}.vault.azure.net/secrets/tenant-id --query value -otsv)
+                  appid: $(az keyvault secret show --id https://${ENV_VAULT}.vault.azure.net/secrets/aad-client-id --query value -otsv)
           EOF
 
       - name: Create Helm Values - dev-sample
@@ -239,21 +265,27 @@ jobs:
                 appid: $(az keyvault secret show --id https://${ENV_VAULT}.vault.azure.net/secrets/aad-client-id --query value -otsv)
           EOF
 
-      - name: Create Helm Values - osdu-istio
+      - name: Create Helm Values - airflow
         run: |
-          cat > $GITHUB_WORKSPACE/apps/$CLUSTER/osdu-istio-values.yaml << EOF
+          cat > $GITHUB_WORKSPACE/apps/$CLUSTER/airflow-base-values.yaml << EOF
           ---
           apiVersion: helm.toolkit.fluxcd.io/v2beta1
           kind: HelmRelease
           metadata:
-            name: osdu-istio
-            namespace: istio-system
+            name: airflow-base
+            namespace: airflow
           spec:
             values:
-              global:
-                azure:
-                  tenant: $(az keyvault secret show --id https://${ENV_VAULT}.vault.azure.net/secrets/tenant-id --query value -otsv)
-                  appid: $(az keyvault secret show --id https://${ENV_VAULT}.vault.azure.net/secrets/aad-client-id --query value -otsv)
+              azure:
+                tenant: $(az keyvault secret show --id https://${ENV_VAULT}.vault.azure.net/secrets/tenant-id --query value -otsv)
+                subscription: $(az keyvault secret show --id https://${ENV_VAULT}.vault.azure.net/secrets/subscription-id --query value -otsv)
+                resourcegroup: $(az keyvault secret show --id https://${ENV_VAULT}.vault.azure.net/secrets/base-name-cr --query value -otsv)-rg
+                identity: $(az keyvault secret show --id https://${ENV_VAULT}.vault.azure.net/secrets/base-name-cr --query value -otsv)-osdu-identity
+                identity_id: $(az keyvault secret show --id https://${ENV_VAULT}.vault.azure.net/secrets/osdu-identity-id --query value -otsv)
+                keyvault: $ENV_VAULT
+                appid: $(az keyvault secret show --id https://${ENV_VAULT}.vault.azure.net/secrets/aad-client-id --query value -otsv)
+              image:
+                repository: $REGISTRY
           EOF
 
       - name: Create Helm Values - self-managed-base
@@ -371,15 +403,15 @@ jobs:
                     - "*/health"
                 env:
                 - name: spring_application_name
-                  value: partition
+                  value: "partition"
                 - name: server.servlet.contextPath
-                  value: /api/partition/v1/
+                  value: "/api/partition/v1/"
                 - name: server_port
                   value: "80"
                 - name: ACCEPT_HTTP
                   value: "true"
                 - name: partition_spring_logging_level
-                  value: INFO
+                  value: "INFO"
                 - name: azure_activedirectory_AppIdUri
                   value: "api://$(az keyvault secret show --id https://${ENV_VAULT}.vault.azure.net/secrets/aad-client-id --query value -otsv)"
                 - name: azure_activedirectory_session_stateless
@@ -443,21 +475,21 @@ jobs:
                     - "/api/entitlements/v2/webjars/*"
                 env:
                 - name: spring_application_name
-                  value: entitlements
+                  value: "entitlements"
                 - name: server.servlet.contextPath
-                  value: /api/entitlements/v2/
+                  value: "/api/entitlements/v2/"
                 - name: LOGGING_LEVEL
-                  value: INFO
+                  value: "INFO"
                 - name: server_port
                   value: "80"
                 - name: service_domain_name
-                  value: contoso.com
+                  value: "contoso.com"
                 - name: root_data_group_quota
                   value: "5000"
                 - name: redis_ttl_seconds
                   value: "1"
                 - name: partition_service_endpoint
-                  value: http://partition/api/partition/v1
+                  value: "http://partition/api/partition/v1"
                 - name: azure_istioauth_enabled
                   value: "true"
                 - name: azure_activedirectory_AppIdUri
@@ -517,33 +549,33 @@ jobs:
                     - "*/health"
                 env:
                 - name: spring_application_name
-                  value: legal
+                  value: "legal"
                 - name: server.servlet.contextPath
-                  value: /api/legal/v1/
+                  value: "/api/legal/v1/"
                 - name: server_port
-                  value: 80
+                  value: "80"
                 - name: ACCEPT_HTTP
-                  value: true
+                  value: "true"
                 - name: cosmosdb_database
-                  value: osdu-db
+                  value: "osdu-db"
                 - name: LOG_PREFIX
-                  value: legal
+                  value: "legal"
                 - name: azure_storage_container_name
-                  value: legal-service-azure-configuration
+                  value: "legal-service-azure-configuration"
                 - name: azure_storage_enable_https
-                  value: true
+                  value: "true"
                 - name: legal_service_region
-                  value: us
+                  value: "us"
                 - name: servicebus_topic_name
-                  value: legaltags
+                  value: "legaltags"
                 - name: entitlements_service_endpoint
-                  value: http://entitlements/api/entitlements/v2
+                  value: "http://entitlements/api/entitlements/v2"
                 - name: entitlements_service_api_key
-                  value: OBSOLETE
+                  value: "OBSOLETE"
                 - name: partition_service_endpoint
-                  value: http://partition/api/partition/v1
+                  value: "http://partition/api/partition/v1"
                 - name: azure_istioauth_enabled
-                  value: true
+                  value: "true"
                 - name: SPRING_CONFIG_NAME
                   value: "common,application"
                 - name: azure_activedirectory_AppIdUri
@@ -613,41 +645,41 @@ jobs:
                     - "*/health"
                 env:
                 - name: spring_application_name
-                  value: storage
+                  value: "storage"
                 - name: server.servlet.contextPath
-                  value: /api/storage/v2/
+                  value: "/api/storage/v2/"
                 - name: server_port
-                  value: 80
+                  value: "80"
                 - name: ACCEPT_HTTP
-                  value: true
+                  value: "true"
                 - name: cosmosdb_database
-                  value: osdu-db
+                  value: "osdu-db"
                 - name: servicebus_topic_name
-                  value: recordstopic
+                  value: "recordstopic"
                 - name: legal_servicebus_topic_name
-                  value: legaltagschangedtopiceg
+                  value: "legaltagschangedtopiceg"
                 - name: legal_servicebus_topic_subscription
-                  value: eg_sb_legaltagssubscription
+                  value: "eg_sb_legaltagssubscription"
                 - name: entitlements_service_endpoint
-                  value: http://entitlements/api/entitlements/v2
+                  value: "http://entitlements/api/entitlements/v2"
                 - name: entitlements_service_api_key
                   value: "OBSOLETE"
                 - name: legal_service_endpoint
-                  value: http://legal/api/legal/v1
+                  value: "http://legal/api/legal/v1"
                 - name: search_service_endpoint
-                  value: http://legal/api/legal/v1
+                  value: "http://legal/api/legal/v1"
                 - name: partition_service_endpoint
-                  value: http://partition/api/partition/v1
+                  value: "http://partition/api/partition/v1"
                 - name: crs_conversion_service_endpoint
                   value: http://crs-conversion-service/api/crs/converter/v2
                 - name: policy_enabled
                   value: "false"
                 - name: policy_service_endpoint
-                  value: http://policy-service/api/policy/v1
+                  value: "http://policy-service/api/policy/v1"
                 - name: schema_endpoints_disabled
                   value: "false"
                 - name: azure_istioauth_enabled
-                  value: true
+                  value: "true"
                 - name: azure_activedirectory_AppIdUri
                   value: "api://$(az keyvault secret show --id https://${ENV_VAULT}.vault.azure.net/secrets/aad-client-id --query value -otsv)"
                 - name: azure_paas_podIdentity_isEnabled
@@ -712,25 +744,25 @@ jobs:
                     - "*/health"
                 env:
                 - name: spring_application_name
-                  value: schema
+                  value: "schema"
                 - name: server.servlet.contextPath
-                  value: /api/schema-service/v1/
+                  value: "/api/schema-service/v1/"
                 - name: server_port
-                  value: 80
+                  value: "80"
                 - name: ACCEPT_HTTP
-                  value: true
+                  value: "true"
                 - name: cosmosdb_database
-                  value: osdu-db
+                  value: "osdu-db"
                 - name: LOG_PREFIX
-                  value: schema
+                  value: "schema"
                 - name: entitlements_service_endpoint
-                  value: http://entitlements/api/entitlements/v2
+                  value: "http://entitlements/api/entitlements/v2"
                 - name: entitlements_service_api_key
                   value: "OBSOLETE"
                 - name: partition_service_endpoint
                   value: "http://partition/api/partition/v1"
                 - name: shared_partition
-                  value: opendes    # Make this configurable
+                  value: "${{ env.PARTITION_NAME }}"
                 - name: azure_istioauth_enabled
                   value: "true"
                 - name: event_grid_enabled
@@ -791,33 +823,33 @@ jobs:
                     - "*/health"
                 env:
                 - name: spring_application_name
-                  value: file
+                  value: "file"
                 - name: server.servlet.contextPath
-                  value: /api/file/
+                  value: "/api/file/"
                 - name: server_port
-                  value: 80
+                  value: "80"
                 - name: ACCEPT_HTTP
-                  value: true
+                  value: "true"
                 - name: cosmosdb_database
-                  value: osdu-db
+                  value: "osdu-db"
                 - name: LOG_PREFIX
-                  value: file
+                  value: "file"
                 - name: osdu_entitlements_url
-                  value: http://entitlements/api/entitlements/v2
+                  value: "http://entitlements/api/entitlements/v2"
                 - name: osdu_entitlements_app_key
-                  value: OBSOLETE
+                  value: "OBSOLETE"
                 - name: APPLICATION_PORT
-                  value: 80
+                  value: "80"
                 - name: SEARCH_HOST
-                  value: http://search/api/search/v2
+                  value: "http://search/api/search/v2"
                 - name: JAVA_HEAP_MEMORY
-                  value: 4096
+                  value: "4096"
                 - name: osdu_storage_url
-                  value: http://storage/api/storage/v2
+                  value: "http://storage/api/storage/v2"
                 - name: partition_service_endpoint
-                  value: http://partition/api/partition/v1
+                  value: "http://partition/api/partition/v1"
                 - name: authorizeAPI
-                  value: http://entitlements/api/entitlements/v2
+                  value: "http://entitlements/api/entitlements/v2"
                 - name: azure_istioauth_enabled
                   value: "true"
                 - name: BATCH_SIZE
@@ -891,25 +923,25 @@ jobs:
                     - "*/_ah/**"
                 env:
                 - name: spring_application_name
-                  value: dataset
+                  value: "dataset"
                 - name: server.servlet.contextPath
-                  value: /api/dataset/v1/
+                  value: "/api/dataset/v1/"
                 - name: server_port
-                  value: 80
+                  value: "80"
                 - name: ACCEPT_HTTP
-                  value: true
+                  value: "true"
                 - name: entitlements_service_endpoint
-                  value: http://entitlements/api/entitlements/v2
+                  value: "http://entitlements/api/entitlements/v2"
                 - name: entitlements_app_key
                   value: "OBSOLETE"
                 - name: storage_service_endpoint
-                  value: http://storage/api/storage/v2
+                  value: "http://storage/api/storage/v2"
                 - name: partition_service_endpoint
-                  value: http://partition/api/partition/v1
+                  value: "http://partition/api/partition/v1"
                 - name: schema_service_endpoint
-                  value: http://schema-service/api/schema-service/v1
+                  value: "http://schema-service/api/schema-service/v1"
                 - name: file_service_endpoint
-                  value: http://file/api/file/v2/files
+                  value: "http://file/api/file/v2/files"
                 - name: azure_istioauth_enabled
                   value: "true"
                 - name: azure_paas_podIdentity_isEnabled
@@ -970,35 +1002,35 @@ jobs:
                     - "*/health"
                 env:
                 - name: spring_application_name
-                  value: indexer
+                  value: "indexer"
                 - name: server.servlet.contextPath
-                  value: /api/indexer/v2/
+                  value: "/api/indexer/v2/"
                 - name: server_port
-                  value: 80
+                  value: "80"
                 - name: ACCEPT_HTTP
-                  value: true
+                  value: "true"
                 - name: cosmosdb_database
-                  value: osdu-db
+                  value: "osdu-db"
                 - name: servicebus_topic_name
-                  value: indexing-progress
+                  value: "indexing-progress"
                 - name: reindex_topic_name
-                  value: recordstopic
+                  value: "recordstopic"
                 - name: entitlements_service_endpoint
-                  value: http://entitlements/api/entitlements/v2
+                  value: "http://entitlements/api/entitlements/v2"
                 - name: entitlements_service_api_key
-                  value: OBSOLETE
+                  value: "OBSOLETE"
                 - name: schema_service_url
-                  value: http://schema/api/schema-service/v1
+                  value: "http://schema/api/schema-service/v1"
                 - name: storage_service_url
-                  value: http://storage/api/storage/v2
+                  value: "http://storage/api/storage/v2"
                 - name: STORAGE_SCHEMA_HOST
-                  value: http://storage/api/storage/v2/schemas
+                  value: "http://storage/api/storage/v2/schemas"
                 - name: STORAGE_QUERY_RECORD_FOR_CONVERSION_HOST
-                  value: http://storage/api/storage/v2/query/records:batch
+                  value: "http://storage/api/storage/v2/query/records:batch"
                 - name: STORAGE_QUERY_RECORD_HOST
-                  value: http://storage/api/storage/v2/records
+                  value: "http://storage/api/storage/v2/records"
                 - name: partition_service_endpoint
-                  value: http://partition/api/partition/v1
+                  value: "http://partition/api/partition/v1"
                 - name: azure_istioauth_enabled
                   value: "true"
                 - name: azure_activedirectory_AppIdUri
@@ -1046,17 +1078,17 @@ jobs:
                   memory: 2Gi
                 env:
                 - name: spring_application_name
-                  value: indexer-queue
+                  value: "indexer-queue"
                 - name: server_port
-                  value: 80
+                  value: "80"
                 - name: azure_servicebus_topic_name
-                  value: recordstopic
+                  value: "recordstopic"
                 - name: azure_servicebus_topic_subscription
-                  value: recordstopicsubscription
+                  value: "recordstopicsubscription"
                 - name: indexer_worker_url
-                  value: http://indexer/api/indexer/v2/_dps/task-handlers/index-worker
+                  value: "http://indexer/api/indexer/v2/_dps/task-handlers/index-worker"
                 - name: PARTITION_API
-                  value: http://partition/api/partition/v1
+                  value: "http://partition/api/partition/v1"
                 - name: max_concurrent_calls
                   value: "32"
                 - name: executor_n_threads
@@ -1136,41 +1168,41 @@ jobs:
                     - "*/_ah/**"
                 env:
                 - name: spring_application_name
-                  value: search
+                  value: "search"
                 - name: server.servlet.contextPath
-                  value: /api/search/v2/
+                  value: "/api/search/v2/"
                 - name: server_port
-                  value: 80
+                  value: "80"
                 - name: ACCEPT_HTTP
-                  value: true
+                  value: "true"
                 - name: APPLICATIONINSIGHTS_CONNECTION_STRING
-                  value: InstrumentationKey=$APP_INSIGHTS_KEY
+                  value: "InstrumentationKey=$APP_INSIGHTS_KEY"
                 - name: cosmosdb_database
-                  value: osdu-db
+                  value: "osdu-db"
                 - name: entitlements_service_endpoint
-                  value: http://entitlements/api/entitlements/v2
+                  value: "http://entitlements/api/entitlements/v2"
                 - name: entitlements_service_api_key
-                  value: OBSOLETE
+                  value: "OBSOLETE"
                 - name: ENVIRONMENT
-                  value: evt
+                  value: "evt"
                 - name: LOG_PREFIX
-                  value: search
+                  value: "search"
                 - name: ELASTIC_CACHE_EXPIRATION
-                  value: 1
+                  value: "1"
                 - name: MAX_CACHE_VALUE_SIZE
-                  value: 60
+                  value: "60"
                 - name: search_service_spring_logging_level
-                  value: debug
+                  value: "debug"
                 - name: partition_service_endpoint
-                  value: http://partition/api/partition/v1
+                  value: "http://partition/api/partition/v1"
                 - name: policy_enabled
                   value: "false"
                 - name: policy_service_endpoint
-                  value: http://policy/api/policy/v1
+                  value: "http://policy/api/policy/v1"
                 - name: azure_istioauth_enabled
-                  value: true
+                  value: "true"
                 - name: azure_activedirectory_AppIdUri
-                  value: api://$(az keyvault secret show --id https://${ENV_VAULT}.vault.azure.net/secrets/aad-client-id --query value -otsv)"
+                  value: "api://$(az keyvault secret show --id https://${ENV_VAULT}.vault.azure.net/secrets/aad-client-id --query value -otsv)"
                 - name: KEYVAULT_URI
                   config:
                     name: osdu-svc-config
@@ -1238,27 +1270,27 @@ jobs:
                     - "*/_ah/**"
                 env:
                 - name: spring_application_name
-                  value: notification-azure
+                  value: "notification-azure"
                 - name: server.servlet.contextPath
-                  value: /api/notification/v1/
+                  value: "/api/notification/v1/"
                 - name: server_port
-                  value: 80
+                  value: "80"
                 - name: ACCEPT_HTTP
-                  value: true
+                  value: "true"
                 - name: cosmosdb_database
-                  value: osdu-db
+                  value: "osdu-db"
                 - name: entitlements_service_endpoint
-                  value: http://entitlements/api/entitlements/v2
+                  value: "http://entitlements/api/entitlements/v2"
                 - name: registeration_service_endpoint
-                  value: http://register/api/register/v1
+                  value: "http://register/api/register/v1"
                 - name: maxCacheSize
                   value:  "20"
                 - name: partition_service_endpoint
-                  value: http://partition/api/partition/v1
+                  value: "http://partition/api/partition/v1"
                 - name: policy_enabled
                   value: "false"
                 - name: policy_service_endpoint
-                  value: http://policy/api/policy/v1
+                  value: "http://policy/api/policy/v1"
                 - name: azure_istioauth_enabled
                   value: "true"
                 - name: LOG_PREFIX
@@ -1331,23 +1363,23 @@ jobs:
                     - "*/_ah/**"
                 env:
                 - name: spring_application_name
-                  value: register
+                  value: "register"
                 - name: server.servlet.contextPath
-                  value: /api/register/v1/
+                  value: "/api/register/v1/"
                 - name: server_port
-                  value: 80
+                  value: "80"
                 - name: ACCEPT_HTTP
-                  value: true
+                  value: "true"
                 - name: LOG_PREFIX
-                  value: register
+                  value: "register"
                 - name: cosmosdb_database
-                  value: osdu-db
+                  value: "osdu-db"
                 - name: RECORDS_CHANGE_PUBSUB_ENDPOINT
-                  value: https://$DNS_HOST/api/notification/v1/push-handlers/records-changed
+                  value: "https://$DNS_HOST/api/notification/v1/push-handlers/records-changed"
                 - name: ENTITLEMENTS_API
-                  value: http://entitlements/api/entitlements/v2
+                  value: "http://entitlements/api/entitlements/v2"
                 - name: partition_service_endpoint
-                  value: http://partition/api/partition/v1
+                  value: "http://partition/api/partition/v1"
                 - name: azure_istioauth_enabled
                   value: "true"
                 - name: azure_serviceBus_enabled
@@ -1502,7 +1534,6 @@ jobs:
                   secret:
                     name: central-logging
                     key: appinsights
-
           EOF
 
       - name: Create Helm Values - crs-conversion
@@ -1598,19 +1629,19 @@ jobs:
                 keyvault: true
                 env:
                 - name: spring_application_name
-                  value: wks
+                  value: "wks"
                 - name: server_port
-                  value: 80
+                  value: "80"
                 - name: cosmosdb_database
-                  value: osdu-db
+                  value: "osdu-db"
                 - name: servicebus_topic_name
-                  value: recordstopiceg
+                  value: "recordstopiceg"
                 - name: servicebus_topic_subscription
-                  value: eg_sb_wkssubscription
+                  value: "eg_sb_wkssubscription"
                 - name: storage_container
-                  value: osdu-wks-mappings
+                  value: "osdu-wks-mappings"
                 - name: partition_service_endpoint
-                  value: http://partition/api/partition/v1
+                  value: "http://partition/api/partition/v1"
                 - name: storage_service_endpoint
                   value: "http://storage/api/storage/v2"
                 - name: schema_service_endpoint
@@ -1618,7 +1649,7 @@ jobs:
                 - name: search_service_endpoint
                   value: "http://search/api/search/v2"
                 - name: default_tenant
-                  value:
+                  value: "${{ env.PARTITION_NAME }}"
                 - name: max_concurrent_calls
                   value: "32"
                 - name: executor_n_threads
@@ -1657,44 +1688,106 @@ jobs:
                     key: appinsights
           EOF
 
-          cat > $GITHUB_WORKSPACE/apps/$CLUSTER/osdu-airflow-values.yaml << EOF
+      - name: Create Helm Values - workflow-service
+        run: |
+          cat > $GITHUB_WORKSPACE/apps/$CLUSTER/workflow-service-values.yaml << EOF
           ---
           apiVersion: helm.toolkit.fluxcd.io/v2beta1
           kind: HelmRelease
           metadata:
-            name: osdu-airflow
-            namespace: airflow
+            name: workflow-service
+            namespace: osdu-azure
           spec:
             values:
-              azure:
-                tenant: $(az keyvault secret show --id https://${ENV_VAULT}.vault.azure.net/secrets/tenant-id --query value -otsv)
-                subscription: $(az keyvault secret show --id https://${ENV_VAULT}.vault.azure.net/secrets/subscription-id --query value -otsv)
-                resourcegroup: $(az keyvault secret show --id https://${ENV_VAULT}.vault.azure.net/secrets/base-name-cr --query value -otsv)-rg
-                identity: $(az keyvault secret show --id https://${ENV_VAULT}.vault.azure.net/secrets/base-name-cr --query value -otsv)-osdu-identity
-                identity_id: $(az keyvault secret show --id https://${ENV_VAULT}.vault.azure.net/secrets/osdu-identity-id --query value -otsv)
-                keyvault: $ENV_VAULT
-                appid: $(az keyvault secret show --id https://${ENV_VAULT}.vault.azure.net/secrets/aad-client-id --query value -otsv)
-              image:
-                repository: $REGISTRY
-              airflowLogin:
-                name: admin
-              airflow:
-                ingress:
-                  host: $DNS_HOST
-                  web:
-                    annotations:
-                      cert-manager.io/cluster-issuer: letsencrypt-prod-dns
-                    host: $DNS_HOST
-                externalDatabase:
-                  host: $(az keyvault secret show --id https://${ENV_VAULT}.vault.azure.net/secrets/base-name-sr --query value -otsv)-pg.postgres.database.azure.com
-                  user:  osdu_admin@$(az keyvault secret show --id https://${ENV_VAULT}.vault.azure.net/secrets/base-name-sr --query value -otsv)-pg
-                externalRedis:
-                  host: $(az keyvault secret show --id https://${ENV_VAULT}.vault.azure.net/secrets/base-name-sr --query value -otsv)-cache.redis.cache.windows.net
-                airflow:
-                  extraEnv:
-                    - name: AIRFLOW_VAR_AZURE_DNS_HOST
-                      value: "$DNS_HOST"
+              ingress:
+                dns: $DNS_HOST
+              configuration:
+              - service: workflow
+                repository: $REGISTRY/workflow
+                path: /api/workflow/*
+                probe:
+                  path: /api/workflow/swagger-ui.html
+                  port: http
+                keyvault: true
+                auth:
+                  disable:
+                    - "/"
+                    - "*/index.html"
+                    - "*/v2/api-docs"
+                    - "*/swagger-resources"
+                    - "*/swagger-ui.html"
+                    - "*/configuration/ui"
+                    - "*/configuration/security"
+                    - "/api/workflow/swagger-resources/*"
+                    - "/api/workflow/webjars/*"
+                    - "*/actuator/health"
+                    - "*/health"
+                    - "*/_ah/**"
+                env:
+                - name: spring_application_name
+                  value: "workflow"
+                - name: server.servlet.contextPath
+                  value: "/api/workflow/"
+                - name: server_port
+                  value: "80"
+                - name: ACCEPT_HTTP
+                  value: "true"
+                - name: LOG_PREFIX
+                  value: "workflow"
+                - name: cosmosdb_database
+                  value: "osdu-db"
+                - name: partition_service_endpoint
+                  value: "http://partition/api/partition/v1"
+                - name: OSDU_ENTITLEMENTS_URL
+                  value: "http://entitlements/api/entitlements/v2"
+                - name: OSDU_ENTITLEMENTS_APPKEY
+                  value: "OBSOLETE"
+                - name: OSDU_AIRFLOW_URL
+                  value: "http://airflow-web.airflow.svc.cluster.local:8080/airflow"
+                - name: OSDU_AIRFLOW_USERNAME
+                  value: "admin"
+                - name: azure_istioauth_enabled
+                  value: "true"
+                - name: azure_activedirectory_AppIdUri
+                  value: "api://$(az keyvault secret show --id https://${ENV_VAULT}.vault.azure.net/secrets/aad-client-id --query value -otsv)"
+                - name: azure_paas_podIdentity_isEnabled
+                  value: "false"
+                - name: dp_airflow_for_system_dag
+                  value: "false"
+                - name: ignore_dagContent
+                  value: "false"
+                - name: cosmosdb_system_database
+                  value: "osdu-system-db"
+                - name: authorizeAPI
+                  value: "http://entitlements/api/entitlements/v2"
+                - name: authorizeAPIKey
+                  value: "OBSOLETE"
+                - name: KEYVAULT_URI
+                  config:
+                    name: osdu-svc-config
+                    key: ENV_KEYVAULT
+                - name: aad_client_id
+                  secret:
+                    name: active-directory
+                    key: application-appid
+                - name: appinsights_key
+                  secret:
+                    name: central-logging
+                    key: appinsights
+                - name: OSDU_AIRFLOW_PASSWORD
+                  secret:
+                    name: airflow
+                    key: admin-password
+                - name: AIRFLOW_STORAGE_ACCOUNT_NAME
+                  secret:
+                    name: airflow
+                    key: azurestorageaccountname
+                - name: AIRFLOW_STORAGE_ACCOUNT_KEY
+                  secret:
+                    name: airflow
+                    key: azurestorageaccountkey
           EOF
+
 
       - name: GitOps CheckIn
         uses: EndBug/add-and-commit@v7
