@@ -2,10 +2,10 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: osdu-airflow
+  name: airflow-base
   namespace: airflow
 spec:
-  releaseName: osdu-airflow
+  releaseName: airflow-base
   dependsOn:
   - name: osdu-base
     namespace: default
@@ -16,7 +16,7 @@ spec:
       retries: 3
   chart:
     spec:
-      chart: ./charts/osdu-airflow
+      chart: ./charts/osdu-airflow-base
       sourceRef:
         kind: GitRepository
         name: flux-system
@@ -28,6 +28,3 @@ spec:
     service:
       type: ClusterIP
       port: 8125
-    image:
-      repository: msosdu.azurecr.io
-

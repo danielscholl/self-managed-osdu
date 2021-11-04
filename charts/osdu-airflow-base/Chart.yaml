@@ -1,0 +1,11 @@
+#  Copyright © Microsoft Corporation
+#
+apiVersion: v2
+name: osdu-airflow-base
+type: application
+description: Installs the Airflow dependencies and Services"
+appVersion: 1.0.0
+version: 1.0.4
+maintainers:
+  - name: danielscholl
+    url: https://github.com/danielscholl

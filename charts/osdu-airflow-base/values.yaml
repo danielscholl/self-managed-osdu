@@ -9,7 +9,6 @@ service:
   type: ClusterIP
   targetPort: 8125
 
-
 ################################################################################
 # Specify the azure environment specific values
 #
@@ -22,18 +21,25 @@ azure:
   keyvault: <keyvault_name>
   appid: <client_id>
 
-
-################################################################################
-# Specify the Ingress Settings
-#
-ingress:
-  dns: <dns_hostname>
-  issuer: letsencrypt-prod-dns
-  enableKeyvaultCert: false
-
-
 ################################################################################
 # Specify any optional override values
 #
 image:
   repository: <registry_url>
+
+################################################################################
+# Specify pgbouncer configuration
+#
+pgbouncer:
+  enabled: true
+  port: 6543
+  max_client_connections: 3000
+  airflowdb:
+    name: airflow
+    host: <airflow_externalDatabase_host>
+    port: 5432
+    pool_size: 100
+    user:  <airflow_externalDatabase_user>
+    passwordSecret: "postgres"
+    passwordSecretKey: "postgres-password"
+
