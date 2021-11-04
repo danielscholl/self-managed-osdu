@@ -3,6 +3,9 @@ name: '2. Stamp Builder'
 on:
   workflow_dispatch:
 
+env:
+  CLI_VERSION: 2.27.0
+
 jobs:
 
   builder:
@@ -13,13 +16,15 @@ jobs:
       - uses: actions/checkout@master
 
       - name: Azure Login
-        uses: Azure/login@v1
+        uses: Azure/login@v1.1
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
+
 
       - name: Validate Template Resources
         uses: Azure/cli@1.0.4
         with:
+          azcliversion: ${{ env.CLI_VERSION }}
           inlineScript: |
             PRINCIPAL_OID=$(az ad sp show --id $(az account show --query user.name -otsv) --query objectId -otsv)
             az deployment sub validate --name 'osdu-${{ secrets.RAND }}' --location ${{ secrets.AZURE_LOCATION }} --template-file $GITHUB_WORKSPACE/main.bicep \
@@ -30,6 +35,7 @@ jobs:
       - name: Deploy Template Resources
         uses: Azure/cli@1.0.4
         with:
+          azcliversion: ${{ env.CLI_VERSION }}
           inlineScript: |
             PRINCIPAL_OID=$(az ad sp show --id $(az account show --query user.name -otsv) --query objectId -otsv)
             GROUP=$(az deployment sub create --name 'osdu-${{ secrets.RAND }}' --location ${{ secrets.AZURE_LOCATION }} --template-file $GITHUB_WORKSPACE/main.bicep \
@@ -48,6 +54,7 @@ jobs:
       - name: Save Secrets to Vault
         uses: Azure/cli@1.0.4
         with:
+          azcliversion: ${{ env.CLI_VERSION }}
           inlineScript: |
             VAULT=$(az keyvault list --resource-group $RESOURCE_GROUP --query [].name -otsv)
             STORAGE=$(az storage account list --resource-group $RESOURCE_GROUP --query [].name -otsv)
@@ -68,6 +75,7 @@ jobs:
         env:
           FILE_SHARE: ssh-keys
         with:
+          azcliversion: ${{ env.CLI_VERSION }}
           inlineScript: |
             mkdir -p $FILE_SHARE
             echo '${{ secrets.SSH_PUBLIC_KEY }}' > $FILE_SHARE/azure-aks-node-ssh-key && chmod 600 $FILE_SHARE/azure-aks-node-ssh-key
@@ -82,6 +90,7 @@ jobs:
         env:
           FILE_SHARE: configuration
         with:
+          azcliversion: ${{ env.CLI_VERSION }}
           inlineScript: |
             mkdir -p $FILE_SHARE
             wget https://community.opengroup.org/osdu/platform/deployment-and-operations/infra-azure-provisioning/-/raw/master/infra/templates/osdu-r3-mvp/central_resources/override.tfvars -O $FILE_SHARE/central.tfvars
@@ -97,6 +106,7 @@ jobs:
         env:
           FILE_SHARE: configuration
         with:
+          azcliversion: ${{ env.CLI_VERSION }}
           inlineScript: |
             VAULT=$(az keyvault list --resource-group $RESOURCE_GROUP --query [].name -otsv)
             cat > envrc << EOF
@@ -131,27 +141,3 @@ jobs:
             export TF_VAR_gitops_ssh_key_file="/osdu-azure/.ssh/azure-aks-gitops-ssh-key"
             EOF
             az keyvault secret set --vault-name $VAULT --name "envrc" --file envrc
-
-      # - name: Save Rest-Client Environment to Vault
-      #   uses: Azure/cli@1.0.4
-      #   with:
-      #     inlineScript: |
-      #       VAULT=$(az keyvault list --resource-group $RESOURCE_GROUP --query [].name -otsv)
-      #       BASE_64_TOKEN=$(echo "elastic:${{ secrets.ELASTIC_PASSWORD }}" | base64)
-
-      #       cat > settings << EOF
-      #       "self-managed-osdu": {
-      #         "TENANT_ID": "$(az account show --query homeTenantId -otsv)",
-      #         "PRINCIPAL_ID": "$(az keyvault secret show --id https://$VAULT.vault.azure.net/secrets/client-id --query value -otsv)",
-      #         "PRINCIPAL_SECRET": "$(az keyvault secret show --id https://$VAULT.vault.azure.net/secrets/client-secret --query value -otsv)",
-      #         "CLIENT_ID": "$(az keyvault secret show --id https://$VAULT.vault.azure.net/secrets/application-id --query value -otsv)",
-      #         "CLIENT_SECRET": "",
-      #         "OSDU_HOST": "",
-      #         "REGION": "${{ secrets.AZURE_LOCATION }}",
-      #         "ES_HOST": "${{ secrets.ELASTIC_ENDPOINT }}",
-      #         "ES_AUTH_TOKEN": "$BASE_64_TOKEN",
-      #         "INITIAL_TOKEN": ""
-      #       }
-      #       EOF
-      #       az keyvault secret set --vault-name $VAULT --name "restclient" --file settings
-
