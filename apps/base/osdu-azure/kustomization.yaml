@@ -21,3 +21,4 @@ resources:
   - crs-catalog.yaml
   - crs-conversion.yaml
   - wks-service.yaml
+  - workflow-service.yaml

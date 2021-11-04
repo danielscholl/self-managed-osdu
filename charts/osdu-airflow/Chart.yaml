@@ -1,6 +1,0 @@
-apiVersion: v2
-name: osdu-airflow
-type: application
-description: Installs airflow for osdu on Azure"
-appVersion: 1.0.0
-version: 1.0.0

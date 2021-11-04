@@ -1,0 +1,17 @@
+apiVersion: v1
+appVersion: 1.10.10
+description: Airflow is a platform to programmatically author, schedule and monitor
+  workflows
+home: https://airflow.apache.org/
+icon: https://airflow.apache.org/_images/pin_large.png
+keywords:
+- workflow
+- dag
+maintainers:
+  - name: danielscholl
+    url: https://github.com/danielscholl
+name: airflow
+sources:
+- https://airflow.apache.org/
+
+version: 7.5.0

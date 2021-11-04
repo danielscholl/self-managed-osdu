@@ -1,0 +1,40 @@
+---
+apiVersion: source.toolkit.fluxcd.io/v1beta1
+kind: GitRepository
+metadata:
+  name: airflow
+spec:
+  interval: 1m
+  url: https://github.com/apache/airflow.git
+  ref:
+    # tag: 2.0.1
+    tag: 1.10.12
+  ignore: |
+    # exclude all
+    /*
+    # include charts directory
+    !/chart/
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: airflow
+  namespace: airflow
+spec:
+  releaseName: airflow
+  dependsOn:
+  - name: airflow-base
+  interval: 5m
+  chart:
+    spec:
+      chart: ./chart
+      sourceRef:
+        kind: GitRepository
+        name: airflow
+        namespace: airflow
+      interval: 1m
+  install:
+    disableWait: true
+  upgrade:
+    disableWait: true
+  targetNamespace: airflow

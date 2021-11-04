@@ -5,8 +5,6 @@ To uninstall the application, run the following command:
 ```bash
 # Suspend and remove kustomizations
 flux suspend kustomization flux-system
-flux delete kustomization osdu-stamp --silent
-flux delete kustomization sealed-secrets --silent
 
 # Remove Helmreleases
 flux delete helmrelease wks-service -n osdu-azure --silent
@@ -31,6 +29,9 @@ flux delete helmrelease self-managed-base -n osdu-azure --silent
 flux delete helmrelease token-service -n dev-sample --silent
 flux delete helmrelease env-tool -n dev-sample --silent
 
+flux delete helmrelease airflow -n airflow --silent
+flux delete helmrelease airflow-base -n airflow --silent
+
 flux delete helmrelease osdu-base -n default --silent
 
 flux delete helmrelease osdu-istio -n istio-system --silent
@@ -41,7 +42,11 @@ flux delete helmrelease sealed-secrets -n flux-system --silent
 
 kubectl delete namespace osdu-azure
 kubectl delete namespace dev-sample
+kubectl delete namespace airflow
 kubectl delete namespace istio-system
+
+flux delete kustomization osdu-stamp --silent
+flux delete kustomization sealed-secrets --silent
 
 # An istio clean up issue requires cleanup of the istio-system namespace.
 kubectl get namespace "istio-system" -o json \
