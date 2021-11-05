@@ -20,6 +20,7 @@ spec:
         namespace: flux-system
   interval: 5m0s
   install:
+    timeout: 7m0s
     remediation:
       retries: 3
   targetNamespace: osdu-azure
