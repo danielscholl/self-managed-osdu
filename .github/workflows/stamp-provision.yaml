@@ -734,7 +734,8 @@ jobs:
                     'wks' \
                     'workflow' \
                     'wellbore-ddms' \
-                    'sdms')
+                    'sdms' \
+                    'schema-load')
 
             for IMAGE in "${IMAGES[@]}"
             do
