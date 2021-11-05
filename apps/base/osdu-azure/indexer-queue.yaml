@@ -7,7 +7,9 @@ metadata:
 spec:
   releaseName: indexer-queue
   dependsOn:
-  - name: indexer-service
+  - name: legal-service
+    namespace: osdu-azure
+  - name: entitlement-service
     namespace: osdu-azure
   chart:
     spec:

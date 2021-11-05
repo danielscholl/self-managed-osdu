@@ -7,7 +7,9 @@ metadata:
 spec:
   releaseName: notification-service
   dependsOn:
-  - name: storage-service
+  - name: legal-service
+    namespace: osdu-azure
+  - name: entitlement-service
     namespace: osdu-azure
   chart:
     spec:

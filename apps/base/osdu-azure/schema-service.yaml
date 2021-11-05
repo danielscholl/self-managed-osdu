@@ -9,6 +9,8 @@ spec:
   dependsOn:
   - name: legal-service
     namespace: osdu-azure
+  - name: entitlement-service
+    namespace: osdu-azure
   chart:
     spec:
       chart: ./charts/self-managed-service

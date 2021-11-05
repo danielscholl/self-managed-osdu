@@ -7,7 +7,9 @@ metadata:
 spec:
   releaseName: register-service
   dependsOn:
-  - name: notification-service
+  - name: legal-service
+    namespace: osdu-azure
+  - name: entitlement-service
     namespace: osdu-azure
   chart:
     spec:
