@@ -120,7 +120,7 @@ az ad app create --display-name $OSDU_APPLICATION \
 
 
   # Sample Format
-  {
+{
   "appId": "00000000-0000-0000-0000-000000000000",
   "displayName": "osdu-application",
   "objectId": "00000000-0000-0000-0000-000000000000"
@@ -223,9 +223,6 @@ Entitlements needs to be initialized.  This can be done by running the `manage-u
 
 - __Define Intial OpenID Connect User__
 
-![user2](./docs/images/user2.png)
-
-- __Initialize the Entitlement Tenant__
 
 ![user3](./docs/images/user3.png)
 

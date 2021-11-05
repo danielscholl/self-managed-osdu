@@ -24,6 +24,7 @@ flux delete helmrelease legal-service -n osdu-azure --silent
 flux delete helmrelease entitlement-service -n osdu-azure --silent
 flux delete helmrelease partition-service -n osdu-azure --silent
 flux delete helmrelease default-service -n osdu-azure --silent
+
 flux delete helmrelease self-managed-base -n osdu-azure --silent
 
 flux delete helmrelease token-service -n dev-sample --silent
@@ -48,7 +49,7 @@ kubectl delete namespace istio-system
 flux delete kustomization osdu-stamp --silent
 flux delete kustomization sealed-secrets --silent
 
-# An istio clean up issue requires cleanup of the istio-system namespace.
+# If an istio clean up issue occurs then cleanup of the istio-system namespace.
 kubectl get namespace "istio-system" -o json \
   | tr -d "\n" | sed "s/\"finalizers\": \[[^]]\+\]/\"finalizers\": []/" \
   | kubectl replace --raw /api/v1/namespaces/istio-system/finalize -f -
