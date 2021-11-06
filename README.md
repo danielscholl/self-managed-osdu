@@ -163,9 +163,7 @@ __Builder__
 
 __Control Plane__
 
-1. Log Analytics Workspace (Pay-as-you-go)
-  - Solution: Container Insights
-  - Solution: Key Vault Analytics
+1. Log Analytics Workspace - 2 Solutions - Container & KeyVault (Pay-as-you-go)
 2.  Application Insights (Pay-as-you-go)
 3. Azure Key Vault (Standard)
 4. Azure Storage Account - Table (StorageV2-LRS)
