@@ -137,30 +137,61 @@ az ad app create --display-name $OSDU_APPLICATION \
 Deployment of a self managed osdu instance is performed by executing github actions to work with a [Deployment Stamp](https://docs.microsoft.com/en-us/azure/architecture/patterns/deployment-stamp).  Currently there is only support for the deployment of 1 stamp.
 
 
-1. __[Stamp Initialize](../../actions/workflows/stamp-init.yaml)__: This action initializes the neccesary items in the github that are necessary in the provisioning process of a Deployment Stamp. _(Time: ~30s)_
+1. __[Stamp Initialize](../../actions/workflows/stamp-init.yaml)__: This action initializes any neccesary items in github that are necessary to begin (ie: Randomizer Secrets, ssh keys). _(Time: ~30s)_
 
-2. __[Stamp Builder](../../actions/workflows/stamp-builder.yaml)__: This action provisions builder resources necessary in the provisioning process of a Deployment Stamp. _(Time: ~3m)_
+2. __[Stamp Builder](../../actions/workflows/stamp-builder.yaml)__: This action provisions resources necessary to support a provisioning process (ie: Terraform State and Secret Storage). _(Time: ~3m)_
 
 3. __[Stamp Provision](../../actions/workflows/stamp-provision.yaml)__: This action provisions resources for the Deployment Stamp.  _(Time: ~1h)_
 
-4. __[Stamp Configure](../../actions/workflows/stamp-configure.yaml)__: This action initializes the GitOps Configruation process for the Deployment Stamp.  _(Time: ~20m)_
+4. __[Stamp Configure](../../actions/workflows/stamp-configure.yaml)__: This action initializes the Software Configuration process of the Deployment Stamp.  _(Time: ~20m)_
 
-> Note: The pipeline creates the software configuration definition which is performed by Flux and will complete in ~2m. Flux will then manage the installation process from within the cluster and will complete in ~18m.
+  > Note: The pipeline creates the software configuration definition which is performed by Flux and will complete in ~2m. Flux will then manage the installation process from within the cluster and will complete in ~18m.
+
+5. __[Stamp Load](../../actions/workflows/stamp-load.yaml)__: This action loads any necessary data into the Stamp in order to properly function. (ie: Entitlements TenantInit, Public Schemas)  _(Time: ~20m)_
+
+  > Note: The pipeline brings airflow online which is not currently done by `Stamp Configure` due to compatability issues with Airflow and Flux v3.
 
 
 ## Azure Resources
 
-The following resources are created in Azure for the Deployment Stamp.
+The following resources are created in Azure for a Deployment Stamp.
 
-![secrets](./docs/images/groups.png)
----
-![secrets](./docs/images/builder.png)
----
-![secrets](./docs/images/controlplane.png)
----
-![secrets](./docs/images/dataplane.png)
----
-![secrets](./docs/images/partition.png)
+__Builder__
+
+1. Azure Key Vault (Standard)
+2. Azure Storage Account - Table (StorageV2-LRS)
+
+__Control Plane__
+
+1. Log Analytics Workspace (Pay-as-you-go)
+  - Solution: Container Insights
+  - Solution: Key Vault Analytics
+2.  Application Insights (Pay-as-you-go)
+3. Azure Key Vault (Standard)
+4. Azure Storage Account - Table (StorageV2-LRS)
+5. Azure Cosmos DB Account - Gremlin (4000 Max RU's - Shared)
+6. Azure Container Registry - (Standard)
+7. User Managed Identity 
+
+__Data Plane__
+
+1. Azure Virtual Network
+2. Azure Storage Account - Qty2 (StorageV2-LRS)
+4. Event Grid System Topic
+5. Application Gateway - (WAFv2 w/ Autoscale (2-10))
+6. Public IP Address
+7. Azure Database for Postgres (General Purpose - 4vCore 5GB)
+8. Azure Cosmos DB Account - Core (12000 Max RU's - Shared)
+9. Azure Cache for Redis (Standard 1Gb)
+10. Azure Kubernetes Service - System NodePool (2 Standard_E4s_v3), User NodePool (5-10 Standard_E4s_v3)
+11. User Managed Identity - Qty3 
+
+__Data Partition__
+
+1. Service Bus Namespace (Standard)
+2. Event Grid Domain w/ 5 Topics (Basic)
+3. Azure Cosmos DB Account - Core (12000 Max RU's - Shared)
+4. Azure Storage Account - Qty2 (StorageV2-GZRS)
 
 
 ## Platform Access
