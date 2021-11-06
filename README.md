@@ -179,7 +179,7 @@ __Data Plane__
 5. Application Gateway - (WAFv2 w/ Autoscale (2-10))
 6. Public IP Address
 7. Azure Database for Postgres (General Purpose - 4vCore 5GB)
-8. Azure Cosmos DB Account - Core (12000 Max RU's - Shared)
+8. Azure Cosmos DB Account - Core (4000 Max RU's - Shared)
 9. Azure Cache for Redis (Standard 1Gb)
 10. Azure Kubernetes Service - System NodePool (2 Standard_E4s_v3), User NodePool (5-10 Standard_E4s_v3)
 11. User Managed Identity - Qty3 
