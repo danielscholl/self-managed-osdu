@@ -5,6 +5,16 @@
    This file holds a variable override sample to be used by pipelines
 */
 
+/* The following items are recommended to override in custom.tfvars
+  1. Resource Tags
+  2. Network Addressing
+  2. Kubernetes Version  ** Lock your version and manage your upgrades.
+  3. Agent VM Size       ** Current Default Recomendation.
+  4. Agent VM Count      ** Size as appropriate
+  5. Agent VM Disk       ** Size as appropriate
+*/
+
+prefix = "osdu-self"
 
 feature_flag = {
   osdu_namespace = false
@@ -12,14 +22,19 @@ feature_flag = {
   sa_lock        = false
   autoscaling    = false
 }
-
 keda_v2_enabled = false
-
-prefix = "osdu-self"
 
 resource_tags = {
   environment = "Self Managed OSDU"
+  contact = "<your_name>"
+  repo = "https://github.dev/danielscholl-demo/self-managed-osdu"
 }
+
+# Network Addressing
+address_space      = "10.10.0.0/16"
+subnet_fe_prefix   = "10.10.1.0/26"
+subnet_aks_prefix  = "10.10.2.0/23"
+subnet_be_prefix   = "10.10.3.0/28"
 
 # Kubernetes Settings
 kubernetes_version = "1.19.13"
@@ -31,49 +46,17 @@ aks_services_agent_vm_size  = "Standard_E4s_v3"
 aks_services_agent_vm_count = "5"
 aks_services_agent_vm_disk  = 128
 
-subnet_aks_prefix  = "10.10.2.0/23"
 
-# cosmos DB SQL collections
-cosmos_sql_collections = [
-  {
-    name                  = "Authority"
-    database_name         = "osdu-system-db"
-    partition_key_path    = "/id"
-    partition_key_version = null
+/* The below items are not typically modified */
 
-  },
-  {
-    name                  = "EntityType"
-    database_name         = "osdu-system-db"
-    partition_key_path    = "/id"
-    partition_key_version = null
-  },
-  {
-    name                  = "SchemaInfo"
-    database_name         = "osdu-system-db"
-    partition_key_path    = "/partitionId"
-    partition_key_version = null
-  },
-  {
-    name                  = "Source"
-    database_name         = "osdu-system-db"
-    partition_key_path    = "/id"
-    partition_key_version = null
-  },
-  {
-    name                  = "WorkflowV2"
-    database_name         = "osdu-system-db"
-    partition_key_path    = "/partitionKey"
-    partition_key_version = 2
-  },
-]
+# Storage Settings
+storage_replication_type = "LRS"
 
-blob_cors_rule = [
+# Database Settings
+cosmosdb_consistency_level = "Session"
+cosmos_databases = [
   {
-    allowed_headers    = ["*"]
-    allowed_origins    = ["https://osdu-self.contoso.org"]
-    allowed_methods    = ["GET", "HEAD", "POST", "PUT", "DELETE"]
-    exposed_headers    = ["*"]
-    max_age_in_seconds = 3600
+    name       = "osdu-system-db"
+    throughput = 4000
   }
 ]
