@@ -129,11 +129,11 @@ az ad app create --display-name $OSDU_APPLICATION \
 
 __Generated Secrets__
 
-1. `RAND`: Unique Random String - Created by Action `1. Stamp Initialize'
-2. `SSH_PASSPHRASE`: AKS SSH Key - Created by Action `1. Stamp Initialize'
-3. `SSH_PRIVATE_KEY`: AKS SSH Key - Created by Action `1. Stamp Initialize'
-4. `SSH_PUBLIC_KEY`: AKS SSH Key - Created by Action `1. Stamp Initialize'
-5. `BUILDER_GROUP`: Resource Group Name - Created by Action `2. Stamp Builder'
+1. `RAND`: Unique Random String - Created by Action `Stamp Initialize'
+2. `SSH_PASSPHRASE`: AKS SSH Key - Created by Action `Stamp Initialize'
+3. `SSH_PRIVATE_KEY`: AKS SSH Key - Created by Action `Stamp Initialize'
+4. `SSH_PUBLIC_KEY`: AKS SSH Key - Created by Action `Stamp Initialize'
+5. `BUILDER_GROUP`: Resource Group Name - Created by Action `Stamp Builder'
 
 
 ## Execute Github Actions
