@@ -31,4 +31,4 @@ cosmos_databases = [
 
 # Storage Settings
 storage_replication_type = "GZRS"
-sa_retention_days.       = 30
+sa_retention_days        = 30
