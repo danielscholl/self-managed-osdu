@@ -65,6 +65,7 @@ COPY customizations/templates /osdu-azure/templates/osdu-r3-mvp
 COPY configuration/controlplane.tfvars /osdu-azure/templates/osdu-r3-mvp/central_resources/custom.tfvars
 COPY configuration/dataplane.tfvars /osdu-azure/templates/osdu-r3-mvp/service_resources/custom.tfvars
 COPY configuration/partition.tfvars /osdu-azure/templates/osdu-r3-mvp/data_partition/custom.tfvars
+COPY configuration/dashboard.tfvars /osdu-azure/templates/osdu-r3-mvp/monitoring_resources/custom.tfvars
 
 # Create SSH Keys
 ARG SSH_PUBLIC_KEY
