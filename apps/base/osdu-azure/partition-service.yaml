@@ -11,6 +11,8 @@ spec:
     namespace: osdu-azure
   - name: osdu-istio
     namespace: istio-system
+  interval: 5m0s
+  timeout: 6m
   chart:
     spec:
       chart: ./charts/self-managed-service
@@ -18,10 +20,16 @@ spec:
         kind: GitRepository
         name: flux-system
         namespace: flux-system
-  interval: 5m0s
   install:
     remediation:
       retries: 3
+  rollback:
+    timeout: 5m
+    disableWait: false
+    disableHooks: false
+    recreate: false
+    force: true
+    cleanupOnFail: true
   targetNamespace: osdu-azure
   values:
     podIdentity: osdu-identity

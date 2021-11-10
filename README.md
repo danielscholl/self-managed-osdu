@@ -147,9 +147,11 @@ Deployment of a self managed osdu instance is performed by executing github acti
 
 3. __[Stamp Provision](../../actions/workflows/stamp-provision.yaml)__: This action provisions resources for the Deployment Stamp.  _(Time: ~1h)_
 
-4. __[Stamp Configure](../../actions/workflows/stamp-configure.yaml)__: This action initializes the Software Configuration process of the Deployment Stamp.  _(Time: ~20m)_
+4. __[Stamp Configure (a) ](../../actions/workflows/stamp-configure.yaml)__: This action initializes the Software Configuration process of the Deployment Stamp.  _(Time: ~20m)_
 
-  > Note: The pipeline creates the software configuration definition which is performed by Flux and will complete in ~2m. Flux will then manage the installation process from within the cluster and will complete in ~18m.
+  > Note: The pipeline creates the software configuration definition which is performed by Flux and will complete in ~2m. Flux will then manage the installation process from within the cluster and will complete in ~18m. [more info](./docs/flux-timing.md)
+
+4. __[Stamp Configure (b) ](../../actions/workflows/stamp-airflow.yaml)__: This action is seperated currently from Stamp Configure (a) due to some compatability issues with Airflow Charts and Flux. The action installs the dags and airflow.  _(Time: ~2m)_  [user setup](./docs/airflow-setup.md)
 
 5. __[Stamp Load](../../actions/workflows/stamp-load.yaml)__: This action loads any necessary data into the Stamp in order to properly function. (ie: Entitlements TenantInit, Public Schemas)  _(Time: ~20m)_
 
@@ -173,7 +175,7 @@ __Control Plane__
 4. Azure Storage Account - Table (StorageV2-LRS)
 5. Azure Cosmos DB Account - Gremlin (4000 Max RU's - Shared)
 6. Azure Container Registry - (Standard)
-7. User Managed Identity 
+7. User Managed Identity
 
 __Data Plane__
 
@@ -186,7 +188,7 @@ __Data Plane__
 8. Azure Cosmos DB Account - Core (4000 Max RU's - Shared)
 9. Azure Cache for Redis (Standard 1Gb)
 10. Azure Kubernetes Service - System NodePool (2 Standard_E4s_v3), User NodePool (5-10 Standard_E4s_v3)
-11. User Managed Identity - Qty3 
+11. User Managed Identity - Qty3
 
 __Data Partition__
 
