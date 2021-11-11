@@ -1,0 +1,205 @@
+name: '6. Stamp Uninstall'
+
+on:
+  workflow_dispatch:
+
+env:
+  CLI_VERSION: 2.30.0
+
+jobs:
+
+  check:
+    name: Remove Check
+    runs-on: ubuntu-latest
+    outputs:
+      uninstall-okay: ${{ steps.uninstall.outputs.uninstall }}
+      delete-okay: ${{ steps.remove.outputs.delete }}
+    steps:
+      - name: Uninstall Check
+        id: uninstall
+        env:
+          REMOVE_OKAY: ${{ secrets.UNINSTALL }}
+        if: "${{ env.REMOVE_OKAY != '' }}"
+        run: echo "::set-output name=uninstall::true"
+      - name: Remove Check
+        id: remove
+        env:
+          DELETE_OKAY: ${{ secrets.DELETE }}
+        if: "${{ env.DELETE_OKAY != '' }}"
+        run: echo "::set-output name=delete::true"
+
+
+  uninstall-software:
+    name: Uninstall Software
+    needs: check
+    if: needs.check.outputs.uninstall-okay == 'true'
+
+    runs-on: ubuntu-latest
+    steps:
+      - uses: Azure/login@v1.1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+      -  uses: actions/checkout@v2
+
+      - name: Install Flux
+        run: curl -s https://fluxcd.io/install.sh | bash;
+
+      - name: Environment Settings
+        uses: Azure/cli@1.0.4
+        with:
+          azcliversion: ${{ env.CLI_VERSION }}
+          inlineScript: |
+            GROUP=$(az group list --query "[?contains(name, 'dpl${{ secrets.RAND }}')].name" -otsv |grep -v MC)
+            ENV_CLUSTER=$(az aks list --resource-group $GROUP --query [].name -otsv)
+            echo "CLUSTER_RESOURCE_GROUP=$GROUP" >> $GITHUB_ENV
+            echo "CLUSTER_NAME=$ENV_CLUSTER" >> $GITHUB_ENV
+
+      - name: AKS Context
+        uses: azure/aks-set-context@v1
+        with:
+          creds: '${{ secrets.AZURE_CREDENTIALS }}'
+          cluster-name: ${{ env.CLUSTER_NAME }}
+          resource-group: ${{ env.CLUSTER_RESOURCE_GROUP }}
+
+      - name: Suspend Kustomization
+        run: |
+          flux suspend kustomization flux-system
+          flux suspend kustomization osdu-stamp
+          flux delete kustomization sealed-secrets --silent
+
+      - name: Uninstall osdu-azure
+        env:
+          NAMESPACE: osdu-azure
+        run: |
+          CHARTS=('workflow-service' \
+                  'wks-service' \
+                  'crs-catalog' \
+                  'crs-conversion' \
+                  'unit-service' \
+                  'register-service' \
+                  'notification-service' \
+                  'search-service' \
+                  'indexer-queue' \
+                  'indexer-service' \
+                  'storage-service' \
+                  'dataset-service' \
+                  'file-service' \
+                  'schema-service' \
+                  'legal-service' \
+                  'entitlement-service' \
+                  'partition-service' \
+                  'default-service' \
+                  'self-managed-base'
+                  )
+
+          for CHART in "${CHARTS[@]}"
+          do
+            if [ ! -z $(helm status $CHART -n $NAMESPACE -o json |jq -r ".info.status") ]
+            then
+              flux delete helmrelease $CHART -n $NAMESPACE --silent
+            fi
+          done
+
+      - name: Uninstall dev-sample
+        env:
+          NAMESPACE: dev-sample
+        run: |
+          CHARTS=('token-service' 'env-tool')
+
+          for CHART in "${CHARTS[@]}"
+          do
+            if [ ! -z $(helm status $CHART -n $NAMESPACE -o json |jq -r ".info.status") ]
+            then
+              flux delete helmrelease $CHART -n $NAMESPACE --silent
+            fi
+          done
+
+      - name: Uninstall osdu-airflow
+        env:
+          NAMESPACE: airflow
+        run: |
+          CHARTS=('airflow' 'airflow-base')
+
+          for CHART in "${CHARTS[@]}"
+          do
+            if [ ! -z $(helm status $CHART -n $NAMESPACE -o json |jq -r ".info.status") ]
+            then
+              flux delete helmrelease $CHART -n $NAMESPACE --silent
+            fi
+          done
+
+      - name: Uninstall osdu-istio
+        env:
+          NAMESPACE: istio-system
+        run: |
+          CHARTS=('osdu-istio' 'istio-operator' 'istio-base')
+
+          for CHART in "${CHARTS[@]}"
+          do
+            if [ ! -z $(helm status $CHART -n $NAMESPACE -o json |jq -r ".info.status") ]
+            then
+              flux delete helmrelease $CHART -n $NAMESPACE --silent
+            fi
+          done
+
+      - name: Uninstall osdu-base
+        env:
+          NAMESPACE: default
+        run: |
+          CHARTS=('osdu-base')
+
+          for CHART in "${CHARTS[@]}"
+          do
+            if [ ! -z $(helm status $CHART -n $NAMESPACE -o json |jq -r ".info.status") ]
+            then
+              flux delete helmrelease $CHART -n $NAMESPACE --silent
+            fi
+          done
+
+      - name: Remove Namespaces
+        run: |
+          kubectl delete namespace osdu-azure
+          kubectl delete namespace dev-sample
+          kubectl delete namespace airflow
+          kubectl delete namespace istio-system
+
+      - name: Uninstall Flux
+        run: |
+          flux delete kustomization osdu-stamp --silent
+          flux uninstall --silent
+
+      - name: Remove osdu-stamp
+        run: |
+          rm -rf clusters/osdu-stamp
+          rm -rf apps/osdu-stamp
+
+      - name: Git CheckIn
+        uses: EndBug/add-and-commit@v7
+        with:
+          message: 'Software Removed'
+          add: '.'
+
+  delete-infrastructure:
+    name: Delete Azure Resources
+    needs: check
+    if: needs.check.outputs.delete-okay == 'true'
+
+    runs-on: ubuntu-latest
+    steps:
+      - uses: Azure/login@v1.1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - name: Environment Settings
+        uses: Azure/cli@1.0.4
+        with:
+          azcliversion: ${{ env.CLI_VERSION }}
+          inlineScript: |
+            PARTITION=$(az group list --query "[?contains(name, 'prt${{ secrets.RAND }}')].name" -otsv |grep -v MC)
+            DATA_PLANE=$(az group list --query "[?contains(name, 'dpl${{ secrets.RAND }}')].name" -otsv |grep -v MC)
+            CONTROL_PLANE=$(az group list --query "[?contains(name, 'cpl${{ secrets.RAND }}')].name" -otsv |grep -v MC)
+            BUILDER_GROUP=osdu-builder-${{ secrets.RAND }}
+            az group delete -n $PARTITION --yes --no-wait
+            az group delete -n $DATA_PLANE --yes --no-wait
+            az group delete -n $CONTROL_PLANE --yes --no-wait
+            az group delete -n $BUILDER_GROUP --yes --no-wait
