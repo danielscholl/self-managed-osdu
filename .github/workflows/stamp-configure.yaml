@@ -1,10 +1,10 @@
-name: '4. Stamp Configure'
+name: '4. Stamp Configure (a)'
 
 on:
   workflow_dispatch:
 
 env:
-  CLI_VERSION: 2.27.0
+  CLI_VERSION: 2.30.0
   OSDU_VERSION: v0.11.0
   CLUSTER: osdu-stamp
   PARTITION_NAME: opendes
