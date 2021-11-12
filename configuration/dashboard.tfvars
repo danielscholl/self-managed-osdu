@@ -12,14 +12,17 @@
 //  See the License for the specific language governing permissions and
 //  limitations under the License.
 
+
+tenant_name = "<your_tenant>"
+
 prefix = "osdu-self"
 
 dashboards = {
   default         = true
   appinsights     = true
-  airflow_infra   = true
-  airflow_service = true
-  airflow_dags    = true
+  airflow_infra   = false
+  airflow_service = false
+  airflow_dags    = false
 }
 
 
@@ -494,23 +497,23 @@ log-alerts = {
 
 # Sample Metric Type Alert data
 metric-alerts = {
-  osdu-airflow-collect-dags = {
-    name        = "OSDU_AirflowCollectDags",
-    description = "Airflow Alert for average time taken to collect dags",
-    enabled     = "true",
-    severity    = 3,
-    frequency   = "PT15M",
-    window-size = "PT15M",
-    action-groups = {
-      1 = "DevActionGroup",
-      2 = "ProdActionGroup"
-    },
-    auto-mitigate             = true,
-    criteria-metric-namespace = "azure.applicationinsights",
-    criteria-metric-name      = "osdu_airflow.collect_dags",
-    criteria-aggregation      = "Average",
-    criteria-operator         = "GreaterThan",
-    criteria-threshold        = 50
-  }
+ # osdu-airflow-collect-dags = {
+ #   name        = "OSDU_AirflowCollectDags",
+ #   description = "Airflow Alert for average time taken to collect dags",
+ #   enabled     = "true",
+ #   severity    = 3,
+ #   frequency   = "PT15M",
+ #   window-size = "PT15M",
+ #   action-groups = {
+ #     1 = "DevActionGroup",
+ #     2 = "ProdActionGroup"
+ #   },
+ #   auto-mitigate             = true,
+ #   criteria-metric-namespace = "azure.applicationinsights",
+ #   criteria-metric-name      = "osdu_airflow.collect_dags",
+ #   criteria-aggregation      = "Average",
+ #   criteria-operator         = "GreaterThan",
+ #   criteria-threshold        = 50
+ # }
 }
 

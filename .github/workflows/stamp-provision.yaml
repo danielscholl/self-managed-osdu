@@ -209,6 +209,72 @@ jobs:
           rm $GITHUB_WORKSPACE/.env
         shell: bash
 
+  dashboard:
+    name: Provision - Dashboard
+    env:
+      TEMPLATE: /osdu-azure/templates/osdu-r3-mvp/monitoring_resources
+    runs-on: ubuntu-latest
+    needs: partition
+    steps:
+
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Azure Login
+        uses: Azure/login@v1.1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+
+      - name: Build Docker Image
+        uses: docker/build-push-action@v2
+        with:
+          push: false
+          build-args: WORKING_DIRECTORY=${{ env.TEMPLATE }}
+          tags: self-managed-osdu:${{ env.IMAGE_TAG }}
+          outputs: type=docker,dest=/tmp/self-managed-osdu.tar
+
+      - name: Load Docker Image
+        run: docker load --input /tmp/self-managed-osdu.tar
+
+      - name: Retrieve Environment Settings
+        uses: Azure/cli@1.0.4
+        with:
+          azcliversion: ${{ env.CLI_VERSION }}
+          inlineScript: |
+            VAULT=$(az keyvault list --resource-group ${{ secrets.BUILDER_GROUP }} --query [].name -otsv)
+            STORAGE=$(az keyvault secret show --id https://$VAULT.vault.azure.net/secrets/storage --query value -otsv)
+
+            cat > $GITHUB_WORKSPACE/.env << EOF
+            ## These variables support AzureRM Backend Storage State
+            ARM_TENANT_ID=$(az account show --query homeTenantId -otsv)
+            ARM_SUBSCRIPTION_ID=$(az account show --query id -otsv)
+            ARM_CLIENT_ID=$(az keyvault secret show --id https://$VAULT.vault.azure.net/secrets/terraform-id --query value -otsv)
+            ARM_CLIENT_SECRET=$(az keyvault secret show --id https://$VAULT.vault.azure.net/secrets/terraform-secret --query value -otsv)
+            ARM_ACCESS_KEY=$(az storage account keys list --resource-group ${{ secrets.BUILDER_GROUP }} --account-name $STORAGE --query '[0].value' -o tsv)
+            TF_VAR_remote_state_account=$STORAGE
+            TF_VAR_remote_state_container=remote-state-container
+
+            # Monitoring Resources
+
+
+            EOF
+
+      - name: Deploy Resources
+        run: |
+          docker run --rm --env-file $GITHUB_WORKSPACE/.env \
+            --env TF_VAR_workspace=${{ env.DASHBOARD_WORKSPACE }} \
+            --env TF_VAR_resource_group_location="${{ secrets.AZURE_LOCATION }}" \
+            --env TF_VAR_central_resources_workspace_name=${{ env.CONTROLPLANE_WORKSPACE }} \
+            --env TF_VAR_service_resources_workspace_name=${{ env.DATAPLANE_WORKSPACE }} \
+            --env TF_VAR_data_partition_resources_workspace_name=${{ env.PARTITION_WORKSPACE }} \
+            self-managed-osdu:${{ env.IMAGE_TAG }}
+
+          rm $GITHUB_WORKSPACE/.env
+        shell: bash
+
   fileshare-data:
     name: Load Data - File Shares
     runs-on: ubuntu-latest
