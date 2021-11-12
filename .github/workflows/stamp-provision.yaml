@@ -5,6 +5,7 @@ on:
 
 env:
   CLI_VERSION: 2.30.0
+
   CONTROLPLANE_WORKSPACE: "cpl-${{ secrets.RAND }}"
   DATAPLANE_WORKSPACE: "dpl-${{ secrets.RAND }}"
   PARTITION_WORKSPACE: "prt-${{ secrets.RAND }}"
@@ -329,6 +330,30 @@ jobs:
               --container-name ${{ env.CONTAINER }} \
               --name ${{ env.FILE }}
 
+      - name: Upload Local DAGS
+        env:
+          FILE_SHARE: airflowdags
+        uses: Azure/cli@1.0.4
+        with:
+          azcliversion: ${{ env.CLI_VERSION }}
+          inlineScript: |
+            GROUP=$(az group list --query "[?contains(name, 'cpl${{ secrets.RAND }}')].name" -otsv)
+            ENV_VAULT=$(az keyvault list --resource-group $GROUP --query [].name -otsv)
+
+            az storage file upload-batch \
+              --account-name $(az keyvault secret show --id https://${ENV_VAULT}.vault.azure.net/secrets/airflow-storage --query value -otsv) \
+              --account-key $(az keyvault secret show --id https://${ENV_VAULT}.vault.azure.net/secrets/airflow-storage-key --query value -otsv) \
+              --destination ${{ env.FILE_SHARE }} \
+              --source $GITHUB_WORKSPACE/src/${{ env.FILE_SHARE }} \
+              --pattern "*.ini"
+
+            az storage file upload-batch \
+              --account-name $(az keyvault secret show --id https://${ENV_VAULT}.vault.azure.net/secrets/airflow-storage --query value -otsv) \
+              --account-key $(az keyvault secret show --id https://${ENV_VAULT}.vault.azure.net/secrets/airflow-storage-key --query value -otsv) \
+              --destination ${{ env.FILE_SHARE }} \
+              --source $GITHUB_WORKSPACE/src/${{ env.FILE_SHARE }} \
+              --pattern "*.py"
+
   cosmos-data:
     name: Load Data - TenantInfo
     runs-on: ubuntu-latest
@@ -535,7 +560,7 @@ jobs:
 
       - name: Custom Login HTML Page
         run: |
-          cat > src/index.html << EOF
+          cat > src/auth_token/index.html << EOF
           <!DOCTYPE html>
           <html lang="en">
           <!-- python3 -m http.server 8080 -->

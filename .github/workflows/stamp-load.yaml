@@ -5,6 +5,8 @@ on:
 
 env:
   CLI_VERSION: 2.30.0
+
+  OSDU_VERSION: v0.11.0
   PARTITION_NAME: opendes
 
 jobs:
@@ -96,3 +98,56 @@ jobs:
 
       - name: Load Common Schema
         run: docker run --env-file .env msosdu.azurecr.io/schema-load:0.9.0
+
+  initialize-workflow:
+    name: Workflow Load
+    runs-on: ubuntu-latest
+    needs: initialize-entitlements
+    steps:
+      - uses: Azure/login@v1.1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+      - uses: actions/checkout@v2
+
+      - name: Environment Settings
+        uses: Azure/cli@1.0.4
+        with:
+          azcliversion: ${{ env.CLI_VERSION }}
+          inlineScript: |
+            GROUP=$(az group list --query "[?contains(name, 'cpl${{ secrets.RAND }}')].name" -otsv)
+            ENV_VAULT=$(az keyvault list --resource-group $GROUP --query [].name -otsv)
+            REGISTRY=$(az acr list -g $GROUP --query [0].loginServer -otsv)
+            DP_GROUP=$(az group list --query "[?contains(name, 'dpl${{ secrets.RAND }}')].name" -otsv |grep -v MC)
+            DNS_HOST=$(az network public-ip list --resource-group $DP_GROUP --query [].dnsSettings.fqdn -otsv)
+
+            echo "GROUP=$GROUP" >> $GITHUB_ENV
+            echo "ENV_VAULT=$ENV_VAULT" >> $GITHUB_ENV
+            echo "REGISTRY=$REGISTRY" >> $GITHUB_ENV
+            echo "DNS_HOST=$DNS_HOST" >> $GITHUB_ENV
+
+      - name: Create Workflow
+        uses: Azure/cli@1.0.4
+        with:
+          azcliversion: ${{ env.CLI_VERSION }}
+          inlineScript: |
+            AZURE_TENANT_ID=$(az account show --query tenantId -otsv)
+            AZURE_CLIENT_ID=$(az keyvault secret show --id https://${ENV_VAULT}.vault.azure.net/secrets/app-dev-sp-username --query value -otsv)
+            AZURE_CLIENT_SECRET=$(az keyvault secret show --id https://${ENV_VAULT}.vault.azure.net/secrets/app-dev-sp-password --query value -otsv)
+            AZURE_AD_APP_RESOURCE_ID=$(az keyvault secret show --id https://${ENV_VAULT}.vault.azure.net/secrets/aad-client-id --query value -otsv)
+
+            TOKEN=$(curl --request POST \
+            --url https://login.microsoftonline.com/$AZURE_TENANT_ID/oauth2/token \
+            --header 'content-type: application/x-www-form-urlencoded' \
+            --header 'user-agent: vscode-restclient' \
+            --data grant_type=client_credentials \
+            --data client_id=$AZURE_CLIENT_ID \
+            --data client_secret=$AZURE_CLIENT_SECRET \
+            --data resource=$AZURE_AD_APP_RESOURCE_ID |jq -r ".access_token")
+
+            curl --request POST \
+            --url https://$DNS_HOST/api/workflow/v1/workflow \
+            --header 'accept: application/json' \
+            --header "authorization: Bearer $TOKEN" \
+            --header 'data-partition-id: opendes' \
+            --header 'user-agent: vscode-restclient' \
+            --data '{"workflowName": "Osdu_ingest","description": "Manifest Ingestion DAGs workflow","registrationInstructions": {"concurrentWorkflowRun": 5,"concurrentTaskRun": 5,"workflowDetailContent": "","active": true}}'

@@ -12,7 +12,7 @@ __Goals:__
 
 __Prerequisites:__
 
-OSDU on Azure assumes a bring your own Elastic Search Instance of a version of 7.x (ie: 7.15.1) with a valid https endpoint. The recommended method of Elastic Search is to use the [Elastic Cloud Managed Service from the Marketplace](https://azuremarketplace.microsoft.com/en-us/marketplace/apps/elastic.ec-azure?tab=Overview).
+OSDU on Azure assumes a bring your own Elastic Search Instance of a version of 7.x (ie: 7.15.1) with a valid https endpoint and the access information must now be stored in the Common KeyVault. The recommended method of Elastic Search is to use the [Elastic Cloud Managed Service from the Marketplace](https://azuremarketplace.microsoft.com/en-us/marketplace/apps/elastic.ec-azure?tab=Overview).
 
 > Note: Elastic Cloud Managed Service requires a Credit Card to be associated to the subscription for billing purposes.
 

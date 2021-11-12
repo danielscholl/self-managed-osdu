@@ -8,39 +8,15 @@ env:
 
 jobs:
 
-  check:
-    name: Remove Check
+  delete:
+    name: Uninstall Process
     runs-on: ubuntu-latest
-    outputs:
-      uninstall-okay: ${{ steps.uninstall.outputs.uninstall }}
-      delete-okay: ${{ steps.remove.outputs.delete }}
-    steps:
-      - name: Uninstall Check
-        id: uninstall
-        env:
-          REMOVE_OKAY: ${{ secrets.UNINSTALL }}
-        if: "${{ env.REMOVE_OKAY != '' }}"
-        run: echo "::set-output name=uninstall::true"
-      - name: Remove Check
-        id: remove
-        env:
-          DELETE_OKAY: ${{ secrets.DELETE }}
-        if: "${{ env.DELETE_OKAY != '' }}"
-        run: echo "::set-output name=delete::true"
 
-
-  uninstall-software:
-    name: Uninstall Software
-    needs: check
-    if: needs.check.outputs.uninstall-okay == 'true'
-
-    runs-on: ubuntu-latest
     steps:
       - uses: Azure/login@v1.1
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
       -  uses: actions/checkout@v2
-
       - name: Install Flux
         run: curl -s https://fluxcd.io/install.sh | bash;
 
@@ -53,7 +29,6 @@ jobs:
             ENV_CLUSTER=$(az aks list --resource-group $GROUP --query [].name -otsv)
             echo "CLUSTER_RESOURCE_GROUP=$GROUP" >> $GITHUB_ENV
             echo "CLUSTER_NAME=$ENV_CLUSTER" >> $GITHUB_ENV
-
       - name: AKS Context
         uses: azure/aks-set-context@v1
         with:
@@ -62,14 +37,18 @@ jobs:
           resource-group: ${{ env.CLUSTER_RESOURCE_GROUP }}
 
       - name: Suspend Kustomization
+        env:
+          OK: ${{ secrets.UNINSTALL }}
+        if: contains(env.OK, 'true')
         run: |
           flux suspend kustomization flux-system
           flux suspend kustomization osdu-stamp
-          flux delete kustomization sealed-secrets --silent
 
       - name: Uninstall osdu-azure
         env:
+          OK: ${{ secrets.UNINSTALL }}
           NAMESPACE: osdu-azure
+        if: contains(env.OK, 'true')
         run: |
           CHARTS=('workflow-service' \
                   'wks-service' \
@@ -91,7 +70,6 @@ jobs:
                   'default-service' \
                   'self-managed-base'
                   )
-
           for CHART in "${CHARTS[@]}"
           do
             if [ ! -z $(helm status $CHART -n $NAMESPACE -o json |jq -r ".info.status") ]
@@ -102,38 +80,41 @@ jobs:
 
       - name: Uninstall dev-sample
         env:
+          OK: ${{ secrets.UNINSTALL }}
           NAMESPACE: dev-sample
+        if: contains(env.OK, 'true')
         run: |
-          CHARTS=('token-service' 'env-tool')
-
-          for CHART in "${CHARTS[@]}"
-          do
-            if [ ! -z $(helm status $CHART -n $NAMESPACE -o json |jq -r ".info.status") ]
-            then
-              flux delete helmrelease $CHART -n $NAMESPACE --silent
-            fi
-          done
+          if [ ! -z $(helm status env-tool -n dev-sample -o json |jq -r ".info.status") ]
+          then
+            flux delete helmrelease env-tool -n dev-sample --silent
+          fi
+          if [ ! -z $(helm status token-service -n dev-sample -o json |jq -r ".info.status") ]
+          then
+            flux delete helmrelease token-service -n dev-sample --silent
+          fi
 
       - name: Uninstall osdu-airflow
         env:
+          OK: ${{ secrets.UNINSTALL }}
           NAMESPACE: airflow
+        if: contains(env.OK, 'true')
         run: |
-          CHARTS=('airflow' 'airflow-base')
-
-          for CHART in "${CHARTS[@]}"
-          do
-            if [ ! -z $(helm status $CHART -n $NAMESPACE -o json |jq -r ".info.status") ]
+          if [ ! -z $(helm status airflow -n $NAMESPACE -o json |jq -r ".info.status") ]
+          then
+            helm uninstall airflow -n $NAMESPACE
+          fi
+          if [ ! -z $(helm status airflow-base -n $NAMESPACE -o json |jq -r ".info.status") ]
             then
-              flux delete helmrelease $CHART -n $NAMESPACE --silent
+              flux delete helmrelease airflow-base -n $NAMESPACE --silent
             fi
-          done
 
       - name: Uninstall osdu-istio
         env:
+          OK: ${{ secrets.UNINSTALL }}
           NAMESPACE: istio-system
+        if: contains(env.OK, 'true')
         run: |
           CHARTS=('osdu-istio' 'istio-operator' 'istio-base')
-
           for CHART in "${CHARTS[@]}"
           do
             if [ ! -z $(helm status $CHART -n $NAMESPACE -o json |jq -r ".info.status") ]
@@ -144,54 +125,67 @@ jobs:
 
       - name: Uninstall osdu-base
         env:
-          NAMESPACE: default
+          OK: ${{ secrets.UNINSTALL }}
+        if: contains(env.OK, 'true')
         run: |
-          CHARTS=('osdu-base')
+          if [ ! -z $(helm status osdu-base -n default -o json |jq -r ".info.status") ]
+          then
+            flux delete helmrelease osdu-base -n default --silent
+          fi
 
-          for CHART in "${CHARTS[@]}"
-          do
-            if [ ! -z $(helm status $CHART -n $NAMESPACE -o json |jq -r ".info.status") ]
-            then
-              flux delete helmrelease $CHART -n $NAMESPACE --silent
-            fi
-          done
+      - name: Uninstall Kustomizations
+        env:
+          OK: ${{ secrets.UNINSTALL }}
+        if: contains(env.OK, 'true')
+        run: |
+          if [ ! -z $(kubectl get sealed-secrets -n flux-system --ignore-not-found) ]
+          then
+            flux delete kustomization sealed-secrets --silent
+          fi
+          if [ ! -z $(kubectl get kustomization osdu-stamp -n osdu-azure --ignore-not-found) ]
+          then
+            flux delete kustomization osdu-stamp --silent
+          fi
 
       - name: Remove Namespaces
+        env:
+          OK: ${{ secrets.UNINSTALL }}
+        if: contains(env.OK, 'true')
         run: |
-          kubectl delete namespace osdu-azure
-          kubectl delete namespace dev-sample
-          kubectl delete namespace airflow
-          kubectl delete namespace istio-system
-
-      - name: Uninstall Flux
-        run: |
-          flux delete kustomization osdu-stamp --silent
-          flux uninstall --silent
+          kubectl delete namespace osdu-azure --ignore-not-found
+          kubectl delete namespace dev-sample --ignore-not-found
+          kubectl delete namespace airflow --ignore-not-found
+          kubectl delete namespace istio-system --ignore-not-found
 
       - name: Remove osdu-stamp
+        env:
+          OK: ${{ secrets.UNINSTALL }}
+        if: contains(env.OK, 'true')
         run: |
           rm -rf clusters/osdu-stamp
           rm -rf apps/osdu-stamp
 
       - name: Git CheckIn
+        env:
+          OK: ${{ secrets.UNINSTALL }}
+        if: contains(env.OK, 'true')
         uses: EndBug/add-and-commit@v7
         with:
           message: 'Software Removed'
           add: '.'
 
-  delete-infrastructure:
-    name: Delete Azure Resources
-    needs: check
-    if: needs.check.outputs.delete-okay == 'true'
+      - name: Remove Flux
+        env:
+          OK: ${{ secrets.UNINSTALL }}
+        if: contains(env.OK, 'true')
+        run: |
+          flux uninstall --silent
 
-    runs-on: ubuntu-latest
-    steps:
-      - uses: Azure/login@v1.1
-        with:
-          creds: ${{ secrets.AZURE_CREDENTIALS }}
-
-      - name: Environment Settings
+      - name: Delete Infrastructure
         uses: Azure/cli@1.0.4
+        env:
+          OK: ${{ secrets.REMOVE }}
+        if: contains(env.OK, 'true')
         with:
           azcliversion: ${{ env.CLI_VERSION }}
           inlineScript: |
@@ -203,3 +197,20 @@ jobs:
             az group delete -n $DATA_PLANE --yes --no-wait
             az group delete -n $CONTROL_PLANE --yes --no-wait
             az group delete -n $BUILDER_GROUP --yes --no-wait
+
+      - name: Remove osdu-stamp
+        env:
+          OK: ${{ secrets.REMOVE }}
+        if: contains(env.OK, 'true')
+        run: |
+          rm -rf clusters/osdu-stamp
+          rm -rf apps/osdu-stamp
+
+      - name: Git CheckIn
+        env:
+          OK: ${{ secrets.REMOVE }}
+        if: contains(env.OK, 'true')
+        uses: EndBug/add-and-commit@v7
+        with:
+          message: 'Software Removed'
+          add: '.'
