@@ -189,10 +189,12 @@ jobs:
         with:
           azcliversion: ${{ env.CLI_VERSION }}
           inlineScript: |
+            DASHBOARD=$(az group list --query "[?contains(name, 'dash${{ secrets.RAND }}')].name" -otsv |grep -v MC)
             PARTITION=$(az group list --query "[?contains(name, 'prt${{ secrets.RAND }}')].name" -otsv |grep -v MC)
             DATA_PLANE=$(az group list --query "[?contains(name, 'dpl${{ secrets.RAND }}')].name" -otsv |grep -v MC)
             CONTROL_PLANE=$(az group list --query "[?contains(name, 'cpl${{ secrets.RAND }}')].name" -otsv |grep -v MC)
             BUILDER_GROUP=osdu-builder-${{ secrets.RAND }}
+            az group delete -n $DASHBOARD --yes --no-wait
             az group delete -n $PARTITION --yes --no-wait
             az group delete -n $DATA_PLANE --yes --no-wait
             az group delete -n $CONTROL_PLANE --yes --no-wait
