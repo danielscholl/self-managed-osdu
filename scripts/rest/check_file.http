@@ -1,0 +1,205 @@
+# -------HTTP REST CLIENT -------
+# https://marketplace.visualstudio.com/items?itemName=humao.rest-client
+
+## This script will help test a file upload flow.
+
+
+# -----------------------
+# OAUTH (Variables)
+# -----------------------
+###
+@login_base = login.microsoftonline.com/{{TENANT_ID}}
+@oauth_token_host = {{login_base}}/oauth2/v2.0/token
+@scopes = {{CLIENT_ID}}/.default openid profile offline_access
+@currentTime = {{$datetime iso8601 -1 d}}
+
+
+# -----------------------
+# OAUTH  refresh_token
+# -----------------------
+###
+# @name refresh
+POST https://{{oauth_token_host}} HTTP/1.1
+Content-Type: application/x-www-form-urlencoded
+
+grant_type=refresh_token
+&client_id={{CLIENT_ID}}
+&client_secret={{CLIENT_SECRET}}
+&refresh_token={{INITIAL_TOKEN}}
+&scope={{scopes}}
+
+
+# -----------------------
+# API (Variables)
+# -----------------------
+###
+@access_token = {{refresh.response.body.access_token}}
+@ENDPOINT = https://{{OSDU_HOST}}
+@FILE_HOST = {{ENDPOINT}}/api/file/v2
+@LEGAL_HOST = {{ENDPOINT}}/api/legal/v1
+@SCHEMA_HOST = {{ENDPOINT}}/api/schema-service/v1
+@data_partition_id = opendes
+@tag =  {{data_partition_id}}-public-usa-check-1
+@kind = {{data_partition_id}}:wks:dataset--File.Generic:1.0.0
+
+
+
+# -----------------------
+# API: legal
+# -----------------------
+
+###
+# @name createTag
+POST {{LEGAL_HOST}}/legaltags
+Authorization: Bearer {{access_token}}
+Content-Type: application/json
+data-partition-id: {{data_partition_id}}
+
+{
+  "name": "{{tag}}",
+  "description": "This tag is used by Data Upload Scripts",
+  "properties": {
+    "countryOfOrigin": [
+      "US"
+    ],
+    "contractId": "A1234",
+    "expirationDate": "2021-12-31",
+    "originator": "MyCompany",
+    "dataType": "Transferred Data",
+    "securityClassification": "Public",
+    "personalData": "No Personal Data",
+    "exportClassification": "EAR99"
+  }
+}
+
+
+###
+# @name getTag
+GET {{LEGAL_HOST}}/legaltags/{{tag}}
+Authorization: Bearer {{access_token}}
+Accept: application/json
+data-partition-id: {{data_partition_id}}
+
+
+
+# -----------------------
+# API: schema
+# -----------------------
+
+###
+# @name getSchema
+GET {{SCHEMA_HOST}}/schema/{{kind}}
+Authorization: Bearer {{access_token}}
+Accept: application/json
+data-partition-id: {{data_partition_id}}
+
+
+
+# -----------------------
+# API: file
+# -----------------------
+###
+# @name uploadURL
+GET {{FILE_HOST}}/files/uploadURL
+Authorization: Bearer {{access_token}}
+Accept: application/json
+Content-Type: application/json
+data-partition-id: {{data_partition_id}}
+
+@FILE_ID = {{uploadURL.response.body.FileID}}
+@FILE_URL = {{uploadURL.response.body.Location.SignedURL}}
+@FILE_SOURCE = {{uploadURL.response.body.Location.FileSource}}
+
+
+###
+# @name getFileList
+POST {{FILE_HOST}}/getFileList
+Authorization: Bearer {{access_token}}
+Accept: application/json
+Content-Type: application/json
+data-partition-id: {{data_partition_id}}
+
+{
+  "Items": 5,
+  "PageNum": 0,
+  "TimeFrom": "{{$datetime iso8601 -1 h}}",
+  "TimeTo": "{{$datetime iso8601}}",
+  "UserID": "osdu-user"
+}
+
+
+###
+# @name uploadFile
+PUT {{FILE_URL}}
+x-ms-blob-type: BlockBlob
+
+< ./sample.las
+
+
+###
+# @name metaData
+POST {{FILE_HOST}}/files/metadata
+Authorization: Bearer {{access_token}}
+Accept: application/json
+Content-Type: application/json
+data-partition-id: {{data_partition_id}}
+
+{
+    "kind": "{{kind}}",
+    "acl": {
+        "viewers": [
+            "data.default.viewers@{{data_partition_id}}.contoso.com"
+        ],
+        "owners": [
+            "data.default.viewers@{{data_partition_id}}.contoso.com"
+        ]
+    },
+    "legal": {
+        "legaltags": [
+            "{{tag}}"
+        ],
+        "otherRelevantDataCountries": [
+            "US"
+        ],
+        "status": "compliant"
+    },
+    "data": {
+        "Endian": "BIG",
+        "ResourceSecurityClassification": "osdu:reference-data--ResourceSecurityClassification:RESTRICTED:",
+        "SchemaFormatTypeID": "osdu:reference-data--SchemaFormatType:LAS2:",
+        "DatasetProperties": {
+            "FileSourceInfo": {
+                "FileSource": "{{FILE_SOURCE}}",
+                "Name": "sample.las"
+            }
+        },
+        "Name": "sample.las"
+    }
+}
+
+@ID = {{metaData.response.body.id}}
+
+
+###
+# @name getMetaData
+GET {{FILE_HOST}}/files/{{ID}}/metadata
+Authorization: Bearer {{access_token}}
+Accept: application/json
+Content-Type: application/json
+data-partition-id: {{data_partition_id}}
+
+
+###
+# @name getDownloadUrl
+GET {{FILE_HOST}}/files/{{ID}}/downloadURL
+Authorization: Bearer {{access_token}}
+Accept: application/json
+Content-Type: application/json
+data-partition-id: {{data_partition_id}}
+
+@URL = {{getDownloadUrl.response.body.SignedUrl}}
+
+
+###
+# @name Download
+GET {{URL}}

@@ -9,6 +9,8 @@ spec:
   dependsOn:
   - name: osdu-base
     namespace: default
+  - name: istio-base
+    namespace: istio-system
   chart:
     spec:
       chart: ./charts/self-managed-base
