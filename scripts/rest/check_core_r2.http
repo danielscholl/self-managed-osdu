@@ -4,6 +4,7 @@
 ## This script will help test the core services and an end to end flow.
 
 
+
 # -----------------------
 # OAUTH (Variables)
 # -----------------------
@@ -11,6 +12,7 @@
 @login_base = login.microsoftonline.com/{{TENANT_ID}}
 @oauth_token_host = {{login_base}}/oauth2/v2.0/token
 @scopes = {{CLIENT_ID}}/.default openid profile offline_access
+
 
 
 # -----------------------
@@ -36,15 +38,13 @@ grant_type=refresh_token
 @ENDPOINT = https://{{OSDU_HOST}}
 @ENTITLEMENTS_HOST = {{ENDPOINT}}/api/entitlements/v2
 @LEGAL_HOST = {{ENDPOINT}}/api/legal/v1
-@SCHEMA_HOST = {{ENDPOINT}}/api/schema-service/v1
 @STORAGE_HOST = {{ENDPOINT}}/api/storage/v2
 @SEARCH_HOST = {{ENDPOINT}}/api/search/v2
-
-
 @data_partition_id = opendes
 @tag =  {{data_partition_id}}-public-usa-check-1
-@kind = osdu:wks:reference-data--ProcessingParameterType:1.0.0
-@index = osdu-wks-reference-data--processingparametertype-1.0.0
+@kind = {{data_partition_id}}:qatest:dummy:0.0.1
+@index = {{data_partition_id}}-qatest-dummy-0.0.1
+
 
 # -----------------------
 # API: entitlements
@@ -59,8 +59,9 @@ data-partition-id: {{data_partition_id}}
 
 
 # -----------------------
-# API: legal
+# INITIALIZE
 # -----------------------
+
 
 ###
 # @name createTag
@@ -88,21 +89,87 @@ data-partition-id: {{data_partition_id}}
 
 
 ###
-# @name getTag
-GET {{LEGAL_HOST}}/legaltags/{{tag}}
+# @name createSchema
+POST {{STORAGE_HOST}}/schemas
 Authorization: Bearer {{access_token}}
-Accept: application/json
+Content-Type: application/json
 data-partition-id: {{data_partition_id}}
 
+{
+  "kind": "{{kind}}",
+  "schema": [
+    {
+      "path": "Field",
+      "kind": "string"
+    },
+    {
+      "path": "Location",
+      "kind": "core:dl:geopoint:1.0.0"
+    },
+    {
+      "path": "Basin",
+      "kind": "string"
+    },
+    {
+      "path": "County",
+      "kind": "string"
+    },
+    {
+      "path": "State",
+      "kind": "string"
+    },
+    {
+      "path": "Country",
+      "kind": "string"
+    },
+    {
+      "path": "WellStatus",
+      "kind": "string"
+    },
+    {
+      "path": "OriginalOperator",
+      "kind": "string"
+    },
+    {
+      "path": "WellName",
+      "kind": "string"
+    },
+    {
+      "path": "WellType",
+      "kind": "string"
+    },
+    {
+      "path": "EmptyAttribute",
+      "kind": "string"
+    },
+    {
+      "path": "Rank",
+      "kind": "int"
+    },
+    {
+      "path": "Score",
+      "kind": "int"
+    },
+    {
+      "path": "Established",
+      "kind": "datetime"
+    },
+    {
+      "path": "InvalidInteger",
+      "kind": "int"
+    }
+  ],
+  "ext": null
+}
 
 
 # -----------------------
-# API: schema
+# API LEGAL
 # -----------------------
 
 ###
-# @name getSchema
-GET {{SCHEMA_HOST}}/schema/{{kind}}
+# @name getTag
+GET {{LEGAL_HOST}}/legaltags/{{tag}}
 Authorization: Bearer {{access_token}}
 Accept: application/json
 data-partition-id: {{data_partition_id}}
@@ -111,6 +178,14 @@ data-partition-id: {{data_partition_id}}
 # -----------------------
 # API STORAGE
 # -----------------------
+
+###
+# @name getSchema
+GET {{STORAGE_HOST}}/schemas/{{kind}}
+Authorization: Bearer {{access_token}}
+Accept: application/json
+data-partition-id: {{data_partition_id}}
+
 
 ###
 # @name createRecord
@@ -140,16 +215,14 @@ data-partition-id: {{data_partition_id}}
       "status": "compliant"
     },
     "data": {
-      "Name": "QA Test Case",
-      "ID": "qatest",
-      "Code": "QA Test Case",
-      "Source": "osdu-tno-load-js"
+      "Field": "MyField",
+      "Basin": "MyBasin",
+      "Country": "MyCountry"
     }
   }
 ]
 
 @id = {{createRecord.response.body.recordIds[0]}}
-@version = {{createRecord.response.body.recordIdVersions[0]}}
 
 
 ###
@@ -166,26 +239,6 @@ Authorization: Bearer {{access_token}}
 Accept: application/json
 data-partition-id: {{data_partition_id}}
 
-###
-# @name ListRecordVersions
-GET {{STORAGE_HOST}}/records/versions/{{id}}
-Authorization: Bearer {{access_token}}
-Accept: application/json
-data-partition-id: {{data_partition_id}}
-
-@version = {{ListRecordVersions.response.body.versions[0]}}
-
-###
-# @name GetRecordVersion
-GET {{STORAGE_HOST}}/records/{{id}}/{{version}}
-Authorization: Bearer {{access_token}}
-Accept: application/json
-data-partition-id: {{data_partition_id}}
-
-
-# -----------------------
-# API search
-# -----------------------
 
 ###
 # @name searchRecord
@@ -217,9 +270,15 @@ data-partition-id: {{data_partition_id}}
 
 
 ###
+# @name deleteSchema
+DELETE {{STORAGE_HOST}}/schemas/{{kind}}
+Authorization: Bearer {{access_token}}
+Accept: application/json
+data-partition-id: {{data_partition_id}}
+
+###
 # @name deleteTag
 DELETE {{LEGAL_HOST}}/legaltags/{{tag}}
 Authorization: Bearer {{access_token}}
 Accept: application/json
 data-partition-id: {{data_partition_id}}
-

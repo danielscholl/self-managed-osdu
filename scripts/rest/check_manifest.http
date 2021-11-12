@@ -74,7 +74,7 @@ data-partition-id: {{data_partition_id}}
 
 {
   "name": "{{tag}}",
-  "description": "This tag is used by Data Upload Scripts",
+  "description": "This tag is used by Check Scripts",
   "properties": {
     "countryOfOrigin": [
       "US"
@@ -117,25 +117,7 @@ data-partition-id: {{data_partition_id}}
 # -----------------------
 
 ###
-# @name createWorkflow
-POST {{WORKLFOW_HOST}}/workflow
-Authorization: Bearer {{access_token}}
-Content-Type: application/json
-data-partition-id: {{data_partition_id}}
-
-{
-  "workflowName": "{{workflow_name}}",
-  "description": "Manifest Ingestion DAGs workflow",
-  "registrationInstructions": {
-      "concurrentWorkflowRun": 5,
-      "concurrentTaskRun": 5,
-      "workflowDetailContent": "",
-      "active": true
-  }
-}
-
-###
-# @name getWorkflow
+# @name getWorkflowById
 GET {{WORKLFOW_HOST}}/workflow/{{workflow_name}}
 Authorization: Bearer {{access_token}}
 Content-Type: application/json
@@ -204,7 +186,20 @@ Authorization: Bearer {{access_token}}
 Content-Type: application/json
 data-partition-id: {{data_partition_id}}
 
+###
+# @name SearchFor1
+POST {{SEARCH_HOST}}/query
+Authorization: Bearer {{access_token}}
+Content-Type: application/json
+data-partition-id: {{data_partition_id}}
 
+{
+  "kind": "osdu:{{source}}:reference-data--ProcessingParameterType:1.0.0",
+  "offset": 0,
+  "limit": 1
+}
+
+@all_totalCount = {{searchRecord.response.body.totalCount}}
 
 # -----------------------
 # Manifest Ingest #TC-2
@@ -969,7 +964,20 @@ Authorization: Bearer {{access_token}}
 Content-Type: application/json
 data-partition-id: {{data_partition_id}}
 
+###
+# @name SearchFor28
+POST {{SEARCH_HOST}}/query
+Authorization: Bearer {{access_token}}
+Content-Type: application/json
+data-partition-id: {{data_partition_id}}
 
+{
+  "kind": "osdu:{{source}}:reference-data--ProcessingParameterType:1.0.0",
+  "offset": 0,
+  "limit": 1
+}
+
+@all_totalCount = {{searchRecord.response.body.totalCount}}
 
 # -----------------------
 # Manifest Ingest #TC-3
@@ -1072,6 +1080,20 @@ Authorization: Bearer {{access_token}}
 Content-Type: application/json
 data-partition-id: {{data_partition_id}}
 
+###
+# @name SearchForWell
+POST {{SEARCH_HOST}}/query
+Authorization: Bearer {{access_token}}
+Content-Type: application/json
+data-partition-id: {{data_partition_id}}
+
+{
+  "kind": "osdu:{{source}}:master-data--Well:1.0.0",
+  "offset": 0,
+  "limit": 1
+}
+
+@well_id = {{SearchForWell.response.body.results[0].id}}
 
 
 # -----------------------
@@ -1299,12 +1321,10 @@ Authorization: Bearer {{access_token}}
 Content-Type: application/json
 data-partition-id: {{data_partition_id}}
 
-
-
 # -----------------------
 # Search #TC-5
 # -----------------------
-## Search for Wellbores with WelboreID=
+## Search for WellboreMarker with Name=
 
 ###
 # @name searchRecord
@@ -1315,7 +1335,6 @@ data-partition-id: {{data_partition_id}}
 
 {
   "kind": "osdu:{{source}}:work-product-component--WellboreMarkerSet:1.0.0",
-  # "query": "(data.WellboreID: \"osdu:master-data--Wellbore:7587:\")",
   "query": "(data.Name: \"7587.csv\")",
   "offset": 0,
   "limit": 1
@@ -1336,6 +1355,13 @@ data-partition-id: {{data_partition_id}}
 # -----------------------
 # CLEANUP
 # -----------------------
+
+###
+# @name deleteWell
+DELETE {{STORAGE_HOST}}/records/{{well_id}}
+Authorization: Bearer {{access_token}}
+Accept: application/json
+data-partition-id: {{data_partition_id}}
 
 ###
 # @name deleteRecord

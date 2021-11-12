@@ -47,8 +47,7 @@ grant_type=refresh_token
 @data_partition_id = opendes
 @tag =  {{data_partition_id}}-public-usa-check-1
 @kind = {{data_partition_id}}:qatest:wellbore:0.0.1
-@workflow_name = csv-parser-0.7.0
-
+@workflow_name = csv-parser-0.11.0
 
 
 # -----------------------
@@ -60,7 +59,6 @@ GET {{ENTITLEMENTS_HOST}}/groups
 Authorization: Bearer {{access_token}}
 Accept: application/json
 data-partition-id: {{data_partition_id}}
-
 
 
 # -----------------------
@@ -75,7 +73,7 @@ data-partition-id: {{data_partition_id}}
 
 {
   "name": "{{tag}}",
-  "description": "This tag is used by Data Upload Scripts",
+  "description": "This tag is used by Check Scripts",
   "properties": {
     "countryOfOrigin": [
       "US"
@@ -98,28 +96,26 @@ Accept: application/json
 data-partition-id: {{data_partition_id}}
 
 
-
-
 # -----------------------
 # API: schema
 # -----------------------
 ###
 # @name getAbstractSpatialLocation
-GET {{SCHEMA_HOST}}/schema/{{data_partition_id}}:wks:AbstractSpatialLocation:1.0.0
+GET {{SCHEMA_HOST}}/schema/osdu:wks:AbstractSpatialLocation:1.0.0
 Authorization: Bearer {{access_token}}
 Accept: application/json
 data-partition-id: {{data_partition_id}}
 
 ###
 # @name getdatasetFileGeneric
-GET {{SCHEMA_HOST}}/schema/{{data_partition_id}}:wks:dataset--File.Generic:1.0.0
+GET {{SCHEMA_HOST}}/schema/osdu:wks:dataset--File.Generic:1.0.0
 Authorization: Bearer {{access_token}}
 Accept: application/json
 data-partition-id: {{data_partition_id}}
 
 ###
 # @name createSchema
-POST {{SCHEMA_HOST}}/schema
+PUT {{SCHEMA_HOST}}/schema
 Authorization: Bearer {{access_token}}
 Content-Type: application/json
 data-partition-id: {{data_partition_id}}
@@ -137,7 +133,7 @@ data-partition-id: {{data_partition_id}}
     "status": "DEVELOPMENT"
   },
   "schema": {
-    "license": "Copyright 2017-2020, Schlumberger\n\nLicensed under the Apache License, Version 2.0 (the \"License\");\nyou may not use this file except in compliance with the License.\nYou may obtain a copy of the License at\n\nhttp://www.apache.org/licenses/LICENSE-2.0\n\nUnless required by applicable law or agreed to in writing, software\ndistributed under the License is distributed on an \"AS IS\" BASIS,\nWITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\nSee the License for the specific language governing permissions and\nlimitations under the License.\n",
+    "license": "Copyright 2021, Microsoft\n\nLicensed under the Apache License, Version 2.0 (the \"License\");\nyou may not use this file except in compliance with the License.\nYou may obtain a copy of the License at\n\nhttp://www.apache.org/licenses/LICENSE-2.0\n\nUnless required by applicable law or agreed to in writing, software\ndistributed under the License is distributed on an \"AS IS\" BASIS,\nWITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\nSee the License for the specific language governing permissions and\nlimitations under the License.\n",
     "$schema": "http://json-schema.org/draft-07/schema#",
     "description": "The wellbore schema. Used to capture the general information about a wellbore. This information is sometimes called a \"wellbore header\". A wellbore represents the path from surface to a unique bottomhole location. The wellbore object is uniquely identified within the context of one well object.",
     "id": "https://slb-swt.visualstudio.com/data-management/Ingestion%20Services/_git/wke-schema?path=%2Fdomains%2Fwell%2Fjson_schema%2Fslb_wke_wellbore.json&version=GBmaster",
@@ -462,7 +458,7 @@ data-partition-id: {{data_partition_id}}
         },
         "SpatialLocation": {
           "description": "The spatial location information such as coordinates, CRS information.",
-          "$ref": "opendes:wks:AbstractSpatialLocation:1.0.0"
+          "$ref": "osdu:wks:AbstractSpatialLocation:1.0.0"
         },
         "$id": "definitions/wellboreData"
       }
@@ -471,7 +467,7 @@ data-partition-id: {{data_partition_id}}
       "ancestry": {
         "description": "The links to data, which constitute the inputs.",
         "title": "Ancestry",
-        "$ref": "#/definitions/linkList"
+        "$ref": "osdu:wks:AbstractLegalParentList:1.0.0"
       },
       "data": {
         "description": "Wellbore data container",
@@ -489,18 +485,18 @@ data-partition-id: {{data_partition_id}}
         "title": "Frame of Reference Meta Data",
         "type": "array",
         "items": {
-          "$ref": "#/definitions/metaItem"
+          "$ref": "osdu:wks:AbstractMetaItem:1.0.0"
         }
       },
       "legal": {
         "description": "The geological interpretation's legal tags",
         "title": "Legal Tags",
-        "$ref": "#/definitions/legal"
+        "$ref": "osdu:wks:AbstractLegalTags:1.0.0"
       },
       "acl": {
         "description": "The access control tags associated with this entity.",
         "title": "Access Control List",
-        "$ref": "#/definitions/tagDictionary"
+        "$ref": "osdu:wks:AbstractAccessControlList:1.0.0"
       },
       "id": {
         "description": "The unique identifier of the wellbore",

@@ -69,80 +69,6 @@ grant_type=client_credentials
 @member_email = email@domain.com
 
 
-# ---------------------------------
-# Inititalize Users for a Partition
-# ---------------------------------
-
-###
-# Purpose: Initialize a Partition.
-# NOTE: This API can ONLY be called by the application service principal.
-# @name tenantInit
-POST {{ENTITLEMENTS_HOST}}/tenant-provisioning
-Authorization: Bearer {{access_token}}
-Accept: application/json
-data-partition-id: {{data_partition_id}}
-
-
-###
-# Purpose: Validate the Owner of the Partition.
-# NOTE: The Owner of the partition by default is the service principal.
-# @name rootGroups
-GET {{ENTITLEMENTS_HOST}}/groups
-Authorization: Bearer {{access_token}}
-Accept: application/json
-data-partition-id: {{data_partition_id}}
-
-# -----------------------
-# Create Group
-# -----------------------
-
-###
-# Purpose: Create a new Group.
-# @name createGroup
-POST {{ENTITLEMENTS_HOST}}/groups
-Authorization: Bearer {{access_token}}
-Accept: application/json
-data-partition-id: {{data_partition_id}}
-Content-Type: application/json
-
-{
-  "name": "{{group_name}}",
-  "description": "My Group"
-}
-
-# -----------------------
-# Add admin user to group
-# -----------------------
-
-###
-# Purpose: Allow group type to access the group.
-# @name addAccessToGroupType
-POST {{ENTITLEMENTS_HOST}}/groups/{{group_name}}@{{data_partition_id}}.{{domain}}/members
-Authorization: Bearer {{access_token}}
-Accept: application/json
-data-partition-id: {{data_partition_id}}
-Content-Type: application/json
-
-{
-  "email": {{group_type_email}},
-  "role": "MEMBER"
-}
-
-
-# -----------------------
-# Get All groups
-# -----------------------
-
-###
-# Purpose: Get all Groups.
-# @name getAllGroups
-GET {{ENTITLEMENTS_HOST}}/groups
-Authorization: Bearer {{access_token}}
-Accept: application/json
-data-partition-id: {{data_partition_id}}
-Content-Type: application/json
-
-
 # -----------------------
 # Create Users
 # -----------------------
@@ -328,6 +254,87 @@ Content-Type: application/json
 # Purpose: Delete User
 # @name deleteUser
 DELETE {{ENTITLEMENTS_HOST}}/members/{{member_email}}
+Authorization: Bearer {{access_token}}
+Accept: application/json
+data-partition-id: {{data_partition_id}}
+Content-Type: application/json
+
+
+
+# -----------------------------------------------------------------------------------------------------------------
+# These actions are part of deployment processes.
+# -----------------------------------------------------------------------------------------------------------------
+
+
+# ---------------------------------
+# Inititalize Users for a Partition
+# ---------------------------------
+
+###
+# Purpose: Initialize a Partition.
+# NOTE: This API can ONLY be called by the application service principal.
+# @name tenantInit
+POST {{ENTITLEMENTS_HOST}}/tenant-provisioning
+Authorization: Bearer {{access_token}}
+Accept: application/json
+data-partition-id: {{data_partition_id}}
+
+
+###
+# Purpose: Validate the Owner of the Partition.
+# NOTE: The Owner of the partition by default is the service principal.
+# @name rootGroups
+GET {{ENTITLEMENTS_HOST}}/groups
+Authorization: Bearer {{access_token}}
+Accept: application/json
+data-partition-id: {{data_partition_id}}
+
+# -----------------------
+# Create Group
+# -----------------------
+
+###
+# Purpose: Create a new Group.
+# @name createGroup
+POST {{ENTITLEMENTS_HOST}}/groups
+Authorization: Bearer {{access_token}}
+Accept: application/json
+data-partition-id: {{data_partition_id}}
+Content-Type: application/json
+
+{
+  "name": "{{group_name}}",
+  "description": "My Group"
+}
+
+
+# -----------------------
+# Add admin user to group
+# -----------------------
+
+###
+# Purpose: Allow group type to access the group.
+# @name addAccessToGroupType
+POST {{ENTITLEMENTS_HOST}}/groups/{{group_name}}@{{data_partition_id}}.{{domain}}/members
+Authorization: Bearer {{access_token}}
+Accept: application/json
+data-partition-id: {{data_partition_id}}
+Content-Type: application/json
+
+{
+  "email": {{group_type_email}},
+  "role": "MEMBER"
+}
+
+
+# -----------------------
+# Get All groups
+# -----------------------
+
+###
+# Purpose: Get all Groups.
+# @name getAllGroups
+GET {{ENTITLEMENTS_HOST}}/groups
 Authorization: Bearer {{access_token}}
 Accept: application/json
 data-partition-id: {{data_partition_id}}

@@ -6,7 +6,7 @@ on:
 env:
   CLI_VERSION: 2.30.0
 
-  OSDU_VERSION: v0.11.0
+  OSDU_VERSION: 0.11.0
   PARTITION_NAME: opendes
 
 jobs:
@@ -97,7 +97,7 @@ jobs:
           EOF
 
       - name: Load Common Schema
-        run: docker run --env-file .env msosdu.azurecr.io/schema-load:0.9.0
+        run: docker run --env-file .env msosdu.azurecr.io/schema-load:$OSDU_VERSION
 
   initialize-workflow:
     name: Workflow Load
@@ -119,35 +119,124 @@ jobs:
             REGISTRY=$(az acr list -g $GROUP --query [0].loginServer -otsv)
             DP_GROUP=$(az group list --query "[?contains(name, 'dpl${{ secrets.RAND }}')].name" -otsv |grep -v MC)
             DNS_HOST=$(az network public-ip list --resource-group $DP_GROUP --query [].dnsSettings.fqdn -otsv)
+            AZURE_TENANT_ID=$(az account show --query tenantId -otsv)
+            AZURE_CLIENT_ID=$(az keyvault secret show --id https://${ENV_VAULT}.vault.azure.net/secrets/app-dev-sp-username --query value -otsv)
+            AZURE_AD_APP_RESOURCE_ID=$(az keyvault secret show --id https://${ENV_VAULT}.vault.azure.net/secrets/aad-client-id --query value -otsv)
+            AZURE_CLIENT_SECRET=$(az keyvault secret show --id https://${ENV_VAULT}.vault.azure.net/secrets/app-dev-sp-password --query value -otsv)
 
             echo "GROUP=$GROUP" >> $GITHUB_ENV
             echo "ENV_VAULT=$ENV_VAULT" >> $GITHUB_ENV
             echo "REGISTRY=$REGISTRY" >> $GITHUB_ENV
             echo "DNS_HOST=$DNS_HOST" >> $GITHUB_ENV
+            echo "AZURE_TENANT_ID=$AZURE_TENANT_ID" >> $GITHUB_ENV
+            echo "AZURE_CLIENT_ID=$AZURE_CLIENT_ID" >> $GITHUB_ENV
+            echo "AZURE_AD_APP_RESOURCE_ID=$AZURE_AD_APP_RESOURCE_ID" >> $GITHUB_ENV
 
-      - name: Create Workflow
+            echo "INSTALL_MANIFEST=false" >> $GITHUB_ENV
+            echo "INSTALL_CSV=false" >> $GITHUB_ENV
+            echo "INSTALL_CSV=false" >> $GITHUB_ENV
+            echo "INSTALL_ZGY=false" >> $GITHUB_ENV
+
+            cat > .env << EOF
+            DATA_PARTITION=${{ env.PARTITION_NAME }}
+            AZURE_TENANT_ID=${AZURE_TENANT_ID}
+            AZURE_DNS_NAME=${DNS_HOST}
+            AZURE_AD_APP_RESOURCE_ID=${AZURE_AD_APP_RESOURCE_ID}
+            AZURE_CLIENT_ID=${AZURE_CLIENT_ID}
+            AZURE_CLIENT_SECRET=${AZURE_CLIENT_SECRET}
+            EOF
+
+      - name: Check Workflows
         uses: Azure/cli@1.0.4
         with:
           azcliversion: ${{ env.CLI_VERSION }}
           inlineScript: |
-            AZURE_TENANT_ID=$(az account show --query tenantId -otsv)
-            AZURE_CLIENT_ID=$(az keyvault secret show --id https://${ENV_VAULT}.vault.azure.net/secrets/app-dev-sp-username --query value -otsv)
             AZURE_CLIENT_SECRET=$(az keyvault secret show --id https://${ENV_VAULT}.vault.azure.net/secrets/app-dev-sp-password --query value -otsv)
-            AZURE_AD_APP_RESOURCE_ID=$(az keyvault secret show --id https://${ENV_VAULT}.vault.azure.net/secrets/aad-client-id --query value -otsv)
 
             TOKEN=$(curl --request POST \
             --url https://login.microsoftonline.com/$AZURE_TENANT_ID/oauth2/token \
             --header 'content-type: application/x-www-form-urlencoded' \
-            --header 'user-agent: vscode-restclient' \
             --data grant_type=client_credentials \
             --data client_id=$AZURE_CLIENT_ID \
             --data client_secret=$AZURE_CLIENT_SECRET \
             --data resource=$AZURE_AD_APP_RESOURCE_ID |jq -r ".access_token")
 
-            curl --request POST \
-            --url https://$DNS_HOST/api/workflow/v1/workflow \
-            --header 'accept: application/json' \
+            MANIFEST_RESULT=$(curl --request GET \
+            --url https://$DNS_HOST/api/workflow/v1/workflow/Osdu_ingest \
             --header "authorization: Bearer $TOKEN" \
-            --header 'data-partition-id: opendes' \
-            --header 'user-agent: vscode-restclient' \
-            --data '{"workflowName": "Osdu_ingest","description": "Manifest Ingestion DAGs workflow","registrationInstructions": {"concurrentWorkflowRun": 5,"concurrentTaskRun": 5,"workflowDetailContent": "","active": true}}'
+            --header "content-type: application/json" \
+            --header "data-partition-id: ${{ env.PARTITION_NAME }}" |jq -r ".status")
+
+            CSV_RESULT=$(curl --request GET \
+            --url https://$DNS_HOST/api/workflow/v1/workflow/csv-parser-$OSDU_VERSION \
+            --header "authorization: Bearer $TOKEN" \
+            --header "content-type: application/json" \
+            --header "data-partition-id: ${{ env.PARTITION_NAME }}" |jq -r ".status")
+
+            ZGY_RESULT=$(curl --request GET \
+            --url https://$DNS_HOST/api/workflow/v1/workflow/segy-to-zgy-conversion-$OSDU_VERSION \
+            --header "authorization: Bearer $TOKEN" \
+            --header "content-type: application/json" \
+            --header "data-partition-id: ${{ env.PARTITION_NAME }}" |jq -r ".status")
+
+            VDS_RESULT=$(curl --request GET \
+            --url https://$DNS_HOST/api/workflow/v1/workflow/segy-to-zgy-conversion-$OSDU_VERSION \
+            --header "authorization: Bearer $TOKEN" \
+            --header "content-type: application/json" \
+            --header "data-partition-id: ${{ env.PARTITION_NAME }}" |jq -r ".status")
+
+            if [ "${MANIFEST_RESULT}" == "404" ]; then echo "INSTALL_MANIFEST=true" >> $GITHUB_ENV; fi
+            if [ "${CSV_RESULT}" == "404" ]; then echo "INSTALL_CSV=true" >> $GITHUB_ENV; fi
+            if [ "${ZGY_RESULT}" == "404" ]; then echo "INSTALL_ZGY=true" >> $GITHUB_ENV; fi
+            if [ "${VDS_RESULT}" == "404" ]; then echo "INSTALL_VDS=true" >> $GITHUB_ENV; fi
+
+
+      - name: Install Docker Workflows
+        run: |
+          if [ ${INSTALL_CSV} != false ];
+          then
+            docker run \
+              --env CSV_PARSER_IMAGE=${REGISTRY}/csv-parser:$OSDU_VERSION \
+              --env-file .env \
+              msosdu.azurecr.io/csv-parser-dag:$OSDU_VERSION;
+          fi
+          if [ ${INSTALL_ZGY} != false ];
+          then
+            docker run \
+              --env DAG_TASK_IMAGE=$REGISTRY/segy-to-zgy-conversion:$OSDU_VERSION \
+              --env-file .env \
+              msosdu.azurecr.io/segy-to-zgy-conversion-dag:$OSDU_VERSION;
+          fi
+          if [ ${INSTALL_VDS} != false ];
+          then
+            docker run \
+              --env DAG_TASK_IMAGE=${REGISTRY}/vds_dag:$OSDU_VERSION \
+              --env-file .env \
+              msosdu.azurecr.io/segy-to-vds-conversion-dag:$OSDU_VERSION;
+          fi
+
+      - name: Install File Share Workflows
+        uses: Azure/cli@1.0.4
+        with:
+          azcliversion: ${{ env.CLI_VERSION }}
+          inlineScript: |
+
+            if [ ${INSTALL_MANIFEST} != false ];
+            then
+              AZURE_CLIENT_SECRET=$(az keyvault secret show --id https://${ENV_VAULT}.vault.azure.net/secrets/app-dev-sp-password --query value -otsv)
+
+              TOKEN=$(curl --request POST \
+              --url https://login.microsoftonline.com/$AZURE_TENANT_ID/oauth2/token \
+              --header 'content-type: application/x-www-form-urlencoded' \
+              --data grant_type=client_credentials \
+              --data client_id=$AZURE_CLIENT_ID \
+              --data client_secret=$AZURE_CLIENT_SECRET \
+              --data resource=$AZURE_AD_APP_RESOURCE_ID |jq -r ".access_token")
+
+              curl --request POST \
+              --url https://$DNS_HOST/api/workflow/v1/workflow \
+              --header "authorization: Bearer $TOKEN" \
+              --header "content-type: application/json" \
+              --header "data-partition-id: ${{ env.PARTITION_NAME }}" \
+              --data '{"workflowName": "Osdu_ingest","description": "Manifest Ingestion DAGs workflow","registrationInstructions": {"concurrentWorkflowRun": 5,"concurrentTaskRun": 5,"workflowDetailContent": "","active": true}}'
+            fi

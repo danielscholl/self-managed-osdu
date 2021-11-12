@@ -1,0 +1,511 @@
+# -------HTTP REST CLIENT -------
+# https://marketplace.visualstudio.com/items?itemName=humao.rest-client
+
+## This script provides a few samples for calling storage.
+
+
+# -----------------------
+# OAUTH (Variables)
+# -----------------------
+###
+@login_base = login.microsoftonline.com/{{TENANT_ID}}
+@oauth_token_host = {{login_base}}/oauth2/v2.0/token
+@scopes = {{CLIENT_ID}}/.default openid profile offline_access
+
+
+
+# -----------------------
+# OAUTH  refresh_token
+# -----------------------
+###
+# @name refresh
+POST https://{{oauth_token_host}} HTTP/1.1
+Content-Type: application/x-www-form-urlencoded
+
+grant_type=refresh_token
+&client_id={{CLIENT_ID}}
+&client_secret={{CLIENT_SECRET}}
+&refresh_token={{INITIAL_TOKEN}}
+&scope={{scopes}}
+
+
+# -----------------------
+# API (Variables)
+# -----------------------
+###
+@access_token = {{refresh.response.body.access_token}}
+@ENDPOINT = https://{{OSDU_HOST}}
+@STORAGE_HOST = {{ENDPOINT}}/api/storage/v2
+@data_partition_id = opendes
+@kind = opendes:qa-test:well-master:0.2.0
+@id = <a_valid_document_id>
+
+
+# -----------------------
+# API: Version
+# -----------------------
+
+###
+# @name info
+GET {{STORAGE_HOST}}/info
+Accept: application/json
+
+
+# -----------------------
+# API: storage
+# -----------------------
+
+###
+# @name getAllSchema
+GET {{STORAGE_HOST}}/query/kinds
+Authorization: Bearer {{access_token}}
+Accept: application/json
+data-partition-id: {{data_partition_id}}
+
+###
+# @name getSchemaWithLimit
+GET {{STORAGE_HOST}}/query/kinds?limit=10
+Authorization: Bearer {{access_token}}
+Accept: application/json
+data-partition-id: {{data_partition_id}}
+
+@cursor = {{getSchemaWithLimit.response.body.cursor}}
+
+
+###
+# @name getAllSchemaWithCursor
+GET {{STORAGE_HOST}}/query/kinds?limit=10&cursor={{cursor}}
+Authorization: Bearer {{access_token}}
+Accept: application/json
+data-partition-id: {{data_partition_id}}
+
+
+
+###
+# @name create_schema
+POST {{STORAGE_HOST}}/schemas
+Authorization: Bearer {{access_token}}
+Content-Type: application/json
+data-partition-id: {{data_partition_id}}
+
+{
+  "kind": "{{kind}}",
+  "schema": [
+    {
+      "path": "ResourceTypeID",
+      "kind": "string",
+      "ext": {}
+    },
+    {
+      "path": "ResourceID",
+      "kind": "string",
+      "ext": {}
+    },
+    {
+      "path": "ResourceHomeRegionID",
+      "kind": "string",
+      "ext": {}
+    },
+    {
+      "path": "ResourceHostRegionIDs",
+      "kind": "[]string",
+      "ext": {}
+    },
+    {
+      "path": "ResourceObjectCreationDateTime",
+      "kind": "string",
+      "ext": {}
+    },
+    {
+      "path": "ResourceVersionCreationDateTime",
+      "kind": "string",
+      "ext": {}
+    },
+    {
+      "path": "ResourceCurationStatus",
+      "kind": "string",
+      "ext": {}
+    },
+    {
+      "path": "ResourceLifecycleStatus",
+      "kind": "string",
+      "ext": {}
+    },
+    {
+      "path": "ResourceSecurityClassification",
+      "kind": "string",
+      "ext": {}
+    },
+    {
+      "path": "Data.IndividualTypeProperties.FacilityID",
+      "kind": "string",
+      "ext": {}
+    },
+    {
+      "path": "Data.IndividualTypeProperties.FacilityTypeID",
+      "kind": "string",
+      "ext": {}
+    },
+    {
+      "path": "Data.IndividualTypeProperties.FacilityOperator.FacilityOperatorOrganisationID",
+      "kind": "string",
+      "ext": {}
+    },
+    {
+      "path": "Data.IndividualTypeProperties.FacilityOperator.EffectiveDateTime",
+      "kind": "string",
+      "ext": {}
+    },
+    {
+      "path": "Data.IndividualTypeProperties.FacilityOperator.TerminationDateTime",
+      "kind": "string",
+      "ext": {}
+    },
+    {
+      "path": "Data.IndividualTypeProperties.DataSourceOrganisationID",
+      "kind": "string",
+      "ext": {}
+    },
+    {
+      "path": "Data.IndividualTypeProperties.SpatialLocation.SpatialLocationCoordinatesDate",
+      "kind": "string",
+      "ext": {}
+    },
+    {
+      "path": "Data.IndividualTypeProperties.SpatialLocation.QuantitativeAccuracyBandID",
+      "kind": "string",
+      "ext": {}
+    },
+    {
+      "path": "Data.IndividualTypeProperties.SpatialLocation.QualitativeSpatialAccuracyTypeID",
+      "kind": "string",
+      "ext": {}
+    },
+    {
+      "path": "Data.IndividualTypeProperties.SpatialLocation.CoordinateQualityCheckPerformedBy",
+      "kind": "string",
+      "ext": {}
+    },
+    {
+      "path": "Data.IndividualTypeProperties.SpatialLocation.CoordinateQualityCheckDateTime",
+      "kind": "string",
+      "ext": {}
+    },
+    {
+      "path": "Data.IndividualTypeProperties.SpatialLocation.CoordinateQualityCheckRemark",
+      "kind": "string",
+      "ext": {}
+    },
+    {
+      "path": "Data.IndividualTypeProperties.SpatialLocation.Coordinates.x",
+      "kind": "double",
+      "ext": {}
+    },
+    {
+      "path": "Data.IndividualTypeProperties.SpatialLocation.Coordinates.y",
+      "kind": "double",
+      "ext": {}
+    },
+    {
+      "path": "Data.IndividualTypeProperties.SpatialLocation.SpatialParameterTypeID",
+      "kind": "string",
+      "ext": {}
+    },
+    {
+      "path": "Data.IndividualTypeProperties.SpatialLocation.SpatialGeometryTypeID",
+      "kind": "string",
+      "ext": {}
+    },
+    {
+      "path": "Data.IndividualTypeProperties.SpatialLocation.VerticalCRSID",
+      "kind": "string",
+      "ext": {}
+    },
+    {
+      "path": "Data.IndividualTypeProperties.SpatialLocation.HorizontalCRSID",
+      "kind": "string",
+      "ext": {}
+    },
+    {
+      "path": "Data.IndividualTypeProperties.SpatialLocation.Elevation",
+      "kind": "double",
+      "ext": {}
+    },
+    {
+      "path": "Data.IndividualTypeProperties.SpatialLocation.HeightAboveGroundLevel",
+      "kind": "double",
+      "ext": {}
+    },
+    {
+      "path": "Data.IndividualTypeProperties.SpatialLocation.HeightAboveGroundLevelUOMID",
+      "kind": "string",
+      "ext": {}
+    },
+    {
+      "path": "Data.IndividualTypeProperties.FacilityName",
+      "kind": "string",
+      "ext": {}
+    },
+    {
+      "path": "Data.IndividualTypeProperties.FacilityNameAlias.AliasName",
+      "kind": "string",
+      "ext": {}
+    },
+    {
+      "path": "Data.IndividualTypeProperties.FacilityNameAlias.AliasNameTypeID",
+      "kind": "string",
+      "ext": {}
+    },
+    {
+      "path": "Data.IndividualTypeProperties.FacilityNameAlias.DefinitionOrganisationID",
+      "kind": "string",
+      "ext": {}
+    },
+    {
+      "path": "Data.IndividualTypeProperties.FacilityNameAlias.EffectiveDateTime",
+      "kind": "string",
+      "ext": {}
+    },
+    {
+      "path": "Data.IndividualTypeProperties.FacilityNameAlias.TerminationDateTime",
+      "kind": "string",
+      "ext": {}
+    },
+    {
+      "path": "Data.IndividualTypeProperties.FacilityState.EffectiveDateTime",
+      "kind": "string",
+      "ext": {}
+    },
+    {
+      "path": "Data.IndividualTypeProperties.FacilityState.TerminationDateTime",
+      "kind": "string",
+      "ext": {}
+    },
+    {
+      "path": "Data.IndividualTypeProperties.FacilityState.FacilityStateTypeID",
+      "kind": "string",
+      "ext": {}
+    },
+    {
+      "path": "Data.IndividualTypeProperties.FacilityEvent.FacilityEventTypeID",
+      "kind": "string",
+      "ext": {}
+    },
+    {
+      "path": "Data.IndividualTypeProperties.FacilityEvent.EffectiveDateTime",
+      "kind": "string",
+      "ext": {}
+    },
+    {
+      "path": "Data.IndividualTypeProperties.FacilityEvent.TerminationDateTime",
+      "kind": "string",
+      "ext": {}
+    },
+    {
+      "path": "Data.IndividualTypeProperties.FacilitySpecification.EffectiveDateTime",
+      "kind": "string",
+      "ext": {}
+    },
+    {
+      "path": "Data.IndividualTypeProperties.FacilitySpecification.TerminationDateTime",
+      "kind": "string",
+      "ext": {}
+    },
+    {
+      "path": "Data.IndividualTypeProperties.FacilitySpecification.FacilitySpecificationQuantity",
+      "kind": "int",
+      "ext": {}
+    },
+    {
+      "path": "Data.IndividualTypeProperties.FacilitySpecification.FacilitySpecificationDateTime",
+      "kind": "string",
+      "ext": {}
+    },
+    {
+      "path": "Data.IndividualTypeProperties.FacilitySpecification.FacilitySpecificationIndicator",
+      "kind": "boolean",
+      "ext": {}
+    },
+    {
+      "path": "Data.IndividualTypeProperties.FacilitySpecification.FacilitySpecificationText",
+      "kind": "string",
+      "ext": {}
+    },
+    {
+      "path": "Data.IndividualTypeProperties.FacilitySpecification.UnitOfMeasureID",
+      "kind": "string",
+      "ext": {}
+    },
+    {
+      "path": "Data.IndividualTypeProperties.FacilitySpecification.ParameterTypeID",
+      "kind": "string",
+      "ext": {}
+    },
+    {
+      "path": "Data.IndividualTypeProperties.DefaultVerticalMeasurementID",
+      "kind": "string",
+      "ext": {}
+    },
+    {
+      "path": "Data.IndividualTypeProperties.DefaultVerticalCRSID",
+      "kind": "string",
+      "ext": {}
+    },
+    {
+      "path": "Data.IndividualTypeProperties.VerticalMeasurements.VerticalMeasurementID",
+      "kind": "string",
+      "ext": {}
+    },
+    {
+      "path": "Data.IndividualTypeProperties.VerticalMeasurements.EffectiveDateTime",
+      "kind": "string",
+      "ext": {}
+    },
+    {
+      "path": "Data.IndividualTypeProperties.VerticalMeasurements.VerticalMeasurement",
+      "kind": "double",
+      "ext": {}
+    },
+    {
+      "path": "Data.IndividualTypeProperties.VerticalMeasurements.TerminationDateTime",
+      "kind": "string",
+      "ext": {}
+    },
+    {
+      "path": "Data.IndividualTypeProperties.VerticalMeasurements.VerticalMeasurementTypeID",
+      "kind": "string",
+      "ext": {}
+    },
+    {
+      "path": "Data.IndividualTypeProperties.VerticalMeasurements.VerticalMeasurementPathID",
+      "kind": "string",
+      "ext": {}
+    },
+    {
+      "path": "Data.IndividualTypeProperties.VerticalMeasurements.VerticalMeasurementSourceID",
+      "kind": "string",
+      "ext": {}
+    },
+    {
+      "path": "Data.IndividualTypeProperties.VerticalMeasurements.WellboreTVDTrajectoryID",
+      "kind": "string",
+      "ext": {}
+    },
+    {
+      "path": "Data.IndividualTypeProperties.VerticalMeasurements.VerticalMeasurementUnitOfMeasureID",
+      "kind": "string",
+      "ext": {}
+    },
+    {
+      "path": "Data.IndividualTypeProperties.VerticalMeasurements.VerticalCRSID",
+      "kind": "string",
+      "ext": {}
+    },
+    {
+      "path": "Data.IndividualTypeProperties.VerticalMeasurements.VerticalReferenceID",
+      "kind": "string",
+      "ext": {}
+    },
+    {
+      "path": "Data.IndividualTypeProperties.VerticalMeasurements.VerticalMeasurementDescription",
+      "kind": "string",
+      "ext": {}
+    },
+    {
+      "path": "Data.IndividualTypeProperties.InterestTypeID",
+      "kind": "string",
+      "ext": {}
+    },
+    {
+      "path": "Data.IndividualTypeProperties.OperatingEnvironmentID",
+      "kind": "string",
+      "ext": {}
+    },
+    {
+      "path": "Data.IndividualTypeProperties.CountryID",
+      "kind": "string",
+      "ext": {}
+    },
+    {
+      "path": "Data.IndividualTypeProperties.StateProvinceID",
+      "kind": "string",
+      "ext": {}
+    },
+    {
+      "path": "Data.IndividualTypeProperties.QuadrantID",
+      "kind": "string",
+      "ext": {}
+    },
+    {
+      "path": "Data.IndividualTypeProperties.BlockID",
+      "kind": "string",
+      "ext": {}
+    },
+    {
+      "path": "Data.IndividualTypeProperties.CountyID",
+      "kind": "string",
+      "ext": {}
+    },
+    {
+      "path": "Data.IndividualTypeProperties.BasinID",
+      "kind": "string",
+      "ext": {}
+    }
+  ]
+}
+
+
+###
+# @name getSchema
+GET {{STORAGE_HOST}}/schemas/{{kind}}
+Authorization: Bearer {{access_token}}
+Accept: application/json
+data-partition-id: {{data_partition_id}}
+
+
+###
+# @name getRecordByKind
+GET {{STORAGE_HOST}}/query/records?kind={{kind}}
+Authorization: Bearer {{access_token}}
+Accept: application/json
+data-partition-id: {{data_partition_id}}
+
+
+###
+# @name deleteSchema
+DELETE {{STORAGE_HOST}}/schemas/{{kind}}
+Authorization: Bearer {{access_token}}
+Accept: application/json
+data-partition-id: {{data_partition_id}}
+
+
+###
+# @name GetRecordByKind
+GET {{STORAGE_HOST}}/query/records?kind={{kind}}
+Authorization: Bearer {{access_token}}
+Accept: application/json
+data-partition-id: {{data_partition_id}}
+
+
+###
+# @name GetRecord
+GET {{STORAGE_HOST}}/records/{{id}}
+Authorization: Bearer {{access_token}}
+Accept: application/json
+data-partition-id: {{data_partition_id}}
+
+###
+# @name ListRecordVersions
+GET {{STORAGE_HOST}}/records/versions/{{id}}
+Authorization: Bearer {{access_token}}
+Accept: application/json
+data-partition-id: {{data_partition_id}}
+
+@version = {{ListRecordVersions.response.body.versions[0]}}
+
+###
+# @name GetRecordVersion
+GET {{STORAGE_HOST}}/records/{{id}}/{{version}}
+Authorization: Bearer {{access_token}}
+Accept: application/json
+data-partition-id: {{data_partition_id}}

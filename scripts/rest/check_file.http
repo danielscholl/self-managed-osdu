@@ -40,7 +40,7 @@ grant_type=refresh_token
 @SCHEMA_HOST = {{ENDPOINT}}/api/schema-service/v1
 @data_partition_id = opendes
 @tag =  {{data_partition_id}}-public-usa-check-1
-@kind = {{data_partition_id}}:wks:dataset--File.Generic:1.0.0
+@kind = osdu:wks:dataset--File.Generic:1.0.0
 
 
 
@@ -57,7 +57,7 @@ data-partition-id: {{data_partition_id}}
 
 {
   "name": "{{tag}}",
-  "description": "This tag is used by Data Upload Scripts",
+  "description": "This tag is used by Check Scripts",
   "properties": {
     "countryOfOrigin": [
       "US"
@@ -72,14 +72,12 @@ data-partition-id: {{data_partition_id}}
   }
 }
 
-
 ###
 # @name getTag
 GET {{LEGAL_HOST}}/legaltags/{{tag}}
 Authorization: Bearer {{access_token}}
 Accept: application/json
 data-partition-id: {{data_partition_id}}
-
 
 
 # -----------------------
@@ -92,7 +90,6 @@ GET {{SCHEMA_HOST}}/schema/{{kind}}
 Authorization: Bearer {{access_token}}
 Accept: application/json
 data-partition-id: {{data_partition_id}}
-
 
 
 # -----------------------

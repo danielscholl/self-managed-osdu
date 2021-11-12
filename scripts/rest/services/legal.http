@@ -1,0 +1,101 @@
+# -------HTTP REST CLIENT -------
+# https://marketplace.visualstudio.com/items?itemName=humao.rest-client
+
+## This script provides a few samples for calling legal.
+
+
+
+# -----------------------
+# OAUTH (Variables)
+# -----------------------
+###
+@login_base = login.microsoftonline.com/{{TENANT_ID}}
+@oauth_token_host = {{login_base}}/oauth2/v2.0/token
+@scopes = {{CLIENT_ID}}/.default openid profile offline_access
+
+
+
+# -----------------------
+# OAUTH  refresh_token
+# -----------------------
+###
+# @name refresh
+POST https://{{oauth_token_host}} HTTP/1.1
+Content-Type: application/x-www-form-urlencoded
+
+grant_type=refresh_token
+&client_id={{CLIENT_ID}}
+&client_secret={{CLIENT_SECRET}}
+&refresh_token={{INITIAL_TOKEN}}
+&scope={{scopes}}
+
+
+# -----------------------
+# API (Variables)
+# -----------------------
+###
+@access_token = {{refresh.response.body.access_token}}
+@ENDPOINT = https://{{OSDU_HOST}}
+@LEGAL_HOST = {{ENDPOINT}}/api/legal/v1
+@data_partition_id = opendes
+@tag = opendes-public-usa-test-1
+
+
+# -----------------------
+# API: Version
+# -----------------------
+
+###
+# @name info
+GET {{LEGAL_HOST}}/info
+Accept: application/json
+
+
+# -----------------------
+# API: legal
+# -----------------------
+
+###
+# @name getAllTag
+GET {{LEGAL_HOST}}/legaltags
+Authorization: Bearer {{access_token}}
+Accept: application/json
+data-partition-id: {{data_partition_id}}
+
+###
+# @name create_tag
+POST {{LEGAL_HOST}}/legaltags
+Authorization: Bearer {{access_token}}
+Content-Type: application/json
+data-partition-id: {{data_partition_id}}
+
+{
+  "name": "{{tag}}",
+  "description": "This tag is used by HTTP Script",
+  "properties": {
+    "countryOfOrigin": [
+      "US"
+    ],
+    "contractId": "A1234",
+    "expirationDate": "2023-12-31",
+    "originator": "MyCompany",
+    "dataType": "Transferred Data",
+    "securityClassification": "Public",
+    "personalData": "No Personal Data",
+    "exportClassification": "EAR99"
+  }
+}
+
+###
+# @name getTag
+GET {{LEGAL_HOST}}/legaltags/{{tag}}
+Authorization: Bearer {{access_token}}
+Accept: application/json
+data-partition-id: {{data_partition_id}}
+
+###
+# @name deleteTag
+DELETE {{LEGAL_HOST}}/legaltags/{{tag}}
+Authorization: Bearer {{access_token}}
+Accept: application/json
+data-partition-id: {{data_partition_id}}

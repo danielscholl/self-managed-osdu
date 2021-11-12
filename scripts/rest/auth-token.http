@@ -4,7 +4,7 @@
 @login_base = login.microsoftonline.com/{{TENANT_ID}}
 @oauth_token_host = {{login_base}}/oauth2/v2.0/token
 @scopes = {{CLIENT_ID}}/.default openid profile offline_access
-@AUTH_CODE = 
+@AUTH_CODE =
 
 # -----------------------
 # OAUTH  authorization_code

@@ -7,7 +7,7 @@
 @oauth_token_host = {{login_base}}/oauth2/v2.0/token
 
 # -----------------------
-# OAUTH  authorization_code
+# OAUTH  CLIENT
 # -----------------------
 ###
 # @name login
@@ -31,8 +31,21 @@ grant_type=client_credentials
 @ENDPOINT = https://{{OSDU_HOST}}
 @PARTITION_HOST = {{ENDPOINT}}/api/partition/v1
 
-@data_partition_id = opendes
+@data_partition_id = test
 
+# -----------------------
+# API: Version
+# -----------------------
+
+###
+# @name info
+GET {{PARTITION_HOST}}/info
+Accept: application/json
+
+
+# -----------------------
+# API: Partition
+# -----------------------
 
 ###
 # @name getPartition

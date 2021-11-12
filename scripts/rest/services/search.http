@@ -1,0 +1,781 @@
+# -------HTTP REST CLIENT -------
+# https://marketplace.visualstudio.com/items?itemName=humao.rest-client
+
+## This script provides a few samples for calling search.
+
+
+# -----------------------
+# OAUTH (Variables)
+# -----------------------
+###
+@login_base = login.microsoftonline.com/{{TENANT_ID}}
+@oauth_token_host = {{login_base}}/oauth2/v2.0/token
+@scopes = {{CLIENT_ID}}/.default openid profile offline_access
+
+
+# -----------------------
+# OAUTH  refresh_token
+# -----------------------
+###
+# @name refresh
+POST https://{{oauth_token_host}} HTTP/1.1
+Content-Type: application/x-www-form-urlencoded
+
+grant_type=refresh_token
+&client_id={{CLIENT_ID}}
+&client_secret={{CLIENT_SECRET}}
+&refresh_token={{INITIAL_TOKEN}}
+&scope={{scopes}}
+
+
+# -----------------------
+# API (Variables)
+# -----------------------
+###
+@access_token = {{refresh.response.body.access_token}}
+@ENDPOINT = https://{{OSDU_HOST}}
+@SEARCH_HOST = {{ENDPOINT}}/api/search/v2/query
+@data_partition_id = opendes
+
+
+# -----------------------
+# API: Version
+# -----------------------
+
+###
+# @name info
+GET {{ENDPOINT}}/api/search/v2/info
+Accept: application/json
+
+
+# -----------------------
+# STANDARD 0.2.0 Queries
+# -----------------------
+###
+# @name fulltext_search
+POST {{SEARCH_HOST}}
+Authorization: Bearer {{access_token}}
+Content-Type: application/json
+data-partition-id: {{data_partition_id}}
+
+{
+   "kind": "opendes:osdu:*:0.2.0",
+   "query": "BIR*"
+}
+
+###
+# @name fulltext_search_wildcard
+POST {{SEARCH_HOST}}
+Authorization: Bearer {{access_token}}
+Content-Type: application/json
+data-partition-id: {{data_partition_id}}
+
+{
+    "kind": "opendes:osdu:*:0.2.0",
+    "query": "(BIR AND 0?)"
+}
+
+###
+# @name fulltext_search_fuzzy
+POST {{SEARCH_HOST}}
+Authorization: Bearer {{access_token}}
+Content-Type: application/json
+data-partition-id: {{data_partition_id}}
+
+{
+   "kind": "opendes:osdu:*:0.2.0",
+   "query": "data.Data.IndividualTypeProperties.FacilityName:EMM~"
+}
+
+
+###
+# @name all_resources_by_wellID
+POST {{SEARCH_HOST}}
+Authorization: Bearer {{access_token}}
+Content-Type: application/json
+data-partition-id: {{data_partition_id}}
+
+{
+    "kind": "opendes:osdu:*:0.2.0",
+    "query": "data.Data.IndividualTypeProperties.WellID:\"srn:master-data/Well:8690:\""
+}
+
+###
+# @name all_resources_by_wellId_and_wildcard
+POST {{SEARCH_HOST}}
+Authorization: Bearer {{access_token}}
+Content-Type: application/json
+data-partition-id: {{data_partition_id}}
+
+{
+    "kind": "opendes:osdu:*:0.2.0",
+    "query": "data.Data.IndividualTypeProperties.WellID:(\"srn:master-data/Well:\" AND 101?)"
+}
+
+###
+# @name wells_by_resourceId_with_OR
+POST {{SEARCH_HOST}}
+Authorization: Bearer {{access_token}}
+Content-Type: application/json
+data-partition-id: {{data_partition_id}}
+
+{
+    "kind": "opendes:osdu:*:0.2.0",
+    "query": "data.ResourceID:(\"srn:master-data/Well:8690:\" OR \"srn:master-data/Well:1000:\")"
+}
+
+###
+# @name wells_by_resourceId_and_countryId
+POST {{SEARCH_HOST}}
+Authorization: Bearer {{access_token}}
+Content-Type: application/json
+data-partition-id: {{data_partition_id}}
+
+{
+    "kind": "opendes:osdu:*:0.2.0",
+    "query": "(data.ResourceID:(\"srn:master-data/Well:8690:\" OR \"srn:master-data/Well:1000:\")) AND (data.Data.IndividualTypeProperties.CountryID: \"srn:master-data/GeopoliticalEntity:Netherlands:\")"
+}
+
+###
+# @name welllog_with_grcurve
+POST {{SEARCH_HOST}}
+Authorization: Bearer {{access_token}}
+Content-Type: application/json
+data-partition-id: {{data_partition_id}}
+
+{
+    "kind": "opendes:osdu:*:0.2.0",
+    "query": "(data.ResourceTypeID: \"srn:type:work-product-component/WellLog:\") AND (data.Data.IndividualTypeProperties.Curves.Mnemonic: GR)"
+}
+
+###
+# @name markers_and_trajectories_for_wellbore
+POST {{SEARCH_HOST}}
+Authorization: Bearer {{access_token}}
+Content-Type: application/json
+data-partition-id: {{data_partition_id}}
+
+{
+    "kind": "opendes:osdu:*:0.2.0",
+    "query": "(data.Data.IndividualTypeProperties.WellboreID: \"srn:master-data/Wellbore:3687:\") AND (data.ResourceTypeID: (\"srn:type:work-product-component/WellboreTrajectory:\" OR \"srn:type:work-product-component/WellboreMarker:\"))"
+}
+
+###
+# @name first_wellbore_page
+POST {{SEARCH_HOST}}
+Authorization: Bearer {{access_token}}
+Content-Type: application/json
+data-partition-id: {{data_partition_id}}
+
+{
+    "kind": "opendes:osdu:*:0.2.0",
+    "query": "data.Data.IndividualTypeProperties.WellID:\"srn:master-data/Well:3687:\"",
+    "offset": 0,
+    "limit": 1,
+    "sort": {
+        "field": ["data.Data.IndividualTypeProperties.SequenceNumber"],
+        "order": ["ASC"]
+    }
+}
+
+###
+# @name next_wellbore_page
+POST {{SEARCH_HOST}}
+Authorization: Bearer {{access_token}}
+Content-Type: application/json
+data-partition-id: {{data_partition_id}}
+
+{
+    "kind": "opendes:osdu:*:0.2.0",
+    "query": "data.Data.IndividualTypeProperties.WellID:\"srn:master-data/Well:3687:\"",
+    "offset": 1,
+    "limit": 10,
+    "sort": {
+        "field": ["data.Data.IndividualTypeProperties.SequenceNumber"],
+        "order": ["ASC"]
+    }
+}
+
+###
+# @name limit_returned_fields
+POST {{SEARCH_HOST}}
+Authorization: Bearer {{access_token}}
+Content-Type: application/json
+data-partition-id: {{data_partition_id}}
+
+{
+   "kind": "opendes:osdu:*:0.2.0",
+   "query": "data.ResourceTypeID: \"srn:type:work-product-component/WellLog:\"",
+   "returnedFields": ["data.ResourceID", "data.Data.IndividualTypeProperties.Name"]
+}
+
+###
+# @name count_wellbore_for_wellID
+POST {{SEARCH_HOST}}
+Authorization: Bearer {{access_token}}
+Content-Type: application/json
+data-partition-id: {{data_partition_id}}
+
+{
+    "kind": "opendes:osdu:*:0.2.0",
+    "query": "data.Data.IndividualTypeProperties.WellID:\"srn:master-data/Well:3687:\"",
+    "returnedFields": [""],
+    "limit": 1
+}
+
+###
+# @name group_by_kind
+POST {{SEARCH_HOST}}
+Authorization: Bearer {{access_token}}
+Content-Type: application/json
+data-partition-id: {{data_partition_id}}
+
+{
+   "kind": "opendes:osdu:*:0.2.0",
+   "limit": 1,
+   "aggregateBy": "kind"
+}
+
+###
+# @name group_by_kind
+POST {{SEARCH_HOST}}
+Authorization: Bearer {{access_token}}
+Content-Type: application/json
+data-partition-id: {{data_partition_id}}
+
+{
+   "kind": "opendes:osdu:*:0.2.0",
+   "limit": 1,
+   "aggregateBy": "kind"
+}
+
+###
+# @name welllogs_with_depth_larger_then_x
+POST {{SEARCH_HOST}}
+Authorization: Bearer {{access_token}}
+Content-Type: application/json
+data-partition-id: {{data_partition_id}}
+
+{
+   "kind": "opendes:osdu:*:0.2.0",
+   "query": "data.Data.IndividualTypeProperties.TopMeasuredDepth.Depth: >2200"
+}
+
+
+###
+# @name welllogs_with_depth_between_x_and_y
+POST {{SEARCH_HOST}}
+Authorization: Bearer {{access_token}}
+Content-Type: application/json
+data-partition-id: {{data_partition_id}}
+
+{
+   "kind": "opendes:osdu:*:0.2.0",
+   "query": "data.Data.IndividualTypeProperties.TopMeasuredDepth.Depth:[2000 TO 3000]"
+}
+
+
+# -----------------------
+# ENRICHED 0.2.1 Queries
+# -----------------------
+###
+# @name fulltext_search
+POST {{SEARCH_HOST}}
+Authorization: Bearer {{access_token}}
+Content-Type: application/json
+data-partition-id: {{data_partition_id}}
+
+{
+   "kind": "opendes:osdu:*:0.2.1",
+   "query": "BIR*"
+}
+
+###
+# @name fulltext_search_wildcard
+POST {{SEARCH_HOST}}
+Authorization: Bearer {{access_token}}
+Content-Type: application/json
+data-partition-id: {{data_partition_id}}
+
+{
+    "kind": "opendes:osdu:*:0.2.1",
+    "query": "BIR 0?"
+}
+
+###
+# @name fulltext_search_fuzzy
+POST {{SEARCH_HOST}}
+Authorization: Bearer {{access_token}}
+Content-Type: application/json
+data-partition-id: {{data_partition_id}}
+
+{
+   "kind": "opendes:osdu:*:0.2.1",
+   "query": "data.WellName:EMM~"
+}
+
+###
+# @name resources_by_uwi
+POST {{SEARCH_HOST}}
+Authorization: Bearer {{access_token}}
+Content-Type: application/json
+data-partition-id: {{data_partition_id}}
+
+{
+    "kind": "opendes:osdu:*:0.2.1",
+    "query": "data.UWI:8690"
+}
+
+###
+# @name resources_by_uwi_wildcard
+POST {{SEARCH_HOST}}
+Authorization: Bearer {{access_token}}
+Content-Type: application/json
+data-partition-id: {{data_partition_id}}
+
+{
+    "kind": "opendes:osdu:*:0.2.1",
+    "query": "data.UWI:101*"
+}
+
+###
+# @name resources_by_uwi_OR
+POST {{SEARCH_HOST}}
+Authorization: Bearer {{access_token}}
+Content-Type: application/json
+data-partition-id: {{data_partition_id}}
+
+{
+    "kind": "opendes:osdu:*:0.2.1",
+    "query": "data.UWI:(8690 OR 8438)"
+}
+
+###
+# @name resources_by_uwi_AND
+POST {{SEARCH_HOST}}
+Authorization: Bearer {{access_token}}
+Content-Type: application/json
+data-partition-id: {{data_partition_id}}
+
+{
+    "kind": "opendes:osdu:well-master:0.2.1",
+    "query": "(data.UWI:(8690 OR 8438)) AND (data.Data.IndividualTypeProperties.CountryID: \"srn:master-data/GeopoliticalEntity:Netherlands:\")"
+}
+
+###
+# @name welllogs_with_gr_and_dt_curves
+POST {{SEARCH_HOST}}
+Authorization: Bearer {{access_token}}
+Content-Type: application/json
+data-partition-id: {{data_partition_id}}
+
+{
+    "kind": "opendes:osdu:welllog-wpc:0.2.1",
+    "query": "data.Curves.Mnemonic: GR AND DT"
+}
+
+###
+# @name markers_and_trajectories_by_UWBI
+POST {{SEARCH_HOST}}
+Authorization: Bearer {{access_token}}
+Content-Type: application/json
+data-partition-id: {{data_partition_id}}
+
+{
+    "kind": "opendes:osdu:*:0.2.1",
+    "query": "(data.UWBI: 3687) AND (kind: \"opendes:osdu:wellboremarker-wpc:0.2.1\" \"opendes:osdu:wellboretrajectory-wpc:0.2.1\")"
+}
+
+###
+# @name first_wellbore_page
+POST {{SEARCH_HOST}}
+Authorization: Bearer {{access_token}}
+Content-Type: application/json
+data-partition-id: {{data_partition_id}}
+
+{
+    "kind": "opendes:osdu:wellbore-master:0.2.1",
+    "query": "data.UWI:3687",
+    "sort": {
+        "field": ["data.Data.IndividualTypeProperties.SequenceNumber"],
+        "order": ["ASC"]
+    },
+    "offset": 0,
+    "limit": 1
+}
+
+###
+# @name next_wellbore_page
+POST {{SEARCH_HOST}}
+Authorization: Bearer {{access_token}}
+Content-Type: application/json
+data-partition-id: {{data_partition_id}}
+
+{
+    "kind": "opendes:osdu:wellbore-master:0.2.1",
+    "query": "data.UWI:3687",
+    "sort": {
+        "field": ["data.Data.IndividualTypeProperties.SequenceNumber"],
+        "order": ["ASC"]
+    },
+    "offset": 1,
+    "limit": 10
+}
+
+###
+# @name limit_returned_fields
+POST {{SEARCH_HOST}}
+Authorization: Bearer {{access_token}}
+Content-Type: application/json
+data-partition-id: {{data_partition_id}}
+
+{
+   "kind": "opendes:osdu:welllog-wpc:0.2.1",
+   "query": "*",
+   "returnedFields": ["data.ResourceID", "data.Curves"]
+}
+
+###
+# @name count_wellbores_for_UWI
+POST {{SEARCH_HOST}}
+Authorization: Bearer {{access_token}}
+Content-Type: application/json
+data-partition-id: {{data_partition_id}}
+
+{
+    "kind": "opendes:osdu:wellbore-master:0.2.1",
+    "query": "data.UWI:3687",
+    "returnedFields": [""],
+    "limit": 1
+}
+
+###
+# @name group_wells_by_Spud_date
+POST {{SEARCH_HOST}}
+Authorization: Bearer {{access_token}}
+Content-Type: application/json
+data-partition-id: {{data_partition_id}}
+
+{
+   "kind": "opendes:osdu:well-master:0.2.1",
+   "limit": 1,
+   "returnedFields": [""],
+   "aggregateBy": "data.SpudDate"
+}
+
+###
+# @name wells_in_bounding_box
+POST {{SEARCH_HOST}}
+Authorization: Bearer {{access_token}}
+Content-Type: application/json
+data-partition-id: {{data_partition_id}}
+
+{
+    "kind": "opendes:osdu:well-master:0.2.1",
+    "spatialFilter": {
+        "field": "data.GeoLocation",
+        "byBoundingBox": {
+		    "topLeft": {
+		    	"longitude": 4.9493408203125,
+            	"latitude": 52.859180945520826
+        	},
+    		"bottomRight": {
+        		"longitude": 5.1580810546875,
+            	"latitude": 52.75956761546834
+    		}
+    	}
+    }
+}
+
+###
+# @name wells_within_distance
+POST {{SEARCH_HOST}}
+Authorization: Bearer {{access_token}}
+Content-Type: application/json
+data-partition-id: {{data_partition_id}}
+
+{
+    "kind": "opendes:osdu:well-master:0.2.1",
+    "spatialFilter": {
+        "field": "data.GeoLocation",
+        "byDistance": {
+            "point": {
+                    "longitude": 5.1580810546875,
+                    "latitude": 52.859180945520826
+                },
+            "distance": 10000
+        }
+    }
+}
+
+###
+# @name wells_in_polygone
+POST {{SEARCH_HOST}}
+Authorization: Bearer {{access_token}}
+Content-Type: application/json
+data-partition-id: {{data_partition_id}}
+
+{
+    "kind": "opendes:osdu:well-master:0.2.1",
+    "spatialFilter": {
+        "field": "data.GeoLocation",
+        "byGeoPolygon": {
+            "points": [
+                {
+                    "longitude": 5.1580810546875,
+                    "latitude": 52.859180945520826
+                },
+                {
+                    "longitude": 4.9493408203125,
+                    "latitude": 52.75956761546834
+                },
+                {
+                    "longitude": 5.064697265625,
+                    "latitude": 52.579688026538726
+                },
+                {
+                    "longitude": 5.372314453125,
+                    "latitude": 52.68970242806752
+                },
+                {
+                    "longitude": 5.1580810546875,
+                    "latitude": 52.859180945520826
+                }
+            ]
+        }
+    },
+    "offset": 0,
+    "limit": 30
+}
+
+###
+# @name wells_with_Spud_date_between_x_and_y
+POST {{SEARCH_HOST}}
+Authorization: Bearer {{access_token}}
+Content-Type: application/json
+data-partition-id: {{data_partition_id}}
+
+{
+   "kind": "opendes:osdu:well-master:0.2.1",
+   "query": "data.SpudDate:[1999-01-01 TO 1999-02-27}",
+   "sort": {
+        "field": ["data.SpudDate"],
+        "order": ["DESC"]
+    },
+    "limit": 30
+}
+
+###
+# @name wells_with_depth_greater_then_x
+POST {{SEARCH_HOST}}
+Authorization: Bearer {{access_token}}
+Content-Type: application/json
+data-partition-id: {{data_partition_id}}
+
+{
+    "kind": "opendes:osdu:welllog-wpc:0.2.1",
+    "query": "data.Data.IndividualTypeProperties.TopMeasuredDepth.Depth: >2000",
+    "returnedFields": ["data.Data.IndividualTypeProperties.TopMeasuredDepth.Depth", "data.Data.IndividualTypeProperties.TopMeasuredDepth.UnitOfMeasure"],
+    "sort": {
+        "field": ["data.Data.IndividualTypeProperties.TopMeasuredDepth.Depth"],
+        "order": ["ASC"]
+    },
+    "limit": 99
+}
+
+###
+# @name wells_with_depth_in_range
+POST {{SEARCH_HOST}}
+Authorization: Bearer {{access_token}}
+Content-Type: application/json
+data-partition-id: {{data_partition_id}}
+
+{
+    "kind": "opendes:osdu:welllog-wpc:0.2.1",
+    "query": "data.Data.IndividualTypeProperties.TopMeasuredDepth.Depth: {0 TO 2000]",
+    "returnedFields": ["data.Data.IndividualTypeProperties.TopMeasuredDepth.Depth"],
+    "sort": {
+        "field": ["data.Data.IndividualTypeProperties.TopMeasuredDepth.Depth"],
+        "order": ["ASC"]
+    },
+    "limit": 99
+}
+
+# -----------------------
+# Seismic Queries
+# -----------------------
+###
+# @name acquisition_project_by_name
+POST {{SEARCH_HOST}}
+Authorization: Bearer {{access_token}}
+Content-Type: application/json
+data-partition-id: {{data_partition_id}}
+
+{
+   "kind": "opendes:osdu:seismic-acquisition-project:0.2.0",
+   "query": "data.Data.IndividualTypeProperties.ProjectID: ST0202R08"
+}
+
+###
+# @name processing_projects_for_aquisition
+POST {{SEARCH_HOST}}
+Authorization: Bearer {{access_token}}
+Content-Type: application/json
+data-partition-id: {{data_partition_id}}
+
+{
+   "kind": "opendes:osdu:seismic-processing-project:0.2.0",
+   "query": "data.Data.IndividualTypeProperties.SeismicAcquisitionProjects: \"srn:master-data/SeismicAcquisitionProject:ST2020R08:\""
+}
+
+###
+# @name aquisitions_by_operator
+POST {{SEARCH_HOST}}
+Authorization: Bearer {{access_token}}
+Content-Type: application/json
+data-partition-id: {{data_partition_id}}
+
+{
+   "kind": "opendes:osdu:seismic-acquisition-project:0.2.0",
+   "query": "(data.Data.IndividualTypeProperties.Operator: \"srn:master-data/Organisation:Statoil:\") AND (data.Data.IndividualTypeProperties.ProjectTypeID: \"srn:reference-data/ProjectType:Acquisition:\")"
+}
+
+###
+# @name aquisitions_within_dates
+POST {{SEARCH_HOST}}
+Authorization: Bearer {{access_token}}
+Content-Type: application/json
+data-partition-id: {{data_partition_id}}
+
+{
+   "kind": "opendes:osdu:seismic-acquisition-project:0.2.0",
+   "query": "data.Data.IndividualTypeProperties.ProjectEndDate:[2000-01-01 TO 2008-02-01]"
+}
+
+###
+# @name aquisitions_with_cable_length_greater_then_x
+POST {{SEARCH_HOST}}
+Authorization: Bearer {{access_token}}
+Content-Type: application/json
+data-partition-id: {{data_partition_id}}
+
+{
+   "kind": "opendes:osdu:seismic-acquisition-project:0.2.0",
+   "query": "data.Data.IndividualTypeProperties.CableLength: >5000"
+}
+
+###
+# @name trace_by_geographic_region
+POST {{SEARCH_HOST}}
+Authorization: Bearer {{access_token}}
+Content-Type: application/json
+data-partition-id: {{data_partition_id}}
+
+{
+    "kind": "opendes:osdu:seismictracedata-wpc:0.2.0",
+    "spatialFilter": {
+        "field": "data.Data.ExtensionProperties.locationWGS84",
+        "byGeoPolygon": {
+            "points": [
+                {
+                    "longitude": 1.813767236,
+                    "latitude": 58.42946998
+                },
+                {
+                    "longitude": 1.949673713,
+                    "latitude": 58.4041567
+                },
+                {
+                    "longitude": 1.978324105,
+                    "latitude": 58.45614207
+                },
+                {
+                    "longitude": 1.84227351,
+                    "latitude": 58.48147214
+                },
+                {
+                    "longitude": 1.813767236,
+                    "latitude": 58.42946998
+                }
+            ]
+        }
+    },
+    "offset": 0,
+    "limit": 30
+}
+
+###
+# @name trace_by_domain_type
+POST {{SEARCH_HOST}}
+Authorization: Bearer {{access_token}}
+Content-Type: application/json
+data-partition-id: {{data_partition_id}}
+
+{
+   "kind": "opendes:osdu:seismictracedata-wpc:0.2.0",
+   "query": "data.Data.IndividualTypeProperties.SeismicDomainTypeID:\"srn:reference-data/SeismicDomainType:Depth:\""
+}
+
+###
+# @name horizons_by_geo_region
+POST {{SEARCH_HOST}}
+Authorization: Bearer {{access_token}}
+Content-Type: application/json
+data-partition-id: {{data_partition_id}}
+
+{
+    "kind": "opendes:osdu:seismichorizon-wpc:0.2.0",
+    "spatialFilter": {
+        "field": "data.Data.ExtensionProperties.locationWGS84",
+        "byGeoPolygon": {
+            "points": [
+                {
+                    "longitude": 1.813767236,
+                    "latitude": 58.42946998
+                },
+                {
+                    "longitude": 1.949673713,
+                    "latitude": 58.4041567
+                },
+                {
+                    "longitude": 1.978324105,
+                    "latitude": 58.45614207
+                },
+                {
+                    "longitude": 1.84227351,
+                    "latitude": 58.48147214
+                },
+                {
+                    "longitude": 1.813767236,
+                    "latitude": 58.42946998
+                }
+            ]
+        }
+    },
+    "offset": 0,
+    "limit": 30
+}
+
+###
+# @name horizon_by_name
+POST {{SEARCH_HOST}}
+Authorization: Bearer {{access_token}}
+Content-Type: application/json
+data-partition-id: {{data_partition_id}}
+
+{
+   "kind": "opendes:osdu:seismichorizon-wpc:0.2.0",
+   "query": "data.Data.IndividualTypeProperties.Name: SHETLAND_GP"
+}
+
+###
+# @name horizon_by_age_and_unitname
+POST {{SEARCH_HOST}}
+Authorization: Bearer {{access_token}}
+Content-Type: application/json
+data-partition-id: {{data_partition_id}}
+
+{
+   "kind": "opendes:osdu:seismichorizon-wpc:0.2.0",
+   "query": "(data.Data.IndividualTypeProperties.GeologicalUnitAgePeriod: Turonian) AND (data.Data.IndividualTypeProperties.GeologicalUnitName: Shetland*)"
+}

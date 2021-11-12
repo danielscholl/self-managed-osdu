@@ -753,8 +753,12 @@ jobs:
                     'wks' \
                     'workflow' \
                     'wellbore-ddms' \
-                    'sdms'
-                    'schema-load')
+                    'sdms' \
+                    'wellbore-ddms' \
+                    'schema-load' \
+                    'csv-parser' \
+                    'segy-to-zgy-conversion-dag' \
+                    'segy-to-vds-conversion-dag' )
 
             for IMAGE in "${IMAGES[@]}"
             do

@@ -227,7 +227,8 @@ The simpliest way to execute against the Platform is to leverage the HTTP Rest S
 
 [Rest Client Settings](https://github.com/Huachao/vscode-restclient#environment-variables) can be set to create environments and saved in [VS Code Settings](https://vscode.readthedocs.io/en/latest/getstarted/settings/).
 
-__Retrieve the Rest Client Environment Setings__
+
+__Retrieve the Rest Client Environment Settings__
 
 For convenience the Rest Client Environment Settings can be retrieved from the `builder` keyvault in the secret `restclient`. To access secrets from the portal an [access policy](https://docs.microsoft.com/en-us/azure/key-vault/general/assign-access-policy?tabs=azure-portal) must be setup first.
 
@@ -239,8 +240,8 @@ __Configure RBAC Access__
 Add a User and entitle the user to the ops group.  This can be done by running the [manage-user.http](./scripts/rest/manage-user.http) script.
 
 1. Modify the @member_email value [(Line 69)](https://github.com/danielscholl-demo/self-managed-osdu/blob/main/scripts/rest/manage-user.http#L69)
-2. Execute createUser [(Line 152)](https://github.com/danielscholl-demo/self-managed-osdu/blob/main/scripts/rest/manage-user.http#L152)
-3. Execute assignMemberToOpsGroup [(Line 232)](https://github.com/danielscholl-demo/self-managed-osdu/blob/main/scripts/rest/manage-user.http#L232)
+2. Execute createUser [(Line 78)](https://github.com/danielscholl-demo/self-managed-osdu/blob/main/scripts/rest/manage-user.http#L78)
+3. Execute assignMemberToOpsGroup [(Line 158)](https://github.com/danielscholl-demo/self-managed-osdu/blob/main/scripts/rest/manage-user.http#L158)
 
 
 __Generate an OpenID Connect Token__
