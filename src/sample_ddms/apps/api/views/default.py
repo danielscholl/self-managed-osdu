@@ -7,5 +7,8 @@ from rest_framework.parsers import JSONParser
 def hello(request):
     return JsonResponse({'hello': 'world'}, status=200)
 
+@csrf_exempt
 def index(request):
     return JsonResponse({'Application': "Sample DDMS"}, status=200)
+
+
