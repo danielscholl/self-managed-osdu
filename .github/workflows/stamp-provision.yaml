@@ -795,6 +795,15 @@ jobs:
             REGISTRY=$(az acr list -g $GROUP --query [0].loginServer -otsv)
             az acr build --registry $REGISTRY --image self-managed-osdu-login:latest -f src/auth_token/Dockerfile src/auth_token
 
+      - name: Build Docker Image - Sample DDMS
+        uses: Azure/cli@1.0.4
+        with:
+          azcliversion: ${{ env.CLI_VERSION }}
+          inlineScript: |
+            REGISTRY=$(az acr list -g $GROUP --query [0].loginServer -otsv)
+            az acr build --registry $REGISTRY --image self-managed-osdu-sample-ddms:latest -f src/sample_ddms/Dockerfile src/sample_ddms
+
+
       - name: Push OSDU Images
         uses: Azure/cli@1.0.4
         with:

@@ -3,8 +3,8 @@ from api.views import default
 from api.views import register
 
 urlpatterns  = [
-    path('hello/', default.hello),
-    path('', default.index),
-    path('register/', register.register)
+    path('sampleddms/hello/', default.hello),
+    path('sampleddms/', default.index),
+    path('sampleddms/register/', register.register)
 ]
 

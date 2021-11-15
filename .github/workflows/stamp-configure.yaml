@@ -363,6 +363,26 @@ jobs:
                 path: /login/*
                 replicaCount: 1
           EOF
+      - name: Create Helm Values - sample-ddms-service
+        run: |
+          cat > $GITHUB_WORKSPACE/apps/$CLUSTER/token-service-values.yaml << EOF
+          ---
+          apiVersion: helm.toolkit.fluxcd.io/v2beta1
+          kind: HelmRelease
+          metadata:
+            name: sample-ddms-service
+            namespace: dev-sample
+          spec:
+            values:
+              ingress:
+                dns: $DNS_HOST
+              configuration:
+              - service: sampleddms
+                repository: $REGISTRY/self-managed-osdu-sample-ddms
+                tag: latest
+                path:/sampleddms/*
+                replicaCount: 1
+          EOF
 
       - name: Create Helm Values - partition-service
         run: |
