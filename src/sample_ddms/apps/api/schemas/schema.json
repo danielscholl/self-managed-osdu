@@ -1,0 +1,23 @@
+{
+    "schemaInfo": {
+      "schemaIdentity": {
+        "authority": "DevSanity",
+        "source": "testSource",
+        "entityType": "testEntity",
+        "schemaVersionMajor": 5,
+        "schemaVersionMinor": 10,
+        "schemaVersionPatch": 1,
+        "id": "DevSanity:testSource:testEntity:5.5.5"
+      },
+      "status": "DEVELOPMENT",
+      "scope": "INTERNAL",
+      "createdBy": "John Smith",
+      "dateCreated": "2019-05-27T11:16:03Z"
+    },
+    "schema": {
+      "ValidationString": "Schema modified by PUT operation",
+      "newfield": "something",
+      "definitions": {}
+    }
+  }
+  
