@@ -50,7 +50,9 @@ jobs:
           NAMESPACE: osdu-azure
         if: contains(env.OK, 'true')
         run: |
-          CHARTS=('workflow-service' \
+          CHARTS=('ddms-wellbore' \
+                  'ddms-seismic' \
+                  'workflow-service' \
                   'wks-service' \
                   'crs-catalog' \
                   'crs-conversion' \
@@ -152,6 +154,8 @@ jobs:
           OK: ${{ secrets.UNINSTALL }}
         if: contains(env.OK, 'true')
         run: |
+          kubectl delete namespace ddms-wellbore --ignore-not-found
+          kubectl delete namespace ddms-seismic --ignore-not-found
           kubectl delete namespace osdu-azure --ignore-not-found
           kubectl delete namespace dev-sample --ignore-not-found
           kubectl delete namespace airflow --ignore-not-found

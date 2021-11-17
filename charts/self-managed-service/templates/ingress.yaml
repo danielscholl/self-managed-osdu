@@ -30,10 +30,12 @@ spec:
       http:
         paths:
         {{- range .Values.configuration }}
+        {{- if or .service .scaledObject }}
         - path: {{ .path }}
           backend:
             serviceName: {{ .service }}
             servicePort: {{ $svcPort }}
+        {{- end }}
         {{- end }}
 ---
 {{- end }}

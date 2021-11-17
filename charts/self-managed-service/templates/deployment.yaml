@@ -5,10 +5,13 @@
 {{- $nodePool := .Values.nodePool}}
 {{- $podIdentity := .Values.podIdentity}}
 {{- $podAnnotations := .Values.podAnnotations}}
+{{- $configMap := .Values.configMap -}}
 {{- $version := .Chart.AppVersion -}}
 {{- $selectorLabels := include "self-managed-service.selectorLabels" . | nindent 8 }}
 {{- $labels := include "self-managed-service.labels" . | nindent 4 }}
 {{- range .Values.configuration }}
+{{- if or .service .scaledObject }}
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -102,6 +105,11 @@ spec:
           - name: {{ .name }}
             mountPath: {{ .path }}
           {{- end }}
+          {{- if $configMap }}
+          envFrom:
+          - configMapRef:
+              name: {{ $configMap }}
+          {{- end }}
           {{- if .env }}
           env:
             {{- range .env }}
@@ -124,5 +132,5 @@ spec:
               {{- end }}
             {{- end }}
           {{- end }}
----
+{{- end }}
 {{- end }}

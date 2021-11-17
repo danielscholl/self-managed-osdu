@@ -1,5 +1,6 @@
 {{- range .Values.configuration }}
 {{- if .scaledObject }}
+---
 apiVersion: keda.k8s.io/v1alpha1
 kind: ScaledObject
 metadata:
@@ -19,5 +20,4 @@ spec:
       name: message
       connection: SERVICE_BUS
 {{- end }}
----
 {{- end }}

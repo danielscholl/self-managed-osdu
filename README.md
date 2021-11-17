@@ -148,14 +148,14 @@ Deployment of a self managed osdu instance is performed by executing github acti
 
 3. __[Stamp Provision](../../actions/workflows/stamp-provision.yaml)__: This action provisions resources for the Deployment Stamp.  _(Time: ~1h)_
 
-4. __[Stamp Configure](../../actions/workflows/stamp-configure.yaml)__: This action initializes the Software Configuration process of the Deployment Stamp and the software deployment occurs after pipeline completion.  _(Time: ~20m)_
+4. __[Stamp Install](../../actions/workflows/stamp-configure.yaml)__: This action initializes the Software Configuration process of the Deployment Stamp and the software deployment occurs after pipeline completion.  _(Time: ~20m)_
 
-5. __[Stamp Load](../../actions/workflows/stamp-load.yaml)__: This action loads any necessary data into the Stamp in order to properly function. (ie: Entitlements, Schemas, Workflow)  _(Time: ~20m)_
+5. __[Stamp Load](../../actions/workflows/stamp-load.yaml)__: This action initializes the partition and loads the necessary data into the Stamp to allow it to fully function. (ie: Entitlements, Schemas, Workflow)  _(Time: ~20m)_
 
-6. __[Stamp Uninstall](../../actions/workflows/stamp-uninstall.yaml)__: This action uninstall the OSDU Stamp and requires Github Secrets used as Feature Flags to enable the activity.
+6. __[Stamp Uninstall](../../actions/workflows/stamp-uninstall.yaml)__: This action uninstalls the OSDU Stamp and requires Github Secrets used as Feature Flags to enable the activity.
 
-  - Secret: UNINSTALL - This secret will remove all Stamp Software Configured.
-  - Secret: REMOVE - This secret will remove all Stamp Resources Provisioned. (Locks must be manually removed first)
+  - Secret: UNINSTALL - This secret will trigger the feature flag to perform a software uninstall.
+  - Secret: REMOVE - This secret will trigger the feature flag to delete the entire Stamp. (Locks must be manually removed first)
 
 ## Provisioned Resources
 

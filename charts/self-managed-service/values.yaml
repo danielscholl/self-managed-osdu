@@ -38,11 +38,23 @@ replicaCount: 1
 service:
   type: ClusterIP
   port: 80
+  # target: 8080
+
+
 
 ################################################################################
 # Specify the Self Managed OSDU Services to Load
 #
 configuration:
+
+################################################################################
+# Specify Config Maps
+#
+#  - map: sample
+#    data:
+#    - name: Hello
+#      value: "World"
+
 
   ##############################################################################
   ##  SERVICE CONFIGURATION SAMPLE

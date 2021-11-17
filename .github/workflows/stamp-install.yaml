@@ -1,4 +1,4 @@
-name: '4. Stamp Configure'
+name: '4. Stamp Install'
 
 on:
   workflow_dispatch:
@@ -190,6 +190,12 @@ jobs:
             - kind: Deployment
               name: workflow
               namespace: osdu-azure
+            - kind: Deployment
+              name: seismic-ddms
+              namespace: ddms-seismic
+            - kind: Deployment
+              name: wellbore-ddms
+              namespace: ddms-wellbore
           EOF
 
           cat > $GITHUB_WORKSPACE/apps/$CLUSTER/kustomization.yaml << EOF
@@ -202,6 +208,8 @@ jobs:
             - ../base/osdu-airflow
             - ../base/dev-sample
             - ../base/osdu-azure
+            - ../base/osdu-ddms-seismic
+            - ../base/osdu-ddms-wellbore
           patchesStrategicMerge:
             - istio-values.yaml
             - dev-sample-values.yaml
@@ -226,6 +234,8 @@ jobs:
             - crs-conversion-values.yaml
             - wks-service-values.yaml
             - workflow-service-values.yaml
+            - ddms-seismic-values.yaml
+            - ddms-wellbore-values.yaml
           EOF
 
       - name: Create Helm Values - osdu-istio
@@ -1787,6 +1797,137 @@ jobs:
                   secret:
                     name: airflow
                     key: azurestorageaccountkey
+          EOF
+
+      - name: Create Helm Values - ddms-seismic
+        run: |
+          cat > $GITHUB_WORKSPACE/apps/$CLUSTER/ddms-seismic-values.yaml << EOF
+          ---
+          apiVersion: helm.toolkit.fluxcd.io/v2beta1
+          kind: HelmRelease
+          metadata:
+            name: ddms-seismic
+            namespace: ddms-seismic
+          spec:
+            values:
+              ingress:
+                dns: osdu-self-dplbdefe-w6b2-gw.westeurope.cloudapp.azure.com
+              configMap: seistore-svc-config
+              configuration:
+              - map: osdu-svc-config
+                data:
+                - name: ENV_KEYVAULT
+                  value: "https://$ENV_VAULT.vault.azure.net/"
+                - name: REDIS_DB_SDMS
+                  value: "10"
+              - map: seistore-svc-config
+                data:
+                - name: DES_SERVICE_HOST
+                  value: https://$DNS_HOST
+                - name: REDIS_INSTANCE_PORT
+                  value: 6380
+                - name: APP_ENVIRONMENT_IDENTIFIER
+                  value: cloud
+                - name: CLOUDPROVIDER
+                  value: azure
+                - name: PORT
+                  value: "80"
+              - service: seismic-ddms
+                repository: $REGISTRY/sdms
+                path: /seistore-svc/api/v3/*
+                probe:
+                  path: /seistore-svc/api/v3/svcstatus
+                  port: http
+                auth:
+                  disable:
+                    - "/"
+                    - "*/index.html"
+                    - "*/v2/api-docs"
+                    - "*/swagger"
+                    - "*/swagger-ui.html"
+                    - "*/swagger-resources"
+                    - "*/actuator/health"
+                    - "*/health"
+                    - "*/configuration/ui"
+                    - "*/configuration/security"
+                    - "/seistore-svc/api/v3/swagger-resources/*"  # CAN"T FIND SWAGGER
+                    - "/seistore-svc/api/v3/webjars/*"
+                env:
+                - name: KEYVAULT_URL
+                  config:
+                    name: osdu-svc-config
+                    key: ENV_KEYVAULT
+          EOF
+
+      - name: Create Helm Values - ddms-wellbore
+        run: |
+          cat > $GITHUB_WORKSPACE/apps/$CLUSTER/ddms-wellbore-values.yaml << EOF
+          ---
+          apiVersion: helm.toolkit.fluxcd.io/v2beta1
+          kind: HelmRelease
+          metadata:
+            name: ddms-wellbore
+            namespace: ddms-wellbore
+          spec:
+            values:
+              ingress:
+                dns: osdu-self-dplbdefe-w6b2-gw.westeurope.cloudapp.azure.com
+              configMap: wellbore-svc-config
+              azure:
+                subscription: $(az keyvault secret show --id https://${ENV_VAULT}.vault.azure.net/secrets/subscription-id --query value -otsv)
+                tenant: $(az keyvault secret show --id https://${ENV_VAULT}.vault.azure.net/secrets/tenant-id --query value -otsv)
+                vault:
+                  name: $ENV_VAULT
+                  group: $(az keyvault secret show --id https://${ENV_VAULT}.vault.azure.net/secrets/base-name-cr --query value -otsv)-rg
+                  secret:
+                  - name: central-logging
+                    key: appinsights
+                    value: appinsights-key
+              configuration:
+              - map: osdu-svc-config
+                data:
+                - name: ENV_KEYVAULT
+                  value: "https://$ENV_VAULT.vault.azure.net/"
+              - map: wellbore-svc-config
+                data:
+                - name: CLOUD_PROVIDER
+                  value: az
+                - name: OPENAPI_PREFIX
+                  value: /api/os-wellbore-ddms
+                - name: SERVICE_HOST_STORAGE
+                  value: http://storage.osdu-azure/api/storage
+                - name: SERVICE_HOST_SEARCH
+                  value: http://search-service.osdu-azure/api/search
+                - name: SERVICE_HOST_PARTITION
+                  value: http://partition.osdu-azure/api/partition
+                - name: USE_PARTITION_SERVICE
+                  value: enabled
+                - name: AZ_LOGGER_LEVEL
+                  value: INFO
+              - service: wellbore-ddms
+                repository: $REGISTRY/wellbore-ddms
+                path: /api/os-wellbore-ddms/*
+                probe:
+                  path: /api/os-wellbore-ddms/healthz
+                  port: 8080
+                keyvault: true
+                auth:
+                  disable:
+                    - "/api/os-wellbore-ddms/"
+                    - "/api/os-wellbore-ddms/ddms/v2/about"
+                    - "/api/os-wellbore-ddms/docs"
+                    - "/api/os-wellbore-ddms/openapi.json"
+                env:
+                - name: SERVICE_NAME
+                  value: os-wellbore-ddms
+                - name: KEYVAULT_URL
+                  config:
+                    name: osdu-svc-config
+                    key: ENV_KEYVAULT
+                - name: AZ_AI_INSTRUMENTATION_KEY
+                  secret:
+                    name: central-logging
+                    key: appinsights
           EOF
 
       - name: GitOps CheckIn

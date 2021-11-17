@@ -2,10 +2,10 @@
 {{- range .Values.configuration }}
 {{- if .pvc }}
 {{- range .pvc }}
+---
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-
   name: {{ .name }}-pv
   labels: {{ $labels }}
     usage: {{ .name }}-pv
@@ -44,5 +44,4 @@ spec:
       usage: {{ .name }}-pv
 {{- end }}
 {{- end }}
----
 {{- end }}
