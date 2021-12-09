@@ -1,14 +1,14 @@
 # swagger_client.PartitionApi
 
-All URIs are relative to *https://oak-osdu-dplbhggc-mwt3-gw.westeurope.cloudapp.azure.com/api*
+All URIs are relative to *https://self-managed-osdu.westeurope.cloudapp.azure.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**create_using_post**](PartitionApi.md#create_using_post) | **POST** /partition/v1/partitions/{partitionId} | Create Partition
-[**delete_using_delete**](PartitionApi.md#delete_using_delete) | **DELETE** /partition/v1/partitions/{partitionId} | Delete Partition
-[**get_using_get**](PartitionApi.md#get_using_get) | **GET** /partition/v1/partitions/{partitionId} | Get Single Partition
-[**list_using_get**](PartitionApi.md#list_using_get) | **GET** /partition/v1/partitions | List Partitions
-[**update_using_patch**](PartitionApi.md#update_using_patch) | **PATCH** /partition/v1/partitions/{partitionId} | Update Partition
+[**create_using_post**](PartitionApi.md#create_using_post) | **POST** /api/partition/v1/partitions/{partitionId} | Create Partition
+[**delete_using_delete**](PartitionApi.md#delete_using_delete) | **DELETE** /api/partition/v1/partitions/{partitionId} | Delete Partition
+[**get_using_get**](PartitionApi.md#get_using_get) | **GET** /api/partition/v1/partitions/{partitionId} | Get Single Partition
+[**list_using_get**](PartitionApi.md#list_using_get) | **GET** /api/partition/v1/partitions | List Partitions
+[**update_using_patch**](PartitionApi.md#update_using_patch) | **PATCH** /api/partition/v1/partitions/{partitionId} | Update Partition
 
 
 # **create_using_post**

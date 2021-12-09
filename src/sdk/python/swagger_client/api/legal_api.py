@@ -125,7 +125,7 @@ class LegalApi(object):
         auth_settings = ['Bearer']  # noqa: E501
 
         return self.api_client.call_api(
-            '/legal/v1/legaltags', 'POST',
+            '/api/legal/v1/legaltags', 'POST',
             path_params,
             query_params,
             header_params,
@@ -232,7 +232,7 @@ class LegalApi(object):
         auth_settings = ['Bearer']  # noqa: E501
 
         return self.api_client.call_api(
-            '/legal/v1/legaltags/{name}', 'DELETE',
+            '/api/legal/v1/legaltags/{name}', 'DELETE',
             path_params,
             query_params,
             header_params,
@@ -339,7 +339,7 @@ class LegalApi(object):
         auth_settings = ['Bearer']  # noqa: E501
 
         return self.api_client.call_api(
-            '/legal/v1/legaltags/{name}', 'GET',
+            '/api/legal/v1/legaltags/{name}', 'GET',
             path_params,
             query_params,
             header_params,
@@ -438,7 +438,7 @@ class LegalApi(object):
         auth_settings = ['Bearer']  # noqa: E501
 
         return self.api_client.call_api(
-            '/legal/v1/legaltags:properties', 'GET',
+            '/api/legal/v1/legaltags:properties', 'GET',
             path_params,
             query_params,
             header_params,
@@ -545,7 +545,7 @@ class LegalApi(object):
         auth_settings = ['Bearer']  # noqa: E501
 
         return self.api_client.call_api(
-            '/legal/v1/legaltags:batchRetrieve', 'POST',
+            '/api/legal/v1/legaltags:batchRetrieve', 'POST',
             path_params,
             query_params,
             header_params,
@@ -652,7 +652,7 @@ class LegalApi(object):
         auth_settings = ['Bearer']  # noqa: E501
 
         return self.api_client.call_api(
-            '/legal/v1/legaltags', 'GET',
+            '/api/legal/v1/legaltags', 'GET',
             path_params,
             query_params,
             header_params,
@@ -759,7 +759,7 @@ class LegalApi(object):
         auth_settings = ['Bearer']  # noqa: E501
 
         return self.api_client.call_api(
-            '/legal/v1/legaltags', 'PUT',
+            '/api/legal/v1/legaltags', 'PUT',
             path_params,
             query_params,
             header_params,
@@ -866,7 +866,7 @@ class LegalApi(object):
         auth_settings = ['Bearer']  # noqa: E501
 
         return self.api_client.call_api(
-            '/legal/v1/legaltags:validate', 'POST',
+            '/api/legal/v1/legaltags:validate', 'POST',
             path_params,
             query_params,
             header_params,

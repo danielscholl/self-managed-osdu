@@ -1,18 +1,18 @@
 # swagger_client.EntitlementApi
 
-All URIs are relative to *https://oak-osdu-dplbhggc-mwt3-gw.westeurope.cloudapp.azure.com/api*
+All URIs are relative to *https://self-managed-osdu.westeurope.cloudapp.azure.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**add_member_using_post**](EntitlementApi.md#add_member_using_post) | **POST** /entitlements/v2/groups/{group_email}/members | Add Member to Group
-[**create_group_using_post**](EntitlementApi.md#create_group_using_post) | **POST** /entitlements/v2/groups | Create a Group
-[**delete_group_using_delete**](EntitlementApi.md#delete_group_using_delete) | **DELETE** /entitlements/v2/groups/{group_email} | Delete a Group
-[**delete_member_using_delete**](EntitlementApi.md#delete_member_using_delete) | **DELETE** /entitlements/v2/members/{member_email} | Delete a User
-[**delete_member_using_delete1**](EntitlementApi.md#delete_member_using_delete1) | **DELETE** /entitlements/v2/groups/{group_email}/members/{member_email} | Remove Member from Group
-[**list_group_members_using_get**](EntitlementApi.md#list_group_members_using_get) | **GET** /entitlements/v2/groups/{group_email}/members | List Group Members
-[**list_groups_on_behalf_of_using_get**](EntitlementApi.md#list_groups_on_behalf_of_using_get) | **GET** /entitlements/v2/members/{member_email}/groups | List Assigned Groups for User
-[**list_groups_using_get**](EntitlementApi.md#list_groups_using_get) | **GET** /entitlements/v2/groups | List Assigned Groups
-[**update_group_using_patch**](EntitlementApi.md#update_group_using_patch) | **PATCH** /entitlements/v2/groups/{group_email} | Updates Items in Group
+[**add_member_using_post**](EntitlementApi.md#add_member_using_post) | **POST** /api/entitlements/v2/groups/{group_email}/members | Add Member to Group
+[**create_group_using_post**](EntitlementApi.md#create_group_using_post) | **POST** /api/entitlements/v2/groups | Create a Group
+[**delete_group_using_delete**](EntitlementApi.md#delete_group_using_delete) | **DELETE** /api/entitlements/v2/groups/{group_email} | Delete a Group
+[**delete_member_using_delete**](EntitlementApi.md#delete_member_using_delete) | **DELETE** /api/entitlements/v2/members/{member_email} | Delete a User
+[**delete_member_using_delete1**](EntitlementApi.md#delete_member_using_delete1) | **DELETE** /api/entitlements/v2/groups/{group_email}/members/{member_email} | Remove Member from Group
+[**list_group_members_using_get**](EntitlementApi.md#list_group_members_using_get) | **GET** /api/entitlements/v2/groups/{group_email}/members | List Group Members
+[**list_groups_on_behalf_of_using_get**](EntitlementApi.md#list_groups_on_behalf_of_using_get) | **GET** /api/entitlements/v2/members/{member_email}/groups | List Assigned Groups for User
+[**list_groups_using_get**](EntitlementApi.md#list_groups_using_get) | **GET** /api/entitlements/v2/groups | List Assigned Groups
+[**update_group_using_patch**](EntitlementApi.md#update_group_using_patch) | **PATCH** /api/entitlements/v2/groups/{group_email} | Updates Items in Group
 
 
 # **add_member_using_post**

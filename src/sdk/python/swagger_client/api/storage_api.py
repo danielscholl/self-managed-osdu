@@ -125,7 +125,7 @@ class StorageApi(object):
         auth_settings = ['Bearer']  # noqa: E501
 
         return self.api_client.call_api(
-            '/records', 'PUT',
+            '/api/storage/v2/records', 'PUT',
             path_params,
             query_params,
             header_params,
@@ -232,7 +232,7 @@ class StorageApi(object):
         auth_settings = ['Bearer']  # noqa: E501
 
         return self.api_client.call_api(
-            '/records/{id}:delete', 'POST',
+            '/api/records/{id}:delete', 'POST',
             path_params,
             query_params,
             header_params,
@@ -331,7 +331,7 @@ class StorageApi(object):
         auth_settings = ['Bearer']  # noqa: E501
 
         return self.api_client.call_api(
-            '/records/delete', 'POST',
+            '/api/storage/v2/records/delete', 'POST',
             path_params,
             query_params,
             header_params,
@@ -434,7 +434,7 @@ class StorageApi(object):
         auth_settings = ['Bearer']  # noqa: E501
 
         return self.api_client.call_api(
-            '/storage/v2/query/records', 'POST',
+            '/api/storage/v2/query/records', 'POST',
             path_params,
             query_params,
             header_params,
@@ -541,7 +541,7 @@ class StorageApi(object):
         auth_settings = ['Bearer']  # noqa: E501
 
         return self.api_client.call_api(
-            '/storage/v2/query/kinds', 'GET',
+            '/api/storage/v2/query/kinds', 'GET',
             path_params,
             query_params,
             header_params,
@@ -652,7 +652,7 @@ class StorageApi(object):
         auth_settings = ['Bearer']  # noqa: E501
 
         return self.api_client.call_api(
-            '/storage/v2/query/records', 'GET',
+            '/api/storage/v2/query/records', 'GET',
             path_params,
             query_params,
             header_params,
@@ -759,7 +759,7 @@ class StorageApi(object):
         auth_settings = ['Bearer']  # noqa: E501
 
         return self.api_client.call_api(
-            '/records/versions/{id}', 'GET',
+            '/api/storage/v2/records/versions/{id}', 'GET',
             path_params,
             query_params,
             header_params,
@@ -871,7 +871,7 @@ class StorageApi(object):
         auth_settings = ['Bearer']  # noqa: E501
 
         return self.api_client.call_api(
-            '/records/{id}', 'GET',
+            '/api/storage/v2/records/{id}', 'GET',
             path_params,
             query_params,
             header_params,
@@ -991,7 +991,7 @@ class StorageApi(object):
         auth_settings = ['Bearer']  # noqa: E501
 
         return self.api_client.call_api(
-            '/records/{id}/{version}', 'GET',
+            '/api/storage/v2/records/{id}/{version}', 'GET',
             path_params,
             query_params,
             header_params,
@@ -1094,7 +1094,7 @@ class StorageApi(object):
         auth_settings = ['Bearer']  # noqa: E501
 
         return self.api_client.call_api(
-            '/records', 'PATCH',
+            '/api/storage/v2/records', 'PATCH',
             path_params,
             query_params,
             header_params,
@@ -1201,7 +1201,7 @@ class StorageApi(object):
         auth_settings = ['Bearer']  # noqa: E501
 
         return self.api_client.call_api(
-            '/records/{id}', 'DELETE',
+            '/api/storage/v2/records/{id}', 'DELETE',
             path_params,
             query_params,
             header_params,

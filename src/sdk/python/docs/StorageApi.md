@@ -1,20 +1,20 @@
 # swagger_client.StorageApi
 
-All URIs are relative to *https://oak-osdu-dplbhggc-mwt3-gw.westeurope.cloudapp.azure.com/api*
+All URIs are relative to *https://self-managed-osdu.westeurope.cloudapp.azure.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**create_or_update_records**](StorageApi.md#create_or_update_records) | **PUT** /records | Create or update records
-[**delete_record**](StorageApi.md#delete_record) | **POST** /records/{id}:delete | Delete record
-[**delete_records**](StorageApi.md#delete_records) | **POST** /records/delete | Soft delete of multiple records
-[**fetch_records**](StorageApi.md#fetch_records) | **POST** /storage/v2/query/records | Fetch records
-[**get_all_kinds**](StorageApi.md#get_all_kinds) | **GET** /storage/v2/query/kinds | Get all kinds
-[**get_all_record_from_kind**](StorageApi.md#get_all_record_from_kind) | **GET** /storage/v2/query/records | Get all record from kind
-[**get_all_record_versions**](StorageApi.md#get_all_record_versions) | **GET** /records/versions/{id} | Get all record versions
-[**get_record**](StorageApi.md#get_record) | **GET** /records/{id} | Get record
-[**get_record_version**](StorageApi.md#get_record_version) | **GET** /records/{id}/{version} | Get record version
-[**patch_update_records**](StorageApi.md#patch_update_records) | **PATCH** /records | Modify record metadata attributes using patch operations
-[**purge_record**](StorageApi.md#purge_record) | **DELETE** /records/{id} | Purge record
+[**create_or_update_records**](StorageApi.md#create_or_update_records) | **PUT** /api/storage/v2/records | Create or update records
+[**delete_record**](StorageApi.md#delete_record) | **POST** /api/records/{id}:delete | Delete record
+[**delete_records**](StorageApi.md#delete_records) | **POST** /api/storage/v2/records/delete | Soft delete of multiple records
+[**fetch_records**](StorageApi.md#fetch_records) | **POST** /api/storage/v2/query/records | Fetch records
+[**get_all_kinds**](StorageApi.md#get_all_kinds) | **GET** /api/storage/v2/query/kinds | Get all kinds
+[**get_all_record_from_kind**](StorageApi.md#get_all_record_from_kind) | **GET** /api/storage/v2/query/records | Get all record from kind
+[**get_all_record_versions**](StorageApi.md#get_all_record_versions) | **GET** /api/storage/v2/records/versions/{id} | Get all record versions
+[**get_record**](StorageApi.md#get_record) | **GET** /api/storage/v2/records/{id} | Get record
+[**get_record_version**](StorageApi.md#get_record_version) | **GET** /api/storage/v2/records/{id}/{version} | Get record version
+[**patch_update_records**](StorageApi.md#patch_update_records) | **PATCH** /api/storage/v2/records | Modify record metadata attributes using patch operations
+[**purge_record**](StorageApi.md#purge_record) | **DELETE** /api/storage/v2/records/{id} | Purge record
 
 
 # **create_or_update_records**
