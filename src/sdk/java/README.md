@@ -2,7 +2,7 @@
 
 self-managed-osdu
 - API version: 0.11.0
-  - Build date: 2021-12-09T19:33:56.348Z
+  - Build date: 2021-12-09T20:22:07.530Z
 
 Rest API Documentation for Self Managed OSDU
 
@@ -109,43 +109,43 @@ public class EntitlementApiExample {
 
 ## Documentation for API Endpoints
 
-All URIs are relative to *https://oak-osdu-dplbhggc-mwt3-gw.westeurope.cloudapp.azure.com/api*
+All URIs are relative to *https://self-managed-osdu.westeurope.cloudapp.azure.com*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*EntitlementApi* | [**addMemberUsingPOST**](docs/EntitlementApi.md#addMemberUsingPOST) | **POST** /entitlements/v2/groups/{group_email}/members | Add Member to Group
-*EntitlementApi* | [**createGroupUsingPOST**](docs/EntitlementApi.md#createGroupUsingPOST) | **POST** /entitlements/v2/groups | Create a Group
-*EntitlementApi* | [**deleteGroupUsingDELETE**](docs/EntitlementApi.md#deleteGroupUsingDELETE) | **DELETE** /entitlements/v2/groups/{group_email} | Delete a Group
-*EntitlementApi* | [**deleteMemberUsingDELETE**](docs/EntitlementApi.md#deleteMemberUsingDELETE) | **DELETE** /entitlements/v2/members/{member_email} | Delete a User
-*EntitlementApi* | [**deleteMemberUsingDELETE1**](docs/EntitlementApi.md#deleteMemberUsingDELETE1) | **DELETE** /entitlements/v2/groups/{group_email}/members/{member_email} | Remove Member from Group
-*EntitlementApi* | [**listGroupMembersUsingGET**](docs/EntitlementApi.md#listGroupMembersUsingGET) | **GET** /entitlements/v2/groups/{group_email}/members | List Group Members
-*EntitlementApi* | [**listGroupsOnBehalfOfUsingGET**](docs/EntitlementApi.md#listGroupsOnBehalfOfUsingGET) | **GET** /entitlements/v2/members/{member_email}/groups | List Assigned Groups for User
-*EntitlementApi* | [**listGroupsUsingGET**](docs/EntitlementApi.md#listGroupsUsingGET) | **GET** /entitlements/v2/groups | List Assigned Groups
-*EntitlementApi* | [**updateGroupUsingPATCH**](docs/EntitlementApi.md#updateGroupUsingPATCH) | **PATCH** /entitlements/v2/groups/{group_email} | Updates Items in Group
-*LegalApi* | [**createLegalTag**](docs/LegalApi.md#createLegalTag) | **POST** /legal/v1/legaltags | Creates the LegalTag for the given &#39;name&#39;.
-*LegalApi* | [**deleteLegalTag**](docs/LegalApi.md#deleteLegalTag) | **DELETE** /legal/v1/legaltags/{name} | Delete Legal Tag
-*LegalApi* | [**getLegalTag**](docs/LegalApi.md#getLegalTag) | **GET** /legal/v1/legaltags/{name} | Gets a LegalTag for the given &#39;name&#39;.
-*LegalApi* | [**getLegalTagProperties**](docs/LegalApi.md#getLegalTagProperties) | **GET** /legal/v1/legaltags:properties | Gets LegalTag property values.
-*LegalApi* | [**getLegalTags**](docs/LegalApi.md#getLegalTags) | **POST** /legal/v1/legaltags:batchRetrieve | Retrieves the LegalTags for the given names.
-*LegalApi* | [**listLegalTags**](docs/LegalApi.md#listLegalTags) | **GET** /legal/v1/legaltags | Gets all LegalTags.
-*LegalApi* | [**updateLegalTag**](docs/LegalApi.md#updateLegalTag) | **PUT** /legal/v1/legaltags | Updates the LegalTag for the given &#39;name&#39;.
-*LegalApi* | [**validateLegalTags**](docs/LegalApi.md#validateLegalTags) | **POST** /legal/v1/legaltags:validate | Retrieves the invalid LegalTag names with reasons for the given names.
-*PartitionApi* | [**createUsingPOST**](docs/PartitionApi.md#createUsingPOST) | **POST** /partition/v1/partitions/{partitionId} | Create Partition
-*PartitionApi* | [**deleteUsingDELETE**](docs/PartitionApi.md#deleteUsingDELETE) | **DELETE** /partition/v1/partitions/{partitionId} | Delete Partition
-*PartitionApi* | [**getUsingGET**](docs/PartitionApi.md#getUsingGET) | **GET** /partition/v1/partitions/{partitionId} | Get Single Partition
-*PartitionApi* | [**listUsingGET**](docs/PartitionApi.md#listUsingGET) | **GET** /partition/v1/partitions | List Partitions
-*PartitionApi* | [**updateUsingPATCH**](docs/PartitionApi.md#updateUsingPATCH) | **PATCH** /partition/v1/partitions/{partitionId} | Update Partition
-*StorageApi* | [**createOrUpdateRecords**](docs/StorageApi.md#createOrUpdateRecords) | **PUT** /records | Create or update records
-*StorageApi* | [**deleteRecord**](docs/StorageApi.md#deleteRecord) | **POST** /records/{id}:delete | Delete record
-*StorageApi* | [**deleteRecords**](docs/StorageApi.md#deleteRecords) | **POST** /records/delete | Soft delete of multiple records
-*StorageApi* | [**fetchRecords**](docs/StorageApi.md#fetchRecords) | **POST** /storage/v2/query/records | Fetch records
-*StorageApi* | [**getAllKinds**](docs/StorageApi.md#getAllKinds) | **GET** /storage/v2/query/kinds | Get all kinds
-*StorageApi* | [**getAllRecordFromKind**](docs/StorageApi.md#getAllRecordFromKind) | **GET** /storage/v2/query/records | Get all record from kind
-*StorageApi* | [**getAllRecordVersions**](docs/StorageApi.md#getAllRecordVersions) | **GET** /records/versions/{id} | Get all record versions
-*StorageApi* | [**getRecord**](docs/StorageApi.md#getRecord) | **GET** /records/{id} | Get record
-*StorageApi* | [**getRecordVersion**](docs/StorageApi.md#getRecordVersion) | **GET** /records/{id}/{version} | Get record version
-*StorageApi* | [**patchUpdateRecords**](docs/StorageApi.md#patchUpdateRecords) | **PATCH** /records | Modify record metadata attributes using patch operations
-*StorageApi* | [**purgeRecord**](docs/StorageApi.md#purgeRecord) | **DELETE** /records/{id} | Purge record
+*EntitlementApi* | [**addMemberUsingPOST**](docs/EntitlementApi.md#addMemberUsingPOST) | **POST** /api/entitlements/v2/groups/{group_email}/members | Add Member to Group
+*EntitlementApi* | [**createGroupUsingPOST**](docs/EntitlementApi.md#createGroupUsingPOST) | **POST** /api/entitlements/v2/groups | Create a Group
+*EntitlementApi* | [**deleteGroupUsingDELETE**](docs/EntitlementApi.md#deleteGroupUsingDELETE) | **DELETE** /api/entitlements/v2/groups/{group_email} | Delete a Group
+*EntitlementApi* | [**deleteMemberUsingDELETE**](docs/EntitlementApi.md#deleteMemberUsingDELETE) | **DELETE** /api/entitlements/v2/members/{member_email} | Delete a User
+*EntitlementApi* | [**deleteMemberUsingDELETE1**](docs/EntitlementApi.md#deleteMemberUsingDELETE1) | **DELETE** /api/entitlements/v2/groups/{group_email}/members/{member_email} | Remove Member from Group
+*EntitlementApi* | [**listGroupMembersUsingGET**](docs/EntitlementApi.md#listGroupMembersUsingGET) | **GET** /api/entitlements/v2/groups/{group_email}/members | List Group Members
+*EntitlementApi* | [**listGroupsOnBehalfOfUsingGET**](docs/EntitlementApi.md#listGroupsOnBehalfOfUsingGET) | **GET** /api/entitlements/v2/members/{member_email}/groups | List Assigned Groups for User
+*EntitlementApi* | [**listGroupsUsingGET**](docs/EntitlementApi.md#listGroupsUsingGET) | **GET** /api/entitlements/v2/groups | List Assigned Groups
+*EntitlementApi* | [**updateGroupUsingPATCH**](docs/EntitlementApi.md#updateGroupUsingPATCH) | **PATCH** /api/entitlements/v2/groups/{group_email} | Updates Items in Group
+*LegalApi* | [**createLegalTag**](docs/LegalApi.md#createLegalTag) | **POST** /api/legal/v1/legaltags | Creates the LegalTag for the given &#39;name&#39;.
+*LegalApi* | [**deleteLegalTag**](docs/LegalApi.md#deleteLegalTag) | **DELETE** /api/legal/v1/legaltags/{name} | Delete Legal Tag
+*LegalApi* | [**getLegalTag**](docs/LegalApi.md#getLegalTag) | **GET** /api/legal/v1/legaltags/{name} | Gets a LegalTag for the given &#39;name&#39;.
+*LegalApi* | [**getLegalTagProperties**](docs/LegalApi.md#getLegalTagProperties) | **GET** /api/legal/v1/legaltags:properties | Gets LegalTag property values.
+*LegalApi* | [**getLegalTags**](docs/LegalApi.md#getLegalTags) | **POST** /api/legal/v1/legaltags:batchRetrieve | Retrieves the LegalTags for the given names.
+*LegalApi* | [**listLegalTags**](docs/LegalApi.md#listLegalTags) | **GET** /api/legal/v1/legaltags | Gets all LegalTags.
+*LegalApi* | [**updateLegalTag**](docs/LegalApi.md#updateLegalTag) | **PUT** /api/legal/v1/legaltags | Updates the LegalTag for the given &#39;name&#39;.
+*LegalApi* | [**validateLegalTags**](docs/LegalApi.md#validateLegalTags) | **POST** /api/legal/v1/legaltags:validate | Retrieves the invalid LegalTag names with reasons for the given names.
+*PartitionApi* | [**createUsingPOST**](docs/PartitionApi.md#createUsingPOST) | **POST** /api/partition/v1/partitions/{partitionId} | Create Partition
+*PartitionApi* | [**deleteUsingDELETE**](docs/PartitionApi.md#deleteUsingDELETE) | **DELETE** /api/partition/v1/partitions/{partitionId} | Delete Partition
+*PartitionApi* | [**getUsingGET**](docs/PartitionApi.md#getUsingGET) | **GET** /api/partition/v1/partitions/{partitionId} | Get Single Partition
+*PartitionApi* | [**listUsingGET**](docs/PartitionApi.md#listUsingGET) | **GET** /api/partition/v1/partitions | List Partitions
+*PartitionApi* | [**updateUsingPATCH**](docs/PartitionApi.md#updateUsingPATCH) | **PATCH** /api/partition/v1/partitions/{partitionId} | Update Partition
+*StorageApi* | [**createOrUpdateRecords**](docs/StorageApi.md#createOrUpdateRecords) | **PUT** /api/storage/v2/records | Create or update records
+*StorageApi* | [**deleteRecord**](docs/StorageApi.md#deleteRecord) | **POST** /api/records/{id}:delete | Delete record
+*StorageApi* | [**deleteRecords**](docs/StorageApi.md#deleteRecords) | **POST** /api/storage/v2/records/delete | Soft delete of multiple records
+*StorageApi* | [**fetchRecords**](docs/StorageApi.md#fetchRecords) | **POST** /api/storage/v2/query/records | Fetch records
+*StorageApi* | [**getAllKinds**](docs/StorageApi.md#getAllKinds) | **GET** /api/storage/v2/query/kinds | Get all kinds
+*StorageApi* | [**getAllRecordFromKind**](docs/StorageApi.md#getAllRecordFromKind) | **GET** /api/storage/v2/query/records | Get all record from kind
+*StorageApi* | [**getAllRecordVersions**](docs/StorageApi.md#getAllRecordVersions) | **GET** /api/storage/v2/records/versions/{id} | Get all record versions
+*StorageApi* | [**getRecord**](docs/StorageApi.md#getRecord) | **GET** /api/storage/v2/records/{id} | Get record
+*StorageApi* | [**getRecordVersion**](docs/StorageApi.md#getRecordVersion) | **GET** /api/storage/v2/records/{id}/{version} | Get record version
+*StorageApi* | [**patchUpdateRecords**](docs/StorageApi.md#patchUpdateRecords) | **PATCH** /api/storage/v2/records | Modify record metadata attributes using patch operations
+*StorageApi* | [**purgeRecord**](docs/StorageApi.md#purgeRecord) | **DELETE** /api/storage/v2/records/{id} | Purge record
 
 
 ## Documentation for Models

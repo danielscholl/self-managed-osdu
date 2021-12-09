@@ -68,7 +68,7 @@ public class PartitionApi {
         Object localVarPostBody = partitionInfo;
 
         // create path and map variables
-        String localVarPath = "/partition/v1/partitions/{partitionId}"
+        String localVarPath = "/api/partition/v1/partitions/{partitionId}"
             .replaceAll("\\{" + "partitionId" + "\\}", apiClient.escapeString(partitionId.toString()));
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
@@ -195,7 +195,7 @@ public class PartitionApi {
         Object localVarPostBody = null;
 
         // create path and map variables
-        String localVarPath = "/partition/v1/partitions/{partitionId}"
+        String localVarPath = "/api/partition/v1/partitions/{partitionId}"
             .replaceAll("\\{" + "partitionId" + "\\}", apiClient.escapeString(partitionId.toString()));
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
@@ -314,7 +314,7 @@ public class PartitionApi {
         Object localVarPostBody = null;
 
         // create path and map variables
-        String localVarPath = "/partition/v1/partitions/{partitionId}"
+        String localVarPath = "/api/partition/v1/partitions/{partitionId}"
             .replaceAll("\\{" + "partitionId" + "\\}", apiClient.escapeString(partitionId.toString()));
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
@@ -436,7 +436,7 @@ public class PartitionApi {
         Object localVarPostBody = null;
 
         // create path and map variables
-        String localVarPath = "/partition/v1/partitions";
+        String localVarPath = "/api/partition/v1/partitions";
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
@@ -551,7 +551,7 @@ public class PartitionApi {
         Object localVarPostBody = partitionInfo;
 
         // create path and map variables
-        String localVarPath = "/partition/v1/partitions/{partitionId}"
+        String localVarPath = "/api/partition/v1/partitions/{partitionId}"
             .replaceAll("\\{" + "partitionId" + "\\}", apiClient.escapeString(partitionId.toString()));
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();

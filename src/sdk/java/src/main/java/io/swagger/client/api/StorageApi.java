@@ -76,7 +76,7 @@ public class StorageApi {
         Object localVarPostBody = body;
 
         // create path and map variables
-        String localVarPath = "/records";
+        String localVarPath = "/api/storage/v2/records";
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
@@ -209,7 +209,7 @@ public class StorageApi {
         Object localVarPostBody = null;
 
         // create path and map variables
-        String localVarPath = "/records/{id}:delete"
+        String localVarPath = "/api/records/{id}:delete"
             .replaceAll("\\{" + "id" + "\\}", apiClient.escapeString(id.toString()));
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
@@ -339,7 +339,7 @@ public class StorageApi {
         Object localVarPostBody = partitionInfo;
 
         // create path and map variables
-        String localVarPath = "/records/delete";
+        String localVarPath = "/api/storage/v2/records/delete";
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
@@ -468,7 +468,7 @@ public class StorageApi {
         Object localVarPostBody = body;
 
         // create path and map variables
-        String localVarPath = "/storage/v2/query/records";
+        String localVarPath = "/api/storage/v2/query/records";
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
@@ -597,7 +597,7 @@ public class StorageApi {
         Object localVarPostBody = null;
 
         // create path and map variables
-        String localVarPath = "/storage/v2/query/kinds";
+        String localVarPath = "/api/storage/v2/query/kinds";
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
@@ -734,7 +734,7 @@ public class StorageApi {
         Object localVarPostBody = null;
 
         // create path and map variables
-        String localVarPath = "/storage/v2/query/records";
+        String localVarPath = "/api/storage/v2/query/records";
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
@@ -874,7 +874,7 @@ public class StorageApi {
         Object localVarPostBody = null;
 
         // create path and map variables
-        String localVarPath = "/records/versions/{id}"
+        String localVarPath = "/api/storage/v2/records/versions/{id}"
             .replaceAll("\\{" + "id" + "\\}", apiClient.escapeString(id.toString()));
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
@@ -1009,7 +1009,7 @@ public class StorageApi {
         Object localVarPostBody = null;
 
         // create path and map variables
-        String localVarPath = "/records/{id}"
+        String localVarPath = "/api/storage/v2/records/{id}"
             .replaceAll("\\{" + "id" + "\\}", apiClient.escapeString(id.toString()));
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
@@ -1150,7 +1150,7 @@ public class StorageApi {
         Object localVarPostBody = null;
 
         // create path and map variables
-        String localVarPath = "/records/{id}/{version}"
+        String localVarPath = "/api/storage/v2/records/{id}/{version}"
             .replaceAll("\\{" + "id" + "\\}", apiClient.escapeString(id.toString()))
             .replaceAll("\\{" + "version" + "\\}", apiClient.escapeString(version.toString()));
 
@@ -1298,7 +1298,7 @@ public class StorageApi {
         Object localVarPostBody = body;
 
         // create path and map variables
-        String localVarPath = "/records";
+        String localVarPath = "/api/storage/v2/records";
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
@@ -1426,7 +1426,7 @@ public class StorageApi {
         Object localVarPostBody = null;
 
         // create path and map variables
-        String localVarPath = "/records/{id}"
+        String localVarPath = "/api/storage/v2/records/{id}"
             .replaceAll("\\{" + "id" + "\\}", apiClient.escapeString(id.toString()));
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();

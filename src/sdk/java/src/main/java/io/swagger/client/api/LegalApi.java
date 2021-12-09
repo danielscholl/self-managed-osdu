@@ -73,7 +73,7 @@ public class LegalApi {
         Object localVarPostBody = body;
 
         // create path and map variables
-        String localVarPath = "/legal/v1/legaltags";
+        String localVarPath = "/api/legal/v1/legaltags";
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
@@ -206,7 +206,7 @@ public class LegalApi {
         Object localVarPostBody = null;
 
         // create path and map variables
-        String localVarPath = "/legal/v1/legaltags/{name}"
+        String localVarPath = "/api/legal/v1/legaltags/{name}"
             .replaceAll("\\{" + "name" + "\\}", apiClient.escapeString(name.toString()));
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
@@ -336,7 +336,7 @@ public class LegalApi {
         Object localVarPostBody = null;
 
         // create path and map variables
-        String localVarPath = "/legal/v1/legaltags/{name}"
+        String localVarPath = "/api/legal/v1/legaltags/{name}"
             .replaceAll("\\{" + "name" + "\\}", apiClient.escapeString(name.toString()));
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
@@ -469,7 +469,7 @@ public class LegalApi {
         Object localVarPostBody = null;
 
         // create path and map variables
-        String localVarPath = "/legal/v1/legaltags:properties";
+        String localVarPath = "/api/legal/v1/legaltags:properties";
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
@@ -595,7 +595,7 @@ public class LegalApi {
         Object localVarPostBody = body;
 
         // create path and map variables
-        String localVarPath = "/legal/v1/legaltags:batchRetrieve";
+        String localVarPath = "/api/legal/v1/legaltags:batchRetrieve";
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
@@ -729,7 +729,7 @@ public class LegalApi {
         Object localVarPostBody = null;
 
         // create path and map variables
-        String localVarPath = "/legal/v1/legaltags";
+        String localVarPath = "/api/legal/v1/legaltags";
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
@@ -865,7 +865,7 @@ public class LegalApi {
         Object localVarPostBody = body;
 
         // create path and map variables
-        String localVarPath = "/legal/v1/legaltags";
+        String localVarPath = "/api/legal/v1/legaltags";
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
@@ -999,7 +999,7 @@ public class LegalApi {
         Object localVarPostBody = body;
 
         // create path and map variables
-        String localVarPath = "/legal/v1/legaltags:validate";
+        String localVarPath = "/api/legal/v1/legaltags:validate";
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();

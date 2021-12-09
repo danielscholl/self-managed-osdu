@@ -1,17 +1,17 @@
 # LegalApi
 
-All URIs are relative to *https://oak-osdu-dplbhggc-mwt3-gw.westeurope.cloudapp.azure.com/api*
+All URIs are relative to *https://self-managed-osdu.westeurope.cloudapp.azure.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**createLegalTag**](LegalApi.md#createLegalTag) | **POST** /legal/v1/legaltags | Creates the LegalTag for the given &#39;name&#39;.
-[**deleteLegalTag**](LegalApi.md#deleteLegalTag) | **DELETE** /legal/v1/legaltags/{name} | Delete Legal Tag
-[**getLegalTag**](LegalApi.md#getLegalTag) | **GET** /legal/v1/legaltags/{name} | Gets a LegalTag for the given &#39;name&#39;.
-[**getLegalTagProperties**](LegalApi.md#getLegalTagProperties) | **GET** /legal/v1/legaltags:properties | Gets LegalTag property values.
-[**getLegalTags**](LegalApi.md#getLegalTags) | **POST** /legal/v1/legaltags:batchRetrieve | Retrieves the LegalTags for the given names.
-[**listLegalTags**](LegalApi.md#listLegalTags) | **GET** /legal/v1/legaltags | Gets all LegalTags.
-[**updateLegalTag**](LegalApi.md#updateLegalTag) | **PUT** /legal/v1/legaltags | Updates the LegalTag for the given &#39;name&#39;.
-[**validateLegalTags**](LegalApi.md#validateLegalTags) | **POST** /legal/v1/legaltags:validate | Retrieves the invalid LegalTag names with reasons for the given names.
+[**createLegalTag**](LegalApi.md#createLegalTag) | **POST** /api/legal/v1/legaltags | Creates the LegalTag for the given &#39;name&#39;.
+[**deleteLegalTag**](LegalApi.md#deleteLegalTag) | **DELETE** /api/legal/v1/legaltags/{name} | Delete Legal Tag
+[**getLegalTag**](LegalApi.md#getLegalTag) | **GET** /api/legal/v1/legaltags/{name} | Gets a LegalTag for the given &#39;name&#39;.
+[**getLegalTagProperties**](LegalApi.md#getLegalTagProperties) | **GET** /api/legal/v1/legaltags:properties | Gets LegalTag property values.
+[**getLegalTags**](LegalApi.md#getLegalTags) | **POST** /api/legal/v1/legaltags:batchRetrieve | Retrieves the LegalTags for the given names.
+[**listLegalTags**](LegalApi.md#listLegalTags) | **GET** /api/legal/v1/legaltags | Gets all LegalTags.
+[**updateLegalTag**](LegalApi.md#updateLegalTag) | **PUT** /api/legal/v1/legaltags | Updates the LegalTag for the given &#39;name&#39;.
+[**validateLegalTags**](LegalApi.md#validateLegalTags) | **POST** /api/legal/v1/legaltags:validate | Retrieves the invalid LegalTag names with reasons for the given names.
 
 
 <a name="createLegalTag"></a>
