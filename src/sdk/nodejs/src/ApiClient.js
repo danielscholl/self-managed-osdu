@@ -46,9 +46,9 @@
     /**
      * The base URL against which to resolve every API call's (relative) path.
      * @type {String}
-     * @default https://oak-osdu-dplbhggc-mwt3-gw.westeurope.cloudapp.azure.com/api
+     * @default https://self-managed-osdu.westeurope.cloudapp.azure.com
      */
-    this.basePath = 'https://oak-osdu-dplbhggc-mwt3-gw.westeurope.cloudapp.azure.com/api'.replace(/\/+$/, '');
+    this.basePath = 'https://self-managed-osdu.westeurope.cloudapp.azure.com'.replace(/\/+$/, '');
 
     /**
      * The authentication methods to be included for all API calls.

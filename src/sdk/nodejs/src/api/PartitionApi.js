@@ -94,7 +94,7 @@
       var returnType = null;
 
       return this.apiClient.callApi(
-        '/partition/v1/partitions/{partitionId}', 'POST',
+        '/api/partition/v1/partitions/{partitionId}', 'POST',
         pathParams, queryParams, collectionQueryParams, headerParams, formParams, postBody,
         authNames, contentTypes, accepts, returnType, callback
       );
@@ -141,7 +141,7 @@
       var returnType = null;
 
       return this.apiClient.callApi(
-        '/partition/v1/partitions/{partitionId}', 'DELETE',
+        '/api/partition/v1/partitions/{partitionId}', 'DELETE',
         pathParams, queryParams, collectionQueryParams, headerParams, formParams, postBody,
         authNames, contentTypes, accepts, returnType, callback
       );
@@ -189,7 +189,7 @@
       var returnType = {'String': PartitionProperty};
 
       return this.apiClient.callApi(
-        '/partition/v1/partitions/{partitionId}', 'GET',
+        '/api/partition/v1/partitions/{partitionId}', 'GET',
         pathParams, queryParams, collectionQueryParams, headerParams, formParams, postBody,
         authNames, contentTypes, accepts, returnType, callback
       );
@@ -229,7 +229,7 @@
       var returnType = ['String'];
 
       return this.apiClient.callApi(
-        '/partition/v1/partitions', 'GET',
+        '/api/partition/v1/partitions', 'GET',
         pathParams, queryParams, collectionQueryParams, headerParams, formParams, postBody,
         authNames, contentTypes, accepts, returnType, callback
       );
@@ -282,7 +282,7 @@
       var returnType = null;
 
       return this.apiClient.callApi(
-        '/partition/v1/partitions/{partitionId}', 'PATCH',
+        '/api/partition/v1/partitions/{partitionId}', 'PATCH',
         pathParams, queryParams, collectionQueryParams, headerParams, formParams, postBody,
         authNames, contentTypes, accepts, returnType, callback
       );

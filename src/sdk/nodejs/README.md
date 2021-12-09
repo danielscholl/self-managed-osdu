@@ -125,43 +125,43 @@ api.addMemberUsingPOST(dataPartitionId, groupEmail, partitionInfo, callback);
 
 ## Documentation for API Endpoints
 
-All URIs are relative to *https://oak-osdu-dplbhggc-mwt3-gw.westeurope.cloudapp.azure.com/api*
+All URIs are relative to *https://self-managed-osdu.westeurope.cloudapp.azure.com*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*SelfManagedOsdu.EntitlementApi* | [**addMemberUsingPOST**](docs/EntitlementApi.md#addMemberUsingPOST) | **POST** /entitlements/v2/groups/{group_email}/members | Add Member to Group
-*SelfManagedOsdu.EntitlementApi* | [**createGroupUsingPOST**](docs/EntitlementApi.md#createGroupUsingPOST) | **POST** /entitlements/v2/groups | Create a Group
-*SelfManagedOsdu.EntitlementApi* | [**deleteGroupUsingDELETE**](docs/EntitlementApi.md#deleteGroupUsingDELETE) | **DELETE** /entitlements/v2/groups/{group_email} | Delete a Group
-*SelfManagedOsdu.EntitlementApi* | [**deleteMemberUsingDELETE**](docs/EntitlementApi.md#deleteMemberUsingDELETE) | **DELETE** /entitlements/v2/members/{member_email} | Delete a User
-*SelfManagedOsdu.EntitlementApi* | [**deleteMemberUsingDELETE1**](docs/EntitlementApi.md#deleteMemberUsingDELETE1) | **DELETE** /entitlements/v2/groups/{group_email}/members/{member_email} | Remove Member from Group
-*SelfManagedOsdu.EntitlementApi* | [**listGroupMembersUsingGET**](docs/EntitlementApi.md#listGroupMembersUsingGET) | **GET** /entitlements/v2/groups/{group_email}/members | List Group Members
-*SelfManagedOsdu.EntitlementApi* | [**listGroupsOnBehalfOfUsingGET**](docs/EntitlementApi.md#listGroupsOnBehalfOfUsingGET) | **GET** /entitlements/v2/members/{member_email}/groups | List Assigned Groups for User
-*SelfManagedOsdu.EntitlementApi* | [**listGroupsUsingGET**](docs/EntitlementApi.md#listGroupsUsingGET) | **GET** /entitlements/v2/groups | List Assigned Groups
-*SelfManagedOsdu.EntitlementApi* | [**updateGroupUsingPATCH**](docs/EntitlementApi.md#updateGroupUsingPATCH) | **PATCH** /entitlements/v2/groups/{group_email} | Updates Items in Group
-*SelfManagedOsdu.LegalApi* | [**createLegalTag**](docs/LegalApi.md#createLegalTag) | **POST** /legal/v1/legaltags | Creates the LegalTag for the given 'name'.
-*SelfManagedOsdu.LegalApi* | [**deleteLegalTag**](docs/LegalApi.md#deleteLegalTag) | **DELETE** /legal/v1/legaltags/{name} | Delete Legal Tag
-*SelfManagedOsdu.LegalApi* | [**getLegalTag**](docs/LegalApi.md#getLegalTag) | **GET** /legal/v1/legaltags/{name} | Gets a LegalTag for the given 'name'.
-*SelfManagedOsdu.LegalApi* | [**getLegalTagProperties**](docs/LegalApi.md#getLegalTagProperties) | **GET** /legal/v1/legaltags:properties | Gets LegalTag property values.
-*SelfManagedOsdu.LegalApi* | [**getLegalTags**](docs/LegalApi.md#getLegalTags) | **POST** /legal/v1/legaltags:batchRetrieve | Retrieves the LegalTags for the given names.
-*SelfManagedOsdu.LegalApi* | [**listLegalTags**](docs/LegalApi.md#listLegalTags) | **GET** /legal/v1/legaltags | Gets all LegalTags.
-*SelfManagedOsdu.LegalApi* | [**updateLegalTag**](docs/LegalApi.md#updateLegalTag) | **PUT** /legal/v1/legaltags | Updates the LegalTag for the given 'name'.
-*SelfManagedOsdu.LegalApi* | [**validateLegalTags**](docs/LegalApi.md#validateLegalTags) | **POST** /legal/v1/legaltags:validate | Retrieves the invalid LegalTag names with reasons for the given names.
-*SelfManagedOsdu.PartitionApi* | [**createUsingPOST**](docs/PartitionApi.md#createUsingPOST) | **POST** /partition/v1/partitions/{partitionId} | Create Partition
-*SelfManagedOsdu.PartitionApi* | [**deleteUsingDELETE**](docs/PartitionApi.md#deleteUsingDELETE) | **DELETE** /partition/v1/partitions/{partitionId} | Delete Partition
-*SelfManagedOsdu.PartitionApi* | [**getUsingGET**](docs/PartitionApi.md#getUsingGET) | **GET** /partition/v1/partitions/{partitionId} | Get Single Partition
-*SelfManagedOsdu.PartitionApi* | [**listUsingGET**](docs/PartitionApi.md#listUsingGET) | **GET** /partition/v1/partitions | List Partitions
-*SelfManagedOsdu.PartitionApi* | [**updateUsingPATCH**](docs/PartitionApi.md#updateUsingPATCH) | **PATCH** /partition/v1/partitions/{partitionId} | Update Partition
-*SelfManagedOsdu.StorageApi* | [**createOrUpdateRecords**](docs/StorageApi.md#createOrUpdateRecords) | **PUT** /records | Create or update records
-*SelfManagedOsdu.StorageApi* | [**deleteRecord**](docs/StorageApi.md#deleteRecord) | **POST** /records/{id}:delete | Delete record
-*SelfManagedOsdu.StorageApi* | [**deleteRecords**](docs/StorageApi.md#deleteRecords) | **POST** /records/delete | Soft delete of multiple records
-*SelfManagedOsdu.StorageApi* | [**fetchRecords**](docs/StorageApi.md#fetchRecords) | **POST** /storage/v2/query/records | Fetch records
-*SelfManagedOsdu.StorageApi* | [**getAllKinds**](docs/StorageApi.md#getAllKinds) | **GET** /storage/v2/query/kinds | Get all kinds
-*SelfManagedOsdu.StorageApi* | [**getAllRecordFromKind**](docs/StorageApi.md#getAllRecordFromKind) | **GET** /storage/v2/query/records | Get all record from kind
-*SelfManagedOsdu.StorageApi* | [**getAllRecordVersions**](docs/StorageApi.md#getAllRecordVersions) | **GET** /records/versions/{id} | Get all record versions
-*SelfManagedOsdu.StorageApi* | [**getRecord**](docs/StorageApi.md#getRecord) | **GET** /records/{id} | Get record
-*SelfManagedOsdu.StorageApi* | [**getRecordVersion**](docs/StorageApi.md#getRecordVersion) | **GET** /records/{id}/{version} | Get record version
-*SelfManagedOsdu.StorageApi* | [**patchUpdateRecords**](docs/StorageApi.md#patchUpdateRecords) | **PATCH** /records | Modify record metadata attributes using patch operations
-*SelfManagedOsdu.StorageApi* | [**purgeRecord**](docs/StorageApi.md#purgeRecord) | **DELETE** /records/{id} | Purge record
+*SelfManagedOsdu.EntitlementApi* | [**addMemberUsingPOST**](docs/EntitlementApi.md#addMemberUsingPOST) | **POST** /api/entitlements/v2/groups/{group_email}/members | Add Member to Group
+*SelfManagedOsdu.EntitlementApi* | [**createGroupUsingPOST**](docs/EntitlementApi.md#createGroupUsingPOST) | **POST** /api/entitlements/v2/groups | Create a Group
+*SelfManagedOsdu.EntitlementApi* | [**deleteGroupUsingDELETE**](docs/EntitlementApi.md#deleteGroupUsingDELETE) | **DELETE** /api/entitlements/v2/groups/{group_email} | Delete a Group
+*SelfManagedOsdu.EntitlementApi* | [**deleteMemberUsingDELETE**](docs/EntitlementApi.md#deleteMemberUsingDELETE) | **DELETE** /api/entitlements/v2/members/{member_email} | Delete a User
+*SelfManagedOsdu.EntitlementApi* | [**deleteMemberUsingDELETE1**](docs/EntitlementApi.md#deleteMemberUsingDELETE1) | **DELETE** /api/entitlements/v2/groups/{group_email}/members/{member_email} | Remove Member from Group
+*SelfManagedOsdu.EntitlementApi* | [**listGroupMembersUsingGET**](docs/EntitlementApi.md#listGroupMembersUsingGET) | **GET** /api/entitlements/v2/groups/{group_email}/members | List Group Members
+*SelfManagedOsdu.EntitlementApi* | [**listGroupsOnBehalfOfUsingGET**](docs/EntitlementApi.md#listGroupsOnBehalfOfUsingGET) | **GET** /api/entitlements/v2/members/{member_email}/groups | List Assigned Groups for User
+*SelfManagedOsdu.EntitlementApi* | [**listGroupsUsingGET**](docs/EntitlementApi.md#listGroupsUsingGET) | **GET** /api/entitlements/v2/groups | List Assigned Groups
+*SelfManagedOsdu.EntitlementApi* | [**updateGroupUsingPATCH**](docs/EntitlementApi.md#updateGroupUsingPATCH) | **PATCH** /api/entitlements/v2/groups/{group_email} | Updates Items in Group
+*SelfManagedOsdu.LegalApi* | [**createLegalTag**](docs/LegalApi.md#createLegalTag) | **POST** /api/legal/v1/legaltags | Creates the LegalTag for the given 'name'.
+*SelfManagedOsdu.LegalApi* | [**deleteLegalTag**](docs/LegalApi.md#deleteLegalTag) | **DELETE** /api/legal/v1/legaltags/{name} | Delete Legal Tag
+*SelfManagedOsdu.LegalApi* | [**getLegalTag**](docs/LegalApi.md#getLegalTag) | **GET** /api/legal/v1/legaltags/{name} | Gets a LegalTag for the given 'name'.
+*SelfManagedOsdu.LegalApi* | [**getLegalTagProperties**](docs/LegalApi.md#getLegalTagProperties) | **GET** /api/legal/v1/legaltags:properties | Gets LegalTag property values.
+*SelfManagedOsdu.LegalApi* | [**getLegalTags**](docs/LegalApi.md#getLegalTags) | **POST** /api/legal/v1/legaltags:batchRetrieve | Retrieves the LegalTags for the given names.
+*SelfManagedOsdu.LegalApi* | [**listLegalTags**](docs/LegalApi.md#listLegalTags) | **GET** /api/legal/v1/legaltags | Gets all LegalTags.
+*SelfManagedOsdu.LegalApi* | [**updateLegalTag**](docs/LegalApi.md#updateLegalTag) | **PUT** /api/legal/v1/legaltags | Updates the LegalTag for the given 'name'.
+*SelfManagedOsdu.LegalApi* | [**validateLegalTags**](docs/LegalApi.md#validateLegalTags) | **POST** /api/legal/v1/legaltags:validate | Retrieves the invalid LegalTag names with reasons for the given names.
+*SelfManagedOsdu.PartitionApi* | [**createUsingPOST**](docs/PartitionApi.md#createUsingPOST) | **POST** /api/partition/v1/partitions/{partitionId} | Create Partition
+*SelfManagedOsdu.PartitionApi* | [**deleteUsingDELETE**](docs/PartitionApi.md#deleteUsingDELETE) | **DELETE** /api/partition/v1/partitions/{partitionId} | Delete Partition
+*SelfManagedOsdu.PartitionApi* | [**getUsingGET**](docs/PartitionApi.md#getUsingGET) | **GET** /api/partition/v1/partitions/{partitionId} | Get Single Partition
+*SelfManagedOsdu.PartitionApi* | [**listUsingGET**](docs/PartitionApi.md#listUsingGET) | **GET** /api/partition/v1/partitions | List Partitions
+*SelfManagedOsdu.PartitionApi* | [**updateUsingPATCH**](docs/PartitionApi.md#updateUsingPATCH) | **PATCH** /api/partition/v1/partitions/{partitionId} | Update Partition
+*SelfManagedOsdu.StorageApi* | [**createOrUpdateRecords**](docs/StorageApi.md#createOrUpdateRecords) | **PUT** /api/storage/v2/records | Create or update records
+*SelfManagedOsdu.StorageApi* | [**deleteRecord**](docs/StorageApi.md#deleteRecord) | **POST** /api/records/{id}:delete | Delete record
+*SelfManagedOsdu.StorageApi* | [**deleteRecords**](docs/StorageApi.md#deleteRecords) | **POST** /api/storage/v2/records/delete | Soft delete of multiple records
+*SelfManagedOsdu.StorageApi* | [**fetchRecords**](docs/StorageApi.md#fetchRecords) | **POST** /api/storage/v2/query/records | Fetch records
+*SelfManagedOsdu.StorageApi* | [**getAllKinds**](docs/StorageApi.md#getAllKinds) | **GET** /api/storage/v2/query/kinds | Get all kinds
+*SelfManagedOsdu.StorageApi* | [**getAllRecordFromKind**](docs/StorageApi.md#getAllRecordFromKind) | **GET** /api/storage/v2/query/records | Get all record from kind
+*SelfManagedOsdu.StorageApi* | [**getAllRecordVersions**](docs/StorageApi.md#getAllRecordVersions) | **GET** /api/storage/v2/records/versions/{id} | Get all record versions
+*SelfManagedOsdu.StorageApi* | [**getRecord**](docs/StorageApi.md#getRecord) | **GET** /api/storage/v2/records/{id} | Get record
+*SelfManagedOsdu.StorageApi* | [**getRecordVersion**](docs/StorageApi.md#getRecordVersion) | **GET** /api/storage/v2/records/{id}/{version} | Get record version
+*SelfManagedOsdu.StorageApi* | [**patchUpdateRecords**](docs/StorageApi.md#patchUpdateRecords) | **PATCH** /api/storage/v2/records | Modify record metadata attributes using patch operations
+*SelfManagedOsdu.StorageApi* | [**purgeRecord**](docs/StorageApi.md#purgeRecord) | **DELETE** /api/storage/v2/records/{id} | Purge record
 
 
 ## Documentation for Models

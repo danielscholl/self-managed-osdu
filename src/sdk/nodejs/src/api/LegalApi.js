@@ -94,7 +94,7 @@
       var returnType = LegalTagDto;
 
       return this.apiClient.callApi(
-        '/legal/v1/legaltags', 'POST',
+        '/api/legal/v1/legaltags', 'POST',
         pathParams, queryParams, collectionQueryParams, headerParams, formParams, postBody,
         authNames, contentTypes, accepts, returnType, callback
       );
@@ -148,7 +148,7 @@
       var returnType = null;
 
       return this.apiClient.callApi(
-        '/legal/v1/legaltags/{name}', 'DELETE',
+        '/api/legal/v1/legaltags/{name}', 'DELETE',
         pathParams, queryParams, collectionQueryParams, headerParams, formParams, postBody,
         authNames, contentTypes, accepts, returnType, callback
       );
@@ -203,7 +203,7 @@
       var returnType = LegalTagDto;
 
       return this.apiClient.callApi(
-        '/legal/v1/legaltags/{name}', 'GET',
+        '/api/legal/v1/legaltags/{name}', 'GET',
         pathParams, queryParams, collectionQueryParams, headerParams, formParams, postBody,
         authNames, contentTypes, accepts, returnType, callback
       );
@@ -251,7 +251,7 @@
       var returnType = LegalTagPropertyValues;
 
       return this.apiClient.callApi(
-        '/legal/v1/legaltags:properties', 'GET',
+        '/api/legal/v1/legaltags:properties', 'GET',
         pathParams, queryParams, collectionQueryParams, headerParams, formParams, postBody,
         authNames, contentTypes, accepts, returnType, callback
       );
@@ -304,7 +304,7 @@
       var returnType = LegalTagDtos;
 
       return this.apiClient.callApi(
-        '/legal/v1/legaltags:batchRetrieve', 'POST',
+        '/api/legal/v1/legaltags:batchRetrieve', 'POST',
         pathParams, queryParams, collectionQueryParams, headerParams, formParams, postBody,
         authNames, contentTypes, accepts, returnType, callback
       );
@@ -358,7 +358,7 @@
       var returnType = LegalTagDtos;
 
       return this.apiClient.callApi(
-        '/legal/v1/legaltags', 'GET',
+        '/api/legal/v1/legaltags', 'GET',
         pathParams, queryParams, collectionQueryParams, headerParams, formParams, postBody,
         authNames, contentTypes, accepts, returnType, callback
       );
@@ -411,7 +411,7 @@
       var returnType = LegalTagDto;
 
       return this.apiClient.callApi(
-        '/legal/v1/legaltags', 'PUT',
+        '/api/legal/v1/legaltags', 'PUT',
         pathParams, queryParams, collectionQueryParams, headerParams, formParams, postBody,
         authNames, contentTypes, accepts, returnType, callback
       );
@@ -464,7 +464,7 @@
       var returnType = LegalTagInvalidResponseList;
 
       return this.apiClient.callApi(
-        '/legal/v1/legaltags:validate', 'POST',
+        '/api/legal/v1/legaltags:validate', 'POST',
         pathParams, queryParams, collectionQueryParams, headerParams, formParams, postBody,
         authNames, contentTypes, accepts, returnType, callback
       );
