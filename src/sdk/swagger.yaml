@@ -6,8 +6,8 @@ info:
   license:
     name: Apache 2.0
     url: 'http://www.apache.org/licenses/LICENSE-2.0'
-    
-host: oak-osdu-dplbhggc-mwt3-gw.westeurope.cloudapp.azure.com
+
+host: self-managed-osdu.westeurope.cloudapp.azure.com
 basePath: /api
 schemes:
  - https
@@ -32,7 +32,7 @@ paths:
   #########################
   # Partition Service
   #########################
-  
+
   '/partition/v1/partitions':
     get:
       tags:
@@ -260,7 +260,7 @@ paths:
           description: Not Found
       security:
         - Bearer: []
- 
+
   '/entitlements/v2/groups/{group_email}/members':
     get:
       tags:
@@ -355,7 +355,7 @@ paths:
           description: Conflict
       security:
         - Bearer: []
- 
+
   '/entitlements/v2/groups/{group_email}/members/{member_email}':
     delete:
       tags:
@@ -893,7 +893,7 @@ paths:
           schema:
             $ref: "#/definitions/StorageErrorResponse"
       security:
-      - Bearer: []  
+      - Bearer: []
 
   '/storage/v2/query/records':
     get:
@@ -943,7 +943,7 @@ paths:
           schema:
             $ref: "#/definitions/StorageErrorResponse"
       security:
-      - Bearer: [] 
+      - Bearer: []
     post:
       tags:
       - Storage
@@ -978,7 +978,7 @@ paths:
           schema:
             $ref: "#/definitions/StorageErrorResponse"
       security:
-      - Bearer: [] 
+      - Bearer: []
 
   '/records/{id}:delete':
     post:
@@ -1103,7 +1103,7 @@ paths:
           schema:
             $ref: "#/definitions/StorageErrorResponse"
       security:
-      - Bearer: []  
+      - Bearer: []
     delete:
       tags:
       - Storage
@@ -1137,8 +1137,8 @@ paths:
           schema:
             $ref: "#/definitions/StorageErrorResponse"
       security:
-      - Bearer: []  
-      
+      - Bearer: []
+
   '/records/{id}/{version}':
     get:
       tags:
@@ -1191,8 +1191,8 @@ paths:
           schema:
             $ref: "#/definitions/StorageErrorResponse"
       security:
-      - Bearer: []  
-      
+      - Bearer: []
+
   '/records/versions/{id}':
     get:
       tags:
@@ -1229,7 +1229,7 @@ paths:
           schema:
             $ref: "#/definitions/StorageErrorResponse"
       security:
-      - Bearer: []  
+      - Bearer: []
   /records:
     put:
       tags:
@@ -1332,7 +1332,7 @@ paths:
           schema:
             $ref: "#/definitions/StorageErrorResponse"
       security:
-      - Bearer: []  
+      - Bearer: []
 
 
 definitions:
@@ -1364,7 +1364,7 @@ definitions:
         cosmos-connection:
           sensitive: true
           value: 'cosmos-connection'
-          
+
   EntitlementGroupProperties:
     type: object
     required:
@@ -1384,7 +1384,7 @@ definitions:
         type: string
         example: service.entitlements.user@partition.contoso.com
         description: The fully qualified group name.
-    description: Group properties        
+    description: Group properties
   EntitlementGroupResponse:
     type: object
     properties:
@@ -1408,9 +1408,9 @@ definitions:
         type: string
         example: MEMBER
         description: Role Name
-  
-          
-        
+
+
+
   LegalTagProperties:
     type: object
     required:
@@ -1573,7 +1573,7 @@ definitions:
       results:
         type: "array"
         items:
-          type: "string"  
+          type: "string"
   StorageErrorResponse:
     type: "object"
     properties:
@@ -1846,5 +1846,5 @@ definitions:
         description: "Records ids for whom patch operations going to be applied"
         items:
           type: "string"
-          
+
     description: "Patch api query specific information"
