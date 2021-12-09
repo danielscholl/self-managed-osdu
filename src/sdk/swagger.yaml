@@ -1,0 +1,1850 @@
+swagger: '2.0'
+info:
+  description: Rest API Documentation for Self Managed OSDU
+  version: '0.11.0'
+  title: self-managed-osdu
+  license:
+    name: Apache 2.0
+    url: 'http://www.apache.org/licenses/LICENSE-2.0'
+    
+host: oak-osdu-dplbhggc-mwt3-gw.westeurope.cloudapp.azure.com
+basePath: /api
+schemes:
+ - https
+
+securityDefinitions:
+  Bearer:
+    type: apiKey
+    name: Authorization
+    in: header
+
+tags:
+  - name: Partition
+    description: Work with Partitions
+  - name: Entitlement
+    description: Work with Members and Groups
+  - name: Legal
+    description: Work with Legal Tags
+  - name: Storage
+    description: Work with Storage Records
+
+paths:
+  #########################
+  # Partition Service
+  #########################
+  
+  '/partition/v1/partitions':
+    get:
+      tags:
+        - Partition
+      summary: List Partitions
+      operationId: listUsingGET
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters: []
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              type: string
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      security:
+        - Bearer: []
+
+  '/partition/v1/partitions/{partitionId}':
+    get:
+      tags:
+        - Partition
+      summary: Get Single Partition
+      description: >
+        By passing in a partition Id, you can retrieve the partition
+        information.
+      operationId: getUsingGET
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: partitionId
+          in: path
+          description: partitionId
+          required: true
+          type: string
+          x-example: opendes
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: object
+            additionalProperties:
+              "$ref": "#/definitions/PartitionProperty"
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      security:
+        - Bearer: []
+
+    post:
+      tags:
+        - Partition
+      summary: Create Partition
+      description: >
+        By passing in a partition Id and a partition info object you can create
+        a partition.
+      operationId: createUsingPOST
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: partitionId
+          in: path
+          description: partitionId
+          required: true
+          type: string
+          x-example: common
+        - in: body
+          name: partitionInfo
+          description: partitionInfo
+          required: true
+          schema:
+            $ref: '#/definitions/PartitionDto'
+      responses:
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      security:
+        - Bearer: []
+    patch:
+      tags:
+        - Partition
+      summary: Update Partition
+      description: >
+        By passing in a partition Id and a partition info object you can update
+        a partition.
+      operationId: updateUsingPATCH
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - name: partitionId
+        in: path
+        description: partitionId
+        required: true
+        type: string
+        x-example: common
+      - in: body
+        name: partitionInfo
+        description: partitionInfo
+        required: true
+        schema:
+          $ref: '#/definitions/PartitionDto'
+      responses:
+        '204':
+          description: No Content
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      security:
+        - Bearer: []
+    delete:
+      tags:
+        - Partition
+      summary: Delete Partition
+      description: |
+        By passing in a single partition Id, you can delete a partition.
+      operationId: deleteUsingDELETE
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: partitionId
+          in: path
+          description: partitionId
+          required: true
+          type: string
+          x-example: common
+      responses:
+        '204':
+          description: No Content
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+      security:
+        - Bearer: []
+
+
+  #########################
+  # Entitlement Service
+  #########################
+
+  '/entitlements/v2/groups':
+    get:
+      tags:
+        - Entitlement
+      summary: List Assigned Groups
+      operationId: listGroupsUsingGET
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: data-partition-id
+          in: header
+          description: tenant
+          required: true
+          type: string
+          x-example: opendes
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/EntitlementGroupResponse'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      security:
+        - Bearer: []
+    post:
+      tags:
+        - Entitlement
+      summary: Create a Group
+      operationId: createGroupUsingPOST
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: data-partition-id
+          in: header
+          description: Partition Id
+          required: true
+          type: string
+          x-example: opendes
+      responses:
+        '200':
+          description: OK
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      security:
+        - Bearer: []
+ 
+  '/entitlements/v2/groups/{group_email}/members':
+    get:
+      tags:
+        - Entitlement
+      summary: List Group Members
+      operationId: listGroupMembersUsingGET
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: data-partition-id
+          in: header
+          description: Data Partition Id
+          required: true
+          type: string
+          x-example: opendes
+        - name: group_email
+          in: path
+          description: group_email
+          required: true
+          type: string
+          x-example: "users@opendes.contoso.com"
+        - name: role
+          in: query
+          description: role
+          required: false
+          type: string
+          enum:
+            - MEMBER
+            - OWNER
+        - name: includeType
+          in: query
+          description: includeType
+          required: false
+          type: boolean
+      responses:
+        '200':
+          description: OK
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      security:
+        - Bearer: []
+    post:
+      tags:
+        - Entitlement
+      summary: Add Member to Group
+      operationId: addMemberUsingPOST
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: data-partition-id
+          in: header
+          description: Partition Name
+          required: true
+          type: string
+          x-example: opendes
+        - name: group_email
+          in: path
+          description: group_email
+          required: true
+          type: string
+          x-example: "users@opendes.contoso.com"
+        - in: body
+          name: partitionInfo
+          description: partitionInfo
+          required: true
+          schema:
+            $ref: '#/definitions/EntitlementMemberDto'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/EntitlementMemberDto'
+        '201':
+          description: Created
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '409':
+          description: Conflict
+      security:
+        - Bearer: []
+ 
+  '/entitlements/v2/groups/{group_email}/members/{member_email}':
+    delete:
+      tags:
+        - Entitlement
+      summary: Remove Member from Group
+      operationId: deleteMemberUsingDELETE_1
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: data-partition-id
+          in: header
+          description: Data Partition Id
+          required: true
+          type: string
+          x-example: opendes
+        - name: group_email
+          in: path
+          description: group_email
+          required: true
+          type: string
+          x-example: "users@opendes.contoso.com"
+        - name: member_email
+          in: path
+          description: member_email
+          required: true
+          type: string
+          x-example: "email@domain.com"
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: string
+        '204':
+          description: No Content
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+      security:
+        - Bearer: []
+
+  '/entitlements/v2/groups/{group_email}':
+    delete:
+      tags:
+        - Entitlement
+      summary: Delete a Group
+      operationId: deleteGroupUsingDELETE
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: data-partition-id
+          in: header
+          description: tenant
+          required: true
+          type: string
+          x-example: common
+        - name: group_email
+          in: path
+          description: group_email
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+        '204':
+          description: No Content
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+      security:
+        - Bearer: []
+    patch:
+      tags:
+        - Entitlement
+      summary: Updates Items in Group
+      operationId: updateGroupUsingPATCH
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: data-partition-id
+          in: header
+          description: tenant
+          required: true
+          type: string
+          x-example: common
+        - name: group_email
+          in: path
+          description: group_email
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+        '204':
+          description: No Content
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+      security:
+        - Bearer: []
+
+  '/entitlements/v2/members/{member_email}':
+    delete:
+      tags:
+        - Entitlement
+      summary: Delete a User
+      operationId: deleteMemberUsingDELETE
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: data-partition-id
+          in: header
+          description: Data Partition Id
+          required: true
+          type: string
+          x-example: opendes
+        - name: member_email
+          in: path
+          description: member_email
+          required: true
+          type: string
+          x-example: email@domain.com
+      responses:
+        '200':
+          description: OK
+        '204':
+          description: No Content
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+      security:
+        - Bearer: []
+
+  '/entitlements/v2/members/{member_email}/groups':
+    get:
+      tags:
+        - Entitlement
+      summary: List Assigned Groups for User
+      operationId: listGroupsOnBehalfOfUsingGET
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: data-partition-id
+          in: header
+          description: tenant
+          required: true
+          type: string
+          x-example: opendes
+        - name: member_email
+          in: path
+          description: member_email
+          required: true
+          type: string
+        - name: type
+          in: query
+          description: type
+          required: false
+          type: string
+        - name: appid
+          in: query
+          description: appid
+          required: false
+          type: string
+      responses:
+        '200':
+          description: OK
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      security:
+        - Bearer: []
+
+
+  #########################
+  # Legal Service
+  #########################
+
+  '/legal/v1/legaltags:properties':
+    get:
+      tags:
+        - Legal
+      summary: Gets LegalTag property values.
+      description: This allows for the retrieval of allowed values for LegalTag properties.
+      operationId: getLegalTagProperties
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: data-partition-id
+          in: header
+          description: Partition Id
+          required: true
+          type: string
+          x-example: opendes
+      responses:
+        '200':
+          description: Retrieved proeprties successfully.
+          schema:
+            $ref: '#/definitions/LegalTagPropertyValues'
+        '401':
+          description: You do not have permissions to access this API.
+      security:
+        - Bearer: []
+
+  '/legal/v1/legaltags:validate':
+    post:
+      tags:
+        - Legal
+      summary: Retrieves the invalid LegalTag names with reasons for the given names.
+      description: This allows for the retrieval of the reason why your LegalTag is not valid. A maximum of 25 can be retrieved at once.
+      operationId: validateLegalTags
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          required: false
+          schema:
+            $ref: '#/definitions/LegalTagRequest'
+        - name: OSDU-Account-Id
+          in: header
+          description: Users account e.g. OSDU
+          required: true
+          type: string
+        - name: OSDU-On-Behalf-Of
+          in: header
+          description: User's email or auth token
+          required: false
+          type: string
+      responses:
+        '200':
+          description: Retrieved LegalTag names with reason successfully.
+          schema:
+            $ref: '#/definitions/LegalTagInvalidResponseList'
+        '400':
+          description: Invalid parameters were given on request.
+        '401':
+          description: You do not have permissions to access this API.
+        '404':
+          description: LegalTag names were not found.
+      security:
+        - Bearer: []
+
+  '/legal/v1/legaltags:batchRetrieve':
+    post:
+      tags:
+        - Legal
+      summary: Retrieves the LegalTags for the given names.
+      description: This allows for the retrieval of your LegalTags using the 'name' associated with it. A maximum of 25 can be retrieved at once.
+      operationId: getLegalTags
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          required: false
+          schema:
+            $ref: '#/definitions/LegalTagRequest'
+        - name: OSDU-Account-Id
+          in: header
+          description: Users account e.g. OSDU
+          required: true
+          type: string
+        - name: OSDU-On-Behalf-Of
+          in: header
+          description: User's email or auth token
+          required: false
+          type: string
+      responses:
+        '200':
+          description: Retrieved LegalTags successfully.
+          schema:
+            $ref: '#/definitions/LegalTagDtos'
+        '400':
+          description: Invalid parameters were given on request.
+        '401':
+          description: You do not have permissions to access this API.
+        '404':
+          description: One or more requested LegalTags were not found.
+      security:
+        - Bearer: []
+
+  '/legal/v1/legaltags':
+    get:
+      tags:
+        - Legal
+      summary: Gets all LegalTags.
+      description: This allows for the retrieval of all LegalTags.
+      operationId: listLegalTags
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: valid
+          in: query
+          description: 'If true returns only valid LegalTags, if false returns only invalid LegalTags.  Default value is true.'
+          required: false
+          type: boolean
+          default: true
+        - name: OSDU-Account-Id
+          in: header
+          description: Users account e.g. OSDU
+          required: true
+          type: string
+        - name: OSDU-On-Behalf-Of
+          in: header
+          description: User's email or auth token
+          required: false
+          type: string
+      responses:
+        '200':
+          description: Retrieved LegalTags successfully.
+          schema:
+            $ref: '#/definitions/LegalTagDtos'
+        '400':
+          description: Invalid parameters were given on request.
+        '401':
+          description: You do not have permissions to access this API.
+      security:
+        - Bearer: []
+    post:
+      tags:
+        - Legal
+      summary: Creates the LegalTag for the given 'name'.
+      description: This allows for the creation of your LegalTag. There can only be 1 LegalTag per 'name'. A LegalTag must be created before you can start ingesting data for that name.
+      operationId: createLegalTag
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          required: false
+          schema:
+            $ref: '#/definitions/LegalTagDto'
+        - name: OSDU-Account-Id
+          in: header
+          description: Users account e.g. OSDU
+          required: true
+          type: string
+        - name: OSDU-On-Behalf-Of
+          in: header
+          description: User's email or auth token
+          required: false
+          type: string
+      responses:
+        '201':
+          description: Created LegalTag successfully.
+          schema:
+            $ref: '#/definitions/LegalTagDto'
+        '400':
+          description: Invalid parameters were given on request.
+        '401':
+          description: You do not have permissions to access this API.
+        '409':
+          description: A LegalTag with the given name already exists.
+      security:
+        - Bearer: []
+    put:
+      tags:
+        - Legal
+      summary: Updates the LegalTag for the given 'name'.
+      description: This allows to update certain properties of your LegalTag using the 'name' associated with it.
+      operationId: updateLegalTag
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          required: false
+          schema:
+            $ref: '#/definitions/LegalTagUpdateDto'
+        - name: OSDU-Account-Id
+          in: header
+          description: Users account e.g. OSDU
+          required: true
+          type: string
+        - name: OSDU-On-Behalf-Of
+          in: header
+          description: User's email or auth token
+          required: false
+          type: string
+      responses:
+        '200':
+          description: Updated LegalTag successfully.
+          schema:
+            $ref: '#/definitions/LegalTagDto'
+        '400':
+          description: Invalid parameters were given on request.
+        '401':
+          description: You do not have permissions to access this API.
+        '404':
+          description: Requested LegalTag to update was not found.
+      security:
+        - Bearer: []
+
+  '/legal/v1/legaltags/{name}':
+    get:
+      tags:
+        - Legal
+      summary: Gets a LegalTag for the given 'name'.
+      description: This allows for the retrieval of your LegalTag using the 'name' associated with it.
+      operationId: getLegalTag
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: data-partition-id
+          in: header
+          description: Partition Id
+          required: true
+          type: string
+          x-example: opendes
+        - name: name
+          in: path
+          required: true
+          type: string
+          x-example: opendes-public-usa-swagger
+      responses:
+        '200':
+          description: Retrieved LegalTag successfully.
+          schema:
+            $ref: '#/definitions/LegalTagDto'
+        '400':
+          description: Invalid parameters were given on request.
+        '401':
+          description: You do not have permissions to access this API.
+        '404':
+          description: Requested LegalTag was not found.
+      security:
+        - Bearer: []
+    delete:
+      tags:
+        - Legal
+      summary: Delete Legal Tag
+      description: |
+        This allows for the deletion of your LegalTag using the 'name' associated with it.
+      operationId: deleteLegalTag
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: data-partition-id
+          in: header
+          description: Partition Id
+          required: true
+          type: string
+          x-example: opendes
+        - name: name
+          in: path
+          required: true
+          type: string
+          x-example: opendes-public-usa-swagger
+      responses:
+        '204':
+          description: No Content
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+      security:
+        - Bearer: []
+
+
+  #########################
+  # Storage Service
+  #########################
+
+  '/storage/v2/query/kinds':
+    get:
+      tags:
+      - Storage
+      summary: "Get all kinds"
+      description: "The API returns a list of all kinds in the specific {Account-Id}.\
+        \ Allowed roles: service.storage.admin."
+      operationId: "Get all kinds"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "cursor"
+        in: "query"
+        description: "Cursor"
+        required: false
+        type: "string"
+      - name: "limit"
+        in: "query"
+        description: "Page Size"
+        required: false
+        type: "integer"
+        default: 10
+        format: "int32"
+      - name: "OSDU-Account-Id"
+        in: "header"
+        description: "Account ID is the active account\
+          \ account) which the users choose to use with the Search API."
+        required: true
+        type: "string"
+        default: "tenant1"
+      responses:
+        200:
+          description: "All kinds retrieved successfully."
+          schema:
+            $ref: "#/definitions/StorageQueryResponse"
+        500:
+          description: "Unknown Error."
+          schema:
+            $ref: "#/definitions/StorageErrorResponse"
+      security:
+      - Bearer: []  
+
+  '/storage/v2/query/records':
+    get:
+      tags:
+      - Storage
+      summary: "Get all record from kind"
+      description: "The API returns a list of all record ids which belong to the specified\
+        \ kind. Allowed roles: service.storage.admin."
+      operationId: "Get all record from kind"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "cursor"
+        in: "query"
+        description: "Cursor"
+        required: false
+        type: "string"
+      - name: "limit"
+        in: "query"
+        description: "Page Size"
+        required: false
+        type: "integer"
+        default: 10
+        format: "int32"
+      - name: "kind"
+        in: "query"
+        description: "Filter Kind"
+        required: false
+        type: "string"
+        default: "tenant1:public:well:1.0.2"
+      - name: "OSDU-Account-Id"
+        in: "header"
+        description: "Account ID is the active OSDU account (OSDU account or customer's\
+          \ account) which the users choose to use with the Search API."
+        required: true
+        type: "string"
+        default: "tenant1"
+      responses:
+        200:
+          description: "Record Ids retrieved successfully."
+          schema:
+            $ref: "#/definitions/StorageQueryResponse"
+        404:
+          description: "Kind or cursor not found."
+          schema:
+            $ref: "#/definitions/StorageErrorResponse"
+      security:
+      - Bearer: [] 
+    post:
+      tags:
+      - Storage
+      summary: "Fetch records"
+      description: "The API fetches multiple records at once. Allowed roles: service.storage.viewer,\
+        \ service.storage.creator and service.storage.admin."
+      operationId: "Fetch records"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        required: false
+        schema:
+          $ref: "#/definitions/StorageMultiRecordIds"
+      - name: "OSDU-Account-Id"
+        in: "header"
+        description: "Account ID is the active OSDU account (OSDU account or customer's\
+          \ account) which the users choose to use with the Search API."
+        required: true
+        type: "string"
+        default: "tenant1"
+      responses:
+        200:
+          description: "Fetch multiple records successfully."
+          schema:
+            $ref: "#/definitions/StorageMultiRecordIds"
+        500:
+          description: "Unknown storage error."
+          schema:
+            $ref: "#/definitions/StorageErrorResponse"
+      security:
+      - Bearer: [] 
+
+  '/records/{id}:delete':
+    post:
+      tags:
+      - Storage
+      summary: "Delete record"
+      description: "The API performs a logical deletion of the given record. This\
+        \ operation can be reverted later. Allowed roles: service.storage.creator\
+        \ and service.storage.admin."
+      operationId: "Delete record"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "Record id"
+        required: true
+        type: "string"
+        default: "tenant1:well:123456789"
+      - name: "OSDU-Account-Id"
+        in: "header"
+        description: "Account ID is the active OSDU account (OSDU account or customer's\
+          \ account) which the users choose to use with the Search API."
+        required: true
+        type: "string"
+        default: "tenant1"
+      responses:
+        204:
+          description: "Record deleted successfully."
+        404:
+          description: "Record not found."
+          schema:
+            $ref: "#/definitions/StorageErrorResponse"
+      security:
+      - Bearer: []
+
+  "/records/delete":
+    post:
+      tags:
+        - Storage
+      summary: Soft delete of multiple records
+      description: "The API performs a soft deletion of the given list of records. Required roles: 'users.datalake.editors' or
+        'users.datalake.admins'."
+      operationId: Delete records
+      parameters:
+        - name: data-partition-id
+          in: header
+          description: Partition Id
+          required: true
+          type: string
+          x-example: opendes
+        - in: body
+          name: partitionInfo
+          description: partitionInfo
+          required: true
+          schema:
+            type: array
+            items:
+              type: string
+      responses:
+        "204":
+          description: All records deleted successfully.
+        "207":
+          description: Some of the records weren't deleted successfully.
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/StorageDeleteRecordError"
+
+        "400":
+          description: "Invalid id format"
+          schema:
+            $ref: "#/definitions/StorageErrorResponse"
+      security:
+        - Bearer: []
+
+  /records/{id}:
+    get:
+      tags:
+      - Storage
+      summary: "Get record"
+      description: "This API returns the latest version of the given record. Allowed\
+        \ roles: service.storage.viewer, service.storage.creator and service.storage.admin."
+      operationId: "Get record"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "Record id"
+        required: true
+        type: "string"
+        default: "tenant1:well:123456789"
+      - name: "attribute"
+        in: "query"
+        description: "Filter attributes to restrict the returned fields of the record.\
+          \ Usage: data.{record-data-field-name}."
+        required: false
+        type: "array"
+        items:
+          type: "string"
+          default: "data.wellName"
+        collectionFormat: "multi"
+      - name: "OSDU-Account-Id"
+        in: "header"
+        description: "Account ID is the active OSDU account (OSDU account or customer's\
+          \ account) which the users choose to use with the Search API."
+        required: true
+        type: "string"
+        default: "tenant1"
+      responses:
+        200:
+          description: "Record retrieved successfully."
+          schema:
+            $ref: "#/definitions/StorageRecordData"
+        404:
+          description: "Record not found."
+          schema:
+            $ref: "#/definitions/StorageErrorResponse"
+      security:
+      - Bearer: []  
+    delete:
+      tags:
+      - Storage
+      summary: "Purge record"
+      description: "The API performs the physical deletion of the given record and\
+        \ all of its versions. This operation cannot be undone. Allowed roles: service.storage.admin."
+      operationId: "Purge record"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "Record id"
+        required: true
+        type: "string"
+        default: "tenant1:well:123456789"
+      - name: "OSDU-Account-Id"
+        in: "header"
+        description: "Account ID is the active OSDU account (OSDU account or customer's\
+          \ account) which the users choose to use with the Search API."
+        required: true
+        type: "string"
+        default: "tenant1"
+      responses:
+        204:
+          description: "Record purged successfully."
+        404:
+          description: "Record not found."
+          schema:
+            $ref: "#/definitions/StorageErrorResponse"
+      security:
+      - Bearer: []  
+      
+  '/records/{id}/{version}':
+    get:
+      tags:
+      - Storage
+      summary: "Get record version"
+      description: "The API retrieves the specific version of the given record. Allowed\
+        \ roles: service.storage.viewer, service.storage.creator and service.storage.admin."
+      operationId: "Get record version"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "Record id"
+        required: true
+        type: "string"
+      - name: "version"
+        in: "path"
+        description: "Record version"
+        required: true
+        type: "integer"
+        default: 123456789
+        format: "int64"
+      - name: "attribute"
+        in: "query"
+        description: "Filter attributes to restrict the returned fields of the record.\
+          \ Usage: data.{record-data-field-name}."
+        required: false
+        type: "array"
+        items:
+          type: "string"
+          default: "data.wellName"
+        collectionFormat: "multi"
+      - name: "OSDU-Account-Id"
+        in: "header"
+        description: "Account ID is the active OSDU account (OSDU account or customer's\
+          \ account) which the users choose to use with the Search API."
+        required: true
+        type: "string"
+        default: "tenant1"
+      responses:
+        200:
+          description: "Record retrieved successfully."
+          schema:
+            $ref: "#/definitions/StorageRecordData"
+        404:
+          description: "Record id or version not found."
+          schema:
+            $ref: "#/definitions/StorageErrorResponse"
+      security:
+      - Bearer: []  
+      
+  '/records/versions/{id}':
+    get:
+      tags:
+      - Storage
+      summary: "Get all record versions"
+      description: "The API returns a list containing all versions for the given record\
+        \ id. Allowed roles: service.storage.viewer, service.storage.creator and service.storage.admin."
+      operationId: "Get all record versions"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "Record id"
+        required: true
+        type: "string"
+        default: "tenant1:well:123456789"
+      - name: "OSDU-Account-Id"
+        in: "header"
+        description: "Account ID is the active OSDU account (OSDU account or customer's\
+          \ account) which the users choose to use with the Search API."
+        required: true
+        type: "string"
+        default: "tenant1"
+      responses:
+        200:
+          description: "Record versions retrieved successfully."
+          schema:
+            $ref: "#/definitions/StorageRecordVersions"
+        404:
+          description: "Record id or version not found."
+          schema:
+            $ref: "#/definitions/StorageErrorResponse"
+      security:
+      - Bearer: []  
+  /records:
+    put:
+      tags:
+      - Storage
+      summary: "Create or update records"
+      description: "The API represents the main injection mechanism into the Data\
+        \ Lake. It allows records creation and/or update. When no record id is provided\
+        \ or when the provided id is not already present in the Data Lake then a new\
+        \ record is created. If the id is related to an existing record in the Data\
+        \ Lake then an update operation takes place and a new version of the record\
+        \ is created. Allowed roles: service.storage.creator and service.storage.admin."
+      operationId: "Create or update records"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "skipdupes"
+        in: "query"
+        description: "Skip duplicates when updating records with the same value."
+        required: false
+        type: "boolean"
+        default: true
+      - in: "body"
+        name: "body"
+        required: false
+        schema:
+          type: "array"
+          items:
+            $ref: "#/definitions/StorageRecord"
+      - name: "OSDU-Account-Id"
+        in: "header"
+        description: "Account ID is the active OSDU account (OSDU account or customer's\
+          \ account) which the users choose to use with the Search API."
+        required: true
+        type: "string"
+        default: "tenant1"
+      responses:
+        201:
+          description: "Records created and/or updated successfully."
+          schema:
+            $ref: "#/definitions/StorageRecord"
+        400:
+          description: "Invalid record format."
+          schema:
+            $ref: "#/definitions/StorageErrorResponse"
+        404:
+          description: "Invalid acl group."
+          schema:
+            $ref: "#/definitions/StorageErrorResponse"
+        403:
+          description: "User not authorized to perform the action."
+          schema:
+            $ref: "#/definitions/StorageErrorResponse"
+      security:
+      - Bearer: []
+    patch:
+      tags:
+      - Storage
+      summary: "Modify record metadata attributes using patch operations"
+      description: "The API represents the patch update mechanism for records. It allows\
+        \ updating multiple records in one request. The currently supported operations are replace,\
+        \ add, and remove for Legal Tags, ACLs, and Tags. \
+        \ Required roles: 'users.datalake.editors' or 'users.datalake.admins'."
+      operationId: "Patch update records"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        required: false
+        schema:
+          type: "array"
+          items:
+            $ref: "#/definitions/StorageRecordBulkUpdateParam"
+      - name: "OSDU-Account-Id"
+        in: "header"
+        description: "Account ID is the active OSDU account (OSDU account or customer's\
+          \ account) which the users choose to use with the Search API."
+        required: true
+        type: "string"
+        default: "tenant1"
+      responses:
+        200:
+          description: "Records updated successfully."
+          schema:
+            $ref: "#/definitions/StorageBulkUpdateRecordsResponse"
+        206:
+          description: "Records updated successful partially."
+          schema:
+            $ref: "#/definitions/StorageBulkUpdateRecordsResponse"
+        400:
+          description: "Bad Request"
+          schema:
+            $ref: "#/definitions/StorageErrorResponse"
+        403:
+          description: "User not authorized to perform the action."
+          schema:
+            $ref: "#/definitions/StorageErrorResponse"
+      security:
+      - Bearer: []  
+
+
+definitions:
+  PartitionProperty:
+    type: object
+    properties:
+      sensitive:
+        type: boolean
+      value:
+        type: object
+  PartitionDto:
+    type: object
+    required:
+      - properties
+    properties:
+      properties:
+        type: object
+        description: 'Free form key value pair object for any data partition specific values'
+        additionalProperties:
+          "$ref": "#/definitions/PartitionProperty"
+    example:
+      properties:
+        compliance-ruleset:
+          sensitive: false
+          value: 'shared'
+        elastic-endpoint:
+          sensitive: true
+          value: 'elastic-endpoint'
+        cosmos-connection:
+          sensitive: true
+          value: 'cosmos-connection'
+          
+  EntitlementGroupProperties:
+    type: object
+    required:
+      - name
+      - description
+      - email
+    properties:
+      name:
+        type: string
+        example: service.entitlements.user
+        description: The name of an entitlement or group.
+      description:
+        type: string
+        example: A service entitlement
+        description: The description of an entitlement or group.
+      email:
+        type: string
+        example: service.entitlements.user@partition.contoso.com
+        description: The fully qualified group name.
+    description: Group properties        
+  EntitlementGroupResponse:
+    type: object
+    properties:
+      desId:
+        type: string
+      memberEmail:
+        type: string
+      groups:
+        type: array
+        description: A collection of groups.
+        items:
+          $ref: '#/definitions/EntitlementGroupProperties'
+  EntitlementMemberDto:
+    type: object
+    properties:
+      email:
+        type: string
+        example: email@domain.com
+        description: Object ID or Email Address
+      role:
+        type: string
+        example: MEMBER
+        description: Role Name
+  
+          
+        
+  LegalTagProperties:
+    type: object
+    required:
+      - contractId
+      - countryOfOrigin
+      - dataType
+      - expirationDate
+      - exportClassification
+      - originator
+      - personalData
+      - securityClassification
+    properties:
+      contractId:
+        type: string
+        example: No Contract Related
+        description: The Id of the physical contract associated with the data being ingested.
+      countryOfOrigin:
+        type: array
+        example: US
+        description: The ISO Alpha 2 country code(s) of where the data relates to.
+        items:
+          type: string
+      dataType:
+        type: string
+        example: Third Party Data
+        description: The type of data being ingested.
+      expirationDate:
+        type: string
+        example: '2025-12-25'
+        description: The optional expiration date of the contract in the format YYYY-MM-DD
+      exportClassification:
+        type: string
+        example: EAR99
+        description: The ECCN value of the data if one applies.
+      originator:
+        type: string
+        example: Contoso
+        description: The company who owns the data.
+      personalData:
+        type: string
+        example: No Personal Data
+        description: Whether the data contains any personally identifiable data.
+      securityClassification:
+        type: string
+        example: Private
+        description: The security classification of the data.
+    description: LegalTag properties
+  LegalTagPropertyValues:
+    type: object
+    properties:
+      countriesOfOrigin:
+        type: object
+        description: The values of all the allowed Countries of Origin with the ISO Alpha 2 code and country name.
+        additionalProperties:
+          type: string
+      otherRelevantDataCountries:
+        type: object
+        description: The values of all the allowed Other Relevant Data Countries with the ISO Alpha 2 code and country name.
+        additionalProperties:
+          type: string
+      securityClassifications:
+        type: array
+        description: The values of all the allowed Security Classifications.
+        uniqueItems: true
+        items:
+          type: string
+      exportClassificationControlNumbers:
+        type: array
+        description: The name of all the allowed Export Classifications.
+        uniqueItems: true
+        items:
+          type: string
+      personalDataTypes:
+        type: array
+        description: The name of all the allowed Personal Data Type values.
+        uniqueItems: true
+        items:
+          type: string
+    description: Shows the allowed values of the fields of a LegalTag.
+  LegalTagInvalidResponse:
+    type: object
+    properties:
+      name:
+        type: string
+        description: The name of the LegalTag.
+      reason:
+        type: string
+        description: The reason the LegalTag is currently invalid.
+    description: Represents a single invalid LegalTag.
+  LegalTagInvalidResponseList:
+    type: object
+    properties:
+      invalidLegalTags:
+        type: array
+        description: A collection of invalid LegalTags.
+        items:
+          $ref: '#/definitions/LegalTagInvalidResponse'
+    description: Represents a collection invalid LegalTags.
+  LegalTagRequest:
+    type: object
+    required:
+      - names
+    properties:
+      names:
+        type: array
+        description: The name of all the LegalTags to retrieve.
+        items:
+          type: string
+        maxItems: 25
+        minItems: 1
+    description: The model to retrieve multiple LegalTags in batch.
+  LegalTagDto:
+    type: object
+    properties:
+      name:
+        type: string
+        example: OSDU-Private-EHCData
+        description: The name of the LegalTag.
+      description:
+        type: string
+        description: The description of the LegalTag.
+      properties:
+        $ref: '#/definitions/LegalTagProperties'
+    description: Represents a single LegalTag.
+  LegalTagDtos:
+    type: object
+    properties:
+      legalTags:
+        type: array
+        description: A collection of complete LegalTags
+        items:
+          $ref: '#/definitions/LegalTagDto'
+    description: Represents a collection of LegalTags.
+  LegalTagUpdateDto:
+    type: object
+    required:
+      - contractId
+      - name
+    properties:
+      name:
+        type: string
+        description: The name of the LegalTag.
+      contractId:
+        type: string
+        example: No Contract Related
+        description: The Id of the physical contract associated with the data being ingested.
+      description:
+        type: string
+        description: The optional description if the LegalTag to allow for easier discoverability of Legaltags overtime.
+      expirationDate:
+        type: string
+        example: '2025-12-25'
+        description: The optional expiration date of the contract in the format YYYY-MM-DD
+    description: The model to update an existing LegalTag
+  StorageQueryResponse:
+    type: "object"
+    properties:
+      cursor:
+        type: "string"
+      results:
+        type: "array"
+        items:
+          type: "string"  
+  StorageErrorResponse:
+    type: "object"
+    properties:
+      code:
+        type: "integer"
+        format: "int32"
+      reason:
+        type: "string"
+      message:
+        type: "string"
+    description: "An error that occurs during normal application logic"
+  StorageMultiRecordIds:
+    type: "object"
+    required:
+    - "records"
+    properties:
+      records:
+        type: "array"
+        example: "tenant1:well:123456789"
+        description: "List of record ids. Each record id must follow the naming convention\
+          \ {OSDU-Account-Id}:{dataset-name}:{record-type}:{version}."
+        items:
+          type: "string"
+      attributes:
+        type: "array"
+        example: "data.wellName"
+        description: "Filter attributes to restrict the returned fields of the record.\
+          \ Usage: data.{record-data-field-name}."
+        items:
+          type: "string"
+    description: "Multiple storage record ids and filter attributes."
+    example:
+      records:
+      - "tenant1:well:123456789"
+      - "tenant1:wellTop:abc789456"
+      - "tenant1:wellLog:654abc987"
+      attributes:
+      - "data.msg"
+  StorageDeleteRecordError:
+    type: object
+    properties:
+      notDeletedRecordId:
+        type: string
+        example: common:welldb:123456
+        description: Record id which wasn't deleted successfully.
+      message:
+        type: string
+        example: Record with id 'common:welldb:123456' not found
+        description: Brief description of the cause why record wasn't delete
+    description: Delete Records Response Body
+  StorageRecordData:
+    type: "object"
+    properties:
+      data:
+        type: "object"
+        additionalProperties:
+          type: "object"
+      meta:
+        type: "array"
+        items:
+          type: "object"
+          additionalProperties:
+            type: "object"
+    description: "Storage record"
+  StorageRecordVersions:
+    type: "object"
+    properties:
+      recordId:
+        type: "string"
+      versions:
+        type: "array"
+        items:
+          type: "integer"
+          format: "int64"
+    description: "Storage record versions."
+  StorageRecord:
+    type: "object"
+    required:
+    - "acl"
+    - "data"
+    - "kind"
+    - "legal"
+    properties:
+      id:
+        type: "string"
+        example: "tenant1:well:123456789"
+        description: "Unique identifier in whole Data Lake. When not provided, Data\
+          \ Lake will create and assign an id to the record. Must follow the naming\
+          \ convention: {OSDU-Account-Id}:{object-type}:{uuid}."
+        pattern: "^[\\w\\-\\.]+:[\\w-\\.\\/]+:.+$"
+      kind:
+        type: "string"
+        example: "tenant1:public:well:1.0.2"
+        description: "Kind of data it is being ingested. Must follow the naming convention:\
+          \ {OSDU-Account-Id}:{dataset-name}:{record-type}:{version}."
+        pattern: "^[\\w\\-\\.]+:[\\w\\-\\.]+:[\\w\\-\\.\\/]+:[0-9]+.[0-9]+.[0-9]+$"
+      acl:
+        description: "Group of users who have access to the record."
+        $ref: "#/definitions/StorageAcl"
+      legal:
+        description: "Attributes which represent the legal constraints associated\
+          \ with the record."
+        $ref: "#/definitions/StorageLegal"
+      data:
+        type: "object"
+        description: "Record payload represented as a list of key-value pairs."
+        additionalProperties:
+          type: "object"
+      history:
+        description: "Record ancestry information."
+        $ref: "#/definitions/StorageRecordHistory"
+    description: "Storage record"
+    example:
+    - id: "tenant1:well:123456789"
+      kind: "tenant1:public:well:1.0.2"
+      acl:
+        viewers:
+        - "my-viewer-group@[OSDU].com"
+        owners:
+        - "my-owner-group@[OSDU].com"
+      legal:
+        legaltags:
+        - "sample-legal-tag"
+        otherRelevantDataCountries:
+        - "US"
+      data:
+        msg: "hello world from Data Lake"
+      history:
+        parents:
+        - "OSDU:parent-record:1.0.0"
+  StorageAcl:
+    type: "object"
+    required:
+    - "owners"
+    - "viewers"
+    properties:
+      viewers:
+        type: "array"
+        description: "List of valid groups which will have view/read privileges over\
+          \ the record."
+        items:
+          type: "string"
+      owners:
+        type: "array"
+        description: "List of valid groups which will have write privileges over the\
+          \ record."
+        items:
+          type: "string"
+  StorageLegal:
+    type: "object"
+    properties:
+      legaltags:
+        type: "array"
+        description: "List of legaltag names associated with the record."
+        uniqueItems: true
+        items:
+          type: "string"
+      otherRelevantDataCountries:
+        type: "array"
+        description: "List of other relevant data countries. Must have 2 values: where\
+          \ the data was ingested from and where Data Lake stores the data."
+        uniqueItems: true
+        items:
+          type: "string"
+  StorageRecordHistory:
+    type: "object"
+    properties:
+      parents:
+        type: "array"
+        description: "List of parent records. Must follow the naming convention: {parent-record-id}:{parent-record-version}."
+        uniqueItems: true
+        items:
+          type: "string"
+  StorageRecordBulkUpdateParam:
+    type: "object"
+    required:
+    - "query"
+    - "ops"
+    properties:
+      query:
+        description: "Patch update query information"
+        $ref: "#/definitions/StorageRecordQuery"
+      ops:
+        type: "array"
+        description: "List of operations for records pathc update"
+        items:
+          $ref: "#/definitions/StoragePatchOperation"
+    description: "Patch update input information"
+    example:
+      query:
+      - ids:
+          - "tenant:type:unique-identifier:version"
+      ops:
+      - op: "replace or add or remove"
+        path: "/acl/viewers or /acl/owners or /legal/legaltags"
+        value:
+        - "value1"
+        - "value2"
+        - "value3"
+      - op: "replace or add"
+        path: "/tags"
+        value:
+          - "key1:value1"
+          - "key2:value2"
+          - "key3:value3"
+      - op: "remove"
+        path: "/tags"
+        value:
+          - "key1"
+          - "key2"
+          - "key3"
+  StoragePatchOperation:
+    type: "object"
+    required:
+      - "op"
+      - "path"
+      - "value"
+    properties:
+      op:
+        type: "string"
+        description: "Type of patch operation"
+        enum:
+        - "add"
+        - "replace"
+        - "remove"
+      path:
+        type: "string"
+        description: "Path for batch operation"
+      value:
+        type: "array"
+        description: "Path for batch operation"
+        items:
+          type: "string"
+    description: "Patch api operation specific information"
+  StorageBulkUpdateRecordsResponse:
+    type: "object"
+    properties:
+      recordCount:
+        type: "integer"
+        format: "int32"
+        description: "Number of records which updated successfully."
+      recordIds:
+        type: "array"
+        description: "List of successfully updated record ids."
+        items:
+          type: "string"
+      notFoundRecordIds:
+        type: "array"
+        description: "List of record ids for whom RecordMetadata was not found"
+        items:
+          type: "string"
+      unAuthorizedRecordIds:
+        type: "array"
+        description: "List of record ids for whom user does not has owner permissions"
+        items:
+          type: "string"
+      lockedRecordIds:
+        type: "array"
+        description: "List of locked record ids"
+        items:
+          type: "string"
+    description: "Result of the record batch update request."
+  StorageRecordQuery:
+    type: "object"
+    required:
+    - "ids"
+    properties:
+      ids:
+        type: "array"
+        description: "Records ids for whom patch operations going to be applied"
+        items:
+          type: "string"
+          
+    description: "Patch api query specific information"
