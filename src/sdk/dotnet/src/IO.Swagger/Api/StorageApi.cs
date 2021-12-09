@@ -688,7 +688,7 @@ namespace IO.Swagger.Api
             if (oSDUAccountId == null)
                 throw new ApiException(400, "Missing required parameter 'oSDUAccountId' when calling StorageApi->CreateOrUpdateRecords");
 
-            var localVarPath = "/records";
+            var localVarPath = "/api/storage/v2/records";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -774,7 +774,7 @@ namespace IO.Swagger.Api
             if (oSDUAccountId == null)
                 throw new ApiException(400, "Missing required parameter 'oSDUAccountId' when calling StorageApi->CreateOrUpdateRecords");
 
-            var localVarPath = "/records";
+            var localVarPath = "/api/storage/v2/records";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -859,7 +859,7 @@ namespace IO.Swagger.Api
             if (oSDUAccountId == null)
                 throw new ApiException(400, "Missing required parameter 'oSDUAccountId' when calling StorageApi->DeleteRecord");
 
-            var localVarPath = "/records/{id}:delete";
+            var localVarPath = "/api/records/{id}:delete";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -937,7 +937,7 @@ namespace IO.Swagger.Api
             if (oSDUAccountId == null)
                 throw new ApiException(400, "Missing required parameter 'oSDUAccountId' when calling StorageApi->DeleteRecord");
 
-            var localVarPath = "/records/{id}:delete";
+            var localVarPath = "/api/records/{id}:delete";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -1014,7 +1014,7 @@ namespace IO.Swagger.Api
             if (partitionInfo == null)
                 throw new ApiException(400, "Missing required parameter 'partitionInfo' when calling StorageApi->DeleteRecords");
 
-            var localVarPath = "/records/delete";
+            var localVarPath = "/api/storage/v2/records/delete";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -1097,7 +1097,7 @@ namespace IO.Swagger.Api
             if (partitionInfo == null)
                 throw new ApiException(400, "Missing required parameter 'partitionInfo' when calling StorageApi->DeleteRecords");
 
-            var localVarPath = "/records/delete";
+            var localVarPath = "/api/storage/v2/records/delete";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -1177,7 +1177,7 @@ namespace IO.Swagger.Api
             if (oSDUAccountId == null)
                 throw new ApiException(400, "Missing required parameter 'oSDUAccountId' when calling StorageApi->FetchRecords");
 
-            var localVarPath = "/storage/v2/query/records";
+            var localVarPath = "/api/storage/v2/query/records";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -1260,7 +1260,7 @@ namespace IO.Swagger.Api
             if (oSDUAccountId == null)
                 throw new ApiException(400, "Missing required parameter 'oSDUAccountId' when calling StorageApi->FetchRecords");
 
-            var localVarPath = "/storage/v2/query/records";
+            var localVarPath = "/api/storage/v2/query/records";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -1344,7 +1344,7 @@ namespace IO.Swagger.Api
             if (oSDUAccountId == null)
                 throw new ApiException(400, "Missing required parameter 'oSDUAccountId' when calling StorageApi->GetAllKinds");
 
-            var localVarPath = "/storage/v2/query/kinds";
+            var localVarPath = "/api/storage/v2/query/kinds";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -1423,7 +1423,7 @@ namespace IO.Swagger.Api
             if (oSDUAccountId == null)
                 throw new ApiException(400, "Missing required parameter 'oSDUAccountId' when calling StorageApi->GetAllKinds");
 
-            var localVarPath = "/storage/v2/query/kinds";
+            var localVarPath = "/api/storage/v2/query/kinds";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -1503,7 +1503,7 @@ namespace IO.Swagger.Api
             if (oSDUAccountId == null)
                 throw new ApiException(400, "Missing required parameter 'oSDUAccountId' when calling StorageApi->GetAllRecordFromKind");
 
-            var localVarPath = "/storage/v2/query/records";
+            var localVarPath = "/api/storage/v2/query/records";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -1585,7 +1585,7 @@ namespace IO.Swagger.Api
             if (oSDUAccountId == null)
                 throw new ApiException(400, "Missing required parameter 'oSDUAccountId' when calling StorageApi->GetAllRecordFromKind");
 
-            var localVarPath = "/storage/v2/query/records";
+            var localVarPath = "/api/storage/v2/query/records";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -1665,7 +1665,7 @@ namespace IO.Swagger.Api
             if (oSDUAccountId == null)
                 throw new ApiException(400, "Missing required parameter 'oSDUAccountId' when calling StorageApi->GetAllRecordVersions");
 
-            var localVarPath = "/records/versions/{id}";
+            var localVarPath = "/api/storage/v2/records/versions/{id}";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -1744,7 +1744,7 @@ namespace IO.Swagger.Api
             if (oSDUAccountId == null)
                 throw new ApiException(400, "Missing required parameter 'oSDUAccountId' when calling StorageApi->GetAllRecordVersions");
 
-            var localVarPath = "/records/versions/{id}";
+            var localVarPath = "/api/storage/v2/records/versions/{id}";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -1824,7 +1824,7 @@ namespace IO.Swagger.Api
             if (oSDUAccountId == null)
                 throw new ApiException(400, "Missing required parameter 'oSDUAccountId' when calling StorageApi->GetRecord");
 
-            var localVarPath = "/records/{id}";
+            var localVarPath = "/api/storage/v2/records/{id}";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -1906,7 +1906,7 @@ namespace IO.Swagger.Api
             if (oSDUAccountId == null)
                 throw new ApiException(400, "Missing required parameter 'oSDUAccountId' when calling StorageApi->GetRecord");
 
-            var localVarPath = "/records/{id}";
+            var localVarPath = "/api/storage/v2/records/{id}";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -1992,7 +1992,7 @@ namespace IO.Swagger.Api
             if (oSDUAccountId == null)
                 throw new ApiException(400, "Missing required parameter 'oSDUAccountId' when calling StorageApi->GetRecordVersion");
 
-            var localVarPath = "/records/{id}/{version}";
+            var localVarPath = "/api/storage/v2/records/{id}/{version}";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -2080,7 +2080,7 @@ namespace IO.Swagger.Api
             if (oSDUAccountId == null)
                 throw new ApiException(400, "Missing required parameter 'oSDUAccountId' when calling StorageApi->GetRecordVersion");
 
-            var localVarPath = "/records/{id}/{version}";
+            var localVarPath = "/api/storage/v2/records/{id}/{version}";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -2157,7 +2157,7 @@ namespace IO.Swagger.Api
             if (oSDUAccountId == null)
                 throw new ApiException(400, "Missing required parameter 'oSDUAccountId' when calling StorageApi->PatchUpdateRecords");
 
-            var localVarPath = "/records";
+            var localVarPath = "/api/storage/v2/records";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -2240,7 +2240,7 @@ namespace IO.Swagger.Api
             if (oSDUAccountId == null)
                 throw new ApiException(400, "Missing required parameter 'oSDUAccountId' when calling StorageApi->PatchUpdateRecords");
 
-            var localVarPath = "/records";
+            var localVarPath = "/api/storage/v2/records";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -2324,7 +2324,7 @@ namespace IO.Swagger.Api
             if (oSDUAccountId == null)
                 throw new ApiException(400, "Missing required parameter 'oSDUAccountId' when calling StorageApi->PurgeRecord");
 
-            var localVarPath = "/records/{id}";
+            var localVarPath = "/api/storage/v2/records/{id}";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -2402,7 +2402,7 @@ namespace IO.Swagger.Api
             if (oSDUAccountId == null)
                 throw new ApiException(400, "Missing required parameter 'oSDUAccountId' when calling StorageApi->PurgeRecord");
 
-            var localVarPath = "/records/{id}";
+            var localVarPath = "/api/storage/v2/records/{id}";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);

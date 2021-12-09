@@ -53,12 +53,12 @@ namespace IO.Swagger.Client
         public ApiClient()
         {
             Configuration = IO.Swagger.Client.Configuration.Default;
-            RestClient = new RestClient("https://oak-osdu-dplbhggc-mwt3-gw.westeurope.cloudapp.azure.com/api");
+            RestClient = new RestClient("https://self-managed-osdu.westeurope.cloudapp.azure.com");
         }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ApiClient" /> class
-        /// with default base path (https://oak-osdu-dplbhggc-mwt3-gw.westeurope.cloudapp.azure.com/api).
+        /// with default base path (https://self-managed-osdu.westeurope.cloudapp.azure.com).
         /// </summary>
         /// <param name="config">An instance of Configuration.</param>
         public ApiClient(Configuration config)
@@ -73,7 +73,7 @@ namespace IO.Swagger.Client
         /// with default configuration.
         /// </summary>
         /// <param name="basePath">The base path.</param>
-        public ApiClient(String basePath = "https://oak-osdu-dplbhggc-mwt3-gw.westeurope.cloudapp.azure.com/api")
+        public ApiClient(String basePath = "https://self-managed-osdu.westeurope.cloudapp.azure.com")
         {
            if (String.IsNullOrEmpty(basePath))
                 throw new ArgumentException("basePath cannot be empty");

@@ -590,7 +590,7 @@ namespace IO.Swagger.Api
             if (partitionInfo == null)
                 throw new ApiException(400, "Missing required parameter 'partitionInfo' when calling EntitlementApi->AddMemberUsingPOST");
 
-            var localVarPath = "/entitlements/v2/groups/{group_email}/members";
+            var localVarPath = "/api/entitlements/v2/groups/{group_email}/members";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -682,7 +682,7 @@ namespace IO.Swagger.Api
             if (partitionInfo == null)
                 throw new ApiException(400, "Missing required parameter 'partitionInfo' when calling EntitlementApi->AddMemberUsingPOST");
 
-            var localVarPath = "/entitlements/v2/groups/{group_email}/members";
+            var localVarPath = "/api/entitlements/v2/groups/{group_email}/members";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -762,7 +762,7 @@ namespace IO.Swagger.Api
             if (dataPartitionId == null)
                 throw new ApiException(400, "Missing required parameter 'dataPartitionId' when calling EntitlementApi->CreateGroupUsingPOST");
 
-            var localVarPath = "/entitlements/v2/groups";
+            var localVarPath = "/api/entitlements/v2/groups";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -834,7 +834,7 @@ namespace IO.Swagger.Api
             if (dataPartitionId == null)
                 throw new ApiException(400, "Missing required parameter 'dataPartitionId' when calling EntitlementApi->CreateGroupUsingPOST");
 
-            var localVarPath = "/entitlements/v2/groups";
+            var localVarPath = "/api/entitlements/v2/groups";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -910,7 +910,7 @@ namespace IO.Swagger.Api
             if (groupEmail == null)
                 throw new ApiException(400, "Missing required parameter 'groupEmail' when calling EntitlementApi->DeleteGroupUsingDELETE");
 
-            var localVarPath = "/entitlements/v2/groups/{group_email}";
+            var localVarPath = "/api/entitlements/v2/groups/{group_email}";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -988,7 +988,7 @@ namespace IO.Swagger.Api
             if (groupEmail == null)
                 throw new ApiException(400, "Missing required parameter 'groupEmail' when calling EntitlementApi->DeleteGroupUsingDELETE");
 
-            var localVarPath = "/entitlements/v2/groups/{group_email}";
+            var localVarPath = "/api/entitlements/v2/groups/{group_email}";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -1065,7 +1065,7 @@ namespace IO.Swagger.Api
             if (memberEmail == null)
                 throw new ApiException(400, "Missing required parameter 'memberEmail' when calling EntitlementApi->DeleteMemberUsingDELETE");
 
-            var localVarPath = "/entitlements/v2/members/{member_email}";
+            var localVarPath = "/api/entitlements/v2/members/{member_email}";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -1143,7 +1143,7 @@ namespace IO.Swagger.Api
             if (memberEmail == null)
                 throw new ApiException(400, "Missing required parameter 'memberEmail' when calling EntitlementApi->DeleteMemberUsingDELETE");
 
-            var localVarPath = "/entitlements/v2/members/{member_email}";
+            var localVarPath = "/api/entitlements/v2/members/{member_email}";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -1226,7 +1226,7 @@ namespace IO.Swagger.Api
             if (memberEmail == null)
                 throw new ApiException(400, "Missing required parameter 'memberEmail' when calling EntitlementApi->DeleteMemberUsingDELETE1");
 
-            var localVarPath = "/entitlements/v2/groups/{group_email}/members/{member_email}";
+            var localVarPath = "/api/entitlements/v2/groups/{group_email}/members/{member_email}";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -1311,7 +1311,7 @@ namespace IO.Swagger.Api
             if (memberEmail == null)
                 throw new ApiException(400, "Missing required parameter 'memberEmail' when calling EntitlementApi->DeleteMemberUsingDELETE1");
 
-            var localVarPath = "/entitlements/v2/groups/{group_email}/members/{member_email}";
+            var localVarPath = "/api/entitlements/v2/groups/{group_email}/members/{member_email}";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -1393,7 +1393,7 @@ namespace IO.Swagger.Api
             if (groupEmail == null)
                 throw new ApiException(400, "Missing required parameter 'groupEmail' when calling EntitlementApi->ListGroupMembersUsingGET");
 
-            var localVarPath = "/entitlements/v2/groups/{group_email}/members";
+            var localVarPath = "/api/entitlements/v2/groups/{group_email}/members";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -1477,7 +1477,7 @@ namespace IO.Swagger.Api
             if (groupEmail == null)
                 throw new ApiException(400, "Missing required parameter 'groupEmail' when calling EntitlementApi->ListGroupMembersUsingGET");
 
-            var localVarPath = "/entitlements/v2/groups/{group_email}/members";
+            var localVarPath = "/api/entitlements/v2/groups/{group_email}/members";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -1560,7 +1560,7 @@ namespace IO.Swagger.Api
             if (memberEmail == null)
                 throw new ApiException(400, "Missing required parameter 'memberEmail' when calling EntitlementApi->ListGroupsOnBehalfOfUsingGET");
 
-            var localVarPath = "/entitlements/v2/members/{member_email}/groups";
+            var localVarPath = "/api/entitlements/v2/members/{member_email}/groups";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -1644,7 +1644,7 @@ namespace IO.Swagger.Api
             if (memberEmail == null)
                 throw new ApiException(400, "Missing required parameter 'memberEmail' when calling EntitlementApi->ListGroupsOnBehalfOfUsingGET");
 
-            var localVarPath = "/entitlements/v2/members/{member_email}/groups";
+            var localVarPath = "/api/entitlements/v2/members/{member_email}/groups";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -1719,7 +1719,7 @@ namespace IO.Swagger.Api
             if (dataPartitionId == null)
                 throw new ApiException(400, "Missing required parameter 'dataPartitionId' when calling EntitlementApi->ListGroupsUsingGET");
 
-            var localVarPath = "/entitlements/v2/groups";
+            var localVarPath = "/api/entitlements/v2/groups";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -1792,7 +1792,7 @@ namespace IO.Swagger.Api
             if (dataPartitionId == null)
                 throw new ApiException(400, "Missing required parameter 'dataPartitionId' when calling EntitlementApi->ListGroupsUsingGET");
 
-            var localVarPath = "/entitlements/v2/groups";
+            var localVarPath = "/api/entitlements/v2/groups";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -1868,7 +1868,7 @@ namespace IO.Swagger.Api
             if (groupEmail == null)
                 throw new ApiException(400, "Missing required parameter 'groupEmail' when calling EntitlementApi->UpdateGroupUsingPATCH");
 
-            var localVarPath = "/entitlements/v2/groups/{group_email}";
+            var localVarPath = "/api/entitlements/v2/groups/{group_email}";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -1946,7 +1946,7 @@ namespace IO.Swagger.Api
             if (groupEmail == null)
                 throw new ApiException(400, "Missing required parameter 'groupEmail' when calling EntitlementApi->UpdateGroupUsingPATCH");
 
-            var localVarPath = "/entitlements/v2/groups/{group_email}";
+            var localVarPath = "/api/entitlements/v2/groups/{group_email}";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);

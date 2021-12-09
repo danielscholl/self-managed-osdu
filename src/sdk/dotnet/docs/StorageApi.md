@@ -1,20 +1,20 @@
 # IO.Swagger.Api.StorageApi
 
-All URIs are relative to *https://oak-osdu-dplbhggc-mwt3-gw.westeurope.cloudapp.azure.com/api*
+All URIs are relative to *https://self-managed-osdu.westeurope.cloudapp.azure.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**CreateOrUpdateRecords**](StorageApi.md#createorupdaterecords) | **PUT** /records | Create or update records
-[**DeleteRecord**](StorageApi.md#deleterecord) | **POST** /records/{id}:delete | Delete record
-[**DeleteRecords**](StorageApi.md#deleterecords) | **POST** /records/delete | Soft delete of multiple records
-[**FetchRecords**](StorageApi.md#fetchrecords) | **POST** /storage/v2/query/records | Fetch records
-[**GetAllKinds**](StorageApi.md#getallkinds) | **GET** /storage/v2/query/kinds | Get all kinds
-[**GetAllRecordFromKind**](StorageApi.md#getallrecordfromkind) | **GET** /storage/v2/query/records | Get all record from kind
-[**GetAllRecordVersions**](StorageApi.md#getallrecordversions) | **GET** /records/versions/{id} | Get all record versions
-[**GetRecord**](StorageApi.md#getrecord) | **GET** /records/{id} | Get record
-[**GetRecordVersion**](StorageApi.md#getrecordversion) | **GET** /records/{id}/{version} | Get record version
-[**PatchUpdateRecords**](StorageApi.md#patchupdaterecords) | **PATCH** /records | Modify record metadata attributes using patch operations
-[**PurgeRecord**](StorageApi.md#purgerecord) | **DELETE** /records/{id} | Purge record
+[**CreateOrUpdateRecords**](StorageApi.md#createorupdaterecords) | **PUT** /api/storage/v2/records | Create or update records
+[**DeleteRecord**](StorageApi.md#deleterecord) | **POST** /api/records/{id}:delete | Delete record
+[**DeleteRecords**](StorageApi.md#deleterecords) | **POST** /api/storage/v2/records/delete | Soft delete of multiple records
+[**FetchRecords**](StorageApi.md#fetchrecords) | **POST** /api/storage/v2/query/records | Fetch records
+[**GetAllKinds**](StorageApi.md#getallkinds) | **GET** /api/storage/v2/query/kinds | Get all kinds
+[**GetAllRecordFromKind**](StorageApi.md#getallrecordfromkind) | **GET** /api/storage/v2/query/records | Get all record from kind
+[**GetAllRecordVersions**](StorageApi.md#getallrecordversions) | **GET** /api/storage/v2/records/versions/{id} | Get all record versions
+[**GetRecord**](StorageApi.md#getrecord) | **GET** /api/storage/v2/records/{id} | Get record
+[**GetRecordVersion**](StorageApi.md#getrecordversion) | **GET** /api/storage/v2/records/{id}/{version} | Get record version
+[**PatchUpdateRecords**](StorageApi.md#patchupdaterecords) | **PATCH** /api/storage/v2/records | Modify record metadata attributes using patch operations
+[**PurgeRecord**](StorageApi.md#purgerecord) | **DELETE** /api/storage/v2/records/{id} | Purge record
 
 
 <a name="createorupdaterecords"></a>

@@ -368,7 +368,7 @@ namespace IO.Swagger.Api
             if (partitionInfo == null)
                 throw new ApiException(400, "Missing required parameter 'partitionInfo' when calling PartitionApi->CreateUsingPOST");
 
-            var localVarPath = "/partition/v1/partitions/{partitionId}";
+            var localVarPath = "/api/partition/v1/partitions/{partitionId}";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -453,7 +453,7 @@ namespace IO.Swagger.Api
             if (partitionInfo == null)
                 throw new ApiException(400, "Missing required parameter 'partitionInfo' when calling PartitionApi->CreateUsingPOST");
 
-            var localVarPath = "/partition/v1/partitions/{partitionId}";
+            var localVarPath = "/api/partition/v1/partitions/{partitionId}";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -532,7 +532,7 @@ namespace IO.Swagger.Api
             if (partitionId == null)
                 throw new ApiException(400, "Missing required parameter 'partitionId' when calling PartitionApi->DeleteUsingDELETE");
 
-            var localVarPath = "/partition/v1/partitions/{partitionId}";
+            var localVarPath = "/api/partition/v1/partitions/{partitionId}";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -604,7 +604,7 @@ namespace IO.Swagger.Api
             if (partitionId == null)
                 throw new ApiException(400, "Missing required parameter 'partitionId' when calling PartitionApi->DeleteUsingDELETE");
 
-            var localVarPath = "/partition/v1/partitions/{partitionId}";
+            var localVarPath = "/api/partition/v1/partitions/{partitionId}";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -676,7 +676,7 @@ namespace IO.Swagger.Api
             if (partitionId == null)
                 throw new ApiException(400, "Missing required parameter 'partitionId' when calling PartitionApi->GetUsingGET");
 
-            var localVarPath = "/partition/v1/partitions/{partitionId}";
+            var localVarPath = "/api/partition/v1/partitions/{partitionId}";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -749,7 +749,7 @@ namespace IO.Swagger.Api
             if (partitionId == null)
                 throw new ApiException(400, "Missing required parameter 'partitionId' when calling PartitionApi->GetUsingGET");
 
-            var localVarPath = "/partition/v1/partitions/{partitionId}";
+            var localVarPath = "/api/partition/v1/partitions/{partitionId}";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -816,7 +816,7 @@ namespace IO.Swagger.Api
         public ApiResponse< List<string> > ListUsingGETWithHttpInfo ()
         {
 
-            var localVarPath = "/partition/v1/partitions";
+            var localVarPath = "/api/partition/v1/partitions";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -883,7 +883,7 @@ namespace IO.Swagger.Api
         public async System.Threading.Tasks.Task<ApiResponse<List<string>>> ListUsingGETAsyncWithHttpInfo ()
         {
 
-            var localVarPath = "/partition/v1/partitions";
+            var localVarPath = "/api/partition/v1/partitions";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -958,7 +958,7 @@ namespace IO.Swagger.Api
             if (partitionInfo == null)
                 throw new ApiException(400, "Missing required parameter 'partitionInfo' when calling PartitionApi->UpdateUsingPATCH");
 
-            var localVarPath = "/partition/v1/partitions/{partitionId}";
+            var localVarPath = "/api/partition/v1/partitions/{partitionId}";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -1043,7 +1043,7 @@ namespace IO.Swagger.Api
             if (partitionInfo == null)
                 throw new ApiException(400, "Missing required parameter 'partitionInfo' when calling PartitionApi->UpdateUsingPATCH");
 
-            var localVarPath = "/partition/v1/partitions/{partitionId}";
+            var localVarPath = "/api/partition/v1/partitions/{partitionId}";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
