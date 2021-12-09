@@ -125,7 +125,7 @@ class PartitionApi(object):
         auth_settings = ['Bearer']  # noqa: E501
 
         return self.api_client.call_api(
-            '/partition/v1/partitions/{partitionId}', 'POST',
+            '/api/partition/v1/partitions/{partitionId}', 'POST',
             path_params,
             query_params,
             header_params,
@@ -224,7 +224,7 @@ class PartitionApi(object):
         auth_settings = ['Bearer']  # noqa: E501
 
         return self.api_client.call_api(
-            '/partition/v1/partitions/{partitionId}', 'DELETE',
+            '/api/partition/v1/partitions/{partitionId}', 'DELETE',
             path_params,
             query_params,
             header_params,
@@ -323,7 +323,7 @@ class PartitionApi(object):
         auth_settings = ['Bearer']  # noqa: E501
 
         return self.api_client.call_api(
-            '/partition/v1/partitions/{partitionId}', 'GET',
+            '/api/partition/v1/partitions/{partitionId}', 'GET',
             path_params,
             query_params,
             header_params,
@@ -412,7 +412,7 @@ class PartitionApi(object):
         auth_settings = ['Bearer']  # noqa: E501
 
         return self.api_client.call_api(
-            '/partition/v1/partitions', 'GET',
+            '/api/partition/v1/partitions', 'GET',
             path_params,
             query_params,
             header_params,
@@ -519,7 +519,7 @@ class PartitionApi(object):
         auth_settings = ['Bearer']  # noqa: E501
 
         return self.api_client.call_api(
-            '/partition/v1/partitions/{partitionId}', 'PATCH',
+            '/api/partition/v1/partitions/{partitionId}', 'PATCH',
             path_params,
             query_params,
             header_params,

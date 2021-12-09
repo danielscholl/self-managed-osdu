@@ -538,7 +538,7 @@ namespace IO.Swagger.Api
             if (oSDUAccountId == null)
                 throw new ApiException(400, "Missing required parameter 'oSDUAccountId' when calling LegalApi->CreateLegalTag");
 
-            var localVarPath = "/legal/v1/legaltags";
+            var localVarPath = "/api/legal/v1/legaltags";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -624,7 +624,7 @@ namespace IO.Swagger.Api
             if (oSDUAccountId == null)
                 throw new ApiException(400, "Missing required parameter 'oSDUAccountId' when calling LegalApi->CreateLegalTag");
 
-            var localVarPath = "/legal/v1/legaltags";
+            var localVarPath = "/api/legal/v1/legaltags";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -709,7 +709,7 @@ namespace IO.Swagger.Api
             if (name == null)
                 throw new ApiException(400, "Missing required parameter 'name' when calling LegalApi->DeleteLegalTag");
 
-            var localVarPath = "/legal/v1/legaltags/{name}";
+            var localVarPath = "/api/legal/v1/legaltags/{name}";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -787,7 +787,7 @@ namespace IO.Swagger.Api
             if (name == null)
                 throw new ApiException(400, "Missing required parameter 'name' when calling LegalApi->DeleteLegalTag");
 
-            var localVarPath = "/legal/v1/legaltags/{name}";
+            var localVarPath = "/api/legal/v1/legaltags/{name}";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -865,7 +865,7 @@ namespace IO.Swagger.Api
             if (name == null)
                 throw new ApiException(400, "Missing required parameter 'name' when calling LegalApi->GetLegalTag");
 
-            var localVarPath = "/legal/v1/legaltags/{name}";
+            var localVarPath = "/api/legal/v1/legaltags/{name}";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -944,7 +944,7 @@ namespace IO.Swagger.Api
             if (name == null)
                 throw new ApiException(400, "Missing required parameter 'name' when calling LegalApi->GetLegalTag");
 
-            var localVarPath = "/legal/v1/legaltags/{name}";
+            var localVarPath = "/api/legal/v1/legaltags/{name}";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -1017,7 +1017,7 @@ namespace IO.Swagger.Api
             if (dataPartitionId == null)
                 throw new ApiException(400, "Missing required parameter 'dataPartitionId' when calling LegalApi->GetLegalTagProperties");
 
-            var localVarPath = "/legal/v1/legaltags:properties";
+            var localVarPath = "/api/legal/v1/legaltags:properties";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -1090,7 +1090,7 @@ namespace IO.Swagger.Api
             if (dataPartitionId == null)
                 throw new ApiException(400, "Missing required parameter 'dataPartitionId' when calling LegalApi->GetLegalTagProperties");
 
-            var localVarPath = "/legal/v1/legaltags:properties";
+            var localVarPath = "/api/legal/v1/legaltags:properties";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -1166,7 +1166,7 @@ namespace IO.Swagger.Api
             if (oSDUAccountId == null)
                 throw new ApiException(400, "Missing required parameter 'oSDUAccountId' when calling LegalApi->GetLegalTags");
 
-            var localVarPath = "/legal/v1/legaltags:batchRetrieve";
+            var localVarPath = "/api/legal/v1/legaltags:batchRetrieve";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -1252,7 +1252,7 @@ namespace IO.Swagger.Api
             if (oSDUAccountId == null)
                 throw new ApiException(400, "Missing required parameter 'oSDUAccountId' when calling LegalApi->GetLegalTags");
 
-            var localVarPath = "/legal/v1/legaltags:batchRetrieve";
+            var localVarPath = "/api/legal/v1/legaltags:batchRetrieve";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -1337,7 +1337,7 @@ namespace IO.Swagger.Api
             if (oSDUAccountId == null)
                 throw new ApiException(400, "Missing required parameter 'oSDUAccountId' when calling LegalApi->ListLegalTags");
 
-            var localVarPath = "/legal/v1/legaltags";
+            var localVarPath = "/api/legal/v1/legaltags";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -1416,7 +1416,7 @@ namespace IO.Swagger.Api
             if (oSDUAccountId == null)
                 throw new ApiException(400, "Missing required parameter 'oSDUAccountId' when calling LegalApi->ListLegalTags");
 
-            var localVarPath = "/legal/v1/legaltags";
+            var localVarPath = "/api/legal/v1/legaltags";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -1494,7 +1494,7 @@ namespace IO.Swagger.Api
             if (oSDUAccountId == null)
                 throw new ApiException(400, "Missing required parameter 'oSDUAccountId' when calling LegalApi->UpdateLegalTag");
 
-            var localVarPath = "/legal/v1/legaltags";
+            var localVarPath = "/api/legal/v1/legaltags";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -1580,7 +1580,7 @@ namespace IO.Swagger.Api
             if (oSDUAccountId == null)
                 throw new ApiException(400, "Missing required parameter 'oSDUAccountId' when calling LegalApi->UpdateLegalTag");
 
-            var localVarPath = "/legal/v1/legaltags";
+            var localVarPath = "/api/legal/v1/legaltags";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -1665,7 +1665,7 @@ namespace IO.Swagger.Api
             if (oSDUAccountId == null)
                 throw new ApiException(400, "Missing required parameter 'oSDUAccountId' when calling LegalApi->ValidateLegalTags");
 
-            var localVarPath = "/legal/v1/legaltags:validate";
+            var localVarPath = "/api/legal/v1/legaltags:validate";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -1751,7 +1751,7 @@ namespace IO.Swagger.Api
             if (oSDUAccountId == null)
                 throw new ApiException(400, "Missing required parameter 'oSDUAccountId' when calling LegalApi->ValidateLegalTags");
 
-            var localVarPath = "/legal/v1/legaltags:validate";
+            var localVarPath = "/api/legal/v1/legaltags:validate";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);

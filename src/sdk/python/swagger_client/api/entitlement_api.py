@@ -131,7 +131,7 @@ class EntitlementApi(object):
         auth_settings = ['Bearer']  # noqa: E501
 
         return self.api_client.call_api(
-            '/entitlements/v2/groups/{group_email}/members', 'POST',
+            '/api/entitlements/v2/groups/{group_email}/members', 'POST',
             path_params,
             query_params,
             header_params,
@@ -228,7 +228,7 @@ class EntitlementApi(object):
         auth_settings = ['Bearer']  # noqa: E501
 
         return self.api_client.call_api(
-            '/entitlements/v2/groups', 'POST',
+            '/api/entitlements/v2/groups', 'POST',
             path_params,
             query_params,
             header_params,
@@ -333,7 +333,7 @@ class EntitlementApi(object):
         auth_settings = ['Bearer']  # noqa: E501
 
         return self.api_client.call_api(
-            '/entitlements/v2/groups/{group_email}', 'DELETE',
+            '/api/entitlements/v2/groups/{group_email}', 'DELETE',
             path_params,
             query_params,
             header_params,
@@ -438,7 +438,7 @@ class EntitlementApi(object):
         auth_settings = ['Bearer']  # noqa: E501
 
         return self.api_client.call_api(
-            '/entitlements/v2/members/{member_email}', 'DELETE',
+            '/api/entitlements/v2/members/{member_email}', 'DELETE',
             path_params,
             query_params,
             header_params,
@@ -551,7 +551,7 @@ class EntitlementApi(object):
         auth_settings = ['Bearer']  # noqa: E501
 
         return self.api_client.call_api(
-            '/entitlements/v2/groups/{group_email}/members/{member_email}', 'DELETE',
+            '/api/entitlements/v2/groups/{group_email}/members/{member_email}', 'DELETE',
             path_params,
             query_params,
             header_params,
@@ -664,7 +664,7 @@ class EntitlementApi(object):
         auth_settings = ['Bearer']  # noqa: E501
 
         return self.api_client.call_api(
-            '/entitlements/v2/groups/{group_email}/members', 'GET',
+            '/api/entitlements/v2/groups/{group_email}/members', 'GET',
             path_params,
             query_params,
             header_params,
@@ -777,7 +777,7 @@ class EntitlementApi(object):
         auth_settings = ['Bearer']  # noqa: E501
 
         return self.api_client.call_api(
-            '/entitlements/v2/members/{member_email}/groups', 'GET',
+            '/api/entitlements/v2/members/{member_email}/groups', 'GET',
             path_params,
             query_params,
             header_params,
@@ -874,7 +874,7 @@ class EntitlementApi(object):
         auth_settings = ['Bearer']  # noqa: E501
 
         return self.api_client.call_api(
-            '/entitlements/v2/groups', 'GET',
+            '/api/entitlements/v2/groups', 'GET',
             path_params,
             query_params,
             header_params,
@@ -979,7 +979,7 @@ class EntitlementApi(object):
         auth_settings = ['Bearer']  # noqa: E501
 
         return self.api_client.call_api(
-            '/entitlements/v2/groups/{group_email}', 'PATCH',
+            '/api/entitlements/v2/groups/{group_email}', 'PATCH',
             path_params,
             query_params,
             header_params,

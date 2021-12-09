@@ -69,7 +69,7 @@ public class EntitlementApi {
         Object localVarPostBody = partitionInfo;
 
         // create path and map variables
-        String localVarPath = "/entitlements/v2/groups/{group_email}/members"
+        String localVarPath = "/api/entitlements/v2/groups/{group_email}/members"
             .replaceAll("\\{" + "group_email" + "\\}", apiClient.escapeString(groupEmail.toString()));
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
@@ -210,7 +210,7 @@ public class EntitlementApi {
         Object localVarPostBody = null;
 
         // create path and map variables
-        String localVarPath = "/entitlements/v2/groups";
+        String localVarPath = "/api/entitlements/v2/groups";
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
@@ -331,7 +331,7 @@ public class EntitlementApi {
         Object localVarPostBody = null;
 
         // create path and map variables
-        String localVarPath = "/entitlements/v2/groups/{group_email}"
+        String localVarPath = "/api/entitlements/v2/groups/{group_email}"
             .replaceAll("\\{" + "group_email" + "\\}", apiClient.escapeString(groupEmail.toString()));
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
@@ -461,7 +461,7 @@ public class EntitlementApi {
         Object localVarPostBody = null;
 
         // create path and map variables
-        String localVarPath = "/entitlements/v2/members/{member_email}"
+        String localVarPath = "/api/entitlements/v2/members/{member_email}"
             .replaceAll("\\{" + "member_email" + "\\}", apiClient.escapeString(memberEmail.toString()));
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
@@ -592,7 +592,7 @@ public class EntitlementApi {
         Object localVarPostBody = null;
 
         // create path and map variables
-        String localVarPath = "/entitlements/v2/groups/{group_email}/members/{member_email}"
+        String localVarPath = "/api/entitlements/v2/groups/{group_email}/members/{member_email}"
             .replaceAll("\\{" + "group_email" + "\\}", apiClient.escapeString(groupEmail.toString()))
             .replaceAll("\\{" + "member_email" + "\\}", apiClient.escapeString(memberEmail.toString()));
 
@@ -737,7 +737,7 @@ public class EntitlementApi {
         Object localVarPostBody = null;
 
         // create path and map variables
-        String localVarPath = "/entitlements/v2/groups/{group_email}/members"
+        String localVarPath = "/api/entitlements/v2/groups/{group_email}/members"
             .replaceAll("\\{" + "group_email" + "\\}", apiClient.escapeString(groupEmail.toString()));
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
@@ -879,7 +879,7 @@ public class EntitlementApi {
         Object localVarPostBody = null;
 
         // create path and map variables
-        String localVarPath = "/entitlements/v2/members/{member_email}/groups"
+        String localVarPath = "/api/entitlements/v2/members/{member_email}/groups"
             .replaceAll("\\{" + "member_email" + "\\}", apiClient.escapeString(memberEmail.toString()));
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
@@ -1018,7 +1018,7 @@ public class EntitlementApi {
         Object localVarPostBody = null;
 
         // create path and map variables
-        String localVarPath = "/entitlements/v2/groups";
+        String localVarPath = "/api/entitlements/v2/groups";
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
@@ -1143,7 +1143,7 @@ public class EntitlementApi {
         Object localVarPostBody = null;
 
         // create path and map variables
-        String localVarPath = "/entitlements/v2/groups/{group_email}"
+        String localVarPath = "/api/entitlements/v2/groups/{group_email}"
             .replaceAll("\\{" + "group_email" + "\\}", apiClient.escapeString(groupEmail.toString()));
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();

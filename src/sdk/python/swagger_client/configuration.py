@@ -40,7 +40,7 @@ class Configuration(object):
             return
 
         # Default Base url
-        self.host = "https://oak-osdu-dplbhggc-mwt3-gw.westeurope.cloudapp.azure.com/api"
+        self.host = "https://self-managed-osdu.westeurope.cloudapp.azure.com"
         # Temp file folder for downloading files
         self.temp_folder_path = None
 

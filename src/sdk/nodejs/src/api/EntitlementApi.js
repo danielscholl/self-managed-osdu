@@ -101,7 +101,7 @@
       var returnType = EntitlementMemberDto;
 
       return this.apiClient.callApi(
-        '/entitlements/v2/groups/{group_email}/members', 'POST',
+        '/api/entitlements/v2/groups/{group_email}/members', 'POST',
         pathParams, queryParams, collectionQueryParams, headerParams, formParams, postBody,
         authNames, contentTypes, accepts, returnType, callback
       );
@@ -147,7 +147,7 @@
       var returnType = null;
 
       return this.apiClient.callApi(
-        '/entitlements/v2/groups', 'POST',
+        '/api/entitlements/v2/groups', 'POST',
         pathParams, queryParams, collectionQueryParams, headerParams, formParams, postBody,
         authNames, contentTypes, accepts, returnType, callback
       );
@@ -200,7 +200,7 @@
       var returnType = null;
 
       return this.apiClient.callApi(
-        '/entitlements/v2/groups/{group_email}', 'DELETE',
+        '/api/entitlements/v2/groups/{group_email}', 'DELETE',
         pathParams, queryParams, collectionQueryParams, headerParams, formParams, postBody,
         authNames, contentTypes, accepts, returnType, callback
       );
@@ -253,7 +253,7 @@
       var returnType = null;
 
       return this.apiClient.callApi(
-        '/entitlements/v2/members/{member_email}', 'DELETE',
+        '/api/entitlements/v2/members/{member_email}', 'DELETE',
         pathParams, queryParams, collectionQueryParams, headerParams, formParams, postBody,
         authNames, contentTypes, accepts, returnType, callback
       );
@@ -314,7 +314,7 @@
       var returnType = 'String';
 
       return this.apiClient.callApi(
-        '/entitlements/v2/groups/{group_email}/members/{member_email}', 'DELETE',
+        '/api/entitlements/v2/groups/{group_email}/members/{member_email}', 'DELETE',
         pathParams, queryParams, collectionQueryParams, headerParams, formParams, postBody,
         authNames, contentTypes, accepts, returnType, callback
       );
@@ -373,7 +373,7 @@
       var returnType = null;
 
       return this.apiClient.callApi(
-        '/entitlements/v2/groups/{group_email}/members', 'GET',
+        '/api/entitlements/v2/groups/{group_email}/members', 'GET',
         pathParams, queryParams, collectionQueryParams, headerParams, formParams, postBody,
         authNames, contentTypes, accepts, returnType, callback
       );
@@ -432,7 +432,7 @@
       var returnType = null;
 
       return this.apiClient.callApi(
-        '/entitlements/v2/members/{member_email}/groups', 'GET',
+        '/api/entitlements/v2/members/{member_email}/groups', 'GET',
         pathParams, queryParams, collectionQueryParams, headerParams, formParams, postBody,
         authNames, contentTypes, accepts, returnType, callback
       );
@@ -479,7 +479,7 @@
       var returnType = EntitlementGroupResponse;
 
       return this.apiClient.callApi(
-        '/entitlements/v2/groups', 'GET',
+        '/api/entitlements/v2/groups', 'GET',
         pathParams, queryParams, collectionQueryParams, headerParams, formParams, postBody,
         authNames, contentTypes, accepts, returnType, callback
       );
@@ -532,7 +532,7 @@
       var returnType = null;
 
       return this.apiClient.callApi(
-        '/entitlements/v2/groups/{group_email}', 'PATCH',
+        '/api/entitlements/v2/groups/{group_email}', 'PATCH',
         pathParams, queryParams, collectionQueryParams, headerParams, formParams, postBody,
         authNames, contentTypes, accepts, returnType, callback
       );

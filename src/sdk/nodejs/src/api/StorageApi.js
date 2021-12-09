@@ -94,7 +94,7 @@
       var returnType = StorageRecord;
 
       return this.apiClient.callApi(
-        '/records', 'PUT',
+        '/api/storage/v2/records', 'PUT',
         pathParams, queryParams, collectionQueryParams, headerParams, formParams, postBody,
         authNames, contentTypes, accepts, returnType, callback
       );
@@ -148,7 +148,7 @@
       var returnType = null;
 
       return this.apiClient.callApi(
-        '/records/{id}:delete', 'POST',
+        '/api/records/{id}:delete', 'POST',
         pathParams, queryParams, collectionQueryParams, headerParams, formParams, postBody,
         authNames, contentTypes, accepts, returnType, callback
       );
@@ -201,7 +201,7 @@
       var returnType = null;
 
       return this.apiClient.callApi(
-        '/records/delete', 'POST',
+        '/api/storage/v2/records/delete', 'POST',
         pathParams, queryParams, collectionQueryParams, headerParams, formParams, postBody,
         authNames, contentTypes, accepts, returnType, callback
       );
@@ -252,7 +252,7 @@
       var returnType = StorageMultiRecordIds;
 
       return this.apiClient.callApi(
-        '/storage/v2/query/records', 'POST',
+        '/api/storage/v2/query/records', 'POST',
         pathParams, queryParams, collectionQueryParams, headerParams, formParams, postBody,
         authNames, contentTypes, accepts, returnType, callback
       );
@@ -306,7 +306,7 @@
       var returnType = StorageQueryResponse;
 
       return this.apiClient.callApi(
-        '/storage/v2/query/kinds', 'GET',
+        '/api/storage/v2/query/kinds', 'GET',
         pathParams, queryParams, collectionQueryParams, headerParams, formParams, postBody,
         authNames, contentTypes, accepts, returnType, callback
       );
@@ -362,7 +362,7 @@
       var returnType = StorageQueryResponse;
 
       return this.apiClient.callApi(
-        '/storage/v2/query/records', 'GET',
+        '/api/storage/v2/query/records', 'GET',
         pathParams, queryParams, collectionQueryParams, headerParams, formParams, postBody,
         authNames, contentTypes, accepts, returnType, callback
       );
@@ -417,7 +417,7 @@
       var returnType = StorageRecordVersions;
 
       return this.apiClient.callApi(
-        '/records/versions/{id}', 'GET',
+        '/api/storage/v2/records/versions/{id}', 'GET',
         pathParams, queryParams, collectionQueryParams, headerParams, formParams, postBody,
         authNames, contentTypes, accepts, returnType, callback
       );
@@ -479,7 +479,7 @@
       var returnType = StorageRecordData;
 
       return this.apiClient.callApi(
-        '/records/{id}', 'GET',
+        '/api/storage/v2/records/{id}', 'GET',
         pathParams, queryParams, collectionQueryParams, headerParams, formParams, postBody,
         authNames, contentTypes, accepts, returnType, callback
       );
@@ -548,7 +548,7 @@
       var returnType = StorageRecordData;
 
       return this.apiClient.callApi(
-        '/records/{id}/{version}', 'GET',
+        '/api/storage/v2/records/{id}/{version}', 'GET',
         pathParams, queryParams, collectionQueryParams, headerParams, formParams, postBody,
         authNames, contentTypes, accepts, returnType, callback
       );
@@ -599,7 +599,7 @@
       var returnType = StorageBulkUpdateRecordsResponse;
 
       return this.apiClient.callApi(
-        '/records', 'PATCH',
+        '/api/storage/v2/records', 'PATCH',
         pathParams, queryParams, collectionQueryParams, headerParams, formParams, postBody,
         authNames, contentTypes, accepts, returnType, callback
       );
@@ -653,7 +653,7 @@
       var returnType = null;
 
       return this.apiClient.callApi(
-        '/records/{id}', 'DELETE',
+        '/api/storage/v2/records/{id}', 'DELETE',
         pathParams, queryParams, collectionQueryParams, headerParams, formParams, postBody,
         authNames, contentTypes, accepts, returnType, callback
       );

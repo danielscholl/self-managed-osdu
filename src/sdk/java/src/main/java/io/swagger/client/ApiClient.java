@@ -54,7 +54,7 @@ import io.swagger.client.auth.OAuth;
 
 public class ApiClient {
 
-    private String basePath = "https://oak-osdu-dplbhggc-mwt3-gw.westeurope.cloudapp.azure.com/api";
+    private String basePath = "https://self-managed-osdu.westeurope.cloudapp.azure.com";
     private boolean debugging = false;
     private Map<String, String> defaultHeaderMap = new HashMap<String, String>();
     private String tempFolderPath = null;
@@ -108,7 +108,7 @@ public class ApiClient {
     /**
      * Set base path
      *
-     * @param basePath Base path of the URL (e.g https://oak-osdu-dplbhggc-mwt3-gw.westeurope.cloudapp.azure.com/api
+     * @param basePath Base path of the URL (e.g https://self-managed-osdu.westeurope.cloudapp.azure.com
      * @return An instance of OkHttpClient
      */
     public ApiClient setBasePath(String basePath) {

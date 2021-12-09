@@ -30,7 +30,7 @@ import java.util.List;
  * LegalTag properties
  */
 @ApiModel(description = "LegalTag properties")
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2021-12-09T19:33:56.348Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2021-12-09T20:22:07.530Z")
 public class LegalTagProperties {
   @SerializedName("contractId")
   private String contractId = null;
