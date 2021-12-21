@@ -25,37 +25,61 @@ import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
- * Patch api query specific information
+ * SearchQueryResponse
  */
-@ApiModel(description = "Patch api query specific information")
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2021-12-21T22:06:14.852Z")
-public class StorageRecordQuery {
-  @SerializedName("ids")
-  private List<String> ids = new ArrayList<String>();
+public class SearchQueryResponse {
+  @SerializedName("results")
+  private List<Map<String, Object>> results = null;
 
-  public StorageRecordQuery ids(List<String> ids) {
-    this.ids = ids;
+  @SerializedName("totalCount")
+  private Long totalCount = null;
+
+  public SearchQueryResponse results(List<Map<String, Object>> results) {
+    this.results = results;
     return this;
   }
 
-  public StorageRecordQuery addIdsItem(String idsItem) {
-    this.ids.add(idsItem);
+  public SearchQueryResponse addResultsItem(Map<String, Object> resultsItem) {
+    if (this.results == null) {
+      this.results = new ArrayList<Map<String, Object>>();
+    }
+    this.results.add(resultsItem);
     return this;
   }
 
    /**
-   * Records ids for whom patch operations going to be applied
-   * @return ids
+   * Get results
+   * @return results
   **/
-  @ApiModelProperty(required = true, value = "Records ids for whom patch operations going to be applied")
-  public List<String> getIds() {
-    return ids;
+  @ApiModelProperty(value = "")
+  public List<Map<String, Object>> getResults() {
+    return results;
   }
 
-  public void setIds(List<String> ids) {
-    this.ids = ids;
+  public void setResults(List<Map<String, Object>> results) {
+    this.results = results;
+  }
+
+  public SearchQueryResponse totalCount(Long totalCount) {
+    this.totalCount = totalCount;
+    return this;
+  }
+
+   /**
+   * Get totalCount
+   * @return totalCount
+  **/
+  @ApiModelProperty(value = "")
+  public Long getTotalCount() {
+    return totalCount;
+  }
+
+  public void setTotalCount(Long totalCount) {
+    this.totalCount = totalCount;
   }
 
 
@@ -67,22 +91,24 @@ public class StorageRecordQuery {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    StorageRecordQuery storageRecordQuery = (StorageRecordQuery) o;
-    return Objects.equals(this.ids, storageRecordQuery.ids);
+    SearchQueryResponse searchQueryResponse = (SearchQueryResponse) o;
+    return Objects.equals(this.results, searchQueryResponse.results) &&
+        Objects.equals(this.totalCount, searchQueryResponse.totalCount);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(ids);
+    return Objects.hash(results, totalCount);
   }
 
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class StorageRecordQuery {\n");
+    sb.append("class SearchQueryResponse {\n");
     
-    sb.append("    ids: ").append(toIndentedString(ids)).append("\n");
+    sb.append("    results: ").append(toIndentedString(results)).append("\n");
+    sb.append("    totalCount: ").append(toIndentedString(totalCount)).append("\n");
     sb.append("}");
     return sb.toString();
   }

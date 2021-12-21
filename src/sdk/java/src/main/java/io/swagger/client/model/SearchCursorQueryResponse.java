@@ -25,19 +25,23 @@ import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
- * StorageQueryResponse
+ * SearchCursorQueryResponse
  */
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2021-12-21T22:06:14.852Z")
-public class StorageQueryResponse {
+public class SearchCursorQueryResponse {
   @SerializedName("cursor")
   private String cursor = null;
 
   @SerializedName("results")
-  private List<String> results = null;
+  private List<Map<String, Object>> results = null;
 
-  public StorageQueryResponse cursor(String cursor) {
+  @SerializedName("totalCount")
+  private Long totalCount = null;
+
+  public SearchCursorQueryResponse cursor(String cursor) {
     this.cursor = cursor;
     return this;
   }
@@ -55,14 +59,14 @@ public class StorageQueryResponse {
     this.cursor = cursor;
   }
 
-  public StorageQueryResponse results(List<String> results) {
+  public SearchCursorQueryResponse results(List<Map<String, Object>> results) {
     this.results = results;
     return this;
   }
 
-  public StorageQueryResponse addResultsItem(String resultsItem) {
+  public SearchCursorQueryResponse addResultsItem(Map<String, Object> resultsItem) {
     if (this.results == null) {
-      this.results = new ArrayList<String>();
+      this.results = new ArrayList<Map<String, Object>>();
     }
     this.results.add(resultsItem);
     return this;
@@ -73,12 +77,30 @@ public class StorageQueryResponse {
    * @return results
   **/
   @ApiModelProperty(value = "")
-  public List<String> getResults() {
+  public List<Map<String, Object>> getResults() {
     return results;
   }
 
-  public void setResults(List<String> results) {
+  public void setResults(List<Map<String, Object>> results) {
     this.results = results;
+  }
+
+  public SearchCursorQueryResponse totalCount(Long totalCount) {
+    this.totalCount = totalCount;
+    return this;
+  }
+
+   /**
+   * Get totalCount
+   * @return totalCount
+  **/
+  @ApiModelProperty(value = "")
+  public Long getTotalCount() {
+    return totalCount;
+  }
+
+  public void setTotalCount(Long totalCount) {
+    this.totalCount = totalCount;
   }
 
 
@@ -90,24 +112,26 @@ public class StorageQueryResponse {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    StorageQueryResponse storageQueryResponse = (StorageQueryResponse) o;
-    return Objects.equals(this.cursor, storageQueryResponse.cursor) &&
-        Objects.equals(this.results, storageQueryResponse.results);
+    SearchCursorQueryResponse searchCursorQueryResponse = (SearchCursorQueryResponse) o;
+    return Objects.equals(this.cursor, searchCursorQueryResponse.cursor) &&
+        Objects.equals(this.results, searchCursorQueryResponse.results) &&
+        Objects.equals(this.totalCount, searchCursorQueryResponse.totalCount);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(cursor, results);
+    return Objects.hash(cursor, results, totalCount);
   }
 
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class StorageQueryResponse {\n");
+    sb.append("class SearchCursorQueryResponse {\n");
     
     sb.append("    cursor: ").append(toIndentedString(cursor)).append("\n");
     sb.append("    results: ").append(toIndentedString(results)).append("\n");
+    sb.append("    totalCount: ").append(toIndentedString(totalCount)).append("\n");
     sb.append("}");
     return sb.toString();
   }

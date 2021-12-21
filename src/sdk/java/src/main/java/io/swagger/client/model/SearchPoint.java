@@ -23,39 +23,57 @@ import com.google.gson.stream.JsonWriter;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
- * Patch api query specific information
+ * Geo-point with latitude and longitude
  */
-@ApiModel(description = "Patch api query specific information")
+@ApiModel(description = "Geo-point with latitude and longitude")
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2021-12-21T22:06:14.852Z")
-public class StorageRecordQuery {
-  @SerializedName("ids")
-  private List<String> ids = new ArrayList<String>();
+public class SearchPoint {
+  @SerializedName("latitude")
+  private Double latitude = null;
 
-  public StorageRecordQuery ids(List<String> ids) {
-    this.ids = ids;
-    return this;
-  }
+  @SerializedName("longitude")
+  private Double longitude = null;
 
-  public StorageRecordQuery addIdsItem(String idsItem) {
-    this.ids.add(idsItem);
+  public SearchPoint latitude(Double latitude) {
+    this.latitude = latitude;
     return this;
   }
 
    /**
-   * Records ids for whom patch operations going to be applied
-   * @return ids
+   * Get latitude
+   * minimum: -90
+   * maximum: 90
+   * @return latitude
   **/
-  @ApiModelProperty(required = true, value = "Records ids for whom patch operations going to be applied")
-  public List<String> getIds() {
-    return ids;
+  @ApiModelProperty(value = "")
+  public Double getLatitude() {
+    return latitude;
   }
 
-  public void setIds(List<String> ids) {
-    this.ids = ids;
+  public void setLatitude(Double latitude) {
+    this.latitude = latitude;
+  }
+
+  public SearchPoint longitude(Double longitude) {
+    this.longitude = longitude;
+    return this;
+  }
+
+   /**
+   * Get longitude
+   * minimum: -180
+   * maximum: 180
+   * @return longitude
+  **/
+  @ApiModelProperty(value = "")
+  public Double getLongitude() {
+    return longitude;
+  }
+
+  public void setLongitude(Double longitude) {
+    this.longitude = longitude;
   }
 
 
@@ -67,22 +85,24 @@ public class StorageRecordQuery {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    StorageRecordQuery storageRecordQuery = (StorageRecordQuery) o;
-    return Objects.equals(this.ids, storageRecordQuery.ids);
+    SearchPoint searchPoint = (SearchPoint) o;
+    return Objects.equals(this.latitude, searchPoint.latitude) &&
+        Objects.equals(this.longitude, searchPoint.longitude);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(ids);
+    return Objects.hash(latitude, longitude);
   }
 
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class StorageRecordQuery {\n");
+    sb.append("class SearchPoint {\n");
     
-    sb.append("    ids: ").append(toIndentedString(ids)).append("\n");
+    sb.append("    latitude: ").append(toIndentedString(latitude)).append("\n");
+    sb.append("    longitude: ").append(toIndentedString(longitude)).append("\n");
     sb.append("}");
     return sb.toString();
   }

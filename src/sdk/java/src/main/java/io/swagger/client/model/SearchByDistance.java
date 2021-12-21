@@ -22,40 +22,56 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import io.swagger.client.model.SearchPoint;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
- * Patch api query specific information
+ * A spatial filter criteria to filter documents that exist within a specific distance from a geo point.
  */
-@ApiModel(description = "Patch api query specific information")
+@ApiModel(description = "A spatial filter criteria to filter documents that exist within a specific distance from a geo point.")
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2021-12-21T22:06:14.852Z")
-public class StorageRecordQuery {
-  @SerializedName("ids")
-  private List<String> ids = new ArrayList<String>();
+public class SearchByDistance {
+  @SerializedName("distance")
+  private Double distance = null;
 
-  public StorageRecordQuery ids(List<String> ids) {
-    this.ids = ids;
-    return this;
-  }
+  @SerializedName("point")
+  private SearchPoint point = null;
 
-  public StorageRecordQuery addIdsItem(String idsItem) {
-    this.ids.add(idsItem);
+  public SearchByDistance distance(Double distance) {
+    this.distance = distance;
     return this;
   }
 
    /**
-   * Records ids for whom patch operations going to be applied
-   * @return ids
+   * Get distance
+   * minimum: 0
+   * @return distance
   **/
-  @ApiModelProperty(required = true, value = "Records ids for whom patch operations going to be applied")
-  public List<String> getIds() {
-    return ids;
+  @ApiModelProperty(value = "")
+  public Double getDistance() {
+    return distance;
   }
 
-  public void setIds(List<String> ids) {
-    this.ids = ids;
+  public void setDistance(Double distance) {
+    this.distance = distance;
+  }
+
+  public SearchByDistance point(SearchPoint point) {
+    this.point = point;
+    return this;
+  }
+
+   /**
+   * Get point
+   * @return point
+  **/
+  @ApiModelProperty(required = true, value = "")
+  public SearchPoint getPoint() {
+    return point;
+  }
+
+  public void setPoint(SearchPoint point) {
+    this.point = point;
   }
 
 
@@ -67,22 +83,24 @@ public class StorageRecordQuery {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    StorageRecordQuery storageRecordQuery = (StorageRecordQuery) o;
-    return Objects.equals(this.ids, storageRecordQuery.ids);
+    SearchByDistance searchByDistance = (SearchByDistance) o;
+    return Objects.equals(this.distance, searchByDistance.distance) &&
+        Objects.equals(this.point, searchByDistance.point);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(ids);
+    return Objects.hash(distance, point);
   }
 
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class StorageRecordQuery {\n");
+    sb.append("class SearchByDistance {\n");
     
-    sb.append("    ids: ").append(toIndentedString(ids)).append("\n");
+    sb.append("    distance: ").append(toIndentedString(distance)).append("\n");
+    sb.append("    point: ").append(toIndentedString(point)).append("\n");
     sb.append("}");
     return sb.toString();
   }
