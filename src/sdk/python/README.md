@@ -100,6 +100,10 @@ Class | Method | HTTP request | Description
 *PartitionApi* | [**get_using_get**](docs/PartitionApi.md#get_using_get) | **GET** /api/partition/v1/partitions/{partitionId} | Get Single Partition
 *PartitionApi* | [**list_using_get**](docs/PartitionApi.md#list_using_get) | **GET** /api/partition/v1/partitions | List Partitions
 *PartitionApi* | [**update_using_patch**](docs/PartitionApi.md#update_using_patch) | **PATCH** /api/partition/v1/partitions/{partitionId} | Update Partition
+*SearchApi* | [**delete_index**](docs/SearchApi.md#delete_index) | **DELETE** /api/search/v2/index/{kind} | Deletes all documents from index for given &#39;kind&#39;.
+*SearchApi* | [**get_kind_schema**](docs/SearchApi.md#get_kind_schema) | **GET** /api/search/v2/index/schema/{kind} | Returns the index schema for given &#39;kind&#39;.
+*SearchApi* | [**query_records**](docs/SearchApi.md#query_records) | **POST** /api/search/v2/query | Queries the index for the specified kind using the input query string.
+*SearchApi* | [**query_with_cursor**](docs/SearchApi.md#query_with_cursor) | **POST** /api/search/v2/query_with_cursor | Query the index using cursor and optionally return only requested fields.
 *StorageApi* | [**create_or_update_records**](docs/StorageApi.md#create_or_update_records) | **PUT** /api/storage/v2/records | Create or update records
 *StorageApi* | [**delete_record**](docs/StorageApi.md#delete_record) | **POST** /api/records/{id}:delete | Delete record
 *StorageApi* | [**delete_records**](docs/StorageApi.md#delete_records) | **POST** /api/storage/v2/records/delete | Soft delete of multiple records
@@ -128,6 +132,16 @@ Class | Method | HTTP request | Description
  - [LegalTagUpdateDto](docs/LegalTagUpdateDto.md)
  - [PartitionDto](docs/PartitionDto.md)
  - [PartitionProperty](docs/PartitionProperty.md)
+ - [SearchAppError](docs/SearchAppError.md)
+ - [SearchByBoundingBox](docs/SearchByBoundingBox.md)
+ - [SearchByDistance](docs/SearchByDistance.md)
+ - [SearchByGeoPolygon](docs/SearchByGeoPolygon.md)
+ - [SearchCursorQueryRequest](docs/SearchCursorQueryRequest.md)
+ - [SearchCursorQueryResponse](docs/SearchCursorQueryResponse.md)
+ - [SearchPoint](docs/SearchPoint.md)
+ - [SearchQueryRequest](docs/SearchQueryRequest.md)
+ - [SearchQueryResponse](docs/SearchQueryResponse.md)
+ - [SearchSpatialFilter](docs/SearchSpatialFilter.md)
  - [StorageAcl](docs/StorageAcl.md)
  - [StorageBulkUpdateRecordsResponse](docs/StorageBulkUpdateRecordsResponse.md)
  - [StorageDeleteRecordError](docs/StorageDeleteRecordError.md)
