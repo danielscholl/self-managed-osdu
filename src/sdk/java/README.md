@@ -2,7 +2,7 @@
 
 self-managed-osdu
 - API version: 0.11.0
-  - Build date: 2021-12-09T20:22:07.530Z
+  - Build date: 2021-12-21T22:06:14.852Z
 
 Rest API Documentation for Self Managed OSDU
 
@@ -135,6 +135,10 @@ Class | Method | HTTP request | Description
 *PartitionApi* | [**getUsingGET**](docs/PartitionApi.md#getUsingGET) | **GET** /api/partition/v1/partitions/{partitionId} | Get Single Partition
 *PartitionApi* | [**listUsingGET**](docs/PartitionApi.md#listUsingGET) | **GET** /api/partition/v1/partitions | List Partitions
 *PartitionApi* | [**updateUsingPATCH**](docs/PartitionApi.md#updateUsingPATCH) | **PATCH** /api/partition/v1/partitions/{partitionId} | Update Partition
+*SearchApi* | [**deleteIndex**](docs/SearchApi.md#deleteIndex) | **DELETE** /api/search/v2/index/{kind} | Deletes all documents from index for given &#39;kind&#39;.
+*SearchApi* | [**getKindSchema**](docs/SearchApi.md#getKindSchema) | **GET** /api/search/v2/index/schema/{kind} | Returns the index schema for given &#39;kind&#39;.
+*SearchApi* | [**queryRecords**](docs/SearchApi.md#queryRecords) | **POST** /api/search/v2/query | Queries the index for the specified kind using the input query string.
+*SearchApi* | [**queryWithCursor**](docs/SearchApi.md#queryWithCursor) | **POST** /api/search/v2/query_with_cursor | Query the index using cursor and optionally return only requested fields.
 *StorageApi* | [**createOrUpdateRecords**](docs/StorageApi.md#createOrUpdateRecords) | **PUT** /api/storage/v2/records | Create or update records
 *StorageApi* | [**deleteRecord**](docs/StorageApi.md#deleteRecord) | **POST** /api/records/{id}:delete | Delete record
 *StorageApi* | [**deleteRecords**](docs/StorageApi.md#deleteRecords) | **POST** /api/storage/v2/records/delete | Soft delete of multiple records
@@ -163,6 +167,16 @@ Class | Method | HTTP request | Description
  - [LegalTagUpdateDto](docs/LegalTagUpdateDto.md)
  - [PartitionDto](docs/PartitionDto.md)
  - [PartitionProperty](docs/PartitionProperty.md)
+ - [SearchAppError](docs/SearchAppError.md)
+ - [SearchByBoundingBox](docs/SearchByBoundingBox.md)
+ - [SearchByDistance](docs/SearchByDistance.md)
+ - [SearchByGeoPolygon](docs/SearchByGeoPolygon.md)
+ - [SearchCursorQueryRequest](docs/SearchCursorQueryRequest.md)
+ - [SearchCursorQueryResponse](docs/SearchCursorQueryResponse.md)
+ - [SearchPoint](docs/SearchPoint.md)
+ - [SearchQueryRequest](docs/SearchQueryRequest.md)
+ - [SearchQueryResponse](docs/SearchQueryResponse.md)
+ - [SearchSpatialFilter](docs/SearchSpatialFilter.md)
  - [StorageAcl](docs/StorageAcl.md)
  - [StorageBulkUpdateRecordsResponse](docs/StorageBulkUpdateRecordsResponse.md)
  - [StorageDeleteRecordError](docs/StorageDeleteRecordError.md)

@@ -25,11 +25,10 @@ import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
 
 /**
- * An error that occurs during normal application logic
+ * SearchAppError
  */
-@ApiModel(description = "An error that occurs during normal application logic")
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2021-12-21T22:06:14.852Z")
-public class StorageErrorResponse {
+public class SearchAppError {
   @SerializedName("code")
   private Integer code = null;
 
@@ -39,7 +38,7 @@ public class StorageErrorResponse {
   @SerializedName("message")
   private String message = null;
 
-  public StorageErrorResponse code(Integer code) {
+  public SearchAppError code(Integer code) {
     this.code = code;
     return this;
   }
@@ -57,7 +56,7 @@ public class StorageErrorResponse {
     this.code = code;
   }
 
-  public StorageErrorResponse reason(String reason) {
+  public SearchAppError reason(String reason) {
     this.reason = reason;
     return this;
   }
@@ -75,7 +74,7 @@ public class StorageErrorResponse {
     this.reason = reason;
   }
 
-  public StorageErrorResponse message(String message) {
+  public SearchAppError message(String message) {
     this.message = message;
     return this;
   }
@@ -102,10 +101,10 @@ public class StorageErrorResponse {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    StorageErrorResponse storageErrorResponse = (StorageErrorResponse) o;
-    return Objects.equals(this.code, storageErrorResponse.code) &&
-        Objects.equals(this.reason, storageErrorResponse.reason) &&
-        Objects.equals(this.message, storageErrorResponse.message);
+    SearchAppError searchAppError = (SearchAppError) o;
+    return Objects.equals(this.code, searchAppError.code) &&
+        Objects.equals(this.reason, searchAppError.reason) &&
+        Objects.equals(this.message, searchAppError.message);
   }
 
   @Override
@@ -117,7 +116,7 @@ public class StorageErrorResponse {
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class StorageErrorResponse {\n");
+    sb.append("class SearchAppError {\n");
     
     sb.append("    code: ").append(toIndentedString(code)).append("\n");
     sb.append("    reason: ").append(toIndentedString(reason)).append("\n");

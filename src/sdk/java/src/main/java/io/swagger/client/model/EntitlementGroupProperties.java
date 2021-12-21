@@ -28,7 +28,7 @@ import java.io.IOException;
  * Group properties
  */
 @ApiModel(description = "Group properties")
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2021-12-09T20:22:07.530Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2021-12-21T22:06:14.852Z")
 public class EntitlementGroupProperties {
   @SerializedName("name")
   private String name = null;
