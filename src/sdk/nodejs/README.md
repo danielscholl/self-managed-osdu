@@ -151,6 +151,10 @@ Class | Method | HTTP request | Description
 *SelfManagedOsdu.PartitionApi* | [**getUsingGET**](docs/PartitionApi.md#getUsingGET) | **GET** /api/partition/v1/partitions/{partitionId} | Get Single Partition
 *SelfManagedOsdu.PartitionApi* | [**listUsingGET**](docs/PartitionApi.md#listUsingGET) | **GET** /api/partition/v1/partitions | List Partitions
 *SelfManagedOsdu.PartitionApi* | [**updateUsingPATCH**](docs/PartitionApi.md#updateUsingPATCH) | **PATCH** /api/partition/v1/partitions/{partitionId} | Update Partition
+*SelfManagedOsdu.SearchApi* | [**deleteIndex**](docs/SearchApi.md#deleteIndex) | **DELETE** /api/search/v2/index/{kind} | Deletes all documents from index for given 'kind'.
+*SelfManagedOsdu.SearchApi* | [**getKindSchema**](docs/SearchApi.md#getKindSchema) | **GET** /api/search/v2/index/schema/{kind} | Returns the index schema for given 'kind'.
+*SelfManagedOsdu.SearchApi* | [**queryRecords**](docs/SearchApi.md#queryRecords) | **POST** /api/search/v2/query | Queries the index for the specified kind using the input query string.
+*SelfManagedOsdu.SearchApi* | [**queryWithCursor**](docs/SearchApi.md#queryWithCursor) | **POST** /api/search/v2/query_with_cursor | Query the index using cursor and optionally return only requested fields.
 *SelfManagedOsdu.StorageApi* | [**createOrUpdateRecords**](docs/StorageApi.md#createOrUpdateRecords) | **PUT** /api/storage/v2/records | Create or update records
 *SelfManagedOsdu.StorageApi* | [**deleteRecord**](docs/StorageApi.md#deleteRecord) | **POST** /api/records/{id}:delete | Delete record
 *SelfManagedOsdu.StorageApi* | [**deleteRecords**](docs/StorageApi.md#deleteRecords) | **POST** /api/storage/v2/records/delete | Soft delete of multiple records
@@ -179,6 +183,16 @@ Class | Method | HTTP request | Description
  - [SelfManagedOsdu.LegalTagUpdateDto](docs/LegalTagUpdateDto.md)
  - [SelfManagedOsdu.PartitionDto](docs/PartitionDto.md)
  - [SelfManagedOsdu.PartitionProperty](docs/PartitionProperty.md)
+ - [SelfManagedOsdu.SearchAppError](docs/SearchAppError.md)
+ - [SelfManagedOsdu.SearchByBoundingBox](docs/SearchByBoundingBox.md)
+ - [SelfManagedOsdu.SearchByDistance](docs/SearchByDistance.md)
+ - [SelfManagedOsdu.SearchByGeoPolygon](docs/SearchByGeoPolygon.md)
+ - [SelfManagedOsdu.SearchCursorQueryRequest](docs/SearchCursorQueryRequest.md)
+ - [SelfManagedOsdu.SearchCursorQueryResponse](docs/SearchCursorQueryResponse.md)
+ - [SelfManagedOsdu.SearchPoint](docs/SearchPoint.md)
+ - [SelfManagedOsdu.SearchQueryRequest](docs/SearchQueryRequest.md)
+ - [SelfManagedOsdu.SearchQueryResponse](docs/SearchQueryResponse.md)
+ - [SelfManagedOsdu.SearchSpatialFilter](docs/SearchSpatialFilter.md)
  - [SelfManagedOsdu.StorageAcl](docs/StorageAcl.md)
  - [SelfManagedOsdu.StorageBulkUpdateRecordsResponse](docs/StorageBulkUpdateRecordsResponse.md)
  - [SelfManagedOsdu.StorageDeleteRecordError](docs/StorageDeleteRecordError.md)

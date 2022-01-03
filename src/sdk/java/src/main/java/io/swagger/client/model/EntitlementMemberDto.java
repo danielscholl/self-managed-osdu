@@ -27,7 +27,7 @@ import java.io.IOException;
 /**
  * EntitlementMemberDto
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2021-12-09T20:22:07.530Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2021-12-21T22:06:14.852Z")
 public class EntitlementMemberDto {
   @SerializedName("email")
   private String email = null;

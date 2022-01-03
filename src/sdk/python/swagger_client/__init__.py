@@ -19,6 +19,7 @@ from __future__ import absolute_import
 from swagger_client.api.entitlement_api import EntitlementApi
 from swagger_client.api.legal_api import LegalApi
 from swagger_client.api.partition_api import PartitionApi
+from swagger_client.api.search_api import SearchApi
 from swagger_client.api.storage_api import StorageApi
 
 # import ApiClient
@@ -38,6 +39,16 @@ from swagger_client.models.legal_tag_request import LegalTagRequest
 from swagger_client.models.legal_tag_update_dto import LegalTagUpdateDto
 from swagger_client.models.partition_dto import PartitionDto
 from swagger_client.models.partition_property import PartitionProperty
+from swagger_client.models.search_app_error import SearchAppError
+from swagger_client.models.search_by_bounding_box import SearchByBoundingBox
+from swagger_client.models.search_by_distance import SearchByDistance
+from swagger_client.models.search_by_geo_polygon import SearchByGeoPolygon
+from swagger_client.models.search_cursor_query_request import SearchCursorQueryRequest
+from swagger_client.models.search_cursor_query_response import SearchCursorQueryResponse
+from swagger_client.models.search_point import SearchPoint
+from swagger_client.models.search_query_request import SearchQueryRequest
+from swagger_client.models.search_query_response import SearchQueryResponse
+from swagger_client.models.search_spatial_filter import SearchSpatialFilter
 from swagger_client.models.storage_acl import StorageAcl
 from swagger_client.models.storage_bulk_update_records_response import StorageBulkUpdateRecordsResponse
 from swagger_client.models.storage_delete_record_error import StorageDeleteRecordError
