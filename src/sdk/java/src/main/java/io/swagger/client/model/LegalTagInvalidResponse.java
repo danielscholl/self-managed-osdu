@@ -28,7 +28,7 @@ import java.io.IOException;
  * Represents a single invalid LegalTag.
  */
 @ApiModel(description = "Represents a single invalid LegalTag.")
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2021-12-21T22:06:14.852Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-01-05T17:57:33.519Z")
 public class LegalTagInvalidResponse {
   @SerializedName("name")
   private String name = null;

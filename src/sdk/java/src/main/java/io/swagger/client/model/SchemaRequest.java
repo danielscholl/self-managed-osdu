@@ -22,44 +22,54 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import io.swagger.client.model.LegalTagInvalidResponse;
+import io.swagger.client.model.SchemaInfo;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
- * Represents a collection invalid LegalTags.
+ * SchemaRequest
  */
-@ApiModel(description = "Represents a collection invalid LegalTags.")
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-01-05T17:57:33.519Z")
-public class LegalTagInvalidResponseList {
-  @SerializedName("invalidLegalTags")
-  private List<LegalTagInvalidResponse> invalidLegalTags = null;
+public class SchemaRequest {
+  @SerializedName("schema")
+  private Object schema = null;
 
-  public LegalTagInvalidResponseList invalidLegalTags(List<LegalTagInvalidResponse> invalidLegalTags) {
-    this.invalidLegalTags = invalidLegalTags;
-    return this;
-  }
+  @SerializedName("schemaInfo")
+  private SchemaInfo schemaInfo = null;
 
-  public LegalTagInvalidResponseList addInvalidLegalTagsItem(LegalTagInvalidResponse invalidLegalTagsItem) {
-    if (this.invalidLegalTags == null) {
-      this.invalidLegalTags = new ArrayList<LegalTagInvalidResponse>();
-    }
-    this.invalidLegalTags.add(invalidLegalTagsItem);
+  public SchemaRequest schema(Object schema) {
+    this.schema = schema;
     return this;
   }
 
    /**
-   * A collection of invalid LegalTags.
-   * @return invalidLegalTags
+   * Get schema
+   * @return schema
   **/
-  @ApiModelProperty(value = "A collection of invalid LegalTags.")
-  public List<LegalTagInvalidResponse> getInvalidLegalTags() {
-    return invalidLegalTags;
+  @ApiModelProperty(required = true, value = "")
+  public Object getSchema() {
+    return schema;
   }
 
-  public void setInvalidLegalTags(List<LegalTagInvalidResponse> invalidLegalTags) {
-    this.invalidLegalTags = invalidLegalTags;
+  public void setSchema(Object schema) {
+    this.schema = schema;
+  }
+
+  public SchemaRequest schemaInfo(SchemaInfo schemaInfo) {
+    this.schemaInfo = schemaInfo;
+    return this;
+  }
+
+   /**
+   * Get schemaInfo
+   * @return schemaInfo
+  **/
+  @ApiModelProperty(required = true, value = "")
+  public SchemaInfo getSchemaInfo() {
+    return schemaInfo;
+  }
+
+  public void setSchemaInfo(SchemaInfo schemaInfo) {
+    this.schemaInfo = schemaInfo;
   }
 
 
@@ -71,22 +81,24 @@ public class LegalTagInvalidResponseList {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    LegalTagInvalidResponseList legalTagInvalidResponseList = (LegalTagInvalidResponseList) o;
-    return Objects.equals(this.invalidLegalTags, legalTagInvalidResponseList.invalidLegalTags);
+    SchemaRequest schemaRequest = (SchemaRequest) o;
+    return Objects.equals(this.schema, schemaRequest.schema) &&
+        Objects.equals(this.schemaInfo, schemaRequest.schemaInfo);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(invalidLegalTags);
+    return Objects.hash(schema, schemaInfo);
   }
 
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class LegalTagInvalidResponseList {\n");
+    sb.append("class SchemaRequest {\n");
     
-    sb.append("    invalidLegalTags: ").append(toIndentedString(invalidLegalTags)).append("\n");
+    sb.append("    schema: ").append(toIndentedString(schema)).append("\n");
+    sb.append("    schemaInfo: ").append(toIndentedString(schemaInfo)).append("\n");
     sb.append("}");
     return sb.toString();
   }

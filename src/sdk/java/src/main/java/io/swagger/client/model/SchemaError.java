@@ -23,63 +23,73 @@ import com.google.gson.stream.JsonWriter;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
- * Storage record versions.
+ * SchemaError
  */
-@ApiModel(description = "Storage record versions.")
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-01-05T17:57:33.519Z")
-public class StorageRecordVersions {
-  @SerializedName("recordId")
-  private String recordId = null;
+public class SchemaError {
+  @SerializedName("message")
+  private String message = null;
 
-  @SerializedName("versions")
-  private List<Long> versions = null;
+  @SerializedName("reason")
+  private String reason = null;
 
-  public StorageRecordVersions recordId(String recordId) {
-    this.recordId = recordId;
+  @SerializedName("domain")
+  private String domain = null;
+
+  public SchemaError message(String message) {
+    this.message = message;
     return this;
   }
 
    /**
-   * Get recordId
-   * @return recordId
+   * Get message
+   * @return message
   **/
   @ApiModelProperty(value = "")
-  public String getRecordId() {
-    return recordId;
+  public String getMessage() {
+    return message;
   }
 
-  public void setRecordId(String recordId) {
-    this.recordId = recordId;
+  public void setMessage(String message) {
+    this.message = message;
   }
 
-  public StorageRecordVersions versions(List<Long> versions) {
-    this.versions = versions;
-    return this;
-  }
-
-  public StorageRecordVersions addVersionsItem(Long versionsItem) {
-    if (this.versions == null) {
-      this.versions = new ArrayList<Long>();
-    }
-    this.versions.add(versionsItem);
+  public SchemaError reason(String reason) {
+    this.reason = reason;
     return this;
   }
 
    /**
-   * Get versions
-   * @return versions
+   * Get reason
+   * @return reason
   **/
   @ApiModelProperty(value = "")
-  public List<Long> getVersions() {
-    return versions;
+  public String getReason() {
+    return reason;
   }
 
-  public void setVersions(List<Long> versions) {
-    this.versions = versions;
+  public void setReason(String reason) {
+    this.reason = reason;
+  }
+
+  public SchemaError domain(String domain) {
+    this.domain = domain;
+    return this;
+  }
+
+   /**
+   * Get domain
+   * @return domain
+  **/
+  @ApiModelProperty(value = "")
+  public String getDomain() {
+    return domain;
+  }
+
+  public void setDomain(String domain) {
+    this.domain = domain;
   }
 
 
@@ -91,24 +101,26 @@ public class StorageRecordVersions {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    StorageRecordVersions storageRecordVersions = (StorageRecordVersions) o;
-    return Objects.equals(this.recordId, storageRecordVersions.recordId) &&
-        Objects.equals(this.versions, storageRecordVersions.versions);
+    SchemaError schemaError = (SchemaError) o;
+    return Objects.equals(this.message, schemaError.message) &&
+        Objects.equals(this.reason, schemaError.reason) &&
+        Objects.equals(this.domain, schemaError.domain);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(recordId, versions);
+    return Objects.hash(message, reason, domain);
   }
 
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class StorageRecordVersions {\n");
+    sb.append("class SchemaError {\n");
     
-    sb.append("    recordId: ").append(toIndentedString(recordId)).append("\n");
-    sb.append("    versions: ").append(toIndentedString(versions)).append("\n");
+    sb.append("    message: ").append(toIndentedString(message)).append("\n");
+    sb.append("    reason: ").append(toIndentedString(reason)).append("\n");
+    sb.append("    domain: ").append(toIndentedString(domain)).append("\n");
     sb.append("}");
     return sb.toString();
   }

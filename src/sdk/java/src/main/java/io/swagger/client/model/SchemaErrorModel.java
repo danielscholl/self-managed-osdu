@@ -22,23 +22,52 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import io.swagger.client.model.SchemaError;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
- * SearchAppError
+ * SchemaErrorModel
  */
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-01-05T17:57:33.519Z")
-public class SearchAppError {
+public class SchemaErrorModel {
+  @SerializedName("errors")
+  private List<SchemaError> errors = null;
+
   @SerializedName("code")
   private Integer code = null;
-
-  @SerializedName("reason")
-  private String reason = null;
 
   @SerializedName("message")
   private String message = null;
 
-  public SearchAppError code(Integer code) {
+  public SchemaErrorModel errors(List<SchemaError> errors) {
+    this.errors = errors;
+    return this;
+  }
+
+  public SchemaErrorModel addErrorsItem(SchemaError errorsItem) {
+    if (this.errors == null) {
+      this.errors = new ArrayList<SchemaError>();
+    }
+    this.errors.add(errorsItem);
+    return this;
+  }
+
+   /**
+   * Get errors
+   * @return errors
+  **/
+  @ApiModelProperty(value = "")
+  public List<SchemaError> getErrors() {
+    return errors;
+  }
+
+  public void setErrors(List<SchemaError> errors) {
+    this.errors = errors;
+  }
+
+  public SchemaErrorModel code(Integer code) {
     this.code = code;
     return this;
   }
@@ -56,25 +85,7 @@ public class SearchAppError {
     this.code = code;
   }
 
-  public SearchAppError reason(String reason) {
-    this.reason = reason;
-    return this;
-  }
-
-   /**
-   * Get reason
-   * @return reason
-  **/
-  @ApiModelProperty(value = "")
-  public String getReason() {
-    return reason;
-  }
-
-  public void setReason(String reason) {
-    this.reason = reason;
-  }
-
-  public SearchAppError message(String message) {
+  public SchemaErrorModel message(String message) {
     this.message = message;
     return this;
   }
@@ -101,25 +112,25 @@ public class SearchAppError {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    SearchAppError searchAppError = (SearchAppError) o;
-    return Objects.equals(this.code, searchAppError.code) &&
-        Objects.equals(this.reason, searchAppError.reason) &&
-        Objects.equals(this.message, searchAppError.message);
+    SchemaErrorModel schemaErrorModel = (SchemaErrorModel) o;
+    return Objects.equals(this.errors, schemaErrorModel.errors) &&
+        Objects.equals(this.code, schemaErrorModel.code) &&
+        Objects.equals(this.message, schemaErrorModel.message);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(code, reason, message);
+    return Objects.hash(errors, code, message);
   }
 
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class SearchAppError {\n");
+    sb.append("class SchemaErrorModel {\n");
     
+    sb.append("    errors: ").append(toIndentedString(errors)).append("\n");
     sb.append("    code: ").append(toIndentedString(code)).append("\n");
-    sb.append("    reason: ").append(toIndentedString(reason)).append("\n");
     sb.append("    message: ").append(toIndentedString(message)).append("\n");
     sb.append("}");
     return sb.toString();

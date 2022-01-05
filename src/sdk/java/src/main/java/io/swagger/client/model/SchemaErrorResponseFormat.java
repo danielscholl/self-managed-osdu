@@ -22,53 +22,34 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import io.swagger.client.model.SchemaErrorModel;
 import java.io.IOException;
 
 /**
- * PartitionProperty
+ * An error that occurs during normal application logic
  */
+@ApiModel(description = "An error that occurs during normal application logic")
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-01-05T17:57:33.519Z")
-public class PartitionProperty {
-  @SerializedName("sensitive")
-  private Boolean sensitive = null;
+public class SchemaErrorResponseFormat {
+  @SerializedName("error")
+  private SchemaErrorModel error = null;
 
-  @SerializedName("value")
-  private Object value = null;
-
-  public PartitionProperty sensitive(Boolean sensitive) {
-    this.sensitive = sensitive;
+  public SchemaErrorResponseFormat error(SchemaErrorModel error) {
+    this.error = error;
     return this;
   }
 
    /**
-   * Get sensitive
-   * @return sensitive
+   * Get error
+   * @return error
   **/
   @ApiModelProperty(value = "")
-  public Boolean isSensitive() {
-    return sensitive;
+  public SchemaErrorModel getError() {
+    return error;
   }
 
-  public void setSensitive(Boolean sensitive) {
-    this.sensitive = sensitive;
-  }
-
-  public PartitionProperty value(Object value) {
-    this.value = value;
-    return this;
-  }
-
-   /**
-   * Get value
-   * @return value
-  **/
-  @ApiModelProperty(value = "")
-  public Object getValue() {
-    return value;
-  }
-
-  public void setValue(Object value) {
-    this.value = value;
+  public void setError(SchemaErrorModel error) {
+    this.error = error;
   }
 
 
@@ -80,24 +61,22 @@ public class PartitionProperty {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    PartitionProperty partitionProperty = (PartitionProperty) o;
-    return Objects.equals(this.sensitive, partitionProperty.sensitive) &&
-        Objects.equals(this.value, partitionProperty.value);
+    SchemaErrorResponseFormat schemaErrorResponseFormat = (SchemaErrorResponseFormat) o;
+    return Objects.equals(this.error, schemaErrorResponseFormat.error);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(sensitive, value);
+    return Objects.hash(error);
   }
 
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class PartitionProperty {\n");
+    sb.append("class SchemaErrorResponseFormat {\n");
     
-    sb.append("    sensitive: ").append(toIndentedString(sensitive)).append("\n");
-    sb.append("    value: ").append(toIndentedString(value)).append("\n");
+    sb.append("    error: ").append(toIndentedString(error)).append("\n");
     sb.append("}");
     return sb.toString();
   }
