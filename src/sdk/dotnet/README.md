@@ -125,6 +125,10 @@ Class | Method | HTTP request | Description
 *PartitionApi* | [**GetUsingGET**](docs/PartitionApi.md#getusingget) | **GET** /api/partition/v1/partitions/{partitionId} | Get Single Partition
 *PartitionApi* | [**ListUsingGET**](docs/PartitionApi.md#listusingget) | **GET** /api/partition/v1/partitions | List Partitions
 *PartitionApi* | [**UpdateUsingPATCH**](docs/PartitionApi.md#updateusingpatch) | **PATCH** /api/partition/v1/partitions/{partitionId} | Update Partition
+*SchemaApi* | [**CreateSchema**](docs/SchemaApi.md#createschema) | **POST** /api/schema-service/v1/schema | Adds a schema to the schema repository.
+*SchemaApi* | [**GetSchema**](docs/SchemaApi.md#getschema) | **GET** /api/schema-service/v1/schema/{id} | Gets schema from the schema repository.
+*SchemaApi* | [**SearchSchemaInfoRepository**](docs/SchemaApi.md#searchschemainforepository) | **GET** /api/schema-service/v1/schema | Searches schemaInfo repository
+*SchemaApi* | [**UpdateSchema**](docs/SchemaApi.md#updateschema) | **PUT** /api/schema-service/v1/schema | Creates/Updates a schema in development status
 *SearchApi* | [**DeleteIndex**](docs/SearchApi.md#deleteindex) | **DELETE** /api/search/v2/index/{kind} | Deletes all documents from index for given 'kind'.
 *SearchApi* | [**GetKindSchema**](docs/SearchApi.md#getkindschema) | **GET** /api/search/v2/index/schema/{kind} | Returns the index schema for given 'kind'.
 *SearchApi* | [**QueryRecords**](docs/SearchApi.md#queryrecords) | **POST** /api/search/v2/query | Queries the index for the specified kind using the input query string.
@@ -158,6 +162,13 @@ Class | Method | HTTP request | Description
  - [Model.LegalTagUpdateDto](docs/LegalTagUpdateDto.md)
  - [Model.PartitionDto](docs/PartitionDto.md)
  - [Model.PartitionProperty](docs/PartitionProperty.md)
+ - [Model.SchemaError](docs/SchemaError.md)
+ - [Model.SchemaErrorModel](docs/SchemaErrorModel.md)
+ - [Model.SchemaErrorResponseFormat](docs/SchemaErrorResponseFormat.md)
+ - [Model.SchemaIdentity](docs/SchemaIdentity.md)
+ - [Model.SchemaInfo](docs/SchemaInfo.md)
+ - [Model.SchemaInfoResponse](docs/SchemaInfoResponse.md)
+ - [Model.SchemaRequest](docs/SchemaRequest.md)
  - [Model.SearchAppError](docs/SearchAppError.md)
  - [Model.SearchByBoundingBox](docs/SearchByBoundingBox.md)
  - [Model.SearchByDistance](docs/SearchByDistance.md)

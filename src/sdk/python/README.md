@@ -100,6 +100,10 @@ Class | Method | HTTP request | Description
 *PartitionApi* | [**get_using_get**](docs/PartitionApi.md#get_using_get) | **GET** /api/partition/v1/partitions/{partitionId} | Get Single Partition
 *PartitionApi* | [**list_using_get**](docs/PartitionApi.md#list_using_get) | **GET** /api/partition/v1/partitions | List Partitions
 *PartitionApi* | [**update_using_patch**](docs/PartitionApi.md#update_using_patch) | **PATCH** /api/partition/v1/partitions/{partitionId} | Update Partition
+*SchemaApi* | [**create_schema**](docs/SchemaApi.md#create_schema) | **POST** /api/schema-service/v1/schema | Adds a schema to the schema repository.
+*SchemaApi* | [**get_schema**](docs/SchemaApi.md#get_schema) | **GET** /api/schema-service/v1/schema/{id} | Gets schema from the schema repository.
+*SchemaApi* | [**search_schema_info_repository**](docs/SchemaApi.md#search_schema_info_repository) | **GET** /api/schema-service/v1/schema | Searches schemaInfo repository
+*SchemaApi* | [**update_schema**](docs/SchemaApi.md#update_schema) | **PUT** /api/schema-service/v1/schema | Creates/Updates a schema in development status
 *SearchApi* | [**delete_index**](docs/SearchApi.md#delete_index) | **DELETE** /api/search/v2/index/{kind} | Deletes all documents from index for given &#39;kind&#39;.
 *SearchApi* | [**get_kind_schema**](docs/SearchApi.md#get_kind_schema) | **GET** /api/search/v2/index/schema/{kind} | Returns the index schema for given &#39;kind&#39;.
 *SearchApi* | [**query_records**](docs/SearchApi.md#query_records) | **POST** /api/search/v2/query | Queries the index for the specified kind using the input query string.
@@ -132,6 +136,13 @@ Class | Method | HTTP request | Description
  - [LegalTagUpdateDto](docs/LegalTagUpdateDto.md)
  - [PartitionDto](docs/PartitionDto.md)
  - [PartitionProperty](docs/PartitionProperty.md)
+ - [SchemaError](docs/SchemaError.md)
+ - [SchemaErrorModel](docs/SchemaErrorModel.md)
+ - [SchemaErrorResponseFormat](docs/SchemaErrorResponseFormat.md)
+ - [SchemaIdentity](docs/SchemaIdentity.md)
+ - [SchemaInfo](docs/SchemaInfo.md)
+ - [SchemaInfoResponse](docs/SchemaInfoResponse.md)
+ - [SchemaRequest](docs/SchemaRequest.md)
  - [SearchAppError](docs/SearchAppError.md)
  - [SearchByBoundingBox](docs/SearchByBoundingBox.md)
  - [SearchByDistance](docs/SearchByDistance.md)

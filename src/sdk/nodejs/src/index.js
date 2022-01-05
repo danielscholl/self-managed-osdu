@@ -16,12 +16,12 @@
 (function(factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
-    define(['ApiClient', 'model/EntitlementGroupProperties', 'model/EntitlementGroupResponse', 'model/EntitlementMemberDto', 'model/LegalTagDto', 'model/LegalTagDtos', 'model/LegalTagInvalidResponse', 'model/LegalTagInvalidResponseList', 'model/LegalTagProperties', 'model/LegalTagPropertyValues', 'model/LegalTagRequest', 'model/LegalTagUpdateDto', 'model/PartitionDto', 'model/PartitionProperty', 'model/SearchAppError', 'model/SearchByBoundingBox', 'model/SearchByDistance', 'model/SearchByGeoPolygon', 'model/SearchCursorQueryRequest', 'model/SearchCursorQueryResponse', 'model/SearchPoint', 'model/SearchQueryRequest', 'model/SearchQueryResponse', 'model/SearchSpatialFilter', 'model/StorageAcl', 'model/StorageBulkUpdateRecordsResponse', 'model/StorageDeleteRecordError', 'model/StorageErrorResponse', 'model/StorageLegal', 'model/StorageMultiRecordIds', 'model/StoragePatchOperation', 'model/StorageQueryResponse', 'model/StorageRecord', 'model/StorageRecordBulkUpdateParam', 'model/StorageRecordData', 'model/StorageRecordHistory', 'model/StorageRecordQuery', 'model/StorageRecordVersions', 'api/EntitlementApi', 'api/LegalApi', 'api/PartitionApi', 'api/SearchApi', 'api/StorageApi'], factory);
+    define(['ApiClient', 'model/EntitlementGroupProperties', 'model/EntitlementGroupResponse', 'model/EntitlementMemberDto', 'model/LegalTagDto', 'model/LegalTagDtos', 'model/LegalTagInvalidResponse', 'model/LegalTagInvalidResponseList', 'model/LegalTagProperties', 'model/LegalTagPropertyValues', 'model/LegalTagRequest', 'model/LegalTagUpdateDto', 'model/PartitionDto', 'model/PartitionProperty', 'model/SchemaError', 'model/SchemaErrorModel', 'model/SchemaErrorResponseFormat', 'model/SchemaIdentity', 'model/SchemaInfo', 'model/SchemaInfoResponse', 'model/SchemaRequest', 'model/SearchAppError', 'model/SearchByBoundingBox', 'model/SearchByDistance', 'model/SearchByGeoPolygon', 'model/SearchCursorQueryRequest', 'model/SearchCursorQueryResponse', 'model/SearchPoint', 'model/SearchQueryRequest', 'model/SearchQueryResponse', 'model/SearchSpatialFilter', 'model/StorageAcl', 'model/StorageBulkUpdateRecordsResponse', 'model/StorageDeleteRecordError', 'model/StorageErrorResponse', 'model/StorageLegal', 'model/StorageMultiRecordIds', 'model/StoragePatchOperation', 'model/StorageQueryResponse', 'model/StorageRecord', 'model/StorageRecordBulkUpdateParam', 'model/StorageRecordData', 'model/StorageRecordHistory', 'model/StorageRecordQuery', 'model/StorageRecordVersions', 'api/EntitlementApi', 'api/LegalApi', 'api/PartitionApi', 'api/SchemaApi', 'api/SearchApi', 'api/StorageApi'], factory);
   } else if (typeof module === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('./ApiClient'), require('./model/EntitlementGroupProperties'), require('./model/EntitlementGroupResponse'), require('./model/EntitlementMemberDto'), require('./model/LegalTagDto'), require('./model/LegalTagDtos'), require('./model/LegalTagInvalidResponse'), require('./model/LegalTagInvalidResponseList'), require('./model/LegalTagProperties'), require('./model/LegalTagPropertyValues'), require('./model/LegalTagRequest'), require('./model/LegalTagUpdateDto'), require('./model/PartitionDto'), require('./model/PartitionProperty'), require('./model/SearchAppError'), require('./model/SearchByBoundingBox'), require('./model/SearchByDistance'), require('./model/SearchByGeoPolygon'), require('./model/SearchCursorQueryRequest'), require('./model/SearchCursorQueryResponse'), require('./model/SearchPoint'), require('./model/SearchQueryRequest'), require('./model/SearchQueryResponse'), require('./model/SearchSpatialFilter'), require('./model/StorageAcl'), require('./model/StorageBulkUpdateRecordsResponse'), require('./model/StorageDeleteRecordError'), require('./model/StorageErrorResponse'), require('./model/StorageLegal'), require('./model/StorageMultiRecordIds'), require('./model/StoragePatchOperation'), require('./model/StorageQueryResponse'), require('./model/StorageRecord'), require('./model/StorageRecordBulkUpdateParam'), require('./model/StorageRecordData'), require('./model/StorageRecordHistory'), require('./model/StorageRecordQuery'), require('./model/StorageRecordVersions'), require('./api/EntitlementApi'), require('./api/LegalApi'), require('./api/PartitionApi'), require('./api/SearchApi'), require('./api/StorageApi'));
+    module.exports = factory(require('./ApiClient'), require('./model/EntitlementGroupProperties'), require('./model/EntitlementGroupResponse'), require('./model/EntitlementMemberDto'), require('./model/LegalTagDto'), require('./model/LegalTagDtos'), require('./model/LegalTagInvalidResponse'), require('./model/LegalTagInvalidResponseList'), require('./model/LegalTagProperties'), require('./model/LegalTagPropertyValues'), require('./model/LegalTagRequest'), require('./model/LegalTagUpdateDto'), require('./model/PartitionDto'), require('./model/PartitionProperty'), require('./model/SchemaError'), require('./model/SchemaErrorModel'), require('./model/SchemaErrorResponseFormat'), require('./model/SchemaIdentity'), require('./model/SchemaInfo'), require('./model/SchemaInfoResponse'), require('./model/SchemaRequest'), require('./model/SearchAppError'), require('./model/SearchByBoundingBox'), require('./model/SearchByDistance'), require('./model/SearchByGeoPolygon'), require('./model/SearchCursorQueryRequest'), require('./model/SearchCursorQueryResponse'), require('./model/SearchPoint'), require('./model/SearchQueryRequest'), require('./model/SearchQueryResponse'), require('./model/SearchSpatialFilter'), require('./model/StorageAcl'), require('./model/StorageBulkUpdateRecordsResponse'), require('./model/StorageDeleteRecordError'), require('./model/StorageErrorResponse'), require('./model/StorageLegal'), require('./model/StorageMultiRecordIds'), require('./model/StoragePatchOperation'), require('./model/StorageQueryResponse'), require('./model/StorageRecord'), require('./model/StorageRecordBulkUpdateParam'), require('./model/StorageRecordData'), require('./model/StorageRecordHistory'), require('./model/StorageRecordQuery'), require('./model/StorageRecordVersions'), require('./api/EntitlementApi'), require('./api/LegalApi'), require('./api/PartitionApi'), require('./api/SchemaApi'), require('./api/SearchApi'), require('./api/StorageApi'));
   }
-}(function(ApiClient, EntitlementGroupProperties, EntitlementGroupResponse, EntitlementMemberDto, LegalTagDto, LegalTagDtos, LegalTagInvalidResponse, LegalTagInvalidResponseList, LegalTagProperties, LegalTagPropertyValues, LegalTagRequest, LegalTagUpdateDto, PartitionDto, PartitionProperty, SearchAppError, SearchByBoundingBox, SearchByDistance, SearchByGeoPolygon, SearchCursorQueryRequest, SearchCursorQueryResponse, SearchPoint, SearchQueryRequest, SearchQueryResponse, SearchSpatialFilter, StorageAcl, StorageBulkUpdateRecordsResponse, StorageDeleteRecordError, StorageErrorResponse, StorageLegal, StorageMultiRecordIds, StoragePatchOperation, StorageQueryResponse, StorageRecord, StorageRecordBulkUpdateParam, StorageRecordData, StorageRecordHistory, StorageRecordQuery, StorageRecordVersions, EntitlementApi, LegalApi, PartitionApi, SearchApi, StorageApi) {
+}(function(ApiClient, EntitlementGroupProperties, EntitlementGroupResponse, EntitlementMemberDto, LegalTagDto, LegalTagDtos, LegalTagInvalidResponse, LegalTagInvalidResponseList, LegalTagProperties, LegalTagPropertyValues, LegalTagRequest, LegalTagUpdateDto, PartitionDto, PartitionProperty, SchemaError, SchemaErrorModel, SchemaErrorResponseFormat, SchemaIdentity, SchemaInfo, SchemaInfoResponse, SchemaRequest, SearchAppError, SearchByBoundingBox, SearchByDistance, SearchByGeoPolygon, SearchCursorQueryRequest, SearchCursorQueryResponse, SearchPoint, SearchQueryRequest, SearchQueryResponse, SearchSpatialFilter, StorageAcl, StorageBulkUpdateRecordsResponse, StorageDeleteRecordError, StorageErrorResponse, StorageLegal, StorageMultiRecordIds, StoragePatchOperation, StorageQueryResponse, StorageRecord, StorageRecordBulkUpdateParam, StorageRecordData, StorageRecordHistory, StorageRecordQuery, StorageRecordVersions, EntitlementApi, LegalApi, PartitionApi, SchemaApi, SearchApi, StorageApi) {
   'use strict';
 
   /**
@@ -126,6 +126,41 @@
      * @property {module:model/PartitionProperty}
      */
     PartitionProperty: PartitionProperty,
+    /**
+     * The SchemaError model constructor.
+     * @property {module:model/SchemaError}
+     */
+    SchemaError: SchemaError,
+    /**
+     * The SchemaErrorModel model constructor.
+     * @property {module:model/SchemaErrorModel}
+     */
+    SchemaErrorModel: SchemaErrorModel,
+    /**
+     * The SchemaErrorResponseFormat model constructor.
+     * @property {module:model/SchemaErrorResponseFormat}
+     */
+    SchemaErrorResponseFormat: SchemaErrorResponseFormat,
+    /**
+     * The SchemaIdentity model constructor.
+     * @property {module:model/SchemaIdentity}
+     */
+    SchemaIdentity: SchemaIdentity,
+    /**
+     * The SchemaInfo model constructor.
+     * @property {module:model/SchemaInfo}
+     */
+    SchemaInfo: SchemaInfo,
+    /**
+     * The SchemaInfoResponse model constructor.
+     * @property {module:model/SchemaInfoResponse}
+     */
+    SchemaInfoResponse: SchemaInfoResponse,
+    /**
+     * The SchemaRequest model constructor.
+     * @property {module:model/SchemaRequest}
+     */
+    SchemaRequest: SchemaRequest,
     /**
      * The SearchAppError model constructor.
      * @property {module:model/SearchAppError}
@@ -261,6 +296,11 @@
      * @property {module:api/PartitionApi}
      */
     PartitionApi: PartitionApi,
+    /**
+     * The SchemaApi service constructor.
+     * @property {module:api/SchemaApi}
+     */
+    SchemaApi: SchemaApi,
     /**
      * The SearchApi service constructor.
      * @property {module:api/SearchApi}

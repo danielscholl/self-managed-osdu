@@ -151,6 +151,10 @@ Class | Method | HTTP request | Description
 *SelfManagedOsdu.PartitionApi* | [**getUsingGET**](docs/PartitionApi.md#getUsingGET) | **GET** /api/partition/v1/partitions/{partitionId} | Get Single Partition
 *SelfManagedOsdu.PartitionApi* | [**listUsingGET**](docs/PartitionApi.md#listUsingGET) | **GET** /api/partition/v1/partitions | List Partitions
 *SelfManagedOsdu.PartitionApi* | [**updateUsingPATCH**](docs/PartitionApi.md#updateUsingPATCH) | **PATCH** /api/partition/v1/partitions/{partitionId} | Update Partition
+*SelfManagedOsdu.SchemaApi* | [**createSchema**](docs/SchemaApi.md#createSchema) | **POST** /api/schema-service/v1/schema | Adds a schema to the schema repository.
+*SelfManagedOsdu.SchemaApi* | [**getSchema**](docs/SchemaApi.md#getSchema) | **GET** /api/schema-service/v1/schema/{id} | Gets schema from the schema repository.
+*SelfManagedOsdu.SchemaApi* | [**searchSchemaInfoRepository**](docs/SchemaApi.md#searchSchemaInfoRepository) | **GET** /api/schema-service/v1/schema | Searches schemaInfo repository
+*SelfManagedOsdu.SchemaApi* | [**updateSchema**](docs/SchemaApi.md#updateSchema) | **PUT** /api/schema-service/v1/schema | Creates/Updates a schema in development status
 *SelfManagedOsdu.SearchApi* | [**deleteIndex**](docs/SearchApi.md#deleteIndex) | **DELETE** /api/search/v2/index/{kind} | Deletes all documents from index for given 'kind'.
 *SelfManagedOsdu.SearchApi* | [**getKindSchema**](docs/SearchApi.md#getKindSchema) | **GET** /api/search/v2/index/schema/{kind} | Returns the index schema for given 'kind'.
 *SelfManagedOsdu.SearchApi* | [**queryRecords**](docs/SearchApi.md#queryRecords) | **POST** /api/search/v2/query | Queries the index for the specified kind using the input query string.
@@ -183,6 +187,13 @@ Class | Method | HTTP request | Description
  - [SelfManagedOsdu.LegalTagUpdateDto](docs/LegalTagUpdateDto.md)
  - [SelfManagedOsdu.PartitionDto](docs/PartitionDto.md)
  - [SelfManagedOsdu.PartitionProperty](docs/PartitionProperty.md)
+ - [SelfManagedOsdu.SchemaError](docs/SchemaError.md)
+ - [SelfManagedOsdu.SchemaErrorModel](docs/SchemaErrorModel.md)
+ - [SelfManagedOsdu.SchemaErrorResponseFormat](docs/SchemaErrorResponseFormat.md)
+ - [SelfManagedOsdu.SchemaIdentity](docs/SchemaIdentity.md)
+ - [SelfManagedOsdu.SchemaInfo](docs/SchemaInfo.md)
+ - [SelfManagedOsdu.SchemaInfoResponse](docs/SchemaInfoResponse.md)
+ - [SelfManagedOsdu.SchemaRequest](docs/SchemaRequest.md)
  - [SelfManagedOsdu.SearchAppError](docs/SearchAppError.md)
  - [SelfManagedOsdu.SearchByBoundingBox](docs/SearchByBoundingBox.md)
  - [SelfManagedOsdu.SearchByDistance](docs/SearchByDistance.md)

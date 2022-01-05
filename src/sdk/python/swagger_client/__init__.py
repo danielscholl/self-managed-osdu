@@ -19,6 +19,7 @@ from __future__ import absolute_import
 from swagger_client.api.entitlement_api import EntitlementApi
 from swagger_client.api.legal_api import LegalApi
 from swagger_client.api.partition_api import PartitionApi
+from swagger_client.api.schema_api import SchemaApi
 from swagger_client.api.search_api import SearchApi
 from swagger_client.api.storage_api import StorageApi
 
@@ -39,6 +40,13 @@ from swagger_client.models.legal_tag_request import LegalTagRequest
 from swagger_client.models.legal_tag_update_dto import LegalTagUpdateDto
 from swagger_client.models.partition_dto import PartitionDto
 from swagger_client.models.partition_property import PartitionProperty
+from swagger_client.models.schema_error import SchemaError
+from swagger_client.models.schema_error_model import SchemaErrorModel
+from swagger_client.models.schema_error_response_format import SchemaErrorResponseFormat
+from swagger_client.models.schema_identity import SchemaIdentity
+from swagger_client.models.schema_info import SchemaInfo
+from swagger_client.models.schema_info_response import SchemaInfoResponse
+from swagger_client.models.schema_request import SchemaRequest
 from swagger_client.models.search_app_error import SearchAppError
 from swagger_client.models.search_by_bounding_box import SearchByBoundingBox
 from swagger_client.models.search_by_distance import SearchByDistance

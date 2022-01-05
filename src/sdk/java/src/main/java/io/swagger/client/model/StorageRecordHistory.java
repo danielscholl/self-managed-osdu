@@ -29,7 +29,7 @@ import java.util.List;
 /**
  * StorageRecordHistory
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2021-12-21T22:06:14.852Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-01-05T17:57:33.519Z")
 public class StorageRecordHistory {
   @SerializedName("parents")
   private List<String> parents = null;
