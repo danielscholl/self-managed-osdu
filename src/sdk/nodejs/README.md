@@ -188,7 +188,6 @@ Class | Method | HTTP request | Description
  - [SelfManagedOsdu.FileError](docs/FileError.md)
  - [SelfManagedOsdu.FileErrorModel](docs/FileErrorModel.md)
  - [SelfManagedOsdu.FileExtensionProperties](docs/FileExtensionProperties.md)
- - [SelfManagedOsdu.FileID](docs/FileID.md)
  - [SelfManagedOsdu.FileLegal](docs/FileLegal.md)
  - [SelfManagedOsdu.FileLinkList](docs/FileLinkList.md)
  - [SelfManagedOsdu.FileListRequest](docs/FileListRequest.md)
