@@ -1792,6 +1792,467 @@ paths:
       security:
         - Bearer: []
 
+  #########################
+  # File Service
+  #########################
+
+  '/api/file/v2/getLocation':
+    post:
+      tags:
+        - File Service
+      summary: 'Get a location in Landing Zone to upload a file.'
+      operationId: 'Get a location in Landing Zone to upload a file.'
+      description: |
+        Create a new location in the landing zone to upload a file.
+        **Required roles**: 'users.datalake.editors' or 'users.datalake.admins' or 'users.datalake.ops'.
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: data-partition-id
+          in: header
+          description: Specifies the data partition to use. This should either be the
+            partition name or crm account ID associated with the partition.
+          required: true
+          type: string
+          x-example: opendes
+        - name: body
+          in: body
+          schema:
+              $ref: '#/definitions/FileLocationRequest'
+      responses:
+        '200':
+          description: Created location
+          schema:
+            $ref: '#/definitions/FileLandingZoneLocationResponse'
+        '400':
+          description: Bad user input. Mandatory fields missing or unacceptable value passed to API
+          schema:
+            $ref: '#/definitions/FileApplicationError'
+        '401':
+          description: Invalid/Expired Credential
+          schema:
+            $ref: '#/definitions/FileApplicationError'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/FileApplicationError'
+        '404':
+          description: Record Not Found
+          schema:
+            $ref: '#/definitions/FileApplicationError'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/FileApplicationError'
+      security:
+      - Bearer: []
+
+  '/api/file/v2/files/UploadURL':
+    get:
+      tags:
+        - File Service
+      summary: 'Get a location in Landing Zone to upload a file.'
+      description: |-
+        Gets a temporary signed URL to upload a file.The generated URL is time bound and expires after 24 hours.
+        User will receive a FileSource in the response.This is the relative path where the uploaded file will persist.
+        Once the file is uploaded, FileSource can then be used to post metadata of the file. The uploaded file gets automatically deleted, if the metadata is not posted within 24 hours of uploading the file.
+        **Required roles**: 'users.datalake.viewers' or 'users.datalake.editors' or 'users.datalake.admins' or 'users.datalake.ops'.
+      operationId: 'Get the location to upload a file'
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+      - name: data-partition-id
+        in: header
+        description: Specifies the data partition to use. This should either be the
+          partition name or crm account ID associated with the partition.
+        required: true
+        type: string
+        x-example: opendes
+      responses:
+        '200':
+          description: |
+            Created location
+          schema:
+            $ref: '#/definitions/FileSourceLocationResponse'
+        '400':
+          description: Bad user input. Mandatory fields missing or unacceptable value passed to API
+          schema:
+            $ref: '#/definitions/FileApplicationError'
+        '401':
+          description: Invalid/Expired Credential
+          schema:
+            $ref: '#/definitions/FileApplicationError'
+        '403':
+          description: Forbidden.
+          schema:
+            $ref: '#/definitions/FileApplicationError'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/FileApplicationError'
+      security:
+        - Bearer: []
+
+  '/api/file/v2/files/metadata':
+    post:
+      tags:
+        - File Service
+      summary: 'Creates metadata for a file'
+      description: |-
+        This API creates a metadata record for a file that is already uploaded. The Metadata is linked to the file via `FileSource` provided in the request body.
+        If `FileSource` attribute is missing in the request body or there is no file present, then the request fails with an error.
+        When metadata is successfully updated in the system, it returns the `Id` of the file metadata record.
+        **Required roles**: 'users.datalake.viewers' or 'users.datalake.editors' or 'users.datalake.admins' or 'users.datalake.ops'.
+      operationId: 'Publish file metadata for a file.'
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+      - name: data-partition-id
+        in: header
+        description: Specifies the data partition to use. This should either be the
+          partition name or crm account ID associated with the partition.
+        required: true
+        type: string
+        x-example: opendes
+      - name: body
+        in: body
+        description: File metadata content
+        schema:
+          $ref: '#/definitions/FileRecord'
+      responses:
+        '201':
+          description: Metadata created
+          schema:
+            $ref: '#/definitions/FileMetadataResponse'
+        '400':
+          description: Bad user input. Mandatory fields missing or unacceptable value
+            passed to API
+          schema:
+            $ref: '#/definitions/FileApplicationError'
+        '401':
+          description: Invalid/Expired Credential
+          schema:
+            $ref: '#/definitions/FileApplicationError'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/FileApplicationError'
+        '404':
+          description: Record Not Found
+          schema:
+            $ref: '#/definitions/FileApplicationError'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/FileApplicationError'
+      security:
+      - Bearer: []
+
+  '/api/file/v2/files/{Id}/metadata':
+    get:
+      tags:
+        - File Service
+      description: >-
+        Gets the latest version of File metadata record identified by the given id.
+        **Required roles**: 'users.datalake.viewers' or 'users.datalake.editors'
+        or 'users.datalake.admins' or 'users.datalake.ops'.
+      operationId: 'Gets metadata record for the given id'
+      summary: 'Gets metadata record for the given id'
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: data-partition-id
+          in: header
+          description: >-
+            Specifies the data partition to use. This should either be the
+            partition name or crm account ID associated with the partition.
+          required: true
+          type: string
+          x-example: opendes
+        - name: Id
+          description: File metadata record Id.
+          in: path
+          required: true
+          type: string
+      responses:
+        '200':
+          description: A successful response
+          schema:
+            $ref: '#/definitions/FileRecordVersion'
+        '400':
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/FileApplicationError'
+        '401':
+          description: Invalid/Expired Credential
+          schema:
+            $ref: '#/definitions/FileApplicationError'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/FileApplicationError'
+        '404':
+          description: Record Not Found
+          schema:
+            $ref: '#/definitions/FileApplicationError'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/FileApplicationError'
+      security:
+        - Bearer: []
+    delete:
+      tags:
+        - File Service
+      description: >-
+        Deletes the File metadata record identified by the given id and file associated with that metadata record.
+        **Required roles**: 'users.datalake.editors'  or 'users.datalake.admins'.
+      operationId: Deletes metadata record & File for the given id
+      summary: Deletes metadata record & file assocaited with that record for the given id
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: data-partition-id
+          in: header
+          description: >-
+            Specifies the data partition to use. This should either be the
+            partition name or crm account ID associated with the partition.
+          required: true
+          type: string
+          x-example: opendes
+        - name: Id
+          description: File metadata record Id.
+          in: path
+          required: true
+          type: string
+      responses:
+        '204':
+          description: Record deleted successfully.
+        '400':
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/FileApplicationError'
+        '401':
+          description: Invalid/Expired Credential
+          schema:
+            $ref: '#/definitions/FileApplicationError'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/FileApplicationError'
+        '404':
+          description: Record Not Found
+          schema:
+            $ref: '#/definitions/FileApplicationError'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/FileApplicationError'
+      security:
+        - Bearer: []
+
+  '/api/file/v2/files/{Id}/DownloadURL':
+    get:
+      tags:
+        - File Service
+      summary: Gets a URL to download the file
+      description: |-
+        Gets a URL for downloading the file associated with the unique `id`.
+        **Required roles**: 'users.datalake.viewers' or 'users.datalake.editors' or 'users.datalake.admins' or 'users.datalake.ops'.
+      operationId: 'Gets URL to download the file associated with the given id.'
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+      - name: data-partition-id
+        in: header
+        description: Specifies the data partition to use. This should either be the
+          partition name or crm account ID associated with the partition.
+        required: true
+        type: string
+        x-example: opendes
+      - name: Id
+        in: path
+        description: File Metadata record Id.
+        required: true
+        type: string
+      - name: expiryTime
+        description: The Time for which Signed URL to be valid. Accepted Regex patterns are "^[0-9]+M$", "^[0-9]+H$", "^[0-9]+D$" denoting Integer values in Minutes, Hours, Days respectively. In absence of this parameter the URL would be valid for 7 Days.
+        required: false
+        in: query
+        type: string
+        x-example: '5M'
+      responses:
+        '200':
+          description: A successful response
+          schema:
+            $ref: '#/definitions/FileDownloadResponse'
+        '400':
+          description: Bad user input. Mandatory fields missing or unacceptable value
+            passed to API
+          schema:
+            $ref: '#/definitions/FileApplicationError'
+        '401':
+          description: Invalid/Expired Credential
+          schema:
+            $ref: '#/definitions/FileApplicationError'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/FileApplicationError'
+        '404':
+          description: Record Not Found
+          schema:
+            $ref: '#/definitions/FileApplicationError'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/FileApplicationError'
+      security:
+        - Bearer: []
+
+  '/api/file/v2/getFileLocation':
+    post:
+      tags:
+        - File Service (Internal)
+      description: 'Returns file `Location` and `Driver`.'
+      operationId: 'Returns file `Location` and `Driver`.'
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: data-partition-id
+          in: header
+          description: Specifies the data partition to use. This should either be the partition name or crm account ID associated with the partition.
+          required: true
+          type: string
+          x-example: opendes
+        - name: body
+          in: body
+          schema:
+            $ref: '#/definitions/FileLocationRequest'
+      responses:
+        '200':
+          description: |
+            File location
+          schema:
+            $ref: '#/definitions/FileLocationResponse'
+        '400':
+          description: Bad user input. Mandatory fields missing or unacceptable value
+            passed to API
+          schema:
+            $ref: '#/definitions/FileApplicationError'
+        '401':
+          description: Invalid/Expired Credential
+          schema:
+            $ref: '#/definitions/FileApplicationError'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/FileApplicationError'
+      security:
+        - Bearer: []
+
+  '/api/file/v2/delivery/getFileSignedUrl':
+    post:
+      tags:
+        - Delivery API
+      description: 'Returns delivery instructions for File(s) using SRNs'
+      operationId: 'Returns delivery instructions for File(s) using SRNs'
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: data-partition-id
+          in: header
+          description: 'Specifies the data partition to use. This should either be the partition name or crm account ID associated with the partition.'
+          required: true
+          type: string
+          x-example: opendes
+        - name: body
+          in: body
+          schema:
+            $ref: '#/definitions/FileDeliveryGetFileSignedURLRequest'
+      responses:
+        '200':
+          description: File location
+          schema:
+            $ref: '#/definitions/FileDeliveryGetFileSignedURLResponse'
+        '400':
+          description: Bad user input. Mandatory fields missing or unacceptable value passed to API
+          schema:
+            $ref: '#/definitions/FileApplicationError'
+        '401':
+          description: Invalid/Expired Credential
+          schema:
+            $ref: '#/definitions/FileApplicationError'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/FileApplicationError'
+      security:
+        - Bearer: []
+
+  '/api/file/v2/getFileList':
+    post:
+      tags:
+        - File Service (Internal)
+      description: 'Allows the application to audit the attempted file uploads. The method is internal and is not available for third-party applications.'
+      operationId: 'Allows the application to audit the attempted file uploads. The method is internal and is not available for third-party applications.'
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: data-partition-id
+          in: header
+          description: Specifies the data partition to use. This should either be the partition name or crm account ID associated with the partition.
+          required: true
+          type: string
+          x-example: opendes
+        - name: body
+          in: body
+          schema:
+            $ref: '#/definitions/FileListRequest'
+      responses:
+        '200':
+          description: File list page
+          schema:
+            $ref: '#/definitions/FileListResponse'
+        '400':
+          description: Bad user input. Mandatory fields missing or unacceptable value passed to API
+          schema:
+            $ref: '#/definitions/FileApplicationError'
+        '401':
+          description: Invalid/Expired Credential
+          schema:
+            $ref: '#/definitions/FileApplicationError'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/FileApplicationError'
+      security:
+        - Bearer: []
+
+#########################
+# Model Definitions
+#########################
+
+
+
 definitions:
   PartitionProperty:
     type: object
@@ -3142,17 +3603,14 @@ definitions:
         $ref: '#/definitions/FileDriver'
       Location:
         type: string
-
   FileID:
     type: string
     # pattern: ^[\w,\s-]+(\.\w+)?$
-    
   FileLocationRequest:
     type: object
     properties:
       FileID:
         $ref: '#/definitions/FileID'
-        
   FileSourceLocationResponse:
     type: object
     properties:
@@ -3179,7 +3637,6 @@ definitions:
           type: string
         example:
           SignedURL: 'GCS signed URL'
-
   FileLocation:
     type: object
     properties:
@@ -3194,7 +3651,6 @@ definitions:
         format: date-time
       CreatedBy:
         type: string
-
   FileListResponse:
     type: object
     properties:
