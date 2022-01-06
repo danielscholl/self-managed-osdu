@@ -1,13 +1,12 @@
-# FileLocation
+# FileListResponse
 
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**file_id** | [**FileID**](FileID.md) |  | [optional] 
-**driver** | [**FileDriver**](FileDriver.md) |  | [optional] 
-**location** | **str** |  | [optional] 
-**created_at** | **datetime** |  | [optional] 
-**created_by** | **str** |  | [optional] 
+**content** | [**list[FileLocation]**](FileLocation.md) |  | [optional] 
+**number** | **int** |  | [optional] 
+**number_of_elements** | **int** |  | [optional] 
+**size** | **int** |  | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

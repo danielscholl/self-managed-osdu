@@ -34,7 +34,7 @@ class FileLocation(object):
     """
     swagger_types = {
         'file_id': 'FileID',
-        'file_driver': 'FileDriver',
+        'driver': 'FileDriver',
         'location': 'str',
         'created_at': 'datetime',
         'created_by': 'str'
@@ -42,20 +42,20 @@ class FileLocation(object):
 
     attribute_map = {
         'file_id': 'FileID',
-        'file_driver': 'FileDriver',
+        'driver': 'Driver',
         'location': 'Location',
         'created_at': 'CreatedAt',
         'created_by': 'CreatedBy'
     }
 
-    def __init__(self, file_id=None, file_driver=None, location=None, created_at=None, created_by=None, _configuration=None):  # noqa: E501
+    def __init__(self, file_id=None, driver=None, location=None, created_at=None, created_by=None, _configuration=None):  # noqa: E501
         """FileLocation - a model defined in Swagger"""  # noqa: E501
         if _configuration is None:
             _configuration = Configuration()
         self._configuration = _configuration
 
         self._file_id = None
-        self._file_driver = None
+        self._driver = None
         self._location = None
         self._created_at = None
         self._created_by = None
@@ -63,8 +63,8 @@ class FileLocation(object):
 
         if file_id is not None:
             self.file_id = file_id
-        if file_driver is not None:
-            self.file_driver = file_driver
+        if driver is not None:
+            self.driver = driver
         if location is not None:
             self.location = location
         if created_at is not None:
@@ -94,25 +94,25 @@ class FileLocation(object):
         self._file_id = file_id
 
     @property
-    def file_driver(self):
-        """Gets the file_driver of this FileLocation.  # noqa: E501
+    def driver(self):
+        """Gets the driver of this FileLocation.  # noqa: E501
 
 
-        :return: The file_driver of this FileLocation.  # noqa: E501
+        :return: The driver of this FileLocation.  # noqa: E501
         :rtype: FileDriver
         """
-        return self._file_driver
+        return self._driver
 
-    @file_driver.setter
-    def file_driver(self, file_driver):
-        """Sets the file_driver of this FileLocation.
+    @driver.setter
+    def driver(self, driver):
+        """Sets the driver of this FileLocation.
 
 
-        :param file_driver: The file_driver of this FileLocation.  # noqa: E501
+        :param driver: The driver of this FileLocation.  # noqa: E501
         :type: FileDriver
         """
 
-        self._file_driver = file_driver
+        self._driver = driver
 
     @property
     def location(self):

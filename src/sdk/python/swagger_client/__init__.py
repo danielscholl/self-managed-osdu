@@ -42,9 +42,12 @@ from swagger_client.models.file_error import FileError
 from swagger_client.models.file_error_model import FileErrorModel
 from swagger_client.models.file_extension_properties import FileExtensionProperties
 from swagger_client.models.file_id import FileID
+from swagger_client.models.file_landing_zone_location_response import FileLandingZoneLocationResponse
 from swagger_client.models.file_legal import FileLegal
 from swagger_client.models.file_link_list import FileLinkList
 from swagger_client.models.file_list_request import FileListRequest
+from swagger_client.models.file_list_response import FileListResponse
+from swagger_client.models.file_location import FileLocation
 from swagger_client.models.file_location_request import FileLocationRequest
 from swagger_client.models.file_location_response import FileLocationResponse
 from swagger_client.models.file_meta_item import FileMetaItem
@@ -52,6 +55,7 @@ from swagger_client.models.file_metadata_response import FileMetadataResponse
 from swagger_client.models.file_record import FileRecord
 from swagger_client.models.file_record_version import FileRecordVersion
 from swagger_client.models.file_relationships import FileRelationships
+from swagger_client.models.file_source_location_response import FileSourceLocationResponse
 from swagger_client.models.file_to_many_relationship import FileToManyRelationship
 from swagger_client.models.file_to_one_relationship import FileToOneRelationship
 from swagger_client.models.files import Files
