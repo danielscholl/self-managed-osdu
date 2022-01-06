@@ -2928,3 +2928,34 @@ definitions:
       processed:
         srn:some-valid-srn:
           signedUrl: https://...
+
+
+  FileDetails:
+    title: Opaque/Generic File Content Details
+    type: object
+    properties:
+      TargetKind:
+        title: Target Schema ID
+        type: string
+        description: The target kind or schema ID which is to be used by the parser.
+        example: os:npd:wellbore:1:*.*
+      FileType:
+        title: File Type
+        type: string
+        description: Type of File to decide what kind of ingestion to be triggered
+        example: csv
+      FrameOfReference:
+        title: Frame of Reference for data present in file.
+        type: array
+        description: The list metaItem definitions which maps a named frame of
+          reference symbol or name to the self-contained persistableReference.
+        items:
+          $ref: '#/definitions/FileMetaItem'
+      ExtensionProperties:
+        $ref: '#/definitions/FileExtensionProperties'
+      ParentReference:
+        title: Parent Reference
+        type: string
+        description: The parent reference for this file.
+        example: CSBE0417
+    description: Further information about File being uploaded.
