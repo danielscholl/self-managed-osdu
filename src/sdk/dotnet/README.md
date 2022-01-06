@@ -75,20 +75,18 @@ namespace Example
             // Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
             // Configuration.Default.ApiKeyPrefix.Add("Authorization", "Bearer");
 
-            var apiInstance = new EntitlementApi();
-            var dataPartitionId = dataPartitionId_example;  // string | Partition Name
-            var groupEmail = groupEmail_example;  // string | group_email
-            var partitionInfo = new EntitlementMemberDto(); // EntitlementMemberDto | partitionInfo
+            var apiInstance = new DeliveryAPIApi();
+            var dataPartitionId = dataPartitionId_example;  // string | Specifies the data partition to use. This should either be the partition name or crm account ID associated with the partition.
+            var body = new FileDeliveryGetFileSignedURLRequest(); // FileDeliveryGetFileSignedURLRequest |  (optional) 
 
             try
             {
-                // Add Member to Group
-                EntitlementMemberDto result = apiInstance.AddMemberUsingPOST(dataPartitionId, groupEmail, partitionInfo);
+                FileDeliveryGetFileSignedURLResponse result = apiInstance.ReturnsDeliveryInstructionsForFileSUsingSRNs(dataPartitionId, body);
                 Debug.WriteLine(result);
             }
             catch (Exception e)
             {
-                Debug.Print("Exception when calling EntitlementApi.AddMemberUsingPOST: " + e.Message );
+                Debug.Print("Exception when calling DeliveryAPIApi.ReturnsDeliveryInstructionsForFileSUsingSRNs: " + e.Message );
             }
 
         }
@@ -103,6 +101,7 @@ All URIs are relative to *https://self-managed-osdu.westeurope.cloudapp.azure.co
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
+*DeliveryAPIApi* | [**ReturnsDeliveryInstructionsForFileSUsingSRNs**](docs/DeliveryAPIApi.md#returnsdeliveryinstructionsforfilesusingsrns) | **POST** /api/file/v2/delivery/getFileSignedUrl | 
 *EntitlementApi* | [**AddMemberUsingPOST**](docs/EntitlementApi.md#addmemberusingpost) | **POST** /api/entitlements/v2/groups/{group_email}/members | Add Member to Group
 *EntitlementApi* | [**CreateGroupUsingPOST**](docs/EntitlementApi.md#creategroupusingpost) | **POST** /api/entitlements/v2/groups | Create a Group
 *EntitlementApi* | [**DeleteGroupUsingDELETE**](docs/EntitlementApi.md#deletegroupusingdelete) | **DELETE** /api/entitlements/v2/groups/{group_email} | Delete a Group
@@ -112,6 +111,14 @@ Class | Method | HTTP request | Description
 *EntitlementApi* | [**ListGroupsOnBehalfOfUsingGET**](docs/EntitlementApi.md#listgroupsonbehalfofusingget) | **GET** /api/entitlements/v2/members/{member_email}/groups | List Assigned Groups for User
 *EntitlementApi* | [**ListGroupsUsingGET**](docs/EntitlementApi.md#listgroupsusingget) | **GET** /api/entitlements/v2/groups | List Assigned Groups
 *EntitlementApi* | [**UpdateGroupUsingPATCH**](docs/EntitlementApi.md#updategroupusingpatch) | **PATCH** /api/entitlements/v2/groups/{group_email} | Updates Items in Group
+*FileServiceApi* | [**DeletesMetadataRecordFileForTheGivenId**](docs/FileServiceApi.md#deletesmetadatarecordfileforthegivenid) | **DELETE** /api/file/v2/files/{Id}/metadata | Deletes metadata record & file assocaited with that record for the given id
+*FileServiceApi* | [**GetALocationInLandingZoneToUploadAFile_**](docs/FileServiceApi.md#getalocationinlandingzonetouploadafile_) | **POST** /api/file/v2/getLocation | Get a location in Landing Zone to upload a file.
+*FileServiceApi* | [**GetTheLocationToUploadAFile**](docs/FileServiceApi.md#getthelocationtouploadafile) | **GET** /api/file/v2/files/UploadURL | Get a location in Landing Zone to upload a file.
+*FileServiceApi* | [**GetsMetadataRecordForTheGivenId**](docs/FileServiceApi.md#getsmetadatarecordforthegivenid) | **GET** /api/file/v2/files/{Id}/metadata | Gets metadata record for the given id
+*FileServiceApi* | [**GetsURLToDownloadTheFileAssociatedWithTheGivenId_**](docs/FileServiceApi.md#getsurltodownloadthefileassociatedwiththegivenid_) | **GET** /api/file/v2/files/{Id}/DownloadURL | Gets a URL to download the file
+*FileServiceApi* | [**PublishFileMetadataForAFile_**](docs/FileServiceApi.md#publishfilemetadataforafile_) | **POST** /api/file/v2/files/metadata | Creates metadata for a file
+*FileServiceInternalApi* | [**AllowsTheApplicationToAuditTheAttemptedFileUploadsTheMethodIsInternalAndIsNotAvailableForThirdPartyApplications_**](docs/FileServiceInternalApi.md#allowstheapplicationtoaudittheattemptedfileuploadsthemethodisinternalandisnotavailableforthirdpartyapplications_) | **POST** /api/file/v2/getFileList | 
+*FileServiceInternalApi* | [**ReturnsFileLocationAndDriver_**](docs/FileServiceInternalApi.md#returnsfilelocationanddriver_) | **POST** /api/file/v2/getFileLocation | 
 *LegalApi* | [**CreateLegalTag**](docs/LegalApi.md#createlegaltag) | **POST** /api/legal/v1/legaltags | Creates the LegalTag for the given 'name'.
 *LegalApi* | [**DeleteLegalTag**](docs/LegalApi.md#deletelegaltag) | **DELETE** /api/legal/v1/legaltags/{name} | Delete Legal Tag
 *LegalApi* | [**GetLegalTag**](docs/LegalApi.md#getlegaltag) | **GET** /api/legal/v1/legaltags/{name} | Gets a LegalTag for the given 'name'.
@@ -152,6 +159,33 @@ Class | Method | HTTP request | Description
  - [Model.EntitlementGroupProperties](docs/EntitlementGroupProperties.md)
  - [Model.EntitlementGroupResponse](docs/EntitlementGroupResponse.md)
  - [Model.EntitlementMemberDto](docs/EntitlementMemberDto.md)
+ - [Model.FileAcl](docs/FileAcl.md)
+ - [Model.FileApplicationError](docs/FileApplicationError.md)
+ - [Model.FileDeliveryGetFileSignedURLRequest](docs/FileDeliveryGetFileSignedURLRequest.md)
+ - [Model.FileDeliveryGetFileSignedURLResponse](docs/FileDeliveryGetFileSignedURLResponse.md)
+ - [Model.FileDetails](docs/FileDetails.md)
+ - [Model.FileDownloadResponse](docs/FileDownloadResponse.md)
+ - [Model.FileDriver](docs/FileDriver.md)
+ - [Model.FileError](docs/FileError.md)
+ - [Model.FileErrorModel](docs/FileErrorModel.md)
+ - [Model.FileExtensionProperties](docs/FileExtensionProperties.md)
+ - [Model.FileLandingZoneLocationResponse](docs/FileLandingZoneLocationResponse.md)
+ - [Model.FileLegal](docs/FileLegal.md)
+ - [Model.FileLinkList](docs/FileLinkList.md)
+ - [Model.FileListRequest](docs/FileListRequest.md)
+ - [Model.FileListResponse](docs/FileListResponse.md)
+ - [Model.FileLocation](docs/FileLocation.md)
+ - [Model.FileLocationRequest](docs/FileLocationRequest.md)
+ - [Model.FileLocationResponse](docs/FileLocationResponse.md)
+ - [Model.FileMetaItem](docs/FileMetaItem.md)
+ - [Model.FileMetadataResponse](docs/FileMetadataResponse.md)
+ - [Model.FileRecord](docs/FileRecord.md)
+ - [Model.FileRecordVersion](docs/FileRecordVersion.md)
+ - [Model.FileRelationships](docs/FileRelationships.md)
+ - [Model.FileSourceLocationResponse](docs/FileSourceLocationResponse.md)
+ - [Model.FileToManyRelationship](docs/FileToManyRelationship.md)
+ - [Model.FileToOneRelationship](docs/FileToOneRelationship.md)
+ - [Model.Files](docs/Files.md)
  - [Model.LegalTagDto](docs/LegalTagDto.md)
  - [Model.LegalTagDtos](docs/LegalTagDtos.md)
  - [Model.LegalTagInvalidResponse](docs/LegalTagInvalidResponse.md)

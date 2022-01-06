@@ -27,7 +27,7 @@ import java.io.IOException;
 /**
  * SearchAppError
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-01-05T17:57:33.519Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-01-06T20:40:55.437Z")
 public class SearchAppError {
   @SerializedName("code")
   private Integer code = null;

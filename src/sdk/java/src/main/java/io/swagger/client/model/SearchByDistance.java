@@ -29,7 +29,7 @@ import java.io.IOException;
  * A spatial filter criteria to filter documents that exist within a specific distance from a geo point.
  */
 @ApiModel(description = "A spatial filter criteria to filter documents that exist within a specific distance from a geo point.")
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-01-05T17:57:33.519Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-01-06T20:40:55.437Z")
 public class SearchByDistance {
   @SerializedName("distance")
   private Double distance = null;
