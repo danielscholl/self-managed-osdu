@@ -33,11 +33,11 @@ class FileLocationRequest(object):
                             and the value is json key in definition.
     """
     swagger_types = {
-        'file_id': 'FileId'
+        'file_id': 'FileID'
     }
 
     attribute_map = {
-        'file_id': 'FileId'
+        'file_id': 'FileID'
     }
 
     def __init__(self, file_id=None, _configuration=None):  # noqa: E501
@@ -58,7 +58,7 @@ class FileLocationRequest(object):
 
 
         :return: The file_id of this FileLocationRequest.  # noqa: E501
-        :rtype: FileId
+        :rtype: FileID
         """
         return self._file_id
 
@@ -68,7 +68,7 @@ class FileLocationRequest(object):
 
 
         :param file_id: The file_id of this FileLocationRequest.  # noqa: E501
-        :type: FileId
+        :type: FileID
         """
 
         self._file_id = file_id
