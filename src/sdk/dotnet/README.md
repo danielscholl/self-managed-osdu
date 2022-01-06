@@ -125,6 +125,7 @@ Class | Method | HTTP request | Description
 *LegalApi* | [**ListLegalTags**](docs/LegalApi.md#listlegaltags) | **GET** /api/legal/v1/legaltags | Gets all LegalTags.
 *LegalApi* | [**UpdateLegalTag**](docs/LegalApi.md#updatelegaltag) | **PUT** /api/legal/v1/legaltags | Updates the LegalTag for the given 'name'.
 *LegalApi* | [**ValidateLegalTags**](docs/LegalApi.md#validatelegaltags) | **POST** /api/legal/v1/legaltags:validate | Retrieves the invalid LegalTag names with reasons for the given names.
+*NotificationApi* | [**RecordChangedUsingPOST**](docs/NotificationApi.md#recordchangedusingpost) | **POST** /api/notification/v1/push-handlers/records-changed | Notifies subscribers that records have changed
 *PartitionApi* | [**CreateUsingPOST**](docs/PartitionApi.md#createusingpost) | **POST** /api/partition/v1/partitions/{partitionId} | Create Partition
 *PartitionApi* | [**DeleteUsingDELETE**](docs/PartitionApi.md#deleteusingdelete) | **DELETE** /api/partition/v1/partitions/{partitionId} | Delete Partition
 *PartitionApi* | [**GetUsingGET**](docs/PartitionApi.md#getusingget) | **GET** /api/partition/v1/partitions/{partitionId} | Get Single Partition
@@ -214,6 +215,7 @@ Class | Method | HTTP request | Description
  - [Model.LegalTagPropertyValues](docs/LegalTagPropertyValues.md)
  - [Model.LegalTagRequest](docs/LegalTagRequest.md)
  - [Model.LegalTagUpdateDto](docs/LegalTagUpdateDto.md)
+ - [Model.NotificationResponseEntity](docs/NotificationResponseEntity.md)
  - [Model.PartitionDto](docs/PartitionDto.md)
  - [Model.PartitionProperty](docs/PartitionProperty.md)
  - [Model.RegisterAcl](docs/RegisterAcl.md)
