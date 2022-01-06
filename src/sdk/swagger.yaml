@@ -3131,3 +3131,16 @@ definitions:
         type: integer
       UserID:
         type: string
+        
+        
+  FileDriver:
+    type: string
+    enum:
+      - AZURE
+  FileLocationResponse:
+    type: object
+    properties:
+      Driver:
+        $ref: '#/definitions/FileDriver'
+      Location:
+        type: string
