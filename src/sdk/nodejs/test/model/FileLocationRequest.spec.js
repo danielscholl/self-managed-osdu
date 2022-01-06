@@ -40,10 +40,10 @@
         expect(instance).to.be.a(SelfManagedOsdu.FileLocationRequest);
       });
 
-      it('should have the property fileId (base name: "FileId")', function() {
-        // TODO: update the code to test the property fileId
-        expect(instance).to.have.property('fileId');
-        // expect(instance.fileId).to.be(expectedValueLiteral);
+      it('should have the property fileID (base name: "FileID")', function() {
+        // TODO: update the code to test the property fileID
+        expect(instance).to.have.property('fileID');
+        // expect(instance.fileID).to.be(expectedValueLiteral);
       });
 
     });

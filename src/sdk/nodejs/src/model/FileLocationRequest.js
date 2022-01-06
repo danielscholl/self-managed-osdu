@@ -16,18 +16,18 @@
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
-    define(['ApiClient', 'model/FileId'], factory);
+    define(['ApiClient', 'model/FileID'], factory);
   } else if (typeof module === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'), require('./FileId'));
+    module.exports = factory(require('../ApiClient'), require('./FileID'));
   } else {
     // Browser globals (root is window)
     if (!root.SelfManagedOsdu) {
       root.SelfManagedOsdu = {};
     }
-    root.SelfManagedOsdu.FileLocationRequest = factory(root.SelfManagedOsdu.ApiClient, root.SelfManagedOsdu.FileId);
+    root.SelfManagedOsdu.FileLocationRequest = factory(root.SelfManagedOsdu.ApiClient, root.SelfManagedOsdu.FileID);
   }
-}(this, function(ApiClient, FileId) {
+}(this, function(ApiClient, FileID) {
   'use strict';
 
   /**
@@ -54,16 +54,16 @@
   exports.constructFromObject = function(data, obj) {
     if (data) {
       obj = obj || new exports();
-      if (data.hasOwnProperty('FileId'))
-        obj.fileId = FileId.constructFromObject(data['FileId']);
+      if (data.hasOwnProperty('FileID'))
+        obj.fileID = FileID.constructFromObject(data['FileID']);
     }
     return obj;
   }
 
   /**
-   * @member {module:model/FileId} fileId
+   * @member {module:model/FileID} fileID
    */
-  exports.prototype.fileId = undefined;
+  exports.prototype.fileID = undefined;
 
 
   return exports;
