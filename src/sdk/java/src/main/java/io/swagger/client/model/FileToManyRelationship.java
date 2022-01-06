@@ -31,7 +31,7 @@ import java.util.List;
  * A relationship from this entity to many other entities either by natural key (name) or explicit id, optionally classified by confidence level.
  */
 @ApiModel(description = "A relationship from this entity to many other entities either by natural key (name) or explicit id, optionally classified by confidence level.")
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-01-06T20:02:41.200Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-01-06T20:03:41.621Z")
 public class FileToManyRelationship {
   @SerializedName("confidences")
   private List<BigDecimal> confidences = null;
