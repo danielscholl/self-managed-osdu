@@ -3135,3 +3135,18 @@ definitions:
         type: integer
         format: int64
         example: 1831253916104085
+
+
+  FileListRequest:
+    type: object
+    properties:
+      TimeFrom:
+        $ref: '#/definitions/FileDateTime'
+      TimeTo:
+        $ref: '#/definitions/FileDateTime'
+      PageNum:
+        type: integer
+      Items:
+        type: integer
+      UserID:
+        type: string
