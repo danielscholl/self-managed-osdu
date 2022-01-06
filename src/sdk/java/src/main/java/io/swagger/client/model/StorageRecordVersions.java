@@ -30,7 +30,7 @@ import java.util.List;
  * Storage record versions.
  */
 @ApiModel(description = "Storage record versions.")
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-01-06T21:37:15.431Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-01-06T21:56:39.476Z")
 public class StorageRecordVersions {
   @SerializedName("recordId")
   private String recordId = null;

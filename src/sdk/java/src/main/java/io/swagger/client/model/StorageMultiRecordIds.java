@@ -30,7 +30,7 @@ import java.util.List;
  * Multiple storage record ids and filter attributes.
  */
 @ApiModel(description = "Multiple storage record ids and filter attributes.")
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-01-06T21:37:15.431Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-01-06T21:56:39.476Z")
 public class StorageMultiRecordIds {
   @SerializedName("records")
   private List<String> records = new ArrayList<String>();
