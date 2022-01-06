@@ -30,7 +30,7 @@ import java.util.List;
  * The model to retrieve multiple LegalTags in batch.
  */
 @ApiModel(description = "The model to retrieve multiple LegalTags in batch.")
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-01-06T19:45:34.984Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-01-06T19:46:16.718Z")
 public class LegalTagRequest {
   @SerializedName("names")
   private List<String> names = new ArrayList<String>();
