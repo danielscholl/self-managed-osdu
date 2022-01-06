@@ -184,7 +184,6 @@ Class | Method | HTTP request | Description
  - [SelfManagedOsdu.FileDeliveryGetFileSignedURLResponse](docs/FileDeliveryGetFileSignedURLResponse.md)
  - [SelfManagedOsdu.FileDetails](docs/FileDetails.md)
  - [SelfManagedOsdu.FileDownloadResponse](docs/FileDownloadResponse.md)
- - [SelfManagedOsdu.FileDriver](docs/FileDriver.md)
  - [SelfManagedOsdu.FileError](docs/FileError.md)
  - [SelfManagedOsdu.FileErrorModel](docs/FileErrorModel.md)
  - [SelfManagedOsdu.FileExtensionProperties](docs/FileExtensionProperties.md)
