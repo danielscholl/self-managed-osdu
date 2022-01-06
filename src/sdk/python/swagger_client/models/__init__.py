@@ -25,12 +25,14 @@ from swagger_client.models.file_delivery_get_file_signed_url_request import File
 from swagger_client.models.file_delivery_get_file_signed_url_response import FileDeliveryGetFileSignedURLResponse
 from swagger_client.models.file_details import FileDetails
 from swagger_client.models.file_download_response import FileDownloadResponse
+from swagger_client.models.file_driver import FileDriver
 from swagger_client.models.file_error import FileError
 from swagger_client.models.file_error_model import FileErrorModel
 from swagger_client.models.file_extension_properties import FileExtensionProperties
 from swagger_client.models.file_legal import FileLegal
 from swagger_client.models.file_link_list import FileLinkList
 from swagger_client.models.file_list_request import FileListRequest
+from swagger_client.models.file_location_response import FileLocationResponse
 from swagger_client.models.file_meta_item import FileMetaItem
 from swagger_client.models.file_metadata_response import FileMetadataResponse
 from swagger_client.models.file_record import FileRecord
