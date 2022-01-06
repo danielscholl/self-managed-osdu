@@ -36,6 +36,8 @@ tags:
     description: Workflow Service API is a wrapper API on existing orchestrator services (ariflow) defined in way which suits the domain workflow needs.Operational tasks like starting,stopping, pausing etc will be part of this API. Also creation and maintenance will be responsilbilities of this API.
   - name: Register
     description: "Get a DDMS registration with the given id. Required roles: 'users.datalake.viewers' or 'users.datalake.editors' or 'users.datalake.admins'"
+  - name: Notification
+    description: The Notification service, with Register service, allow interested consumers to subscribe to data and metadata changes using a publisher/subscriber pattern
 paths:
   #########################
   # Partition Service
@@ -3473,6 +3475,39 @@ paths:
             $ref: "#/definitions/RegisterAppError"
       security:
         - Bearer: []
+        
+  #########################
+  # Notification Service
+  #########################
+  
+  '/api/notification/v1/push-handlers/records-changed':
+    post:
+      tags:
+        - pubsub-endpoint
+      summary: Notifies subscribers that records have changed
+      operationId: recordChangedUsingPOST
+      parameters:
+        - name: data-partition-id
+          in: header
+          description: tenant
+          required: true
+          type: string
+          x-example: opendes
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: "#/definitions/NotificationResponseEntity"
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      security:
+        - Bearer: []
   
 definitions:
   PartitionProperty:
@@ -5402,3 +5437,14 @@ definitions:
       op:
         type: string
         example: deleted
+  
+  NotificationResponseEntity:
+    type: object
+    properties:
+      body:
+        type: object
+      statusCode:
+        type: string
+      statusCodeValue:
+        type: integer
+        format: int32
