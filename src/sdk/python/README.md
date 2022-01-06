@@ -128,6 +128,7 @@ Class | Method | HTTP request | Description
  - [EntitlementMemberDto](docs/EntitlementMemberDto.md)
  - [FileDriver](docs/FileDriver.md)
  - [FileID](docs/FileID.md)
+ - [FileLocation](docs/FileLocation.md)
  - [LegalTagDto](docs/LegalTagDto.md)
  - [LegalTagDtos](docs/LegalTagDtos.md)
  - [LegalTagInvalidResponse](docs/LegalTagInvalidResponse.md)
