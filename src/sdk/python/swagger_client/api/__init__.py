@@ -12,3 +12,4 @@ from swagger_client.api.partition_api import PartitionApi
 from swagger_client.api.schema_api import SchemaApi
 from swagger_client.api.search_api import SearchApi
 from swagger_client.api.storage_api import StorageApi
+from swagger_client.api.workflow_api import WorkflowApi

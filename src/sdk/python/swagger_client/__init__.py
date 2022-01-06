@@ -25,6 +25,7 @@ from swagger_client.api.partition_api import PartitionApi
 from swagger_client.api.schema_api import SchemaApi
 from swagger_client.api.search_api import SearchApi
 from swagger_client.api.storage_api import StorageApi
+from swagger_client.api.workflow_api import WorkflowApi
 
 # import ApiClient
 from swagger_client.api_client import ApiClient
@@ -103,3 +104,8 @@ from swagger_client.models.storage_record_data import StorageRecordData
 from swagger_client.models.storage_record_history import StorageRecordHistory
 from swagger_client.models.storage_record_query import StorageRecordQuery
 from swagger_client.models.storage_record_versions import StorageRecordVersions
+from swagger_client.models.workflow import Workflow
+from swagger_client.models.workflow_error import WorkflowError
+from swagger_client.models.workflow_error_details import WorkflowErrorDetails
+from swagger_client.models.workflow_run import WorkflowRun
+from swagger_client.models.workflow_trigger_request import WorkflowTriggerRequest
