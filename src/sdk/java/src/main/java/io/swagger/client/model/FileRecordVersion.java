@@ -32,7 +32,7 @@ import java.io.IOException;
  * Metadata record.
  */
 @ApiModel(description = "Metadata record.")
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-01-06T20:04:58.542Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-01-06T20:06:09.758Z")
 public class FileRecordVersion {
   @SerializedName("id")
   private String id = null;

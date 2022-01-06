@@ -29,7 +29,7 @@ import java.util.List;
 /**
  * StorageQueryResponse
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-01-06T20:04:58.542Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-01-06T20:06:09.758Z")
 public class StorageQueryResponse {
   @SerializedName("cursor")
   private String cursor = null;

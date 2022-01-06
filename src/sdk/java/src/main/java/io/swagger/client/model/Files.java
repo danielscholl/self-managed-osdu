@@ -28,7 +28,7 @@ import java.io.IOException;
  * The file data container containing all necessary details of the file record
  */
 @ApiModel(description = "The file data container containing all necessary details of the file record")
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-01-06T20:04:58.542Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-01-06T20:06:09.758Z")
 public class Files {
   @SerializedName("Name")
   private String name = null;
