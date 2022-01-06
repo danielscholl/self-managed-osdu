@@ -20,7 +20,6 @@ from swagger_client.models.entitlement_group_response import EntitlementGroupRes
 from swagger_client.models.entitlement_member_dto import EntitlementMemberDto
 from swagger_client.models.file_driver import FileDriver
 from swagger_client.models.file_id import FileID
-from swagger_client.models.file_location import FileLocation
 from swagger_client.models.legal_tag_dto import LegalTagDto
 from swagger_client.models.legal_tag_dtos import LegalTagDtos
 from swagger_client.models.legal_tag_invalid_response import LegalTagInvalidResponse
