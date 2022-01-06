@@ -31,7 +31,7 @@ import java.io.IOException;
  * This filter is used to filter geo-point geo data which supports lat/lon pairs. The queries in this group are Geo Distance, Geo Polygon and Bounding Box. Only one spatial criteria can be used while defining filter.
  */
 @ApiModel(description = "This filter is used to filter geo-point geo data which supports lat/lon pairs. The queries in this group are Geo Distance, Geo Polygon and Bounding Box. Only one spatial criteria can be used while defining filter.")
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-01-06T20:06:09.758Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-01-06T20:07:24.096Z")
 public class SearchSpatialFilter {
   @SerializedName("field")
   private String field = null;

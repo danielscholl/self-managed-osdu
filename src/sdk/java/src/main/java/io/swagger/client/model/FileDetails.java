@@ -32,7 +32,7 @@ import java.util.List;
  * Further information about File being uploaded.
  */
 @ApiModel(description = "Further information about File being uploaded.")
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-01-06T20:06:09.758Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-01-06T20:07:24.096Z")
 public class FileDetails {
   @SerializedName("TargetKind")
   private String targetKind = null;

@@ -28,7 +28,7 @@ import java.io.IOException;
  * The model to update an existing LegalTag
  */
 @ApiModel(description = "The model to update an existing LegalTag")
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-01-06T20:06:09.758Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-01-06T20:07:24.096Z")
 public class LegalTagUpdateDto {
   @SerializedName("name")
   private String name = null;
