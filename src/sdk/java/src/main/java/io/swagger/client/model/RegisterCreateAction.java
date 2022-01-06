@@ -28,7 +28,7 @@ import java.io.IOException;
 /**
  * RegisterCreateAction
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-01-06T21:56:39.476Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-01-06T21:59:16.916Z")
 public class RegisterCreateAction {
   @SerializedName("id")
   private String id = null;

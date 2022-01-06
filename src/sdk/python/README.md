@@ -100,6 +100,7 @@ Class | Method | HTTP request | Description
 *LegalApi* | [**list_legal_tags**](docs/LegalApi.md#list_legal_tags) | **GET** /api/legal/v1/legaltags | Gets all LegalTags.
 *LegalApi* | [**update_legal_tag**](docs/LegalApi.md#update_legal_tag) | **PUT** /api/legal/v1/legaltags | Updates the LegalTag for the given &#39;name&#39;.
 *LegalApi* | [**validate_legal_tags**](docs/LegalApi.md#validate_legal_tags) | **POST** /api/legal/v1/legaltags:validate | Retrieves the invalid LegalTag names with reasons for the given names.
+*NotificationApi* | [**record_changed_using_post**](docs/NotificationApi.md#record_changed_using_post) | **POST** /api/notification/v1/push-handlers/records-changed | Notifies subscribers that records have changed
 *PartitionApi* | [**create_using_post**](docs/PartitionApi.md#create_using_post) | **POST** /api/partition/v1/partitions/{partitionId} | Create Partition
 *PartitionApi* | [**delete_using_delete**](docs/PartitionApi.md#delete_using_delete) | **DELETE** /api/partition/v1/partitions/{partitionId} | Delete Partition
 *PartitionApi* | [**get_using_get**](docs/PartitionApi.md#get_using_get) | **GET** /api/partition/v1/partitions/{partitionId} | Get Single Partition
@@ -190,6 +191,7 @@ Class | Method | HTTP request | Description
  - [LegalTagPropertyValues](docs/LegalTagPropertyValues.md)
  - [LegalTagRequest](docs/LegalTagRequest.md)
  - [LegalTagUpdateDto](docs/LegalTagUpdateDto.md)
+ - [NotificationResponseEntity](docs/NotificationResponseEntity.md)
  - [PartitionDto](docs/PartitionDto.md)
  - [PartitionProperty](docs/PartitionProperty.md)
  - [RegisterAcl](docs/RegisterAcl.md)
