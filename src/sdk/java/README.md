@@ -2,7 +2,7 @@
 
 self-managed-osdu
 - API version: 0.11.0
-  - Build date: 2022-01-06T21:56:39.476Z
+  - Build date: 2022-01-06T21:59:16.916Z
 
 Rest API Documentation for Self Managed OSDU
 
@@ -136,6 +136,7 @@ Class | Method | HTTP request | Description
 *LegalApi* | [**listLegalTags**](docs/LegalApi.md#listLegalTags) | **GET** /api/legal/v1/legaltags | Gets all LegalTags.
 *LegalApi* | [**updateLegalTag**](docs/LegalApi.md#updateLegalTag) | **PUT** /api/legal/v1/legaltags | Updates the LegalTag for the given &#39;name&#39;.
 *LegalApi* | [**validateLegalTags**](docs/LegalApi.md#validateLegalTags) | **POST** /api/legal/v1/legaltags:validate | Retrieves the invalid LegalTag names with reasons for the given names.
+*NotificationApi* | [**recordChangedUsingPOST**](docs/NotificationApi.md#recordChangedUsingPOST) | **POST** /api/notification/v1/push-handlers/records-changed | Notifies subscribers that records have changed
 *PartitionApi* | [**createUsingPOST**](docs/PartitionApi.md#createUsingPOST) | **POST** /api/partition/v1/partitions/{partitionId} | Create Partition
 *PartitionApi* | [**deleteUsingDELETE**](docs/PartitionApi.md#deleteUsingDELETE) | **DELETE** /api/partition/v1/partitions/{partitionId} | Delete Partition
 *PartitionApi* | [**getUsingGET**](docs/PartitionApi.md#getUsingGET) | **GET** /api/partition/v1/partitions/{partitionId} | Get Single Partition
@@ -224,6 +225,7 @@ Class | Method | HTTP request | Description
  - [LegalTagPropertyValues](docs/LegalTagPropertyValues.md)
  - [LegalTagRequest](docs/LegalTagRequest.md)
  - [LegalTagUpdateDto](docs/LegalTagUpdateDto.md)
+ - [NotificationResponseEntity](docs/NotificationResponseEntity.md)
  - [PartitionDto](docs/PartitionDto.md)
  - [PartitionProperty](docs/PartitionProperty.md)
  - [RegisterAcl](docs/RegisterAcl.md)
