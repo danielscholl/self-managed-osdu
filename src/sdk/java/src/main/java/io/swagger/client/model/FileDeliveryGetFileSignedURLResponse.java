@@ -31,7 +31,7 @@ import java.util.Map;
 /**
  * FileDeliveryGetFileSignedURLResponse
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-01-06T20:32:07.050Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-01-06T20:33:05.130Z")
 public class FileDeliveryGetFileSignedURLResponse {
   @SerializedName("unprocessed")
   private List<String> unprocessed = null;

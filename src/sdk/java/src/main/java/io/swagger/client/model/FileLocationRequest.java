@@ -23,39 +23,31 @@ import com.google.gson.stream.JsonWriter;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
- * Patch api query specific information
+ * FileLocationRequest
  */
-@ApiModel(description = "Patch api query specific information")
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-01-06T20:33:05.130Z")
-public class StorageRecordQuery {
-  @SerializedName("ids")
-  private List<String> ids = new ArrayList<String>();
+public class FileLocationRequest {
+  @SerializedName("FileId")
+  private String fileId = null;
 
-  public StorageRecordQuery ids(List<String> ids) {
-    this.ids = ids;
-    return this;
-  }
-
-  public StorageRecordQuery addIdsItem(String idsItem) {
-    this.ids.add(idsItem);
+  public FileLocationRequest fileId(String fileId) {
+    this.fileId = fileId;
     return this;
   }
 
    /**
-   * Records ids for whom patch operations going to be applied
-   * @return ids
+   * Get fileId
+   * @return fileId
   **/
-  @ApiModelProperty(required = true, value = "Records ids for whom patch operations going to be applied")
-  public List<String> getIds() {
-    return ids;
+  @ApiModelProperty(value = "")
+  public String getFileId() {
+    return fileId;
   }
 
-  public void setIds(List<String> ids) {
-    this.ids = ids;
+  public void setFileId(String fileId) {
+    this.fileId = fileId;
   }
 
 
@@ -67,22 +59,22 @@ public class StorageRecordQuery {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    StorageRecordQuery storageRecordQuery = (StorageRecordQuery) o;
-    return Objects.equals(this.ids, storageRecordQuery.ids);
+    FileLocationRequest fileLocationRequest = (FileLocationRequest) o;
+    return Objects.equals(this.fileId, fileLocationRequest.fileId);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(ids);
+    return Objects.hash(fileId);
   }
 
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class StorageRecordQuery {\n");
+    sb.append("class FileLocationRequest {\n");
     
-    sb.append("    ids: ").append(toIndentedString(ids)).append("\n");
+    sb.append("    fileId: ").append(toIndentedString(fileId)).append("\n");
     sb.append("}");
     return sb.toString();
   }
