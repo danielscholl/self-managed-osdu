@@ -30,7 +30,7 @@ import java.io.IOException;
  * All relationships from this entity.
  */
 @ApiModel(description = "All relationships from this entity.")
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-01-06T20:23:53.013Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-01-06T20:26:20.764Z")
 public class FileRelationships {
   @SerializedName("parentEntity")
   private FileToOneRelationship parentEntity = null;
