@@ -166,6 +166,8 @@ Class | Method | HTTP request | Description
  - [Model.FileLinkList](docs/FileLinkList.md)
  - [Model.FileMetaItem](docs/FileMetaItem.md)
  - [Model.FileMetadataResponse](docs/FileMetadataResponse.md)
+ - [Model.FileRecord](docs/FileRecord.md)
+ - [Model.FileRecordVersion](docs/FileRecordVersion.md)
  - [Model.FileRelationships](docs/FileRelationships.md)
  - [Model.FileToManyRelationship](docs/FileToManyRelationship.md)
  - [Model.FileToOneRelationship](docs/FileToOneRelationship.md)
