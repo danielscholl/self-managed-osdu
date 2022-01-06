@@ -27,27 +27,27 @@ import java.io.IOException;
 /**
  * FileLocationRequest
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-01-06T20:34:20.238Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-01-06T20:35:16.278Z")
 public class FileLocationRequest {
-  @SerializedName("FileId")
-  private String fileId = null;
+  @SerializedName("FileID")
+  private String fileID = null;
 
-  public FileLocationRequest fileId(String fileId) {
-    this.fileId = fileId;
+  public FileLocationRequest fileID(String fileID) {
+    this.fileID = fileID;
     return this;
   }
 
    /**
-   * Get fileId
-   * @return fileId
+   * Get fileID
+   * @return fileID
   **/
   @ApiModelProperty(value = "")
-  public String getFileId() {
-    return fileId;
+  public String getFileID() {
+    return fileID;
   }
 
-  public void setFileId(String fileId) {
-    this.fileId = fileId;
+  public void setFileID(String fileID) {
+    this.fileID = fileID;
   }
 
 
@@ -60,12 +60,12 @@ public class FileLocationRequest {
       return false;
     }
     FileLocationRequest fileLocationRequest = (FileLocationRequest) o;
-    return Objects.equals(this.fileId, fileLocationRequest.fileId);
+    return Objects.equals(this.fileID, fileLocationRequest.fileID);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(fileId);
+    return Objects.hash(fileID);
   }
 
 
@@ -74,7 +74,7 @@ public class FileLocationRequest {
     StringBuilder sb = new StringBuilder();
     sb.append("class FileLocationRequest {\n");
     
-    sb.append("    fileId: ").append(toIndentedString(fileId)).append("\n");
+    sb.append("    fileID: ").append(toIndentedString(fileID)).append("\n");
     sb.append("}");
     return sb.toString();
   }

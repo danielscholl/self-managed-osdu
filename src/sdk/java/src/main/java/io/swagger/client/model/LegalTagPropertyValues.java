@@ -32,7 +32,7 @@ import java.util.Map;
  * Shows the allowed values of the fields of a LegalTag.
  */
 @ApiModel(description = "Shows the allowed values of the fields of a LegalTag.")
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-01-06T20:34:20.238Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-01-06T20:35:16.278Z")
 public class LegalTagPropertyValues {
   @SerializedName("countriesOfOrigin")
   private Map<String, String> countriesOfOrigin = null;

@@ -30,7 +30,7 @@ import java.util.List;
 /**
  * EntitlementGroupResponse
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-01-06T20:34:20.238Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-01-06T20:35:16.278Z")
 public class EntitlementGroupResponse {
   @SerializedName("desId")
   private String desId = null;
