@@ -30,11 +30,13 @@ tags:
     description: Search for records
   - name: Schema
     description: Responsible for schema management in the Data Ecosystem and offers an implementation of our schema standard.
+
+
 paths:
+
   #########################
   # Partition Service
   #########################
-
   '/api/partition/v1/partitions':
     get:
       tags:
@@ -61,7 +63,6 @@ paths:
           description: Not Found
       security:
         - Bearer: []
-
   '/api/partition/v1/partitions/{partitionId}':
     get:
       tags:
@@ -202,7 +203,6 @@ paths:
   #########################
   # Entitlement Service
   #########################
-
   '/api/entitlements/v2/groups':
     get:
       tags:
@@ -262,7 +262,6 @@ paths:
           description: Not Found
       security:
         - Bearer: []
-
   '/api/entitlements/v2/groups/{group_email}/members':
     get:
       tags:
@@ -357,7 +356,6 @@ paths:
           description: Conflict
       security:
         - Bearer: []
-
   '/api/entitlements/v2/groups/{group_email}/members/{member_email}':
     delete:
       tags:
@@ -400,7 +398,6 @@ paths:
           description: Forbidden
       security:
         - Bearer: []
-
   '/api/entitlements/v2/groups/{group_email}':
     delete:
       tags:
@@ -466,7 +463,6 @@ paths:
           description: Forbidden
       security:
         - Bearer: []
-
   '/api/entitlements/v2/members/{member_email}':
     delete:
       tags:
@@ -501,7 +497,6 @@ paths:
           description: Forbidden
       security:
         - Bearer: []
-
   '/api/entitlements/v2/members/{member_email}/groups':
     get:
       tags:
@@ -550,7 +545,6 @@ paths:
   #########################
   # Legal Service
   #########################
-
   '/api/legal/v1/legaltags:properties':
     get:
       tags:
@@ -578,7 +572,6 @@ paths:
           description: You do not have permissions to access this API.
       security:
         - Bearer: []
-
   '/api/legal/v1/legaltags:validate':
     post:
       tags:
@@ -619,7 +612,6 @@ paths:
           description: LegalTag names were not found.
       security:
         - Bearer: []
-
   '/api/legal/v1/legaltags:batchRetrieve':
     post:
       tags:
@@ -660,7 +652,6 @@ paths:
           description: One or more requested LegalTags were not found.
       security:
         - Bearer: []
-
   '/api/legal/v1/legaltags':
     get:
       tags:
@@ -778,7 +769,6 @@ paths:
           description: Requested LegalTag to update was not found.
       security:
         - Bearer: []
-
   '/api/legal/v1/legaltags/{name}':
     get:
       tags:
@@ -852,7 +842,6 @@ paths:
   #########################
   # Storage Service
   #########################
-
   '/api/storage/v2/query/kinds':
     get:
       tags:
@@ -896,7 +885,6 @@ paths:
             $ref: "#/definitions/StorageErrorResponse"
       security:
       - Bearer: []
-
   '/api/storage/v2/query/records':
     get:
       tags:
@@ -981,7 +969,6 @@ paths:
             $ref: "#/definitions/StorageErrorResponse"
       security:
       - Bearer: []
-
   '/api/records/{id}:delete':
     post:
       tags:
@@ -1018,7 +1005,6 @@ paths:
             $ref: "#/definitions/StorageErrorResponse"
       security:
       - Bearer: []
-
   "/api/storage/v2/records/delete":
     post:
       tags:
@@ -1058,7 +1044,6 @@ paths:
             $ref: "#/definitions/StorageErrorResponse"
       security:
         - Bearer: []
-
   '/api/storage/v2/records/{id}':
     get:
       tags:
@@ -1140,7 +1125,6 @@ paths:
             $ref: "#/definitions/StorageErrorResponse"
       security:
       - Bearer: []
-
   '/api/storage/v2/records/{id}/{version}':
     get:
       tags:
@@ -1194,7 +1178,6 @@ paths:
             $ref: "#/definitions/StorageErrorResponse"
       security:
       - Bearer: []
-
   '/api/storage/v2/records/versions/{id}':
     get:
       tags:
@@ -1232,7 +1215,6 @@ paths:
             $ref: "#/definitions/StorageErrorResponse"
       security:
       - Bearer: []
-
   '/api/storage/v2/records':
     put:
       tags:
@@ -1337,10 +1319,10 @@ paths:
       security:
       - Bearer: []
 
+
   #########################
   # Search Service
   #########################
-
   "/api/search/v2/index/{kind}":
     delete:
       tags:
@@ -1381,7 +1363,6 @@ paths:
             "$ref": "#/definitions/SearchAppError"
       security:
         - Bearer: []
-
   "/api/search/v2/index/schema/{kind}":
     get:
       tags:
@@ -1424,7 +1405,6 @@ paths:
             "$ref": "#/definitions/SearchAppError"
       security:
         - Bearer: []
-
   "/api/search/v2/query":
     post:
       tags:
@@ -1472,7 +1452,6 @@ paths:
            "$ref": "#/definitions/SearchAppError"
       security:
         - Bearer: []
-
   "/api/search/v2/query_with_cursor":
     post:
       tags:
@@ -1521,10 +1500,10 @@ paths:
       security:
         - Bearer: []
 
+
   #########################
   # Schema Service
   #########################
-
   '/api/schema-service/v1/schema':
     post:
       tags:
@@ -1736,7 +1715,6 @@ paths:
             $ref: '#/definitions/SchemaErrorResponseFormat'
       security:
         - Bearer: []
-
   '/api/schema-service/v1/schema/{id}':
     get:
       tags:
@@ -1792,10 +1770,10 @@ paths:
       security:
         - Bearer: []
 
+
   #########################
   # File Service
   #########################
-
   '/api/file/v2/getLocation':
     post:
       tags:
@@ -1848,7 +1826,6 @@ paths:
             $ref: '#/definitions/FileApplicationError'
       security:
       - Bearer: []
-
   '/api/file/v2/files/UploadURL':
     get:
       tags:
@@ -1896,7 +1873,6 @@ paths:
             $ref: '#/definitions/FileApplicationError'
       security:
         - Bearer: []
-
   '/api/file/v2/files/metadata':
     post:
       tags:
@@ -1953,7 +1929,6 @@ paths:
             $ref: '#/definitions/FileApplicationError'
       security:
       - Bearer: []
-
   '/api/file/v2/files/{Id}/metadata':
     get:
       tags:
@@ -2060,7 +2035,6 @@ paths:
             $ref: '#/definitions/FileApplicationError'
       security:
         - Bearer: []
-
   '/api/file/v2/files/{Id}/DownloadURL':
     get:
       tags:
@@ -2121,50 +2095,7 @@ paths:
             $ref: '#/definitions/FileApplicationError'
       security:
         - Bearer: []
-
-  '/api/file/v2/getFileLocation':
-    post:
-      tags:
-        - File Service (Internal)
-      description: 'Returns file `Location` and `Driver`.'
-      operationId: 'Returns file `Location` and `Driver`.'
-      consumes:
-        - application/json
-      produces:
-        - application/json
-      parameters:
-        - name: data-partition-id
-          in: header
-          description: Specifies the data partition to use. This should either be the partition name or crm account ID associated with the partition.
-          required: true
-          type: string
-          x-example: opendes
-        - name: body
-          in: body
-          schema:
-            $ref: '#/definitions/FileLocationRequest'
-      responses:
-        '200':
-          description: |
-            File location
-          schema:
-            $ref: '#/definitions/FileLocationResponse'
-        '400':
-          description: Bad user input. Mandatory fields missing or unacceptable value
-            passed to API
-          schema:
-            $ref: '#/definitions/FileApplicationError'
-        '401':
-          description: Invalid/Expired Credential
-          schema:
-            $ref: '#/definitions/FileApplicationError'
-        '500':
-          description: Internal Server Error
-          schema:
-            $ref: '#/definitions/FileApplicationError'
-      security:
-        - Bearer: []
-
+  
   '/api/file/v2/delivery/getFileSignedUrl':
     post:
       tags:
@@ -2205,52 +2136,11 @@ paths:
             $ref: '#/definitions/FileApplicationError'
       security:
         - Bearer: []
-
-  '/api/file/v2/getFileList':
-    post:
-      tags:
-        - File Service (Internal)
-      description: 'Allows the application to audit the attempted file uploads. The method is internal and is not available for third-party applications.'
-      operationId: 'Allows the application to audit the attempted file uploads. The method is internal and is not available for third-party applications.'
-      consumes:
-        - application/json
-      produces:
-        - application/json
-      parameters:
-        - name: data-partition-id
-          in: header
-          description: Specifies the data partition to use. This should either be the partition name or crm account ID associated with the partition.
-          required: true
-          type: string
-          x-example: opendes
-        - name: body
-          in: body
-          schema:
-            $ref: '#/definitions/FileListRequest'
-      responses:
-        '200':
-          description: File list page
-          schema:
-            $ref: '#/definitions/FileListResponse'
-        '400':
-          description: Bad user input. Mandatory fields missing or unacceptable value passed to API
-          schema:
-            $ref: '#/definitions/FileApplicationError'
-        '401':
-          description: Invalid/Expired Credential
-          schema:
-            $ref: '#/definitions/FileApplicationError'
-        '500':
-          description: Internal Server Error
-          schema:
-            $ref: '#/definitions/FileApplicationError'
-      security:
-        - Bearer: []
+ 
 
   #########################
   # Workflow Service
   #########################
-
   '/api/workflow/v1/workflow':
     post:
       tags:
@@ -2648,6 +2538,832 @@ paths:
         - Bearer: []
 
 
+  #########################
+  # Registration Service
+  #########################
+  '/api/register/v1/ddms/{id}':
+    get:
+      tags:
+        - Register
+      summary: Get a DDMS registration
+      description: "Get a DDMS registration with the given id. Required roles:
+        'users.datalake.viewers' or 'users.datalake.editors' or
+        'users.datalake.admins'"
+      operationId: Get a DDMS registration
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: id
+          in: path
+          required: true
+          type: string
+          pattern: ^[A-Za-z0-9-]{2,50}
+        - name: data-partition-id
+          in: header
+          description: Specifies the partition to use. This should be either the partition
+            name associated with the partition.
+          required: true
+          type: string
+          x-example: opendes
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: "#/definitions/RegisterDdms"
+        '400':
+          description: Bad Request
+          schema:
+            $ref: "#/definitions/RegisterAppError"
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: "#/definitions/RegisterAppError"
+        '404':
+          description: Not Found
+          schema:
+            $ref: "#/definitions/RegisterAppError"
+        '429':
+          description: Too Many Requests
+          schema:
+            $ref: "#/definitions/RegisterAppError"
+        '500':
+          description: Server Error
+          schema:
+            $ref: "#/definitions/RegisterAppError"
+        '502':
+          description: Bad Gateway
+          schema:
+            $ref: "#/definitions/RegisterAppError"
+        '503':
+          description: Service Unavailable
+          schema:
+            $ref: "#/definitions/RegisterAppError"
+      security:
+        - Bearer: []
+    delete:
+      tags:
+        - Register
+      summary: Delete a DDMS registration
+      description: "Delete a DDMS registration with the given id. Required roles:
+        'users.datalake.admins'"
+      operationId: Delete a DDMS registration
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: id
+          in: path
+          required: true
+          type: string
+          pattern: ^[A-Za-z0-9-]{2,50}
+        - name: data-partition-id
+          in: header
+          description: Specifies the partition to use. This should be either the partition
+            name associated with the partition.
+          required: true
+          type: string
+          x-example: opendes
+      responses:
+        '204':
+          description: No Content
+        '400':
+          description: Bad Request
+          schema:
+            $ref: "#/definitions/RegisterAppError"
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: "#/definitions/RegisterAppError"
+        '404':
+          description: Not found
+          schema:
+            $ref: "#/definitions/RegisterAppError"
+        '429':
+          description: Too Many Requests
+          schema:
+            $ref: "#/definitions/RegisterAppError"
+        '500':
+          description: Server Error
+          schema:
+            $ref: "#/definitions/RegisterAppError"
+        '502':
+          description: Bad Gateway
+          schema:
+            $ref: "#/definitions/RegisterAppError"
+        '503':
+          description: Service Unavailable
+          schema:
+            $ref: "#/definitions/RegisterAppError"
+      security:
+        - Bearer: []
+  '/api/register/v1/ddms':
+    post:
+      tags:
+        - Register
+      summary: Create a DDMS registration
+      description: "Create a DDMS registration using an OpenApi spec V3 document. Required
+        roles: 'users.datalake.editors' or 'users.datalake.admins'"
+      operationId: Create a DDMS registration
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: data-partition-id
+          in: header
+          description: Specifies the partition to use. This should be either the partition
+            name associated with the partition.
+          required: true
+          type: string
+          x-example: opendes
+        - name: body
+          in: body
+          schema:
+            $ref: "#/definitions/RegisterDdms"
+      responses:
+        '201':
+          description: Created
+          schema:
+            $ref: "#/definitions/RegisterDdms"
+        '400':
+          description: Bad Request
+          schema:
+            $ref: "#/definitions/RegisterAppError"
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: "#/definitions/RegisterAppError"
+        '409':
+          description: Conflict
+          schema:
+            $ref: "#/definitions/RegisterAppError"
+        '429':
+          description: Too Many Requests
+          schema:
+            $ref: "#/definitions/RegisterAppError"
+        '500':
+          description: Server Error
+          schema:
+            $ref: "#/definitions/RegisterAppError"
+        '502':
+          description: Bad Gateway
+          schema:
+            $ref: "#/definitions/RegisterAppError"
+        '503':
+          description: Service Unavailable
+          schema:
+            $ref: "#/definitions/RegisterAppError"
+      security:
+        - Bearer: []
+    get:
+      tags:
+        - Register
+      summary: Query for DDMS registrations
+      description: "Query for DDMS registrations allowing retrievals by type. Required
+        roles: 'users.datalake.viewers' or 'users.datalake.editors' or
+        'users.datalake.admins'"
+      operationId: Query a DDMS registration
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: type
+          in: query
+          required: true
+          type: string
+          pattern: ^[A-Za-z0-9 ]{2,50}
+        - name: data-partition-id
+          in: header
+          description: Specifies the partition to use. This should be either the partition
+            name associated with the partition.
+          required: true
+          type: string
+          x-example: opendes
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/RegisterDdms"
+        '400':
+          description: Bad Request
+          schema:
+            $ref: "#/definitions/RegisterAppError"
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: "#/definitions/RegisterAppError"
+        '404':
+          description: Not Found
+          schema:
+            $ref: "#/definitions/RegisterAppError"
+        '429':
+          description: Too Many Requests
+          schema:
+            $ref: "#/definitions/RegisterAppError"
+        '500':
+          description: Server Error
+          schema:
+            $ref: "#/definitions/RegisterAppError"
+        '502':
+          description: Bad Gateway
+          schema:
+            $ref: "#/definitions/RegisterAppError"
+        '503':
+          description: Service Unavailable
+          schema:
+            $ref: "#/definitions/RegisterAppError"
+      security:
+        - Bearer: []
+  '/api/register/v1/action/{id}':
+    get:
+      tags:
+        - Register
+      summary: Get an action registration
+      description: "Get an action registration with the given id. Required roles:
+        'users.datalake.viewers' or 'users.datalake.editors' or
+        'users.datalake.admins'"
+      operationId: Get an action registration
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: id
+          in: path
+          required: true
+          type: string
+          pattern: ^[A-Za-z0-9-]{2,50}
+        - name: data-partition-id
+          in: header
+          description: Specifies the partition to use. This should be either the partition
+            name associated with the partition.
+          required: true
+          type: string
+          x-example: opendes
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: "#/definitions/RegisterAction"
+        '400':
+          description: Bad Request
+          schema:
+            $ref: "#/definitions/RegisterAppError"
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: "#/definitions/RegisterAppError"
+        '404':
+          description: Not Found
+          schema:
+            $ref: "#/definitions/RegisterAppError"
+        '429':
+          description: Too Many Requests
+          schema:
+            $ref: "#/definitions/RegisterAppError"
+        '500':
+          description: Server Error
+          schema:
+            $ref: "#/definitions/RegisterAppError"
+        '502':
+          description: Bad Gateway
+          schema:
+            $ref: "#/definitions/RegisterAppError"
+        '503':
+          description: Service Unavailable
+          schema:
+            $ref: "#/definitions/RegisterAppError"
+      security:
+        - Bearer: []
+    delete:
+      tags:
+        - Register
+      summary: Delete an action  registration
+      description: "Delete an action registration with the given id. Required role:
+        'users.datalake.admins'"
+      operationId: Delete an action registration
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: id
+          in: path
+          required: true
+          type: string
+          pattern: ^[A-Za-z0-9-]{2,50}
+        - name: data-partition-id
+          in: header
+          description: Specifies the partition to use. This should be either the partition
+            name associated with the partition.
+          required: true
+          type: string
+          x-example: opendes
+      responses:
+        '204':
+          description: No Content
+        '400':
+          description: Bad Request
+          schema:
+            $ref: "#/definitions/RegisterAppError"
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: "#/definitions/RegisterAppError"
+        '404':
+          description: Not found
+          schema:
+            $ref: "#/definitions/RegisterAppError"
+        '429':
+          description: Too Many Requests
+          schema:
+            $ref: "#/definitions/RegisterAppError"
+        '500':
+          description: Server Error
+          schema:
+            $ref: "#/definitions/RegisterAppError"
+        '502':
+          description: Bad Gateway
+          schema:
+            $ref: "#/definitions/RegisterAppError"
+        '503':
+          description: Service Unavailable
+          schema:
+            $ref: "#/definitions/RegisterAppError"
+      security:
+        - Bearer: []
+  '/api/register/v1/action':
+    post:
+      tags:
+        - Register
+      summary: Create an action registration
+      description: "Create an action registration. Required role: 'users.datalake.admins'"
+      operationId: Create an action registration
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: data-partition-id
+          in: header
+          description: Specifies the partition to use. This should be either the partition
+            name associated with the partition.
+          required: true
+          type: string
+          x-example: opendes
+        - name: body
+          in: body
+          schema:
+            $ref: "#/definitions/RegisterCreateAction"
+      responses:
+        '201':
+          description: Created
+          schema:
+            $ref: "#/definitions/RegisterAction"
+        '400':
+          description: Bad Request
+          schema:
+            $ref: "#/definitions/RegisterAppError"
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: "#/definitions/RegisterAppError"
+        '409':
+          description: Conflict
+          schema:
+            $ref: '#/definitions/RegisterAppError'
+        '429':
+          description: Too Many Requests
+          schema:
+            $ref: "#/definitions/RegisterAppError"
+        '500':
+          description: Server Error
+          schema:
+            $ref: "#/definitions/RegisterAppError"
+        '502':
+          description: Bad Gateway
+          schema:
+            $ref: "#/definitions/RegisterAppError"
+        '503':
+          description: Service Unavailable
+          schema:
+            $ref: "#/definitions/RegisterAppError"
+      security:
+        - Bearer: []
+  '/api/register/v1/action:test':
+    post:
+      tags:
+        - Register
+      summary: Test an action registration
+      description: "Test an action registration. Required roles: 'users.datalake.viewers'
+        or 'users.datalake.editors' or 'users.datalake.admins'"
+      operationId: Test an action registration
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: data-partition-id
+          in: header
+          description: Specifies the partition to use. This should be either the partition
+            name associated with the partition.
+          required: true
+          type: string
+          x-example: opendes
+        - name: body
+          in: body
+          schema:
+            $ref: "#/definitions/RegisterTestAction"
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: "#/definitions/RegisterTestActionResult"
+        '400':
+          description: Bad Request
+          schema:
+            $ref: "#/definitions/RegisterAppError"
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: "#/definitions/RegisterAppError"
+        '409':
+          description: Conflict
+          schema:
+            $ref: "#/definitions/RegisterAppError"
+        '429':
+          description: Too Many Requests
+          schema:
+            $ref: "#/definitions/RegisterAppError"
+        '500':
+          description: Server Error
+          schema:
+            $ref: "#/definitions/RegisterAppError"
+        '502':
+          description: Bad Gateway
+          schema:
+            $ref: "#/definitions/RegisterAppError"
+        '503':
+          description: Service Unavailable
+          schema:
+            $ref: "#/definitions/RegisterAppError"
+      security:
+        - Bearer: []
+  '/api/register/v1/action:retrieve':
+    post:
+      tags:
+        - Register
+      summary: Query for action registrations and substitutes any action with the
+        given parameters
+      description: "Retrieve an action registration. Required roles:
+        'users.datalake.viewers' or 'users.datalake.editors' or
+        'users.datalake.admins'"
+      operationId: Retrieve an action registration
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: data-partition-id
+          in: header
+          description: Specifies the partition to use. This should be either the partition
+            name associated with the partition.
+          required: true
+          type: string
+          default: opendes
+        - name: body
+          in: body
+          description: The Record to find matching actions for and apply the template for.
+          schema:
+            $ref: "#/definitions/RegisterRecord"
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/RegisterAction"
+        '400':
+          description: Bad Request
+          schema:
+            $ref: "#/definitions/RegisterAppError"
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: "#/definitions/RegisterAppError"
+        '409':
+          description: Conflict
+          schema:
+            $ref: "#/definitions/RegisterAppError"
+        '429':
+          description: Too Many Requests
+          schema:
+            $ref: "#/definitions/RegisterAppError"
+        '500':
+          description: Server Error
+          schema:
+            $ref: "#/definitions/RegisterAppError"
+        '502':
+          description: Bad Gateway
+          schema:
+            $ref: "#/definitions/RegisterAppError"
+        '503':
+          description: Service Unavailable
+          schema:
+            $ref: "#/definitions/RegisterAppError"
+      security:
+        - Bearer: []
+  '/api/register/v1/subscription':
+    post:
+      tags:
+        - Register
+      summary: Create a subscription
+      description: "Create a subscription. Required roles: 'users.datalake.editors' or 'users.datalake.admins'"
+      operationId: Create a subscription
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: data-partition-id
+          in: header
+          description: Specifies the partition to use. This should be either the partition
+            name associated with the partition.
+          required: true
+          type: string
+          x-example: opendes
+        - name: body
+          in: body
+          schema:
+            $ref: "#/definitions/RegisterSubscription"
+      responses:
+        '201':
+          description: Created
+          schema:
+            $ref: "#/definitions/RegisterSubscriptionCreateResult"
+        '400':
+          description: Bad Request
+          schema:
+            $ref: "#/definitions/RegisterAppError"
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: "#/definitions/RegisterAppError"
+        '409':
+          description: Conflict
+          schema:
+            $ref: "#/definitions/RegisterAppError"
+        '429':
+          description: Too Many Requests
+          schema:
+            $ref: "#/definitions/RegisterAppError"
+        '500':
+          description: Server Error
+          schema:
+            $ref: "#/definitions/RegisterAppError"
+        '502':
+          description: Bad Gateway
+          schema:
+            $ref: "#/definitions/RegisterAppError"
+        '503':
+          description: Service Unavailable
+          schema:
+            $ref: "#/definitions/RegisterAppError"
+      security:
+        - Bearer: []
+  '/api/register/v1/subscription/{id}':
+    get:
+      tags:
+        - Register
+      summary: Get a subscription
+      description: "Get a subscription with its Id. Required role: 'users.datalake.editors' or 'users.datalake.admins'"
+      operationId: Get a subscription by Id
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: id
+          in: path
+          required: true
+          type: string
+        - name: data-partition-id
+          in: header
+          description: Specifies the partition to use. This should be either the partition name associated with the partition.
+          required: true
+          type: string
+          x-example: opendes
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: "#/definitions/RegisterGetSubscriptionResult"
+        '400':
+          description: Bad Request
+          schema:
+            $ref: "#/definitions/RegisterAppError"
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: "#/definitions/RegisterAppError"
+        '404':
+          description: Not found
+          schema:
+            $ref: "#/definitions/RegisterAppError"
+        '429':
+          description: Too Many Requests
+          schema:
+            $ref: "#/definitions/RegisterAppError"
+        '500':
+          description: Server Error
+          schema:
+            $ref: "#/definitions/RegisterAppError"
+        '502':
+          description: Bad Gateway
+          schema:
+            $ref: "#/definitions/RegisterAppError"
+        '503':
+          description: Service Unavailable
+          schema:
+            $ref: "#/definitions/RegisterAppError"
+      security:
+        - Bearer: []
+    delete:
+      tags:
+        - Register
+      summary: Delete a subscription
+      description: "Delete a subscription with its Id. Required role:
+        'users.datalake.admins'"
+      operationId: Delete a subscription by Id
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: id
+          in: path
+          required: true
+          type: string
+        - name: data-partition-id
+          in: header
+          description: Specifies the partition to use. This should be either the partition name associated with the partition.
+          required: true
+          type: string
+          x-example: opendes
+      responses:
+        '204':
+          description: No Content
+        '400':
+          description: Bad Request
+          schema:
+            $ref: "#/definitions/RegisterAppError"
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: "#/definitions/RegisterAppError"
+        '404':
+          description: Not found
+          schema:
+            $ref: "#/definitions/RegisterAppError"
+        '429':
+          description: Too Many Requests
+          schema:
+            $ref: "#/definitions/RegisterAppError"
+        '500':
+          description: Server Error
+          schema:
+            $ref: "#/definitions/RegisterAppError"
+        '502':
+          description: Bad Gateway
+          schema:
+            $ref: "#/definitions/RegisterAppError"
+        '503':
+          description: Service Unavailable
+          schema:
+            $ref: "#/definitions/RegisterAppError"
+      security:
+        - Bearer: []
+  '/api/register/v1/subscription/{id}/secret':
+    put:
+      tags:
+        - Register
+      summary: Update secret for subscription
+      description: "Update secret for a subscription. Required role: 'users.datalake.editors' or 'users.datalake.admins'"
+      operationId: Update secret for subscription
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: id
+          in: path
+          required: true
+          type: string
+        - name: data-partition-id
+          in: header
+          description: Specifies the partition to use. This should be either the partition name associated with the partition.
+          required: true
+          type: string
+          x-example: opendes
+        - name: body
+          in: body
+          schema:
+            $ref: "#/definitions/RegisterSecret"
+      responses:
+        '204':
+          description: No Content
+        '400':
+          description: Bad Request
+          schema:
+            $ref: "#/definitions/RegisterAppError"
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: "#/definitions/RegisterAppError"
+        '404':
+          description: Not found
+          schema:
+            $ref: "#/definitions/RegisterAppError"
+        '429':
+          description: Too Many Requests
+          schema:
+            $ref: "#/definitions/RegisterAppError"
+        '500':
+          description: Server Error
+          schema:
+            $ref: "#/definitions/RegisterAppError"
+        '502':
+          description: Bad Gateway
+          schema:
+            $ref: "#/definitions/RegisterAppError"
+        '503':
+          description: Service Unavailable
+          schema:
+            $ref: "#/definitions/RegisterAppError"
+      security:
+        - Bearer: []
+  '/api/register/v1/topics':
+    get:
+      tags:
+        - Register
+      summary: List all topics
+      description: "List all topics that you can create a subscription for, along with the corresponding sample messages. Required role: 'users.datalake.editors' or
+        'users.datalake.admins'"
+      operationId: List all topics
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: data-partition-id
+          in: header
+          description: Specifies the partition to use. This should be either the partition name associated with the partition.
+          required: true
+          type: string
+          x-example: opendes
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/RegisterTopic"
+        '400':
+          description: Bad Request
+          schema:
+            $ref: "#/definitions/RegisterAppError"
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: "#/definitions/RegisterAppError"
+        '404':
+          description: Not found
+          schema:
+            $ref: "#/definitions/RegisterAppError"
+        '429':
+          description: Too Many Requests
+          schema:
+            $ref: "#/definitions/RegisterAppError"
+        '500':
+          description: Server Error
+          schema:
+            $ref: "#/definitions/RegisterAppError"
+        '502':
+          description: Bad Gateway
+          schema:
+            $ref: "#/definitions/RegisterAppError"
+        '503':
+          description: Service Unavailable
+          schema:
+            $ref: "#/definitions/RegisterAppError"
+      security:
+        - Bearer: []
 
 
 
@@ -2656,6 +3372,10 @@ paths:
 #########################
 
 definitions:
+
+  #########################
+  # Partition Models
+  ######################### 
   PartitionProperty:
     type: object
     properties:
@@ -2685,6 +3405,10 @@ definitions:
           sensitive: true
           value: 'cosmos-connection'
 
+
+  #########################
+  # Entitlement Models
+  ######################### 
   EntitlementGroupProperties:
     type: object
     required:
@@ -2729,6 +3453,10 @@ definitions:
         example: MEMBER
         description: Role Name
 
+
+  #########################
+  # Legal Models
+  ######################### 
   LegalTagProperties:
     type: object
     required:
@@ -2884,6 +3612,10 @@ definitions:
         description: The optional expiration date of the contract in the format YYYY-MM-DD
     description: The model to update an existing LegalTag
 
+
+  #########################
+  # Storage Models
+  ######################### 
   StorageQueryResponse:
     type: "object"
     properties:
@@ -3168,6 +3900,10 @@ definitions:
 
     description: "Patch api query specific information"
 
+
+  #########################
+  # Search Models
+  ######################### 
   SearchAppError:
     type: object
     properties:
@@ -3354,7 +4090,11 @@ definitions:
             latitude: 36.450727
             longitude: 122.174762
       returnedFields: [Location]
-
+  
+  
+  #########################
+  # Schema Models
+  ######################### 
   SchemaError:
     type: object
     properties:
@@ -3505,7 +4245,9 @@ definitions:
       schema: {}
 
 
-
+  #########################
+  # File Models
+  ######################### 
   FileDateTime:
     type: string
     format: date-time
@@ -4066,7 +4808,11 @@ definitions:
         type: integer
       size:
         type: integer
-  
+ 
+ 
+  #########################
+  # Workflow Models
+  #########################  
   WorkflowTriggerRequest:
     title: Workflow Trigger Request
     type: object
@@ -4180,3 +4926,412 @@ definitions:
         type: string
       reason:
         type: string
+  
+  
+  #########################
+  # Register Models
+  #########################    
+  RegisterDdms:
+    type: object
+    required:
+      - schema
+    properties:
+      id:
+        type: string
+        pattern: ^[A-Za-z0-9-]{2,50}
+      name:
+        type: string
+        pattern: ^[A-Za-z0-9- ]{2,50}
+      description:
+        type: string
+        pattern: ^[A-Za-z0-9. ]{0,255}
+      contactEmail:
+        type: string
+      interfaces:
+        type: array
+        items:
+          $ref: "#/definitions/RegisterDdmsInterface"
+    example:
+      id: example-id-123
+      name: example-name
+      description: example-description
+      contactEmail: abc@test.com
+      interfaces:
+        - entityType: wellbore
+          schema: {}
+  RegisterAppError:
+    type: object
+    properties:
+      code:
+        type: integer
+        format: int32
+      reason:
+        type: string
+      message:
+        type: string
+    description: An error that occurs during normal application logic
+  RegisterDdmsInterface:
+    type: object
+    required:
+      - schema
+    properties:
+      entityType:
+        type: string
+        pattern: ^[A-Za-z0-9-]{2,50}
+      schema:
+        type: object
+  RegisterCreateAction:
+    type: object
+    required:
+      - schema
+    properties:
+      id:
+        type: string
+        pattern: ^[A-Za-z0-9-]{2,50}
+      name:
+        type: string
+        pattern: ^[A-Za-z0-9- ]{2,50}
+      description:
+        type: string
+        pattern: ^[A-Za-z0-9. ]{0,255}
+      contactEmail:
+        type: string
+      img:
+        type: string
+        pattern: ^(https:\/\/)[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&\(\)\*\+,;=.]+$
+        description: Reference link to an image file that can be usd in an UI to
+          represent the action.
+      url:
+        type: string
+        pattern: ^(https:\/\/)[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&\(\)\*\+,;=.]+$
+        example: https://myapp.osdu.com/action/{type}/{id}
+      filter:
+        $ref: "#/definitions/RegisterFilter"
+    example:
+      id: petrel-launch-project
+      name: Petrel Project
+      description: This action launches the Petrel projects landing page that holds the
+        selected data.
+      img: https://mycdn.com/img.png
+      contactEmail: abc@test.com
+      url: https://myapp.osdu.com/action/{type}/{id}
+      filter:
+        entityType:
+          - regularheightfield
+        source:
+          - petrel
+        version:
+          - "*"
+  RegisterTestAction:
+    type: object
+    required:
+      - schema
+    properties:
+      action:
+        $ref: "#/definitions/RegisterCreateAction"
+      testPayload:
+        type: object
+    example:
+      action:
+        id: petrel-launch-project
+        name: Petrel Project
+        description: This action launches the Petrel projects landing page that holds the
+          selected data.
+        contactEmail: abc@test.com
+        img: https://mycdn.com/img.png
+        url: https://myapp.osdu.com/action/{data.uri:^(?:[^\/]*(?:\/(?:\/[^\/]*\/?)?)?([^?]+)(?:\??.+)?)$}
+        filter:
+          entityType:
+            - regularheightfield
+            - project
+          source:
+            - petrel
+          version:
+            - "*"
+      testPayload:
+        id: common:regularheightfield:123456
+        kind: common:petrel:regularheightfield:1.0.0
+        data:
+          uri: https://myproj.com/abc123
+  RegisterTestActionResult:
+    type: object
+    required:
+      - schema
+    properties:
+      url:
+        type: string
+      errors:
+        type: string
+    example:
+      url: https://myapp.osdu.com/action/abc123
+      errors: ""
+  RegisterAction:
+    type: object
+    required:
+      - schema
+    properties:
+      id:
+        type: string
+      name:
+        type: string
+      description:
+        type: string
+      contactEmail:
+        type: string
+      img:
+        type: string
+      url:
+        type: string
+        example: https://myapp.osdu.com/action/{type}/{id}
+      filter:
+        $ref: "#/definitions/RegisterFilter"
+      createdOnEpoch:
+        type: object
+        properties:
+          seconds:
+            type: integer
+          nanos:
+            type: integer
+  RegisterRecord:
+    type: object
+    required:
+      - schema
+    properties:
+      id:
+        type: string
+      kind:
+        type: string
+      acl:
+        $ref: "#/definitions/RegisterAcl"
+      legal:
+        $ref: "#/definitions/RegisterLegal"
+      data:
+        $ref: "#/definitions/RegisterData"
+    example:
+      id: common:regularheightfield:123456
+      kind: common:petrel:regularheightfield:1.0.0
+      acl:
+        viewers:
+          - data.default.viewers@{datapartition}.{domain}.com
+        owners:
+          - data.default.owners@{datapartition}.{domain}.com
+      legal:
+        legaltags:
+          - common-sample-legaltag
+        otherRelevantDataCountries:
+          - US
+      data:
+        msg: Hello
+        uri: https://myproj.com/abc123
+  RegisterAcl:
+    type: object
+    required:
+      - schema
+    properties:
+      viewers:
+        type: array
+        items:
+          type: string
+          example:
+            - data.default.viewers@{datapartition}.{domain}.com
+      owners:
+        type: array
+        items:
+          type: string
+          example:
+            - data.default.owners@{datapartition}.{domain}.com
+  RegisterData:
+    type: object
+    required:
+      - schema
+    properties:
+      msg:
+        type: string
+        example: Hello
+      uri:
+        type: string
+        example: https://myproj.com/abc123
+  RegisterLegal:
+    type: object
+    required:
+      - schema
+    properties:
+      legaltags:
+        type: array
+        items:
+          type: string
+          example:
+            - common-sample-legaltag
+      otherRelevantDataCountries:
+        type: array
+        items:
+          type: string
+          example:
+            - US
+  RegisterFilter:
+    type: object
+    required:
+      - schema
+    properties:
+      entityType:
+        type: array
+        items:
+          type: string
+          pattern: ^[a-z0-9-]{0,50}
+          default:
+            - "*"
+          example:
+            - regularheightfield
+      source:
+        type: array
+        items:
+          type: string
+          pattern: ^[a-z0-9-]{0,50}
+          default:
+            - "*"
+          example:
+            - petrel
+      version:
+        type: array
+        items:
+          type: string
+          pattern: ^[0-9.]{0,10}
+          default:
+            - "*"
+          example:
+            - "*"
+  RegisterSubscription:
+    type: object
+    required:
+      - schema
+    properties:
+      name:
+        type: string
+        pattern: ^[A-Za-z0-9- ]{2,50}
+        example: test-subscription
+      description:
+        type: string
+        pattern: ^[A-Za-z0-9. ]{0,255}
+        example: test description
+      topic:
+        type: string
+        example: data-changed-v1
+      pushEndpoint:
+        type: string
+        example: https://myListener.com
+      secret:
+        $ref: "#/definitions/RegisterSecret"
+  RegisterGetSubscriptionResult:
+    type: object
+    required:
+      - schema
+    properties:
+      id:
+        type: string
+        example: dGVzdC1uYW1l
+      name:
+        type: string
+        example: test-subscription
+      description:
+        type: string
+        example: test description
+      topic:
+        type: string
+        example: data-changed-v1
+      pushEndpoint:
+        type: string
+        example: https://myListener.com
+      createdBy:
+        type: string
+        example: test@myapp.com
+      notificationId:
+        type: string
+        example: de-6ee609b9-620e-477b-86f9-3b8907643a12
+  RegisterSubscriptionCreateResult:
+    type: object
+    required:
+      - schema
+    properties:
+      id:
+        type: string
+        example: dGVzdC1uYW1l
+      name:
+        type: string
+        pattern: ^[A-Za-z0-9- ]{2,50}
+        example: test-subscription
+      description:
+        type: string
+        pattern: ^[A-Za-z0-9. ]{0,255}
+        example: test description
+      topic:
+        type: string
+        example: data-changed-v1
+      pushEndpoint:
+        type: string
+        example: https://myListener.com
+      createdBy:
+        type: string
+        example: test@myapp.com
+      notificationId:
+        type: string
+        example: de-6ee609b9-620e-477b-86f9-3b8907643a12
+      createdOnEpoch:
+        $ref: "#/definitions/RegisterCreatedOnEpoch"
+      secret:
+        $ref: "#/definitions/RegisterSecret"
+  RegisterSecret:
+    type: object
+    required:
+      - schema
+    properties:
+      secretType:
+        type: string
+        enum:
+          - HMAC
+          - GSA
+      value:
+        type: object
+        example: hmacsecret
+  RegisterCreatedOnEpoch:
+    type: object
+    required:
+      - schema
+    properties:
+      seconds:
+        type: integer
+        example: 1572275081
+      nanos:
+        type: integer
+        example: 51000000
+  RegisterTopic:
+    type: object
+    required:
+      - schema
+    properties:
+      name:
+        type: string
+        example: records-changed
+      description:
+        type: string
+        example: This notification is sent whenever a record is created, updated or deleted.
+      state:
+        type: string
+        example: ACTIVE
+      example:
+        type: array
+        items:
+          $ref: "#/definitions/RegisterTopicExample"
+  RegisterTopicExample:
+    type: object
+    required:
+      - schema
+    properties:
+      id:
+        type: string
+        example: common:test:123
+      kind:
+        type: string
+        example: common:source:type:1.0.0
+      op:
+        type: string
+        example: deleted
