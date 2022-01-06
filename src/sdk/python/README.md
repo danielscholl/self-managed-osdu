@@ -131,6 +131,7 @@ Class | Method | HTTP request | Description
  - [FileDateTime](docs/FileDateTime.md)
  - [FileDeliveryGetFileSignedURLRequest](docs/FileDeliveryGetFileSignedURLRequest.md)
  - [FileDeliveryGetFileSignedURLResponse](docs/FileDeliveryGetFileSignedURLResponse.md)
+ - [FileDetails](docs/FileDetails.md)
  - [FileDownloadResponse](docs/FileDownloadResponse.md)
  - [FileDriver](docs/FileDriver.md)
  - [FileError](docs/FileError.md)
