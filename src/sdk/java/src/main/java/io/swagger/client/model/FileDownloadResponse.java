@@ -25,51 +25,29 @@ import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
 
 /**
- * Represents a single invalid LegalTag.
+ * FileDownloadResponse
  */
-@ApiModel(description = "Represents a single invalid LegalTag.")
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-01-06T19:27:20.802Z")
-public class LegalTagInvalidResponse {
-  @SerializedName("name")
-  private String name = null;
+public class FileDownloadResponse {
+  @SerializedName("SignedURL")
+  private String signedURL = null;
 
-  @SerializedName("reason")
-  private String reason = null;
-
-  public LegalTagInvalidResponse name(String name) {
-    this.name = name;
+  public FileDownloadResponse signedURL(String signedURL) {
+    this.signedURL = signedURL;
     return this;
   }
 
    /**
-   * The name of the LegalTag.
-   * @return name
+   * Get signedURL
+   * @return signedURL
   **/
-  @ApiModelProperty(value = "The name of the LegalTag.")
-  public String getName() {
-    return name;
+  @ApiModelProperty(value = "")
+  public String getSignedURL() {
+    return signedURL;
   }
 
-  public void setName(String name) {
-    this.name = name;
-  }
-
-  public LegalTagInvalidResponse reason(String reason) {
-    this.reason = reason;
-    return this;
-  }
-
-   /**
-   * The reason the LegalTag is currently invalid.
-   * @return reason
-  **/
-  @ApiModelProperty(value = "The reason the LegalTag is currently invalid.")
-  public String getReason() {
-    return reason;
-  }
-
-  public void setReason(String reason) {
-    this.reason = reason;
+  public void setSignedURL(String signedURL) {
+    this.signedURL = signedURL;
   }
 
 
@@ -81,24 +59,22 @@ public class LegalTagInvalidResponse {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    LegalTagInvalidResponse legalTagInvalidResponse = (LegalTagInvalidResponse) o;
-    return Objects.equals(this.name, legalTagInvalidResponse.name) &&
-        Objects.equals(this.reason, legalTagInvalidResponse.reason);
+    FileDownloadResponse fileDownloadResponse = (FileDownloadResponse) o;
+    return Objects.equals(this.signedURL, fileDownloadResponse.signedURL);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(name, reason);
+    return Objects.hash(signedURL);
   }
 
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class LegalTagInvalidResponse {\n");
+    sb.append("class FileDownloadResponse {\n");
     
-    sb.append("    name: ").append(toIndentedString(name)).append("\n");
-    sb.append("    reason: ").append(toIndentedString(reason)).append("\n");
+    sb.append("    signedURL: ").append(toIndentedString(signedURL)).append("\n");
     sb.append("}");
     return sb.toString();
   }

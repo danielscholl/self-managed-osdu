@@ -27,22 +27,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * StorageAcl
+ * FileAcl
  */
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-01-06T19:27:20.802Z")
-public class StorageAcl {
+public class FileAcl {
   @SerializedName("viewers")
   private List<String> viewers = new ArrayList<String>();
 
   @SerializedName("owners")
   private List<String> owners = new ArrayList<String>();
 
-  public StorageAcl viewers(List<String> viewers) {
+  public FileAcl viewers(List<String> viewers) {
     this.viewers = viewers;
     return this;
   }
 
-  public StorageAcl addViewersItem(String viewersItem) {
+  public FileAcl addViewersItem(String viewersItem) {
     this.viewers.add(viewersItem);
     return this;
   }
@@ -60,12 +60,12 @@ public class StorageAcl {
     this.viewers = viewers;
   }
 
-  public StorageAcl owners(List<String> owners) {
+  public FileAcl owners(List<String> owners) {
     this.owners = owners;
     return this;
   }
 
-  public StorageAcl addOwnersItem(String ownersItem) {
+  public FileAcl addOwnersItem(String ownersItem) {
     this.owners.add(ownersItem);
     return this;
   }
@@ -92,9 +92,9 @@ public class StorageAcl {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    StorageAcl storageAcl = (StorageAcl) o;
-    return Objects.equals(this.viewers, storageAcl.viewers) &&
-        Objects.equals(this.owners, storageAcl.owners);
+    FileAcl fileAcl = (FileAcl) o;
+    return Objects.equals(this.viewers, fileAcl.viewers) &&
+        Objects.equals(this.owners, fileAcl.owners);
   }
 
   @Override
@@ -106,7 +106,7 @@ public class StorageAcl {
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class StorageAcl {\n");
+    sb.append("class FileAcl {\n");
     
     sb.append("    viewers: ").append(toIndentedString(viewers)).append("\n");
     sb.append("    owners: ").append(toIndentedString(owners)).append("\n");

@@ -27,22 +27,26 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * StorageLegal
+ * Legal meta data like legal tags, relevant other countries, legal status.
  */
+@ApiModel(description = "Legal meta data like legal tags, relevant other countries, legal status.")
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-01-06T19:27:20.802Z")
-public class StorageLegal {
+public class FileLegal {
   @SerializedName("legaltags")
   private List<String> legaltags = null;
 
   @SerializedName("otherRelevantDataCountries")
   private List<String> otherRelevantDataCountries = null;
 
-  public StorageLegal legaltags(List<String> legaltags) {
+  @SerializedName("status")
+  private String status = null;
+
+  public FileLegal legaltags(List<String> legaltags) {
     this.legaltags = legaltags;
     return this;
   }
 
-  public StorageLegal addLegaltagsItem(String legaltagsItem) {
+  public FileLegal addLegaltagsItem(String legaltagsItem) {
     if (this.legaltags == null) {
       this.legaltags = new ArrayList<String>();
     }
@@ -51,10 +55,10 @@ public class StorageLegal {
   }
 
    /**
-   * List of legaltag names associated with the record.
+   * The list of legal tags, see compliance API.
    * @return legaltags
   **/
-  @ApiModelProperty(value = "List of legaltag names associated with the record.")
+  @ApiModelProperty(value = "The list of legal tags, see compliance API.")
   public List<String> getLegaltags() {
     return legaltags;
   }
@@ -63,12 +67,12 @@ public class StorageLegal {
     this.legaltags = legaltags;
   }
 
-  public StorageLegal otherRelevantDataCountries(List<String> otherRelevantDataCountries) {
+  public FileLegal otherRelevantDataCountries(List<String> otherRelevantDataCountries) {
     this.otherRelevantDataCountries = otherRelevantDataCountries;
     return this;
   }
 
-  public StorageLegal addOtherRelevantDataCountriesItem(String otherRelevantDataCountriesItem) {
+  public FileLegal addOtherRelevantDataCountriesItem(String otherRelevantDataCountriesItem) {
     if (this.otherRelevantDataCountries == null) {
       this.otherRelevantDataCountries = new ArrayList<String>();
     }
@@ -77,16 +81,34 @@ public class StorageLegal {
   }
 
    /**
-   * List of other relevant data countries. Must have 2 values: where the data was ingested from and where Data Lake stores the data.
+   * The list of other relevant data countries using the ISO 2-letter codes, see compliance API.
    * @return otherRelevantDataCountries
   **/
-  @ApiModelProperty(value = "List of other relevant data countries. Must have 2 values: where the data was ingested from and where Data Lake stores the data.")
+  @ApiModelProperty(value = "The list of other relevant data countries using the ISO 2-letter codes, see compliance API.")
   public List<String> getOtherRelevantDataCountries() {
     return otherRelevantDataCountries;
   }
 
   public void setOtherRelevantDataCountries(List<String> otherRelevantDataCountries) {
     this.otherRelevantDataCountries = otherRelevantDataCountries;
+  }
+
+  public FileLegal status(String status) {
+    this.status = status;
+    return this;
+  }
+
+   /**
+   * The legal status.
+   * @return status
+  **/
+  @ApiModelProperty(value = "The legal status.")
+  public String getStatus() {
+    return status;
+  }
+
+  public void setStatus(String status) {
+    this.status = status;
   }
 
 
@@ -98,24 +120,26 @@ public class StorageLegal {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    StorageLegal storageLegal = (StorageLegal) o;
-    return Objects.equals(this.legaltags, storageLegal.legaltags) &&
-        Objects.equals(this.otherRelevantDataCountries, storageLegal.otherRelevantDataCountries);
+    FileLegal fileLegal = (FileLegal) o;
+    return Objects.equals(this.legaltags, fileLegal.legaltags) &&
+        Objects.equals(this.otherRelevantDataCountries, fileLegal.otherRelevantDataCountries) &&
+        Objects.equals(this.status, fileLegal.status);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(legaltags, otherRelevantDataCountries);
+    return Objects.hash(legaltags, otherRelevantDataCountries, status);
   }
 
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class StorageLegal {\n");
+    sb.append("class FileLegal {\n");
     
     sb.append("    legaltags: ").append(toIndentedString(legaltags)).append("\n");
     sb.append("    otherRelevantDataCountries: ").append(toIndentedString(otherRelevantDataCountries)).append("\n");
+    sb.append("    status: ").append(toIndentedString(status)).append("\n");
     sb.append("}");
     return sb.toString();
   }

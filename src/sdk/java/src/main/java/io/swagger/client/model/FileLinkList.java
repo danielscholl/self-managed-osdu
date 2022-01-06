@@ -24,7 +24,7 @@ import java.util.Map;
  * A named list of entities in the data lake as a dictionary item.
  */
 @ApiModel(description = "A named list of entities in the data lake as a dictionary item.")
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-01-06T19:12:22.462Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-01-06T19:27:20.802Z")
 public class FileLinkList extends HashMap<String, List> {
 
   @Override
