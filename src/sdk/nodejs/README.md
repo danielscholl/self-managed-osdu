@@ -196,6 +196,7 @@ Class | Method | HTTP request | Description
  - [SelfManagedOsdu.FileRelationships](docs/FileRelationships.md)
  - [SelfManagedOsdu.FileToManyRelationship](docs/FileToManyRelationship.md)
  - [SelfManagedOsdu.FileToOneRelationship](docs/FileToOneRelationship.md)
+ - [SelfManagedOsdu.Files](docs/Files.md)
  - [SelfManagedOsdu.LegalTagDto](docs/LegalTagDto.md)
  - [SelfManagedOsdu.LegalTagDtos](docs/LegalTagDtos.md)
  - [SelfManagedOsdu.LegalTagInvalidResponse](docs/LegalTagInvalidResponse.md)
