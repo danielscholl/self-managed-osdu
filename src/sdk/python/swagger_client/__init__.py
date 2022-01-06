@@ -32,15 +32,12 @@ from swagger_client.models.entitlement_group_response import EntitlementGroupRes
 from swagger_client.models.entitlement_member_dto import EntitlementMemberDto
 from swagger_client.models.file_acl import FileAcl
 from swagger_client.models.file_date_time import FileDateTime
-from swagger_client.models.file_download_response import FileDownloadResponse
 from swagger_client.models.file_driver import FileDriver
 from swagger_client.models.file_extension_properties import FileExtensionProperties
 from swagger_client.models.file_id import FileID
 from swagger_client.models.file_legal import FileLegal
-from swagger_client.models.file_link_list import FileLinkList
 from swagger_client.models.file_location import FileLocation
 from swagger_client.models.file_meta_item import FileMetaItem
-from swagger_client.models.file_metadata_response import FileMetadataResponse
 from swagger_client.models.legal_tag_dto import LegalTagDto
 from swagger_client.models.legal_tag_dtos import LegalTagDtos
 from swagger_client.models.legal_tag_invalid_response import LegalTagInvalidResponse
