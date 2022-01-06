@@ -27,7 +27,7 @@ import java.io.IOException;
 /**
  * SchemaError
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-01-06T20:30:18.662Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-01-06T20:32:07.050Z")
 public class SchemaError {
   @SerializedName("message")
   private String message = null;

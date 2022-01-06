@@ -2,7 +2,7 @@
 
 self-managed-osdu
 - API version: 0.11.0
-  - Build date: 2022-01-06T20:30:18.662Z
+  - Build date: 2022-01-06T20:32:07.050Z
 
 Rest API Documentation for Self Managed OSDU
 

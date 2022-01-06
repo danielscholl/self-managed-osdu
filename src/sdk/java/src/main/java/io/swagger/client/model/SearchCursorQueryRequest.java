@@ -31,7 +31,7 @@ import java.util.List;
  * Json object to query the Search API
  */
 @ApiModel(description = "Json object to query the Search API")
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-01-06T20:30:18.662Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-01-06T20:32:07.050Z")
 public class SearchCursorQueryRequest {
   @SerializedName("cursor")
   private String cursor = null;
