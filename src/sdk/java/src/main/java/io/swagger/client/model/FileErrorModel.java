@@ -30,7 +30,7 @@ import java.util.List;
 /**
  * FileErrorModel
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-01-06T19:56:05.916Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-01-06T19:58:30.495Z")
 public class FileErrorModel {
   @SerializedName("errors")
   private List<FileError> errors = null;
