@@ -193,6 +193,8 @@ Class | Method | HTTP request | Description
  - [SelfManagedOsdu.FileLinkList](docs/FileLinkList.md)
  - [SelfManagedOsdu.FileMetaItem](docs/FileMetaItem.md)
  - [SelfManagedOsdu.FileMetadataResponse](docs/FileMetadataResponse.md)
+ - [SelfManagedOsdu.FileRecord](docs/FileRecord.md)
+ - [SelfManagedOsdu.FileRecordVersion](docs/FileRecordVersion.md)
  - [SelfManagedOsdu.FileRelationships](docs/FileRelationships.md)
  - [SelfManagedOsdu.FileToManyRelationship](docs/FileToManyRelationship.md)
  - [SelfManagedOsdu.FileToOneRelationship](docs/FileToOneRelationship.md)
