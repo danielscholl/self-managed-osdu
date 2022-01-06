@@ -29,7 +29,7 @@ import java.io.IOException;
  * An error that occurs during normal application logic
  */
 @ApiModel(description = "An error that occurs during normal application logic")
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-01-06T19:47:20.557Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-01-06T19:47:50.968Z")
 public class SchemaErrorResponseFormat {
   @SerializedName("error")
   private SchemaErrorModel error = null;
