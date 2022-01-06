@@ -29,7 +29,7 @@ import java.io.IOException;
  * An error that occurs during normal application logic.
  */
 @ApiModel(description = "An error that occurs during normal application logic.")
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-01-06T20:36:10.522Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-01-06T20:40:55.437Z")
 public class FileApplicationError {
   @SerializedName("error")
   private FileErrorModel error = null;

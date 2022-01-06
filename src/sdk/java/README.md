@@ -2,7 +2,7 @@
 
 self-managed-osdu
 - API version: 0.11.0
-  - Build date: 2022-01-06T20:36:10.522Z
+  - Build date: 2022-01-06T20:40:55.437Z
 
 Rest API Documentation for Self Managed OSDU
 
@@ -75,12 +75,12 @@ Please follow the [installation](#installation) instruction and execute the foll
 import io.swagger.client.*;
 import io.swagger.client.auth.*;
 import io.swagger.client.model.*;
-import io.swagger.client.api.EntitlementApi;
+import io.swagger.client.api.DeliveryApiApi;
 
 import java.io.File;
 import java.util.*;
 
-public class EntitlementApiExample {
+public class DeliveryApiApiExample {
 
     public static void main(String[] args) {
         ApiClient defaultClient = Configuration.getDefaultApiClient();
@@ -91,15 +91,14 @@ public class EntitlementApiExample {
         // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
         //Bearer.setApiKeyPrefix("Token");
 
-        EntitlementApi apiInstance = new EntitlementApi();
-        String dataPartitionId = "dataPartitionId_example"; // String | Partition Name
-        String groupEmail = "groupEmail_example"; // String | group_email
-        EntitlementMemberDto partitionInfo = new EntitlementMemberDto(); // EntitlementMemberDto | partitionInfo
+        DeliveryApiApi apiInstance = new DeliveryApiApi();
+        String dataPartitionId = "dataPartitionId_example"; // String | Specifies the data partition to use. This should either be the partition name or crm account ID associated with the partition.
+        FileDeliveryGetFileSignedURLRequest body = new FileDeliveryGetFileSignedURLRequest(); // FileDeliveryGetFileSignedURLRequest | 
         try {
-            EntitlementMemberDto result = apiInstance.addMemberUsingPOST(dataPartitionId, groupEmail, partitionInfo);
+            FileDeliveryGetFileSignedURLResponse result = apiInstance.returnsDeliveryInstructionsForFileSUsingSRNs(dataPartitionId, body);
             System.out.println(result);
         } catch (ApiException e) {
-            System.err.println("Exception when calling EntitlementApi#addMemberUsingPOST");
+            System.err.println("Exception when calling DeliveryApiApi#returnsDeliveryInstructionsForFileSUsingSRNs");
             e.printStackTrace();
         }
     }
@@ -113,6 +112,7 @@ All URIs are relative to *https://self-managed-osdu.westeurope.cloudapp.azure.co
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
+*DeliveryApiApi* | [**returnsDeliveryInstructionsForFileSUsingSRNs**](docs/DeliveryApiApi.md#returnsDeliveryInstructionsForFileSUsingSRNs) | **POST** /api/file/v2/delivery/getFileSignedUrl | 
 *EntitlementApi* | [**addMemberUsingPOST**](docs/EntitlementApi.md#addMemberUsingPOST) | **POST** /api/entitlements/v2/groups/{group_email}/members | Add Member to Group
 *EntitlementApi* | [**createGroupUsingPOST**](docs/EntitlementApi.md#createGroupUsingPOST) | **POST** /api/entitlements/v2/groups | Create a Group
 *EntitlementApi* | [**deleteGroupUsingDELETE**](docs/EntitlementApi.md#deleteGroupUsingDELETE) | **DELETE** /api/entitlements/v2/groups/{group_email} | Delete a Group
@@ -122,6 +122,14 @@ Class | Method | HTTP request | Description
 *EntitlementApi* | [**listGroupsOnBehalfOfUsingGET**](docs/EntitlementApi.md#listGroupsOnBehalfOfUsingGET) | **GET** /api/entitlements/v2/members/{member_email}/groups | List Assigned Groups for User
 *EntitlementApi* | [**listGroupsUsingGET**](docs/EntitlementApi.md#listGroupsUsingGET) | **GET** /api/entitlements/v2/groups | List Assigned Groups
 *EntitlementApi* | [**updateGroupUsingPATCH**](docs/EntitlementApi.md#updateGroupUsingPATCH) | **PATCH** /api/entitlements/v2/groups/{group_email} | Updates Items in Group
+*FileServiceApi* | [**deletesMetadataRecordFileForTheGivenId**](docs/FileServiceApi.md#deletesMetadataRecordFileForTheGivenId) | **DELETE** /api/file/v2/files/{Id}/metadata | Deletes metadata record &amp; file assocaited with that record for the given id
+*FileServiceApi* | [**getALocationInLandingZoneToUploadAFile_**](docs/FileServiceApi.md#getALocationInLandingZoneToUploadAFile_) | **POST** /api/file/v2/getLocation | Get a location in Landing Zone to upload a file.
+*FileServiceApi* | [**getTheLocationToUploadAFile**](docs/FileServiceApi.md#getTheLocationToUploadAFile) | **GET** /api/file/v2/files/UploadURL | Get a location in Landing Zone to upload a file.
+*FileServiceApi* | [**getsMetadataRecordForTheGivenId**](docs/FileServiceApi.md#getsMetadataRecordForTheGivenId) | **GET** /api/file/v2/files/{Id}/metadata | Gets metadata record for the given id
+*FileServiceApi* | [**getsURLToDownloadTheFileAssociatedWithTheGivenId_**](docs/FileServiceApi.md#getsURLToDownloadTheFileAssociatedWithTheGivenId_) | **GET** /api/file/v2/files/{Id}/DownloadURL | Gets a URL to download the file
+*FileServiceApi* | [**publishFileMetadataForAFile_**](docs/FileServiceApi.md#publishFileMetadataForAFile_) | **POST** /api/file/v2/files/metadata | Creates metadata for a file
+*FileServiceInternalApi* | [**allowsTheApplicationToAuditTheAttemptedFileUploadsTheMethodIsInternalAndIsNotAvailableForThirdPartyApplications_**](docs/FileServiceInternalApi.md#allowsTheApplicationToAuditTheAttemptedFileUploadsTheMethodIsInternalAndIsNotAvailableForThirdPartyApplications_) | **POST** /api/file/v2/getFileList | 
+*FileServiceInternalApi* | [**returnsFileLocationAndDriver_**](docs/FileServiceInternalApi.md#returnsFileLocationAndDriver_) | **POST** /api/file/v2/getFileLocation | 
 *LegalApi* | [**createLegalTag**](docs/LegalApi.md#createLegalTag) | **POST** /api/legal/v1/legaltags | Creates the LegalTag for the given &#39;name&#39;.
 *LegalApi* | [**deleteLegalTag**](docs/LegalApi.md#deleteLegalTag) | **DELETE** /api/legal/v1/legaltags/{name} | Delete Legal Tag
 *LegalApi* | [**getLegalTag**](docs/LegalApi.md#getLegalTag) | **GET** /api/legal/v1/legaltags/{name} | Gets a LegalTag for the given &#39;name&#39;.

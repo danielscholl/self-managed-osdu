@@ -30,7 +30,7 @@ import java.util.Map;
 /**
  * SearchQueryResponse
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-01-06T20:36:10.522Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-01-06T20:40:55.437Z")
 public class SearchQueryResponse {
   @SerializedName("results")
   private List<Map<String, Object>> results = null;
