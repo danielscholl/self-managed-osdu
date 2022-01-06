@@ -182,6 +182,7 @@ Class | Method | HTTP request | Description
  - [SelfManagedOsdu.FileDateTime](docs/FileDateTime.md)
  - [SelfManagedOsdu.FileDeliveryGetFileSignedURLRequest](docs/FileDeliveryGetFileSignedURLRequest.md)
  - [SelfManagedOsdu.FileDeliveryGetFileSignedURLResponse](docs/FileDeliveryGetFileSignedURLResponse.md)
+ - [SelfManagedOsdu.FileDetails](docs/FileDetails.md)
  - [SelfManagedOsdu.FileDownloadResponse](docs/FileDownloadResponse.md)
  - [SelfManagedOsdu.FileDriver](docs/FileDriver.md)
  - [SelfManagedOsdu.FileError](docs/FileError.md)
