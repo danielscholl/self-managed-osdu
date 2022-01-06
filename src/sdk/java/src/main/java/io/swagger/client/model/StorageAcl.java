@@ -29,7 +29,7 @@ import java.util.List;
 /**
  * StorageAcl
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-01-06T20:03:41.621Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-01-06T20:04:58.542Z")
 public class StorageAcl {
   @SerializedName("viewers")
   private List<String> viewers = new ArrayList<String>();
