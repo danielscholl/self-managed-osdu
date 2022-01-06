@@ -2930,6 +2930,7 @@ definitions:
           signedUrl: https://...
 
 
+
   FileDetails:
     title: Opaque/Generic File Content Details
     type: object
@@ -2959,3 +2960,123 @@ definitions:
         description: The parent reference for this file.
         example: CSBE0417
     description: Further information about File being uploaded.
+  Files:
+    title: File Metadata
+    required:
+      - Name
+      - DatasetProperties
+      - Endian
+    type: object
+    properties:
+      Name:
+        type: string
+        description: An optional name of the dataset, e.g. a user friendly file or file collection name.
+      Description:
+        type: string
+        description: An optional, textual description of the dataset.
+      TotalSize:
+        type: string
+        description: Total size of the dataset in bytes; for files it is the same as declared in FileSourceInfo.FileSize or the sum of all individual files. Implemented as string. The value must be convertible to a long integer (sizes can become very large).
+        pattern: ^[0-9]+$
+      EncodingFormatTypeID:
+        type: string
+        description: Encoding Format Type ID
+        pattern: ^srn:<namespace>:reference-data\\/EncodingFormatType:[^:]+:[0-9]*$
+      SchemaFormatTypeID:
+        type: string
+        description: Schema Format Type ID
+        pattern: ^srn:<namespace>:reference-data\\/SchemaFormatType:[^:]+:[0-9]*$
+      Endian:
+        description: Endianness of binary value. Enumeration- \BIG\ \LITTLE\.  If absent applications will need to interpret from context indicators.
+        type: string
+        enum: [
+            BIG
+            LITTLE
+          ]
+      Checksum:
+        description: MD5 checksum of file bytes - a 32 byte hexadecimal number
+        type: string
+        pattern: ^[0-9a-fA-F]32}$
+      DatasetProperties:
+        type: object
+        required:
+        - FileSourceInfo
+        properties:
+          FileSourceInfo:
+            type: object
+            required:
+              - FileSource
+            properties:
+              Name:
+                type: string
+                description: user-friendly file name.
+              PreLoadFilePath:
+                type: string
+                description: File system path to the data file as it existed before loading to the data platform
+              FileSource:
+                type: string
+                description: Relative file path for the data in the file
+              PreloadFileCreateUser:
+                type: string
+                description: Optional user name or reference, who created the file prior to up-loading to the platform.
+              PreloadFileCreateDate:
+                type: string
+                description: Optional create date and time of the file prior to uploading to the platform.
+              PreloadFileModifyUser:
+                type: string
+                description: Optional user name or reference, who last modified the file prior to up-loading to the platform.
+              PreloadFileModifyDate:
+                type: string
+                description: Optional last modified date and time of the file prior to up-loading to the platform.
+              FileSize:
+                type: string
+                description: Length of file in bytes. Implemented as string. The value must be convertible to a long integer (sizes can become very large).
+              EncodingFormatTypeID:
+                type: string
+                description: Encoding Format Type ID
+                pattern: ^srn:<namespace>:reference-data\\/EncodingFormatType:[^:]+:[0-9]*$
+      ExtensionProperties:
+        title: File DMS Extension Properties
+        type: object
+        properties:
+           Name:
+              description: The name of the file. Note- this is an additional property, which is not part of OSDU File.1.0.0
+              example: File
+              title: File Name
+              type: string
+           Classification:
+              description: The well-known entity classification code.
+              example: Raw File
+              title: File Classification
+              type: string
+           Description:
+              description: A text describing the entity.
+              example: An text further describing this file example.
+              title: Entity Description
+              type: string
+           ExternalIds:
+              description: An array of identities (e.g. some kind if URL to be resolved in an external data store) which links to external realizations of the same entity.
+              format: link
+              items:
+                type: string
+              title: Array of External IDs
+              type: array
+           FileDateCreated:
+              description: The UTC date time of the file creation
+              example: 2013-03-22T11:16:03Z
+              format: date-time
+              title: Creation Date and Time
+              type: string
+           FileDateModified:
+              description: The UTC date time of the last file modification
+              example: 2013-03-22T11:16:03Z
+              format: date-time
+              title: Last Modification Date and Time
+              type: string
+           FileContentsDetails:
+              $ref: '#/definitions/FileDetails'
+           relationships:
+              $ref: '#/definitions/FileRelationships'
+    description: >-
+      The file data container containing all necessary details of the file
+      record
