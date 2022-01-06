@@ -165,6 +165,7 @@ Class | Method | HTTP request | Description
  - [Model.FileLegal](docs/FileLegal.md)
  - [Model.FileLinkList](docs/FileLinkList.md)
  - [Model.FileListRequest](docs/FileListRequest.md)
+ - [Model.FileLocationRequest](docs/FileLocationRequest.md)
  - [Model.FileLocationResponse](docs/FileLocationResponse.md)
  - [Model.FileMetaItem](docs/FileMetaItem.md)
  - [Model.FileMetadataResponse](docs/FileMetadataResponse.md)
