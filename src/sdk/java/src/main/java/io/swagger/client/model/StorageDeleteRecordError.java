@@ -28,7 +28,7 @@ import java.io.IOException;
  * Delete Records Response Body
  */
 @ApiModel(description = "Delete Records Response Body")
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-01-06T19:53:08.320Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-01-06T19:53:30.442Z")
 public class StorageDeleteRecordError {
   @SerializedName("notDeletedRecordId")
   private String notDeletedRecordId = null;

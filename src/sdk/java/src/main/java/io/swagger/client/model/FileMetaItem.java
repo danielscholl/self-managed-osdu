@@ -31,7 +31,7 @@ import java.util.List;
  * A meta data item, which allows the association of named properties or property values to a Unit/Measurement/CRS/Azimuth/Time context.
  */
 @ApiModel(description = "A meta data item, which allows the association of named properties or property values to a Unit/Measurement/CRS/Azimuth/Time context.")
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-01-06T19:53:08.320Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-01-06T19:53:30.442Z")
 public class FileMetaItem {
   /**
    * The kind of reference, unit, measurement, CRS or azimuth reference.
