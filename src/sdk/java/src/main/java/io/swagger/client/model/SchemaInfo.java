@@ -30,7 +30,7 @@ import org.threeten.bp.OffsetDateTime;
  * Schema info including status, creation and schemaIdentity
  */
 @ApiModel(description = "Schema info including status, creation and schemaIdentity")
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-01-06T19:45:04.076Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-01-06T19:45:34.984Z")
 public class SchemaInfo {
   @SerializedName("createdBy")
   private String createdBy = null;

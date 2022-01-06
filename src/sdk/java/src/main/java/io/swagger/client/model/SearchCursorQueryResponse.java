@@ -30,7 +30,7 @@ import java.util.Map;
 /**
  * SearchCursorQueryResponse
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-01-06T19:45:04.076Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-01-06T19:45:34.984Z")
 public class SearchCursorQueryResponse {
   @SerializedName("cursor")
   private String cursor = null;

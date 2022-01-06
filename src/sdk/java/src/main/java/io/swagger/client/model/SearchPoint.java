@@ -28,7 +28,7 @@ import java.io.IOException;
  * Geo-point with latitude and longitude
  */
 @ApiModel(description = "Geo-point with latitude and longitude")
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-01-06T19:45:04.076Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-01-06T19:45:34.984Z")
 public class SearchPoint {
   @SerializedName("latitude")
   private Double latitude = null;
