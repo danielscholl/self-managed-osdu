@@ -27,7 +27,7 @@ import java.io.IOException;
 /**
  * PartitionProperty
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-01-06T20:26:20.764Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-01-06T20:27:30.372Z")
 public class PartitionProperty {
   @SerializedName("sensitive")
   private Boolean sensitive = null;
