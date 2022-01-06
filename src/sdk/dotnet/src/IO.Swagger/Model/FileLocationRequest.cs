@@ -33,17 +33,17 @@ namespace IO.Swagger.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="FileLocationRequest" /> class.
         /// </summary>
-        /// <param name="fileId">fileId.</param>
-        public FileLocationRequest(string fileId = default(string))
+        /// <param name="fileID">fileID.</param>
+        public FileLocationRequest(string fileID = default(string))
         {
-            this.FileId = fileId;
+            this.FileID = fileID;
         }
         
         /// <summary>
-        /// Gets or Sets FileId
+        /// Gets or Sets FileID
         /// </summary>
-        [DataMember(Name="FileId", EmitDefaultValue=false)]
-        public string FileId { get; set; }
+        [DataMember(Name="FileID", EmitDefaultValue=false)]
+        public string FileID { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -53,7 +53,7 @@ namespace IO.Swagger.Model
         {
             var sb = new StringBuilder();
             sb.Append("class FileLocationRequest {\n");
-            sb.Append("  FileId: ").Append(FileId).Append("\n");
+            sb.Append("  FileID: ").Append(FileID).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -89,9 +89,9 @@ namespace IO.Swagger.Model
 
             return 
                 (
-                    this.FileId == input.FileId ||
-                    (this.FileId != null &&
-                    this.FileId.Equals(input.FileId))
+                    this.FileID == input.FileID ||
+                    (this.FileID != null &&
+                    this.FileID.Equals(input.FileID))
                 );
         }
 
@@ -104,8 +104,8 @@ namespace IO.Swagger.Model
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = 41;
-                if (this.FileId != null)
-                    hashCode = hashCode * 59 + this.FileId.GetHashCode();
+                if (this.FileID != null)
+                    hashCode = hashCode * 59 + this.FileID.GetHashCode();
                 return hashCode;
             }
         }

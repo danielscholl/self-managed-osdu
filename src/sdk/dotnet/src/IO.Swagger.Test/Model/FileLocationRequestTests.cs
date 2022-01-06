@@ -67,12 +67,12 @@ namespace IO.Swagger.Test
 
 
         /// <summary>
-        /// Test the property 'FileId'
+        /// Test the property 'FileID'
         /// </summary>
         [Test]
-        public void FileIdTest()
+        public void FileIDTest()
         {
-            // TODO unit test for the property 'FileId'
+            // TODO unit test for the property 'FileID'
         }
 
     }
