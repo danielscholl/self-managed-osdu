@@ -2642,10 +2642,7 @@ definitions:
       schema: {}
 
 
-  FileDriver:
-    type: string
-    enum:
-      - AZURE
+
   FileDateTime:
     type: string
     format: date-time
