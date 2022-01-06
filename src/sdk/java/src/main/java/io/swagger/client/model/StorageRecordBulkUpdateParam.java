@@ -32,7 +32,7 @@ import java.util.List;
  * Patch update input information
  */
 @ApiModel(description = "Patch update input information")
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-01-06T19:59:40.550Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-01-06T20:02:41.200Z")
 public class StorageRecordBulkUpdateParam {
   @SerializedName("query")
   private StorageRecordQuery query = null;
