@@ -22,58 +22,56 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import io.swagger.client.model.FileToManyRelationship;
+import io.swagger.client.model.FileToOneRelationship;
 import java.io.IOException;
 
 /**
- * Geo-point with latitude and longitude
+ * All relationships from this entity.
  */
-@ApiModel(description = "Geo-point with latitude and longitude")
+@ApiModel(description = "All relationships from this entity.")
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-01-06T19:40:40.245Z")
-public class SearchPoint {
-  @SerializedName("latitude")
-  private Double latitude = null;
+public class FileRelationships {
+  @SerializedName("parentEntity")
+  private FileToOneRelationship parentEntity = null;
 
-  @SerializedName("longitude")
-  private Double longitude = null;
+  @SerializedName("relatedItems")
+  private FileToManyRelationship relatedItems = null;
 
-  public SearchPoint latitude(Double latitude) {
-    this.latitude = latitude;
+  public FileRelationships parentEntity(FileToOneRelationship parentEntity) {
+    this.parentEntity = parentEntity;
     return this;
   }
 
    /**
-   * Get latitude
-   * minimum: -90
-   * maximum: 90
-   * @return latitude
+   * Get parentEntity
+   * @return parentEntity
   **/
   @ApiModelProperty(value = "")
-  public Double getLatitude() {
-    return latitude;
+  public FileToOneRelationship getParentEntity() {
+    return parentEntity;
   }
 
-  public void setLatitude(Double latitude) {
-    this.latitude = latitude;
+  public void setParentEntity(FileToOneRelationship parentEntity) {
+    this.parentEntity = parentEntity;
   }
 
-  public SearchPoint longitude(Double longitude) {
-    this.longitude = longitude;
+  public FileRelationships relatedItems(FileToManyRelationship relatedItems) {
+    this.relatedItems = relatedItems;
     return this;
   }
 
    /**
-   * Get longitude
-   * minimum: -180
-   * maximum: 180
-   * @return longitude
+   * Get relatedItems
+   * @return relatedItems
   **/
   @ApiModelProperty(value = "")
-  public Double getLongitude() {
-    return longitude;
+  public FileToManyRelationship getRelatedItems() {
+    return relatedItems;
   }
 
-  public void setLongitude(Double longitude) {
-    this.longitude = longitude;
+  public void setRelatedItems(FileToManyRelationship relatedItems) {
+    this.relatedItems = relatedItems;
   }
 
 
@@ -85,24 +83,24 @@ public class SearchPoint {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    SearchPoint searchPoint = (SearchPoint) o;
-    return Objects.equals(this.latitude, searchPoint.latitude) &&
-        Objects.equals(this.longitude, searchPoint.longitude);
+    FileRelationships fileRelationships = (FileRelationships) o;
+    return Objects.equals(this.parentEntity, fileRelationships.parentEntity) &&
+        Objects.equals(this.relatedItems, fileRelationships.relatedItems);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(latitude, longitude);
+    return Objects.hash(parentEntity, relatedItems);
   }
 
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class SearchPoint {\n");
+    sb.append("class FileRelationships {\n");
     
-    sb.append("    latitude: ").append(toIndentedString(latitude)).append("\n");
-    sb.append("    longitude: ").append(toIndentedString(longitude)).append("\n");
+    sb.append("    parentEntity: ").append(toIndentedString(parentEntity)).append("\n");
+    sb.append("    relatedItems: ").append(toIndentedString(relatedItems)).append("\n");
     sb.append("}");
     return sb.toString();
   }

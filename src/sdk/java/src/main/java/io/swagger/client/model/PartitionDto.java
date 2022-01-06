@@ -31,7 +31,7 @@ import java.util.Map;
 /**
  * PartitionDto
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-01-06T19:27:20.802Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-01-06T19:40:40.245Z")
 public class PartitionDto {
   @SerializedName("properties")
   private Map<String, PartitionProperty> properties = new HashMap<String, PartitionProperty>();
