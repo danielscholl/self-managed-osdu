@@ -156,6 +156,7 @@ Class | Method | HTTP request | Description
  - [Model.FileApplicationError](docs/FileApplicationError.md)
  - [Model.FileDeliveryGetFileSignedURLRequest](docs/FileDeliveryGetFileSignedURLRequest.md)
  - [Model.FileDeliveryGetFileSignedURLResponse](docs/FileDeliveryGetFileSignedURLResponse.md)
+ - [Model.FileDetails](docs/FileDetails.md)
  - [Model.FileDownloadResponse](docs/FileDownloadResponse.md)
  - [Model.FileDriver](docs/FileDriver.md)
  - [Model.FileError](docs/FileError.md)
