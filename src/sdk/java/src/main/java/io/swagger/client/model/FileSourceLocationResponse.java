@@ -22,34 +22,53 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import io.swagger.client.model.FileErrorModel;
 import java.io.IOException;
 
 /**
- * An error that occurs during normal application logic.
+ * FileSourceLocationResponse
  */
-@ApiModel(description = "An error that occurs during normal application logic.")
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-01-06T19:52:30.921Z")
-public class FileApplicationError {
-  @SerializedName("error")
-  private FileErrorModel error = null;
+public class FileSourceLocationResponse {
+  @SerializedName("FileID")
+  private String fileID = null;
 
-  public FileApplicationError error(FileErrorModel error) {
-    this.error = error;
+  @SerializedName("Location")
+  private Object location = null;
+
+  public FileSourceLocationResponse fileID(String fileID) {
+    this.fileID = fileID;
     return this;
   }
 
    /**
-   * Get error
-   * @return error
+   * Get fileID
+   * @return fileID
   **/
   @ApiModelProperty(value = "")
-  public FileErrorModel getError() {
-    return error;
+  public String getFileID() {
+    return fileID;
   }
 
-  public void setError(FileErrorModel error) {
-    this.error = error;
+  public void setFileID(String fileID) {
+    this.fileID = fileID;
+  }
+
+  public FileSourceLocationResponse location(Object location) {
+    this.location = location;
+    return this;
+  }
+
+   /**
+   * Get location
+   * @return location
+  **/
+  @ApiModelProperty(value = "")
+  public Object getLocation() {
+    return location;
+  }
+
+  public void setLocation(Object location) {
+    this.location = location;
   }
 
 
@@ -61,22 +80,24 @@ public class FileApplicationError {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    FileApplicationError fileApplicationError = (FileApplicationError) o;
-    return Objects.equals(this.error, fileApplicationError.error);
+    FileSourceLocationResponse fileSourceLocationResponse = (FileSourceLocationResponse) o;
+    return Objects.equals(this.fileID, fileSourceLocationResponse.fileID) &&
+        Objects.equals(this.location, fileSourceLocationResponse.location);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(error);
+    return Objects.hash(fileID, location);
   }
 
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class FileApplicationError {\n");
+    sb.append("class FileSourceLocationResponse {\n");
     
-    sb.append("    error: ").append(toIndentedString(error)).append("\n");
+    sb.append("    fileID: ").append(toIndentedString(fileID)).append("\n");
+    sb.append("    location: ").append(toIndentedString(location)).append("\n");
     sb.append("}");
     return sb.toString();
   }

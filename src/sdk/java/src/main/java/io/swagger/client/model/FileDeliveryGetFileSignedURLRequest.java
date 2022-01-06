@@ -22,34 +22,42 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import io.swagger.client.model.FileErrorModel;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
- * An error that occurs during normal application logic.
+ * FileDeliveryGetFileSignedURLRequest
  */
-@ApiModel(description = "An error that occurs during normal application logic.")
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-01-06T19:52:30.921Z")
-public class FileApplicationError {
-  @SerializedName("error")
-  private FileErrorModel error = null;
+public class FileDeliveryGetFileSignedURLRequest {
+  @SerializedName("srn")
+  private List<String> srn = null;
 
-  public FileApplicationError error(FileErrorModel error) {
-    this.error = error;
+  public FileDeliveryGetFileSignedURLRequest srn(List<String> srn) {
+    this.srn = srn;
+    return this;
+  }
+
+  public FileDeliveryGetFileSignedURLRequest addSrnItem(String srnItem) {
+    if (this.srn == null) {
+      this.srn = new ArrayList<String>();
+    }
+    this.srn.add(srnItem);
     return this;
   }
 
    /**
-   * Get error
-   * @return error
+   * A list of SRNs to fetch
+   * @return srn
   **/
-  @ApiModelProperty(value = "")
-  public FileErrorModel getError() {
-    return error;
+  @ApiModelProperty(value = "A list of SRNs to fetch")
+  public List<String> getSrn() {
+    return srn;
   }
 
-  public void setError(FileErrorModel error) {
-    this.error = error;
+  public void setSrn(List<String> srn) {
+    this.srn = srn;
   }
 
 
@@ -61,22 +69,22 @@ public class FileApplicationError {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    FileApplicationError fileApplicationError = (FileApplicationError) o;
-    return Objects.equals(this.error, fileApplicationError.error);
+    FileDeliveryGetFileSignedURLRequest fileDeliveryGetFileSignedURLRequest = (FileDeliveryGetFileSignedURLRequest) o;
+    return Objects.equals(this.srn, fileDeliveryGetFileSignedURLRequest.srn);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(error);
+    return Objects.hash(srn);
   }
 
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class FileApplicationError {\n");
+    sb.append("class FileDeliveryGetFileSignedURLRequest {\n");
     
-    sb.append("    error: ").append(toIndentedString(error)).append("\n");
+    sb.append("    srn: ").append(toIndentedString(srn)).append("\n");
     sb.append("}");
     return sb.toString();
   }

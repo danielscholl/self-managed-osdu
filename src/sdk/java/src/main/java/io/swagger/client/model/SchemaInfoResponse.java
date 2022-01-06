@@ -31,7 +31,7 @@ import java.util.List;
  * The response for a GET schema request
  */
 @ApiModel(description = "The response for a GET schema request")
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-01-06T19:49:15.102Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-01-06T19:52:30.921Z")
 public class SchemaInfoResponse {
   @SerializedName("schemaInfos")
   private List<SchemaInfo> schemaInfos = null;

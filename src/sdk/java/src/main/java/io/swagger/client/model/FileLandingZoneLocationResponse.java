@@ -23,73 +23,63 @@ import com.google.gson.stream.JsonWriter;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 /**
- * Storage record
+ * FileLandingZoneLocationResponse
  */
-@ApiModel(description = "Storage record")
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-01-06T19:52:30.921Z")
-public class StorageRecordData {
-  @SerializedName("data")
-  private Map<String, Object> data = null;
+public class FileLandingZoneLocationResponse {
+  @SerializedName("FileID")
+  private String fileID = null;
 
-  @SerializedName("meta")
-  private List<Map<String, Object>> meta = null;
+  @SerializedName("Location")
+  private Map<String, String> location = null;
 
-  public StorageRecordData data(Map<String, Object> data) {
-    this.data = data;
-    return this;
-  }
-
-  public StorageRecordData putDataItem(String key, Object dataItem) {
-    if (this.data == null) {
-      this.data = new HashMap<String, Object>();
-    }
-    this.data.put(key, dataItem);
+  public FileLandingZoneLocationResponse fileID(String fileID) {
+    this.fileID = fileID;
     return this;
   }
 
    /**
-   * Get data
-   * @return data
+   * Get fileID
+   * @return fileID
   **/
   @ApiModelProperty(value = "")
-  public Map<String, Object> getData() {
-    return data;
+  public String getFileID() {
+    return fileID;
   }
 
-  public void setData(Map<String, Object> data) {
-    this.data = data;
+  public void setFileID(String fileID) {
+    this.fileID = fileID;
   }
 
-  public StorageRecordData meta(List<Map<String, Object>> meta) {
-    this.meta = meta;
+  public FileLandingZoneLocationResponse location(Map<String, String> location) {
+    this.location = location;
     return this;
   }
 
-  public StorageRecordData addMetaItem(Map<String, Object> metaItem) {
-    if (this.meta == null) {
-      this.meta = new ArrayList<Map<String, Object>>();
+  public FileLandingZoneLocationResponse putLocationItem(String key, String locationItem) {
+    if (this.location == null) {
+      this.location = new HashMap<String, String>();
     }
-    this.meta.add(metaItem);
+    this.location.put(key, locationItem);
     return this;
   }
 
    /**
-   * Get meta
-   * @return meta
+   * Get location
+   * @return location
   **/
-  @ApiModelProperty(value = "")
-  public List<Map<String, Object>> getMeta() {
-    return meta;
+  @ApiModelProperty(example = "{\"SignedURL\":\"GCS signed URL\"}", value = "")
+  public Map<String, String> getLocation() {
+    return location;
   }
 
-  public void setMeta(List<Map<String, Object>> meta) {
-    this.meta = meta;
+  public void setLocation(Map<String, String> location) {
+    this.location = location;
   }
 
 
@@ -101,24 +91,24 @@ public class StorageRecordData {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    StorageRecordData storageRecordData = (StorageRecordData) o;
-    return Objects.equals(this.data, storageRecordData.data) &&
-        Objects.equals(this.meta, storageRecordData.meta);
+    FileLandingZoneLocationResponse fileLandingZoneLocationResponse = (FileLandingZoneLocationResponse) o;
+    return Objects.equals(this.fileID, fileLandingZoneLocationResponse.fileID) &&
+        Objects.equals(this.location, fileLandingZoneLocationResponse.location);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(data, meta);
+    return Objects.hash(fileID, location);
   }
 
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class StorageRecordData {\n");
+    sb.append("class FileLandingZoneLocationResponse {\n");
     
-    sb.append("    data: ").append(toIndentedString(data)).append("\n");
-    sb.append("    meta: ").append(toIndentedString(meta)).append("\n");
+    sb.append("    fileID: ").append(toIndentedString(fileID)).append("\n");
+    sb.append("    location: ").append(toIndentedString(location)).append("\n");
     sb.append("}");
     return sb.toString();
   }
