@@ -4,7 +4,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **file_id** | [**FileID**](FileID.md) |  | [optional] 
-**driver** | [**FileDriver**](FileDriver.md) |  | [optional] 
+**file_driver** | [**FileDriver**](FileDriver.md) |  | [optional] 
 **location** | **str** |  | [optional] 
 **created_at** | **datetime** |  | [optional] 
 **created_by** | **str** |  | [optional] 
