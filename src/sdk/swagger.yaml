@@ -1807,7 +1807,7 @@ paths:
   '/api/file/v2/getLocation':
     post:
       tags:
-        - File Service
+        - File
       summary: 'Get a location in Landing Zone to upload a file.'
       operationId: 'Get a location in Landing Zone to upload a file.'
       description: |
@@ -1859,7 +1859,7 @@ paths:
   '/api/file/v2/files/UploadURL':
     get:
       tags:
-        - File Service
+        - File
       summary: 'Get a location in Landing Zone to upload a file.'
       description: |-
         Gets a temporary signed URL to upload a file.The generated URL is time bound and expires after 24 hours.
@@ -1906,7 +1906,7 @@ paths:
   '/api/file/v2/files/metadata':
     post:
       tags:
-        - File Service
+        - File
       summary: 'Creates metadata for a file'
       description: |-
         This API creates a metadata record for a file that is already uploaded. The Metadata is linked to the file via `FileSource` provided in the request body.
@@ -1962,7 +1962,7 @@ paths:
   '/api/file/v2/files/{Id}/metadata':
     get:
       tags:
-        - File Service
+        - File
       description: >-
         Gets the latest version of File metadata record identified by the given id.
         **Required roles**: 'users.datalake.viewers' or 'users.datalake.editors'
@@ -2016,7 +2016,7 @@ paths:
         - Bearer: []
     delete:
       tags:
-        - File Service
+        - File
       description: >-
         Deletes the File metadata record identified by the given id and file associated with that metadata record.
         **Required roles**: 'users.datalake.editors'  or 'users.datalake.admins'.
@@ -2068,7 +2068,7 @@ paths:
   '/api/file/v2/files/{Id}/DownloadURL':
     get:
       tags:
-        - File Service
+        - File
       summary: Gets a URL to download the file
       description: |-
         Gets a URL for downloading the file associated with the unique `id`.
@@ -2128,7 +2128,7 @@ paths:
   '/api/file/v2/getFileLocation':
     post:
       tags:
-        - File Service (Internal)
+        - File
       description: 'Returns file `Location` and `Driver`.'
       operationId: 'Returns file `Location` and `Driver`.'
       consumes:
@@ -2170,7 +2170,7 @@ paths:
   '/api/file/v2/delivery/getFileSignedUrl':
     post:
       tags:
-        - Delivery API
+        - File
       description: 'Returns delivery instructions for File(s) using SRNs'
       operationId: 'Returns delivery instructions for File(s) using SRNs'
       consumes:
@@ -2210,7 +2210,7 @@ paths:
   '/api/file/v2/getFileList':
     post:
       tags:
-        - File Service (Internal)
+        - File
       description: 'Allows the application to audit the attempted file uploads. The method is internal and is not available for third-party applications.'
       operationId: 'Allows the application to audit the attempted file uploads. The method is internal and is not available for third-party applications.'
       consumes:
@@ -2429,7 +2429,7 @@ paths:
   '/api/workflow/v1/workflow/{workflow_name}/workflowRun':
     post:
       tags:
-        - Workflow Run
+        - Workflow
       summary: Trigger a workflow.
       operationId: triggerWorkflow
       description: Trigger a workflow mentioned in payload.
@@ -2476,7 +2476,7 @@ paths:
         - Bearer: []
     get:
       tags:
-        - Workflow Run
+        - Workflow
       summary: Get all run instances of a workflow.
       operationId: getAllWorkflowRuns
       description: Get all run instances for a worflow.
@@ -2557,7 +2557,7 @@ paths:
   '/api/workflow/v1/workflow/{workflow_name}/workflowRun/{runId}':
     get:
       tags:
-        - Workflow Run
+        - Workflow
       summary: Get details for a speciffic workflow run instance.
       operationId: getWorkflowRun
       description: Get an execution instances for a workflow.
@@ -2601,7 +2601,7 @@ paths:
         - Bearer: []
     put:
       tags:
-        - Workflow Run
+        - Workflow
       summary: Update the workflow run instance.
       operationId: updateWorkflowRun
       description: Update workflow run.
@@ -2655,7 +2655,7 @@ paths:
   '/api/register/v1/ddms/{id}':
     get:
       tags:
-        - Domain Data Management Service (DDMS)
+        - Register
       summary: Get a DDMS registration
       description: "Get a DDMS registration with the given id. Required roles:
         'users.datalake.viewers' or 'users.datalake.editors' or
@@ -2715,7 +2715,7 @@ paths:
         - Bearer: []
     delete:
       tags:
-        - Domain Data Management Service (DDMS)
+        - Register
       summary: Delete a DDMS registration
       description: "Delete a DDMS registration with the given id. Required roles:
         'users.datalake.admins'"
@@ -2773,7 +2773,7 @@ paths:
   '/api/register/v1/ddms':
     post:
       tags:
-        - Domain Data Management Service (DDMS)
+        - Register
       summary: Create a DDMS registration
       description: "Create a DDMS registration using an OpenApi spec V3 document. Required
         roles: 'users.datalake.editors' or 'users.datalake.admins'"
@@ -2831,7 +2831,7 @@ paths:
         - Bearer: []
     get:
       tags:
-        - Domain Data Management Service (DDMS)
+        - Register
       summary: Query for DDMS registrations
       description: "Query for DDMS registrations allowing retrievals by type. Required
         roles: 'users.datalake.viewers' or 'users.datalake.editors' or
@@ -2894,7 +2894,7 @@ paths:
   '/api/register/v1/action/{id}':
     get:
       tags:
-        - Action
+        - Register
       summary: Get an action registration
       description: "Get an action registration with the given id. Required roles:
         'users.datalake.viewers' or 'users.datalake.editors' or
@@ -2954,7 +2954,7 @@ paths:
         - Bearer: []
     delete:
       tags:
-        - Action
+        - Register
       summary: Delete an action  registration
       description: "Delete an action registration with the given id. Required role:
         'users.datalake.admins'"
@@ -3012,7 +3012,7 @@ paths:
   '/api/register/v1/action':
     post:
       tags:
-        - Action
+        - Register
       summary: Create an action registration
       description: "Create an action registration. Required role: 'users.datalake.admins'"
       operationId: Create an action registration
@@ -3070,7 +3070,7 @@ paths:
   '/api/register/v1/action:test':
     post:
       tags:
-        - Action
+        - Register
       summary: Test an action registration
       description: "Test an action registration. Required roles: 'users.datalake.viewers'
         or 'users.datalake.editors' or 'users.datalake.admins'"
@@ -3129,7 +3129,7 @@ paths:
   '/api/register/v1/action:retrieve':
     post:
       tags:
-        - Action
+        - Register
       summary: Query for action registrations and substitutes any action with the
         given parameters
       description: "Retrieve an action registration. Required roles:
@@ -3193,7 +3193,7 @@ paths:
   '/api/register/v1/subscription':
     post:
       tags:
-        - Subscription
+        - Register
       summary: Create a subscription
       description: "Create a subscription. Required roles: 'users.datalake.editors' or 'users.datalake.admins'"
       operationId: Create a subscription
@@ -3251,7 +3251,7 @@ paths:
   '/api/register/v1/subscription/{id}':
     get:
       tags:
-        - Subscription
+        - Register
       summary: Get a subscription
       description: "Get a subscription with its Id. Required role: 'users.datalake.editors' or 'users.datalake.admins'"
       operationId: Get a subscription by Id
@@ -3307,7 +3307,7 @@ paths:
         - Bearer: []
     delete:
       tags:
-        - Subscription
+        - Register
       summary: Delete a subscription
       description: "Delete a subscription with its Id. Required role:
         'users.datalake.admins'"
@@ -3363,7 +3363,7 @@ paths:
   '/api/register/v1/subscription/{id}/secret':
     put:
       tags:
-        - Subscription
+        - Register
       summary: Update secret for subscription
       description: "Update secret for a subscription. Required role: 'users.datalake.editors' or 'users.datalake.admins'"
       operationId: Update secret for subscription
@@ -3422,7 +3422,7 @@ paths:
   '/api/register/v1/topics':
     get:
       tags:
-        - Subscription
+        - Register
       summary: List all topics
       description: "List all topics that you can create a subscription for, along with the corresponding sample messages. Required role: 'users.datalake.editors' or
         'users.datalake.admins'"
@@ -3483,7 +3483,7 @@ paths:
   '/api/notification/v1/push-handlers/records-changed':
     post:
       tags:
-        - pubsub-endpoint
+        - Notification
       summary: Notifies subscribers that records have changed
       operationId: recordChangedUsingPOST
       parameters:
