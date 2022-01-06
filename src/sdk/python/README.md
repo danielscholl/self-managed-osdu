@@ -145,6 +145,7 @@ Class | Method | HTTP request | Description
  - [FileRelationships](docs/FileRelationships.md)
  - [FileToManyRelationship](docs/FileToManyRelationship.md)
  - [FileToOneRelationship](docs/FileToOneRelationship.md)
+ - [Files](docs/Files.md)
  - [LegalTagDto](docs/LegalTagDto.md)
  - [LegalTagDtos](docs/LegalTagDtos.md)
  - [LegalTagInvalidResponse](docs/LegalTagInvalidResponse.md)
