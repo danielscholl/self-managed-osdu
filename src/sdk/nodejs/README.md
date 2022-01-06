@@ -103,14 +103,13 @@ Bearer.apiKey = "YOUR API KEY"
 // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
 //Bearer.apiKeyPrefix['Authorization'] = "Token"
 
-var api = new SelfManagedOsdu.EntitlementApi()
+var api = new SelfManagedOsdu.DeliveryAPIApi()
 
-var dataPartitionId = "dataPartitionId_example"; // {String} Partition Name
+var dataPartitionId = "dataPartitionId_example"; // {String} Specifies the data partition to use. This should either be the partition name or crm account ID associated with the partition.
 
-var groupEmail = "groupEmail_example"; // {String} group_email
-
-var partitionInfo = new SelfManagedOsdu.EntitlementMemberDto(); // {EntitlementMemberDto} partitionInfo
-
+var opts = { 
+  'body': new SelfManagedOsdu.FileDeliveryGetFileSignedURLRequest() // {FileDeliveryGetFileSignedURLRequest} 
+};
 
 var callback = function(error, data, response) {
   if (error) {
@@ -119,7 +118,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-api.addMemberUsingPOST(dataPartitionId, groupEmail, partitionInfo, callback);
+api.returnsDeliveryInstructionsForFileSUsingSRNs(dataPartitionId, opts, callback);
 
 ```
 
@@ -129,6 +128,7 @@ All URIs are relative to *https://self-managed-osdu.westeurope.cloudapp.azure.co
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
+*SelfManagedOsdu.DeliveryAPIApi* | [**returnsDeliveryInstructionsForFileSUsingSRNs**](docs/DeliveryAPIApi.md#returnsDeliveryInstructionsForFileSUsingSRNs) | **POST** /api/file/v2/delivery/getFileSignedUrl | 
 *SelfManagedOsdu.EntitlementApi* | [**addMemberUsingPOST**](docs/EntitlementApi.md#addMemberUsingPOST) | **POST** /api/entitlements/v2/groups/{group_email}/members | Add Member to Group
 *SelfManagedOsdu.EntitlementApi* | [**createGroupUsingPOST**](docs/EntitlementApi.md#createGroupUsingPOST) | **POST** /api/entitlements/v2/groups | Create a Group
 *SelfManagedOsdu.EntitlementApi* | [**deleteGroupUsingDELETE**](docs/EntitlementApi.md#deleteGroupUsingDELETE) | **DELETE** /api/entitlements/v2/groups/{group_email} | Delete a Group
@@ -138,6 +138,14 @@ Class | Method | HTTP request | Description
 *SelfManagedOsdu.EntitlementApi* | [**listGroupsOnBehalfOfUsingGET**](docs/EntitlementApi.md#listGroupsOnBehalfOfUsingGET) | **GET** /api/entitlements/v2/members/{member_email}/groups | List Assigned Groups for User
 *SelfManagedOsdu.EntitlementApi* | [**listGroupsUsingGET**](docs/EntitlementApi.md#listGroupsUsingGET) | **GET** /api/entitlements/v2/groups | List Assigned Groups
 *SelfManagedOsdu.EntitlementApi* | [**updateGroupUsingPATCH**](docs/EntitlementApi.md#updateGroupUsingPATCH) | **PATCH** /api/entitlements/v2/groups/{group_email} | Updates Items in Group
+*SelfManagedOsdu.FileServiceApi* | [**deletesMetadataRecordFileForTheGivenId**](docs/FileServiceApi.md#deletesMetadataRecordFileForTheGivenId) | **DELETE** /api/file/v2/files/{Id}/metadata | Deletes metadata record & file assocaited with that record for the given id
+*SelfManagedOsdu.FileServiceApi* | [**getALocationInLandingZoneToUploadAFile_**](docs/FileServiceApi.md#getALocationInLandingZoneToUploadAFile_) | **POST** /api/file/v2/getLocation | Get a location in Landing Zone to upload a file.
+*SelfManagedOsdu.FileServiceApi* | [**getTheLocationToUploadAFile**](docs/FileServiceApi.md#getTheLocationToUploadAFile) | **GET** /api/file/v2/files/UploadURL | Get a location in Landing Zone to upload a file.
+*SelfManagedOsdu.FileServiceApi* | [**getsMetadataRecordForTheGivenId**](docs/FileServiceApi.md#getsMetadataRecordForTheGivenId) | **GET** /api/file/v2/files/{Id}/metadata | Gets metadata record for the given id
+*SelfManagedOsdu.FileServiceApi* | [**getsURLToDownloadTheFileAssociatedWithTheGivenId_**](docs/FileServiceApi.md#getsURLToDownloadTheFileAssociatedWithTheGivenId_) | **GET** /api/file/v2/files/{Id}/DownloadURL | Gets a URL to download the file
+*SelfManagedOsdu.FileServiceApi* | [**publishFileMetadataForAFile_**](docs/FileServiceApi.md#publishFileMetadataForAFile_) | **POST** /api/file/v2/files/metadata | Creates metadata for a file
+*SelfManagedOsdu.FileServiceInternalApi* | [**allowsTheApplicationToAuditTheAttemptedFileUploadsTheMethodIsInternalAndIsNotAvailableForThirdPartyApplications_**](docs/FileServiceInternalApi.md#allowsTheApplicationToAuditTheAttemptedFileUploadsTheMethodIsInternalAndIsNotAvailableForThirdPartyApplications_) | **POST** /api/file/v2/getFileList | 
+*SelfManagedOsdu.FileServiceInternalApi* | [**returnsFileLocationAndDriver_**](docs/FileServiceInternalApi.md#returnsFileLocationAndDriver_) | **POST** /api/file/v2/getFileLocation | 
 *SelfManagedOsdu.LegalApi* | [**createLegalTag**](docs/LegalApi.md#createLegalTag) | **POST** /api/legal/v1/legaltags | Creates the LegalTag for the given 'name'.
 *SelfManagedOsdu.LegalApi* | [**deleteLegalTag**](docs/LegalApi.md#deleteLegalTag) | **DELETE** /api/legal/v1/legaltags/{name} | Delete Legal Tag
 *SelfManagedOsdu.LegalApi* | [**getLegalTag**](docs/LegalApi.md#getLegalTag) | **GET** /api/legal/v1/legaltags/{name} | Gets a LegalTag for the given 'name'.
