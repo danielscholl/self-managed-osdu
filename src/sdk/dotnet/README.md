@@ -151,6 +151,14 @@ Class | Method | HTTP request | Description
 *StorageApi* | [**GetRecordVersion**](docs/StorageApi.md#getrecordversion) | **GET** /api/storage/v2/records/{id}/{version} | Get record version
 *StorageApi* | [**PatchUpdateRecords**](docs/StorageApi.md#patchupdaterecords) | **PATCH** /api/storage/v2/records | Modify record metadata attributes using patch operations
 *StorageApi* | [**PurgeRecord**](docs/StorageApi.md#purgerecord) | **DELETE** /api/storage/v2/records/{id} | Purge record
+*WorkflowApi* | [**DeleteWorkflow**](docs/WorkflowApi.md#deleteworkflow) | **DELETE** /api/workflow/v1/workflow/{workflow_name} | Delete a workflow defintion.
+*WorkflowApi* | [**DeployWorkflow**](docs/WorkflowApi.md#deployworkflow) | **POST** /api/workflow/v1/workflow | Creates workflow definition with standard orchestrator operators.
+*WorkflowApi* | [**GetAllWorkflowRuns**](docs/WorkflowApi.md#getallworkflowruns) | **GET** /api/workflow/v1/workflow/{workflow_name}/workflowRun | Get all run instances of a workflow.
+*WorkflowApi* | [**GetWorkflowRun**](docs/WorkflowApi.md#getworkflowrun) | **GET** /api/workflow/v1/workflow/{workflow_name}/workflowRun/{runId} | Get details for a speciffic workflow run instance.
+*WorkflowApi* | [**ListAllWorkflow**](docs/WorkflowApi.md#listallworkflow) | **GET** /api/workflow/v1/workflow | List all the workflow applicable for a tenant.
+*WorkflowApi* | [**TriggerWorkflow**](docs/WorkflowApi.md#triggerworkflow) | **POST** /api/workflow/v1/workflow/{workflow_name}/workflowRun | Trigger a workflow.
+*WorkflowApi* | [**UpdateWorkflowRun**](docs/WorkflowApi.md#updateworkflowrun) | **PUT** /api/workflow/v1/workflow/{workflow_name}/workflowRun/{runId} | Update the workflow run instance.
+*WorkflowApi* | [**ViewWorkflow**](docs/WorkflowApi.md#viewworkflow) | **GET** /api/workflow/v1/workflow/{workflow_name} | Get complete details for a workflow.
 
 
 <a name="documentation-for-models"></a>
@@ -227,6 +235,11 @@ Class | Method | HTTP request | Description
  - [Model.StorageRecordHistory](docs/StorageRecordHistory.md)
  - [Model.StorageRecordQuery](docs/StorageRecordQuery.md)
  - [Model.StorageRecordVersions](docs/StorageRecordVersions.md)
+ - [Model.Workflow](docs/Workflow.md)
+ - [Model.WorkflowError](docs/WorkflowError.md)
+ - [Model.WorkflowErrorDetails](docs/WorkflowErrorDetails.md)
+ - [Model.WorkflowRun](docs/WorkflowRun.md)
+ - [Model.WorkflowTriggerRequest](docs/WorkflowTriggerRequest.md)
 
 
 <a name="documentation-for-authorization"></a>
