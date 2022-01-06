@@ -137,6 +137,7 @@ Class | Method | HTTP request | Description
  - [FileError](docs/FileError.md)
  - [FileErrorModel](docs/FileErrorModel.md)
  - [FileExtensionProperties](docs/FileExtensionProperties.md)
+ - [FileId](docs/FileId.md)
  - [FileLegal](docs/FileLegal.md)
  - [FileLinkList](docs/FileLinkList.md)
  - [FileListRequest](docs/FileListRequest.md)

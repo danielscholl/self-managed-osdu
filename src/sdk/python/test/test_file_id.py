@@ -16,12 +16,12 @@ from __future__ import absolute_import
 import unittest
 
 import swagger_client
-from swagger_client.models.file_id import FileID  # noqa: E501
+from swagger_client.models.file_id import FileId  # noqa: E501
 from swagger_client.rest import ApiException
 
 
-class TestFileID(unittest.TestCase):
-    """FileID unit test stubs"""
+class TestFileId(unittest.TestCase):
+    """FileId unit test stubs"""
 
     def setUp(self):
         pass
@@ -29,10 +29,10 @@ class TestFileID(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def testFileID(self):
-        """Test FileID"""
+    def testFileId(self):
+        """Test FileId"""
         # FIXME: construct object with mandatory attributes with example values
-        # model = swagger_client.models.file_id.FileID()  # noqa: E501
+        # model = swagger_client.models.file_id.FileId()  # noqa: E501
         pass
 
 
