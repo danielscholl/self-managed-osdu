@@ -2891,8 +2891,6 @@ definitions:
       relatedItems:
         $ref: '#/definitions/FileToManyRelationship'
     description: All relationships from this entity.
-    
-  
   FileDeliveryGetFileSignedURLRequest:
     type: object
     properties:
@@ -2928,9 +2926,6 @@ definitions:
       processed:
         srn:some-valid-srn:
           signedUrl: https://...
-
-
-
   FileDetails:
     title: Opaque/Generic File Content Details
     type: object
@@ -3080,8 +3075,6 @@ definitions:
     description: >-
       The file data container containing all necessary details of the file
       record
-
-
   FileRecord:
     description: Metadata record.
     type: object
@@ -3135,8 +3128,6 @@ definitions:
         type: integer
         format: int64
         example: 1831253916104085
-
-
   FileListRequest:
     type: object
     properties:
