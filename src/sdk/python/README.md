@@ -140,8 +140,6 @@ Class | Method | HTTP request | Description
  - [FileLocation](docs/FileLocation.md)
  - [FileMetaItem](docs/FileMetaItem.md)
  - [FileMetadataResponse](docs/FileMetadataResponse.md)
- - [FileToManyRelationship](docs/FileToManyRelationship.md)
- - [FileToOneRelationship](docs/FileToOneRelationship.md)
  - [LegalTagDto](docs/LegalTagDto.md)
  - [LegalTagDtos](docs/LegalTagDtos.md)
  - [LegalTagInvalidResponse](docs/LegalTagInvalidResponse.md)
