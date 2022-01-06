@@ -31,6 +31,9 @@ from swagger_client.models.file_legal import FileLegal
 from swagger_client.models.file_link_list import FileLinkList
 from swagger_client.models.file_meta_item import FileMetaItem
 from swagger_client.models.file_metadata_response import FileMetadataResponse
+from swagger_client.models.file_relationships import FileRelationships
+from swagger_client.models.file_to_many_relationship import FileToManyRelationship
+from swagger_client.models.file_to_one_relationship import FileToOneRelationship
 from swagger_client.models.legal_tag_dto import LegalTagDto
 from swagger_client.models.legal_tag_dtos import LegalTagDtos
 from swagger_client.models.legal_tag_invalid_response import LegalTagInvalidResponse
