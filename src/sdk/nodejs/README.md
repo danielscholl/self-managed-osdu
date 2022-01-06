@@ -180,6 +180,8 @@ Class | Method | HTTP request | Description
  - [SelfManagedOsdu.FileAcl](docs/FileAcl.md)
  - [SelfManagedOsdu.FileApplicationError](docs/FileApplicationError.md)
  - [SelfManagedOsdu.FileDateTime](docs/FileDateTime.md)
+ - [SelfManagedOsdu.FileDeliveryGetFileSignedURLRequest](docs/FileDeliveryGetFileSignedURLRequest.md)
+ - [SelfManagedOsdu.FileDeliveryGetFileSignedURLResponse](docs/FileDeliveryGetFileSignedURLResponse.md)
  - [SelfManagedOsdu.FileDownloadResponse](docs/FileDownloadResponse.md)
  - [SelfManagedOsdu.FileDriver](docs/FileDriver.md)
  - [SelfManagedOsdu.FileError](docs/FileError.md)
