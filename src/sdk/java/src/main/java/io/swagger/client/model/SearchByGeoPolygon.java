@@ -24,7 +24,7 @@ import java.util.List;
  * A spatial filter criteria to filter documents which falls within a polygon of points.
  */
 @ApiModel(description = "A spatial filter criteria to filter documents which falls within a polygon of points.")
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-01-06T19:41:15.992Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-01-06T19:42:14.578Z")
 public class SearchByGeoPolygon extends ArrayList<SearchPoint> {
 
   @Override

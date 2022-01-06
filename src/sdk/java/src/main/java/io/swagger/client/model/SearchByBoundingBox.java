@@ -29,7 +29,7 @@ import java.io.IOException;
  * A spatial filter criteria to allow to filter documents based on a point location within a bounding box.
  */
 @ApiModel(description = "A spatial filter criteria to allow to filter documents based on a point location within a bounding box.")
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-01-06T19:41:15.992Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-01-06T19:42:14.578Z")
 public class SearchByBoundingBox {
   @SerializedName("topLeft")
   private SearchPoint topLeft = null;
