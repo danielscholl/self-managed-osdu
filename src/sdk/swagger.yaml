@@ -3366,6 +3366,38 @@ paths:
         - Bearer: []
 
 
+  #########################
+  # Notification Service
+  #########################
+  '/api/notification/v1/push-handlers/records-changed':
+    post:
+      tags:
+        - Notification
+      summary: Notifies subscribers that records have changed
+      operationId: recordChangedUsingPOST
+      parameters:
+        - name: data-partition-id
+          in: header
+          description: tenant
+          required: true
+          type: string
+          x-example: opendes
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: "#/definitions/NotificationResponseEntity"
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      security:
+        - Bearer: []
+
 
 #########################
 # Model Definitions
@@ -5335,3 +5367,18 @@ definitions:
       op:
         type: string
         example: deleted
+
+
+  #########################
+  # Notification Models
+  #########################
+  NotificationResponseEntity:
+    type: object
+    properties:
+      body:
+        type: object
+      statusCode:
+        type: string
+      statusCodeValue:
+        type: integer
+        format: int32
