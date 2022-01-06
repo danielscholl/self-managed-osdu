@@ -28,7 +28,7 @@ import java.io.IOException;
  * Useful for providing the user defined attributes to be associated with the file metadata record.
  */
 @ApiModel(description = "Useful for providing the user defined attributes to be associated with the file metadata record.")
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-01-06T19:43:35.687Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-01-06T19:44:08.388Z")
 public class FileExtensionProperties {
   @SerializedName("kind")
   private String kind = null;

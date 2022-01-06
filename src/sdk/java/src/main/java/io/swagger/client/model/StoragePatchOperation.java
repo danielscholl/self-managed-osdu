@@ -30,7 +30,7 @@ import java.util.List;
  * Patch api operation specific information
  */
 @ApiModel(description = "Patch api operation specific information")
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-01-06T19:43:35.687Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-01-06T19:44:08.388Z")
 public class StoragePatchOperation {
   /**
    * Type of patch operation
