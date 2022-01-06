@@ -169,6 +169,7 @@ Class | Method | HTTP request | Description
  - [Model.FileRelationships](docs/FileRelationships.md)
  - [Model.FileToManyRelationship](docs/FileToManyRelationship.md)
  - [Model.FileToOneRelationship](docs/FileToOneRelationship.md)
+ - [Model.Files](docs/Files.md)
  - [Model.LegalTagDto](docs/LegalTagDto.md)
  - [Model.LegalTagDtos](docs/LegalTagDtos.md)
  - [Model.LegalTagInvalidResponse](docs/LegalTagInvalidResponse.md)
