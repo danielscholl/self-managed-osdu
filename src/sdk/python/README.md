@@ -141,6 +141,7 @@ Class | Method | HTTP request | Description
  - [FileLegal](docs/FileLegal.md)
  - [FileLinkList](docs/FileLinkList.md)
  - [FileListRequest](docs/FileListRequest.md)
+ - [FileLocationRequest](docs/FileLocationRequest.md)
  - [FileLocationResponse](docs/FileLocationResponse.md)
  - [FileMetaItem](docs/FileMetaItem.md)
  - [FileMetadataResponse](docs/FileMetadataResponse.md)

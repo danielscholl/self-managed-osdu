@@ -45,6 +45,7 @@ from swagger_client.models.file_id import FileId
 from swagger_client.models.file_legal import FileLegal
 from swagger_client.models.file_link_list import FileLinkList
 from swagger_client.models.file_list_request import FileListRequest
+from swagger_client.models.file_location_request import FileLocationRequest
 from swagger_client.models.file_location_response import FileLocationResponse
 from swagger_client.models.file_meta_item import FileMetaItem
 from swagger_client.models.file_metadata_response import FileMetadataResponse
