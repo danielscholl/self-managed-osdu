@@ -25,7 +25,6 @@ from swagger_client.models.file_delivery_get_file_signed_url_request import File
 from swagger_client.models.file_delivery_get_file_signed_url_response import FileDeliveryGetFileSignedURLResponse
 from swagger_client.models.file_details import FileDetails
 from swagger_client.models.file_download_response import FileDownloadResponse
-from swagger_client.models.file_driver import FileDriver
 from swagger_client.models.file_error import FileError
 from swagger_client.models.file_error_model import FileErrorModel
 from swagger_client.models.file_extension_properties import FileExtensionProperties

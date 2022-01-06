@@ -133,7 +133,6 @@ Class | Method | HTTP request | Description
  - [FileDeliveryGetFileSignedURLResponse](docs/FileDeliveryGetFileSignedURLResponse.md)
  - [FileDetails](docs/FileDetails.md)
  - [FileDownloadResponse](docs/FileDownloadResponse.md)
- - [FileDriver](docs/FileDriver.md)
  - [FileError](docs/FileError.md)
  - [FileErrorModel](docs/FileErrorModel.md)
  - [FileExtensionProperties](docs/FileExtensionProperties.md)
