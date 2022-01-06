@@ -27,7 +27,6 @@ from swagger_client.models.file_error import FileError
 from swagger_client.models.file_error_model import FileErrorModel
 from swagger_client.models.file_extension_properties import FileExtensionProperties
 from swagger_client.models.file_id import FileID
-from swagger_client.models.file_landing_zone_location_response import FileLandingZoneLocationResponse
 from swagger_client.models.file_legal import FileLegal
 from swagger_client.models.file_link_list import FileLinkList
 from swagger_client.models.file_meta_item import FileMetaItem

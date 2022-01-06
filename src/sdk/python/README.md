@@ -135,7 +135,6 @@ Class | Method | HTTP request | Description
  - [FileErrorModel](docs/FileErrorModel.md)
  - [FileExtensionProperties](docs/FileExtensionProperties.md)
  - [FileID](docs/FileID.md)
- - [FileLandingZoneLocationResponse](docs/FileLandingZoneLocationResponse.md)
  - [FileLegal](docs/FileLegal.md)
  - [FileLinkList](docs/FileLinkList.md)
  - [FileMetaItem](docs/FileMetaItem.md)
