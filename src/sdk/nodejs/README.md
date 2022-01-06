@@ -191,6 +191,7 @@ Class | Method | HTTP request | Description
  - [SelfManagedOsdu.FileID](docs/FileID.md)
  - [SelfManagedOsdu.FileLegal](docs/FileLegal.md)
  - [SelfManagedOsdu.FileLinkList](docs/FileLinkList.md)
+ - [SelfManagedOsdu.FileListRequest](docs/FileListRequest.md)
  - [SelfManagedOsdu.FileMetaItem](docs/FileMetaItem.md)
  - [SelfManagedOsdu.FileMetadataResponse](docs/FileMetadataResponse.md)
  - [SelfManagedOsdu.FileRecord](docs/FileRecord.md)
