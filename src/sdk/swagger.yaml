@@ -2643,9 +2643,7 @@ definitions:
 
 
 
-  FileID:
-    type: string
-    pattern: ^[\w,\s-]+(\.\w+)?$
+
   FileDriver:
     type: string
     enum:
@@ -2812,9 +2810,6 @@ definitions:
       error:
         $ref: '#/definitions/FileErrorModel'
     description: An error that occurs during normal application logic.
-
-
-
   FileToManyRelationship:
     properties:
       confidences:
