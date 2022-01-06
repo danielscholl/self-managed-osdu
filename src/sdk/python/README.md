@@ -140,6 +140,7 @@ Class | Method | HTTP request | Description
  - [FileID](docs/FileID.md)
  - [FileLegal](docs/FileLegal.md)
  - [FileLinkList](docs/FileLinkList.md)
+ - [FileListRequest](docs/FileListRequest.md)
  - [FileMetaItem](docs/FileMetaItem.md)
  - [FileMetadataResponse](docs/FileMetadataResponse.md)
  - [FileRecord](docs/FileRecord.md)
