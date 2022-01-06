@@ -55,6 +55,7 @@ from swagger_client.models.legal_tag_properties import LegalTagProperties
 from swagger_client.models.legal_tag_property_values import LegalTagPropertyValues
 from swagger_client.models.legal_tag_request import LegalTagRequest
 from swagger_client.models.legal_tag_update_dto import LegalTagUpdateDto
+from swagger_client.models.notification_response_entity import NotificationResponseEntity
 from swagger_client.models.partition_dto import PartitionDto
 from swagger_client.models.partition_property import PartitionProperty
 from swagger_client.models.register_acl import RegisterAcl

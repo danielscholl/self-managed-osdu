@@ -20,6 +20,7 @@ from swagger_client.api.delivery_api_api import DeliveryAPIApi
 from swagger_client.api.entitlement_api import EntitlementApi
 from swagger_client.api.file_service_api import FileServiceApi
 from swagger_client.api.legal_api import LegalApi
+from swagger_client.api.notification_api import NotificationApi
 from swagger_client.api.partition_api import PartitionApi
 from swagger_client.api.register_api import RegisterApi
 from swagger_client.api.schema_api import SchemaApi
@@ -71,6 +72,7 @@ from swagger_client.models.legal_tag_properties import LegalTagProperties
 from swagger_client.models.legal_tag_property_values import LegalTagPropertyValues
 from swagger_client.models.legal_tag_request import LegalTagRequest
 from swagger_client.models.legal_tag_update_dto import LegalTagUpdateDto
+from swagger_client.models.notification_response_entity import NotificationResponseEntity
 from swagger_client.models.partition_dto import PartitionDto
 from swagger_client.models.partition_property import PartitionProperty
 from swagger_client.models.register_acl import RegisterAcl
