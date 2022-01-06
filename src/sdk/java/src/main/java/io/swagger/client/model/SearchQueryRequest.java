@@ -31,7 +31,7 @@ import java.util.List;
  * Json object to query the Search API
  */
 @ApiModel(description = "Json object to query the Search API")
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-01-06T20:08:24.505Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-01-06T20:09:04.110Z")
 public class SearchQueryRequest {
   @SerializedName("offset")
   private Integer offset = null;
