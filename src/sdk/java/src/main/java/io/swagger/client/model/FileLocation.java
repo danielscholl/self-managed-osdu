@@ -29,13 +29,13 @@ import org.threeten.bp.OffsetDateTime;
 /**
  * FileLocation
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-01-06T19:47:50.968Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-01-06T20:36:10.522Z")
 public class FileLocation {
   @SerializedName("FileID")
   private String fileID = null;
 
-  @SerializedName("FileDriver")
-  private FileDriver fileDriver = null;
+  @SerializedName("Driver")
+  private FileDriver driver = null;
 
   @SerializedName("Location")
   private String location = null;
@@ -64,22 +64,22 @@ public class FileLocation {
     this.fileID = fileID;
   }
 
-  public FileLocation fileDriver(FileDriver fileDriver) {
-    this.fileDriver = fileDriver;
+  public FileLocation driver(FileDriver driver) {
+    this.driver = driver;
     return this;
   }
 
    /**
-   * Get fileDriver
-   * @return fileDriver
+   * Get driver
+   * @return driver
   **/
   @ApiModelProperty(value = "")
-  public FileDriver getFileDriver() {
-    return fileDriver;
+  public FileDriver getDriver() {
+    return driver;
   }
 
-  public void setFileDriver(FileDriver fileDriver) {
-    this.fileDriver = fileDriver;
+  public void setDriver(FileDriver driver) {
+    this.driver = driver;
   }
 
   public FileLocation location(String location) {
@@ -147,7 +147,7 @@ public class FileLocation {
     }
     FileLocation fileLocation = (FileLocation) o;
     return Objects.equals(this.fileID, fileLocation.fileID) &&
-        Objects.equals(this.fileDriver, fileLocation.fileDriver) &&
+        Objects.equals(this.driver, fileLocation.driver) &&
         Objects.equals(this.location, fileLocation.location) &&
         Objects.equals(this.createdAt, fileLocation.createdAt) &&
         Objects.equals(this.createdBy, fileLocation.createdBy);
@@ -155,7 +155,7 @@ public class FileLocation {
 
   @Override
   public int hashCode() {
-    return Objects.hash(fileID, fileDriver, location, createdAt, createdBy);
+    return Objects.hash(fileID, driver, location, createdAt, createdBy);
   }
 
 
@@ -165,7 +165,7 @@ public class FileLocation {
     sb.append("class FileLocation {\n");
     
     sb.append("    fileID: ").append(toIndentedString(fileID)).append("\n");
-    sb.append("    fileDriver: ").append(toIndentedString(fileDriver)).append("\n");
+    sb.append("    driver: ").append(toIndentedString(driver)).append("\n");
     sb.append("    location: ").append(toIndentedString(location)).append("\n");
     sb.append("    createdAt: ").append(toIndentedString(createdAt)).append("\n");
     sb.append("    createdBy: ").append(toIndentedString(createdBy)).append("\n");
