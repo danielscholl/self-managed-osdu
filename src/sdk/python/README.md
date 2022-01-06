@@ -141,7 +141,6 @@ Class | Method | HTTP request | Description
  - [FileMetaItem](docs/FileMetaItem.md)
  - [FileMetadataResponse](docs/FileMetadataResponse.md)
  - [FileRelationships](docs/FileRelationships.md)
- - [FileSourceLocationResponse](docs/FileSourceLocationResponse.md)
  - [FileToManyRelationship](docs/FileToManyRelationship.md)
  - [FileToOneRelationship](docs/FileToOneRelationship.md)
  - [LegalTagDto](docs/LegalTagDto.md)
