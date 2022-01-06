@@ -32,6 +32,8 @@ tags:
     description: Responsible for schema management in the Data Ecosystem and offers an implementation of our schema standard.
   - name: File
     description: This service allows users to manage files on the Data Platform. File Management includes uploads, downloads and creation of metadata record for the file.
+  - name: Workflow
+    description: Workflow Service API is a wrapper API on existing orchestrator services (ariflow) defined in way which suits the domain workflow needs.Operational tasks like starting,stopping, pausing etc will be part of this API. Also creation and maintenance will be responsilbilities of this API.
 paths:
   #########################
   # Partition Service
@@ -2241,6 +2243,407 @@ paths:
             $ref: '#/definitions/FileApplicationError'
       security:
         - Bearer: []
+        
+  #########################
+  # Workflow Service
+  #########################
+  
+  '/api/workflow/v1/workflow':
+    post:
+      tags:
+        - Workflow
+      summary: Creates workflow definition with standard orchestrator operators.
+      operationId: deployWorkflow
+      description: API to create a new workflow using standard operators of orchestrator.
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: body
+          in: body
+          description: Request payload for deploying new workflow.
+          schema:
+            $ref: '#/definitions/Workflow'
+      responses:
+        '200':
+          description: Workflow created\updated successfully.
+          schema:
+            $ref: '#/definitions/Workflow'
+        '400':
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/WorkflowError'
+        '401':
+          description: Invalid/Expired Credential
+          schema:
+            $ref: '#/definitions/WorkflowError'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/WorkflowError'
+        '404':
+          description: Not Found
+          schema:
+            $ref: '#/definitions/WorkflowError'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/WorkflowError'
+      security:
+        - Bearer: []
+    get:
+      tags:
+        - Workflow
+      summary: List all the workflow applicable for a tenant.
+      operationId: listAllWorkflow
+      description: List all the workflows for the tenant.
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: prefix
+          in: query
+          description: 'Filter workflow names which start with  the full prefix specified.'
+          required: false
+          type: string
+      responses:
+        '200':
+          schema:
+            items:
+              $ref: '#/definitions/Workflow'
+            type: array
+          description: List of all the workflows.
+        '400':
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/WorkflowError'
+        '401':
+          description: Invalid/Expired Credential
+          schema:
+            $ref: '#/definitions/WorkflowError'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/WorkflowError'
+        '404':
+          description: Not Found
+          schema:
+            $ref: '#/definitions/WorkflowError'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/WorkflowError'
+      security:
+        - Bearer: []
+  '/api/workflow/v1/workflow/{workflow_name}':
+    delete:
+      tags:
+        - Workflow
+      summary: Delete a workflow defintion.
+      operationId: deleteWorkflow
+      description: Delete a workflow by it's name.
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: workflow_name
+          in: path
+          description: Unique Name of the Workflow to be deleted.
+          required: true
+          type: string
+      responses:
+        '204':
+          description: Workflow deleted successfully.
+        '400':
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/WorkflowError'
+        '401':
+          description: Invalid/Expired Credential
+          schema:
+            $ref: '#/definitions/WorkflowError'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/WorkflowError'
+        '404':
+          description: Not Found
+          schema:
+            $ref: '#/definitions/WorkflowError'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/WorkflowError'
+      security:
+        - Bearer: []
+    get:
+      tags:
+        - Workflow
+      summary: Get complete details for a workflow.
+      operationId: viewWorkflow
+      description: Get complete details for an workflow.
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: workflow_name
+          in: path
+          description: Name of the Workflow.
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Workflow Details.
+          schema:
+            $ref: '#/definitions/Workflow'
+        '400':
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/WorkflowError'
+        '401':
+          description: Invalid/Expired Credential
+          schema:
+            $ref: '#/definitions/WorkflowError'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/WorkflowError'
+        '404':
+          description: Not Found
+          schema:
+            $ref: '#/definitions/WorkflowError'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/WorkflowError'
+      security:
+        - Bearer: []
+  '/api/workflow/v1/workflow/{workflow_name}/workflowRun':
+    post:
+      tags:
+        - Workflow Run
+      summary: Trigger a workflow.
+      operationId: triggerWorkflow
+      description: Trigger a workflow mentioned in payload.
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: workflow_name
+          in: path
+          description: Unique Name of the Workflow to run.
+          required: true
+          type: string
+        - name: body
+          in: body
+          schema:
+            $ref: '#/definitions/WorkflowTriggerRequest'
+      responses:
+        '200':
+          description: Workflow successully triggered.
+          schema:
+            $ref: '#/definitions/WorkflowRun'
+        '400':
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/WorkflowError'
+        '401':
+          description: Invalid/Expired Credential
+          schema:
+            $ref: '#/definitions/WorkflowError'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/WorkflowError'
+        '404':
+          description: Not Found
+          schema:
+            $ref: '#/definitions/WorkflowError'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/WorkflowError'
+      security:
+        - Bearer: []
+    get:
+      tags:
+        - Workflow Run
+      summary: Get all run instances of a workflow.
+      operationId: getAllWorkflowRuns
+      description: Get all run instances for a worflow.
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: workflow_name
+          in: path
+          description: Unique Name of the Workflow for which the execution details has to be fetched.
+          required: true
+          type: string
+        - name: prefix
+          in: query
+          description: 'A prefix used when generating the runId of the workflow run. Prefix cannot contain the word "backfill"'
+          required: false
+          type: string
+        - name: startDate
+          in: query
+          description: 'The start date where this call should start creating workflow runs from (inclusive)'
+          required: false
+          type: string
+        - name: endDate
+          in: query
+          description: 'The end date where this call should stop creating workflow runs at (inclusive)'
+          required: false
+          type: boolean
+        - name: limit
+          in: query
+          description: 'The maximum number of workflow runs to create in a single request. Maximum is 500.'
+          required: false
+          type: integer
+        - name: cursor
+          in: query
+          description: 'Cursor for subsequent request.'
+          required: false
+          type: string
+        - name: partial
+          in: query
+          description: 'Whether or not a partial batch can be created. If true, and the number of workflow runs that would be created between the start and end exceeds the limit, no workflow runs will be created.'
+          required: false
+          type: boolean
+        - name: conf
+          in: query
+          description: 'JSON configuration added to the Workflow run conf attribute'
+          required: false
+          type: string
+      responses:
+        '200':
+          schema:
+            items:
+              $ref: '#/definitions/WorkflowRun'
+            type: array
+          description: History of workflow runs.
+        '400':
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/WorkflowError'
+        '401':
+          description: Invalid/Expired Credential
+          schema:
+            $ref: '#/definitions/WorkflowError'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/WorkflowError'
+        '404':
+          description: Not Found
+          schema:
+            $ref: '#/definitions/WorkflowError'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/WorkflowError'
+      security:
+        - Bearer: []
+  '/api/workflow/v1/workflow/{workflow_name}/workflowRun/{runId}':
+    get:
+      tags:
+        - Workflow Run
+      summary: Get details for a speciffic workflow run instance.
+      operationId: getWorkflowRun
+      description: Get an execution instances for a workflow.
+      parameters:
+        - name: workflow_name
+          in: path
+          description: Unique Name of Workflow.
+          required: true
+          type: string
+        - name: runId
+          in: path
+          description: Run id for the worfkow.
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Workflow execution detail.
+          schema:
+            $ref: '#/definitions/WorkflowRun'
+        '400':
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/WorkflowError'
+        '401':
+          description: Invalid/Expired Credential
+          schema:
+            $ref: '#/definitions/WorkflowError'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/WorkflowError'
+        '404':
+          description: Not Found
+          schema:
+            $ref: '#/definitions/WorkflowError'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/WorkflowError'
+      security:
+        - Bearer: []
+    put:
+      tags:
+        - Workflow Run
+      summary: Update the workflow run instance.
+      operationId: updateWorkflowRun
+      description: Update workflow run.
+      parameters:
+        - name: workflow_name
+          in: path
+          description: Unique Name of Workflow.
+          required: true
+          type: string
+        - name: runId
+          in: path
+          description: Run id for the worfkow.
+          required: true
+          type: string
+        - name: body
+          in: body
+          schema:
+            $ref: '#/definitions/WorkflowRun'
+      responses:
+        '200':
+          description: Workflow updated successfully.
+          schema:
+            $ref: '#/definitions/Workflow'
+        '400':
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/WorkflowError'
+        '401':
+          description: Invalid/Expired Credential
+          schema:
+            $ref: '#/definitions/WorkflowError'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/WorkflowError'
+        '404':
+          description: Not Found
+          schema:
+            $ref: '#/definitions/WorkflowError'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/WorkflowError'
+      security:
+        - Bearer: []
+  
 definitions:
   PartitionProperty:
     type: object
@@ -3649,4 +4052,118 @@ definitions:
       reason:
         type: string
       domain:
+        type: string
+  
+  WorkflowTriggerRequest:
+    title: Workflow Trigger Request
+    type: object
+    properties:
+      runId:
+        type: string
+        description: Optional. Explicit setting up workflow run id.
+      executionContext:
+        type: object
+        properties:
+          key1:
+            type: string
+            example: value1
+        description: Map to configure workflow speciffic key value pairs.
+  Workflow:
+    type: object
+    title: Workflow
+    properties:
+      workflowId:
+        readOnly: true
+        description: System generated id, which uniquely recongnizes a workflow.
+        type: string
+      workflowName:
+        description: Workfow name given as input from user while deploying the workflow.
+        type: string
+      registrationInstructions:
+        description: |
+          Workfow registration instructions which could contains:
+          - Name of already registered Airflow DAG
+          - Cotent of python DAG file
+          - etc
+          By default this is Airflow DAG named `workflowName`
+        type: object
+        properties:
+          dagName:
+            type: string
+            example: osdu-default
+          dagContent:
+            type: string
+            example:
+          etc:
+            type: string
+      description:
+        type: string
+        description: Description of workflow provided by user at time of creation of workflow.
+      createdby:
+        readOnly: true
+        type: string
+        description: System captured user info who created workflow.
+      creationTimestamp:
+        readOnly: true
+        type: number
+        description: System date of creation of workflow.Epoch tiemstamp.
+      version:
+        readOnly: true
+        type: string
+        description: Sematic versions of workflow. These numbers are assigned in increasing order and correspond to edits\modifications to workflow definitions.
+  WorkflowRun:
+    title: Workflow Run
+    description: Reperesent one workflow run.
+    type: object
+    properties:
+      workflowId:
+        readOnly: true
+        type: string
+        description: Workflow id for the workflow.
+      runId:
+        readOnly: true
+        type: string
+        description: Run id for the workflow.
+      startTimestamp:
+        readOnly: true
+        type: number
+        description: Start timestamp of the workflow run.Epoch time stamp.
+      endTimestamp:
+        readOnly: true
+        type: number
+        description: End timestamp of the workflow run.Epoch timestamp.
+      status:
+        description: "Task execution status"
+        enum:
+          - "INPROGRESS"
+          - "PARTIAL_SUCCESS"
+          - "SUCCESS"
+          - "FAILED"
+          - "SUBMITTED"
+        title: "status"
+        type: "string"
+      submittedBy:
+        readOnly: true
+        type: string
+        description: System captured user details which triggered the  run.
+  WorkflowError:
+    title: Error
+    type: object
+    properties:
+      code:
+        type: integer
+        format: int32
+      errors:
+        type: array
+        items:
+          $ref: '#/definitions/WorkflowErrorDetails'
+      message:
+        type: string
+  WorkflowErrorDetails:
+    title: Error Details
+    type: object
+    properties:
+      message:
+        type: string
+      reason:
         type: string
