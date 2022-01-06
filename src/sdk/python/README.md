@@ -129,6 +129,8 @@ Class | Method | HTTP request | Description
  - [FileAcl](docs/FileAcl.md)
  - [FileApplicationError](docs/FileApplicationError.md)
  - [FileDateTime](docs/FileDateTime.md)
+ - [FileDeliveryGetFileSignedURLRequest](docs/FileDeliveryGetFileSignedURLRequest.md)
+ - [FileDeliveryGetFileSignedURLResponse](docs/FileDeliveryGetFileSignedURLResponse.md)
  - [FileDownloadResponse](docs/FileDownloadResponse.md)
  - [FileDriver](docs/FileDriver.md)
  - [FileError](docs/FileError.md)
