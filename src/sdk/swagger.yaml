@@ -3131,8 +3131,6 @@ definitions:
         type: integer
       UserID:
         type: string
-        
-        
   FileDriver:
     type: string
     enum:
@@ -3144,3 +3142,7 @@ definitions:
         $ref: '#/definitions/FileDriver'
       Location:
         type: string
+
+  FileId:
+    type: string
+    pattern: ^[\w,\s-]+(\.\w+)?$
