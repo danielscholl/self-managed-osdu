@@ -3145,4 +3145,10 @@ definitions:
 
   FileId:
     type: string
-    pattern: ^[\w,\s-]+(\.\w+)?$
+    # pattern: ^[\w,\s-]+(\.\w+)?$
+    
+  FileLocationRequest:
+    type: object
+    properties:
+      FileId:
+        $ref: '#/definitions/FileId'
