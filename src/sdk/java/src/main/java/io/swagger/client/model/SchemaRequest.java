@@ -28,7 +28,7 @@ import java.io.IOException;
 /**
  * SchemaRequest
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-01-06T19:42:14.578Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-01-06T19:43:35.687Z")
 public class SchemaRequest {
   @SerializedName("schema")
   private Object schema = null;

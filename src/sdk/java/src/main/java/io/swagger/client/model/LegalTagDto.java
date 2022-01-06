@@ -29,7 +29,7 @@ import java.io.IOException;
  * Represents a single LegalTag.
  */
 @ApiModel(description = "Represents a single LegalTag.")
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-01-06T19:42:14.578Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-01-06T19:43:35.687Z")
 public class LegalTagDto {
   @SerializedName("name")
   private String name = null;
