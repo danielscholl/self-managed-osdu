@@ -3143,12 +3143,12 @@ definitions:
       Location:
         type: string
 
-  FileId:
+  FileID:
     type: string
     # pattern: ^[\w,\s-]+(\.\w+)?$
     
   FileLocationRequest:
     type: object
     properties:
-      FileId:
-        $ref: '#/definitions/FileId'
+      FileID:
+        $ref: '#/definitions/FileID'
