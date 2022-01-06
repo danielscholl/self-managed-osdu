@@ -30,7 +30,6 @@ from swagger_client.configuration import Configuration
 from swagger_client.models.entitlement_group_properties import EntitlementGroupProperties
 from swagger_client.models.entitlement_group_response import EntitlementGroupResponse
 from swagger_client.models.entitlement_member_dto import EntitlementMemberDto
-from swagger_client.models.file_acl import FileAcl
 from swagger_client.models.file_date_time import FileDateTime
 from swagger_client.models.file_driver import FileDriver
 from swagger_client.models.file_extension_properties import FileExtensionProperties

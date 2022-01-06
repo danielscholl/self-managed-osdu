@@ -126,7 +126,6 @@ Class | Method | HTTP request | Description
  - [EntitlementGroupProperties](docs/EntitlementGroupProperties.md)
  - [EntitlementGroupResponse](docs/EntitlementGroupResponse.md)
  - [EntitlementMemberDto](docs/EntitlementMemberDto.md)
- - [FileAcl](docs/FileAcl.md)
  - [FileDateTime](docs/FileDateTime.md)
  - [FileDriver](docs/FileDriver.md)
  - [FileExtensionProperties](docs/FileExtensionProperties.md)
