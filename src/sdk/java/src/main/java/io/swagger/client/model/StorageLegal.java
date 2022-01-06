@@ -29,7 +29,7 @@ import java.util.List;
 /**
  * StorageLegal
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-01-06T19:53:30.442Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-01-06T19:53:58.989Z")
 public class StorageLegal {
   @SerializedName("legaltags")
   private List<String> legaltags = null;

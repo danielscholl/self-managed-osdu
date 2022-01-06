@@ -29,7 +29,7 @@ import java.math.BigDecimal;
  * A relationship from this entity to one other entity either by natural key (name) or id, optionally classified by confidence level
  */
 @ApiModel(description = "A relationship from this entity to one other entity either by natural key (name) or id, optionally classified by confidence level")
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-01-06T19:53:30.442Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-01-06T19:53:58.989Z")
 public class FileToOneRelationship {
   @SerializedName("confidence")
   private BigDecimal confidence = null;

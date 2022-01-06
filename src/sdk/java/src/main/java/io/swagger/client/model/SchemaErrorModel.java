@@ -30,7 +30,7 @@ import java.util.List;
 /**
  * SchemaErrorModel
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-01-06T19:53:30.442Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-01-06T19:53:58.989Z")
 public class SchemaErrorModel {
   @SerializedName("errors")
   private List<SchemaError> errors = null;

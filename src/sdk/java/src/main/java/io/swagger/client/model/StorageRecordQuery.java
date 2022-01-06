@@ -30,7 +30,7 @@ import java.util.List;
  * Patch api query specific information
  */
 @ApiModel(description = "Patch api query specific information")
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-01-06T19:53:30.442Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-01-06T19:53:58.989Z")
 public class StorageRecordQuery {
   @SerializedName("ids")
   private List<String> ids = new ArrayList<String>();
