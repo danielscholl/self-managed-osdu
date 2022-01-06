@@ -16,12 +16,12 @@
 (function(factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
-    define(['ApiClient', 'model/EntitlementGroupProperties', 'model/EntitlementGroupResponse', 'model/EntitlementMemberDto', 'model/FileAcl', 'model/FileApplicationError', 'model/FileDateTime', 'model/FileDeliveryGetFileSignedURLRequest', 'model/FileDeliveryGetFileSignedURLResponse', 'model/FileDetails', 'model/FileDownloadResponse', 'model/FileDriver', 'model/FileError', 'model/FileErrorModel', 'model/FileExtensionProperties', 'model/FileID', 'model/FileLandingZoneLocationResponse', 'model/FileLegal', 'model/FileLinkList', 'model/FileListRequest', 'model/FileListResponse', 'model/FileLocation', 'model/FileLocationRequest', 'model/FileLocationResponse', 'model/FileMetaItem', 'model/FileMetadataResponse', 'model/FileRecord', 'model/FileRecordVersion', 'model/FileRelationships', 'model/FileSourceLocationResponse', 'model/FileToManyRelationship', 'model/FileToOneRelationship', 'model/Files', 'model/LegalTagDto', 'model/LegalTagDtos', 'model/LegalTagInvalidResponse', 'model/LegalTagInvalidResponseList', 'model/LegalTagProperties', 'model/LegalTagPropertyValues', 'model/LegalTagRequest', 'model/LegalTagUpdateDto', 'model/PartitionDto', 'model/PartitionProperty', 'model/SchemaError', 'model/SchemaErrorModel', 'model/SchemaErrorResponseFormat', 'model/SchemaIdentity', 'model/SchemaInfo', 'model/SchemaInfoResponse', 'model/SchemaRequest', 'model/SearchAppError', 'model/SearchByBoundingBox', 'model/SearchByDistance', 'model/SearchByGeoPolygon', 'model/SearchCursorQueryRequest', 'model/SearchCursorQueryResponse', 'model/SearchPoint', 'model/SearchQueryRequest', 'model/SearchQueryResponse', 'model/SearchSpatialFilter', 'model/StorageAcl', 'model/StorageBulkUpdateRecordsResponse', 'model/StorageDeleteRecordError', 'model/StorageErrorResponse', 'model/StorageLegal', 'model/StorageMultiRecordIds', 'model/StoragePatchOperation', 'model/StorageQueryResponse', 'model/StorageRecord', 'model/StorageRecordBulkUpdateParam', 'model/StorageRecordData', 'model/StorageRecordHistory', 'model/StorageRecordQuery', 'model/StorageRecordVersions', 'model/Workflow', 'model/WorkflowError', 'model/WorkflowErrorDetails', 'model/WorkflowRun', 'model/WorkflowTriggerRequest', 'api/DeliveryAPIApi', 'api/EntitlementApi', 'api/FileServiceApi', 'api/FileServiceInternalApi', 'api/LegalApi', 'api/PartitionApi', 'api/SchemaApi', 'api/SearchApi', 'api/StorageApi', 'api/WorkflowApi'], factory);
+    define(['ApiClient', 'model/EntitlementGroupProperties', 'model/EntitlementGroupResponse', 'model/EntitlementMemberDto', 'model/FileAcl', 'model/FileApplicationError', 'model/FileDateTime', 'model/FileDeliveryGetFileSignedURLRequest', 'model/FileDeliveryGetFileSignedURLResponse', 'model/FileDetails', 'model/FileDownloadResponse', 'model/FileDriver', 'model/FileError', 'model/FileErrorModel', 'model/FileExtensionProperties', 'model/FileID', 'model/FileLandingZoneLocationResponse', 'model/FileLegal', 'model/FileLinkList', 'model/FileListRequest', 'model/FileListResponse', 'model/FileLocation', 'model/FileLocationRequest', 'model/FileLocationResponse', 'model/FileMetaItem', 'model/FileMetadataResponse', 'model/FileRecord', 'model/FileRecordVersion', 'model/FileRelationships', 'model/FileSourceLocationResponse', 'model/FileToManyRelationship', 'model/FileToOneRelationship', 'model/Files', 'model/LegalTagDto', 'model/LegalTagDtos', 'model/LegalTagInvalidResponse', 'model/LegalTagInvalidResponseList', 'model/LegalTagProperties', 'model/LegalTagPropertyValues', 'model/LegalTagRequest', 'model/LegalTagUpdateDto', 'model/PartitionDto', 'model/PartitionProperty', 'model/RegisterAcl', 'model/RegisterAction', 'model/RegisterAppError', 'model/RegisterCreateAction', 'model/RegisterCreatedOnEpoch', 'model/RegisterData', 'model/RegisterDdms', 'model/RegisterDdmsInterface', 'model/RegisterFilter', 'model/RegisterGetSubscriptionResult', 'model/RegisterLegal', 'model/RegisterRecord', 'model/RegisterSecret', 'model/RegisterSubscription', 'model/RegisterSubscriptionCreateResult', 'model/RegisterTestAction', 'model/RegisterTestActionResult', 'model/RegisterTopic', 'model/RegisterTopicExample', 'model/SchemaError', 'model/SchemaErrorModel', 'model/SchemaErrorResponseFormat', 'model/SchemaIdentity', 'model/SchemaInfo', 'model/SchemaInfoResponse', 'model/SchemaRequest', 'model/SearchAppError', 'model/SearchByBoundingBox', 'model/SearchByDistance', 'model/SearchByGeoPolygon', 'model/SearchCursorQueryRequest', 'model/SearchCursorQueryResponse', 'model/SearchPoint', 'model/SearchQueryRequest', 'model/SearchQueryResponse', 'model/SearchSpatialFilter', 'model/StorageAcl', 'model/StorageBulkUpdateRecordsResponse', 'model/StorageDeleteRecordError', 'model/StorageErrorResponse', 'model/StorageLegal', 'model/StorageMultiRecordIds', 'model/StoragePatchOperation', 'model/StorageQueryResponse', 'model/StorageRecord', 'model/StorageRecordBulkUpdateParam', 'model/StorageRecordData', 'model/StorageRecordHistory', 'model/StorageRecordQuery', 'model/StorageRecordVersions', 'model/Workflow', 'model/WorkflowError', 'model/WorkflowErrorDetails', 'model/WorkflowRun', 'model/WorkflowTriggerRequest', 'api/DeliveryAPIApi', 'api/EntitlementApi', 'api/FileServiceApi', 'api/LegalApi', 'api/PartitionApi', 'api/RegisterApi', 'api/SchemaApi', 'api/SearchApi', 'api/StorageApi', 'api/WorkflowApi'], factory);
   } else if (typeof module === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('./ApiClient'), require('./model/EntitlementGroupProperties'), require('./model/EntitlementGroupResponse'), require('./model/EntitlementMemberDto'), require('./model/FileAcl'), require('./model/FileApplicationError'), require('./model/FileDateTime'), require('./model/FileDeliveryGetFileSignedURLRequest'), require('./model/FileDeliveryGetFileSignedURLResponse'), require('./model/FileDetails'), require('./model/FileDownloadResponse'), require('./model/FileDriver'), require('./model/FileError'), require('./model/FileErrorModel'), require('./model/FileExtensionProperties'), require('./model/FileID'), require('./model/FileLandingZoneLocationResponse'), require('./model/FileLegal'), require('./model/FileLinkList'), require('./model/FileListRequest'), require('./model/FileListResponse'), require('./model/FileLocation'), require('./model/FileLocationRequest'), require('./model/FileLocationResponse'), require('./model/FileMetaItem'), require('./model/FileMetadataResponse'), require('./model/FileRecord'), require('./model/FileRecordVersion'), require('./model/FileRelationships'), require('./model/FileSourceLocationResponse'), require('./model/FileToManyRelationship'), require('./model/FileToOneRelationship'), require('./model/Files'), require('./model/LegalTagDto'), require('./model/LegalTagDtos'), require('./model/LegalTagInvalidResponse'), require('./model/LegalTagInvalidResponseList'), require('./model/LegalTagProperties'), require('./model/LegalTagPropertyValues'), require('./model/LegalTagRequest'), require('./model/LegalTagUpdateDto'), require('./model/PartitionDto'), require('./model/PartitionProperty'), require('./model/SchemaError'), require('./model/SchemaErrorModel'), require('./model/SchemaErrorResponseFormat'), require('./model/SchemaIdentity'), require('./model/SchemaInfo'), require('./model/SchemaInfoResponse'), require('./model/SchemaRequest'), require('./model/SearchAppError'), require('./model/SearchByBoundingBox'), require('./model/SearchByDistance'), require('./model/SearchByGeoPolygon'), require('./model/SearchCursorQueryRequest'), require('./model/SearchCursorQueryResponse'), require('./model/SearchPoint'), require('./model/SearchQueryRequest'), require('./model/SearchQueryResponse'), require('./model/SearchSpatialFilter'), require('./model/StorageAcl'), require('./model/StorageBulkUpdateRecordsResponse'), require('./model/StorageDeleteRecordError'), require('./model/StorageErrorResponse'), require('./model/StorageLegal'), require('./model/StorageMultiRecordIds'), require('./model/StoragePatchOperation'), require('./model/StorageQueryResponse'), require('./model/StorageRecord'), require('./model/StorageRecordBulkUpdateParam'), require('./model/StorageRecordData'), require('./model/StorageRecordHistory'), require('./model/StorageRecordQuery'), require('./model/StorageRecordVersions'), require('./model/Workflow'), require('./model/WorkflowError'), require('./model/WorkflowErrorDetails'), require('./model/WorkflowRun'), require('./model/WorkflowTriggerRequest'), require('./api/DeliveryAPIApi'), require('./api/EntitlementApi'), require('./api/FileServiceApi'), require('./api/FileServiceInternalApi'), require('./api/LegalApi'), require('./api/PartitionApi'), require('./api/SchemaApi'), require('./api/SearchApi'), require('./api/StorageApi'), require('./api/WorkflowApi'));
+    module.exports = factory(require('./ApiClient'), require('./model/EntitlementGroupProperties'), require('./model/EntitlementGroupResponse'), require('./model/EntitlementMemberDto'), require('./model/FileAcl'), require('./model/FileApplicationError'), require('./model/FileDateTime'), require('./model/FileDeliveryGetFileSignedURLRequest'), require('./model/FileDeliveryGetFileSignedURLResponse'), require('./model/FileDetails'), require('./model/FileDownloadResponse'), require('./model/FileDriver'), require('./model/FileError'), require('./model/FileErrorModel'), require('./model/FileExtensionProperties'), require('./model/FileID'), require('./model/FileLandingZoneLocationResponse'), require('./model/FileLegal'), require('./model/FileLinkList'), require('./model/FileListRequest'), require('./model/FileListResponse'), require('./model/FileLocation'), require('./model/FileLocationRequest'), require('./model/FileLocationResponse'), require('./model/FileMetaItem'), require('./model/FileMetadataResponse'), require('./model/FileRecord'), require('./model/FileRecordVersion'), require('./model/FileRelationships'), require('./model/FileSourceLocationResponse'), require('./model/FileToManyRelationship'), require('./model/FileToOneRelationship'), require('./model/Files'), require('./model/LegalTagDto'), require('./model/LegalTagDtos'), require('./model/LegalTagInvalidResponse'), require('./model/LegalTagInvalidResponseList'), require('./model/LegalTagProperties'), require('./model/LegalTagPropertyValues'), require('./model/LegalTagRequest'), require('./model/LegalTagUpdateDto'), require('./model/PartitionDto'), require('./model/PartitionProperty'), require('./model/RegisterAcl'), require('./model/RegisterAction'), require('./model/RegisterAppError'), require('./model/RegisterCreateAction'), require('./model/RegisterCreatedOnEpoch'), require('./model/RegisterData'), require('./model/RegisterDdms'), require('./model/RegisterDdmsInterface'), require('./model/RegisterFilter'), require('./model/RegisterGetSubscriptionResult'), require('./model/RegisterLegal'), require('./model/RegisterRecord'), require('./model/RegisterSecret'), require('./model/RegisterSubscription'), require('./model/RegisterSubscriptionCreateResult'), require('./model/RegisterTestAction'), require('./model/RegisterTestActionResult'), require('./model/RegisterTopic'), require('./model/RegisterTopicExample'), require('./model/SchemaError'), require('./model/SchemaErrorModel'), require('./model/SchemaErrorResponseFormat'), require('./model/SchemaIdentity'), require('./model/SchemaInfo'), require('./model/SchemaInfoResponse'), require('./model/SchemaRequest'), require('./model/SearchAppError'), require('./model/SearchByBoundingBox'), require('./model/SearchByDistance'), require('./model/SearchByGeoPolygon'), require('./model/SearchCursorQueryRequest'), require('./model/SearchCursorQueryResponse'), require('./model/SearchPoint'), require('./model/SearchQueryRequest'), require('./model/SearchQueryResponse'), require('./model/SearchSpatialFilter'), require('./model/StorageAcl'), require('./model/StorageBulkUpdateRecordsResponse'), require('./model/StorageDeleteRecordError'), require('./model/StorageErrorResponse'), require('./model/StorageLegal'), require('./model/StorageMultiRecordIds'), require('./model/StoragePatchOperation'), require('./model/StorageQueryResponse'), require('./model/StorageRecord'), require('./model/StorageRecordBulkUpdateParam'), require('./model/StorageRecordData'), require('./model/StorageRecordHistory'), require('./model/StorageRecordQuery'), require('./model/StorageRecordVersions'), require('./model/Workflow'), require('./model/WorkflowError'), require('./model/WorkflowErrorDetails'), require('./model/WorkflowRun'), require('./model/WorkflowTriggerRequest'), require('./api/DeliveryAPIApi'), require('./api/EntitlementApi'), require('./api/FileServiceApi'), require('./api/LegalApi'), require('./api/PartitionApi'), require('./api/RegisterApi'), require('./api/SchemaApi'), require('./api/SearchApi'), require('./api/StorageApi'), require('./api/WorkflowApi'));
   }
-}(function(ApiClient, EntitlementGroupProperties, EntitlementGroupResponse, EntitlementMemberDto, FileAcl, FileApplicationError, FileDateTime, FileDeliveryGetFileSignedURLRequest, FileDeliveryGetFileSignedURLResponse, FileDetails, FileDownloadResponse, FileDriver, FileError, FileErrorModel, FileExtensionProperties, FileID, FileLandingZoneLocationResponse, FileLegal, FileLinkList, FileListRequest, FileListResponse, FileLocation, FileLocationRequest, FileLocationResponse, FileMetaItem, FileMetadataResponse, FileRecord, FileRecordVersion, FileRelationships, FileSourceLocationResponse, FileToManyRelationship, FileToOneRelationship, Files, LegalTagDto, LegalTagDtos, LegalTagInvalidResponse, LegalTagInvalidResponseList, LegalTagProperties, LegalTagPropertyValues, LegalTagRequest, LegalTagUpdateDto, PartitionDto, PartitionProperty, SchemaError, SchemaErrorModel, SchemaErrorResponseFormat, SchemaIdentity, SchemaInfo, SchemaInfoResponse, SchemaRequest, SearchAppError, SearchByBoundingBox, SearchByDistance, SearchByGeoPolygon, SearchCursorQueryRequest, SearchCursorQueryResponse, SearchPoint, SearchQueryRequest, SearchQueryResponse, SearchSpatialFilter, StorageAcl, StorageBulkUpdateRecordsResponse, StorageDeleteRecordError, StorageErrorResponse, StorageLegal, StorageMultiRecordIds, StoragePatchOperation, StorageQueryResponse, StorageRecord, StorageRecordBulkUpdateParam, StorageRecordData, StorageRecordHistory, StorageRecordQuery, StorageRecordVersions, Workflow, WorkflowError, WorkflowErrorDetails, WorkflowRun, WorkflowTriggerRequest, DeliveryAPIApi, EntitlementApi, FileServiceApi, FileServiceInternalApi, LegalApi, PartitionApi, SchemaApi, SearchApi, StorageApi, WorkflowApi) {
+}(function(ApiClient, EntitlementGroupProperties, EntitlementGroupResponse, EntitlementMemberDto, FileAcl, FileApplicationError, FileDateTime, FileDeliveryGetFileSignedURLRequest, FileDeliveryGetFileSignedURLResponse, FileDetails, FileDownloadResponse, FileDriver, FileError, FileErrorModel, FileExtensionProperties, FileID, FileLandingZoneLocationResponse, FileLegal, FileLinkList, FileListRequest, FileListResponse, FileLocation, FileLocationRequest, FileLocationResponse, FileMetaItem, FileMetadataResponse, FileRecord, FileRecordVersion, FileRelationships, FileSourceLocationResponse, FileToManyRelationship, FileToOneRelationship, Files, LegalTagDto, LegalTagDtos, LegalTagInvalidResponse, LegalTagInvalidResponseList, LegalTagProperties, LegalTagPropertyValues, LegalTagRequest, LegalTagUpdateDto, PartitionDto, PartitionProperty, RegisterAcl, RegisterAction, RegisterAppError, RegisterCreateAction, RegisterCreatedOnEpoch, RegisterData, RegisterDdms, RegisterDdmsInterface, RegisterFilter, RegisterGetSubscriptionResult, RegisterLegal, RegisterRecord, RegisterSecret, RegisterSubscription, RegisterSubscriptionCreateResult, RegisterTestAction, RegisterTestActionResult, RegisterTopic, RegisterTopicExample, SchemaError, SchemaErrorModel, SchemaErrorResponseFormat, SchemaIdentity, SchemaInfo, SchemaInfoResponse, SchemaRequest, SearchAppError, SearchByBoundingBox, SearchByDistance, SearchByGeoPolygon, SearchCursorQueryRequest, SearchCursorQueryResponse, SearchPoint, SearchQueryRequest, SearchQueryResponse, SearchSpatialFilter, StorageAcl, StorageBulkUpdateRecordsResponse, StorageDeleteRecordError, StorageErrorResponse, StorageLegal, StorageMultiRecordIds, StoragePatchOperation, StorageQueryResponse, StorageRecord, StorageRecordBulkUpdateParam, StorageRecordData, StorageRecordHistory, StorageRecordQuery, StorageRecordVersions, Workflow, WorkflowError, WorkflowErrorDetails, WorkflowRun, WorkflowTriggerRequest, DeliveryAPIApi, EntitlementApi, FileServiceApi, LegalApi, PartitionApi, RegisterApi, SchemaApi, SearchApi, StorageApi, WorkflowApi) {
   'use strict';
 
   /**
@@ -272,6 +272,101 @@
      */
     PartitionProperty: PartitionProperty,
     /**
+     * The RegisterAcl model constructor.
+     * @property {module:model/RegisterAcl}
+     */
+    RegisterAcl: RegisterAcl,
+    /**
+     * The RegisterAction model constructor.
+     * @property {module:model/RegisterAction}
+     */
+    RegisterAction: RegisterAction,
+    /**
+     * The RegisterAppError model constructor.
+     * @property {module:model/RegisterAppError}
+     */
+    RegisterAppError: RegisterAppError,
+    /**
+     * The RegisterCreateAction model constructor.
+     * @property {module:model/RegisterCreateAction}
+     */
+    RegisterCreateAction: RegisterCreateAction,
+    /**
+     * The RegisterCreatedOnEpoch model constructor.
+     * @property {module:model/RegisterCreatedOnEpoch}
+     */
+    RegisterCreatedOnEpoch: RegisterCreatedOnEpoch,
+    /**
+     * The RegisterData model constructor.
+     * @property {module:model/RegisterData}
+     */
+    RegisterData: RegisterData,
+    /**
+     * The RegisterDdms model constructor.
+     * @property {module:model/RegisterDdms}
+     */
+    RegisterDdms: RegisterDdms,
+    /**
+     * The RegisterDdmsInterface model constructor.
+     * @property {module:model/RegisterDdmsInterface}
+     */
+    RegisterDdmsInterface: RegisterDdmsInterface,
+    /**
+     * The RegisterFilter model constructor.
+     * @property {module:model/RegisterFilter}
+     */
+    RegisterFilter: RegisterFilter,
+    /**
+     * The RegisterGetSubscriptionResult model constructor.
+     * @property {module:model/RegisterGetSubscriptionResult}
+     */
+    RegisterGetSubscriptionResult: RegisterGetSubscriptionResult,
+    /**
+     * The RegisterLegal model constructor.
+     * @property {module:model/RegisterLegal}
+     */
+    RegisterLegal: RegisterLegal,
+    /**
+     * The RegisterRecord model constructor.
+     * @property {module:model/RegisterRecord}
+     */
+    RegisterRecord: RegisterRecord,
+    /**
+     * The RegisterSecret model constructor.
+     * @property {module:model/RegisterSecret}
+     */
+    RegisterSecret: RegisterSecret,
+    /**
+     * The RegisterSubscription model constructor.
+     * @property {module:model/RegisterSubscription}
+     */
+    RegisterSubscription: RegisterSubscription,
+    /**
+     * The RegisterSubscriptionCreateResult model constructor.
+     * @property {module:model/RegisterSubscriptionCreateResult}
+     */
+    RegisterSubscriptionCreateResult: RegisterSubscriptionCreateResult,
+    /**
+     * The RegisterTestAction model constructor.
+     * @property {module:model/RegisterTestAction}
+     */
+    RegisterTestAction: RegisterTestAction,
+    /**
+     * The RegisterTestActionResult model constructor.
+     * @property {module:model/RegisterTestActionResult}
+     */
+    RegisterTestActionResult: RegisterTestActionResult,
+    /**
+     * The RegisterTopic model constructor.
+     * @property {module:model/RegisterTopic}
+     */
+    RegisterTopic: RegisterTopic,
+    /**
+     * The RegisterTopicExample model constructor.
+     * @property {module:model/RegisterTopicExample}
+     */
+    RegisterTopicExample: RegisterTopicExample,
+    /**
      * The SchemaError model constructor.
      * @property {module:model/SchemaError}
      */
@@ -467,11 +562,6 @@
      */
     FileServiceApi: FileServiceApi,
     /**
-     * The FileServiceInternalApi service constructor.
-     * @property {module:api/FileServiceInternalApi}
-     */
-    FileServiceInternalApi: FileServiceInternalApi,
-    /**
      * The LegalApi service constructor.
      * @property {module:api/LegalApi}
      */
@@ -481,6 +571,11 @@
      * @property {module:api/PartitionApi}
      */
     PartitionApi: PartitionApi,
+    /**
+     * The RegisterApi service constructor.
+     * @property {module:api/RegisterApi}
+     */
+    RegisterApi: RegisterApi,
     /**
      * The SchemaApi service constructor.
      * @property {module:api/SchemaApi}

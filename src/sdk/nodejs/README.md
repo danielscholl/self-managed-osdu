@@ -144,8 +144,6 @@ Class | Method | HTTP request | Description
 *SelfManagedOsdu.FileServiceApi* | [**getsMetadataRecordForTheGivenId**](docs/FileServiceApi.md#getsMetadataRecordForTheGivenId) | **GET** /api/file/v2/files/{Id}/metadata | Gets metadata record for the given id
 *SelfManagedOsdu.FileServiceApi* | [**getsURLToDownloadTheFileAssociatedWithTheGivenId_**](docs/FileServiceApi.md#getsURLToDownloadTheFileAssociatedWithTheGivenId_) | **GET** /api/file/v2/files/{Id}/DownloadURL | Gets a URL to download the file
 *SelfManagedOsdu.FileServiceApi* | [**publishFileMetadataForAFile_**](docs/FileServiceApi.md#publishFileMetadataForAFile_) | **POST** /api/file/v2/files/metadata | Creates metadata for a file
-*SelfManagedOsdu.FileServiceInternalApi* | [**allowsTheApplicationToAuditTheAttemptedFileUploadsTheMethodIsInternalAndIsNotAvailableForThirdPartyApplications_**](docs/FileServiceInternalApi.md#allowsTheApplicationToAuditTheAttemptedFileUploadsTheMethodIsInternalAndIsNotAvailableForThirdPartyApplications_) | **POST** /api/file/v2/getFileList | 
-*SelfManagedOsdu.FileServiceInternalApi* | [**returnsFileLocationAndDriver_**](docs/FileServiceInternalApi.md#returnsFileLocationAndDriver_) | **POST** /api/file/v2/getFileLocation | 
 *SelfManagedOsdu.LegalApi* | [**createLegalTag**](docs/LegalApi.md#createLegalTag) | **POST** /api/legal/v1/legaltags | Creates the LegalTag for the given 'name'.
 *SelfManagedOsdu.LegalApi* | [**deleteLegalTag**](docs/LegalApi.md#deleteLegalTag) | **DELETE** /api/legal/v1/legaltags/{name} | Delete Legal Tag
 *SelfManagedOsdu.LegalApi* | [**getLegalTag**](docs/LegalApi.md#getLegalTag) | **GET** /api/legal/v1/legaltags/{name} | Gets a LegalTag for the given 'name'.
@@ -159,6 +157,20 @@ Class | Method | HTTP request | Description
 *SelfManagedOsdu.PartitionApi* | [**getUsingGET**](docs/PartitionApi.md#getUsingGET) | **GET** /api/partition/v1/partitions/{partitionId} | Get Single Partition
 *SelfManagedOsdu.PartitionApi* | [**listUsingGET**](docs/PartitionApi.md#listUsingGET) | **GET** /api/partition/v1/partitions | List Partitions
 *SelfManagedOsdu.PartitionApi* | [**updateUsingPATCH**](docs/PartitionApi.md#updateUsingPATCH) | **PATCH** /api/partition/v1/partitions/{partitionId} | Update Partition
+*SelfManagedOsdu.RegisterApi* | [**createADDMSRegistration**](docs/RegisterApi.md#createADDMSRegistration) | **POST** /api/register/v1/ddms | Create a DDMS registration
+*SelfManagedOsdu.RegisterApi* | [**createASubscription**](docs/RegisterApi.md#createASubscription) | **POST** /api/register/v1/subscription | Create a subscription
+*SelfManagedOsdu.RegisterApi* | [**createAnActionRegistration**](docs/RegisterApi.md#createAnActionRegistration) | **POST** /api/register/v1/action | Create an action registration
+*SelfManagedOsdu.RegisterApi* | [**deleteADDMSRegistration**](docs/RegisterApi.md#deleteADDMSRegistration) | **DELETE** /api/register/v1/ddms/{id} | Delete a DDMS registration
+*SelfManagedOsdu.RegisterApi* | [**deleteASubscriptionById**](docs/RegisterApi.md#deleteASubscriptionById) | **DELETE** /api/register/v1/subscription/{id} | Delete a subscription
+*SelfManagedOsdu.RegisterApi* | [**deleteAnActionRegistration**](docs/RegisterApi.md#deleteAnActionRegistration) | **DELETE** /api/register/v1/action/{id} | Delete an action  registration
+*SelfManagedOsdu.RegisterApi* | [**getADDMSRegistration**](docs/RegisterApi.md#getADDMSRegistration) | **GET** /api/register/v1/ddms/{id} | Get a DDMS registration
+*SelfManagedOsdu.RegisterApi* | [**getASubscriptionById**](docs/RegisterApi.md#getASubscriptionById) | **GET** /api/register/v1/subscription/{id} | Get a subscription
+*SelfManagedOsdu.RegisterApi* | [**getAnActionRegistration**](docs/RegisterApi.md#getAnActionRegistration) | **GET** /api/register/v1/action/{id} | Get an action registration
+*SelfManagedOsdu.RegisterApi* | [**listAllTopics**](docs/RegisterApi.md#listAllTopics) | **GET** /api/register/v1/topics | List all topics
+*SelfManagedOsdu.RegisterApi* | [**queryADDMSRegistration**](docs/RegisterApi.md#queryADDMSRegistration) | **GET** /api/register/v1/ddms | Query for DDMS registrations
+*SelfManagedOsdu.RegisterApi* | [**retrieveAnActionRegistration**](docs/RegisterApi.md#retrieveAnActionRegistration) | **POST** /api/register/v1/action:retrieve | Query for action registrations and substitutes any action with the given parameters
+*SelfManagedOsdu.RegisterApi* | [**testAnActionRegistration**](docs/RegisterApi.md#testAnActionRegistration) | **POST** /api/register/v1/action:test | Test an action registration
+*SelfManagedOsdu.RegisterApi* | [**updateSecretForSubscription**](docs/RegisterApi.md#updateSecretForSubscription) | **PUT** /api/register/v1/subscription/{id}/secret | Update secret for subscription
 *SelfManagedOsdu.SchemaApi* | [**createSchema**](docs/SchemaApi.md#createSchema) | **POST** /api/schema-service/v1/schema | Adds a schema to the schema repository.
 *SelfManagedOsdu.SchemaApi* | [**getSchema**](docs/SchemaApi.md#getSchema) | **GET** /api/schema-service/v1/schema/{id} | Gets schema from the schema repository.
 *SelfManagedOsdu.SchemaApi* | [**searchSchemaInfoRepository**](docs/SchemaApi.md#searchSchemaInfoRepository) | **GET** /api/schema-service/v1/schema | Searches schemaInfo repository
@@ -232,6 +244,25 @@ Class | Method | HTTP request | Description
  - [SelfManagedOsdu.LegalTagUpdateDto](docs/LegalTagUpdateDto.md)
  - [SelfManagedOsdu.PartitionDto](docs/PartitionDto.md)
  - [SelfManagedOsdu.PartitionProperty](docs/PartitionProperty.md)
+ - [SelfManagedOsdu.RegisterAcl](docs/RegisterAcl.md)
+ - [SelfManagedOsdu.RegisterAction](docs/RegisterAction.md)
+ - [SelfManagedOsdu.RegisterAppError](docs/RegisterAppError.md)
+ - [SelfManagedOsdu.RegisterCreateAction](docs/RegisterCreateAction.md)
+ - [SelfManagedOsdu.RegisterCreatedOnEpoch](docs/RegisterCreatedOnEpoch.md)
+ - [SelfManagedOsdu.RegisterData](docs/RegisterData.md)
+ - [SelfManagedOsdu.RegisterDdms](docs/RegisterDdms.md)
+ - [SelfManagedOsdu.RegisterDdmsInterface](docs/RegisterDdmsInterface.md)
+ - [SelfManagedOsdu.RegisterFilter](docs/RegisterFilter.md)
+ - [SelfManagedOsdu.RegisterGetSubscriptionResult](docs/RegisterGetSubscriptionResult.md)
+ - [SelfManagedOsdu.RegisterLegal](docs/RegisterLegal.md)
+ - [SelfManagedOsdu.RegisterRecord](docs/RegisterRecord.md)
+ - [SelfManagedOsdu.RegisterSecret](docs/RegisterSecret.md)
+ - [SelfManagedOsdu.RegisterSubscription](docs/RegisterSubscription.md)
+ - [SelfManagedOsdu.RegisterSubscriptionCreateResult](docs/RegisterSubscriptionCreateResult.md)
+ - [SelfManagedOsdu.RegisterTestAction](docs/RegisterTestAction.md)
+ - [SelfManagedOsdu.RegisterTestActionResult](docs/RegisterTestActionResult.md)
+ - [SelfManagedOsdu.RegisterTopic](docs/RegisterTopic.md)
+ - [SelfManagedOsdu.RegisterTopicExample](docs/RegisterTopicExample.md)
  - [SelfManagedOsdu.SchemaError](docs/SchemaError.md)
  - [SelfManagedOsdu.SchemaErrorModel](docs/SchemaErrorModel.md)
  - [SelfManagedOsdu.SchemaErrorResponseFormat](docs/SchemaErrorResponseFormat.md)
