@@ -164,6 +164,7 @@ Class | Method | HTTP request | Description
  - [Model.FileExtensionProperties](docs/FileExtensionProperties.md)
  - [Model.FileLegal](docs/FileLegal.md)
  - [Model.FileLinkList](docs/FileLinkList.md)
+ - [Model.FileListRequest](docs/FileListRequest.md)
  - [Model.FileMetaItem](docs/FileMetaItem.md)
  - [Model.FileMetadataResponse](docs/FileMetadataResponse.md)
  - [Model.FileRecord](docs/FileRecord.md)
