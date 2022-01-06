@@ -58,17 +58,15 @@ configuration.api_key['Authorization'] = 'YOUR_API_KEY'
 # configuration.api_key_prefix['Authorization'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = swagger_client.EntitlementApi(swagger_client.ApiClient(configuration))
-data_partition_id = 'data_partition_id_example' # str | Partition Name
-group_email = 'group_email_example' # str | group_email
-partition_info = swagger_client.EntitlementMemberDto() # EntitlementMemberDto | partitionInfo
+api_instance = swagger_client.DeliveryAPIApi(swagger_client.ApiClient(configuration))
+data_partition_id = 'data_partition_id_example' # str | Specifies the data partition to use. This should either be the partition name or crm account ID associated with the partition.
+body = swagger_client.FileDeliveryGetFileSignedURLRequest() # FileDeliveryGetFileSignedURLRequest |  (optional)
 
 try:
-    # Add Member to Group
-    api_response = api_instance.add_member_using_post(data_partition_id, group_email, partition_info)
+    api_response = api_instance.returns_delivery_instructions_for_file_s_using_sr_ns(data_partition_id, body=body)
     pprint(api_response)
 except ApiException as e:
-    print("Exception when calling EntitlementApi->add_member_using_post: %s\n" % e)
+    print("Exception when calling DeliveryAPIApi->returns_delivery_instructions_for_file_s_using_sr_ns: %s\n" % e)
 
 ```
 
@@ -78,6 +76,7 @@ All URIs are relative to *https://self-managed-osdu.westeurope.cloudapp.azure.co
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
+*DeliveryAPIApi* | [**returns_delivery_instructions_for_file_s_using_sr_ns**](docs/DeliveryAPIApi.md#returns_delivery_instructions_for_file_s_using_sr_ns) | **POST** /api/file/v2/delivery/getFileSignedUrl | 
 *EntitlementApi* | [**add_member_using_post**](docs/EntitlementApi.md#add_member_using_post) | **POST** /api/entitlements/v2/groups/{group_email}/members | Add Member to Group
 *EntitlementApi* | [**create_group_using_post**](docs/EntitlementApi.md#create_group_using_post) | **POST** /api/entitlements/v2/groups | Create a Group
 *EntitlementApi* | [**delete_group_using_delete**](docs/EntitlementApi.md#delete_group_using_delete) | **DELETE** /api/entitlements/v2/groups/{group_email} | Delete a Group
@@ -87,6 +86,14 @@ Class | Method | HTTP request | Description
 *EntitlementApi* | [**list_groups_on_behalf_of_using_get**](docs/EntitlementApi.md#list_groups_on_behalf_of_using_get) | **GET** /api/entitlements/v2/members/{member_email}/groups | List Assigned Groups for User
 *EntitlementApi* | [**list_groups_using_get**](docs/EntitlementApi.md#list_groups_using_get) | **GET** /api/entitlements/v2/groups | List Assigned Groups
 *EntitlementApi* | [**update_group_using_patch**](docs/EntitlementApi.md#update_group_using_patch) | **PATCH** /api/entitlements/v2/groups/{group_email} | Updates Items in Group
+*FileServiceApi* | [**deletes_metadata_record__file_for_the_given_id**](docs/FileServiceApi.md#deletes_metadata_record__file_for_the_given_id) | **DELETE** /api/file/v2/files/{Id}/metadata | Deletes metadata record &amp; file assocaited with that record for the given id
+*FileServiceApi* | [**get_a_location_in_landing_zone_to_upload_a_file_**](docs/FileServiceApi.md#get_a_location_in_landing_zone_to_upload_a_file_) | **POST** /api/file/v2/getLocation | Get a location in Landing Zone to upload a file.
+*FileServiceApi* | [**get_the_location_to_upload_a_file**](docs/FileServiceApi.md#get_the_location_to_upload_a_file) | **GET** /api/file/v2/files/UploadURL | Get a location in Landing Zone to upload a file.
+*FileServiceApi* | [**gets_metadata_record_for_the_given_id**](docs/FileServiceApi.md#gets_metadata_record_for_the_given_id) | **GET** /api/file/v2/files/{Id}/metadata | Gets metadata record for the given id
+*FileServiceApi* | [**gets_url_to_download_the_file_associated_with_the_given_id_**](docs/FileServiceApi.md#gets_url_to_download_the_file_associated_with_the_given_id_) | **GET** /api/file/v2/files/{Id}/DownloadURL | Gets a URL to download the file
+*FileServiceApi* | [**publish_file_metadata_for_a_file_**](docs/FileServiceApi.md#publish_file_metadata_for_a_file_) | **POST** /api/file/v2/files/metadata | Creates metadata for a file
+*FileServiceInternalApi* | [**allows_the_application_to_audit_the_attempted_file_uploads__the_method_is_internal_and_is_not_available_for_third_party_applications_**](docs/FileServiceInternalApi.md#allows_the_application_to_audit_the_attempted_file_uploads__the_method_is_internal_and_is_not_available_for_third_party_applications_) | **POST** /api/file/v2/getFileList | 
+*FileServiceInternalApi* | [**returns_file_location_and_driver_**](docs/FileServiceInternalApi.md#returns_file_location_and_driver_) | **POST** /api/file/v2/getFileLocation | 
 *LegalApi* | [**create_legal_tag**](docs/LegalApi.md#create_legal_tag) | **POST** /api/legal/v1/legaltags | Creates the LegalTag for the given &#39;name&#39;.
 *LegalApi* | [**delete_legal_tag**](docs/LegalApi.md#delete_legal_tag) | **DELETE** /api/legal/v1/legaltags/{name} | Delete Legal Tag
 *LegalApi* | [**get_legal_tag**](docs/LegalApi.md#get_legal_tag) | **GET** /api/legal/v1/legaltags/{name} | Gets a LegalTag for the given &#39;name&#39;.
