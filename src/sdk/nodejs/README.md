@@ -178,6 +178,14 @@ Class | Method | HTTP request | Description
 *SelfManagedOsdu.StorageApi* | [**getRecordVersion**](docs/StorageApi.md#getRecordVersion) | **GET** /api/storage/v2/records/{id}/{version} | Get record version
 *SelfManagedOsdu.StorageApi* | [**patchUpdateRecords**](docs/StorageApi.md#patchUpdateRecords) | **PATCH** /api/storage/v2/records | Modify record metadata attributes using patch operations
 *SelfManagedOsdu.StorageApi* | [**purgeRecord**](docs/StorageApi.md#purgeRecord) | **DELETE** /api/storage/v2/records/{id} | Purge record
+*SelfManagedOsdu.WorkflowApi* | [**deleteWorkflow**](docs/WorkflowApi.md#deleteWorkflow) | **DELETE** /api/workflow/v1/workflow/{workflow_name} | Delete a workflow defintion.
+*SelfManagedOsdu.WorkflowApi* | [**deployWorkflow**](docs/WorkflowApi.md#deployWorkflow) | **POST** /api/workflow/v1/workflow | Creates workflow definition with standard orchestrator operators.
+*SelfManagedOsdu.WorkflowApi* | [**getAllWorkflowRuns**](docs/WorkflowApi.md#getAllWorkflowRuns) | **GET** /api/workflow/v1/workflow/{workflow_name}/workflowRun | Get all run instances of a workflow.
+*SelfManagedOsdu.WorkflowApi* | [**getWorkflowRun**](docs/WorkflowApi.md#getWorkflowRun) | **GET** /api/workflow/v1/workflow/{workflow_name}/workflowRun/{runId} | Get details for a speciffic workflow run instance.
+*SelfManagedOsdu.WorkflowApi* | [**listAllWorkflow**](docs/WorkflowApi.md#listAllWorkflow) | **GET** /api/workflow/v1/workflow | List all the workflow applicable for a tenant.
+*SelfManagedOsdu.WorkflowApi* | [**triggerWorkflow**](docs/WorkflowApi.md#triggerWorkflow) | **POST** /api/workflow/v1/workflow/{workflow_name}/workflowRun | Trigger a workflow.
+*SelfManagedOsdu.WorkflowApi* | [**updateWorkflowRun**](docs/WorkflowApi.md#updateWorkflowRun) | **PUT** /api/workflow/v1/workflow/{workflow_name}/workflowRun/{runId} | Update the workflow run instance.
+*SelfManagedOsdu.WorkflowApi* | [**viewWorkflow**](docs/WorkflowApi.md#viewWorkflow) | **GET** /api/workflow/v1/workflow/{workflow_name} | Get complete details for a workflow.
 
 
 ## Documentation for Models
@@ -255,6 +263,11 @@ Class | Method | HTTP request | Description
  - [SelfManagedOsdu.StorageRecordHistory](docs/StorageRecordHistory.md)
  - [SelfManagedOsdu.StorageRecordQuery](docs/StorageRecordQuery.md)
  - [SelfManagedOsdu.StorageRecordVersions](docs/StorageRecordVersions.md)
+ - [SelfManagedOsdu.Workflow](docs/Workflow.md)
+ - [SelfManagedOsdu.WorkflowError](docs/WorkflowError.md)
+ - [SelfManagedOsdu.WorkflowErrorDetails](docs/WorkflowErrorDetails.md)
+ - [SelfManagedOsdu.WorkflowRun](docs/WorkflowRun.md)
+ - [SelfManagedOsdu.WorkflowTriggerRequest](docs/WorkflowTriggerRequest.md)
 
 
 ## Documentation for Authorization

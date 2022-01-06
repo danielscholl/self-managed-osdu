@@ -2,7 +2,7 @@
 
 self-managed-osdu
 - API version: 0.11.0
-  - Build date: 2022-01-06T20:40:55.437Z
+  - Build date: 2022-01-06T21:37:15.431Z
 
 Rest API Documentation for Self Managed OSDU
 
@@ -162,6 +162,14 @@ Class | Method | HTTP request | Description
 *StorageApi* | [**getRecordVersion**](docs/StorageApi.md#getRecordVersion) | **GET** /api/storage/v2/records/{id}/{version} | Get record version
 *StorageApi* | [**patchUpdateRecords**](docs/StorageApi.md#patchUpdateRecords) | **PATCH** /api/storage/v2/records | Modify record metadata attributes using patch operations
 *StorageApi* | [**purgeRecord**](docs/StorageApi.md#purgeRecord) | **DELETE** /api/storage/v2/records/{id} | Purge record
+*WorkflowApi* | [**deleteWorkflow**](docs/WorkflowApi.md#deleteWorkflow) | **DELETE** /api/workflow/v1/workflow/{workflow_name} | Delete a workflow defintion.
+*WorkflowApi* | [**deployWorkflow**](docs/WorkflowApi.md#deployWorkflow) | **POST** /api/workflow/v1/workflow | Creates workflow definition with standard orchestrator operators.
+*WorkflowApi* | [**getAllWorkflowRuns**](docs/WorkflowApi.md#getAllWorkflowRuns) | **GET** /api/workflow/v1/workflow/{workflow_name}/workflowRun | Get all run instances of a workflow.
+*WorkflowApi* | [**getWorkflowRun**](docs/WorkflowApi.md#getWorkflowRun) | **GET** /api/workflow/v1/workflow/{workflow_name}/workflowRun/{runId} | Get details for a speciffic workflow run instance.
+*WorkflowApi* | [**listAllWorkflow**](docs/WorkflowApi.md#listAllWorkflow) | **GET** /api/workflow/v1/workflow | List all the workflow applicable for a tenant.
+*WorkflowApi* | [**triggerWorkflow**](docs/WorkflowApi.md#triggerWorkflow) | **POST** /api/workflow/v1/workflow/{workflow_name}/workflowRun | Trigger a workflow.
+*WorkflowApi* | [**updateWorkflowRun**](docs/WorkflowApi.md#updateWorkflowRun) | **PUT** /api/workflow/v1/workflow/{workflow_name}/workflowRun/{runId} | Update the workflow run instance.
+*WorkflowApi* | [**viewWorkflow**](docs/WorkflowApi.md#viewWorkflow) | **GET** /api/workflow/v1/workflow/{workflow_name} | Get complete details for a workflow.
 
 
 ## Documentation for Models
@@ -237,6 +245,11 @@ Class | Method | HTTP request | Description
  - [StorageRecordHistory](docs/StorageRecordHistory.md)
  - [StorageRecordQuery](docs/StorageRecordQuery.md)
  - [StorageRecordVersions](docs/StorageRecordVersions.md)
+ - [Workflow](docs/Workflow.md)
+ - [WorkflowError](docs/WorkflowError.md)
+ - [WorkflowErrorDetails](docs/WorkflowErrorDetails.md)
+ - [WorkflowRun](docs/WorkflowRun.md)
+ - [WorkflowTriggerRequest](docs/WorkflowTriggerRequest.md)
 
 
 ## Documentation for Authorization
