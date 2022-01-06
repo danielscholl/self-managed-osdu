@@ -31,7 +31,7 @@ import java.util.List;
  * Represents a collection of LegalTags.
  */
 @ApiModel(description = "Represents a collection of LegalTags.")
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-01-06T19:55:22.158Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-01-06T19:56:05.916Z")
 public class LegalTagDtos {
   @SerializedName("legalTags")
   private List<LegalTagDto> legalTags = null;
