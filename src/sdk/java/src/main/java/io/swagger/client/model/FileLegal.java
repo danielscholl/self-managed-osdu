@@ -30,7 +30,7 @@ import java.util.List;
  * Legal meta data like legal tags, relevant other countries, legal status.
  */
 @ApiModel(description = "Legal meta data like legal tags, relevant other countries, legal status.")
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-01-06T19:45:04.076Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-01-06T19:49:15.102Z")
 public class FileLegal {
   @SerializedName("legaltags")
   private List<String> legaltags = null;

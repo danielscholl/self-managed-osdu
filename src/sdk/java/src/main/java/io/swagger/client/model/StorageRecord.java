@@ -34,7 +34,7 @@ import java.util.Map;
  * Storage record
  */
 @ApiModel(description = "Storage record")
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-01-06T19:47:50.968Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-01-06T19:49:15.102Z")
 public class StorageRecord {
   @SerializedName("id")
   private String id = null;

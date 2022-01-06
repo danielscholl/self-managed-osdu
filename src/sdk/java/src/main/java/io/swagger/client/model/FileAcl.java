@@ -29,7 +29,7 @@ import java.util.List;
 /**
  * FileAcl
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-01-06T19:44:08.388Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-01-06T19:49:15.102Z")
 public class FileAcl {
   @SerializedName("viewers")
   private List<String> viewers = new ArrayList<String>();

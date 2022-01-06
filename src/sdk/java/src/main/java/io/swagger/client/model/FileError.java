@@ -27,7 +27,7 @@ import java.io.IOException;
 /**
  * FileError
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-01-06T19:42:14.578Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-01-06T19:49:15.102Z")
 public class FileError {
   @SerializedName("message")
   private String message = null;
