@@ -38,7 +38,6 @@ from swagger_client.models.file_metadata_response import FileMetadataResponse
 from swagger_client.models.file_record import FileRecord
 from swagger_client.models.file_record_version import FileRecordVersion
 from swagger_client.models.file_relationships import FileRelationships
-from swagger_client.models.file_source_location_response import FileSourceLocationResponse
 from swagger_client.models.file_to_many_relationship import FileToManyRelationship
 from swagger_client.models.file_to_one_relationship import FileToOneRelationship
 from swagger_client.models.files import Files
