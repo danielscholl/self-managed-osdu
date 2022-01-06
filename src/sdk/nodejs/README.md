@@ -192,6 +192,7 @@ Class | Method | HTTP request | Description
  - [SelfManagedOsdu.FileLegal](docs/FileLegal.md)
  - [SelfManagedOsdu.FileLinkList](docs/FileLinkList.md)
  - [SelfManagedOsdu.FileListRequest](docs/FileListRequest.md)
+ - [SelfManagedOsdu.FileLocationRequest](docs/FileLocationRequest.md)
  - [SelfManagedOsdu.FileLocationResponse](docs/FileLocationResponse.md)
  - [SelfManagedOsdu.FileMetaItem](docs/FileMetaItem.md)
  - [SelfManagedOsdu.FileMetadataResponse](docs/FileMetadataResponse.md)
