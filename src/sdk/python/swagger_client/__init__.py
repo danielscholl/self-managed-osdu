@@ -41,7 +41,6 @@ from swagger_client.models.file_driver import FileDriver
 from swagger_client.models.file_error import FileError
 from swagger_client.models.file_error_model import FileErrorModel
 from swagger_client.models.file_extension_properties import FileExtensionProperties
-from swagger_client.models.file_id import FileID
 from swagger_client.models.file_legal import FileLegal
 from swagger_client.models.file_link_list import FileLinkList
 from swagger_client.models.file_list_request import FileListRequest
