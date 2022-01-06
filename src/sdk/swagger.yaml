@@ -3152,3 +3152,59 @@ definitions:
     properties:
       FileID:
         $ref: '#/definitions/FileID'
+        
+  FileSourceLocationResponse:
+    type: object
+    properties:
+      FileID:
+        $ref: '#/definitions/FileID'
+      Location:
+        type: object
+        properties:
+          SignedURL:
+            type: string
+            example: 'GCS signed URL'
+          FileSource:
+            type: string
+            description: 'Relative location of file'
+            example: 'AXB564XVCY\SHVCU7632'
+  FileLandingZoneLocationResponse:
+    type: object
+    properties:
+      FileID:
+        $ref: '#/definitions/FileID'
+      Location:
+        type: object
+        additionalProperties:
+          type: string
+        example:
+          SignedURL: 'GCS signed URL'
+
+  FileLocation:
+    type: object
+    properties:
+      FileID:
+        $ref: '#/definitions/FileID'
+      Driver:
+        $ref: '#/definitions/FileDriver'
+      Location:
+        type: string
+      CreatedAt:
+        type: string
+        format: date-time
+      CreatedBy:
+        type: string
+
+  FileListResponse:
+    type: object
+    properties:
+      content:
+        type: array
+        items:
+          $ref: '#/definitions/FileLocation'
+      number:
+        type: integer
+      numberOfElements:
+        type: integer
+      size:
+        type: integer
