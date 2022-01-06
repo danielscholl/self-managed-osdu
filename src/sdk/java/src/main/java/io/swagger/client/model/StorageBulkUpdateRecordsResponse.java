@@ -30,7 +30,7 @@ import java.util.List;
  * Result of the record batch update request.
  */
 @ApiModel(description = "Result of the record batch update request.")
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-01-06T20:27:30.372Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-01-06T20:29:00.529Z")
 public class StorageBulkUpdateRecordsResponse {
   @SerializedName("recordCount")
   private Integer recordCount = null;

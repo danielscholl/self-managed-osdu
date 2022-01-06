@@ -28,7 +28,7 @@ import java.io.IOException;
  * An error that occurs during normal application logic
  */
 @ApiModel(description = "An error that occurs during normal application logic")
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-01-06T20:27:30.372Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-01-06T20:29:00.529Z")
 public class StorageErrorResponse {
   @SerializedName("code")
   private Integer code = null;
