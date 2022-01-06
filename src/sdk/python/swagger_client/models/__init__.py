@@ -18,6 +18,12 @@ from __future__ import absolute_import
 from swagger_client.models.entitlement_group_properties import EntitlementGroupProperties
 from swagger_client.models.entitlement_group_response import EntitlementGroupResponse
 from swagger_client.models.entitlement_member_dto import EntitlementMemberDto
+from swagger_client.models.file_application_error import FileApplicationError
+from swagger_client.models.file_error import FileError
+from swagger_client.models.file_error_model import FileErrorModel
+from swagger_client.models.file_link_list import FileLinkList
+from swagger_client.models.file_to_many_relationship import FileToManyRelationship
+from swagger_client.models.file_to_one_relationship import FileToOneRelationship
 from swagger_client.models.legal_tag_dto import LegalTagDto
 from swagger_client.models.legal_tag_dtos import LegalTagDtos
 from swagger_client.models.legal_tag_invalid_response import LegalTagInvalidResponse
