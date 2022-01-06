@@ -2891,3 +2891,40 @@ definitions:
       relatedItems:
         $ref: '#/definitions/FileToManyRelationship'
     description: All relationships from this entity.
+    
+  
+  FileDeliveryGetFileSignedURLRequest:
+    type: object
+    properties:
+      srn:
+        description: A list of SRNs to fetch
+        type: array
+        items:
+          type: string
+    example:
+      srns:
+        - srn:some-valid-srn
+        - srn:some-invalid-srn
+  FileDeliveryGetFileSignedURLResponse:
+    type: object
+    properties:
+      unprocessed:
+        description: A list of SRNs which could not be processed
+        type: array
+        items:
+          type: string
+      processed:
+        description: Each key is equal to an SRN that was able to be processed
+        type: object
+        additionalProperties:
+          description: Signed URL and/or related properties for the processed SRN
+          type: object
+          properties:
+            signedUrl:
+              type: string
+    example:
+      unprocessed:
+        - srn:some-invalid-srn
+      processed:
+        srn:some-valid-srn:
+          signedUrl: https://...
