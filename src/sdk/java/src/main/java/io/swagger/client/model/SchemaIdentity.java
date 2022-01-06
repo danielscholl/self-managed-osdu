@@ -28,7 +28,7 @@ import java.io.IOException;
  * Schema authority source and type description
  */
 @ApiModel(description = "Schema authority source and type description")
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-01-06T19:58:30.495Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-01-06T19:59:40.550Z")
 public class SchemaIdentity {
   @SerializedName("authority")
   private String authority = null;

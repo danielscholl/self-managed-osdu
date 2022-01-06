@@ -29,7 +29,7 @@ import java.util.List;
 /**
  * FileDeliveryGetFileSignedURLRequest
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-01-06T19:53:08.320Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-01-06T19:59:40.550Z")
 public class FileDeliveryGetFileSignedURLRequest {
   @SerializedName("srn")
   private List<String> srn = null;
