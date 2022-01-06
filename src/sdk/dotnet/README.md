@@ -117,8 +117,6 @@ Class | Method | HTTP request | Description
 *FileServiceApi* | [**GetsMetadataRecordForTheGivenId**](docs/FileServiceApi.md#getsmetadatarecordforthegivenid) | **GET** /api/file/v2/files/{Id}/metadata | Gets metadata record for the given id
 *FileServiceApi* | [**GetsURLToDownloadTheFileAssociatedWithTheGivenId_**](docs/FileServiceApi.md#getsurltodownloadthefileassociatedwiththegivenid_) | **GET** /api/file/v2/files/{Id}/DownloadURL | Gets a URL to download the file
 *FileServiceApi* | [**PublishFileMetadataForAFile_**](docs/FileServiceApi.md#publishfilemetadataforafile_) | **POST** /api/file/v2/files/metadata | Creates metadata for a file
-*FileServiceInternalApi* | [**AllowsTheApplicationToAuditTheAttemptedFileUploadsTheMethodIsInternalAndIsNotAvailableForThirdPartyApplications_**](docs/FileServiceInternalApi.md#allowstheapplicationtoaudittheattemptedfileuploadsthemethodisinternalandisnotavailableforthirdpartyapplications_) | **POST** /api/file/v2/getFileList | 
-*FileServiceInternalApi* | [**ReturnsFileLocationAndDriver_**](docs/FileServiceInternalApi.md#returnsfilelocationanddriver_) | **POST** /api/file/v2/getFileLocation | 
 *LegalApi* | [**CreateLegalTag**](docs/LegalApi.md#createlegaltag) | **POST** /api/legal/v1/legaltags | Creates the LegalTag for the given 'name'.
 *LegalApi* | [**DeleteLegalTag**](docs/LegalApi.md#deletelegaltag) | **DELETE** /api/legal/v1/legaltags/{name} | Delete Legal Tag
 *LegalApi* | [**GetLegalTag**](docs/LegalApi.md#getlegaltag) | **GET** /api/legal/v1/legaltags/{name} | Gets a LegalTag for the given 'name'.
@@ -132,6 +130,20 @@ Class | Method | HTTP request | Description
 *PartitionApi* | [**GetUsingGET**](docs/PartitionApi.md#getusingget) | **GET** /api/partition/v1/partitions/{partitionId} | Get Single Partition
 *PartitionApi* | [**ListUsingGET**](docs/PartitionApi.md#listusingget) | **GET** /api/partition/v1/partitions | List Partitions
 *PartitionApi* | [**UpdateUsingPATCH**](docs/PartitionApi.md#updateusingpatch) | **PATCH** /api/partition/v1/partitions/{partitionId} | Update Partition
+*RegisterApi* | [**CreateADDMSRegistration**](docs/RegisterApi.md#createaddmsregistration) | **POST** /api/register/v1/ddms | Create a DDMS registration
+*RegisterApi* | [**CreateASubscription**](docs/RegisterApi.md#createasubscription) | **POST** /api/register/v1/subscription | Create a subscription
+*RegisterApi* | [**CreateAnActionRegistration**](docs/RegisterApi.md#createanactionregistration) | **POST** /api/register/v1/action | Create an action registration
+*RegisterApi* | [**DeleteADDMSRegistration**](docs/RegisterApi.md#deleteaddmsregistration) | **DELETE** /api/register/v1/ddms/{id} | Delete a DDMS registration
+*RegisterApi* | [**DeleteASubscriptionById**](docs/RegisterApi.md#deleteasubscriptionbyid) | **DELETE** /api/register/v1/subscription/{id} | Delete a subscription
+*RegisterApi* | [**DeleteAnActionRegistration**](docs/RegisterApi.md#deleteanactionregistration) | **DELETE** /api/register/v1/action/{id} | Delete an action  registration
+*RegisterApi* | [**GetADDMSRegistration**](docs/RegisterApi.md#getaddmsregistration) | **GET** /api/register/v1/ddms/{id} | Get a DDMS registration
+*RegisterApi* | [**GetASubscriptionById**](docs/RegisterApi.md#getasubscriptionbyid) | **GET** /api/register/v1/subscription/{id} | Get a subscription
+*RegisterApi* | [**GetAnActionRegistration**](docs/RegisterApi.md#getanactionregistration) | **GET** /api/register/v1/action/{id} | Get an action registration
+*RegisterApi* | [**ListAllTopics**](docs/RegisterApi.md#listalltopics) | **GET** /api/register/v1/topics | List all topics
+*RegisterApi* | [**QueryADDMSRegistration**](docs/RegisterApi.md#queryaddmsregistration) | **GET** /api/register/v1/ddms | Query for DDMS registrations
+*RegisterApi* | [**RetrieveAnActionRegistration**](docs/RegisterApi.md#retrieveanactionregistration) | **POST** /api/register/v1/action:retrieve | Query for action registrations and substitutes any action with the given parameters
+*RegisterApi* | [**TestAnActionRegistration**](docs/RegisterApi.md#testanactionregistration) | **POST** /api/register/v1/action:test | Test an action registration
+*RegisterApi* | [**UpdateSecretForSubscription**](docs/RegisterApi.md#updatesecretforsubscription) | **PUT** /api/register/v1/subscription/{id}/secret | Update secret for subscription
 *SchemaApi* | [**CreateSchema**](docs/SchemaApi.md#createschema) | **POST** /api/schema-service/v1/schema | Adds a schema to the schema repository.
 *SchemaApi* | [**GetSchema**](docs/SchemaApi.md#getschema) | **GET** /api/schema-service/v1/schema/{id} | Gets schema from the schema repository.
 *SchemaApi* | [**SearchSchemaInfoRepository**](docs/SchemaApi.md#searchschemainforepository) | **GET** /api/schema-service/v1/schema | Searches schemaInfo repository
@@ -204,6 +216,25 @@ Class | Method | HTTP request | Description
  - [Model.LegalTagUpdateDto](docs/LegalTagUpdateDto.md)
  - [Model.PartitionDto](docs/PartitionDto.md)
  - [Model.PartitionProperty](docs/PartitionProperty.md)
+ - [Model.RegisterAcl](docs/RegisterAcl.md)
+ - [Model.RegisterAction](docs/RegisterAction.md)
+ - [Model.RegisterAppError](docs/RegisterAppError.md)
+ - [Model.RegisterCreateAction](docs/RegisterCreateAction.md)
+ - [Model.RegisterCreatedOnEpoch](docs/RegisterCreatedOnEpoch.md)
+ - [Model.RegisterData](docs/RegisterData.md)
+ - [Model.RegisterDdms](docs/RegisterDdms.md)
+ - [Model.RegisterDdmsInterface](docs/RegisterDdmsInterface.md)
+ - [Model.RegisterFilter](docs/RegisterFilter.md)
+ - [Model.RegisterGetSubscriptionResult](docs/RegisterGetSubscriptionResult.md)
+ - [Model.RegisterLegal](docs/RegisterLegal.md)
+ - [Model.RegisterRecord](docs/RegisterRecord.md)
+ - [Model.RegisterSecret](docs/RegisterSecret.md)
+ - [Model.RegisterSubscription](docs/RegisterSubscription.md)
+ - [Model.RegisterSubscriptionCreateResult](docs/RegisterSubscriptionCreateResult.md)
+ - [Model.RegisterTestAction](docs/RegisterTestAction.md)
+ - [Model.RegisterTestActionResult](docs/RegisterTestActionResult.md)
+ - [Model.RegisterTopic](docs/RegisterTopic.md)
+ - [Model.RegisterTopicExample](docs/RegisterTopicExample.md)
  - [Model.SchemaError](docs/SchemaError.md)
  - [Model.SchemaErrorModel](docs/SchemaErrorModel.md)
  - [Model.SchemaErrorResponseFormat](docs/SchemaErrorResponseFormat.md)
