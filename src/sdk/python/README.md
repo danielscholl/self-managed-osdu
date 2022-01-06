@@ -142,6 +142,8 @@ Class | Method | HTTP request | Description
  - [FileLinkList](docs/FileLinkList.md)
  - [FileMetaItem](docs/FileMetaItem.md)
  - [FileMetadataResponse](docs/FileMetadataResponse.md)
+ - [FileRecord](docs/FileRecord.md)
+ - [FileRecordVersion](docs/FileRecordVersion.md)
  - [FileRelationships](docs/FileRelationships.md)
  - [FileToManyRelationship](docs/FileToManyRelationship.md)
  - [FileToOneRelationship](docs/FileToOneRelationship.md)
