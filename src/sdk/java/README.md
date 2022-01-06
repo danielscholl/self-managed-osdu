@@ -2,7 +2,7 @@
 
 self-managed-osdu
 - API version: 0.11.0
-  - Build date: 2022-01-06T20:07:24.096Z
+  - Build date: 2022-01-06T20:08:24.505Z
 
 Rest API Documentation for Self Managed OSDU
 
@@ -179,6 +179,7 @@ Class | Method | HTTP request | Description
  - [FileRecord](docs/FileRecord.md)
  - [FileRecordVersion](docs/FileRecordVersion.md)
  - [FileRelationships](docs/FileRelationships.md)
+ - [FileSourceLocationResponse](docs/FileSourceLocationResponse.md)
  - [FileToManyRelationship](docs/FileToManyRelationship.md)
  - [FileToOneRelationship](docs/FileToOneRelationship.md)
  - [Files](docs/Files.md)

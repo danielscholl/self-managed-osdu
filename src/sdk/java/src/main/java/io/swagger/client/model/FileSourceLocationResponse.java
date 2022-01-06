@@ -27,7 +27,7 @@ import java.io.IOException;
 /**
  * FileSourceLocationResponse
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-01-06T19:53:30.442Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-01-06T20:08:24.505Z")
 public class FileSourceLocationResponse {
   @SerializedName("FileID")
   private String fileID = null;
