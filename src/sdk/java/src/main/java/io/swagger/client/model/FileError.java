@@ -25,51 +25,71 @@ import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
 
 /**
- * Delete Records Response Body
+ * FileError
  */
-@ApiModel(description = "Delete Records Response Body")
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-01-06T19:12:22.462Z")
-public class StorageDeleteRecordError {
-  @SerializedName("notDeletedRecordId")
-  private String notDeletedRecordId = null;
-
+public class FileError {
   @SerializedName("message")
   private String message = null;
 
-  public StorageDeleteRecordError notDeletedRecordId(String notDeletedRecordId) {
-    this.notDeletedRecordId = notDeletedRecordId;
-    return this;
-  }
+  @SerializedName("reason")
+  private String reason = null;
 
-   /**
-   * Record id which wasn&#39;t deleted successfully.
-   * @return notDeletedRecordId
-  **/
-  @ApiModelProperty(example = "common:welldb:123456", value = "Record id which wasn't deleted successfully.")
-  public String getNotDeletedRecordId() {
-    return notDeletedRecordId;
-  }
+  @SerializedName("domain")
+  private String domain = null;
 
-  public void setNotDeletedRecordId(String notDeletedRecordId) {
-    this.notDeletedRecordId = notDeletedRecordId;
-  }
-
-  public StorageDeleteRecordError message(String message) {
+  public FileError message(String message) {
     this.message = message;
     return this;
   }
 
    /**
-   * Brief description of the cause why record wasn&#39;t delete
+   * Get message
    * @return message
   **/
-  @ApiModelProperty(example = "Record with id 'common:welldb:123456' not found", value = "Brief description of the cause why record wasn't delete")
+  @ApiModelProperty(value = "")
   public String getMessage() {
     return message;
   }
 
   public void setMessage(String message) {
     this.message = message;
+  }
+
+  public FileError reason(String reason) {
+    this.reason = reason;
+    return this;
+  }
+
+   /**
+   * Get reason
+   * @return reason
+  **/
+  @ApiModelProperty(value = "")
+  public String getReason() {
+    return reason;
+  }
+
+  public void setReason(String reason) {
+    this.reason = reason;
+  }
+
+  public FileError domain(String domain) {
+    this.domain = domain;
+    return this;
+  }
+
+   /**
+   * Get domain
+   * @return domain
+  **/
+  @ApiModelProperty(value = "")
+  public String getDomain() {
+    return domain;
+  }
+
+  public void setDomain(String domain) {
+    this.domain = domain;
   }
 
 
@@ -81,24 +101,26 @@ public class StorageDeleteRecordError {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    StorageDeleteRecordError storageDeleteRecordError = (StorageDeleteRecordError) o;
-    return Objects.equals(this.notDeletedRecordId, storageDeleteRecordError.notDeletedRecordId) &&
-        Objects.equals(this.message, storageDeleteRecordError.message);
+    FileError fileError = (FileError) o;
+    return Objects.equals(this.message, fileError.message) &&
+        Objects.equals(this.reason, fileError.reason) &&
+        Objects.equals(this.domain, fileError.domain);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(notDeletedRecordId, message);
+    return Objects.hash(message, reason, domain);
   }
 
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class StorageDeleteRecordError {\n");
+    sb.append("class FileError {\n");
     
-    sb.append("    notDeletedRecordId: ").append(toIndentedString(notDeletedRecordId)).append("\n");
     sb.append("    message: ").append(toIndentedString(message)).append("\n");
+    sb.append("    reason: ").append(toIndentedString(reason)).append("\n");
+    sb.append("    domain: ").append(toIndentedString(domain)).append("\n");
     sb.append("}");
     return sb.toString();
   }

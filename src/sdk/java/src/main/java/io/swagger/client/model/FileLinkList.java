@@ -16,16 +16,16 @@ package io.swagger.client.model;
 import java.util.Objects;
 import java.util.Arrays;
 import io.swagger.annotations.ApiModel;
-import io.swagger.client.model.SearchPoint;
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
- * A spatial filter criteria to filter documents which falls within a polygon of points.
+ * A named list of entities in the data lake as a dictionary item.
  */
-@ApiModel(description = "A spatial filter criteria to filter documents which falls within a polygon of points.")
+@ApiModel(description = "A named list of entities in the data lake as a dictionary item.")
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-01-06T19:12:22.462Z")
-public class SearchByGeoPolygon extends ArrayList<SearchPoint> {
+public class FileLinkList extends HashMap<String, List> {
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -47,7 +47,7 @@ public class SearchByGeoPolygon extends ArrayList<SearchPoint> {
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class SearchByGeoPolygon {\n");
+    sb.append("class FileLinkList {\n");
     sb.append("    ").append(toIndentedString(super.toString())).append("\n");
     sb.append("}");
     return sb.toString();

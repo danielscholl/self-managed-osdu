@@ -2,7 +2,7 @@
 
 self-managed-osdu
 - API version: 0.11.0
-  - Build date: 2022-01-05T17:57:33.519Z
+  - Build date: 2022-01-06T19:12:22.462Z
 
 Rest API Documentation for Self Managed OSDU
 
@@ -161,6 +161,12 @@ Class | Method | HTTP request | Description
  - [EntitlementGroupProperties](docs/EntitlementGroupProperties.md)
  - [EntitlementGroupResponse](docs/EntitlementGroupResponse.md)
  - [EntitlementMemberDto](docs/EntitlementMemberDto.md)
+ - [FileApplicationError](docs/FileApplicationError.md)
+ - [FileError](docs/FileError.md)
+ - [FileErrorModel](docs/FileErrorModel.md)
+ - [FileLinkList](docs/FileLinkList.md)
+ - [FileToManyRelationship](docs/FileToManyRelationship.md)
+ - [FileToOneRelationship](docs/FileToOneRelationship.md)
  - [LegalTagDto](docs/LegalTagDto.md)
  - [LegalTagDtos](docs/LegalTagDtos.md)
  - [LegalTagInvalidResponse](docs/LegalTagInvalidResponse.md)

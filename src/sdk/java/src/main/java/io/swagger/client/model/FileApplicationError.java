@@ -22,19 +22,19 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import io.swagger.client.model.SchemaErrorModel;
+import io.swagger.client.model.FileErrorModel;
 import java.io.IOException;
 
 /**
- * An error that occurs during normal application logic
+ * An error that occurs during normal application logic.
  */
-@ApiModel(description = "An error that occurs during normal application logic")
+@ApiModel(description = "An error that occurs during normal application logic.")
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-01-06T19:12:22.462Z")
-public class SchemaErrorResponseFormat {
+public class FileApplicationError {
   @SerializedName("error")
-  private SchemaErrorModel error = null;
+  private FileErrorModel error = null;
 
-  public SchemaErrorResponseFormat error(SchemaErrorModel error) {
+  public FileApplicationError error(FileErrorModel error) {
     this.error = error;
     return this;
   }
@@ -44,11 +44,11 @@ public class SchemaErrorResponseFormat {
    * @return error
   **/
   @ApiModelProperty(value = "")
-  public SchemaErrorModel getError() {
+  public FileErrorModel getError() {
     return error;
   }
 
-  public void setError(SchemaErrorModel error) {
+  public void setError(FileErrorModel error) {
     this.error = error;
   }
 
@@ -61,8 +61,8 @@ public class SchemaErrorResponseFormat {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    SchemaErrorResponseFormat schemaErrorResponseFormat = (SchemaErrorResponseFormat) o;
-    return Objects.equals(this.error, schemaErrorResponseFormat.error);
+    FileApplicationError fileApplicationError = (FileApplicationError) o;
+    return Objects.equals(this.error, fileApplicationError.error);
   }
 
   @Override
@@ -74,7 +74,7 @@ public class SchemaErrorResponseFormat {
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class SchemaErrorResponseFormat {\n");
+    sb.append("class FileApplicationError {\n");
     
     sb.append("    error: ").append(toIndentedString(error)).append("\n");
     sb.append("}");

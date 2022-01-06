@@ -22,48 +22,79 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import io.swagger.client.model.FileError;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
- * Delete Records Response Body
+ * FileErrorModel
  */
-@ApiModel(description = "Delete Records Response Body")
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-01-06T19:12:22.462Z")
-public class StorageDeleteRecordError {
-  @SerializedName("notDeletedRecordId")
-  private String notDeletedRecordId = null;
+public class FileErrorModel {
+  @SerializedName("errors")
+  private List<FileError> errors = null;
+
+  @SerializedName("code")
+  private Integer code = null;
 
   @SerializedName("message")
   private String message = null;
 
-  public StorageDeleteRecordError notDeletedRecordId(String notDeletedRecordId) {
-    this.notDeletedRecordId = notDeletedRecordId;
+  public FileErrorModel errors(List<FileError> errors) {
+    this.errors = errors;
+    return this;
+  }
+
+  public FileErrorModel addErrorsItem(FileError errorsItem) {
+    if (this.errors == null) {
+      this.errors = new ArrayList<FileError>();
+    }
+    this.errors.add(errorsItem);
     return this;
   }
 
    /**
-   * Record id which wasn&#39;t deleted successfully.
-   * @return notDeletedRecordId
+   * Get errors
+   * @return errors
   **/
-  @ApiModelProperty(example = "common:welldb:123456", value = "Record id which wasn't deleted successfully.")
-  public String getNotDeletedRecordId() {
-    return notDeletedRecordId;
+  @ApiModelProperty(value = "")
+  public List<FileError> getErrors() {
+    return errors;
   }
 
-  public void setNotDeletedRecordId(String notDeletedRecordId) {
-    this.notDeletedRecordId = notDeletedRecordId;
+  public void setErrors(List<FileError> errors) {
+    this.errors = errors;
   }
 
-  public StorageDeleteRecordError message(String message) {
+  public FileErrorModel code(Integer code) {
+    this.code = code;
+    return this;
+  }
+
+   /**
+   * Get code
+   * @return code
+  **/
+  @ApiModelProperty(value = "")
+  public Integer getCode() {
+    return code;
+  }
+
+  public void setCode(Integer code) {
+    this.code = code;
+  }
+
+  public FileErrorModel message(String message) {
     this.message = message;
     return this;
   }
 
    /**
-   * Brief description of the cause why record wasn&#39;t delete
+   * Get message
    * @return message
   **/
-  @ApiModelProperty(example = "Record with id 'common:welldb:123456' not found", value = "Brief description of the cause why record wasn't delete")
+  @ApiModelProperty(value = "")
   public String getMessage() {
     return message;
   }
@@ -81,23 +112,25 @@ public class StorageDeleteRecordError {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    StorageDeleteRecordError storageDeleteRecordError = (StorageDeleteRecordError) o;
-    return Objects.equals(this.notDeletedRecordId, storageDeleteRecordError.notDeletedRecordId) &&
-        Objects.equals(this.message, storageDeleteRecordError.message);
+    FileErrorModel fileErrorModel = (FileErrorModel) o;
+    return Objects.equals(this.errors, fileErrorModel.errors) &&
+        Objects.equals(this.code, fileErrorModel.code) &&
+        Objects.equals(this.message, fileErrorModel.message);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(notDeletedRecordId, message);
+    return Objects.hash(errors, code, message);
   }
 
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class StorageDeleteRecordError {\n");
+    sb.append("class FileErrorModel {\n");
     
-    sb.append("    notDeletedRecordId: ").append(toIndentedString(notDeletedRecordId)).append("\n");
+    sb.append("    errors: ").append(toIndentedString(errors)).append("\n");
+    sb.append("    code: ").append(toIndentedString(code)).append("\n");
     sb.append("    message: ").append(toIndentedString(message)).append("\n");
     sb.append("}");
     return sb.toString();
