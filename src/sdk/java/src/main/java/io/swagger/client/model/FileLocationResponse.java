@@ -22,74 +22,54 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import io.swagger.client.model.FileDriver;
 import java.io.IOException;
 
 /**
- * SearchAppError
+ * FileLocationResponse
  */
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-01-06T20:30:18.662Z")
-public class SearchAppError {
-  @SerializedName("code")
-  private Integer code = null;
+public class FileLocationResponse {
+  @SerializedName("Driver")
+  private FileDriver driver = null;
 
-  @SerializedName("reason")
-  private String reason = null;
+  @SerializedName("Location")
+  private String location = null;
 
-  @SerializedName("message")
-  private String message = null;
-
-  public SearchAppError code(Integer code) {
-    this.code = code;
+  public FileLocationResponse driver(FileDriver driver) {
+    this.driver = driver;
     return this;
   }
 
    /**
-   * Get code
-   * @return code
+   * Get driver
+   * @return driver
   **/
   @ApiModelProperty(value = "")
-  public Integer getCode() {
-    return code;
+  public FileDriver getDriver() {
+    return driver;
   }
 
-  public void setCode(Integer code) {
-    this.code = code;
+  public void setDriver(FileDriver driver) {
+    this.driver = driver;
   }
 
-  public SearchAppError reason(String reason) {
-    this.reason = reason;
+  public FileLocationResponse location(String location) {
+    this.location = location;
     return this;
   }
 
    /**
-   * Get reason
-   * @return reason
+   * Get location
+   * @return location
   **/
   @ApiModelProperty(value = "")
-  public String getReason() {
-    return reason;
+  public String getLocation() {
+    return location;
   }
 
-  public void setReason(String reason) {
-    this.reason = reason;
-  }
-
-  public SearchAppError message(String message) {
-    this.message = message;
-    return this;
-  }
-
-   /**
-   * Get message
-   * @return message
-  **/
-  @ApiModelProperty(value = "")
-  public String getMessage() {
-    return message;
-  }
-
-  public void setMessage(String message) {
-    this.message = message;
+  public void setLocation(String location) {
+    this.location = location;
   }
 
 
@@ -101,26 +81,24 @@ public class SearchAppError {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    SearchAppError searchAppError = (SearchAppError) o;
-    return Objects.equals(this.code, searchAppError.code) &&
-        Objects.equals(this.reason, searchAppError.reason) &&
-        Objects.equals(this.message, searchAppError.message);
+    FileLocationResponse fileLocationResponse = (FileLocationResponse) o;
+    return Objects.equals(this.driver, fileLocationResponse.driver) &&
+        Objects.equals(this.location, fileLocationResponse.location);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(code, reason, message);
+    return Objects.hash(driver, location);
   }
 
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class SearchAppError {\n");
+    sb.append("class FileLocationResponse {\n");
     
-    sb.append("    code: ").append(toIndentedString(code)).append("\n");
-    sb.append("    reason: ").append(toIndentedString(reason)).append("\n");
-    sb.append("    message: ").append(toIndentedString(message)).append("\n");
+    sb.append("    driver: ").append(toIndentedString(driver)).append("\n");
+    sb.append("    location: ").append(toIndentedString(location)).append("\n");
     sb.append("}");
     return sb.toString();
   }
