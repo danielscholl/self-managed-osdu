@@ -19,12 +19,9 @@ from swagger_client.models.entitlement_group_properties import EntitlementGroupP
 from swagger_client.models.entitlement_group_response import EntitlementGroupResponse
 from swagger_client.models.entitlement_member_dto import EntitlementMemberDto
 from swagger_client.models.file_acl import FileAcl
-from swagger_client.models.file_application_error import FileApplicationError
 from swagger_client.models.file_date_time import FileDateTime
 from swagger_client.models.file_download_response import FileDownloadResponse
 from swagger_client.models.file_driver import FileDriver
-from swagger_client.models.file_error import FileError
-from swagger_client.models.file_error_model import FileErrorModel
 from swagger_client.models.file_extension_properties import FileExtensionProperties
 from swagger_client.models.file_id import FileID
 from swagger_client.models.file_legal import FileLegal
