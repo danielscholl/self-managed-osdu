@@ -1900,7 +1900,7 @@ paths:
         in: body
         description: File metadata content
         schema:
-          $ref: '#/definitions/FileRecord'
+          $ref: '#/definitions/FileMetadata'
       responses:
         '201':
           description: Metadata created
@@ -4405,16 +4405,6 @@ definitions:
     properties:
       SignedURL:
         type: string
-  FileLinkList:
-    title: Link List
-    type: object
-    additionalProperties:
-      title: Link List
-      type: array
-      description: An array of one or more entity references in the data lake.
-      items:
-        type: string
-    description: A named list of entities in the data lake as a dictionary item.
   FileError:
     type: object
     properties:
@@ -4702,7 +4692,7 @@ definitions:
     description: >-
       The file data container containing all necessary details of the file
       record
-  FileRecord:
+  FileMetadata:
     description: Metadata record.
     type: object
     required:
@@ -4727,7 +4717,7 @@ definitions:
       data:
         $ref: '#/definitions/Files'
       ancestry:
-        $ref: '#/definitions/FileLinkList'
+        $ref: '#/definitions/FileAncestry'
   FileRecordVersion:
     description: Metadata record.
     type: object
@@ -4748,7 +4738,7 @@ definitions:
       data:
         $ref: '#/definitions/Files'
       ancestry:
-        $ref: '#/definitions/FileLinkList'
+        $ref: '#/definitions/FileAncestry'
       version:
         description: The version number of this OSDU resource; set by the framework.
         title: Version Number
@@ -4840,7 +4830,13 @@ definitions:
         type: integer
       size:
         type: integer
- 
+  FileAncestry:
+    type: object
+    properties:
+      parents:
+        type: array
+        items:
+          type: string
  
   #########################
   # Workflow Models
