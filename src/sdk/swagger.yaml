@@ -4280,9 +4280,6 @@ definitions:
   #########################
   # File Models
   ######################### 
-  FileDateTime:
-    type: string
-    format: date-time
   FileExtensionProperties:
     title: Extension Property
     type: object
@@ -4745,30 +4742,6 @@ definitions:
         type: integer
         format: int64
         example: 1831253916104085
-  FileListRequest:
-    type: object
-    properties:
-      TimeFrom:
-        $ref: '#/definitions/FileDateTime'
-      TimeTo:
-        $ref: '#/definitions/FileDateTime'
-      PageNum:
-        type: integer
-      Items:
-        type: integer
-      UserID:
-        type: string
-  FileDriver:
-    type: string
-    enum:
-      - AZURE
-  FileLocationResponse:
-    type: object
-    properties:
-      Driver:
-        $ref: '#/definitions/FileDriver'
-      Location:
-        type: string
   FileID:
     type: string
     # pattern: ^[\w,\s-]+(\.\w+)?$
@@ -4803,33 +4776,6 @@ definitions:
           type: string
         example:
           SignedURL: 'GCS signed URL'
-  FileLocation:
-    type: object
-    properties:
-      FileID:
-        $ref: '#/definitions/FileID'
-      Driver:
-        $ref: '#/definitions/FileDriver'
-      Location:
-        type: string
-      CreatedAt:
-        type: string
-        format: date-time
-      CreatedBy:
-        type: string
-  FileListResponse:
-    type: object
-    properties:
-      content:
-        type: array
-        items:
-          $ref: '#/definitions/FileLocation'
-      number:
-        type: integer
-      numberOfElements:
-        type: integer
-      size:
-        type: integer
   FileAncestry:
     type: object
     properties:
