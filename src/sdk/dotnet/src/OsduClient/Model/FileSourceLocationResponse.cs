@@ -35,7 +35,7 @@ namespace OsduClient.Model
         /// </summary>
         /// <param name="fileID">fileID.</param>
         /// <param name="location">location.</param>
-        public FileSourceLocationResponse(string fileID = default(string), Object location = default(Object))
+        public FileSourceLocationResponse(string fileID = default(string), Dictionary<string, string> location = default(Dictionary<string, string>))
         {
             this.FileID = fileID;
             this.Location = location;
@@ -51,7 +51,7 @@ namespace OsduClient.Model
         /// Gets or Sets Location
         /// </summary>
         [DataMember(Name="Location", EmitDefaultValue=false)]
-        public Object Location { get; set; }
+        public Dictionary<string, string> Location { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -104,8 +104,8 @@ namespace OsduClient.Model
                 ) && 
                 (
                     this.Location == input.Location ||
-                    (this.Location != null &&
-                    this.Location.Equals(input.Location))
+                    this.Location != null &&
+                    this.Location.SequenceEqual(input.Location)
                 );
         }
 
