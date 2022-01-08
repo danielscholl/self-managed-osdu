@@ -15,16 +15,16 @@ from __future__ import absolute_import
 
 import unittest
 
-import swagger_client
-from swagger_client.api.file_service_api import FileServiceApi  # noqa: E501
-from swagger_client.rest import ApiException
+import OsduClient
+from OsduClient.api.file_service_api import FileServiceApi  # noqa: E501
+from OsduClient.rest import ApiException
 
 
 class TestFileServiceApi(unittest.TestCase):
     """FileServiceApi unit test stubs"""
 
     def setUp(self):
-        self.api = swagger_client.api.file_service_api.FileServiceApi()  # noqa: E501
+        self.api = OsduClient.api.file_service_api.FileServiceApi()  # noqa: E501
 
     def tearDown(self):
         pass

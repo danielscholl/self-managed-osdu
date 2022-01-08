@@ -15,16 +15,16 @@ from __future__ import absolute_import
 
 import unittest
 
-import swagger_client
-from swagger_client.api.delivery_api_api import DeliveryAPIApi  # noqa: E501
-from swagger_client.rest import ApiException
+import OsduClient
+from OsduClient.api.delivery_api_api import DeliveryAPIApi  # noqa: E501
+from OsduClient.rest import ApiException
 
 
 class TestDeliveryAPIApi(unittest.TestCase):
     """DeliveryAPIApi unit test stubs"""
 
     def setUp(self):
-        self.api = swagger_client.api.delivery_api_api.DeliveryAPIApi()  # noqa: E501
+        self.api = OsduClient.api.delivery_api_api.DeliveryAPIApi()  # noqa: E501
 
     def tearDown(self):
         pass

@@ -1,4 +1,4 @@
-# IO.Swagger.Api.PartitionApi
+# OsduClient.Api.PartitionApi
 
 All URIs are relative to *https://self-managed-osdu.westeurope.cloudapp.azure.com*
 
@@ -23,9 +23,9 @@ By passing in a partition Id and a partition info object you can create a partit
 ```csharp
 using System;
 using System.Diagnostics;
-using IO.Swagger.Api;
-using IO.Swagger.Client;
-using IO.Swagger.Model;
+using OsduClient.Api;
+using OsduClient.Client;
+using OsduClient.Model;
 
 namespace Example
 {
@@ -90,9 +90,9 @@ By passing in a single partition Id, you can delete a partition.
 ```csharp
 using System;
 using System.Diagnostics;
-using IO.Swagger.Api;
-using IO.Swagger.Client;
-using IO.Swagger.Model;
+using OsduClient.Api;
+using OsduClient.Client;
+using OsduClient.Model;
 
 namespace Example
 {
@@ -155,9 +155,9 @@ By passing in a partition Id, you can retrieve the partition information.
 ```csharp
 using System;
 using System.Diagnostics;
-using IO.Swagger.Api;
-using IO.Swagger.Client;
-using IO.Swagger.Model;
+using OsduClient.Api;
+using OsduClient.Client;
+using OsduClient.Model;
 
 namespace Example
 {
@@ -219,9 +219,9 @@ List Partitions
 ```csharp
 using System;
 using System.Diagnostics;
-using IO.Swagger.Api;
-using IO.Swagger.Client;
-using IO.Swagger.Model;
+using OsduClient.Api;
+using OsduClient.Client;
+using OsduClient.Model;
 
 namespace Example
 {
@@ -281,9 +281,9 @@ By passing in a partition Id and a partition info object you can update a partit
 ```csharp
 using System;
 using System.Diagnostics;
-using IO.Swagger.Api;
-using IO.Swagger.Client;
-using IO.Swagger.Model;
+using OsduClient.Api;
+using OsduClient.Client;
+using OsduClient.Model;
 
 namespace Example
 {

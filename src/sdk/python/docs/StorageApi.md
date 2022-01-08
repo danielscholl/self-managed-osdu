@@ -1,4 +1,4 @@
-# swagger_client.StorageApi
+# OsduClient.StorageApi
 
 All URIs are relative to *https://self-managed-osdu.westeurope.cloudapp.azure.com*
 
@@ -28,21 +28,21 @@ The API represents the main injection mechanism into the Data Lake. It allows re
 ```python
 from __future__ import print_function
 import time
-import swagger_client
-from swagger_client.rest import ApiException
+import OsduClient
+from OsduClient.rest import ApiException
 from pprint import pprint
 
 # Configure API key authorization: Bearer
-configuration = swagger_client.Configuration()
+configuration = OsduClient.Configuration()
 configuration.api_key['Authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['Authorization'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = swagger_client.StorageApi(swagger_client.ApiClient(configuration))
+api_instance = OsduClient.StorageApi(OsduClient.ApiClient(configuration))
 osdu_account_id = 'tenant1' # str | Account ID is the active OSDU account (OSDU account or customer's account) which the users choose to use with the Search API. (default to tenant1)
 skipdupes = true # bool | Skip duplicates when updating records with the same value. (optional) (default to true)
-body = [swagger_client.StorageRecord()] # list[StorageRecord] |  (optional)
+body = [OsduClient.StorageRecord()] # list[StorageRecord] |  (optional)
 
 try:
     # Create or update records
@@ -86,18 +86,18 @@ The API performs a logical deletion of the given record. This operation can be r
 ```python
 from __future__ import print_function
 import time
-import swagger_client
-from swagger_client.rest import ApiException
+import OsduClient
+from OsduClient.rest import ApiException
 from pprint import pprint
 
 # Configure API key authorization: Bearer
-configuration = swagger_client.Configuration()
+configuration = OsduClient.Configuration()
 configuration.api_key['Authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['Authorization'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = swagger_client.StorageApi(swagger_client.ApiClient(configuration))
+api_instance = OsduClient.StorageApi(OsduClient.ApiClient(configuration))
 id = 'id_example' # str | Record id
 osdu_account_id = 'tenant1' # str | Account ID is the active OSDU account (OSDU account or customer's account) which the users choose to use with the Search API. (default to tenant1)
 
@@ -141,20 +141,20 @@ The API performs a soft deletion of the given list of records. Required roles: '
 ```python
 from __future__ import print_function
 import time
-import swagger_client
-from swagger_client.rest import ApiException
+import OsduClient
+from OsduClient.rest import ApiException
 from pprint import pprint
 
 # Configure API key authorization: Bearer
-configuration = swagger_client.Configuration()
+configuration = OsduClient.Configuration()
 configuration.api_key['Authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['Authorization'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = swagger_client.StorageApi(swagger_client.ApiClient(configuration))
+api_instance = OsduClient.StorageApi(OsduClient.ApiClient(configuration))
 data_partition_id = 'data_partition_id_example' # str | Partition Id
-partition_info = [swagger_client.list[str]()] # list[str] | partitionInfo
+partition_info = [OsduClient.list[str]()] # list[str] | partitionInfo
 
 try:
     # Soft delete of multiple records
@@ -196,20 +196,20 @@ The API fetches multiple records at once. Allowed roles: service.storage.viewer,
 ```python
 from __future__ import print_function
 import time
-import swagger_client
-from swagger_client.rest import ApiException
+import OsduClient
+from OsduClient.rest import ApiException
 from pprint import pprint
 
 # Configure API key authorization: Bearer
-configuration = swagger_client.Configuration()
+configuration = OsduClient.Configuration()
 configuration.api_key['Authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['Authorization'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = swagger_client.StorageApi(swagger_client.ApiClient(configuration))
+api_instance = OsduClient.StorageApi(OsduClient.ApiClient(configuration))
 osdu_account_id = 'tenant1' # str | Account ID is the active OSDU account (OSDU account or customer's account) which the users choose to use with the Search API. (default to tenant1)
-body = swagger_client.StorageMultiRecordIds() # StorageMultiRecordIds |  (optional)
+body = OsduClient.StorageMultiRecordIds() # StorageMultiRecordIds |  (optional)
 
 try:
     # Fetch records
@@ -252,18 +252,18 @@ The API returns a list of all kinds in the specific {Account-Id}. Allowed roles:
 ```python
 from __future__ import print_function
 import time
-import swagger_client
-from swagger_client.rest import ApiException
+import OsduClient
+from OsduClient.rest import ApiException
 from pprint import pprint
 
 # Configure API key authorization: Bearer
-configuration = swagger_client.Configuration()
+configuration = OsduClient.Configuration()
 configuration.api_key['Authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['Authorization'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = swagger_client.StorageApi(swagger_client.ApiClient(configuration))
+api_instance = OsduClient.StorageApi(OsduClient.ApiClient(configuration))
 osdu_account_id = 'tenant1' # str | Account ID is the active account account) which the users choose to use with the Search API. (default to tenant1)
 cursor = 'cursor_example' # str | Cursor (optional)
 limit = 10 # int | Page Size (optional) (default to 10)
@@ -310,18 +310,18 @@ The API returns a list of all record ids which belong to the specified kind. All
 ```python
 from __future__ import print_function
 import time
-import swagger_client
-from swagger_client.rest import ApiException
+import OsduClient
+from OsduClient.rest import ApiException
 from pprint import pprint
 
 # Configure API key authorization: Bearer
-configuration = swagger_client.Configuration()
+configuration = OsduClient.Configuration()
 configuration.api_key['Authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['Authorization'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = swagger_client.StorageApi(swagger_client.ApiClient(configuration))
+api_instance = OsduClient.StorageApi(OsduClient.ApiClient(configuration))
 osdu_account_id = 'tenant1' # str | Account ID is the active OSDU account (OSDU account or customer's account) which the users choose to use with the Search API. (default to tenant1)
 cursor = 'cursor_example' # str | Cursor (optional)
 limit = 10 # int | Page Size (optional) (default to 10)
@@ -370,18 +370,18 @@ The API returns a list containing all versions for the given record id. Allowed 
 ```python
 from __future__ import print_function
 import time
-import swagger_client
-from swagger_client.rest import ApiException
+import OsduClient
+from OsduClient.rest import ApiException
 from pprint import pprint
 
 # Configure API key authorization: Bearer
-configuration = swagger_client.Configuration()
+configuration = OsduClient.Configuration()
 configuration.api_key['Authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['Authorization'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = swagger_client.StorageApi(swagger_client.ApiClient(configuration))
+api_instance = OsduClient.StorageApi(OsduClient.ApiClient(configuration))
 id = 'id_example' # str | Record id
 osdu_account_id = 'tenant1' # str | Account ID is the active OSDU account (OSDU account or customer's account) which the users choose to use with the Search API. (default to tenant1)
 
@@ -426,18 +426,18 @@ This API returns the latest version of the given record. Allowed roles: service.
 ```python
 from __future__ import print_function
 import time
-import swagger_client
-from swagger_client.rest import ApiException
+import OsduClient
+from OsduClient.rest import ApiException
 from pprint import pprint
 
 # Configure API key authorization: Bearer
-configuration = swagger_client.Configuration()
+configuration = OsduClient.Configuration()
 configuration.api_key['Authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['Authorization'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = swagger_client.StorageApi(swagger_client.ApiClient(configuration))
+api_instance = OsduClient.StorageApi(OsduClient.ApiClient(configuration))
 id = 'id_example' # str | Record id
 osdu_account_id = 'tenant1' # str | Account ID is the active OSDU account (OSDU account or customer's account) which the users choose to use with the Search API. (default to tenant1)
 attribute = ['attribute_example'] # list[str] | Filter attributes to restrict the returned fields of the record. Usage: data.{record-data-field-name}. (optional)
@@ -484,18 +484,18 @@ The API retrieves the specific version of the given record. Allowed roles: servi
 ```python
 from __future__ import print_function
 import time
-import swagger_client
-from swagger_client.rest import ApiException
+import OsduClient
+from OsduClient.rest import ApiException
 from pprint import pprint
 
 # Configure API key authorization: Bearer
-configuration = swagger_client.Configuration()
+configuration = OsduClient.Configuration()
 configuration.api_key['Authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['Authorization'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = swagger_client.StorageApi(swagger_client.ApiClient(configuration))
+api_instance = OsduClient.StorageApi(OsduClient.ApiClient(configuration))
 id = 'id_example' # str | Record id
 version = 789 # int | Record version
 osdu_account_id = 'tenant1' # str | Account ID is the active OSDU account (OSDU account or customer's account) which the users choose to use with the Search API. (default to tenant1)
@@ -544,20 +544,20 @@ The API represents the patch update mechanism for records. It allows updating mu
 ```python
 from __future__ import print_function
 import time
-import swagger_client
-from swagger_client.rest import ApiException
+import OsduClient
+from OsduClient.rest import ApiException
 from pprint import pprint
 
 # Configure API key authorization: Bearer
-configuration = swagger_client.Configuration()
+configuration = OsduClient.Configuration()
 configuration.api_key['Authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['Authorization'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = swagger_client.StorageApi(swagger_client.ApiClient(configuration))
+api_instance = OsduClient.StorageApi(OsduClient.ApiClient(configuration))
 osdu_account_id = 'tenant1' # str | Account ID is the active OSDU account (OSDU account or customer's account) which the users choose to use with the Search API. (default to tenant1)
-body = [swagger_client.StorageRecordBulkUpdateParam()] # list[StorageRecordBulkUpdateParam] |  (optional)
+body = [OsduClient.StorageRecordBulkUpdateParam()] # list[StorageRecordBulkUpdateParam] |  (optional)
 
 try:
     # Modify record metadata attributes using patch operations
@@ -600,18 +600,18 @@ The API performs the physical deletion of the given record and all of its versio
 ```python
 from __future__ import print_function
 import time
-import swagger_client
-from swagger_client.rest import ApiException
+import OsduClient
+from OsduClient.rest import ApiException
 from pprint import pprint
 
 # Configure API key authorization: Bearer
-configuration = swagger_client.Configuration()
+configuration = OsduClient.Configuration()
 configuration.api_key['Authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['Authorization'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = swagger_client.StorageApi(swagger_client.ApiClient(configuration))
+api_instance = OsduClient.StorageApi(OsduClient.ApiClient(configuration))
 id = 'id_example' # str | Record id
 osdu_account_id = 'tenant1' # str | Account ID is the active OSDU account (OSDU account or customer's account) which the users choose to use with the Search API. (default to tenant1)
 

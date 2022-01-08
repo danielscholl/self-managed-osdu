@@ -1,4 +1,4 @@
-# IO.Swagger.Model.StoragePatchOperation
+# OsduClient.Model.StoragePatchOperation
 ## Properties
 
 Name | Type | Description | Notes

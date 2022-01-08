@@ -1,4 +1,4 @@
-# IO.Swagger.Model.RegisterSubscriptionCreateResult
+# OsduClient.Model.RegisterSubscriptionCreateResult
 ## Properties
 
 Name | Type | Description | Notes

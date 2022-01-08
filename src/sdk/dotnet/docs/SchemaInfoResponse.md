@@ -1,4 +1,4 @@
-# IO.Swagger.Model.SchemaInfoResponse
+# OsduClient.Model.SchemaInfoResponse
 ## Properties
 
 Name | Type | Description | Notes

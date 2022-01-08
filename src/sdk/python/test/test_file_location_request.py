@@ -15,9 +15,9 @@ from __future__ import absolute_import
 
 import unittest
 
-import swagger_client
-from swagger_client.models.file_location_request import FileLocationRequest  # noqa: E501
-from swagger_client.rest import ApiException
+import OsduClient
+from OsduClient.models.file_location_request import FileLocationRequest  # noqa: E501
+from OsduClient.rest import ApiException
 
 
 class TestFileLocationRequest(unittest.TestCase):
@@ -32,7 +32,7 @@ class TestFileLocationRequest(unittest.TestCase):
     def testFileLocationRequest(self):
         """Test FileLocationRequest"""
         # FIXME: construct object with mandatory attributes with example values
-        # model = swagger_client.models.file_location_request.FileLocationRequest()  # noqa: E501
+        # model = OsduClient.models.file_location_request.FileLocationRequest()  # noqa: E501
         pass
 
 

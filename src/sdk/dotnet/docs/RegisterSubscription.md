@@ -1,4 +1,4 @@
-# IO.Swagger.Model.RegisterSubscription
+# OsduClient.Model.RegisterSubscription
 ## Properties
 
 Name | Type | Description | Notes

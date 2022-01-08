@@ -15,16 +15,16 @@ from __future__ import absolute_import
 
 import unittest
 
-import swagger_client
-from swagger_client.api.legal_api import LegalApi  # noqa: E501
-from swagger_client.rest import ApiException
+import OsduClient
+from OsduClient.api.legal_api import LegalApi  # noqa: E501
+from OsduClient.rest import ApiException
 
 
 class TestLegalApi(unittest.TestCase):
     """LegalApi unit test stubs"""
 
     def setUp(self):
-        self.api = swagger_client.api.legal_api.LegalApi()  # noqa: E501
+        self.api = OsduClient.api.legal_api.LegalApi()  # noqa: E501
 
     def tearDown(self):
         pass

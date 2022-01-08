@@ -1,4 +1,4 @@
-# IO.Swagger.Model.LegalTagPropertyValues
+# OsduClient.Model.LegalTagPropertyValues
 ## Properties
 
 Name | Type | Description | Notes

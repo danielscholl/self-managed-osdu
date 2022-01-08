@@ -15,9 +15,9 @@ from __future__ import absolute_import
 
 import unittest
 
-import swagger_client
-from swagger_client.models.search_cursor_query_request import SearchCursorQueryRequest  # noqa: E501
-from swagger_client.rest import ApiException
+import OsduClient
+from OsduClient.models.search_cursor_query_request import SearchCursorQueryRequest  # noqa: E501
+from OsduClient.rest import ApiException
 
 
 class TestSearchCursorQueryRequest(unittest.TestCase):
@@ -32,7 +32,7 @@ class TestSearchCursorQueryRequest(unittest.TestCase):
     def testSearchCursorQueryRequest(self):
         """Test SearchCursorQueryRequest"""
         # FIXME: construct object with mandatory attributes with example values
-        # model = swagger_client.models.search_cursor_query_request.SearchCursorQueryRequest()  # noqa: E501
+        # model = OsduClient.models.search_cursor_query_request.SearchCursorQueryRequest()  # noqa: E501
         pass
 
 

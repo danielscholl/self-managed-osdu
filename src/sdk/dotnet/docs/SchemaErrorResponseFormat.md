@@ -1,4 +1,4 @@
-# IO.Swagger.Model.SchemaErrorResponseFormat
+# OsduClient.Model.SchemaErrorResponseFormat
 ## Properties
 
 Name | Type | Description | Notes

@@ -1826,7 +1826,7 @@ paths:
             $ref: '#/definitions/FileApplicationError'
       security:
       - Bearer: []
-  '/api/file/v2/files/UploadURL':
+  '/api/file/v2/files/uploadURL':
     get:
       tags:
         - File Service
@@ -1900,7 +1900,7 @@ paths:
         in: body
         description: File metadata content
         schema:
-          $ref: '#/definitions/FileRecord'
+          $ref: '#/definitions/FileMetadata'
       responses:
         '201':
           description: Metadata created
@@ -4280,9 +4280,6 @@ definitions:
   #########################
   # File Models
   ######################### 
-  FileDateTime:
-    type: string
-    format: date-time
   FileExtensionProperties:
     title: Extension Property
     type: object
@@ -4405,16 +4402,6 @@ definitions:
     properties:
       SignedURL:
         type: string
-  FileLinkList:
-    title: Link List
-    type: object
-    additionalProperties:
-      title: Link List
-      type: array
-      description: An array of one or more entity references in the data lake.
-      items:
-        type: string
-    description: A named list of entities in the data lake as a dictionary item.
   FileError:
     type: object
     properties:
@@ -4702,7 +4689,7 @@ definitions:
     description: >-
       The file data container containing all necessary details of the file
       record
-  FileRecord:
+  FileMetadata:
     description: Metadata record.
     type: object
     required:
@@ -4727,7 +4714,7 @@ definitions:
       data:
         $ref: '#/definitions/Files'
       ancestry:
-        $ref: '#/definitions/FileLinkList'
+        $ref: '#/definitions/FileAncestry'
   FileRecordVersion:
     description: Metadata record.
     type: object
@@ -4748,37 +4735,13 @@ definitions:
       data:
         $ref: '#/definitions/Files'
       ancestry:
-        $ref: '#/definitions/FileLinkList'
+        $ref: '#/definitions/FileAncestry'
       version:
         description: The version number of this OSDU resource; set by the framework.
         title: Version Number
         type: integer
         format: int64
         example: 1831253916104085
-  FileListRequest:
-    type: object
-    properties:
-      TimeFrom:
-        $ref: '#/definitions/FileDateTime'
-      TimeTo:
-        $ref: '#/definitions/FileDateTime'
-      PageNum:
-        type: integer
-      Items:
-        type: integer
-      UserID:
-        type: string
-  FileDriver:
-    type: string
-    enum:
-      - AZURE
-  FileLocationResponse:
-    type: object
-    properties:
-      Driver:
-        $ref: '#/definitions/FileDriver'
-      Location:
-        type: string
   FileID:
     type: string
     # pattern: ^[\w,\s-]+(\.\w+)?$
@@ -4794,14 +4757,8 @@ definitions:
         $ref: '#/definitions/FileID'
       Location:
         type: object
-        properties:
-          SignedURL:
-            type: string
-            example: 'GCS signed URL'
-          FileSource:
-            type: string
-            description: 'Relative location of file'
-            example: 'AXB564XVCY\SHVCU7632'
+        additionalProperties:
+          type: string
   FileLandingZoneLocationResponse:
     type: object
     properties:
@@ -4813,34 +4770,13 @@ definitions:
           type: string
         example:
           SignedURL: 'GCS signed URL'
-  FileLocation:
+  FileAncestry:
     type: object
     properties:
-      FileID:
-        $ref: '#/definitions/FileID'
-      Driver:
-        $ref: '#/definitions/FileDriver'
-      Location:
-        type: string
-      CreatedAt:
-        type: string
-        format: date-time
-      CreatedBy:
-        type: string
-  FileListResponse:
-    type: object
-    properties:
-      content:
+      parents:
         type: array
         items:
-          $ref: '#/definitions/FileLocation'
-      number:
-        type: integer
-      numberOfElements:
-        type: integer
-      size:
-        type: integer
- 
+          type: string
  
   #########################
   # Workflow Models

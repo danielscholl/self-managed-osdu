@@ -15,9 +15,9 @@ from __future__ import absolute_import
 
 import unittest
 
-import swagger_client
-from swagger_client.models.file_error import FileError  # noqa: E501
-from swagger_client.rest import ApiException
+import OsduClient
+from OsduClient.models.file_error import FileError  # noqa: E501
+from OsduClient.rest import ApiException
 
 
 class TestFileError(unittest.TestCase):
@@ -32,7 +32,7 @@ class TestFileError(unittest.TestCase):
     def testFileError(self):
         """Test FileError"""
         # FIXME: construct object with mandatory attributes with example values
-        # model = swagger_client.models.file_error.FileError()  # noqa: E501
+        # model = OsduClient.models.file_error.FileError()  # noqa: E501
         pass
 
 

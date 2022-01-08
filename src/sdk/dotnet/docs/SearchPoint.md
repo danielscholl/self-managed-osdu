@@ -1,4 +1,4 @@
-# IO.Swagger.Model.SearchPoint
+# OsduClient.Model.SearchPoint
 ## Properties
 
 Name | Type | Description | Notes

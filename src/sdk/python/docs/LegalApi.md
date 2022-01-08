@@ -1,4 +1,4 @@
-# swagger_client.LegalApi
+# OsduClient.LegalApi
 
 All URIs are relative to *https://self-managed-osdu.westeurope.cloudapp.azure.com*
 
@@ -25,20 +25,20 @@ This allows for the creation of your LegalTag. There can only be 1 LegalTag per 
 ```python
 from __future__ import print_function
 import time
-import swagger_client
-from swagger_client.rest import ApiException
+import OsduClient
+from OsduClient.rest import ApiException
 from pprint import pprint
 
 # Configure API key authorization: Bearer
-configuration = swagger_client.Configuration()
+configuration = OsduClient.Configuration()
 configuration.api_key['Authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['Authorization'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = swagger_client.LegalApi(swagger_client.ApiClient(configuration))
+api_instance = OsduClient.LegalApi(OsduClient.ApiClient(configuration))
 osdu_account_id = 'osdu_account_id_example' # str | Users account e.g. OSDU
-body = swagger_client.LegalTagDto() # LegalTagDto |  (optional)
+body = OsduClient.LegalTagDto() # LegalTagDto |  (optional)
 osdu_on_behalf_of = 'osdu_on_behalf_of_example' # str | User's email or auth token (optional)
 
 try:
@@ -83,18 +83,18 @@ This allows for the deletion of your LegalTag using the 'name' associated with i
 ```python
 from __future__ import print_function
 import time
-import swagger_client
-from swagger_client.rest import ApiException
+import OsduClient
+from OsduClient.rest import ApiException
 from pprint import pprint
 
 # Configure API key authorization: Bearer
-configuration = swagger_client.Configuration()
+configuration = OsduClient.Configuration()
 configuration.api_key['Authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['Authorization'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = swagger_client.LegalApi(swagger_client.ApiClient(configuration))
+api_instance = OsduClient.LegalApi(OsduClient.ApiClient(configuration))
 data_partition_id = 'data_partition_id_example' # str | Partition Id
 name = 'name_example' # str | 
 
@@ -138,18 +138,18 @@ This allows for the retrieval of your LegalTag using the 'name' associated with 
 ```python
 from __future__ import print_function
 import time
-import swagger_client
-from swagger_client.rest import ApiException
+import OsduClient
+from OsduClient.rest import ApiException
 from pprint import pprint
 
 # Configure API key authorization: Bearer
-configuration = swagger_client.Configuration()
+configuration = OsduClient.Configuration()
 configuration.api_key['Authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['Authorization'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = swagger_client.LegalApi(swagger_client.ApiClient(configuration))
+api_instance = OsduClient.LegalApi(OsduClient.ApiClient(configuration))
 data_partition_id = 'data_partition_id_example' # str | Partition Id
 name = 'name_example' # str | 
 
@@ -194,18 +194,18 @@ This allows for the retrieval of allowed values for LegalTag properties.
 ```python
 from __future__ import print_function
 import time
-import swagger_client
-from swagger_client.rest import ApiException
+import OsduClient
+from OsduClient.rest import ApiException
 from pprint import pprint
 
 # Configure API key authorization: Bearer
-configuration = swagger_client.Configuration()
+configuration = OsduClient.Configuration()
 configuration.api_key['Authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['Authorization'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = swagger_client.LegalApi(swagger_client.ApiClient(configuration))
+api_instance = OsduClient.LegalApi(OsduClient.ApiClient(configuration))
 data_partition_id = 'data_partition_id_example' # str | Partition Id
 
 try:
@@ -248,20 +248,20 @@ This allows for the retrieval of your LegalTags using the 'name' associated with
 ```python
 from __future__ import print_function
 import time
-import swagger_client
-from swagger_client.rest import ApiException
+import OsduClient
+from OsduClient.rest import ApiException
 from pprint import pprint
 
 # Configure API key authorization: Bearer
-configuration = swagger_client.Configuration()
+configuration = OsduClient.Configuration()
 configuration.api_key['Authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['Authorization'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = swagger_client.LegalApi(swagger_client.ApiClient(configuration))
+api_instance = OsduClient.LegalApi(OsduClient.ApiClient(configuration))
 osdu_account_id = 'osdu_account_id_example' # str | Users account e.g. OSDU
-body = swagger_client.LegalTagRequest() # LegalTagRequest |  (optional)
+body = OsduClient.LegalTagRequest() # LegalTagRequest |  (optional)
 osdu_on_behalf_of = 'osdu_on_behalf_of_example' # str | User's email or auth token (optional)
 
 try:
@@ -306,18 +306,18 @@ This allows for the retrieval of all LegalTags.
 ```python
 from __future__ import print_function
 import time
-import swagger_client
-from swagger_client.rest import ApiException
+import OsduClient
+from OsduClient.rest import ApiException
 from pprint import pprint
 
 # Configure API key authorization: Bearer
-configuration = swagger_client.Configuration()
+configuration = OsduClient.Configuration()
 configuration.api_key['Authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['Authorization'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = swagger_client.LegalApi(swagger_client.ApiClient(configuration))
+api_instance = OsduClient.LegalApi(OsduClient.ApiClient(configuration))
 osdu_account_id = 'osdu_account_id_example' # str | Users account e.g. OSDU
 valid = true # bool | If true returns only valid LegalTags, if false returns only invalid LegalTags.  Default value is true. (optional) (default to true)
 osdu_on_behalf_of = 'osdu_on_behalf_of_example' # str | User's email or auth token (optional)
@@ -364,20 +364,20 @@ This allows to update certain properties of your LegalTag using the 'name' assoc
 ```python
 from __future__ import print_function
 import time
-import swagger_client
-from swagger_client.rest import ApiException
+import OsduClient
+from OsduClient.rest import ApiException
 from pprint import pprint
 
 # Configure API key authorization: Bearer
-configuration = swagger_client.Configuration()
+configuration = OsduClient.Configuration()
 configuration.api_key['Authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['Authorization'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = swagger_client.LegalApi(swagger_client.ApiClient(configuration))
+api_instance = OsduClient.LegalApi(OsduClient.ApiClient(configuration))
 osdu_account_id = 'osdu_account_id_example' # str | Users account e.g. OSDU
-body = swagger_client.LegalTagUpdateDto() # LegalTagUpdateDto |  (optional)
+body = OsduClient.LegalTagUpdateDto() # LegalTagUpdateDto |  (optional)
 osdu_on_behalf_of = 'osdu_on_behalf_of_example' # str | User's email or auth token (optional)
 
 try:
@@ -422,20 +422,20 @@ This allows for the retrieval of the reason why your LegalTag is not valid. A ma
 ```python
 from __future__ import print_function
 import time
-import swagger_client
-from swagger_client.rest import ApiException
+import OsduClient
+from OsduClient.rest import ApiException
 from pprint import pprint
 
 # Configure API key authorization: Bearer
-configuration = swagger_client.Configuration()
+configuration = OsduClient.Configuration()
 configuration.api_key['Authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['Authorization'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = swagger_client.LegalApi(swagger_client.ApiClient(configuration))
+api_instance = OsduClient.LegalApi(OsduClient.ApiClient(configuration))
 osdu_account_id = 'osdu_account_id_example' # str | Users account e.g. OSDU
-body = swagger_client.LegalTagRequest() # LegalTagRequest |  (optional)
+body = OsduClient.LegalTagRequest() # LegalTagRequest |  (optional)
 osdu_on_behalf_of = 'osdu_on_behalf_of_example' # str | User's email or auth token (optional)
 
 try:

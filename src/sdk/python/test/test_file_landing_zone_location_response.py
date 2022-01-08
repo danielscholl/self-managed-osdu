@@ -15,9 +15,9 @@ from __future__ import absolute_import
 
 import unittest
 
-import swagger_client
-from swagger_client.models.file_landing_zone_location_response import FileLandingZoneLocationResponse  # noqa: E501
-from swagger_client.rest import ApiException
+import OsduClient
+from OsduClient.models.file_landing_zone_location_response import FileLandingZoneLocationResponse  # noqa: E501
+from OsduClient.rest import ApiException
 
 
 class TestFileLandingZoneLocationResponse(unittest.TestCase):
@@ -32,7 +32,7 @@ class TestFileLandingZoneLocationResponse(unittest.TestCase):
     def testFileLandingZoneLocationResponse(self):
         """Test FileLandingZoneLocationResponse"""
         # FIXME: construct object with mandatory attributes with example values
-        # model = swagger_client.models.file_landing_zone_location_response.FileLandingZoneLocationResponse()  # noqa: E501
+        # model = OsduClient.models.file_landing_zone_location_response.FileLandingZoneLocationResponse()  # noqa: E501
         pass
 
 

@@ -21,11 +21,11 @@ Adds a schema to the schema repository. The schemaIdentity must be unique. The &
 ### Example
 ```java
 // Import classes:
-//import io.swagger.client.ApiClient;
-//import io.swagger.client.ApiException;
-//import io.swagger.client.Configuration;
-//import io.swagger.client.auth.*;
-//import io.swagger.client.api.SchemaApi;
+//import osdu.client.ApiClient;
+//import osdu.client.ApiException;
+//import osdu.client.Configuration;
+//import osdu.client.auth.*;
+//import osdu.client.api.SchemaApi;
 
 ApiClient defaultClient = Configuration.getDefaultApiClient();
 
@@ -78,11 +78,11 @@ Retrieve a schema using its system defined id. Required roles &#39;users.datalak
 ### Example
 ```java
 // Import classes:
-//import io.swagger.client.ApiClient;
-//import io.swagger.client.ApiException;
-//import io.swagger.client.Configuration;
-//import io.swagger.client.auth.*;
-//import io.swagger.client.api.SchemaApi;
+//import osdu.client.ApiClient;
+//import osdu.client.ApiException;
+//import osdu.client.Configuration;
+//import osdu.client.auth.*;
+//import osdu.client.api.SchemaApi;
 
 ApiClient defaultClient = Configuration.getDefaultApiClient();
 
@@ -135,11 +135,11 @@ Searches for information of available schema (SchemInfo) in schema repository. S
 ### Example
 ```java
 // Import classes:
-//import io.swagger.client.ApiClient;
-//import io.swagger.client.ApiException;
-//import io.swagger.client.Configuration;
-//import io.swagger.client.auth.*;
-//import io.swagger.client.api.SchemaApi;
+//import osdu.client.ApiClient;
+//import osdu.client.ApiException;
+//import osdu.client.Configuration;
+//import osdu.client.auth.*;
+//import osdu.client.api.SchemaApi;
 
 ApiClient defaultClient = Configuration.getDefaultApiClient();
 
@@ -210,11 +210,11 @@ Creates a new schema or updates an already existing schema with status &#x60;DEV
 ### Example
 ```java
 // Import classes:
-//import io.swagger.client.ApiClient;
-//import io.swagger.client.ApiException;
-//import io.swagger.client.Configuration;
-//import io.swagger.client.auth.*;
-//import io.swagger.client.api.SchemaApi;
+//import osdu.client.ApiClient;
+//import osdu.client.ApiException;
+//import osdu.client.Configuration;
+//import osdu.client.auth.*;
+//import osdu.client.api.SchemaApi;
 
 ApiClient defaultClient = Configuration.getDefaultApiClient();
 

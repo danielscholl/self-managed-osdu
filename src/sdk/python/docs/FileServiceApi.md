@@ -1,4 +1,4 @@
-# swagger_client.FileServiceApi
+# OsduClient.FileServiceApi
 
 All URIs are relative to *https://self-managed-osdu.westeurope.cloudapp.azure.com*
 
@@ -6,7 +6,7 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**deletes_metadata_record__file_for_the_given_id**](FileServiceApi.md#deletes_metadata_record__file_for_the_given_id) | **DELETE** /api/file/v2/files/{Id}/metadata | Deletes metadata record &amp; file assocaited with that record for the given id
 [**get_a_location_in_landing_zone_to_upload_a_file_**](FileServiceApi.md#get_a_location_in_landing_zone_to_upload_a_file_) | **POST** /api/file/v2/getLocation | Get a location in Landing Zone to upload a file.
-[**get_the_location_to_upload_a_file**](FileServiceApi.md#get_the_location_to_upload_a_file) | **GET** /api/file/v2/files/UploadURL | Get a location in Landing Zone to upload a file.
+[**get_the_location_to_upload_a_file**](FileServiceApi.md#get_the_location_to_upload_a_file) | **GET** /api/file/v2/files/uploadURL | Get a location in Landing Zone to upload a file.
 [**gets_metadata_record_for_the_given_id**](FileServiceApi.md#gets_metadata_record_for_the_given_id) | **GET** /api/file/v2/files/{Id}/metadata | Gets metadata record for the given id
 [**gets_url_to_download_the_file_associated_with_the_given_id_**](FileServiceApi.md#gets_url_to_download_the_file_associated_with_the_given_id_) | **GET** /api/file/v2/files/{Id}/DownloadURL | Gets a URL to download the file
 [**publish_file_metadata_for_a_file_**](FileServiceApi.md#publish_file_metadata_for_a_file_) | **POST** /api/file/v2/files/metadata | Creates metadata for a file
@@ -23,18 +23,18 @@ Deletes the File metadata record identified by the given id and file associated 
 ```python
 from __future__ import print_function
 import time
-import swagger_client
-from swagger_client.rest import ApiException
+import OsduClient
+from OsduClient.rest import ApiException
 from pprint import pprint
 
 # Configure API key authorization: Bearer
-configuration = swagger_client.Configuration()
+configuration = OsduClient.Configuration()
 configuration.api_key['Authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['Authorization'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = swagger_client.FileServiceApi(swagger_client.ApiClient(configuration))
+api_instance = OsduClient.FileServiceApi(OsduClient.ApiClient(configuration))
 data_partition_id = 'data_partition_id_example' # str | Specifies the data partition to use. This should either be the partition name or crm account ID associated with the partition.
 id = 'id_example' # str | File metadata record Id.
 
@@ -78,20 +78,20 @@ Create a new location in the landing zone to upload a file. **Required roles**: 
 ```python
 from __future__ import print_function
 import time
-import swagger_client
-from swagger_client.rest import ApiException
+import OsduClient
+from OsduClient.rest import ApiException
 from pprint import pprint
 
 # Configure API key authorization: Bearer
-configuration = swagger_client.Configuration()
+configuration = OsduClient.Configuration()
 configuration.api_key['Authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['Authorization'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = swagger_client.FileServiceApi(swagger_client.ApiClient(configuration))
+api_instance = OsduClient.FileServiceApi(OsduClient.ApiClient(configuration))
 data_partition_id = 'data_partition_id_example' # str | Specifies the data partition to use. This should either be the partition name or crm account ID associated with the partition.
-body = swagger_client.FileLocationRequest() # FileLocationRequest |  (optional)
+body = OsduClient.FileLocationRequest() # FileLocationRequest |  (optional)
 
 try:
     # Get a location in Landing Zone to upload a file.
@@ -134,18 +134,18 @@ Gets a temporary signed URL to upload a file.The generated URL is time bound and
 ```python
 from __future__ import print_function
 import time
-import swagger_client
-from swagger_client.rest import ApiException
+import OsduClient
+from OsduClient.rest import ApiException
 from pprint import pprint
 
 # Configure API key authorization: Bearer
-configuration = swagger_client.Configuration()
+configuration = OsduClient.Configuration()
 configuration.api_key['Authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['Authorization'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = swagger_client.FileServiceApi(swagger_client.ApiClient(configuration))
+api_instance = OsduClient.FileServiceApi(OsduClient.ApiClient(configuration))
 data_partition_id = 'data_partition_id_example' # str | Specifies the data partition to use. This should either be the partition name or crm account ID associated with the partition.
 
 try:
@@ -188,18 +188,18 @@ Gets the latest version of File metadata record identified by the given id. **Re
 ```python
 from __future__ import print_function
 import time
-import swagger_client
-from swagger_client.rest import ApiException
+import OsduClient
+from OsduClient.rest import ApiException
 from pprint import pprint
 
 # Configure API key authorization: Bearer
-configuration = swagger_client.Configuration()
+configuration = OsduClient.Configuration()
 configuration.api_key['Authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['Authorization'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = swagger_client.FileServiceApi(swagger_client.ApiClient(configuration))
+api_instance = OsduClient.FileServiceApi(OsduClient.ApiClient(configuration))
 data_partition_id = 'data_partition_id_example' # str | Specifies the data partition to use. This should either be the partition name or crm account ID associated with the partition.
 id = 'id_example' # str | File metadata record Id.
 
@@ -244,18 +244,18 @@ Gets a URL for downloading the file associated with the unique `id`. **Required 
 ```python
 from __future__ import print_function
 import time
-import swagger_client
-from swagger_client.rest import ApiException
+import OsduClient
+from OsduClient.rest import ApiException
 from pprint import pprint
 
 # Configure API key authorization: Bearer
-configuration = swagger_client.Configuration()
+configuration = OsduClient.Configuration()
 configuration.api_key['Authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['Authorization'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = swagger_client.FileServiceApi(swagger_client.ApiClient(configuration))
+api_instance = OsduClient.FileServiceApi(OsduClient.ApiClient(configuration))
 data_partition_id = 'data_partition_id_example' # str | Specifies the data partition to use. This should either be the partition name or crm account ID associated with the partition.
 id = 'id_example' # str | File Metadata record Id.
 expiry_time = 'expiry_time_example' # str | The Time for which Signed URL to be valid. Accepted Regex patterns are \"^[0-9]+M$\", \"^[0-9]+H$\", \"^[0-9]+D$\" denoting Integer values in Minutes, Hours, Days respectively. In absence of this parameter the URL would be valid for 7 Days. (optional)
@@ -302,20 +302,20 @@ This API creates a metadata record for a file that is already uploaded. The Meta
 ```python
 from __future__ import print_function
 import time
-import swagger_client
-from swagger_client.rest import ApiException
+import OsduClient
+from OsduClient.rest import ApiException
 from pprint import pprint
 
 # Configure API key authorization: Bearer
-configuration = swagger_client.Configuration()
+configuration = OsduClient.Configuration()
 configuration.api_key['Authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['Authorization'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = swagger_client.FileServiceApi(swagger_client.ApiClient(configuration))
+api_instance = OsduClient.FileServiceApi(OsduClient.ApiClient(configuration))
 data_partition_id = 'data_partition_id_example' # str | Specifies the data partition to use. This should either be the partition name or crm account ID associated with the partition.
-body = swagger_client.FileRecord() # FileRecord | File metadata content (optional)
+body = OsduClient.FileMetadata() # FileMetadata | File metadata content (optional)
 
 try:
     # Creates metadata for a file
@@ -330,7 +330,7 @@ except ApiException as e:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **data_partition_id** | **str**| Specifies the data partition to use. This should either be the partition name or crm account ID associated with the partition. | 
- **body** | [**FileRecord**](FileRecord.md)| File metadata content | [optional] 
+ **body** | [**FileMetadata**](FileMetadata.md)| File metadata content | [optional] 
 
 ### Return type
 

@@ -1,4 +1,4 @@
-# IO.Swagger.Model.FileRelationships
+# OsduClient.Model.FileRelationships
 ## Properties
 
 Name | Type | Description | Notes

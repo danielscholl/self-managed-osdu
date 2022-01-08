@@ -1,4 +1,4 @@
-# IO.Swagger.Api.SearchApi
+# OsduClient.Api.SearchApi
 
 All URIs are relative to *https://self-managed-osdu.westeurope.cloudapp.azure.com*
 
@@ -22,9 +22,9 @@ The API can be used  to purge all indexed documents for a kind. Required access 
 ```csharp
 using System;
 using System.Diagnostics;
-using IO.Swagger.Api;
-using IO.Swagger.Client;
-using IO.Swagger.Model;
+using OsduClient.Api;
+using OsduClient.Client;
+using OsduClient.Model;
 
 namespace Example
 {
@@ -91,9 +91,9 @@ The API returns the schema for a given kind which is used find what attributes a
 ```csharp
 using System;
 using System.Diagnostics;
-using IO.Swagger.Api;
-using IO.Swagger.Client;
-using IO.Swagger.Model;
+using OsduClient.Api;
+using OsduClient.Client;
+using OsduClient.Model;
 
 namespace Example
 {
@@ -161,9 +161,9 @@ The API supports full text search on string fields, range queries on date, numer
 ```csharp
 using System;
 using System.Diagnostics;
-using IO.Swagger.Api;
-using IO.Swagger.Client;
-using IO.Swagger.Model;
+using OsduClient.Api;
+using OsduClient.Client;
+using OsduClient.Model;
 
 namespace Example
 {
@@ -231,9 +231,9 @@ The API supports full text search on string fields, range queries on date, numer
 ```csharp
 using System;
 using System.Diagnostics;
-using IO.Swagger.Api;
-using IO.Swagger.Client;
-using IO.Swagger.Model;
+using OsduClient.Api;
+using OsduClient.Client;
+using OsduClient.Model;
 
 namespace Example
 {

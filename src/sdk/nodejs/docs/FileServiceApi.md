@@ -6,7 +6,7 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**deletesMetadataRecordFileForTheGivenId**](FileServiceApi.md#deletesMetadataRecordFileForTheGivenId) | **DELETE** /api/file/v2/files/{Id}/metadata | Deletes metadata record & file assocaited with that record for the given id
 [**getALocationInLandingZoneToUploadAFile_**](FileServiceApi.md#getALocationInLandingZoneToUploadAFile_) | **POST** /api/file/v2/getLocation | Get a location in Landing Zone to upload a file.
-[**getTheLocationToUploadAFile**](FileServiceApi.md#getTheLocationToUploadAFile) | **GET** /api/file/v2/files/UploadURL | Get a location in Landing Zone to upload a file.
+[**getTheLocationToUploadAFile**](FileServiceApi.md#getTheLocationToUploadAFile) | **GET** /api/file/v2/files/uploadURL | Get a location in Landing Zone to upload a file.
 [**getsMetadataRecordForTheGivenId**](FileServiceApi.md#getsMetadataRecordForTheGivenId) | **GET** /api/file/v2/files/{Id}/metadata | Gets metadata record for the given id
 [**getsURLToDownloadTheFileAssociatedWithTheGivenId_**](FileServiceApi.md#getsURLToDownloadTheFileAssociatedWithTheGivenId_) | **GET** /api/file/v2/files/{Id}/DownloadURL | Gets a URL to download the file
 [**publishFileMetadataForAFile_**](FileServiceApi.md#publishFileMetadataForAFile_) | **POST** /api/file/v2/files/metadata | Creates metadata for a file
@@ -318,7 +318,7 @@ var apiInstance = new SelfManagedOsdu.FileServiceApi();
 var dataPartitionId = "dataPartitionId_example"; // String | Specifies the data partition to use. This should either be the partition name or crm account ID associated with the partition.
 
 var opts = { 
-  'body': new SelfManagedOsdu.FileRecord() // FileRecord | File metadata content
+  'body': new SelfManagedOsdu.FileMetadata() // FileMetadata | File metadata content
 };
 
 var callback = function(error, data, response) {
@@ -336,7 +336,7 @@ apiInstance.publishFileMetadataForAFile_(dataPartitionId, opts, callback);
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **dataPartitionId** | **String**| Specifies the data partition to use. This should either be the partition name or crm account ID associated with the partition. | 
- **body** | [**FileRecord**](FileRecord.md)| File metadata content | [optional] 
+ **body** | [**FileMetadata**](FileMetadata.md)| File metadata content | [optional] 
 
 ### Return type
 

@@ -1,4 +1,4 @@
-# swagger_client.NotificationApi
+# OsduClient.NotificationApi
 
 All URIs are relative to *https://self-managed-osdu.westeurope.cloudapp.azure.com*
 
@@ -16,18 +16,18 @@ Notifies subscribers that records have changed
 ```python
 from __future__ import print_function
 import time
-import swagger_client
-from swagger_client.rest import ApiException
+import OsduClient
+from OsduClient.rest import ApiException
 from pprint import pprint
 
 # Configure API key authorization: Bearer
-configuration = swagger_client.Configuration()
+configuration = OsduClient.Configuration()
 configuration.api_key['Authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['Authorization'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = swagger_client.NotificationApi(swagger_client.ApiClient(configuration))
+api_instance = OsduClient.NotificationApi(OsduClient.ApiClient(configuration))
 data_partition_id = 'data_partition_id_example' # str | tenant
 
 try:

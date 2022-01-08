@@ -1,4 +1,4 @@
-# IO.Swagger.Model.FileRecordVersion
+# OsduClient.Model.FileRecordVersion
 ## Properties
 
 Name | Type | Description | Notes
@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **Acl** | [**FileAcl**](FileAcl.md) |  | [optional] 
 **Legal** | [**FileLegal**](FileLegal.md) |  | [optional] 
 **Data** | [**Files**](Files.md) |  | [optional] 
-**Ancestry** | [**FileLinkList**](FileLinkList.md) |  | [optional] 
+**Ancestry** | [**FileAncestry**](FileAncestry.md) |  | [optional] 
 **Version** | **long?** | The version number of this OSDU resource; set by the framework. | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

@@ -1,4 +1,4 @@
-# IO.Swagger.Model.FileErrorModel
+# OsduClient.Model.FileErrorModel
 ## Properties
 
 Name | Type | Description | Notes

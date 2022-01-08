@@ -1,4 +1,4 @@
-# IO.Swagger.Model.RegisterCreateAction
+# OsduClient.Model.RegisterCreateAction
 ## Properties
 
 Name | Type | Description | Notes

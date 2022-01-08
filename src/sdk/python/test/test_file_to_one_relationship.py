@@ -15,9 +15,9 @@ from __future__ import absolute_import
 
 import unittest
 
-import swagger_client
-from swagger_client.models.file_to_one_relationship import FileToOneRelationship  # noqa: E501
-from swagger_client.rest import ApiException
+import OsduClient
+from OsduClient.models.file_to_one_relationship import FileToOneRelationship  # noqa: E501
+from OsduClient.rest import ApiException
 
 
 class TestFileToOneRelationship(unittest.TestCase):
@@ -32,7 +32,7 @@ class TestFileToOneRelationship(unittest.TestCase):
     def testFileToOneRelationship(self):
         """Test FileToOneRelationship"""
         # FIXME: construct object with mandatory attributes with example values
-        # model = swagger_client.models.file_to_one_relationship.FileToOneRelationship()  # noqa: E501
+        # model = OsduClient.models.file_to_one_relationship.FileToOneRelationship()  # noqa: E501
         pass
 
 

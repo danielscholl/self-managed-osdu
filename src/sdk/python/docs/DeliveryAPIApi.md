@@ -1,4 +1,4 @@
-# swagger_client.DeliveryAPIApi
+# OsduClient.DeliveryAPIApi
 
 All URIs are relative to *https://self-managed-osdu.westeurope.cloudapp.azure.com*
 
@@ -18,20 +18,20 @@ Returns delivery instructions for File(s) using SRNs
 ```python
 from __future__ import print_function
 import time
-import swagger_client
-from swagger_client.rest import ApiException
+import OsduClient
+from OsduClient.rest import ApiException
 from pprint import pprint
 
 # Configure API key authorization: Bearer
-configuration = swagger_client.Configuration()
+configuration = OsduClient.Configuration()
 configuration.api_key['Authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['Authorization'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = swagger_client.DeliveryAPIApi(swagger_client.ApiClient(configuration))
+api_instance = OsduClient.DeliveryAPIApi(OsduClient.ApiClient(configuration))
 data_partition_id = 'data_partition_id_example' # str | Specifies the data partition to use. This should either be the partition name or crm account ID associated with the partition.
-body = swagger_client.FileDeliveryGetFileSignedURLRequest() # FileDeliveryGetFileSignedURLRequest |  (optional)
+body = OsduClient.FileDeliveryGetFileSignedURLRequest() # FileDeliveryGetFileSignedURLRequest |  (optional)
 
 try:
     api_response = api_instance.returns_delivery_instructions_for_file_s_using_sr_ns(data_partition_id, body=body)

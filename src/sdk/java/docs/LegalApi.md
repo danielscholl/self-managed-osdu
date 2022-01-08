@@ -25,11 +25,11 @@ This allows for the creation of your LegalTag. There can only be 1 LegalTag per 
 ### Example
 ```java
 // Import classes:
-//import io.swagger.client.ApiClient;
-//import io.swagger.client.ApiException;
-//import io.swagger.client.Configuration;
-//import io.swagger.client.auth.*;
-//import io.swagger.client.api.LegalApi;
+//import osdu.client.ApiClient;
+//import osdu.client.ApiException;
+//import osdu.client.Configuration;
+//import osdu.client.auth.*;
+//import osdu.client.api.LegalApi;
 
 ApiClient defaultClient = Configuration.getDefaultApiClient();
 
@@ -84,11 +84,11 @@ This allows for the deletion of your LegalTag using the &#39;name&#39; associate
 ### Example
 ```java
 // Import classes:
-//import io.swagger.client.ApiClient;
-//import io.swagger.client.ApiException;
-//import io.swagger.client.Configuration;
-//import io.swagger.client.auth.*;
-//import io.swagger.client.api.LegalApi;
+//import osdu.client.ApiClient;
+//import osdu.client.ApiException;
+//import osdu.client.Configuration;
+//import osdu.client.auth.*;
+//import osdu.client.api.LegalApi;
 
 ApiClient defaultClient = Configuration.getDefaultApiClient();
 
@@ -140,11 +140,11 @@ This allows for the retrieval of your LegalTag using the &#39;name&#39; associat
 ### Example
 ```java
 // Import classes:
-//import io.swagger.client.ApiClient;
-//import io.swagger.client.ApiException;
-//import io.swagger.client.Configuration;
-//import io.swagger.client.auth.*;
-//import io.swagger.client.api.LegalApi;
+//import osdu.client.ApiClient;
+//import osdu.client.ApiException;
+//import osdu.client.Configuration;
+//import osdu.client.auth.*;
+//import osdu.client.api.LegalApi;
 
 ApiClient defaultClient = Configuration.getDefaultApiClient();
 
@@ -197,11 +197,11 @@ This allows for the retrieval of allowed values for LegalTag properties.
 ### Example
 ```java
 // Import classes:
-//import io.swagger.client.ApiClient;
-//import io.swagger.client.ApiException;
-//import io.swagger.client.Configuration;
-//import io.swagger.client.auth.*;
-//import io.swagger.client.api.LegalApi;
+//import osdu.client.ApiClient;
+//import osdu.client.ApiException;
+//import osdu.client.Configuration;
+//import osdu.client.auth.*;
+//import osdu.client.api.LegalApi;
 
 ApiClient defaultClient = Configuration.getDefaultApiClient();
 
@@ -252,11 +252,11 @@ This allows for the retrieval of your LegalTags using the &#39;name&#39; associa
 ### Example
 ```java
 // Import classes:
-//import io.swagger.client.ApiClient;
-//import io.swagger.client.ApiException;
-//import io.swagger.client.Configuration;
-//import io.swagger.client.auth.*;
-//import io.swagger.client.api.LegalApi;
+//import osdu.client.ApiClient;
+//import osdu.client.ApiException;
+//import osdu.client.Configuration;
+//import osdu.client.auth.*;
+//import osdu.client.api.LegalApi;
 
 ApiClient defaultClient = Configuration.getDefaultApiClient();
 
@@ -311,11 +311,11 @@ This allows for the retrieval of all LegalTags.
 ### Example
 ```java
 // Import classes:
-//import io.swagger.client.ApiClient;
-//import io.swagger.client.ApiException;
-//import io.swagger.client.Configuration;
-//import io.swagger.client.auth.*;
-//import io.swagger.client.api.LegalApi;
+//import osdu.client.ApiClient;
+//import osdu.client.ApiException;
+//import osdu.client.Configuration;
+//import osdu.client.auth.*;
+//import osdu.client.api.LegalApi;
 
 ApiClient defaultClient = Configuration.getDefaultApiClient();
 
@@ -370,11 +370,11 @@ This allows to update certain properties of your LegalTag using the &#39;name&#3
 ### Example
 ```java
 // Import classes:
-//import io.swagger.client.ApiClient;
-//import io.swagger.client.ApiException;
-//import io.swagger.client.Configuration;
-//import io.swagger.client.auth.*;
-//import io.swagger.client.api.LegalApi;
+//import osdu.client.ApiClient;
+//import osdu.client.ApiException;
+//import osdu.client.Configuration;
+//import osdu.client.auth.*;
+//import osdu.client.api.LegalApi;
 
 ApiClient defaultClient = Configuration.getDefaultApiClient();
 
@@ -429,11 +429,11 @@ This allows for the retrieval of the reason why your LegalTag is not valid. A ma
 ### Example
 ```java
 // Import classes:
-//import io.swagger.client.ApiClient;
-//import io.swagger.client.ApiException;
-//import io.swagger.client.Configuration;
-//import io.swagger.client.auth.*;
-//import io.swagger.client.api.LegalApi;
+//import osdu.client.ApiClient;
+//import osdu.client.ApiException;
+//import osdu.client.Configuration;
+//import osdu.client.auth.*;
+//import osdu.client.api.LegalApi;
 
 ApiClient defaultClient = Configuration.getDefaultApiClient();
 

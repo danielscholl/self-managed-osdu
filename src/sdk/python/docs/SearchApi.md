@@ -1,4 +1,4 @@
-# swagger_client.SearchApi
+# OsduClient.SearchApi
 
 All URIs are relative to *https://self-managed-osdu.westeurope.cloudapp.azure.com*
 
@@ -21,18 +21,18 @@ The API can be used  to purge all indexed documents for a kind. Required access 
 ```python
 from __future__ import print_function
 import time
-import swagger_client
-from swagger_client.rest import ApiException
+import OsduClient
+from OsduClient.rest import ApiException
 from pprint import pprint
 
 # Configure API key authorization: Bearer
-configuration = swagger_client.Configuration()
+configuration = OsduClient.Configuration()
 configuration.api_key['Authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['Authorization'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = swagger_client.SearchApi(swagger_client.ApiClient(configuration))
+api_instance = OsduClient.SearchApi(OsduClient.ApiClient(configuration))
 osdu_account_id = 'osdu_account_id_example' # str | Account ID is the active OSDU account (OSDU account or customer's account) which the users choose to use with the Search API.
 kind = 'kind_example' # str | Kind of the record.
 osdu_on_behalf_of = 'osdu_on_behalf_of_example' # str | On behalf email or token is the token/email of the original user making the call. For now, only email is supported but eventually, primary usage will be token. (optional)
@@ -78,18 +78,18 @@ The API returns the schema for a given kind which is used find what attributes a
 ```python
 from __future__ import print_function
 import time
-import swagger_client
-from swagger_client.rest import ApiException
+import OsduClient
+from OsduClient.rest import ApiException
 from pprint import pprint
 
 # Configure API key authorization: Bearer
-configuration = swagger_client.Configuration()
+configuration = OsduClient.Configuration()
 configuration.api_key['Authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['Authorization'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = swagger_client.SearchApi(swagger_client.ApiClient(configuration))
+api_instance = OsduClient.SearchApi(OsduClient.ApiClient(configuration))
 osdu_account_id = 'osdu_account_id_example' # str | Account ID is the active OSDU account (OSDU account or customer's account) which the users choose to use with the Search API.
 kind = 'kind_example' # str | Kind of the record.
 osdu_on_behalf_of = 'osdu_on_behalf_of_example' # str | On behalf email or token is the token/email of the original user making the call. For now, only email is supported but eventually, primary usage will be token. (optional)
@@ -136,20 +136,20 @@ The API supports full text search on string fields, range queries on date, numer
 ```python
 from __future__ import print_function
 import time
-import swagger_client
-from swagger_client.rest import ApiException
+import OsduClient
+from OsduClient.rest import ApiException
 from pprint import pprint
 
 # Configure API key authorization: Bearer
-configuration = swagger_client.Configuration()
+configuration = OsduClient.Configuration()
 configuration.api_key['Authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['Authorization'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = swagger_client.SearchApi(swagger_client.ApiClient(configuration))
+api_instance = OsduClient.SearchApi(OsduClient.ApiClient(configuration))
 osdu_account_id = 'osdu_account_id_example' # str | Account ID is the active OSDU account (OSDU account or customer's account) which the users choose to use with the Search API.
-body = swagger_client.SearchQueryRequest() # SearchQueryRequest | Specifies the API parameters. The only required parameter is the kind which needs to be formatted correctly.
+body = OsduClient.SearchQueryRequest() # SearchQueryRequest | Specifies the API parameters. The only required parameter is the kind which needs to be formatted correctly.
 osdu_on_behalf_of = 'osdu_on_behalf_of_example' # str | On behalf email or token is the token/email of the original user making the call. For now, only email is supported but eventually, primary usage will be token. (optional)
 
 try:
@@ -194,20 +194,20 @@ The API supports full text search on string fields, range queries on date, numer
 ```python
 from __future__ import print_function
 import time
-import swagger_client
-from swagger_client.rest import ApiException
+import OsduClient
+from OsduClient.rest import ApiException
 from pprint import pprint
 
 # Configure API key authorization: Bearer
-configuration = swagger_client.Configuration()
+configuration = OsduClient.Configuration()
 configuration.api_key['Authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['Authorization'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = swagger_client.SearchApi(swagger_client.ApiClient(configuration))
+api_instance = OsduClient.SearchApi(OsduClient.ApiClient(configuration))
 osdu_account_id = 'osdu_account_id_example' # str | Account ID is the active OSDU account (OSDU account or customer's account) which the users choose to use with the Search API.
-body = swagger_client.SearchCursorQueryRequest() # SearchCursorQueryRequest | Specifies the API parameters. The only required parameter is the kind which needs to be formatted correctly.
+body = OsduClient.SearchCursorQueryRequest() # SearchCursorQueryRequest | Specifies the API parameters. The only required parameter is the kind which needs to be formatted correctly.
 osdu_on_behalf_of = 'osdu_on_behalf_of_example' # str | On behalf email or token is the token/email of the original user making the call. For now, only email is supported but eventually, primary usage will be token. (optional)
 
 try:

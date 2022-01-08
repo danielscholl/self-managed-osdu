@@ -15,9 +15,9 @@ from __future__ import absolute_import
 
 import unittest
 
-import swagger_client
-from swagger_client.models.partition_property import PartitionProperty  # noqa: E501
-from swagger_client.rest import ApiException
+import OsduClient
+from OsduClient.models.partition_property import PartitionProperty  # noqa: E501
+from OsduClient.rest import ApiException
 
 
 class TestPartitionProperty(unittest.TestCase):
@@ -32,7 +32,7 @@ class TestPartitionProperty(unittest.TestCase):
     def testPartitionProperty(self):
         """Test PartitionProperty"""
         # FIXME: construct object with mandatory attributes with example values
-        # model = swagger_client.models.partition_property.PartitionProperty()  # noqa: E501
+        # model = OsduClient.models.partition_property.PartitionProperty()  # noqa: E501
         pass
 
 

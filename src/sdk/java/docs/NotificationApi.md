@@ -16,11 +16,11 @@ Notifies subscribers that records have changed
 ### Example
 ```java
 // Import classes:
-//import io.swagger.client.ApiClient;
-//import io.swagger.client.ApiException;
-//import io.swagger.client.Configuration;
-//import io.swagger.client.auth.*;
-//import io.swagger.client.api.NotificationApi;
+//import osdu.client.ApiClient;
+//import osdu.client.ApiException;
+//import osdu.client.Configuration;
+//import osdu.client.auth.*;
+//import osdu.client.api.NotificationApi;
 
 ApiClient defaultClient = Configuration.getDefaultApiClient();
 

@@ -1,4 +1,4 @@
-# IO.Swagger.Model.StorageRecordVersions
+# OsduClient.Model.StorageRecordVersions
 ## Properties
 
 Name | Type | Description | Notes

@@ -15,16 +15,16 @@ from __future__ import absolute_import
 
 import unittest
 
-import swagger_client
-from swagger_client.api.workflow_api import WorkflowApi  # noqa: E501
-from swagger_client.rest import ApiException
+import OsduClient
+from OsduClient.api.workflow_api import WorkflowApi  # noqa: E501
+from OsduClient.rest import ApiException
 
 
 class TestWorkflowApi(unittest.TestCase):
     """WorkflowApi unit test stubs"""
 
     def setUp(self):
-        self.api = swagger_client.api.workflow_api.WorkflowApi()  # noqa: E501
+        self.api = OsduClient.api.workflow_api.WorkflowApi()  # noqa: E501
 
     def tearDown(self):
         pass

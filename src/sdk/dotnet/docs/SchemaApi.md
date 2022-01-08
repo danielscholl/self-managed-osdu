@@ -1,4 +1,4 @@
-# IO.Swagger.Api.SchemaApi
+# OsduClient.Api.SchemaApi
 
 All URIs are relative to *https://self-managed-osdu.westeurope.cloudapp.azure.com*
 
@@ -22,9 +22,9 @@ Adds a schema to the schema repository. The schemaIdentity must be unique. The `
 ```csharp
 using System;
 using System.Diagnostics;
-using IO.Swagger.Api;
-using IO.Swagger.Client;
-using IO.Swagger.Model;
+using OsduClient.Api;
+using OsduClient.Client;
+using OsduClient.Model;
 
 namespace Example
 {
@@ -90,9 +90,9 @@ Retrieve a schema using its system defined id. Required roles 'users.datalake.vi
 ```csharp
 using System;
 using System.Diagnostics;
-using IO.Swagger.Api;
-using IO.Swagger.Client;
-using IO.Swagger.Model;
+using OsduClient.Api;
+using OsduClient.Client;
+using OsduClient.Model;
 
 namespace Example
 {
@@ -158,9 +158,9 @@ Searches for information of available schema (SchemInfo) in schema repository. S
 ```csharp
 using System;
 using System.Diagnostics;
-using IO.Swagger.Api;
-using IO.Swagger.Client;
-using IO.Swagger.Model;
+using OsduClient.Api;
+using OsduClient.Client;
+using OsduClient.Model;
 
 namespace Example
 {
@@ -244,9 +244,9 @@ Creates a new schema or updates an already existing schema with status `DEVELOPM
 ```csharp
 using System;
 using System.Diagnostics;
-using IO.Swagger.Api;
-using IO.Swagger.Client;
-using IO.Swagger.Model;
+using OsduClient.Api;
+using OsduClient.Client;
+using OsduClient.Model;
 
 namespace Example
 {

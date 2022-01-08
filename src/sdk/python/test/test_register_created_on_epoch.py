@@ -15,9 +15,9 @@ from __future__ import absolute_import
 
 import unittest
 
-import swagger_client
-from swagger_client.models.register_created_on_epoch import RegisterCreatedOnEpoch  # noqa: E501
-from swagger_client.rest import ApiException
+import OsduClient
+from OsduClient.models.register_created_on_epoch import RegisterCreatedOnEpoch  # noqa: E501
+from OsduClient.rest import ApiException
 
 
 class TestRegisterCreatedOnEpoch(unittest.TestCase):
@@ -32,7 +32,7 @@ class TestRegisterCreatedOnEpoch(unittest.TestCase):
     def testRegisterCreatedOnEpoch(self):
         """Test RegisterCreatedOnEpoch"""
         # FIXME: construct object with mandatory attributes with example values
-        # model = swagger_client.models.register_created_on_epoch.RegisterCreatedOnEpoch()  # noqa: E501
+        # model = OsduClient.models.register_created_on_epoch.RegisterCreatedOnEpoch()  # noqa: E501
         pass
 
 

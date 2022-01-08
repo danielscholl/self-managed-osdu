@@ -15,9 +15,9 @@ from __future__ import absolute_import
 
 import unittest
 
-import swagger_client
-from swagger_client.models.register_get_subscription_result import RegisterGetSubscriptionResult  # noqa: E501
-from swagger_client.rest import ApiException
+import OsduClient
+from OsduClient.models.register_get_subscription_result import RegisterGetSubscriptionResult  # noqa: E501
+from OsduClient.rest import ApiException
 
 
 class TestRegisterGetSubscriptionResult(unittest.TestCase):
@@ -32,7 +32,7 @@ class TestRegisterGetSubscriptionResult(unittest.TestCase):
     def testRegisterGetSubscriptionResult(self):
         """Test RegisterGetSubscriptionResult"""
         # FIXME: construct object with mandatory attributes with example values
-        # model = swagger_client.models.register_get_subscription_result.RegisterGetSubscriptionResult()  # noqa: E501
+        # model = OsduClient.models.register_get_subscription_result.RegisterGetSubscriptionResult()  # noqa: E501
         pass
 
 

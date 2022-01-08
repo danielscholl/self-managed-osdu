@@ -15,9 +15,9 @@ from __future__ import absolute_import
 
 import unittest
 
-import swagger_client
-from swagger_client.models.legal_tag_invalid_response_list import LegalTagInvalidResponseList  # noqa: E501
-from swagger_client.rest import ApiException
+import OsduClient
+from OsduClient.models.legal_tag_invalid_response_list import LegalTagInvalidResponseList  # noqa: E501
+from OsduClient.rest import ApiException
 
 
 class TestLegalTagInvalidResponseList(unittest.TestCase):
@@ -32,7 +32,7 @@ class TestLegalTagInvalidResponseList(unittest.TestCase):
     def testLegalTagInvalidResponseList(self):
         """Test LegalTagInvalidResponseList"""
         # FIXME: construct object with mandatory attributes with example values
-        # model = swagger_client.models.legal_tag_invalid_response_list.LegalTagInvalidResponseList()  # noqa: E501
+        # model = OsduClient.models.legal_tag_invalid_response_list.LegalTagInvalidResponseList()  # noqa: E501
         pass
 
 

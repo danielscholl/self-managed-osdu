@@ -16,18 +16,18 @@
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
-    define(['ApiClient', 'model/FileApplicationError', 'model/FileDownloadResponse', 'model/FileLandingZoneLocationResponse', 'model/FileLocationRequest', 'model/FileMetadataResponse', 'model/FileRecord', 'model/FileRecordVersion', 'model/FileSourceLocationResponse'], factory);
+    define(['ApiClient', 'model/FileApplicationError', 'model/FileDownloadResponse', 'model/FileLandingZoneLocationResponse', 'model/FileLocationRequest', 'model/FileMetadata', 'model/FileMetadataResponse', 'model/FileRecordVersion', 'model/FileSourceLocationResponse'], factory);
   } else if (typeof module === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'), require('../model/FileApplicationError'), require('../model/FileDownloadResponse'), require('../model/FileLandingZoneLocationResponse'), require('../model/FileLocationRequest'), require('../model/FileMetadataResponse'), require('../model/FileRecord'), require('../model/FileRecordVersion'), require('../model/FileSourceLocationResponse'));
+    module.exports = factory(require('../ApiClient'), require('../model/FileApplicationError'), require('../model/FileDownloadResponse'), require('../model/FileLandingZoneLocationResponse'), require('../model/FileLocationRequest'), require('../model/FileMetadata'), require('../model/FileMetadataResponse'), require('../model/FileRecordVersion'), require('../model/FileSourceLocationResponse'));
   } else {
     // Browser globals (root is window)
     if (!root.SelfManagedOsdu) {
       root.SelfManagedOsdu = {};
     }
-    root.SelfManagedOsdu.FileServiceApi = factory(root.SelfManagedOsdu.ApiClient, root.SelfManagedOsdu.FileApplicationError, root.SelfManagedOsdu.FileDownloadResponse, root.SelfManagedOsdu.FileLandingZoneLocationResponse, root.SelfManagedOsdu.FileLocationRequest, root.SelfManagedOsdu.FileMetadataResponse, root.SelfManagedOsdu.FileRecord, root.SelfManagedOsdu.FileRecordVersion, root.SelfManagedOsdu.FileSourceLocationResponse);
+    root.SelfManagedOsdu.FileServiceApi = factory(root.SelfManagedOsdu.ApiClient, root.SelfManagedOsdu.FileApplicationError, root.SelfManagedOsdu.FileDownloadResponse, root.SelfManagedOsdu.FileLandingZoneLocationResponse, root.SelfManagedOsdu.FileLocationRequest, root.SelfManagedOsdu.FileMetadata, root.SelfManagedOsdu.FileMetadataResponse, root.SelfManagedOsdu.FileRecordVersion, root.SelfManagedOsdu.FileSourceLocationResponse);
   }
-}(this, function(ApiClient, FileApplicationError, FileDownloadResponse, FileLandingZoneLocationResponse, FileLocationRequest, FileMetadataResponse, FileRecord, FileRecordVersion, FileSourceLocationResponse) {
+}(this, function(ApiClient, FileApplicationError, FileDownloadResponse, FileLandingZoneLocationResponse, FileLocationRequest, FileMetadata, FileMetadataResponse, FileRecordVersion, FileSourceLocationResponse) {
   'use strict';
 
   /**
@@ -194,7 +194,7 @@
       var returnType = FileSourceLocationResponse;
 
       return this.apiClient.callApi(
-        '/api/file/v2/files/UploadURL', 'GET',
+        '/api/file/v2/files/uploadURL', 'GET',
         pathParams, queryParams, collectionQueryParams, headerParams, formParams, postBody,
         authNames, contentTypes, accepts, returnType, callback
       );
@@ -327,7 +327,7 @@
      * This API creates a metadata record for a file that is already uploaded. The Metadata is linked to the file via `FileSource` provided in the request body. If `FileSource` attribute is missing in the request body or there is no file present, then the request fails with an error. When metadata is successfully updated in the system, it returns the `Id` of the file metadata record. **Required roles**: 'users.datalake.viewers' or 'users.datalake.editors' or 'users.datalake.admins' or 'users.datalake.ops'.
      * @param {String} dataPartitionId Specifies the data partition to use. This should either be the partition name or crm account ID associated with the partition.
      * @param {Object} opts Optional parameters
-     * @param {module:model/FileRecord} opts.body File metadata content
+     * @param {module:model/FileMetadata} opts.body File metadata content
      * @param {module:api/FileServiceApi~publishFileMetadataForAFile_Callback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {@link module:model/FileMetadataResponse}
      */

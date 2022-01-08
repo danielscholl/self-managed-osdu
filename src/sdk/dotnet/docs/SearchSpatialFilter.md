@@ -1,4 +1,4 @@
-# IO.Swagger.Model.SearchSpatialFilter
+# OsduClient.Model.SearchSpatialFilter
 ## Properties
 
 Name | Type | Description | Notes

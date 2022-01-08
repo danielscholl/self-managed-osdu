@@ -1,4 +1,4 @@
-# IO.Swagger.Model.SearchCursorQueryResponse
+# OsduClient.Model.SearchCursorQueryResponse
 ## Properties
 
 Name | Type | Description | Notes

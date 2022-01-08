@@ -1,4 +1,4 @@
-# IO.Swagger.Model.PartitionDto
+# OsduClient.Model.PartitionDto
 ## Properties
 
 Name | Type | Description | Notes

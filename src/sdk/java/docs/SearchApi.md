@@ -21,11 +21,11 @@ The API can be used  to purge all indexed documents for a kind. Required access 
 ### Example
 ```java
 // Import classes:
-//import io.swagger.client.ApiClient;
-//import io.swagger.client.ApiException;
-//import io.swagger.client.Configuration;
-//import io.swagger.client.auth.*;
-//import io.swagger.client.api.SearchApi;
+//import osdu.client.ApiClient;
+//import osdu.client.ApiException;
+//import osdu.client.Configuration;
+//import osdu.client.auth.*;
+//import osdu.client.api.SearchApi;
 
 ApiClient defaultClient = Configuration.getDefaultApiClient();
 
@@ -79,11 +79,11 @@ The API returns the schema for a given kind which is used find what attributes a
 ### Example
 ```java
 // Import classes:
-//import io.swagger.client.ApiClient;
-//import io.swagger.client.ApiException;
-//import io.swagger.client.Configuration;
-//import io.swagger.client.auth.*;
-//import io.swagger.client.api.SearchApi;
+//import osdu.client.ApiClient;
+//import osdu.client.ApiException;
+//import osdu.client.Configuration;
+//import osdu.client.auth.*;
+//import osdu.client.api.SearchApi;
 
 ApiClient defaultClient = Configuration.getDefaultApiClient();
 
@@ -138,11 +138,11 @@ The API supports full text search on string fields, range queries on date, numer
 ### Example
 ```java
 // Import classes:
-//import io.swagger.client.ApiClient;
-//import io.swagger.client.ApiException;
-//import io.swagger.client.Configuration;
-//import io.swagger.client.auth.*;
-//import io.swagger.client.api.SearchApi;
+//import osdu.client.ApiClient;
+//import osdu.client.ApiException;
+//import osdu.client.Configuration;
+//import osdu.client.auth.*;
+//import osdu.client.api.SearchApi;
 
 ApiClient defaultClient = Configuration.getDefaultApiClient();
 
@@ -197,11 +197,11 @@ The API supports full text search on string fields, range queries on date, numer
 ### Example
 ```java
 // Import classes:
-//import io.swagger.client.ApiClient;
-//import io.swagger.client.ApiException;
-//import io.swagger.client.Configuration;
-//import io.swagger.client.auth.*;
-//import io.swagger.client.api.SearchApi;
+//import osdu.client.ApiClient;
+//import osdu.client.ApiException;
+//import osdu.client.Configuration;
+//import osdu.client.auth.*;
+//import osdu.client.api.SearchApi;
 
 ApiClient defaultClient = Configuration.getDefaultApiClient();
 

@@ -15,9 +15,9 @@ from __future__ import absolute_import
 
 import unittest
 
-import swagger_client
-from swagger_client.models.storage_record import StorageRecord  # noqa: E501
-from swagger_client.rest import ApiException
+import OsduClient
+from OsduClient.models.storage_record import StorageRecord  # noqa: E501
+from OsduClient.rest import ApiException
 
 
 class TestStorageRecord(unittest.TestCase):
@@ -32,7 +32,7 @@ class TestStorageRecord(unittest.TestCase):
     def testStorageRecord(self):
         """Test StorageRecord"""
         # FIXME: construct object with mandatory attributes with example values
-        # model = swagger_client.models.storage_record.StorageRecord()  # noqa: E501
+        # model = OsduClient.models.storage_record.StorageRecord()  # noqa: E501
         pass
 
 

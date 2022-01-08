@@ -1,4 +1,4 @@
-# IO.Swagger.Model.StorageDeleteRecordError
+# OsduClient.Model.StorageDeleteRecordError
 ## Properties
 
 Name | Type | Description | Notes

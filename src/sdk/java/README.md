@@ -2,7 +2,7 @@
 
 self-managed-osdu
 - API version: 0.11.0
-  - Build date: 2022-01-06T21:59:16.916Z
+  - Build date: 2022-01-08T01:37:46.955Z
 
 Rest API Documentation for Self Managed OSDU
 
@@ -72,10 +72,10 @@ Please follow the [installation](#installation) instruction and execute the foll
 
 ```java
 
-import io.swagger.client.*;
-import io.swagger.client.auth.*;
-import io.swagger.client.model.*;
-import io.swagger.client.api.DeliveryApiApi;
+import osdu.client.*;
+import osdu.client.auth.*;
+import osdu.client.model.*;
+import osdu.client.api.DeliveryApiApi;
 
 import java.io.File;
 import java.util.*;
@@ -124,7 +124,7 @@ Class | Method | HTTP request | Description
 *EntitlementApi* | [**updateGroupUsingPATCH**](docs/EntitlementApi.md#updateGroupUsingPATCH) | **PATCH** /api/entitlements/v2/groups/{group_email} | Updates Items in Group
 *FileServiceApi* | [**deletesMetadataRecordFileForTheGivenId**](docs/FileServiceApi.md#deletesMetadataRecordFileForTheGivenId) | **DELETE** /api/file/v2/files/{Id}/metadata | Deletes metadata record &amp; file assocaited with that record for the given id
 *FileServiceApi* | [**getALocationInLandingZoneToUploadAFile_**](docs/FileServiceApi.md#getALocationInLandingZoneToUploadAFile_) | **POST** /api/file/v2/getLocation | Get a location in Landing Zone to upload a file.
-*FileServiceApi* | [**getTheLocationToUploadAFile**](docs/FileServiceApi.md#getTheLocationToUploadAFile) | **GET** /api/file/v2/files/UploadURL | Get a location in Landing Zone to upload a file.
+*FileServiceApi* | [**getTheLocationToUploadAFile**](docs/FileServiceApi.md#getTheLocationToUploadAFile) | **GET** /api/file/v2/files/uploadURL | Get a location in Landing Zone to upload a file.
 *FileServiceApi* | [**getsMetadataRecordForTheGivenId**](docs/FileServiceApi.md#getsMetadataRecordForTheGivenId) | **GET** /api/file/v2/files/{Id}/metadata | Gets metadata record for the given id
 *FileServiceApi* | [**getsURLToDownloadTheFileAssociatedWithTheGivenId_**](docs/FileServiceApi.md#getsURLToDownloadTheFileAssociatedWithTheGivenId_) | **GET** /api/file/v2/files/{Id}/DownloadURL | Gets a URL to download the file
 *FileServiceApi* | [**publishFileMetadataForAFile_**](docs/FileServiceApi.md#publishFileMetadataForAFile_) | **POST** /api/file/v2/files/metadata | Creates metadata for a file
@@ -191,26 +191,21 @@ Class | Method | HTTP request | Description
  - [EntitlementGroupResponse](docs/EntitlementGroupResponse.md)
  - [EntitlementMemberDto](docs/EntitlementMemberDto.md)
  - [FileAcl](docs/FileAcl.md)
+ - [FileAncestry](docs/FileAncestry.md)
  - [FileApplicationError](docs/FileApplicationError.md)
  - [FileDeliveryGetFileSignedURLRequest](docs/FileDeliveryGetFileSignedURLRequest.md)
  - [FileDeliveryGetFileSignedURLResponse](docs/FileDeliveryGetFileSignedURLResponse.md)
  - [FileDetails](docs/FileDetails.md)
  - [FileDownloadResponse](docs/FileDownloadResponse.md)
- - [FileDriver](docs/FileDriver.md)
  - [FileError](docs/FileError.md)
  - [FileErrorModel](docs/FileErrorModel.md)
  - [FileExtensionProperties](docs/FileExtensionProperties.md)
  - [FileLandingZoneLocationResponse](docs/FileLandingZoneLocationResponse.md)
  - [FileLegal](docs/FileLegal.md)
- - [FileLinkList](docs/FileLinkList.md)
- - [FileListRequest](docs/FileListRequest.md)
- - [FileListResponse](docs/FileListResponse.md)
- - [FileLocation](docs/FileLocation.md)
  - [FileLocationRequest](docs/FileLocationRequest.md)
- - [FileLocationResponse](docs/FileLocationResponse.md)
  - [FileMetaItem](docs/FileMetaItem.md)
+ - [FileMetadata](docs/FileMetadata.md)
  - [FileMetadataResponse](docs/FileMetadataResponse.md)
- - [FileRecord](docs/FileRecord.md)
  - [FileRecordVersion](docs/FileRecordVersion.md)
  - [FileRelationships](docs/FileRelationships.md)
  - [FileSourceLocationResponse](docs/FileSourceLocationResponse.md)

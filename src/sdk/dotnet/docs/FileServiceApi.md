@@ -1,4 +1,4 @@
-# IO.Swagger.Api.FileServiceApi
+# OsduClient.Api.FileServiceApi
 
 All URIs are relative to *https://self-managed-osdu.westeurope.cloudapp.azure.com*
 
@@ -6,7 +6,7 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**DeletesMetadataRecordFileForTheGivenId**](FileServiceApi.md#deletesmetadatarecordfileforthegivenid) | **DELETE** /api/file/v2/files/{Id}/metadata | Deletes metadata record &amp; file assocaited with that record for the given id
 [**GetALocationInLandingZoneToUploadAFile_**](FileServiceApi.md#getalocationinlandingzonetouploadafile_) | **POST** /api/file/v2/getLocation | Get a location in Landing Zone to upload a file.
-[**GetTheLocationToUploadAFile**](FileServiceApi.md#getthelocationtouploadafile) | **GET** /api/file/v2/files/UploadURL | Get a location in Landing Zone to upload a file.
+[**GetTheLocationToUploadAFile**](FileServiceApi.md#getthelocationtouploadafile) | **GET** /api/file/v2/files/uploadURL | Get a location in Landing Zone to upload a file.
 [**GetsMetadataRecordForTheGivenId**](FileServiceApi.md#getsmetadatarecordforthegivenid) | **GET** /api/file/v2/files/{Id}/metadata | Gets metadata record for the given id
 [**GetsURLToDownloadTheFileAssociatedWithTheGivenId_**](FileServiceApi.md#getsurltodownloadthefileassociatedwiththegivenid_) | **GET** /api/file/v2/files/{Id}/DownloadURL | Gets a URL to download the file
 [**PublishFileMetadataForAFile_**](FileServiceApi.md#publishfilemetadataforafile_) | **POST** /api/file/v2/files/metadata | Creates metadata for a file
@@ -24,9 +24,9 @@ Deletes the File metadata record identified by the given id and file associated 
 ```csharp
 using System;
 using System.Diagnostics;
-using IO.Swagger.Api;
-using IO.Swagger.Client;
-using IO.Swagger.Model;
+using OsduClient.Api;
+using OsduClient.Client;
+using OsduClient.Model;
 
 namespace Example
 {
@@ -91,9 +91,9 @@ Create a new location in the landing zone to upload a file. **Required roles**: 
 ```csharp
 using System;
 using System.Diagnostics;
-using IO.Swagger.Api;
-using IO.Swagger.Client;
-using IO.Swagger.Model;
+using OsduClient.Api;
+using OsduClient.Client;
+using OsduClient.Model;
 
 namespace Example
 {
@@ -159,9 +159,9 @@ Gets a temporary signed URL to upload a file.The generated URL is time bound and
 ```csharp
 using System;
 using System.Diagnostics;
-using IO.Swagger.Api;
-using IO.Swagger.Client;
-using IO.Swagger.Model;
+using OsduClient.Api;
+using OsduClient.Client;
+using OsduClient.Model;
 
 namespace Example
 {
@@ -225,9 +225,9 @@ Gets the latest version of File metadata record identified by the given id. **Re
 ```csharp
 using System;
 using System.Diagnostics;
-using IO.Swagger.Api;
-using IO.Swagger.Client;
-using IO.Swagger.Model;
+using OsduClient.Api;
+using OsduClient.Client;
+using OsduClient.Model;
 
 namespace Example
 {
@@ -293,9 +293,9 @@ Gets a URL for downloading the file associated with the unique `id`. **Required 
 ```csharp
 using System;
 using System.Diagnostics;
-using IO.Swagger.Api;
-using IO.Swagger.Client;
-using IO.Swagger.Model;
+using OsduClient.Api;
+using OsduClient.Client;
+using OsduClient.Model;
 
 namespace Example
 {
@@ -353,7 +353,7 @@ Name | Type | Description  | Notes
 
 <a name="publishfilemetadataforafile_"></a>
 # **PublishFileMetadataForAFile_**
-> FileMetadataResponse PublishFileMetadataForAFile_ (string dataPartitionId, FileRecord body = null)
+> FileMetadataResponse PublishFileMetadataForAFile_ (string dataPartitionId, FileMetadata body = null)
 
 Creates metadata for a file
 
@@ -363,9 +363,9 @@ This API creates a metadata record for a file that is already uploaded. The Meta
 ```csharp
 using System;
 using System.Diagnostics;
-using IO.Swagger.Api;
-using IO.Swagger.Client;
-using IO.Swagger.Model;
+using OsduClient.Api;
+using OsduClient.Client;
+using OsduClient.Model;
 
 namespace Example
 {
@@ -380,7 +380,7 @@ namespace Example
 
             var apiInstance = new FileServiceApi();
             var dataPartitionId = dataPartitionId_example;  // string | Specifies the data partition to use. This should either be the partition name or crm account ID associated with the partition.
-            var body = new FileRecord(); // FileRecord | File metadata content (optional) 
+            var body = new FileMetadata(); // FileMetadata | File metadata content (optional) 
 
             try
             {
@@ -402,7 +402,7 @@ namespace Example
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **dataPartitionId** | **string**| Specifies the data partition to use. This should either be the partition name or crm account ID associated with the partition. | 
- **body** | [**FileRecord**](FileRecord.md)| File metadata content | [optional] 
+ **body** | [**FileMetadata**](FileMetadata.md)| File metadata content | [optional] 
 
 ### Return type
 

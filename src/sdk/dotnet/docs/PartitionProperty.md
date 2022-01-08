@@ -1,4 +1,4 @@
-# IO.Swagger.Model.PartitionProperty
+# OsduClient.Model.PartitionProperty
 ## Properties
 
 Name | Type | Description | Notes

@@ -1,4 +1,4 @@
-# IO.Swagger.Model.NotificationResponseEntity
+# OsduClient.Model.NotificationResponseEntity
 ## Properties
 
 Name | Type | Description | Notes

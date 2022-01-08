@@ -1,4 +1,4 @@
-# IO.Swagger.Model.FileDownloadResponse
+# OsduClient.Model.FileDownloadResponse
 ## Properties
 
 Name | Type | Description | Notes

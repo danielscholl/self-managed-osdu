@@ -1,4 +1,4 @@
-# swagger_client.PartitionApi
+# OsduClient.PartitionApi
 
 All URIs are relative to *https://self-managed-osdu.westeurope.cloudapp.azure.com*
 
@@ -22,20 +22,20 @@ By passing in a partition Id and a partition info object you can create a partit
 ```python
 from __future__ import print_function
 import time
-import swagger_client
-from swagger_client.rest import ApiException
+import OsduClient
+from OsduClient.rest import ApiException
 from pprint import pprint
 
 # Configure API key authorization: Bearer
-configuration = swagger_client.Configuration()
+configuration = OsduClient.Configuration()
 configuration.api_key['Authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['Authorization'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = swagger_client.PartitionApi(swagger_client.ApiClient(configuration))
+api_instance = OsduClient.PartitionApi(OsduClient.ApiClient(configuration))
 partition_id = 'partition_id_example' # str | partitionId
-partition_info = swagger_client.PartitionDto() # PartitionDto | partitionInfo
+partition_info = OsduClient.PartitionDto() # PartitionDto | partitionInfo
 
 try:
     # Create Partition
@@ -77,18 +77,18 @@ By passing in a single partition Id, you can delete a partition.
 ```python
 from __future__ import print_function
 import time
-import swagger_client
-from swagger_client.rest import ApiException
+import OsduClient
+from OsduClient.rest import ApiException
 from pprint import pprint
 
 # Configure API key authorization: Bearer
-configuration = swagger_client.Configuration()
+configuration = OsduClient.Configuration()
 configuration.api_key['Authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['Authorization'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = swagger_client.PartitionApi(swagger_client.ApiClient(configuration))
+api_instance = OsduClient.PartitionApi(OsduClient.ApiClient(configuration))
 partition_id = 'partition_id_example' # str | partitionId
 
 try:
@@ -130,18 +130,18 @@ By passing in a partition Id, you can retrieve the partition information.
 ```python
 from __future__ import print_function
 import time
-import swagger_client
-from swagger_client.rest import ApiException
+import OsduClient
+from OsduClient.rest import ApiException
 from pprint import pprint
 
 # Configure API key authorization: Bearer
-configuration = swagger_client.Configuration()
+configuration = OsduClient.Configuration()
 configuration.api_key['Authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['Authorization'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = swagger_client.PartitionApi(swagger_client.ApiClient(configuration))
+api_instance = OsduClient.PartitionApi(OsduClient.ApiClient(configuration))
 partition_id = 'partition_id_example' # str | partitionId
 
 try:
@@ -182,18 +182,18 @@ List Partitions
 ```python
 from __future__ import print_function
 import time
-import swagger_client
-from swagger_client.rest import ApiException
+import OsduClient
+from OsduClient.rest import ApiException
 from pprint import pprint
 
 # Configure API key authorization: Bearer
-configuration = swagger_client.Configuration()
+configuration = OsduClient.Configuration()
 configuration.api_key['Authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['Authorization'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = swagger_client.PartitionApi(swagger_client.ApiClient(configuration))
+api_instance = OsduClient.PartitionApi(OsduClient.ApiClient(configuration))
 
 try:
     # List Partitions
@@ -232,20 +232,20 @@ By passing in a partition Id and a partition info object you can update a partit
 ```python
 from __future__ import print_function
 import time
-import swagger_client
-from swagger_client.rest import ApiException
+import OsduClient
+from OsduClient.rest import ApiException
 from pprint import pprint
 
 # Configure API key authorization: Bearer
-configuration = swagger_client.Configuration()
+configuration = OsduClient.Configuration()
 configuration.api_key['Authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['Authorization'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = swagger_client.PartitionApi(swagger_client.ApiClient(configuration))
+api_instance = OsduClient.PartitionApi(OsduClient.ApiClient(configuration))
 partition_id = 'partition_id_example' # str | partitionId
-partition_info = swagger_client.PartitionDto() # PartitionDto | partitionInfo
+partition_info = OsduClient.PartitionDto() # PartitionDto | partitionInfo
 
 try:
     # Update Partition

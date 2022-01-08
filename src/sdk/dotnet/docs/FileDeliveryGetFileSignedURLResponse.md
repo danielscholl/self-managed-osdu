@@ -1,4 +1,4 @@
-# IO.Swagger.Model.FileDeliveryGetFileSignedURLResponse
+# OsduClient.Model.FileDeliveryGetFileSignedURLResponse
 ## Properties
 
 Name | Type | Description | Notes

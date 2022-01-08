@@ -15,9 +15,9 @@ from __future__ import absolute_import
 
 import unittest
 
-import swagger_client
-from swagger_client.models.storage_error_response import StorageErrorResponse  # noqa: E501
-from swagger_client.rest import ApiException
+import OsduClient
+from OsduClient.models.storage_error_response import StorageErrorResponse  # noqa: E501
+from OsduClient.rest import ApiException
 
 
 class TestStorageErrorResponse(unittest.TestCase):
@@ -32,7 +32,7 @@ class TestStorageErrorResponse(unittest.TestCase):
     def testStorageErrorResponse(self):
         """Test StorageErrorResponse"""
         # FIXME: construct object with mandatory attributes with example values
-        # model = swagger_client.models.storage_error_response.StorageErrorResponse()  # noqa: E501
+        # model = OsduClient.models.storage_error_response.StorageErrorResponse()  # noqa: E501
         pass
 
 

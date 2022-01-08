@@ -25,11 +25,11 @@ Delete a workflow by it&#39;s name.
 ### Example
 ```java
 // Import classes:
-//import io.swagger.client.ApiClient;
-//import io.swagger.client.ApiException;
-//import io.swagger.client.Configuration;
-//import io.swagger.client.auth.*;
-//import io.swagger.client.api.WorkflowApi;
+//import osdu.client.ApiClient;
+//import osdu.client.ApiException;
+//import osdu.client.Configuration;
+//import osdu.client.auth.*;
+//import osdu.client.api.WorkflowApi;
 
 ApiClient defaultClient = Configuration.getDefaultApiClient();
 
@@ -79,11 +79,11 @@ API to create a new workflow using standard operators of orchestrator.
 ### Example
 ```java
 // Import classes:
-//import io.swagger.client.ApiClient;
-//import io.swagger.client.ApiException;
-//import io.swagger.client.Configuration;
-//import io.swagger.client.auth.*;
-//import io.swagger.client.api.WorkflowApi;
+//import osdu.client.ApiClient;
+//import osdu.client.ApiException;
+//import osdu.client.Configuration;
+//import osdu.client.auth.*;
+//import osdu.client.api.WorkflowApi;
 
 ApiClient defaultClient = Configuration.getDefaultApiClient();
 
@@ -134,11 +134,11 @@ Get all run instances for a worflow.
 ### Example
 ```java
 // Import classes:
-//import io.swagger.client.ApiClient;
-//import io.swagger.client.ApiException;
-//import io.swagger.client.Configuration;
-//import io.swagger.client.auth.*;
-//import io.swagger.client.api.WorkflowApi;
+//import osdu.client.ApiClient;
+//import osdu.client.ApiException;
+//import osdu.client.Configuration;
+//import osdu.client.auth.*;
+//import osdu.client.api.WorkflowApi;
 
 ApiClient defaultClient = Configuration.getDefaultApiClient();
 
@@ -203,11 +203,11 @@ Get an execution instances for a workflow.
 ### Example
 ```java
 // Import classes:
-//import io.swagger.client.ApiClient;
-//import io.swagger.client.ApiException;
-//import io.swagger.client.Configuration;
-//import io.swagger.client.auth.*;
-//import io.swagger.client.api.WorkflowApi;
+//import osdu.client.ApiClient;
+//import osdu.client.ApiException;
+//import osdu.client.Configuration;
+//import osdu.client.auth.*;
+//import osdu.client.api.WorkflowApi;
 
 ApiClient defaultClient = Configuration.getDefaultApiClient();
 
@@ -260,11 +260,11 @@ List all the workflows for the tenant.
 ### Example
 ```java
 // Import classes:
-//import io.swagger.client.ApiClient;
-//import io.swagger.client.ApiException;
-//import io.swagger.client.Configuration;
-//import io.swagger.client.auth.*;
-//import io.swagger.client.api.WorkflowApi;
+//import osdu.client.ApiClient;
+//import osdu.client.ApiException;
+//import osdu.client.Configuration;
+//import osdu.client.auth.*;
+//import osdu.client.api.WorkflowApi;
 
 ApiClient defaultClient = Configuration.getDefaultApiClient();
 
@@ -315,11 +315,11 @@ Trigger a workflow mentioned in payload.
 ### Example
 ```java
 // Import classes:
-//import io.swagger.client.ApiClient;
-//import io.swagger.client.ApiException;
-//import io.swagger.client.Configuration;
-//import io.swagger.client.auth.*;
-//import io.swagger.client.api.WorkflowApi;
+//import osdu.client.ApiClient;
+//import osdu.client.ApiException;
+//import osdu.client.Configuration;
+//import osdu.client.auth.*;
+//import osdu.client.api.WorkflowApi;
 
 ApiClient defaultClient = Configuration.getDefaultApiClient();
 
@@ -372,11 +372,11 @@ Update workflow run.
 ### Example
 ```java
 // Import classes:
-//import io.swagger.client.ApiClient;
-//import io.swagger.client.ApiException;
-//import io.swagger.client.Configuration;
-//import io.swagger.client.auth.*;
-//import io.swagger.client.api.WorkflowApi;
+//import osdu.client.ApiClient;
+//import osdu.client.ApiException;
+//import osdu.client.Configuration;
+//import osdu.client.auth.*;
+//import osdu.client.api.WorkflowApi;
 
 ApiClient defaultClient = Configuration.getDefaultApiClient();
 
@@ -431,11 +431,11 @@ Get complete details for an workflow.
 ### Example
 ```java
 // Import classes:
-//import io.swagger.client.ApiClient;
-//import io.swagger.client.ApiException;
-//import io.swagger.client.Configuration;
-//import io.swagger.client.auth.*;
-//import io.swagger.client.api.WorkflowApi;
+//import osdu.client.ApiClient;
+//import osdu.client.ApiException;
+//import osdu.client.Configuration;
+//import osdu.client.auth.*;
+//import osdu.client.api.WorkflowApi;
 
 ApiClient defaultClient = Configuration.getDefaultApiClient();
 

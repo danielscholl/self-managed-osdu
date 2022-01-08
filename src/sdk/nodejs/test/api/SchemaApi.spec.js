@@ -44,7 +44,7 @@
           body.schema = ;
           body.schemaInfo = new SelfManagedOsdu.SchemaInfo();
           body.schemaInfo.createdBy = "user@opendes.com";
-          body.schemaInfo.dateCreated = 2019-05-23T11:16:03.000+0000;
+          body.schemaInfo.dateCreated = 2019-05-23T11:16:03.000Z;
           body.schemaInfo.schemaIdentity = new SelfManagedOsdu.SchemaIdentity();
           body.schemaInfo.schemaIdentity.authority = "osdu";
           body.schemaInfo.schemaIdentity.entityType = "wellbore";
@@ -74,7 +74,7 @@
             expect(data.createdBy).to.be.a('string');
             expect(data.createdBy).to.be("user@opendes.com");
             expect(data.dateCreated).to.be.a(Date);
-            expect(data.dateCreated).to.be(2019-05-23T11:16:03.000+0000);
+            expect(data.dateCreated).to.be(2019-05-23T11:16:03.000Z);
             expect(data.schemaIdentity).to.be.a(SelfManagedOsdu.SchemaIdentity);
                   expect(data.schemaIdentity.authority).to.be.a('string');
               expect(data.schemaIdentity.authority).to.be("osdu");
@@ -174,7 +174,7 @@
                 expect(data.createdBy).to.be.a('string');
                 expect(data.createdBy).to.be("user@opendes.com");
                 expect(data.dateCreated).to.be.a(Date);
-                expect(data.dateCreated).to.be(2019-05-23T11:16:03.000+0000);
+                expect(data.dateCreated).to.be(2019-05-23T11:16:03.000Z);
                 expect(data.schemaIdentity).to.be.a(SelfManagedOsdu.SchemaIdentity);
                       expect(data.schemaIdentity.authority).to.be.a('string');
                   expect(data.schemaIdentity.authority).to.be("osdu");
@@ -235,7 +235,7 @@
           body.schema = ;
           body.schemaInfo = new SelfManagedOsdu.SchemaInfo();
           body.schemaInfo.createdBy = "user@opendes.com";
-          body.schemaInfo.dateCreated = 2019-05-23T11:16:03.000+0000;
+          body.schemaInfo.dateCreated = 2019-05-23T11:16:03.000Z;
           body.schemaInfo.schemaIdentity = new SelfManagedOsdu.SchemaIdentity();
           body.schemaInfo.schemaIdentity.authority = "osdu";
           body.schemaInfo.schemaIdentity.entityType = "wellbore";
@@ -265,7 +265,7 @@
             expect(data.createdBy).to.be.a('string');
             expect(data.createdBy).to.be("user@opendes.com");
             expect(data.dateCreated).to.be.a(Date);
-            expect(data.dateCreated).to.be(2019-05-23T11:16:03.000+0000);
+            expect(data.dateCreated).to.be(2019-05-23T11:16:03.000Z);
             expect(data.schemaIdentity).to.be.a(SelfManagedOsdu.SchemaIdentity);
                   expect(data.schemaIdentity.authority).to.be.a('string');
               expect(data.schemaIdentity.authority).to.be("osdu");

@@ -1,4 +1,4 @@
-# IO.Swagger.Model.LegalTagInvalidResponseList
+# OsduClient.Model.LegalTagInvalidResponseList
 ## Properties
 
 Name | Type | Description | Notes

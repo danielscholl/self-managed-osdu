@@ -1,4 +1,4 @@
-# IO.Swagger.Api.EntitlementApi
+# OsduClient.Api.EntitlementApi
 
 All URIs are relative to *https://self-managed-osdu.westeurope.cloudapp.azure.com*
 
@@ -25,9 +25,9 @@ Add Member to Group
 ```csharp
 using System;
 using System.Diagnostics;
-using IO.Swagger.Api;
-using IO.Swagger.Client;
-using IO.Swagger.Model;
+using OsduClient.Api;
+using OsduClient.Client;
+using OsduClient.Model;
 
 namespace Example
 {
@@ -93,9 +93,9 @@ Create a Group
 ```csharp
 using System;
 using System.Diagnostics;
-using IO.Swagger.Api;
-using IO.Swagger.Client;
-using IO.Swagger.Model;
+using OsduClient.Api;
+using OsduClient.Client;
+using OsduClient.Model;
 
 namespace Example
 {
@@ -156,9 +156,9 @@ Delete a Group
 ```csharp
 using System;
 using System.Diagnostics;
-using IO.Swagger.Api;
-using IO.Swagger.Client;
-using IO.Swagger.Model;
+using OsduClient.Api;
+using OsduClient.Client;
+using OsduClient.Model;
 
 namespace Example
 {
@@ -221,9 +221,9 @@ Delete a User
 ```csharp
 using System;
 using System.Diagnostics;
-using IO.Swagger.Api;
-using IO.Swagger.Client;
-using IO.Swagger.Model;
+using OsduClient.Api;
+using OsduClient.Client;
+using OsduClient.Model;
 
 namespace Example
 {
@@ -286,9 +286,9 @@ Remove Member from Group
 ```csharp
 using System;
 using System.Diagnostics;
-using IO.Swagger.Api;
-using IO.Swagger.Client;
-using IO.Swagger.Model;
+using OsduClient.Api;
+using OsduClient.Client;
+using OsduClient.Model;
 
 namespace Example
 {
@@ -354,9 +354,9 @@ List Group Members
 ```csharp
 using System;
 using System.Diagnostics;
-using IO.Swagger.Api;
-using IO.Swagger.Client;
-using IO.Swagger.Model;
+using OsduClient.Api;
+using OsduClient.Client;
+using OsduClient.Model;
 
 namespace Example
 {
@@ -423,9 +423,9 @@ List Assigned Groups for User
 ```csharp
 using System;
 using System.Diagnostics;
-using IO.Swagger.Api;
-using IO.Swagger.Client;
-using IO.Swagger.Model;
+using OsduClient.Api;
+using OsduClient.Client;
+using OsduClient.Model;
 
 namespace Example
 {
@@ -492,9 +492,9 @@ List Assigned Groups
 ```csharp
 using System;
 using System.Diagnostics;
-using IO.Swagger.Api;
-using IO.Swagger.Client;
-using IO.Swagger.Model;
+using OsduClient.Api;
+using OsduClient.Client;
+using OsduClient.Model;
 
 namespace Example
 {
@@ -556,9 +556,9 @@ Updates Items in Group
 ```csharp
 using System;
 using System.Diagnostics;
-using IO.Swagger.Api;
-using IO.Swagger.Client;
-using IO.Swagger.Model;
+using OsduClient.Api;
+using OsduClient.Client;
+using OsduClient.Model;
 
 namespace Example
 {

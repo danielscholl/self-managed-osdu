@@ -1,4 +1,4 @@
-# IO.Swagger.Model.Workflow
+# OsduClient.Model.Workflow
 ## Properties
 
 Name | Type | Description | Notes

@@ -6,7 +6,7 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**deletesMetadataRecordFileForTheGivenId**](FileServiceApi.md#deletesMetadataRecordFileForTheGivenId) | **DELETE** /api/file/v2/files/{Id}/metadata | Deletes metadata record &amp; file assocaited with that record for the given id
 [**getALocationInLandingZoneToUploadAFile_**](FileServiceApi.md#getALocationInLandingZoneToUploadAFile_) | **POST** /api/file/v2/getLocation | Get a location in Landing Zone to upload a file.
-[**getTheLocationToUploadAFile**](FileServiceApi.md#getTheLocationToUploadAFile) | **GET** /api/file/v2/files/UploadURL | Get a location in Landing Zone to upload a file.
+[**getTheLocationToUploadAFile**](FileServiceApi.md#getTheLocationToUploadAFile) | **GET** /api/file/v2/files/uploadURL | Get a location in Landing Zone to upload a file.
 [**getsMetadataRecordForTheGivenId**](FileServiceApi.md#getsMetadataRecordForTheGivenId) | **GET** /api/file/v2/files/{Id}/metadata | Gets metadata record for the given id
 [**getsURLToDownloadTheFileAssociatedWithTheGivenId_**](FileServiceApi.md#getsURLToDownloadTheFileAssociatedWithTheGivenId_) | **GET** /api/file/v2/files/{Id}/DownloadURL | Gets a URL to download the file
 [**publishFileMetadataForAFile_**](FileServiceApi.md#publishFileMetadataForAFile_) | **POST** /api/file/v2/files/metadata | Creates metadata for a file
@@ -23,11 +23,11 @@ Deletes the File metadata record identified by the given id and file associated 
 ### Example
 ```java
 // Import classes:
-//import io.swagger.client.ApiClient;
-//import io.swagger.client.ApiException;
-//import io.swagger.client.Configuration;
-//import io.swagger.client.auth.*;
-//import io.swagger.client.api.FileServiceApi;
+//import osdu.client.ApiClient;
+//import osdu.client.ApiException;
+//import osdu.client.Configuration;
+//import osdu.client.auth.*;
+//import osdu.client.api.FileServiceApi;
 
 ApiClient defaultClient = Configuration.getDefaultApiClient();
 
@@ -79,11 +79,11 @@ Create a new location in the landing zone to upload a file. **Required roles**: 
 ### Example
 ```java
 // Import classes:
-//import io.swagger.client.ApiClient;
-//import io.swagger.client.ApiException;
-//import io.swagger.client.Configuration;
-//import io.swagger.client.auth.*;
-//import io.swagger.client.api.FileServiceApi;
+//import osdu.client.ApiClient;
+//import osdu.client.ApiException;
+//import osdu.client.Configuration;
+//import osdu.client.auth.*;
+//import osdu.client.api.FileServiceApi;
 
 ApiClient defaultClient = Configuration.getDefaultApiClient();
 
@@ -136,11 +136,11 @@ Gets a temporary signed URL to upload a file.The generated URL is time bound and
 ### Example
 ```java
 // Import classes:
-//import io.swagger.client.ApiClient;
-//import io.swagger.client.ApiException;
-//import io.swagger.client.Configuration;
-//import io.swagger.client.auth.*;
-//import io.swagger.client.api.FileServiceApi;
+//import osdu.client.ApiClient;
+//import osdu.client.ApiException;
+//import osdu.client.Configuration;
+//import osdu.client.auth.*;
+//import osdu.client.api.FileServiceApi;
 
 ApiClient defaultClient = Configuration.getDefaultApiClient();
 
@@ -191,11 +191,11 @@ Gets the latest version of File metadata record identified by the given id. **Re
 ### Example
 ```java
 // Import classes:
-//import io.swagger.client.ApiClient;
-//import io.swagger.client.ApiException;
-//import io.swagger.client.Configuration;
-//import io.swagger.client.auth.*;
-//import io.swagger.client.api.FileServiceApi;
+//import osdu.client.ApiClient;
+//import osdu.client.ApiException;
+//import osdu.client.Configuration;
+//import osdu.client.auth.*;
+//import osdu.client.api.FileServiceApi;
 
 ApiClient defaultClient = Configuration.getDefaultApiClient();
 
@@ -248,11 +248,11 @@ Gets a URL for downloading the file associated with the unique &#x60;id&#x60;. *
 ### Example
 ```java
 // Import classes:
-//import io.swagger.client.ApiClient;
-//import io.swagger.client.ApiException;
-//import io.swagger.client.Configuration;
-//import io.swagger.client.auth.*;
-//import io.swagger.client.api.FileServiceApi;
+//import osdu.client.ApiClient;
+//import osdu.client.ApiException;
+//import osdu.client.Configuration;
+//import osdu.client.auth.*;
+//import osdu.client.api.FileServiceApi;
 
 ApiClient defaultClient = Configuration.getDefaultApiClient();
 
@@ -307,11 +307,11 @@ This API creates a metadata record for a file that is already uploaded. The Meta
 ### Example
 ```java
 // Import classes:
-//import io.swagger.client.ApiClient;
-//import io.swagger.client.ApiException;
-//import io.swagger.client.Configuration;
-//import io.swagger.client.auth.*;
-//import io.swagger.client.api.FileServiceApi;
+//import osdu.client.ApiClient;
+//import osdu.client.ApiException;
+//import osdu.client.Configuration;
+//import osdu.client.auth.*;
+//import osdu.client.api.FileServiceApi;
 
 ApiClient defaultClient = Configuration.getDefaultApiClient();
 
@@ -323,7 +323,7 @@ Bearer.setApiKey("YOUR API KEY");
 
 FileServiceApi apiInstance = new FileServiceApi();
 String dataPartitionId = "dataPartitionId_example"; // String | Specifies the data partition to use. This should either be the partition name or crm account ID associated with the partition.
-FileRecord body = new FileRecord(); // FileRecord | File metadata content
+FileMetadata body = new FileMetadata(); // FileMetadata | File metadata content
 try {
     FileMetadataResponse result = apiInstance.publishFileMetadataForAFile_(dataPartitionId, body);
     System.out.println(result);
@@ -338,7 +338,7 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **dataPartitionId** | **String**| Specifies the data partition to use. This should either be the partition name or crm account ID associated with the partition. |
- **body** | [**FileRecord**](FileRecord.md)| File metadata content | [optional]
+ **body** | [**FileMetadata**](FileMetadata.md)| File metadata content | [optional]
 
 ### Return type
 

@@ -4,6 +4,6 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **fileID** | [**FileID**](FileID.md) |  | [optional] 
-**location** | **Object** |  | [optional] 
+**location** | **{String: String}** |  | [optional] 
 
 

@@ -1,4 +1,4 @@
-# IO.Swagger.Model.EntitlementMemberDto
+# OsduClient.Model.EntitlementMemberDto
 ## Properties
 
 Name | Type | Description | Notes

@@ -1,4 +1,4 @@
-# swagger_client.EntitlementApi
+# OsduClient.EntitlementApi
 
 All URIs are relative to *https://self-managed-osdu.westeurope.cloudapp.azure.com*
 
@@ -24,21 +24,21 @@ Add Member to Group
 ```python
 from __future__ import print_function
 import time
-import swagger_client
-from swagger_client.rest import ApiException
+import OsduClient
+from OsduClient.rest import ApiException
 from pprint import pprint
 
 # Configure API key authorization: Bearer
-configuration = swagger_client.Configuration()
+configuration = OsduClient.Configuration()
 configuration.api_key['Authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['Authorization'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = swagger_client.EntitlementApi(swagger_client.ApiClient(configuration))
+api_instance = OsduClient.EntitlementApi(OsduClient.ApiClient(configuration))
 data_partition_id = 'data_partition_id_example' # str | Partition Name
 group_email = 'group_email_example' # str | group_email
-partition_info = swagger_client.EntitlementMemberDto() # EntitlementMemberDto | partitionInfo
+partition_info = OsduClient.EntitlementMemberDto() # EntitlementMemberDto | partitionInfo
 
 try:
     # Add Member to Group
@@ -80,18 +80,18 @@ Create a Group
 ```python
 from __future__ import print_function
 import time
-import swagger_client
-from swagger_client.rest import ApiException
+import OsduClient
+from OsduClient.rest import ApiException
 from pprint import pprint
 
 # Configure API key authorization: Bearer
-configuration = swagger_client.Configuration()
+configuration = OsduClient.Configuration()
 configuration.api_key['Authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['Authorization'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = swagger_client.EntitlementApi(swagger_client.ApiClient(configuration))
+api_instance = OsduClient.EntitlementApi(OsduClient.ApiClient(configuration))
 data_partition_id = 'data_partition_id_example' # str | Partition Id
 
 try:
@@ -131,18 +131,18 @@ Delete a Group
 ```python
 from __future__ import print_function
 import time
-import swagger_client
-from swagger_client.rest import ApiException
+import OsduClient
+from OsduClient.rest import ApiException
 from pprint import pprint
 
 # Configure API key authorization: Bearer
-configuration = swagger_client.Configuration()
+configuration = OsduClient.Configuration()
 configuration.api_key['Authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['Authorization'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = swagger_client.EntitlementApi(swagger_client.ApiClient(configuration))
+api_instance = OsduClient.EntitlementApi(OsduClient.ApiClient(configuration))
 data_partition_id = 'data_partition_id_example' # str | tenant
 group_email = 'group_email_example' # str | group_email
 
@@ -184,18 +184,18 @@ Delete a User
 ```python
 from __future__ import print_function
 import time
-import swagger_client
-from swagger_client.rest import ApiException
+import OsduClient
+from OsduClient.rest import ApiException
 from pprint import pprint
 
 # Configure API key authorization: Bearer
-configuration = swagger_client.Configuration()
+configuration = OsduClient.Configuration()
 configuration.api_key['Authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['Authorization'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = swagger_client.EntitlementApi(swagger_client.ApiClient(configuration))
+api_instance = OsduClient.EntitlementApi(OsduClient.ApiClient(configuration))
 data_partition_id = 'data_partition_id_example' # str | Data Partition Id
 member_email = 'member_email_example' # str | member_email
 
@@ -237,18 +237,18 @@ Remove Member from Group
 ```python
 from __future__ import print_function
 import time
-import swagger_client
-from swagger_client.rest import ApiException
+import OsduClient
+from OsduClient.rest import ApiException
 from pprint import pprint
 
 # Configure API key authorization: Bearer
-configuration = swagger_client.Configuration()
+configuration = OsduClient.Configuration()
 configuration.api_key['Authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['Authorization'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = swagger_client.EntitlementApi(swagger_client.ApiClient(configuration))
+api_instance = OsduClient.EntitlementApi(OsduClient.ApiClient(configuration))
 data_partition_id = 'data_partition_id_example' # str | Data Partition Id
 group_email = 'group_email_example' # str | group_email
 member_email = 'member_email_example' # str | member_email
@@ -293,18 +293,18 @@ List Group Members
 ```python
 from __future__ import print_function
 import time
-import swagger_client
-from swagger_client.rest import ApiException
+import OsduClient
+from OsduClient.rest import ApiException
 from pprint import pprint
 
 # Configure API key authorization: Bearer
-configuration = swagger_client.Configuration()
+configuration = OsduClient.Configuration()
 configuration.api_key['Authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['Authorization'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = swagger_client.EntitlementApi(swagger_client.ApiClient(configuration))
+api_instance = OsduClient.EntitlementApi(OsduClient.ApiClient(configuration))
 data_partition_id = 'data_partition_id_example' # str | Data Partition Id
 group_email = 'group_email_example' # str | group_email
 role = 'role_example' # str | role (optional)
@@ -350,18 +350,18 @@ List Assigned Groups for User
 ```python
 from __future__ import print_function
 import time
-import swagger_client
-from swagger_client.rest import ApiException
+import OsduClient
+from OsduClient.rest import ApiException
 from pprint import pprint
 
 # Configure API key authorization: Bearer
-configuration = swagger_client.Configuration()
+configuration = OsduClient.Configuration()
 configuration.api_key['Authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['Authorization'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = swagger_client.EntitlementApi(swagger_client.ApiClient(configuration))
+api_instance = OsduClient.EntitlementApi(OsduClient.ApiClient(configuration))
 data_partition_id = 'data_partition_id_example' # str | tenant
 member_email = 'member_email_example' # str | member_email
 type = 'type_example' # str | type (optional)
@@ -407,18 +407,18 @@ List Assigned Groups
 ```python
 from __future__ import print_function
 import time
-import swagger_client
-from swagger_client.rest import ApiException
+import OsduClient
+from OsduClient.rest import ApiException
 from pprint import pprint
 
 # Configure API key authorization: Bearer
-configuration = swagger_client.Configuration()
+configuration = OsduClient.Configuration()
 configuration.api_key['Authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['Authorization'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = swagger_client.EntitlementApi(swagger_client.ApiClient(configuration))
+api_instance = OsduClient.EntitlementApi(OsduClient.ApiClient(configuration))
 data_partition_id = 'data_partition_id_example' # str | tenant
 
 try:
@@ -459,18 +459,18 @@ Updates Items in Group
 ```python
 from __future__ import print_function
 import time
-import swagger_client
-from swagger_client.rest import ApiException
+import OsduClient
+from OsduClient.rest import ApiException
 from pprint import pprint
 
 # Configure API key authorization: Bearer
-configuration = swagger_client.Configuration()
+configuration = OsduClient.Configuration()
 configuration.api_key['Authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['Authorization'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = swagger_client.EntitlementApi(swagger_client.ApiClient(configuration))
+api_instance = OsduClient.EntitlementApi(OsduClient.ApiClient(configuration))
 data_partition_id = 'data_partition_id_example' # str | tenant
 group_email = 'group_email_example' # str | group_email
 

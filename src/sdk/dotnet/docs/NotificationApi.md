@@ -1,4 +1,4 @@
-# IO.Swagger.Api.NotificationApi
+# OsduClient.Api.NotificationApi
 
 All URIs are relative to *https://self-managed-osdu.westeurope.cloudapp.azure.com*
 
@@ -17,9 +17,9 @@ Notifies subscribers that records have changed
 ```csharp
 using System;
 using System.Diagnostics;
-using IO.Swagger.Api;
-using IO.Swagger.Client;
-using IO.Swagger.Model;
+using OsduClient.Api;
+using OsduClient.Client;
+using OsduClient.Model;
 
 namespace Example
 {

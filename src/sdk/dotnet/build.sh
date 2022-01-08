@@ -40,23 +40,23 @@ if ! type nuget &>/dev/null; then
 fi
 
 mozroots --import --sync
-${nuget_cmd} install src/IO.Swagger/packages.config -o packages;
+${nuget_cmd} install src/OsduClient/packages.config -o packages;
 
 echo "[INFO] Copy DLLs to the 'bin' folder"
 mkdir -p bin;
-cp packages/Newtonsoft.Json.10.0.3/lib/net45/Newtonsoft.Json.dll bin/Newtonsoft.Json.dll;
-cp packages/RestSharp.105.1.0/lib/net45/RestSharp.dll bin/RestSharp.dll;
-cp packages/JsonSubTypes.1.2.0/lib/net45/JsonSubTypes.dll bin/JsonSubTypes.dll
+cp packages/Newtonsoft.Json.13.0.1/lib/net45/Newtonsoft.Json.dll bin/Newtonsoft.Json.dll;
+cp packages/RestSharp.106.15.0/lib/net452/RestSharp.dll bin/RestSharp.dll;
+cp packages/JsonSubTypes.1.8.0/lib/net45/JsonSubTypes.dll bin/JsonSubTypes.dll
 
-echo "[INFO] Run 'mcs' to build bin/IO.Swagger.dll"
+echo "[INFO] Run 'mcs' to build bin/OsduClient.dll"
 mcs -langversion:${langversion} -sdk:${sdk} -r:bin/Newtonsoft.Json.dll,bin/JsonSubTypes.dll,\
 bin/RestSharp.dll,\
 System.ComponentModel.DataAnnotations.dll,\
 System.Runtime.Serialization.dll \
 -target:library \
--out:bin/IO.Swagger.dll \
--recurse:'src/IO.Swagger/*.cs' \
--doc:bin/IO.Swagger.xml \
+-out:bin/OsduClient.dll \
+-recurse:'src/OsduClient/*.cs' \
+-doc:bin/OsduClient.xml \
 -platform:anycpu
 
 if [ $? -ne 0 ]
@@ -64,5 +64,5 @@ then
   echo "[ERROR] Compilation failed with exit code $?"
   exit 1
 else
-  echo "[INFO] bin/IO.Swagger.dll was created successfully"
+  echo "[INFO] bin/OsduClient.dll was created successfully"
 fi

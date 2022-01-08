@@ -1,4 +1,4 @@
-# IO.Swagger.Model.Files
+# OsduClient.Model.Files
 ## Properties
 
 Name | Type | Description | Notes

@@ -104,8 +104,16 @@
             // TODO: update response assertions
             expect(data).to.be.a(SelfManagedOsdu.FileSourceLocationResponse);
             expect(data.fileID).to.be.a(SelfManagedOsdu.FileID);
-                expect(data.location).to.be.a(Object);
-            expect(data.location).to.be();
+                {
+              let dataCtr = data.location;
+              expect(dataCtr).to.be.an(Object);
+              expect(dataCtr).to.not.be.empty();
+              for (let p in dataCtr) {
+                let data = dataCtr[p];
+                expect(data).to.be.a('string');
+                expect(data).to.be("");
+              }
+            }
 
             done();
           });
@@ -195,8 +203,18 @@
               expect(data.data.datasetProperties).to.be();
               expect(data.data.extensionProperties).to.be.a(Object);
               expect(data.data.extensionProperties).to.be();
-            expect(data.ancestry).to.be.a(SelfManagedOsdu.FileLinkList);
-                expect(data.version).to.be.a('number');
+            expect(data.ancestry).to.be.a(SelfManagedOsdu.FileAncestry);
+                  {
+                let dataCtr = data.ancestry.parents;
+                expect(dataCtr).to.be.an(Array);
+                expect(dataCtr).to.not.be.empty();
+                for (let p in dataCtr) {
+                  let data = dataCtr[p];
+                  expect(data).to.be.a('string');
+                  expect(data).to.be("");
+                }
+              }
+            expect(data.version).to.be.a('number');
             expect(data.version).to.be(1831253916104085);
 
             done();
@@ -238,7 +256,7 @@
           /*
           var dataPartitionId = "dataPartitionId_example";
           var opts = {};
-          opts.body = new SelfManagedOsdu.FileRecord();
+          opts.body = new SelfManagedOsdu.FileMetadata();
           opts.body.kind = "osdu:wks:dataset--File.Generic:1.0.0";
           opts.body.acl = new SelfManagedOsdu.FileAcl();
           opts.body.acl.viewers = [""];
@@ -257,7 +275,8 @@
           opts.body.data.checksum = "";
           opts.body.data.datasetProperties = ;
           opts.body.data.extensionProperties = ;
-          opts.body.ancestry = new SelfManagedOsdu.FileLinkList();
+          opts.body.ancestry = new SelfManagedOsdu.FileAncestry();
+          opts.body.ancestry.parents = [""];
 
           instance.publishFileMetadataForAFile_(dataPartitionId, opts, function(error, data, response) {
             if (error) {

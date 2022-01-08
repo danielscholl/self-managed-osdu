@@ -15,9 +15,9 @@ from __future__ import absolute_import
 
 import unittest
 
-import swagger_client
-from swagger_client.models.file_acl import FileAcl  # noqa: E501
-from swagger_client.rest import ApiException
+import OsduClient
+from OsduClient.models.file_acl import FileAcl  # noqa: E501
+from OsduClient.rest import ApiException
 
 
 class TestFileAcl(unittest.TestCase):
@@ -32,7 +32,7 @@ class TestFileAcl(unittest.TestCase):
     def testFileAcl(self):
         """Test FileAcl"""
         # FIXME: construct object with mandatory attributes with example values
-        # model = swagger_client.models.file_acl.FileAcl()  # noqa: E501
+        # model = OsduClient.models.file_acl.FileAcl()  # noqa: E501
         pass
 
 

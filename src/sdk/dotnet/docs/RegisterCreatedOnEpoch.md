@@ -1,4 +1,4 @@
-# IO.Swagger.Model.RegisterCreatedOnEpoch
+# OsduClient.Model.RegisterCreatedOnEpoch
 ## Properties
 
 Name | Type | Description | Notes

@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **fileID** | **String** |  |  [optional]
-**location** | **Object** |  |  [optional]
+**location** | **Map&lt;String, String&gt;** |  |  [optional]
 
 
 

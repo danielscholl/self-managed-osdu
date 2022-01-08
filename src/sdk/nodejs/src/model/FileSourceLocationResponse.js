@@ -57,7 +57,7 @@
       if (data.hasOwnProperty('FileID'))
         obj.fileID = FileID.constructFromObject(data['FileID']);
       if (data.hasOwnProperty('Location'))
-        obj.location = ApiClient.convertToType(data['Location'], Object);
+        obj.location = ApiClient.convertToType(data['Location'], {'String': 'String'});
     }
     return obj;
   }
@@ -68,7 +68,7 @@
   exports.prototype.fileID = undefined;
 
   /**
-   * @member {Object} location
+   * @member {Object.<String, String>} location
    */
   exports.prototype.location = undefined;
 

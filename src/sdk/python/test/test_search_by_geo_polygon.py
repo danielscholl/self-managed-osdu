@@ -15,9 +15,9 @@ from __future__ import absolute_import
 
 import unittest
 
-import swagger_client
-from swagger_client.models.search_by_geo_polygon import SearchByGeoPolygon  # noqa: E501
-from swagger_client.rest import ApiException
+import OsduClient
+from OsduClient.models.search_by_geo_polygon import SearchByGeoPolygon  # noqa: E501
+from OsduClient.rest import ApiException
 
 
 class TestSearchByGeoPolygon(unittest.TestCase):
@@ -32,7 +32,7 @@ class TestSearchByGeoPolygon(unittest.TestCase):
     def testSearchByGeoPolygon(self):
         """Test SearchByGeoPolygon"""
         # FIXME: construct object with mandatory attributes with example values
-        # model = swagger_client.models.search_by_geo_polygon.SearchByGeoPolygon()  # noqa: E501
+        # model = OsduClient.models.search_by_geo_polygon.SearchByGeoPolygon()  # noqa: E501
         pass
 
 

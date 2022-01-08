@@ -1,4 +1,4 @@
-# IO.Swagger.Model.StorageAcl
+# OsduClient.Model.StorageAcl
 ## Properties
 
 Name | Type | Description | Notes

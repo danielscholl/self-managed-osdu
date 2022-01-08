@@ -1,4 +1,4 @@
-# IO.Swagger.Model.FileLandingZoneLocationResponse
+# OsduClient.Model.FileLandingZoneLocationResponse
 ## Properties
 
 Name | Type | Description | Notes

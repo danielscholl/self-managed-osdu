@@ -15,16 +15,16 @@ from __future__ import absolute_import
 
 import unittest
 
-import swagger_client
-from swagger_client.api.notification_api import NotificationApi  # noqa: E501
-from swagger_client.rest import ApiException
+import OsduClient
+from OsduClient.api.notification_api import NotificationApi  # noqa: E501
+from OsduClient.rest import ApiException
 
 
 class TestNotificationApi(unittest.TestCase):
     """NotificationApi unit test stubs"""
 
     def setUp(self):
-        self.api = swagger_client.api.notification_api.NotificationApi()  # noqa: E501
+        self.api = OsduClient.api.notification_api.NotificationApi()  # noqa: E501
 
     def tearDown(self):
         pass

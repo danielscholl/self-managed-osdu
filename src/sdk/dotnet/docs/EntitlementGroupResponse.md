@@ -1,4 +1,4 @@
-# IO.Swagger.Model.EntitlementGroupResponse
+# OsduClient.Model.EntitlementGroupResponse
 ## Properties
 
 Name | Type | Description | Notes

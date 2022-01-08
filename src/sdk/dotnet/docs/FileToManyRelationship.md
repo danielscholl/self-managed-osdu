@@ -1,4 +1,4 @@
-# IO.Swagger.Model.FileToManyRelationship
+# OsduClient.Model.FileToManyRelationship
 ## Properties
 
 Name | Type | Description | Notes

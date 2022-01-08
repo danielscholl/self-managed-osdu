@@ -140,7 +140,7 @@ Class | Method | HTTP request | Description
 *SelfManagedOsdu.EntitlementApi* | [**updateGroupUsingPATCH**](docs/EntitlementApi.md#updateGroupUsingPATCH) | **PATCH** /api/entitlements/v2/groups/{group_email} | Updates Items in Group
 *SelfManagedOsdu.FileServiceApi* | [**deletesMetadataRecordFileForTheGivenId**](docs/FileServiceApi.md#deletesMetadataRecordFileForTheGivenId) | **DELETE** /api/file/v2/files/{Id}/metadata | Deletes metadata record & file assocaited with that record for the given id
 *SelfManagedOsdu.FileServiceApi* | [**getALocationInLandingZoneToUploadAFile_**](docs/FileServiceApi.md#getALocationInLandingZoneToUploadAFile_) | **POST** /api/file/v2/getLocation | Get a location in Landing Zone to upload a file.
-*SelfManagedOsdu.FileServiceApi* | [**getTheLocationToUploadAFile**](docs/FileServiceApi.md#getTheLocationToUploadAFile) | **GET** /api/file/v2/files/UploadURL | Get a location in Landing Zone to upload a file.
+*SelfManagedOsdu.FileServiceApi* | [**getTheLocationToUploadAFile**](docs/FileServiceApi.md#getTheLocationToUploadAFile) | **GET** /api/file/v2/files/uploadURL | Get a location in Landing Zone to upload a file.
 *SelfManagedOsdu.FileServiceApi* | [**getsMetadataRecordForTheGivenId**](docs/FileServiceApi.md#getsMetadataRecordForTheGivenId) | **GET** /api/file/v2/files/{Id}/metadata | Gets metadata record for the given id
 *SelfManagedOsdu.FileServiceApi* | [**getsURLToDownloadTheFileAssociatedWithTheGivenId_**](docs/FileServiceApi.md#getsURLToDownloadTheFileAssociatedWithTheGivenId_) | **GET** /api/file/v2/files/{Id}/DownloadURL | Gets a URL to download the file
 *SelfManagedOsdu.FileServiceApi* | [**publishFileMetadataForAFile_**](docs/FileServiceApi.md#publishFileMetadataForAFile_) | **POST** /api/file/v2/files/metadata | Creates metadata for a file
@@ -207,28 +207,22 @@ Class | Method | HTTP request | Description
  - [SelfManagedOsdu.EntitlementGroupResponse](docs/EntitlementGroupResponse.md)
  - [SelfManagedOsdu.EntitlementMemberDto](docs/EntitlementMemberDto.md)
  - [SelfManagedOsdu.FileAcl](docs/FileAcl.md)
+ - [SelfManagedOsdu.FileAncestry](docs/FileAncestry.md)
  - [SelfManagedOsdu.FileApplicationError](docs/FileApplicationError.md)
- - [SelfManagedOsdu.FileDateTime](docs/FileDateTime.md)
  - [SelfManagedOsdu.FileDeliveryGetFileSignedURLRequest](docs/FileDeliveryGetFileSignedURLRequest.md)
  - [SelfManagedOsdu.FileDeliveryGetFileSignedURLResponse](docs/FileDeliveryGetFileSignedURLResponse.md)
  - [SelfManagedOsdu.FileDetails](docs/FileDetails.md)
  - [SelfManagedOsdu.FileDownloadResponse](docs/FileDownloadResponse.md)
- - [SelfManagedOsdu.FileDriver](docs/FileDriver.md)
  - [SelfManagedOsdu.FileError](docs/FileError.md)
  - [SelfManagedOsdu.FileErrorModel](docs/FileErrorModel.md)
  - [SelfManagedOsdu.FileExtensionProperties](docs/FileExtensionProperties.md)
  - [SelfManagedOsdu.FileID](docs/FileID.md)
  - [SelfManagedOsdu.FileLandingZoneLocationResponse](docs/FileLandingZoneLocationResponse.md)
  - [SelfManagedOsdu.FileLegal](docs/FileLegal.md)
- - [SelfManagedOsdu.FileLinkList](docs/FileLinkList.md)
- - [SelfManagedOsdu.FileListRequest](docs/FileListRequest.md)
- - [SelfManagedOsdu.FileListResponse](docs/FileListResponse.md)
- - [SelfManagedOsdu.FileLocation](docs/FileLocation.md)
  - [SelfManagedOsdu.FileLocationRequest](docs/FileLocationRequest.md)
- - [SelfManagedOsdu.FileLocationResponse](docs/FileLocationResponse.md)
  - [SelfManagedOsdu.FileMetaItem](docs/FileMetaItem.md)
+ - [SelfManagedOsdu.FileMetadata](docs/FileMetadata.md)
  - [SelfManagedOsdu.FileMetadataResponse](docs/FileMetadataResponse.md)
- - [SelfManagedOsdu.FileRecord](docs/FileRecord.md)
  - [SelfManagedOsdu.FileRecordVersion](docs/FileRecordVersion.md)
  - [SelfManagedOsdu.FileRelationships](docs/FileRelationships.md)
  - [SelfManagedOsdu.FileSourceLocationResponse](docs/FileSourceLocationResponse.md)

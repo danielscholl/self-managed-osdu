@@ -1,4 +1,4 @@
-# IO.Swagger - the C# library for the self-managed-osdu
+# OsduClient - the C# library for the self-managed-osdu
 
 Rest API Documentation for Self Managed OSDU
 
@@ -36,9 +36,9 @@ Run the following command to generate the DLL
 
 Then include the DLL (under the `bin` folder) in the C# project, and use the namespaces:
 ```csharp
-using IO.Swagger.Api;
-using IO.Swagger.Client;
-using IO.Swagger.Model;
+using OsduClient.Api;
+using OsduClient.Client;
+using OsduClient.Model;
 ```
 <a name="packaging"></a>
 ## Packaging
@@ -48,7 +48,7 @@ A `.nuspec` is included with the project. You can follow the Nuget quickstart to
 This `.nuspec` uses placeholders from the `.csproj`, so build the `.csproj` directly:
 
 ```
-nuget pack -Build -OutputDirectory out IO.Swagger.csproj
+nuget pack -Build -OutputDirectory out OsduClient.csproj
 ```
 
 Then, publish to a [local feed](https://docs.microsoft.com/en-us/nuget/hosting-packages/local-feeds) or [other host](https://docs.microsoft.com/en-us/nuget/hosting-packages/overview) and consume the new package via Nuget as usual.
@@ -59,9 +59,9 @@ Then, publish to a [local feed](https://docs.microsoft.com/en-us/nuget/hosting-p
 ```csharp
 using System;
 using System.Diagnostics;
-using IO.Swagger.Api;
-using IO.Swagger.Client;
-using IO.Swagger.Model;
+using OsduClient.Api;
+using OsduClient.Client;
+using OsduClient.Model;
 
 namespace Example
 {
@@ -113,7 +113,7 @@ Class | Method | HTTP request | Description
 *EntitlementApi* | [**UpdateGroupUsingPATCH**](docs/EntitlementApi.md#updategroupusingpatch) | **PATCH** /api/entitlements/v2/groups/{group_email} | Updates Items in Group
 *FileServiceApi* | [**DeletesMetadataRecordFileForTheGivenId**](docs/FileServiceApi.md#deletesmetadatarecordfileforthegivenid) | **DELETE** /api/file/v2/files/{Id}/metadata | Deletes metadata record & file assocaited with that record for the given id
 *FileServiceApi* | [**GetALocationInLandingZoneToUploadAFile_**](docs/FileServiceApi.md#getalocationinlandingzonetouploadafile_) | **POST** /api/file/v2/getLocation | Get a location in Landing Zone to upload a file.
-*FileServiceApi* | [**GetTheLocationToUploadAFile**](docs/FileServiceApi.md#getthelocationtouploadafile) | **GET** /api/file/v2/files/UploadURL | Get a location in Landing Zone to upload a file.
+*FileServiceApi* | [**GetTheLocationToUploadAFile**](docs/FileServiceApi.md#getthelocationtouploadafile) | **GET** /api/file/v2/files/uploadURL | Get a location in Landing Zone to upload a file.
 *FileServiceApi* | [**GetsMetadataRecordForTheGivenId**](docs/FileServiceApi.md#getsmetadatarecordforthegivenid) | **GET** /api/file/v2/files/{Id}/metadata | Gets metadata record for the given id
 *FileServiceApi* | [**GetsURLToDownloadTheFileAssociatedWithTheGivenId_**](docs/FileServiceApi.md#getsurltodownloadthefileassociatedwiththegivenid_) | **GET** /api/file/v2/files/{Id}/DownloadURL | Gets a URL to download the file
 *FileServiceApi* | [**PublishFileMetadataForAFile_**](docs/FileServiceApi.md#publishfilemetadataforafile_) | **POST** /api/file/v2/files/metadata | Creates metadata for a file
@@ -181,26 +181,21 @@ Class | Method | HTTP request | Description
  - [Model.EntitlementGroupResponse](docs/EntitlementGroupResponse.md)
  - [Model.EntitlementMemberDto](docs/EntitlementMemberDto.md)
  - [Model.FileAcl](docs/FileAcl.md)
+ - [Model.FileAncestry](docs/FileAncestry.md)
  - [Model.FileApplicationError](docs/FileApplicationError.md)
  - [Model.FileDeliveryGetFileSignedURLRequest](docs/FileDeliveryGetFileSignedURLRequest.md)
  - [Model.FileDeliveryGetFileSignedURLResponse](docs/FileDeliveryGetFileSignedURLResponse.md)
  - [Model.FileDetails](docs/FileDetails.md)
  - [Model.FileDownloadResponse](docs/FileDownloadResponse.md)
- - [Model.FileDriver](docs/FileDriver.md)
  - [Model.FileError](docs/FileError.md)
  - [Model.FileErrorModel](docs/FileErrorModel.md)
  - [Model.FileExtensionProperties](docs/FileExtensionProperties.md)
  - [Model.FileLandingZoneLocationResponse](docs/FileLandingZoneLocationResponse.md)
  - [Model.FileLegal](docs/FileLegal.md)
- - [Model.FileLinkList](docs/FileLinkList.md)
- - [Model.FileListRequest](docs/FileListRequest.md)
- - [Model.FileListResponse](docs/FileListResponse.md)
- - [Model.FileLocation](docs/FileLocation.md)
  - [Model.FileLocationRequest](docs/FileLocationRequest.md)
- - [Model.FileLocationResponse](docs/FileLocationResponse.md)
  - [Model.FileMetaItem](docs/FileMetaItem.md)
+ - [Model.FileMetadata](docs/FileMetadata.md)
  - [Model.FileMetadataResponse](docs/FileMetadataResponse.md)
- - [Model.FileRecord](docs/FileRecord.md)
  - [Model.FileRecordVersion](docs/FileRecordVersion.md)
  - [Model.FileRelationships](docs/FileRelationships.md)
  - [Model.FileSourceLocationResponse](docs/FileSourceLocationResponse.md)

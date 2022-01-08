@@ -15,9 +15,9 @@ from __future__ import absolute_import
 
 import unittest
 
-import swagger_client
-from swagger_client.models.entitlement_group_response import EntitlementGroupResponse  # noqa: E501
-from swagger_client.rest import ApiException
+import OsduClient
+from OsduClient.models.entitlement_group_response import EntitlementGroupResponse  # noqa: E501
+from OsduClient.rest import ApiException
 
 
 class TestEntitlementGroupResponse(unittest.TestCase):
@@ -32,7 +32,7 @@ class TestEntitlementGroupResponse(unittest.TestCase):
     def testEntitlementGroupResponse(self):
         """Test EntitlementGroupResponse"""
         # FIXME: construct object with mandatory attributes with example values
-        # model = swagger_client.models.entitlement_group_response.EntitlementGroupResponse()  # noqa: E501
+        # model = OsduClient.models.entitlement_group_response.EntitlementGroupResponse()  # noqa: E501
         pass
 
 

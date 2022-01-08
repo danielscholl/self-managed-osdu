@@ -1,4 +1,4 @@
-# IO.Swagger.Model.RegisterAcl
+# OsduClient.Model.RegisterAcl
 ## Properties
 
 Name | Type | Description | Notes

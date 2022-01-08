@@ -16,18 +16,18 @@
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
-    define(['ApiClient', 'model/FileAcl', 'model/FileLegal', 'model/FileLinkList', 'model/Files'], factory);
+    define(['ApiClient', 'model/FileAcl', 'model/FileAncestry', 'model/FileLegal', 'model/Files'], factory);
   } else if (typeof module === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'), require('./FileAcl'), require('./FileLegal'), require('./FileLinkList'), require('./Files'));
+    module.exports = factory(require('../ApiClient'), require('./FileAcl'), require('./FileAncestry'), require('./FileLegal'), require('./Files'));
   } else {
     // Browser globals (root is window)
     if (!root.SelfManagedOsdu) {
       root.SelfManagedOsdu = {};
     }
-    root.SelfManagedOsdu.FileRecordVersion = factory(root.SelfManagedOsdu.ApiClient, root.SelfManagedOsdu.FileAcl, root.SelfManagedOsdu.FileLegal, root.SelfManagedOsdu.FileLinkList, root.SelfManagedOsdu.Files);
+    root.SelfManagedOsdu.FileRecordVersion = factory(root.SelfManagedOsdu.ApiClient, root.SelfManagedOsdu.FileAcl, root.SelfManagedOsdu.FileAncestry, root.SelfManagedOsdu.FileLegal, root.SelfManagedOsdu.Files);
   }
-}(this, function(ApiClient, FileAcl, FileLegal, FileLinkList, Files) {
+}(this, function(ApiClient, FileAcl, FileAncestry, FileLegal, Files) {
   'use strict';
 
   /**
@@ -66,7 +66,7 @@
       if (data.hasOwnProperty('data'))
         obj.data = Files.constructFromObject(data['data']);
       if (data.hasOwnProperty('ancestry'))
-        obj.ancestry = FileLinkList.constructFromObject(data['ancestry']);
+        obj.ancestry = FileAncestry.constructFromObject(data['ancestry']);
       if (data.hasOwnProperty('version'))
         obj.version = ApiClient.convertToType(data['version'], 'Number');
     }
@@ -101,7 +101,7 @@
   exports.prototype.data = undefined;
 
   /**
-   * @member {module:model/FileLinkList} ancestry
+   * @member {module:model/FileAncestry} ancestry
    */
   exports.prototype.ancestry = undefined;
 

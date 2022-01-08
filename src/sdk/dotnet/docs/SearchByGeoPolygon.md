@@ -1,4 +1,4 @@
-# IO.Swagger.Model.SearchByGeoPolygon
+# OsduClient.Model.SearchByGeoPolygon
 ## Properties
 
 Name | Type | Description | Notes

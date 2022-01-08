@@ -1,4 +1,4 @@
-# swagger_client.WorkflowApi
+# OsduClient.WorkflowApi
 
 All URIs are relative to *https://self-managed-osdu.westeurope.cloudapp.azure.com*
 
@@ -25,18 +25,18 @@ Delete a workflow by it's name.
 ```python
 from __future__ import print_function
 import time
-import swagger_client
-from swagger_client.rest import ApiException
+import OsduClient
+from OsduClient.rest import ApiException
 from pprint import pprint
 
 # Configure API key authorization: Bearer
-configuration = swagger_client.Configuration()
+configuration = OsduClient.Configuration()
 configuration.api_key['Authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['Authorization'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = swagger_client.WorkflowApi(swagger_client.ApiClient(configuration))
+api_instance = OsduClient.WorkflowApi(OsduClient.ApiClient(configuration))
 workflow_name = 'workflow_name_example' # str | Unique Name of the Workflow to be deleted.
 
 try:
@@ -78,19 +78,19 @@ API to create a new workflow using standard operators of orchestrator.
 ```python
 from __future__ import print_function
 import time
-import swagger_client
-from swagger_client.rest import ApiException
+import OsduClient
+from OsduClient.rest import ApiException
 from pprint import pprint
 
 # Configure API key authorization: Bearer
-configuration = swagger_client.Configuration()
+configuration = OsduClient.Configuration()
 configuration.api_key['Authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['Authorization'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = swagger_client.WorkflowApi(swagger_client.ApiClient(configuration))
-body = swagger_client.Workflow() # Workflow | Request payload for deploying new workflow. (optional)
+api_instance = OsduClient.WorkflowApi(OsduClient.ApiClient(configuration))
+body = OsduClient.Workflow() # Workflow | Request payload for deploying new workflow. (optional)
 
 try:
     # Creates workflow definition with standard orchestrator operators.
@@ -132,18 +132,18 @@ Get all run instances for a worflow.
 ```python
 from __future__ import print_function
 import time
-import swagger_client
-from swagger_client.rest import ApiException
+import OsduClient
+from OsduClient.rest import ApiException
 from pprint import pprint
 
 # Configure API key authorization: Bearer
-configuration = swagger_client.Configuration()
+configuration = OsduClient.Configuration()
 configuration.api_key['Authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['Authorization'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = swagger_client.WorkflowApi(swagger_client.ApiClient(configuration))
+api_instance = OsduClient.WorkflowApi(OsduClient.ApiClient(configuration))
 workflow_name = 'workflow_name_example' # str | Unique Name of the Workflow for which the execution details has to be fetched.
 prefix = 'prefix_example' # str | A prefix used when generating the runId of the workflow run. Prefix cannot contain the word \"backfill\" (optional)
 start_date = 'start_date_example' # str | The start date where this call should start creating workflow runs from (inclusive) (optional)
@@ -200,18 +200,18 @@ Get an execution instances for a workflow.
 ```python
 from __future__ import print_function
 import time
-import swagger_client
-from swagger_client.rest import ApiException
+import OsduClient
+from OsduClient.rest import ApiException
 from pprint import pprint
 
 # Configure API key authorization: Bearer
-configuration = swagger_client.Configuration()
+configuration = OsduClient.Configuration()
 configuration.api_key['Authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['Authorization'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = swagger_client.WorkflowApi(swagger_client.ApiClient(configuration))
+api_instance = OsduClient.WorkflowApi(OsduClient.ApiClient(configuration))
 workflow_name = 'workflow_name_example' # str | Unique Name of Workflow.
 run_id = 'run_id_example' # str | Run id for the worfkow.
 
@@ -256,18 +256,18 @@ List all the workflows for the tenant.
 ```python
 from __future__ import print_function
 import time
-import swagger_client
-from swagger_client.rest import ApiException
+import OsduClient
+from OsduClient.rest import ApiException
 from pprint import pprint
 
 # Configure API key authorization: Bearer
-configuration = swagger_client.Configuration()
+configuration = OsduClient.Configuration()
 configuration.api_key['Authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['Authorization'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = swagger_client.WorkflowApi(swagger_client.ApiClient(configuration))
+api_instance = OsduClient.WorkflowApi(OsduClient.ApiClient(configuration))
 prefix = 'prefix_example' # str | Filter workflow names which start with  the full prefix specified. (optional)
 
 try:
@@ -310,20 +310,20 @@ Trigger a workflow mentioned in payload.
 ```python
 from __future__ import print_function
 import time
-import swagger_client
-from swagger_client.rest import ApiException
+import OsduClient
+from OsduClient.rest import ApiException
 from pprint import pprint
 
 # Configure API key authorization: Bearer
-configuration = swagger_client.Configuration()
+configuration = OsduClient.Configuration()
 configuration.api_key['Authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['Authorization'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = swagger_client.WorkflowApi(swagger_client.ApiClient(configuration))
+api_instance = OsduClient.WorkflowApi(OsduClient.ApiClient(configuration))
 workflow_name = 'workflow_name_example' # str | Unique Name of the Workflow to run.
-body = swagger_client.WorkflowTriggerRequest() # WorkflowTriggerRequest |  (optional)
+body = OsduClient.WorkflowTriggerRequest() # WorkflowTriggerRequest |  (optional)
 
 try:
     # Trigger a workflow.
@@ -366,21 +366,21 @@ Update workflow run.
 ```python
 from __future__ import print_function
 import time
-import swagger_client
-from swagger_client.rest import ApiException
+import OsduClient
+from OsduClient.rest import ApiException
 from pprint import pprint
 
 # Configure API key authorization: Bearer
-configuration = swagger_client.Configuration()
+configuration = OsduClient.Configuration()
 configuration.api_key['Authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['Authorization'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = swagger_client.WorkflowApi(swagger_client.ApiClient(configuration))
+api_instance = OsduClient.WorkflowApi(OsduClient.ApiClient(configuration))
 workflow_name = 'workflow_name_example' # str | Unique Name of Workflow.
 run_id = 'run_id_example' # str | Run id for the worfkow.
-body = swagger_client.WorkflowRun() # WorkflowRun |  (optional)
+body = OsduClient.WorkflowRun() # WorkflowRun |  (optional)
 
 try:
     # Update the workflow run instance.
@@ -424,18 +424,18 @@ Get complete details for an workflow.
 ```python
 from __future__ import print_function
 import time
-import swagger_client
-from swagger_client.rest import ApiException
+import OsduClient
+from OsduClient.rest import ApiException
 from pprint import pprint
 
 # Configure API key authorization: Bearer
-configuration = swagger_client.Configuration()
+configuration = OsduClient.Configuration()
 configuration.api_key['Authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['Authorization'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = swagger_client.WorkflowApi(swagger_client.ApiClient(configuration))
+api_instance = OsduClient.WorkflowApi(OsduClient.ApiClient(configuration))
 workflow_name = 'workflow_name_example' # str | Name of the Workflow.
 
 try:

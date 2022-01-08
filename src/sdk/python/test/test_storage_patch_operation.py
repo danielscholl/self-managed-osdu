@@ -15,9 +15,9 @@ from __future__ import absolute_import
 
 import unittest
 
-import swagger_client
-from swagger_client.models.storage_patch_operation import StoragePatchOperation  # noqa: E501
-from swagger_client.rest import ApiException
+import OsduClient
+from OsduClient.models.storage_patch_operation import StoragePatchOperation  # noqa: E501
+from OsduClient.rest import ApiException
 
 
 class TestStoragePatchOperation(unittest.TestCase):
@@ -32,7 +32,7 @@ class TestStoragePatchOperation(unittest.TestCase):
     def testStoragePatchOperation(self):
         """Test StoragePatchOperation"""
         # FIXME: construct object with mandatory attributes with example values
-        # model = swagger_client.models.storage_patch_operation.StoragePatchOperation()  # noqa: E501
+        # model = OsduClient.models.storage_patch_operation.StoragePatchOperation()  # noqa: E501
         pass
 
 

@@ -1,4 +1,4 @@
-# IO.Swagger.Model.FileApplicationError
+# OsduClient.Model.FileApplicationError
 ## Properties
 
 Name | Type | Description | Notes

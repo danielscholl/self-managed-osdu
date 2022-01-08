@@ -1,4 +1,4 @@
-# swagger_client.RegisterApi
+# OsduClient.RegisterApi
 
 All URIs are relative to *https://self-managed-osdu.westeurope.cloudapp.azure.com*
 
@@ -31,20 +31,20 @@ Create a DDMS registration using an OpenApi spec V3 document. Required roles: 'u
 ```python
 from __future__ import print_function
 import time
-import swagger_client
-from swagger_client.rest import ApiException
+import OsduClient
+from OsduClient.rest import ApiException
 from pprint import pprint
 
 # Configure API key authorization: Bearer
-configuration = swagger_client.Configuration()
+configuration = OsduClient.Configuration()
 configuration.api_key['Authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['Authorization'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = swagger_client.RegisterApi(swagger_client.ApiClient(configuration))
+api_instance = OsduClient.RegisterApi(OsduClient.ApiClient(configuration))
 data_partition_id = 'data_partition_id_example' # str | Specifies the partition to use. This should be either the partition name associated with the partition.
-body = swagger_client.RegisterDdms() # RegisterDdms |  (optional)
+body = OsduClient.RegisterDdms() # RegisterDdms |  (optional)
 
 try:
     # Create a DDMS registration
@@ -87,20 +87,20 @@ Create a subscription. Required roles: 'users.datalake.editors' or 'users.datala
 ```python
 from __future__ import print_function
 import time
-import swagger_client
-from swagger_client.rest import ApiException
+import OsduClient
+from OsduClient.rest import ApiException
 from pprint import pprint
 
 # Configure API key authorization: Bearer
-configuration = swagger_client.Configuration()
+configuration = OsduClient.Configuration()
 configuration.api_key['Authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['Authorization'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = swagger_client.RegisterApi(swagger_client.ApiClient(configuration))
+api_instance = OsduClient.RegisterApi(OsduClient.ApiClient(configuration))
 data_partition_id = 'data_partition_id_example' # str | Specifies the partition to use. This should be either the partition name associated with the partition.
-body = swagger_client.RegisterSubscription() # RegisterSubscription |  (optional)
+body = OsduClient.RegisterSubscription() # RegisterSubscription |  (optional)
 
 try:
     # Create a subscription
@@ -143,20 +143,20 @@ Create an action registration. Required role: 'users.datalake.admins'
 ```python
 from __future__ import print_function
 import time
-import swagger_client
-from swagger_client.rest import ApiException
+import OsduClient
+from OsduClient.rest import ApiException
 from pprint import pprint
 
 # Configure API key authorization: Bearer
-configuration = swagger_client.Configuration()
+configuration = OsduClient.Configuration()
 configuration.api_key['Authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['Authorization'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = swagger_client.RegisterApi(swagger_client.ApiClient(configuration))
+api_instance = OsduClient.RegisterApi(OsduClient.ApiClient(configuration))
 data_partition_id = 'data_partition_id_example' # str | Specifies the partition to use. This should be either the partition name associated with the partition.
-body = swagger_client.RegisterCreateAction() # RegisterCreateAction |  (optional)
+body = OsduClient.RegisterCreateAction() # RegisterCreateAction |  (optional)
 
 try:
     # Create an action registration
@@ -199,18 +199,18 @@ Delete a DDMS registration with the given id. Required roles: 'users.datalake.ad
 ```python
 from __future__ import print_function
 import time
-import swagger_client
-from swagger_client.rest import ApiException
+import OsduClient
+from OsduClient.rest import ApiException
 from pprint import pprint
 
 # Configure API key authorization: Bearer
-configuration = swagger_client.Configuration()
+configuration = OsduClient.Configuration()
 configuration.api_key['Authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['Authorization'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = swagger_client.RegisterApi(swagger_client.ApiClient(configuration))
+api_instance = OsduClient.RegisterApi(OsduClient.ApiClient(configuration))
 id = 'id_example' # str | 
 data_partition_id = 'data_partition_id_example' # str | Specifies the partition to use. This should be either the partition name associated with the partition.
 
@@ -254,18 +254,18 @@ Delete a subscription with its Id. Required role: 'users.datalake.admins'
 ```python
 from __future__ import print_function
 import time
-import swagger_client
-from swagger_client.rest import ApiException
+import OsduClient
+from OsduClient.rest import ApiException
 from pprint import pprint
 
 # Configure API key authorization: Bearer
-configuration = swagger_client.Configuration()
+configuration = OsduClient.Configuration()
 configuration.api_key['Authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['Authorization'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = swagger_client.RegisterApi(swagger_client.ApiClient(configuration))
+api_instance = OsduClient.RegisterApi(OsduClient.ApiClient(configuration))
 id = 'id_example' # str | 
 data_partition_id = 'data_partition_id_example' # str | Specifies the partition to use. This should be either the partition name associated with the partition.
 
@@ -309,18 +309,18 @@ Delete an action registration with the given id. Required role: 'users.datalake.
 ```python
 from __future__ import print_function
 import time
-import swagger_client
-from swagger_client.rest import ApiException
+import OsduClient
+from OsduClient.rest import ApiException
 from pprint import pprint
 
 # Configure API key authorization: Bearer
-configuration = swagger_client.Configuration()
+configuration = OsduClient.Configuration()
 configuration.api_key['Authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['Authorization'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = swagger_client.RegisterApi(swagger_client.ApiClient(configuration))
+api_instance = OsduClient.RegisterApi(OsduClient.ApiClient(configuration))
 id = 'id_example' # str | 
 data_partition_id = 'data_partition_id_example' # str | Specifies the partition to use. This should be either the partition name associated with the partition.
 
@@ -364,18 +364,18 @@ Get a DDMS registration with the given id. Required roles: 'users.datalake.viewe
 ```python
 from __future__ import print_function
 import time
-import swagger_client
-from swagger_client.rest import ApiException
+import OsduClient
+from OsduClient.rest import ApiException
 from pprint import pprint
 
 # Configure API key authorization: Bearer
-configuration = swagger_client.Configuration()
+configuration = OsduClient.Configuration()
 configuration.api_key['Authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['Authorization'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = swagger_client.RegisterApi(swagger_client.ApiClient(configuration))
+api_instance = OsduClient.RegisterApi(OsduClient.ApiClient(configuration))
 id = 'id_example' # str | 
 data_partition_id = 'data_partition_id_example' # str | Specifies the partition to use. This should be either the partition name associated with the partition.
 
@@ -420,18 +420,18 @@ Get a subscription with its Id. Required role: 'users.datalake.editors' or 'user
 ```python
 from __future__ import print_function
 import time
-import swagger_client
-from swagger_client.rest import ApiException
+import OsduClient
+from OsduClient.rest import ApiException
 from pprint import pprint
 
 # Configure API key authorization: Bearer
-configuration = swagger_client.Configuration()
+configuration = OsduClient.Configuration()
 configuration.api_key['Authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['Authorization'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = swagger_client.RegisterApi(swagger_client.ApiClient(configuration))
+api_instance = OsduClient.RegisterApi(OsduClient.ApiClient(configuration))
 id = 'id_example' # str | 
 data_partition_id = 'data_partition_id_example' # str | Specifies the partition to use. This should be either the partition name associated with the partition.
 
@@ -476,18 +476,18 @@ Get an action registration with the given id. Required roles: 'users.datalake.vi
 ```python
 from __future__ import print_function
 import time
-import swagger_client
-from swagger_client.rest import ApiException
+import OsduClient
+from OsduClient.rest import ApiException
 from pprint import pprint
 
 # Configure API key authorization: Bearer
-configuration = swagger_client.Configuration()
+configuration = OsduClient.Configuration()
 configuration.api_key['Authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['Authorization'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = swagger_client.RegisterApi(swagger_client.ApiClient(configuration))
+api_instance = OsduClient.RegisterApi(OsduClient.ApiClient(configuration))
 id = 'id_example' # str | 
 data_partition_id = 'data_partition_id_example' # str | Specifies the partition to use. This should be either the partition name associated with the partition.
 
@@ -532,18 +532,18 @@ List all topics that you can create a subscription for, along with the correspon
 ```python
 from __future__ import print_function
 import time
-import swagger_client
-from swagger_client.rest import ApiException
+import OsduClient
+from OsduClient.rest import ApiException
 from pprint import pprint
 
 # Configure API key authorization: Bearer
-configuration = swagger_client.Configuration()
+configuration = OsduClient.Configuration()
 configuration.api_key['Authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['Authorization'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = swagger_client.RegisterApi(swagger_client.ApiClient(configuration))
+api_instance = OsduClient.RegisterApi(OsduClient.ApiClient(configuration))
 data_partition_id = 'data_partition_id_example' # str | Specifies the partition to use. This should be either the partition name associated with the partition.
 
 try:
@@ -586,18 +586,18 @@ Query for DDMS registrations allowing retrievals by type. Required roles: 'users
 ```python
 from __future__ import print_function
 import time
-import swagger_client
-from swagger_client.rest import ApiException
+import OsduClient
+from OsduClient.rest import ApiException
 from pprint import pprint
 
 # Configure API key authorization: Bearer
-configuration = swagger_client.Configuration()
+configuration = OsduClient.Configuration()
 configuration.api_key['Authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['Authorization'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = swagger_client.RegisterApi(swagger_client.ApiClient(configuration))
+api_instance = OsduClient.RegisterApi(OsduClient.ApiClient(configuration))
 type = 'type_example' # str | 
 data_partition_id = 'data_partition_id_example' # str | Specifies the partition to use. This should be either the partition name associated with the partition.
 
@@ -642,20 +642,20 @@ Retrieve an action registration. Required roles: 'users.datalake.viewers' or 'us
 ```python
 from __future__ import print_function
 import time
-import swagger_client
-from swagger_client.rest import ApiException
+import OsduClient
+from OsduClient.rest import ApiException
 from pprint import pprint
 
 # Configure API key authorization: Bearer
-configuration = swagger_client.Configuration()
+configuration = OsduClient.Configuration()
 configuration.api_key['Authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['Authorization'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = swagger_client.RegisterApi(swagger_client.ApiClient(configuration))
+api_instance = OsduClient.RegisterApi(OsduClient.ApiClient(configuration))
 data_partition_id = 'opendes' # str | Specifies the partition to use. This should be either the partition name associated with the partition. (default to opendes)
-body = swagger_client.RegisterRecord() # RegisterRecord | The Record to find matching actions for and apply the template for. (optional)
+body = OsduClient.RegisterRecord() # RegisterRecord | The Record to find matching actions for and apply the template for. (optional)
 
 try:
     # Query for action registrations and substitutes any action with the given parameters
@@ -698,20 +698,20 @@ Test an action registration. Required roles: 'users.datalake.viewers' or 'users.
 ```python
 from __future__ import print_function
 import time
-import swagger_client
-from swagger_client.rest import ApiException
+import OsduClient
+from OsduClient.rest import ApiException
 from pprint import pprint
 
 # Configure API key authorization: Bearer
-configuration = swagger_client.Configuration()
+configuration = OsduClient.Configuration()
 configuration.api_key['Authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['Authorization'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = swagger_client.RegisterApi(swagger_client.ApiClient(configuration))
+api_instance = OsduClient.RegisterApi(OsduClient.ApiClient(configuration))
 data_partition_id = 'data_partition_id_example' # str | Specifies the partition to use. This should be either the partition name associated with the partition.
-body = swagger_client.RegisterTestAction() # RegisterTestAction |  (optional)
+body = OsduClient.RegisterTestAction() # RegisterTestAction |  (optional)
 
 try:
     # Test an action registration
@@ -754,21 +754,21 @@ Update secret for a subscription. Required role: 'users.datalake.editors' or 'us
 ```python
 from __future__ import print_function
 import time
-import swagger_client
-from swagger_client.rest import ApiException
+import OsduClient
+from OsduClient.rest import ApiException
 from pprint import pprint
 
 # Configure API key authorization: Bearer
-configuration = swagger_client.Configuration()
+configuration = OsduClient.Configuration()
 configuration.api_key['Authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['Authorization'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = swagger_client.RegisterApi(swagger_client.ApiClient(configuration))
+api_instance = OsduClient.RegisterApi(OsduClient.ApiClient(configuration))
 id = 'id_example' # str | 
 data_partition_id = 'data_partition_id_example' # str | Specifies the partition to use. This should be either the partition name associated with the partition.
-body = swagger_client.RegisterSecret() # RegisterSecret |  (optional)
+body = OsduClient.RegisterSecret() # RegisterSecret |  (optional)
 
 try:
     # Update secret for subscription

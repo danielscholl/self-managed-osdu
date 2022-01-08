@@ -1,4 +1,4 @@
-# IO.Swagger.Model.SearchQueryResponse
+# OsduClient.Model.SearchQueryResponse
 ## Properties
 
 Name | Type | Description | Notes

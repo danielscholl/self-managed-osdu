@@ -1,4 +1,4 @@
-# IO.Swagger.Model.RegisterLegal
+# OsduClient.Model.RegisterLegal
 ## Properties
 
 Name | Type | Description | Notes

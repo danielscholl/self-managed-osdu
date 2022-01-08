@@ -15,9 +15,9 @@ from __future__ import absolute_import
 
 import unittest
 
-import swagger_client
-from swagger_client.models.register_topic_example import RegisterTopicExample  # noqa: E501
-from swagger_client.rest import ApiException
+import OsduClient
+from OsduClient.models.register_topic_example import RegisterTopicExample  # noqa: E501
+from OsduClient.rest import ApiException
 
 
 class TestRegisterTopicExample(unittest.TestCase):
@@ -32,7 +32,7 @@ class TestRegisterTopicExample(unittest.TestCase):
     def testRegisterTopicExample(self):
         """Test RegisterTopicExample"""
         # FIXME: construct object with mandatory attributes with example values
-        # model = swagger_client.models.register_topic_example.RegisterTopicExample()  # noqa: E501
+        # model = OsduClient.models.register_topic_example.RegisterTopicExample()  # noqa: E501
         pass
 
 

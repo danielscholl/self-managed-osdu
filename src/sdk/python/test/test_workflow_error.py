@@ -15,9 +15,9 @@ from __future__ import absolute_import
 
 import unittest
 
-import swagger_client
-from swagger_client.models.workflow_error import WorkflowError  # noqa: E501
-from swagger_client.rest import ApiException
+import OsduClient
+from OsduClient.models.workflow_error import WorkflowError  # noqa: E501
+from OsduClient.rest import ApiException
 
 
 class TestWorkflowError(unittest.TestCase):
@@ -32,7 +32,7 @@ class TestWorkflowError(unittest.TestCase):
     def testWorkflowError(self):
         """Test WorkflowError"""
         # FIXME: construct object with mandatory attributes with example values
-        # model = swagger_client.models.workflow_error.WorkflowError()  # noqa: E501
+        # model = OsduClient.models.workflow_error.WorkflowError()  # noqa: E501
         pass
 
 

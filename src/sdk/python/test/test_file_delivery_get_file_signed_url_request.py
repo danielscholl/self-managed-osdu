@@ -15,9 +15,9 @@ from __future__ import absolute_import
 
 import unittest
 
-import swagger_client
-from swagger_client.models.file_delivery_get_file_signed_url_request import FileDeliveryGetFileSignedURLRequest  # noqa: E501
-from swagger_client.rest import ApiException
+import OsduClient
+from OsduClient.models.file_delivery_get_file_signed_url_request import FileDeliveryGetFileSignedURLRequest  # noqa: E501
+from OsduClient.rest import ApiException
 
 
 class TestFileDeliveryGetFileSignedURLRequest(unittest.TestCase):
@@ -32,7 +32,7 @@ class TestFileDeliveryGetFileSignedURLRequest(unittest.TestCase):
     def testFileDeliveryGetFileSignedURLRequest(self):
         """Test FileDeliveryGetFileSignedURLRequest"""
         # FIXME: construct object with mandatory attributes with example values
-        # model = swagger_client.models.file_delivery_get_file_signed_url_request.FileDeliveryGetFileSignedURLRequest()  # noqa: E501
+        # model = OsduClient.models.file_delivery_get_file_signed_url_request.FileDeliveryGetFileSignedURLRequest()  # noqa: E501
         pass
 
 

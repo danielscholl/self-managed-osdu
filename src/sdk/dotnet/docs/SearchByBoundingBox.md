@@ -1,4 +1,4 @@
-# IO.Swagger.Model.SearchByBoundingBox
+# OsduClient.Model.SearchByBoundingBox
 ## Properties
 
 Name | Type | Description | Notes

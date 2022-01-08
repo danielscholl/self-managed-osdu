@@ -31,11 +31,11 @@ Create a DDMS registration using an OpenApi spec V3 document. Required roles: &#
 ### Example
 ```java
 // Import classes:
-//import io.swagger.client.ApiClient;
-//import io.swagger.client.ApiException;
-//import io.swagger.client.Configuration;
-//import io.swagger.client.auth.*;
-//import io.swagger.client.api.RegisterApi;
+//import osdu.client.ApiClient;
+//import osdu.client.ApiException;
+//import osdu.client.Configuration;
+//import osdu.client.auth.*;
+//import osdu.client.api.RegisterApi;
 
 ApiClient defaultClient = Configuration.getDefaultApiClient();
 
@@ -88,11 +88,11 @@ Create a subscription. Required roles: &#39;users.datalake.editors&#39; or &#39;
 ### Example
 ```java
 // Import classes:
-//import io.swagger.client.ApiClient;
-//import io.swagger.client.ApiException;
-//import io.swagger.client.Configuration;
-//import io.swagger.client.auth.*;
-//import io.swagger.client.api.RegisterApi;
+//import osdu.client.ApiClient;
+//import osdu.client.ApiException;
+//import osdu.client.Configuration;
+//import osdu.client.auth.*;
+//import osdu.client.api.RegisterApi;
 
 ApiClient defaultClient = Configuration.getDefaultApiClient();
 
@@ -145,11 +145,11 @@ Create an action registration. Required role: &#39;users.datalake.admins&#39;
 ### Example
 ```java
 // Import classes:
-//import io.swagger.client.ApiClient;
-//import io.swagger.client.ApiException;
-//import io.swagger.client.Configuration;
-//import io.swagger.client.auth.*;
-//import io.swagger.client.api.RegisterApi;
+//import osdu.client.ApiClient;
+//import osdu.client.ApiException;
+//import osdu.client.Configuration;
+//import osdu.client.auth.*;
+//import osdu.client.api.RegisterApi;
 
 ApiClient defaultClient = Configuration.getDefaultApiClient();
 
@@ -202,11 +202,11 @@ Delete a DDMS registration with the given id. Required roles: &#39;users.datalak
 ### Example
 ```java
 // Import classes:
-//import io.swagger.client.ApiClient;
-//import io.swagger.client.ApiException;
-//import io.swagger.client.Configuration;
-//import io.swagger.client.auth.*;
-//import io.swagger.client.api.RegisterApi;
+//import osdu.client.ApiClient;
+//import osdu.client.ApiException;
+//import osdu.client.Configuration;
+//import osdu.client.auth.*;
+//import osdu.client.api.RegisterApi;
 
 ApiClient defaultClient = Configuration.getDefaultApiClient();
 
@@ -258,11 +258,11 @@ Delete a subscription with its Id. Required role: &#39;users.datalake.admins&#39
 ### Example
 ```java
 // Import classes:
-//import io.swagger.client.ApiClient;
-//import io.swagger.client.ApiException;
-//import io.swagger.client.Configuration;
-//import io.swagger.client.auth.*;
-//import io.swagger.client.api.RegisterApi;
+//import osdu.client.ApiClient;
+//import osdu.client.ApiException;
+//import osdu.client.Configuration;
+//import osdu.client.auth.*;
+//import osdu.client.api.RegisterApi;
 
 ApiClient defaultClient = Configuration.getDefaultApiClient();
 
@@ -314,11 +314,11 @@ Delete an action registration with the given id. Required role: &#39;users.datal
 ### Example
 ```java
 // Import classes:
-//import io.swagger.client.ApiClient;
-//import io.swagger.client.ApiException;
-//import io.swagger.client.Configuration;
-//import io.swagger.client.auth.*;
-//import io.swagger.client.api.RegisterApi;
+//import osdu.client.ApiClient;
+//import osdu.client.ApiException;
+//import osdu.client.Configuration;
+//import osdu.client.auth.*;
+//import osdu.client.api.RegisterApi;
 
 ApiClient defaultClient = Configuration.getDefaultApiClient();
 
@@ -370,11 +370,11 @@ Get a DDMS registration with the given id. Required roles: &#39;users.datalake.v
 ### Example
 ```java
 // Import classes:
-//import io.swagger.client.ApiClient;
-//import io.swagger.client.ApiException;
-//import io.swagger.client.Configuration;
-//import io.swagger.client.auth.*;
-//import io.swagger.client.api.RegisterApi;
+//import osdu.client.ApiClient;
+//import osdu.client.ApiException;
+//import osdu.client.Configuration;
+//import osdu.client.auth.*;
+//import osdu.client.api.RegisterApi;
 
 ApiClient defaultClient = Configuration.getDefaultApiClient();
 
@@ -427,11 +427,11 @@ Get a subscription with its Id. Required role: &#39;users.datalake.editors&#39; 
 ### Example
 ```java
 // Import classes:
-//import io.swagger.client.ApiClient;
-//import io.swagger.client.ApiException;
-//import io.swagger.client.Configuration;
-//import io.swagger.client.auth.*;
-//import io.swagger.client.api.RegisterApi;
+//import osdu.client.ApiClient;
+//import osdu.client.ApiException;
+//import osdu.client.Configuration;
+//import osdu.client.auth.*;
+//import osdu.client.api.RegisterApi;
 
 ApiClient defaultClient = Configuration.getDefaultApiClient();
 
@@ -484,11 +484,11 @@ Get an action registration with the given id. Required roles: &#39;users.datalak
 ### Example
 ```java
 // Import classes:
-//import io.swagger.client.ApiClient;
-//import io.swagger.client.ApiException;
-//import io.swagger.client.Configuration;
-//import io.swagger.client.auth.*;
-//import io.swagger.client.api.RegisterApi;
+//import osdu.client.ApiClient;
+//import osdu.client.ApiException;
+//import osdu.client.Configuration;
+//import osdu.client.auth.*;
+//import osdu.client.api.RegisterApi;
 
 ApiClient defaultClient = Configuration.getDefaultApiClient();
 
@@ -541,11 +541,11 @@ List all topics that you can create a subscription for, along with the correspon
 ### Example
 ```java
 // Import classes:
-//import io.swagger.client.ApiClient;
-//import io.swagger.client.ApiException;
-//import io.swagger.client.Configuration;
-//import io.swagger.client.auth.*;
-//import io.swagger.client.api.RegisterApi;
+//import osdu.client.ApiClient;
+//import osdu.client.ApiException;
+//import osdu.client.Configuration;
+//import osdu.client.auth.*;
+//import osdu.client.api.RegisterApi;
 
 ApiClient defaultClient = Configuration.getDefaultApiClient();
 
@@ -596,11 +596,11 @@ Query for DDMS registrations allowing retrievals by type. Required roles: &#39;u
 ### Example
 ```java
 // Import classes:
-//import io.swagger.client.ApiClient;
-//import io.swagger.client.ApiException;
-//import io.swagger.client.Configuration;
-//import io.swagger.client.auth.*;
-//import io.swagger.client.api.RegisterApi;
+//import osdu.client.ApiClient;
+//import osdu.client.ApiException;
+//import osdu.client.Configuration;
+//import osdu.client.auth.*;
+//import osdu.client.api.RegisterApi;
 
 ApiClient defaultClient = Configuration.getDefaultApiClient();
 
@@ -653,11 +653,11 @@ Retrieve an action registration. Required roles: &#39;users.datalake.viewers&#39
 ### Example
 ```java
 // Import classes:
-//import io.swagger.client.ApiClient;
-//import io.swagger.client.ApiException;
-//import io.swagger.client.Configuration;
-//import io.swagger.client.auth.*;
-//import io.swagger.client.api.RegisterApi;
+//import osdu.client.ApiClient;
+//import osdu.client.ApiException;
+//import osdu.client.Configuration;
+//import osdu.client.auth.*;
+//import osdu.client.api.RegisterApi;
 
 ApiClient defaultClient = Configuration.getDefaultApiClient();
 
@@ -710,11 +710,11 @@ Test an action registration. Required roles: &#39;users.datalake.viewers&#39; or
 ### Example
 ```java
 // Import classes:
-//import io.swagger.client.ApiClient;
-//import io.swagger.client.ApiException;
-//import io.swagger.client.Configuration;
-//import io.swagger.client.auth.*;
-//import io.swagger.client.api.RegisterApi;
+//import osdu.client.ApiClient;
+//import osdu.client.ApiException;
+//import osdu.client.Configuration;
+//import osdu.client.auth.*;
+//import osdu.client.api.RegisterApi;
 
 ApiClient defaultClient = Configuration.getDefaultApiClient();
 
@@ -767,11 +767,11 @@ Update secret for a subscription. Required role: &#39;users.datalake.editors&#39
 ### Example
 ```java
 // Import classes:
-//import io.swagger.client.ApiClient;
-//import io.swagger.client.ApiException;
-//import io.swagger.client.Configuration;
-//import io.swagger.client.auth.*;
-//import io.swagger.client.api.RegisterApi;
+//import osdu.client.ApiClient;
+//import osdu.client.ApiException;
+//import osdu.client.Configuration;
+//import osdu.client.auth.*;
+//import osdu.client.api.RegisterApi;
 
 ApiClient defaultClient = Configuration.getDefaultApiClient();
 

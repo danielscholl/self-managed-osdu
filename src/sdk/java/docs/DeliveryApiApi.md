@@ -18,11 +18,11 @@ Returns delivery instructions for File(s) using SRNs
 ### Example
 ```java
 // Import classes:
-//import io.swagger.client.ApiClient;
-//import io.swagger.client.ApiException;
-//import io.swagger.client.Configuration;
-//import io.swagger.client.auth.*;
-//import io.swagger.client.api.DeliveryApiApi;
+//import osdu.client.ApiClient;
+//import osdu.client.ApiException;
+//import osdu.client.Configuration;
+//import osdu.client.auth.*;
+//import osdu.client.api.DeliveryApiApi;
 
 ApiClient defaultClient = Configuration.getDefaultApiClient();
 

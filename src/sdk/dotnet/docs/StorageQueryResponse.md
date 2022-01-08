@@ -1,4 +1,4 @@
-# IO.Swagger.Model.StorageQueryResponse
+# OsduClient.Model.StorageQueryResponse
 ## Properties
 
 Name | Type | Description | Notes

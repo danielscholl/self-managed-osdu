@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **acl** | [**FileAcl**](FileAcl.md) |  | [optional] 
 **legal** | [**FileLegal**](FileLegal.md) |  | [optional] 
 **data** | [**Files**](Files.md) |  | [optional] 
-**ancestry** | [**FileLinkList**](FileLinkList.md) |  | [optional] 
+**ancestry** | [**FileAncestry**](FileAncestry.md) |  | [optional] 
 **version** | **int** | The version number of this OSDU resource; set by the framework. | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

@@ -1,4 +1,4 @@
-# IO.Swagger.Model.LegalTagUpdateDto
+# OsduClient.Model.LegalTagUpdateDto
 ## Properties
 
 Name | Type | Description | Notes

@@ -15,9 +15,9 @@ from __future__ import absolute_import
 
 import unittest
 
-import swagger_client
-from swagger_client.models.register_ddms import RegisterDdms  # noqa: E501
-from swagger_client.rest import ApiException
+import OsduClient
+from OsduClient.models.register_ddms import RegisterDdms  # noqa: E501
+from OsduClient.rest import ApiException
 
 
 class TestRegisterDdms(unittest.TestCase):
@@ -32,7 +32,7 @@ class TestRegisterDdms(unittest.TestCase):
     def testRegisterDdms(self):
         """Test RegisterDdms"""
         # FIXME: construct object with mandatory attributes with example values
-        # model = swagger_client.models.register_ddms.RegisterDdms()  # noqa: E501
+        # model = OsduClient.models.register_ddms.RegisterDdms()  # noqa: E501
         pass
 
 

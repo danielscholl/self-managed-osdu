@@ -1,4 +1,4 @@
-# IO.Swagger.Model.WorkflowError
+# OsduClient.Model.WorkflowError
 ## Properties
 
 Name | Type | Description | Notes

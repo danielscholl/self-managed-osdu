@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **acl** | [**FileAcl**](FileAcl.md) |  |  [optional]
 **legal** | [**FileLegal**](FileLegal.md) |  |  [optional]
 **data** | [**Files**](Files.md) |  |  [optional]
-**ancestry** | [**FileLinkList**](FileLinkList.md) |  |  [optional]
+**ancestry** | [**FileAncestry**](FileAncestry.md) |  |  [optional]
 **version** | **Long** | The version number of this OSDU resource; set by the framework. |  [optional]
 
 

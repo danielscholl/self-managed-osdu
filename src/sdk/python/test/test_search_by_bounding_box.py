@@ -15,9 +15,9 @@ from __future__ import absolute_import
 
 import unittest
 
-import swagger_client
-from swagger_client.models.search_by_bounding_box import SearchByBoundingBox  # noqa: E501
-from swagger_client.rest import ApiException
+import OsduClient
+from OsduClient.models.search_by_bounding_box import SearchByBoundingBox  # noqa: E501
+from OsduClient.rest import ApiException
 
 
 class TestSearchByBoundingBox(unittest.TestCase):
@@ -32,7 +32,7 @@ class TestSearchByBoundingBox(unittest.TestCase):
     def testSearchByBoundingBox(self):
         """Test SearchByBoundingBox"""
         # FIXME: construct object with mandatory attributes with example values
-        # model = swagger_client.models.search_by_bounding_box.SearchByBoundingBox()  # noqa: E501
+        # model = OsduClient.models.search_by_bounding_box.SearchByBoundingBox()  # noqa: E501
         pass
 
 

@@ -1,4 +1,4 @@
-# IO.Swagger.Model.RegisterTestActionResult
+# OsduClient.Model.RegisterTestActionResult
 ## Properties
 
 Name | Type | Description | Notes

@@ -15,9 +15,9 @@ from __future__ import absolute_import
 
 import unittest
 
-import swagger_client
-from swagger_client.models.file_metadata_response import FileMetadataResponse  # noqa: E501
-from swagger_client.rest import ApiException
+import OsduClient
+from OsduClient.models.file_metadata_response import FileMetadataResponse  # noqa: E501
+from OsduClient.rest import ApiException
 
 
 class TestFileMetadataResponse(unittest.TestCase):
@@ -32,7 +32,7 @@ class TestFileMetadataResponse(unittest.TestCase):
     def testFileMetadataResponse(self):
         """Test FileMetadataResponse"""
         # FIXME: construct object with mandatory attributes with example values
-        # model = swagger_client.models.file_metadata_response.FileMetadataResponse()  # noqa: E501
+        # model = OsduClient.models.file_metadata_response.FileMetadataResponse()  # noqa: E501
         pass
 
 

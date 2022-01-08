@@ -1,4 +1,4 @@
-# IO.Swagger.Model.LegalTagRequest
+# OsduClient.Model.LegalTagRequest
 ## Properties
 
 Name | Type | Description | Notes

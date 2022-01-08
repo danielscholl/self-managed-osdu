@@ -15,9 +15,9 @@ from __future__ import absolute_import
 
 import unittest
 
-import swagger_client
-from swagger_client.models.partition_dto import PartitionDto  # noqa: E501
-from swagger_client.rest import ApiException
+import OsduClient
+from OsduClient.models.partition_dto import PartitionDto  # noqa: E501
+from OsduClient.rest import ApiException
 
 
 class TestPartitionDto(unittest.TestCase):
@@ -32,7 +32,7 @@ class TestPartitionDto(unittest.TestCase):
     def testPartitionDto(self):
         """Test PartitionDto"""
         # FIXME: construct object with mandatory attributes with example values
-        # model = swagger_client.models.partition_dto.PartitionDto()  # noqa: E501
+        # model = OsduClient.models.partition_dto.PartitionDto()  # noqa: E501
         pass
 
 

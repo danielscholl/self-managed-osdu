@@ -1,4 +1,4 @@
-# IO.Swagger.Model.SearchByDistance
+# OsduClient.Model.SearchByDistance
 ## Properties
 
 Name | Type | Description | Notes

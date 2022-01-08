@@ -1,4 +1,4 @@
-# IO.Swagger.Model.FileAcl
+# OsduClient.Model.FileAcl
 ## Properties
 
 Name | Type | Description | Notes

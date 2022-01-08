@@ -1,4 +1,4 @@
-# IO.Swagger.Model.WorkflowTriggerRequest
+# OsduClient.Model.WorkflowTriggerRequest
 ## Properties
 
 Name | Type | Description | Notes

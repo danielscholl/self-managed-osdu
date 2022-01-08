@@ -1,4 +1,4 @@
-# IO.Swagger.Model.SchemaIdentity
+# OsduClient.Model.SchemaIdentity
 ## Properties
 
 Name | Type | Description | Notes

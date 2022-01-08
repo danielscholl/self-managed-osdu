@@ -1,4 +1,4 @@
-# IO.Swagger.Api.DeliveryAPIApi
+# OsduClient.Api.DeliveryAPIApi
 
 All URIs are relative to *https://self-managed-osdu.westeurope.cloudapp.azure.com*
 
@@ -19,9 +19,9 @@ Returns delivery instructions for File(s) using SRNs
 ```csharp
 using System;
 using System.Diagnostics;
-using IO.Swagger.Api;
-using IO.Swagger.Client;
-using IO.Swagger.Model;
+using OsduClient.Api;
+using OsduClient.Client;
+using OsduClient.Model;
 
 namespace Example
 {

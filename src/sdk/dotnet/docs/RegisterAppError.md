@@ -1,4 +1,4 @@
-# IO.Swagger.Model.RegisterAppError
+# OsduClient.Model.RegisterAppError
 ## Properties
 
 Name | Type | Description | Notes

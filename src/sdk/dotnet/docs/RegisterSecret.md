@@ -1,4 +1,4 @@
-# IO.Swagger.Model.RegisterSecret
+# OsduClient.Model.RegisterSecret
 ## Properties
 
 Name | Type | Description | Notes

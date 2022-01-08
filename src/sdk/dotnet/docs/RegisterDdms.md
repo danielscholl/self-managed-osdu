@@ -1,4 +1,4 @@
-# IO.Swagger.Model.RegisterDdms
+# OsduClient.Model.RegisterDdms
 ## Properties
 
 Name | Type | Description | Notes

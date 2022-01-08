@@ -15,9 +15,9 @@ from __future__ import absolute_import
 
 import unittest
 
-import swagger_client
-from swagger_client.models.search_query_response import SearchQueryResponse  # noqa: E501
-from swagger_client.rest import ApiException
+import OsduClient
+from OsduClient.models.search_query_response import SearchQueryResponse  # noqa: E501
+from OsduClient.rest import ApiException
 
 
 class TestSearchQueryResponse(unittest.TestCase):
@@ -32,7 +32,7 @@ class TestSearchQueryResponse(unittest.TestCase):
     def testSearchQueryResponse(self):
         """Test SearchQueryResponse"""
         # FIXME: construct object with mandatory attributes with example values
-        # model = swagger_client.models.search_query_response.SearchQueryResponse()  # noqa: E501
+        # model = OsduClient.models.search_query_response.SearchQueryResponse()  # noqa: E501
         pass
 
 

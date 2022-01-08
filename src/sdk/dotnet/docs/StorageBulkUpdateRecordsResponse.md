@@ -1,4 +1,4 @@
-# IO.Swagger.Model.StorageBulkUpdateRecordsResponse
+# OsduClient.Model.StorageBulkUpdateRecordsResponse
 ## Properties
 
 Name | Type | Description | Notes

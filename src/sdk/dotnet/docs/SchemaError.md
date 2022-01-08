@@ -1,4 +1,4 @@
-# IO.Swagger.Model.SchemaError
+# OsduClient.Model.SchemaError
 ## Properties
 
 Name | Type | Description | Notes

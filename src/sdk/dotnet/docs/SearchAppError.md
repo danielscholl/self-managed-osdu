@@ -1,4 +1,4 @@
-# IO.Swagger.Model.SearchAppError
+# OsduClient.Model.SearchAppError
 ## Properties
 
 Name | Type | Description | Notes

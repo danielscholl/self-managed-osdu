@@ -1,4 +1,4 @@
-# swagger_client.SchemaApi
+# OsduClient.SchemaApi
 
 All URIs are relative to *https://self-managed-osdu.westeurope.cloudapp.azure.com*
 
@@ -21,20 +21,20 @@ Adds a schema to the schema repository. The schemaIdentity must be unique. The `
 ```python
 from __future__ import print_function
 import time
-import swagger_client
-from swagger_client.rest import ApiException
+import OsduClient
+from OsduClient.rest import ApiException
 from pprint import pprint
 
 # Configure API key authorization: Bearer
-configuration = swagger_client.Configuration()
+configuration = OsduClient.Configuration()
 configuration.api_key['Authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['Authorization'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = swagger_client.SchemaApi(swagger_client.ApiClient(configuration))
+api_instance = OsduClient.SchemaApi(OsduClient.ApiClient(configuration))
 data_partition_id = 'data_partition_id_example' # str | Specifies the data partition to use. This should be either the partition name or crm account ID associated with the partition.
-body = swagger_client.SchemaRequest() # SchemaRequest | 
+body = OsduClient.SchemaRequest() # SchemaRequest | 
 
 try:
     # Adds a schema to the schema repository.
@@ -77,18 +77,18 @@ Retrieve a schema using its system defined id. Required roles 'users.datalake.vi
 ```python
 from __future__ import print_function
 import time
-import swagger_client
-from swagger_client.rest import ApiException
+import OsduClient
+from OsduClient.rest import ApiException
 from pprint import pprint
 
 # Configure API key authorization: Bearer
-configuration = swagger_client.Configuration()
+configuration = OsduClient.Configuration()
 configuration.api_key['Authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['Authorization'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = swagger_client.SchemaApi(swagger_client.ApiClient(configuration))
+api_instance = OsduClient.SchemaApi(OsduClient.ApiClient(configuration))
 data_partition_id = 'data_partition_id_example' # str | Specifies the data partition to use. This should be either the partition name or crm account ID associated with the partition.
 id = 'id_example' # str | the system id of the schema
 
@@ -133,18 +133,18 @@ Searches for information of available schema (SchemInfo) in schema repository. S
 ```python
 from __future__ import print_function
 import time
-import swagger_client
-from swagger_client.rest import ApiException
+import OsduClient
+from OsduClient.rest import ApiException
 from pprint import pprint
 
 # Configure API key authorization: Bearer
-configuration = swagger_client.Configuration()
+configuration = OsduClient.Configuration()
 configuration.api_key['Authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['Authorization'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = swagger_client.SchemaApi(swagger_client.ApiClient(configuration))
+api_instance = OsduClient.SchemaApi(OsduClient.ApiClient(configuration))
 data_partition_id = 'data_partition_id_example' # str | Specifies the data partition to use. This should be either the partition name or crm account ID associated with the partition.
 authority = '*' # str | pass an optional string to search for a specific authority (optional) (default to *)
 source = '*' # str | pass an optional string to search for a specific source (optional) (default to *)
@@ -207,20 +207,20 @@ Creates a new schema or updates an already existing schema with status `DEVELOPM
 ```python
 from __future__ import print_function
 import time
-import swagger_client
-from swagger_client.rest import ApiException
+import OsduClient
+from OsduClient.rest import ApiException
 from pprint import pprint
 
 # Configure API key authorization: Bearer
-configuration = swagger_client.Configuration()
+configuration = OsduClient.Configuration()
 configuration.api_key['Authorization'] = 'YOUR_API_KEY'
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['Authorization'] = 'Bearer'
 
 # create an instance of the API class
-api_instance = swagger_client.SchemaApi(swagger_client.ApiClient(configuration))
+api_instance = OsduClient.SchemaApi(OsduClient.ApiClient(configuration))
 data_partition_id = 'data_partition_id_example' # str | Specifies the data partition to use. This should be either the partition name or crm account ID associated with the partition.
-body = swagger_client.SchemaRequest() # SchemaRequest | SchemaRequest
+body = OsduClient.SchemaRequest() # SchemaRequest | SchemaRequest
 
 try:
     # Creates/Updates a schema in development status

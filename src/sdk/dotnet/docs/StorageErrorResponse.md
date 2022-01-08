@@ -1,4 +1,4 @@
-# IO.Swagger.Model.StorageErrorResponse
+# OsduClient.Model.StorageErrorResponse
 ## Properties
 
 Name | Type | Description | Notes

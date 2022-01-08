@@ -1,4 +1,4 @@
-# IO.Swagger.Model.StorageMultiRecordIds
+# OsduClient.Model.StorageMultiRecordIds
 ## Properties
 
 Name | Type | Description | Notes

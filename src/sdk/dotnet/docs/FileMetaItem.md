@@ -1,4 +1,4 @@
-# IO.Swagger.Model.FileMetaItem
+# OsduClient.Model.FileMetaItem
 ## Properties
 
 Name | Type | Description | Notes

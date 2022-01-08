@@ -1,4 +1,4 @@
-# IO.Swagger.Model.FileMetadataResponse
+# OsduClient.Model.FileMetadataResponse
 ## Properties
 
 Name | Type | Description | Notes

@@ -1,4 +1,4 @@
-# IO.Swagger.Model.FileLocationRequest
+# OsduClient.Model.FileLocationRequest
 ## Properties
 
 Name | Type | Description | Notes
