@@ -6,7 +6,7 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**DeletesMetadataRecordFileForTheGivenId**](FileServiceApi.md#deletesmetadatarecordfileforthegivenid) | **DELETE** /api/file/v2/files/{Id}/metadata | Deletes metadata record &amp; file assocaited with that record for the given id
 [**GetALocationInLandingZoneToUploadAFile_**](FileServiceApi.md#getalocationinlandingzonetouploadafile_) | **POST** /api/file/v2/getLocation | Get a location in Landing Zone to upload a file.
-[**GetTheLocationToUploadAFile**](FileServiceApi.md#getthelocationtouploadafile) | **GET** /api/file/v2/files/UploadURL | Get a location in Landing Zone to upload a file.
+[**GetTheLocationToUploadAFile**](FileServiceApi.md#getthelocationtouploadafile) | **GET** /api/file/v2/files/uploadURL | Get a location in Landing Zone to upload a file.
 [**GetsMetadataRecordForTheGivenId**](FileServiceApi.md#getsmetadatarecordforthegivenid) | **GET** /api/file/v2/files/{Id}/metadata | Gets metadata record for the given id
 [**GetsURLToDownloadTheFileAssociatedWithTheGivenId_**](FileServiceApi.md#getsurltodownloadthefileassociatedwiththegivenid_) | **GET** /api/file/v2/files/{Id}/DownloadURL | Gets a URL to download the file
 [**PublishFileMetadataForAFile_**](FileServiceApi.md#publishfilemetadataforafile_) | **POST** /api/file/v2/files/metadata | Creates metadata for a file

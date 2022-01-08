@@ -1826,7 +1826,7 @@ paths:
             $ref: '#/definitions/FileApplicationError'
       security:
       - Bearer: []
-  '/api/file/v2/files/UploadURL':
+  '/api/file/v2/files/uploadURL':
     get:
       tags:
         - File Service

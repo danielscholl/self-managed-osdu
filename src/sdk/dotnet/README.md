@@ -113,7 +113,7 @@ Class | Method | HTTP request | Description
 *EntitlementApi* | [**UpdateGroupUsingPATCH**](docs/EntitlementApi.md#updategroupusingpatch) | **PATCH** /api/entitlements/v2/groups/{group_email} | Updates Items in Group
 *FileServiceApi* | [**DeletesMetadataRecordFileForTheGivenId**](docs/FileServiceApi.md#deletesmetadatarecordfileforthegivenid) | **DELETE** /api/file/v2/files/{Id}/metadata | Deletes metadata record & file assocaited with that record for the given id
 *FileServiceApi* | [**GetALocationInLandingZoneToUploadAFile_**](docs/FileServiceApi.md#getalocationinlandingzonetouploadafile_) | **POST** /api/file/v2/getLocation | Get a location in Landing Zone to upload a file.
-*FileServiceApi* | [**GetTheLocationToUploadAFile**](docs/FileServiceApi.md#getthelocationtouploadafile) | **GET** /api/file/v2/files/UploadURL | Get a location in Landing Zone to upload a file.
+*FileServiceApi* | [**GetTheLocationToUploadAFile**](docs/FileServiceApi.md#getthelocationtouploadafile) | **GET** /api/file/v2/files/uploadURL | Get a location in Landing Zone to upload a file.
 *FileServiceApi* | [**GetsMetadataRecordForTheGivenId**](docs/FileServiceApi.md#getsmetadatarecordforthegivenid) | **GET** /api/file/v2/files/{Id}/metadata | Gets metadata record for the given id
 *FileServiceApi* | [**GetsURLToDownloadTheFileAssociatedWithTheGivenId_**](docs/FileServiceApi.md#getsurltodownloadthefileassociatedwiththegivenid_) | **GET** /api/file/v2/files/{Id}/DownloadURL | Gets a URL to download the file
 *FileServiceApi* | [**PublishFileMetadataForAFile_**](docs/FileServiceApi.md#publishfilemetadataforafile_) | **POST** /api/file/v2/files/metadata | Creates metadata for a file

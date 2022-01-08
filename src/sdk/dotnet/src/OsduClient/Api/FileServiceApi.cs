@@ -746,7 +746,7 @@ namespace OsduClient.Api
             if (dataPartitionId == null)
                 throw new ApiException(400, "Missing required parameter 'dataPartitionId' when calling FileServiceApi->GetTheLocationToUploadAFile");
 
-            var localVarPath = "/api/file/v2/files/UploadURL";
+            var localVarPath = "/api/file/v2/files/uploadURL";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -819,7 +819,7 @@ namespace OsduClient.Api
             if (dataPartitionId == null)
                 throw new ApiException(400, "Missing required parameter 'dataPartitionId' when calling FileServiceApi->GetTheLocationToUploadAFile");
 
-            var localVarPath = "/api/file/v2/files/UploadURL";
+            var localVarPath = "/api/file/v2/files/uploadURL";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
