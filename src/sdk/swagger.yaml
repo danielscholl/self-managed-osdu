@@ -4757,14 +4757,8 @@ definitions:
         $ref: '#/definitions/FileID'
       Location:
         type: object
-        properties:
-          SignedURL:
-            type: string
-            example: 'GCS signed URL'
-          FileSource:
-            type: string
-            description: 'Relative location of file'
-            example: 'AXB564XVCY\SHVCU7632'
+        additionalProperties:
+          type: string
   FileLandingZoneLocationResponse:
     type: object
     properties:
