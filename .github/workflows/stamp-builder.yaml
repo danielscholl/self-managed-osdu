@@ -78,8 +78,8 @@ jobs:
           azcliversion: ${{ env.CLI_VERSION }}
           inlineScript: |
             mkdir -p $FILE_SHARE
-            echo '${{ secrets.SSH_PUBLIC_KEY }}' > $FILE_SHARE/azure-aks-node-ssh-key && chmod 600 $FILE_SHARE/azure-aks-node-ssh-key
-            echo '${{ secrets.SSH_PRIVATE_KEY }}' > $FILE_SHARE/azure-aks-node-ssh-key.pub && chmod 644 $FILE_SHARE/azure-aks-node-ssh-key.pub
+            echo '${{ secrets.SSH_PUBLIC_KEY }}' > $FILE_SHARE/azure-aks-node-ssh-key.pub && chmod 600 $FILE_SHARE/azure-aks-node-ssh-key.pub
+            echo '${{ secrets.SSH_PRIVATE_KEY }}' > $FILE_SHARE/azure-aks-node-ssh-key && chmod 644 $FILE_SHARE/azure-aks-node-ssh-key
             STORAGE=$(az storage account list --resource-group $RESOURCE_GROUP --query [].name -otsv)
             STORAGE_KEY=$(az storage account keys list --account-name $STORAGE --resource-group $RESOURCE_GROUP --query '[0].value' -otsv)
             az storage file upload-batch --account-name $STORAGE --account-key $STORAGE_KEY --destination $FILE_SHARE --source $FILE_SHARE --pattern "**"
@@ -121,12 +121,13 @@ jobs:
 
             ## These variables support creating the infrastructure
             # Global Region Pair Location
+            export TF_VAR_resource_group_location="${{ secrets.AZURE_LOCATION }}"
             export TF_VAR_cosmosdb_replica_location="$(az account list-locations --query "[?name == '${{ secrets.AZURE_LOCATION }}'].metadata.pairedRegion[0].name" -otsv)"
 
             # Central Resources
             export TF_VAR_principal_appId="$(az keyvault secret show --id https://$VAULT.vault.azure.net/secrets/client-id --query value -otsv)"
-            export TF_VAR_principal_name="$principalName"
             export TF_VAR_principal_password="$(az keyvault secret show --id https://$VAULT.vault.azure.net/secrets/client-secret --query value -otsv)"
+            export TF_VAR_principal_name=""
             export TF_VAR_principal_objectId="$(az keyvault secret show --id https://$VAULT.vault.azure.net/secrets/client-oid --query value -otsv)"
             export TF_VAR_aad_client_id="$(az keyvault secret show --id https://$VAULT.vault.azure.net/secrets/application-id --query value -otsv)"
 
@@ -138,6 +139,6 @@ jobs:
             # Service Resources
             export TF_VAR_gitops_ssh_url="git@github.com/$GITHUB_REPOSITORY.git"
             export TF_VAR_ssh_public_key_file="/osdu-azure/.ssh/azure-aks-node-ssh-key.pub"
-            export TF_VAR_gitops_ssh_key_file="/osdu-azure/.ssh/azure-aks-gitops-ssh-key"
+            export TF_VAR_gitops_ssh_key_file="/osdu-azure/.ssh/azure-aks-node-ssh-key"
             EOF
             az keyvault secret set --vault-name $VAULT --name "envrc" --file envrc

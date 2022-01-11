@@ -1,4 +1,7 @@
 {{- $namespace := .Release.Namespace }}
+{{- $nodePool := .Values.nodePool}}
+{{- $toleration := .Values.toleration}}
+{{- $affinity := .Values.affinity}}
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -21,6 +24,40 @@ spec:
       labels:
         {{- include "env-debug.selectorLabels" . | nindent 8 }}
     spec:
+      {{- if $nodePool }}
+      nodeSelector:
+        nodepool: {{ $nodePool }}
+      {{- end }}
+      {{- if $affinity }}
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              {{- if $affinity.zones }}
+              - key: topology.kubernetes.io/zone
+                operator: In
+                values:
+                {{- range $affinity.zones }}
+                - {{ . }}
+                {{- end }}
+              {{- end }}
+              {{- if $affinity.pools }}
+              - key: agentpool
+                operator: In
+                values:
+                {{- range $affinity.pools }}
+                - {{ . }}
+                {{- end }}
+              {{- end }}
+      {{- end }}
+      {{- if $toleration }}
+      tolerations:
+      - key: "app"
+        operator: "Equal"
+        value: {{ $toleration }}
+        effect: "NoSchedule"
+      {{- end }}
     {{- if .Values.azure.enabled }}
       volumes:
         - name: azure-keyvault
