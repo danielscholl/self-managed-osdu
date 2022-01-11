@@ -17,7 +17,8 @@
 #
 # nodePool: default
 # podIdentity: osdu-identity
-replicaCount: 1
+replicaCount: 4
+
 # autoscale:
 #   minReplicas: 2
 #   maxReplicas: 5

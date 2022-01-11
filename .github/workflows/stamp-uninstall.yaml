@@ -154,6 +154,7 @@ jobs:
           OK: ${{ secrets.UNINSTALL }}
         if: contains(env.OK, 'true')
         run: |
+          kubectl delete CustomResourceDefinition istiooperators.install.istio.io --ignore-not-found
           kubectl delete namespace ddms-wellbore --ignore-not-found
           kubectl delete namespace ddms-seismic --ignore-not-found
           kubectl delete namespace osdu-azure --ignore-not-found
