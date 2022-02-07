@@ -269,7 +269,7 @@ module "log_analytics" {
 # AD Principal and Applications
 #-------------------------------
 module "service_principal" {
-  source = "github.com/danielscholl/iac-terraform.git//modules/service-principal?ref=v1.0.0"
+  source = "git::https://github.com/danielscholl-terraform/module-service-principal?ref=v1.0.0"
 
   name   = var.principal_name
   scopes = local.rbac_contributor_scopes
@@ -288,7 +288,7 @@ module "service_principal" {
 
 
 module "ad_application" {
-  source = "github.com/danielscholl/iac-terraform.git//modules/ad-application?ref=v1.0.0"
+  source = "git::https://github.com/danielscholl-terraform/module-ad-application?ref=v1.0.0"
 
   name                       = local.ad_app_name
   oauth2_allow_implicit_flow = true
