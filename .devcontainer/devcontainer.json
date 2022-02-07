@@ -1,26 +1,15 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the README at:
+// https://github.com/microsoft/vscode-dev-containers/tree/v0.217.1/containers/bash
 {
-  "name": "Azure Terraform (Community)",
+  "name": "Bash (Community)",
   "build": {
     "dockerfile": "Dockerfile",
+    // Update 'VARIANT' to pick an Debian / Ubuntu OS version: debian-11, debian-10, debian-9, ubuntu-21.04, ubuntu-20.04, ubuntu-18.04
+    // Use Debian 11, Debian 9, Ubuntu 18.04 or Ubuntu 21.04 on local arm64/Apple Silicon
     "args": {
-      "OSDU_VERSION": "v0.11.2",
-      "TERRAFORM_VERSION": "0.14.11",
-      "TFLINT_VERSION": "0.26.0",
-      "TERRAGRUNT_VERSION": "0.28.24",
-      "INSTALL_AZURE_CLI": "true",
-      "INSTALL_DOCKER": "true",
-      "INSTALL_NODE": "false"
+      "VARIANT": "ubuntu-18.04"
     }
   },
-  "workspaceFolder": "/osdu-azure",
-  "mounts": [
-    "source=/var/run/docker.sock,target=/var/run/docker-host.sock,type=bind"
-  ],
-  "overrideCommand": false,
-  "runArgs": [
-    "--env-file",
-    ".devcontainer/devcontainer.env"
-  ],
   "remoteEnv": {
     // Sets environment variables required for terrafom remote backend
     "UNIQUE": "${containerEnv:UNIQUE}",
@@ -29,25 +18,29 @@
   },
   // Set *default* container specific settings.json values on container create.
   "settings": {
-    "terraform.languageServer": {
-      "enabled": true,
-      "args": []
-    },
-    "azureTerraform.terminal": "integrated"
+    "terminal.integrated.defaultProfile.linux": "bash"
   },
+  "workspaceFolder": "/osdu-azure",
   // Add the IDs of extensions you want installed when the container is created.
   "extensions": [
+    "mads-hartmann.bash-ide-vscode",
+    "rogalmic.bash-debug",
     "hashicorp.terraform",
     "ms-vscode.azurecli",
     "ms-azuretools.vscode-azureterraform",
     "ms-azuretools.vscode-docker"
   ],
   // Use 'forwardPorts' to make a list of ports inside the container available locally.
-  // "forwardPorts": [],
+  "forwardPorts": [],
   // Use 'postCreateCommand' to run commands after the container is created.
-  // "postCreateCommand": "terraform --version",
+  // "postCreateCommand": "uname -a",
+  // Uncomment to connect as a non-root user. See https://aka.ms/vscode-remote/containers/non-root.
   "postStartCommand": "echo 'eval \"$(direnv hook bash)\"' >> ~/.bashrc && sudo cp -r /workspaces/self-managed-osdu-demo/customizations/README.md /osdu-azure/README.md && sudo cp -r /workspaces/self-managed-osdu-demo/customizations/templates/* /osdu-azure/templates/osdu-r3-mvp && sudo cp -r /workspaces/self-managed-osdu-demo/customizations/modules/* /osdu-azure/modules && sudo cp /workspaces/self-managed-osdu-demo/configuration/controlplane.tfvars templates/osdu-r3-mvp/central_resources/custom.tfvars && sudo cp /workspaces/self-managed-osdu-demo/configuration/dataplane.tfvars templates/osdu-r3-mvp/service_resources/custom.tfvars && sudo cp /workspaces/self-managed-osdu-demo/configuration/partition.tfvars templates/osdu-r3-mvp/data_partition/custom.tfvars && sudo chown -R vscode /osdu-azure",
-  // "postStartCommand": "echo 'eval \"$(direnv hook bash)\"' >> ~/.bashrc &&  sudo cp -r /workspaces/self-managed-osdu-demo/custom/* /osdu-azure/templates/osdu-r3-mvp/ && sudo cp /workspaces/docker-custom-infra/README.md /osdu-azure/README.md && sudo chown -R vscode /osdu-azure",
-  // Comment out connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
-  "remoteUser": "vscode"
+  "remoteUser": "vscode",
+  "features": {
+    "docker-in-docker": "latest",
+    "git": "latest",
+    "github-cli": "latest",
+    "azure-cli": "latest"
+  }
 }

@@ -10,13 +10,6 @@ __Goals:__
 4. Provide access to and control of all software components installed.
 
 
-__Prerequisites:__
-
-OSDU on Azure assumes a bring your own Elastic Search Instance of a version of 7.x (ie: 7.15.1) with a valid https endpoint and the access information must now be stored in the Common KeyVault. The recommended method of Elastic Search is to use the [Elastic Cloud Managed Service from the Marketplace](https://azuremarketplace.microsoft.com/en-us/marketplace/apps/elastic.ec-azure?tab=Overview).
-
-> Note: Elastic Cloud Managed Service requires a Credit Card to be associated to the subscription for billing purposes.
-
-
 __Architecture:__
 
 The  Architecture is based on the OSDU on Azure [Reference Architecture](https://community.opengroup.org/osdu/platform/deployment-and-operations/infra-azure-provisioning/-/tree/master#cloud-resource-architecture) but an additional diagram is provided to help visualize the architecture [here](./docs/images/architecture.png).
@@ -39,16 +32,8 @@ Secrets are managed using [Github Repository Secrets](https://docs.github.com/en
 __Manually Created Secrets__
 
 1. `GH_REPO_TOKEN`: A personal access token with `repo` scope.
-2. `ELASTIC_ENDPOINT`: The endpoint of the Elasticsearch cluster.
-
-```bash
-# Sample Format
-https://my-osdu.es.southcentralus.azure.elastic-cloud.com:9243
-```
-
-3. `ELASTIC_PASSWORD`: The password of the Elasticsearch cluster.
-4. `AZURE_LOCATION`: The Azure Region to deploy the resources to.
-5. `AZURE_CREDENTIALS`: The json output of a Service Principal with _Owner_ Subscription Scope.
+2. `AZURE_LOCATION`: The Azure Region to deploy the resources to.
+3. `AZURE_CREDENTIALS`: The json output of a Service Principal with _Owner_ Subscription Scope.
 
 ```bash
 SUBSCRIPTION_ID=$(az account show --query id --output tsv)
@@ -75,7 +60,7 @@ az ad sp create-for-rbac --name $AZURE_CREDENTIALS \
 }
 ```
 
-6. `OSDU_CREDENTIALS`: The json output a Service Principal with _Contributor_ Subscription Scope.
+4. `OSDU_CREDENTIALS`: The json output a Service Principal with _Contributor_ Subscription Scope.
 
 ```bash
 SUBSCRIPTION_ID=$(az account show --query id --output tsv)
@@ -102,13 +87,13 @@ az ad sp create-for-rbac --name $OSDU_CREDENTIALS \
 }
 ```
 
-7. `OSDU_CREDENTIAL_OID`: The Object ID of the _OSDU_CREDENTIALS_ Service Principal.
+5. `OSDU_CREDENTIAL_OID`: The Object ID of the _OSDU_CREDENTIALS_ Service Principal.
 
 ```bash
 az ad sp list --display-name $OSDU_CREDENTIALS --query [].objectId -otsv
 ```
 
-8. `OSDU_APPLICATION`: The json output of an Azure AD Application.
+6. `OSDU_APPLICATION`: The json output of an Azure AD Application.
 
 ```bash
 OSDU_APPLICATION="self-managed-osdu-stamp-application-$(az account show --query user.name -otsv | awk -F "@" '{print $1}')"
@@ -149,6 +134,8 @@ Deployment of a self managed osdu instance is performed by executing github acti
 3. __[Stamp Provision](../../actions/workflows/stamp-provision.yaml)__: This action provisions resources for the Deployment Stamp.  _(Time: ~1h)_
 
 4. __[Stamp Install](../../actions/workflows/stamp-configure.yaml)__: This action initializes the Software Configuration process of the Deployment Stamp and the software deployment occurs after pipeline completion.  _(Time: ~20m)_
+
+> Note: Prior to running the Stamp Load due to a recent change in Azure AD Applications the AD Application needs to be approved for access.  This can be done by accessing the Login Page. Access the $DNS_HOST/login
 
 5. __[Stamp Load](../../actions/workflows/stamp-load.yaml)__: This action initializes the partition and loads the necessary data into the Stamp to allow it to fully function. (ie: Entitlements, Schemas, Workflow)  _(Time: ~20m)_
 

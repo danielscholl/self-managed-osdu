@@ -95,6 +95,7 @@ terraform.sh show  # Show the Terraform Plan
 terraform.sh run   # Apply the Terraform Plan
 
 ## Install the Data Partition ##
+export TF_VAR_service_resources_workspace_name="dpl-${RAND}"
 export TF_VAR_workspace="prt-${RAND}" && cd /osdu-azure/templates/osdu-r3-mvp/data_partition
 terraform.sh show  # Show the Terraform Plan
 terraform.sh run   # Apply the Terraform Plan

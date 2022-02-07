@@ -1,0 +1,23 @@
+{{- $version := .Chart.AppVersion -}}
+apiVersion: kibana.k8s.elastic.co/v1
+kind: Kibana
+metadata:
+  name: kibana
+spec:
+  version: {{ $version }}
+  http:
+    tls:
+      selfSignedCertificate:
+        disabled: true
+  elasticsearchRef:
+    name: "elasticsearch"
+  count: 3
+  podTemplate:
+    spec:
+      nodeSelector:
+        agentpool: {{ .Values.agentPool }}
+      tolerations:
+      - key: "sku"
+        operator: "Equal"
+        value: "elasticsearch"
+        effect: "NoSchedule"

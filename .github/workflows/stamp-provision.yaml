@@ -201,9 +201,6 @@ jobs:
             --env TF_VAR_resource_group_location="${{ secrets.AZURE_LOCATION }}" \
             --env TF_VAR_central_resources_workspace_name=${{ env.CONTROLPLANE_WORKSPACE }}  \
             --env TF_VAR_service_resources_workspace_name=${{ env.DATAPLANE_WORKSPACE }}  \
-            --env TF_VAR_elasticsearch_endpoint=${{ secrets.ELASTIC_ENDPOINT }} \
-            --env TF_VAR_elasticsearch_username=${{ env.ELASTIC_USERNAME }} \
-            --env TF_VAR_elasticsearch_password=${{ secrets.ELASTIC_PASSWORD }} \
             self-managed-osdu:${{ env.IMAGE_TAG }}
 
           rm $GITHUB_WORKSPACE/.env
@@ -492,6 +489,10 @@ jobs:
             az storage entity insert --account-name $STORAGE_NAME --account-key $STORAGE_KEY \
                 --if-exists replace --table-name $TABLE \
                 --entity PartitionKey=$PARTITION_NAME RowKey=elastic-password sensitive=true value=$PARTITION_NAME-elastic-password
+
+            az storage entity insert --account-name $STORAGE_NAME --account-key $STORAGE_KEY \
+                --if-exists replace --table-name $TABLE \
+                --entity PartitionKey=opendes RowKey=elastic-ssl-enabled sensitive=false value=false
 
             az storage entity insert --account-name $STORAGE_NAME --account-key $STORAGE_KEY \
                 --if-exists replace --table-name $TABLE \
@@ -866,8 +867,6 @@ jobs:
               "CLIENT_SECRET": "",
               "OSDU_HOST": "$DNS_HOST",
               "REGION": "${{ secrets.AZURE_LOCATION }}",
-              "ES_HOST": "${{ secrets.ELASTIC_ENDPOINT }}",
-              "ES_AUTH_TOKEN": "$(printf "elastic:${{ secrets.ELASTIC_PASSWORD }}" | base64)",
               "INITIAL_TOKEN": ""
             }
             EOF

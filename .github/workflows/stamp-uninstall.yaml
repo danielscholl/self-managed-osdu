@@ -86,9 +86,9 @@ jobs:
           NAMESPACE: dev-sample
         if: contains(env.OK, 'true')
         run: |
-          if [ ! -z $(helm status env-tool -n dev-sample -o json |jq -r ".info.status") ]
+          if [ ! -z $(helm status dev-sample-env-tool -n dev-sample -o json |jq -r ".info.status") ]
           then
-            flux delete helmrelease env-tool -n dev-sample --silent
+            flux delete helmrelease dev-sample-env-tool -n dev-sample --silent
           fi
           if [ ! -z $(helm status token-service -n dev-sample -o json |jq -r ".info.status") ]
           then
@@ -106,9 +106,22 @@ jobs:
             helm uninstall airflow -n $NAMESPACE
           fi
           if [ ! -z $(helm status airflow-base -n $NAMESPACE -o json |jq -r ".info.status") ]
-            then
-              flux delete helmrelease airflow-base -n $NAMESPACE --silent
-            fi
+          then
+            flux delete helmrelease airflow-base -n $NAMESPACE --silent
+          fi
+
+      - name: Uninstall Elastic
+        env:
+          OK: ${{ secrets.UNINSTALL }}
+          NAMESPACE: elastic-system
+        if: contains(env.OK, 'true')
+        run: |
+          if [ ! -z $(helm status eck -n $NAMESPACE -o json |jq -r ".info.status") ]
+          then
+            helm uninstall eck -n $NAMESPACE
+          fi
+
+
 
       - name: Uninstall osdu-istio
         env:
@@ -160,6 +173,8 @@ jobs:
           kubectl delete namespace osdu-azure --ignore-not-found
           kubectl delete namespace dev-sample --ignore-not-found
           kubectl delete namespace airflow --ignore-not-found
+          kubectl delete namespace elastic-instance --ignore-not-found
+          kubectl delete namespace elastic-system --ignore-not-found
           kubectl delete namespace istio-system --ignore-not-found
 
       - name: Remove osdu-stamp

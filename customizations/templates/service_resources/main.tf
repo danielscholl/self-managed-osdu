@@ -283,9 +283,10 @@ module "network" {
       create_network_security_group = false
     }
     iaas-public = {
-      cidrs                   = [var.subnet_aks_prefix]
-      route_table_association = "aks"
-      configure_nsg_rules     = false
+      cidrs                         = [var.subnet_aks_prefix]
+      route_table_association       = "aks"
+      create_network_security_group = false
+      # configure_nsg_rules     = false
       service_endpoints = ["Microsoft.Storage",
         "Microsoft.AzureCosmosDB",
         "Microsoft.KeyVault",
