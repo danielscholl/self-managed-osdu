@@ -2,7 +2,7 @@
 .Synopsis
    Terraform Main Control
 .DESCRIPTION
-   This file holds the main control and resoures for bootstraping an OSDU Azure Devops Project.
+   This file holds the main control.
 */
 
 terraform {
@@ -269,7 +269,7 @@ resource "azurerm_role_assignment" "system_storage_data_contributor" {
 # Network
 #-------------------------------
 module "network" {
-  source = "github.com/danielscholl/iac-terraform.git//modules/network?ref=v1.0.0"
+  source = "git::https://github.com/danielscholl-terraform/module-virtual-network?ref=v1.0.0"
 
   name                = local.vnet_name
   resource_group_name = azurerm_resource_group.main.name
@@ -283,9 +283,10 @@ module "network" {
       create_network_security_group = false
     }
     iaas-public = {
-      cidrs                   = [var.subnet_aks_prefix]
-      route_table_association = "aks"
-      configure_nsg_rules     = false
+      cidrs                         = [var.subnet_aks_prefix]
+      route_table_association       = "aks"
+      create_network_security_group = false
+      # configure_nsg_rules     = false
       service_endpoints = ["Microsoft.Storage",
         "Microsoft.AzureCosmosDB",
         "Microsoft.KeyVault",
@@ -365,7 +366,7 @@ resource "azurerm_role_assignment" "agic_app_gw_mi" {
 # Azure AKS
 #-------------------------------
 module "aks" {
-  source     = "github.com/danielscholl/iac-terraform.git//modules/aks?ref=v1.0.0"
+  source     = "git::https://github.com/danielscholl-terraform/module-aks?ref=v1.0.0"
   depends_on = [module.network]
 
   name                       = local.aks_cluster_name

@@ -1,0 +1,54 @@
+{{- $version := .Chart.AppVersion -}}
+{{- $memLimit := .Values.resources.limits.memory}}
+---
+apiVersion: elasticsearch.k8s.elastic.co/v1
+kind: Elasticsearch
+metadata:
+  name: "elasticsearch"
+spec:
+  version: {{ $version }}
+  http:
+    tls:
+      selfSignedCertificate:
+        disabled: true
+    service:
+      spec:
+        type: ClusterIP
+  nodeSets:
+    - name: node
+      count: {{ .Values.elasticsearch.nodeCount }}
+      volumeClaimTemplates:
+        - metadata:
+            name: elasticsearch-data
+          spec:
+            accessModes:
+              - ReadWriteOnce
+            resources:
+              requests:
+                storage: {{ .Values.elasticsearch.storagePerNodeGB }}Gi
+            storageClassName: managed-premium
+      config:
+        node.master: true
+        node.data: true
+        node.ingest: true
+        node.store.allow_mmap: false
+      podTemplate:
+        spec:
+          nodeSelector:
+            agentpool: {{ .Values.agentPool }}
+          tolerations:
+          - key: "sku"
+            operator: "Equal"
+            value: "elasticsearch"
+            effect: "NoSchedule"
+        containers:
+        - name: elasticsearch
+          env:
+          - name: ES_JAVA_OPTS
+            value: "-Xms{{ div $memLimit 2 }}g -Xmx{{ div $memLimit 2 }}g"
+          resources:
+            requests:
+              cpu: {{ .Values.resources.requests.cpu }}
+            limits:
+              memory: {{ $memLimit }}Gi
+              cpu: {{ .Values.resources.limits.cpu }}

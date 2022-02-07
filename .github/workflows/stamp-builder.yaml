@@ -131,11 +131,6 @@ jobs:
             export TF_VAR_principal_objectId="$(az keyvault secret show --id https://$VAULT.vault.azure.net/secrets/client-oid --query value -otsv)"
             export TF_VAR_aad_client_id="$(az keyvault secret show --id https://$VAULT.vault.azure.net/secrets/application-id --query value -otsv)"
 
-            # Data Partition
-            export TF_VAR_elasticsearch_endpoint="${{ secrets.ELASTIC_ENDPOINT }}"
-            export TF_VAR_elasticsearch_username="elastic"
-            export TF_VAR_elasticsearch_password="${{ secrets.ELASTIC_PASSWORD }}"
-
             # Service Resources
             export TF_VAR_gitops_ssh_url="git@github.com/$GITHUB_REPOSITORY.git"
             export TF_VAR_ssh_public_key_file="/osdu-azure/.ssh/azure-aks-node-ssh-key.pub"

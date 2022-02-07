@@ -41,6 +41,8 @@ flux delete helmrelease istio-base -n istio-system --silent
 
 flux delete helmrelease sealed-secrets -n flux-system --silent
 
+kubectl delete CustomResourceDefinition istiooperators.install.istio.io --ignore-not-found=true
+
 kubectl delete namespace osdu-azure
 kubectl delete namespace dev-sample
 kubectl delete namespace airflow
