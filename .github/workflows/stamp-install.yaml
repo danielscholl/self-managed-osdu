@@ -470,8 +470,11 @@ jobs:
                 tag: $TAG
                 path: /api/entitlements/v2/*
                 probe:
-                  path: /api/entitlements/v2/_ah/readiness_check
-                  port: http
+                  path: /actuator/health
+                  port: 8081
+                  liveness:
+                    delay: 250
+                    seconds: 10
                 keyvault: true
                 auth:
                   disable:
@@ -748,6 +751,9 @@ jobs:
                 probe:
                   path: /actuator/health
                   port: 8081
+                  liveness:
+                    delay: 250
+                    seconds: 10
                 keyvault: true
                 auth:
                   disable:
@@ -827,8 +833,11 @@ jobs:
                 tag: $TAG
                 path: /api/file/*
                 probe:
-                  path: /api/file/v2/readiness_check
-                  port: http
+                  path: /actuator/health
+                  port: 8081
+                  liveness:
+                    delay: 250
+                    seconds: 10
                 keyvault: true
                 auth:
                   disable:
@@ -1010,6 +1019,9 @@ jobs:
                 probe:
                   path: /actuator/health
                   port: 8081
+                  liveness:
+                    delay: 250
+                    seconds: 10
                 keyvault: true
                 auth:
                   disable:
@@ -1178,6 +1190,9 @@ jobs:
                 probe:
                   path: /actuator/health
                   port: 8081
+                  liveness:
+                    delay: 250
+                    seconds: 10
                 keyvault: true
                 request:
                   cpu: 500m
@@ -1376,8 +1391,11 @@ jobs:
                 tag: $TAG
                 path: /api/register/v1/*
                 probe:
-                  path: /api/register/v1/actuator/health
-                  port: http
+                  path: /actuator/health
+                  port: 8081
+                  liveness:
+                    delay: 250
+                    seconds: 10
                 keyvault: true
                 auth:
                   disable:
@@ -1453,8 +1471,11 @@ jobs:
                 tag: $TAG
                 path: /api/unit/*
                 probe:
-                  path: /api/unit/_ah/readiness_check
-                  port: http
+                  path: /actuator/health
+                  port: 8081
+                  liveness:
+                    delay: 250
+                    seconds: 10
                 keyvault: true
                 auth:
                   disable:
@@ -1749,8 +1770,11 @@ jobs:
                 tag: $TAG
                 path: /api/workflow/*
                 probe:
-                  path: /api/workflow/swagger-ui.html
-                  port: http
+                  path: /actuator/health
+                  port: 8081
+                  liveness:
+                    delay: 250
+                    seconds: 10
                 keyvault: true
                 auth:
                   disable:
@@ -1829,6 +1853,25 @@ jobs:
                   secret:
                     name: airflow
                     key: azurestorageaccountkey
+                - name: postgres_name
+                  secret:
+                    name: postgres
+                    key: postgres-name
+                - name: postgres_username
+                  secret:
+                    name: postgres
+                    key: postgres-username
+                - name: postgres_password
+                  secret:
+                    name: postgres
+                    key: postgres-password
+                - name: postgres_port
+                  value: "5432"
+                - name: postgres_db
+                  value: "airflow"
+                - name: OSDU_AIRFLOW_VERSION2_ENABLED
+                  value: "false"
+
           EOF
 
       - name: Create Helm Values - ddms-seismic
