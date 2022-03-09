@@ -470,11 +470,8 @@ jobs:
                 tag: $TAG
                 path: /api/entitlements/v2/*
                 probe:
-                  path: /actuator/health
-                  port: 8081
-                  liveness:
-                    delay: 250
-                    seconds: 10
+                  path: /api/entitlements/v2/_ah/readiness_check
+                  port: http
                 keyvault: true
                 auth:
                   disable:
@@ -833,11 +830,8 @@ jobs:
                 tag: $TAG
                 path: /api/file/*
                 probe:
-                  path: /actuator/health
-                  port: 8081
-                  liveness:
-                    delay: 250
-                    seconds: 10
+                  path: /api/file/v2/readiness_check
+                  port: http
                 keyvault: true
                 auth:
                   disable:
@@ -1391,11 +1385,8 @@ jobs:
                 tag: $TAG
                 path: /api/register/v1/*
                 probe:
-                  path: /actuator/health
-                  port: 8081
-                  liveness:
-                    delay: 250
-                    seconds: 10
+                  path: /api/register/v1/actuator/health
+                  port: http
                 keyvault: true
                 auth:
                   disable:
@@ -1471,11 +1462,8 @@ jobs:
                 tag: $TAG
                 path: /api/unit/*
                 probe:
-                  path: /actuator/health
-                  port: 8081
-                  liveness:
-                    delay: 250
-                    seconds: 10
+                  path: /api/unit/_ah/readiness_check
+                  port: http
                 keyvault: true
                 auth:
                   disable:
