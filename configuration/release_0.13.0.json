@@ -1,0 +1,117 @@
+[
+  {
+    "name": "partition",
+    "tag": "0.13.0",
+    "image": "community.opengroup.org:5555/osdu/platform/system/partition/partition-v0-13-0:latest"
+  },
+  {
+    "name": "entitlements",
+    "tag": "0.13.0",
+    "image": "community.opengroup.org:5555/osdu/platform/security-and-compliance/entitlements/entitlements-release-0-13:latest"
+  },
+  {
+    "name": "legal",
+    "tag": "0.13.0",
+    "image": "community.opengroup.org:5555/osdu/platform/security-and-compliance/legal/legal-release-0-13:latest"
+  },
+  {
+    "name": "schema",
+    "tag": "0.13.0",
+    "image": "community.opengroup.org:5555/osdu/platform/system/schema-service/schema-service-release-0-13:latest"
+  },
+  {
+    "name": "storage",
+    "tag": "0.13.0",
+    "image": "community.opengroup.org:5555/osdu/platform/system/storage/storage-release-0-13:latest"
+  },
+  {
+    "name": "file",
+    "tag": "0.13.0",
+    "image": "community.opengroup.org:5555/osdu/platform/system/file/file-release-0-13:latest"
+  },
+  {
+    "name": "dataset",
+    "tag": "0.13.0",
+    "image": "community.opengroup.org:5555/osdu/platform/system/dataset/dataset-release-0-13:latest"
+  },
+  {
+    "name": "indexer",
+    "tag": "0.13.0",
+    "image": "community.opengroup.org:5555/osdu/platform/system/indexer-service/indexer-service-release-0-13:latest"
+  },
+  {
+    "name": "indexer-queue",
+    "tag": "0.13.0",
+    "image": "community.opengroup.org:5555/osdu/platform/system/indexer-queue/indexer-queue-release-0-13:latest"
+  },
+  {
+    "name": "search",
+    "tag": "0.13.0",
+    "image": "community.opengroup.org:5555/osdu/platform/system/search-service/search-service-release-0-13:latest"
+  },
+  {
+    "name": "register",
+    "tag": "0.12.1",
+    "image": "community.opengroup.org:5555/osdu/platform/system/register/register-v0-12-1:latest"
+  },
+  {
+    "name": "notification",
+    "tag": "0.13.0",
+    "image": "community.opengroup.org:5555/osdu/platform/system/notification/notification-release-0-13:latest"
+  },
+  {
+    "name": "unit",
+    "tag": "0.13.0",
+    "image": "community.opengroup.org:5555/osdu/platform/system/reference/unit-service/unit-service-release-0-13:latest"
+  },
+  {
+    "name": "crs-catalog",
+    "tag": "0.12.2",
+    "image": "community.opengroup.org:5555/osdu/platform/system/reference/crs-catalog-service/crs-catalog-service-v0-12-2:latest"
+  },
+  {
+    "name": "crs-conversion",
+    "tag": "0.12.0",
+    "image": "community.opengroup.org:5555/osdu/platform/system/reference/crs-conversion-service/crs-conversion-service-v0-12-0:latest"
+  },
+  {
+    "name": "wks",
+    "tag": "0.13.0",
+    "image": "community.opengroup.org:5555/osdu/platform/data-flow/enrichment/wks/wks-release-0-13:latest"
+  },
+  {
+    "name": "workflow",
+    "tag": "0.13.0",
+    "image": "community.opengroup.org:5555/osdu/platform/data-flow/ingestion/ingestion-workflow/ingestion-workflow-release-0-13:latest"
+  },
+  {
+    "name": "wellbore-ddms",
+    "tag": "0.13.0",
+    "image": "community.opengroup.org:5555/osdu/platform/domain-data-mgmt-services/wellbore/wellbore-domain-services/wellbore-domain-services-release-0-13:latest"
+  },
+  {
+    "name": "sdms",
+    "tag": "0.13.0",
+    "image": "community.opengroup.org:5555/osdu/platform/domain-data-mgmt-services/seismic/seismic-dms-suite/seismic-store-service/seismic-dms-file-metadata-service-release-0-13:latest"
+  },
+  {
+    "name": "schema-load",
+    "tag": "0.13.1",
+    "image": "community.opengroup.org:5555/osdu/platform/system/schema-service/schema-service-schema-load-v0-13-1:6c20d492df313c7e013bd6b1d7375c9550b42a05"
+  },
+  {
+    "name": "csv-parser",
+    "tag": "0.13.0",
+    "image": "community.opengroup.org:5555/osdu/platform/data-flow/ingestion/csv-parser/csv-parser/osdu-bootstrap-csv-parser:v0.13.0"
+  },
+  {
+    "name": "segy-to-zgy-conversion-dag",
+    "tag": "0.13.1",
+    "image": "community.opengroup.org:5555/osdu/platform/data-flow/ingestion/segy-to-zgy-conversion/osdu-bootstrap-segy-to-zgy:v0.13.1"
+  },
+  {
+    "name": "segy-to-vds-conversion-dag",
+    "tag": "0.13.0",
+    "image": "community.opengroup.org:5555/osdu/platform/data-flow/ingestion/segy-to-vds-conversion/osdu-bootstrap-segy:v0.13.0"
+  }
+]

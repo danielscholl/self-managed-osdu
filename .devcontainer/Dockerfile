@@ -1,20 +1,18 @@
-# [Choice] Debian / Ubuntu version (use Debian 11/9, Ubuntu 18.04/21.04 on local arm64/Apple Silicon): debian-11, debian-10, debian-9, ubuntu-21.04, ubuntu-20.04, ubuntu-18.04
-ARG VARIANT=debian-11
-FROM mcr.microsoft.com/vscode/devcontainers/base:0-${VARIANT}
-WORKDIR /src
+# See here for image contents: https://github.com/microsoft/vscode-dev-containers/tree/v0.209.6/containers/python-3/.devcontainer/base.Dockerfile
 
-COPY library-scripts/*.sh /src/library-scripts/
+# [Choice] Python version (use -bullseye variants on local arm64/Apple Silicon): 3, 3.10, 3.9, 3.8, 3.7, 3.6, 3-bullseye, 3.10-bullseye, 3.9-bullseye, 3.8-bullseye, 3.7-bullseye, 3.6-bullseye, 3-buster, 3.10-buster, 3.9-buster, 3.8-buster, 3.7-buster, 3.6-buster
+ARG VARIANT="3.10-bullseye"
+FROM mcr.microsoft.com/vscode/devcontainers/python:0-${VARIANT}
 
-# Install Terraform, tflint, Terragrunt
-ARG TERRAFORM_VERSION=0.14.11
-ARG TFLINT_VERSION=0.26.0
-ARG TERRAGRUNT_VERSION=0.28.24
-RUN bash /src/library-scripts/terraform-debian.sh "${TERRAFORM_VERSION}" "${TFLINT_VERSION}" "${TERRAGRUNT_VERSION}"
-
-# Install Infra Azure Provisioning
-ARG OSDU_VERSION=v0.12.0
-RUN bash /src/library-scripts/osdu-infra.sh "${OSDU_VERSION}"
+# [Choice] Node.js version: none, lts/*, 16, 14, 12, 10
+ARG NODE_VERSION="none"
+RUN if [ "${NODE_VERSION}" != "none" ]; then su vscode -c "umask 0002 && . /usr/local/share/nvm/nvm.sh && nvm install ${NODE_VERSION} 2>&1"; fi
 
 # [Optional] Uncomment this section to install additional OS packages.
 RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
   && apt-get -y install --no-install-recommends direnv
+
+RUN apt-get update \
+  && apt-get autoremove -y && apt-get clean -y && rm -rf /var/lib/apt/lists/*
+
+RUN echo 'eval "$(direnv hook bash)"' >> /etc/bash.bashrc

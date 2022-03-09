@@ -1,4 +1,4 @@
-name: '4. Stamp Install'
+name: "4. Stamp Install"
 
 on:
   workflow_dispatch:
@@ -7,11 +7,10 @@ env:
   CLI_VERSION: 2.30.0
   CLUSTER: osdu-stamp
 
-  OSDU_VERSION: v0.11.0
+  OSDU_VERSION: 0.13.0
   PARTITION_NAME: opendes
 
 jobs:
-
   flux-setup:
     name: Gitops Configuration
     env:
@@ -38,7 +37,7 @@ jobs:
       - name: AKS Context
         uses: azure/aks-set-context@v1
         with:
-          creds: '${{ secrets.AZURE_CREDENTIALS }}'
+          creds: "${{ secrets.AZURE_CREDENTIALS }}"
           cluster-name: ${{ env.CLUSTER_NAME }}
           resource-group: ${{ env.CLUSTER_RESOURCE_GROUP }}
 
@@ -376,6 +375,7 @@ jobs:
 
       - name: Create Helm Values - partition-service
         run: |
+          TAG=$(cat $GITHUB_WORKSPACE/configuration/release_$OSDU_VERSION.json | jq -c '.[] | select( .name == "partition")' | jq -r '.tag')
           cat > $GITHUB_WORKSPACE/apps/$CLUSTER/partition-service-values.yaml << EOF
           ---
           apiVersion: helm.toolkit.fluxcd.io/v2beta1
@@ -390,6 +390,7 @@ jobs:
               configuration:
               - service: partition
                 repository: $REGISTRY/partition
+                tag: $TAG
                 path: /api/partition/v1/*
                 probe:
                   path: /actuator/health
@@ -451,6 +452,7 @@ jobs:
 
       - name: Create Helm Values - entitlement-service
         run: |
+          TAG=$(cat $GITHUB_WORKSPACE/configuration/release_$OSDU_VERSION.json | jq -c '.[] | select( .name == "entitlements")' | jq -r '.tag')
           cat > $GITHUB_WORKSPACE/apps/$CLUSTER/entitlement-service-values.yaml << EOF
           ---
           apiVersion: helm.toolkit.fluxcd.io/v2beta1
@@ -465,6 +467,7 @@ jobs:
               configuration:
               - service: entitlements
                 repository: $REGISTRY/entitlements
+                tag: $TAG
                 path: /api/entitlements/v2/*
                 probe:
                   path: /api/entitlements/v2/_ah/readiness_check
@@ -523,6 +526,7 @@ jobs:
 
       - name: Create Helm Values - legal-service
         run: |
+          TAG=$(cat $GITHUB_WORKSPACE/configuration/release_$OSDU_VERSION.json | jq -c '.[] | select( .name == "legal")' | jq -r '.tag')
           cat > $GITHUB_WORKSPACE/apps/$CLUSTER/legal-service-values.yaml << EOF
           ---
           apiVersion: helm.toolkit.fluxcd.io/v2beta1
@@ -537,6 +541,7 @@ jobs:
               configuration:
               - service: legal
                 repository: $REGISTRY/legal
+                tag: $TAG
                 path: /api/legal/v1/*
                 probe:
                   path: /actuator/health
@@ -613,6 +618,7 @@ jobs:
 
       - name: Create Helm Values - storage-service
         run: |
+          TAG=$(cat $GITHUB_WORKSPACE/configuration/release_$OSDU_VERSION.json | jq -c '.[] | select( .name == "storage")' | jq -r '.tag')
           cat > $GITHUB_WORKSPACE/apps/$CLUSTER/storage-service-values.yaml << EOF
           ---
           apiVersion: helm.toolkit.fluxcd.io/v2beta1
@@ -627,6 +633,7 @@ jobs:
               configuration:
               - service: storage
                 repository: $REGISTRY/storage
+                tag: $TAG
                 path: /api/storage/v2/*
                 probe:
                   path: /actuator/health
@@ -721,6 +728,7 @@ jobs:
 
       - name: Create Helm Values - schema-service
         run: |
+          TAG=$(cat $GITHUB_WORKSPACE/configuration/release_$OSDU_VERSION.json | jq -c '.[] | select( .name == "schema")' | jq -r '.tag')
           cat > $GITHUB_WORKSPACE/apps/$CLUSTER/schema-service-values.yaml << EOF
           ---
           apiVersion: helm.toolkit.fluxcd.io/v2beta1
@@ -735,10 +743,11 @@ jobs:
               configuration:
               - service: schema
                 repository: $REGISTRY/schema
+                tag: $TAG
                 path: /api/schema-service/v1/*
                 probe:
-                  path: /api/schema-service/v1/swagger-ui.html
-                  port: http
+                  path: /actuator/health
+                  port: 8081
                 keyvault: true
                 auth:
                   disable:
@@ -800,6 +809,7 @@ jobs:
 
       - name: Create Helm Values - file-service
         run: |
+          TAG=$(cat $GITHUB_WORKSPACE/configuration/release_$OSDU_VERSION.json | jq -c '.[] | select( .name == "file")' | jq -r '.tag')
           cat > $GITHUB_WORKSPACE/apps/$CLUSTER/file-service-values.yaml << EOF
           ---
           apiVersion: helm.toolkit.fluxcd.io/v2beta1
@@ -814,6 +824,7 @@ jobs:
               configuration:
               - service: file
                 repository: $REGISTRY/file
+                tag: $TAG
                 path: /api/file/*
                 probe:
                   path: /api/file/v2/readiness_check
@@ -895,6 +906,7 @@ jobs:
 
       - name: Create Helm Values - dataset-service
         run: |
+          TAG=$(cat $GITHUB_WORKSPACE/configuration/release_$OSDU_VERSION.json | jq -c '.[] | select( .name == "dataset")' | jq -r '.tag')
           cat > $GITHUB_WORKSPACE/apps/$CLUSTER/dataset-service-values.yaml << EOF
           ---
           apiVersion: helm.toolkit.fluxcd.io/v2beta1
@@ -909,6 +921,7 @@ jobs:
               configuration:
               - service: dataset
                 repository: $REGISTRY/dataset
+                tag: $TAG
                 path: /api/dataset/*
                 probe:
                   path: /actuator/health
@@ -977,6 +990,7 @@ jobs:
 
       - name: Create Helm Values - indexer-service
         run: |
+          TAG=$(cat $GITHUB_WORKSPACE/configuration/release_$OSDU_VERSION.json | jq -c '.[] | select( .name == "indexer")' | jq -r '.tag')
           cat > $GITHUB_WORKSPACE/apps/$CLUSTER/indexer-service-values.yaml << EOF
           ---
           apiVersion: helm.toolkit.fluxcd.io/v2beta1
@@ -991,10 +1005,11 @@ jobs:
               configuration:
               - service: indexer
                 repository: $REGISTRY/indexer
+                tag: $TAG
                 path: /api/indexer/v2/*
                 probe:
-                  path: /api/indexer/v2/swagger-ui.html
-                  port: http
+                  path: /actuator/health
+                  port: 8081
                 keyvault: true
                 auth:
                   disable:
@@ -1068,6 +1083,7 @@ jobs:
 
       - name: Create Helm Values - indexer-queue
         run: |
+          TAG=$(cat $GITHUB_WORKSPACE/configuration/release_$OSDU_VERSION.json | jq -c '.[] | select( .name == "indexer-queue")' | jq -r '.tag')
           cat > $GITHUB_WORKSPACE/apps/$CLUSTER/indexer-queue-values.yaml << EOF
           ---
           apiVersion: helm.toolkit.fluxcd.io/v2beta1
@@ -1080,6 +1096,7 @@ jobs:
               configuration:
               - service: indexer-queue
                 repository: $REGISTRY/indexer-queue
+                tag: $TAG
                 keyvault: true
                 request:
                   cpu: 1000m
@@ -1140,7 +1157,7 @@ jobs:
 
       - name: Create Helm Values - search-service
         run: |
-
+          TAG=$(cat $GITHUB_WORKSPACE/configuration/release_$OSDU_VERSION.json | jq -c '.[] | select( .name == "search")' | jq -r '.tag')
           APP_INSIGHTS_KEY=$(az keyvault secret show --id https://${ENV_VAULT}.vault.azure.net/secrets/appinsights-key --query value -otsv)
           cat > $GITHUB_WORKSPACE/apps/$CLUSTER/search-service-values.yaml << EOF
           ---
@@ -1156,10 +1173,11 @@ jobs:
               configuration:
               - service: search
                 repository: $REGISTRY/search
+                tag: $TAG
                 path: /api/search/v2/*
                 probe:
-                  path: /api/search/v2/swagger-ui.html
-                  port: http
+                  path: /actuator/health
+                  port: 8081
                 keyvault: true
                 request:
                   cpu: 500m
@@ -1246,6 +1264,7 @@ jobs:
 
       - name: Create Helm Values - notification-service
         run: |
+          TAG=$(cat $GITHUB_WORKSPACE/configuration/release_$OSDU_VERSION.json | jq -c '.[] | select( .name == "notification")' | jq -r '.tag')
           cat > $GITHUB_WORKSPACE/apps/$CLUSTER/notification-service-values.yaml << EOF
           ---
           apiVersion: helm.toolkit.fluxcd.io/v2beta1
@@ -1260,9 +1279,10 @@ jobs:
               configuration:
               - service: notification
                 repository: $REGISTRY/notification
+                tag: $TAG
                 path: /api/notification/v1/*
                 probe:
-                  path: /api/notification/v1/swagger-ui.html
+                  path: /api/notification/v1/swagger-ui/index.html
                   port: http
                 keyvault: true
                 auth:
@@ -1271,7 +1291,7 @@ jobs:
                     - "*/index.html"
                     - "*/v2/api-docs"
                     - "*/swagger-resources"
-                    - "*/swagger-ui.html"
+                    - "*/swagger-ui/index.html"
                     - "*/configuration/ui"
                     - "*/configuration/security"
                     - "/api/notification/v1/swagger-resources/*"
@@ -1338,6 +1358,7 @@ jobs:
 
       - name: Create Helm Values - register-service
         run: |
+          TAG=$(cat $GITHUB_WORKSPACE/configuration/release_$OSDU_VERSION.json | jq -c '.[] | select( .name == "register")' | jq -r '.tag')
           cat > $GITHUB_WORKSPACE/apps/$CLUSTER/register-service-values.yaml << EOF
           ---
           apiVersion: helm.toolkit.fluxcd.io/v2beta1
@@ -1352,9 +1373,10 @@ jobs:
               configuration:
               - service: register
                 repository: $REGISTRY/register
+                tag: $TAG
                 path: /api/register/v1/*
                 probe:
-                  path: /api/register/v1/swagger-ui.html
+                  path: /api/register/v1/actuator/health
                   port: http
                 keyvault: true
                 auth:
@@ -1413,6 +1435,7 @@ jobs:
 
       - name: Create Helm Values - unit-service
         run: |
+          TAG=$(cat $GITHUB_WORKSPACE/configuration/release_$OSDU_VERSION.json | jq -c '.[] | select( .name == "unit")' | jq -r '.tag')
           cat > $GITHUB_WORKSPACE/apps/$CLUSTER/unit-service-values.yaml << EOF
           ---
           apiVersion: helm.toolkit.fluxcd.io/v2beta1
@@ -1427,6 +1450,7 @@ jobs:
               configuration:
               - service: unit
                 repository: $REGISTRY/unit
+                tag: $TAG
                 path: /api/unit/*
                 probe:
                   path: /api/unit/_ah/readiness_check
@@ -1481,6 +1505,7 @@ jobs:
 
       - name: Create Helm Values - crs-catalog
         run: |
+          TAG=$(cat $GITHUB_WORKSPACE/configuration/release_$OSDU_VERSION.json | jq -c '.[] | select( .name == "crs-catalog")' | jq -r '.tag')
           cat > $GITHUB_WORKSPACE/apps/$CLUSTER/crs-catalog-values.yaml << EOF
           ---
           apiVersion: helm.toolkit.fluxcd.io/v2beta1
@@ -1495,6 +1520,7 @@ jobs:
               configuration:
               - service: crs-catalog
                 repository: $REGISTRY/crs-catalog
+                tag: $TAG
                 path: /api/crs/catalog/*
                 probe:
                   path: /api/crs/catalog/swagger-ui.html
@@ -1549,6 +1575,7 @@ jobs:
 
       - name: Create Helm Values - crs-conversion
         run: |
+          TAG=$(cat $GITHUB_WORKSPACE/configuration/release_$OSDU_VERSION.json | jq -c '.[] | select( .name == "crs-conversion")' | jq -r '.tag')
           cat > $GITHUB_WORKSPACE/apps/$CLUSTER/crs-conversion-values.yaml << EOF
           ---
           apiVersion: helm.toolkit.fluxcd.io/v2beta1
@@ -1563,6 +1590,7 @@ jobs:
               configuration:
               - service: crs-conversion
                 repository: $REGISTRY/crs-conversion
+                tag: $TAG
                 path: /api/crs/converter/*
                 probe:
                   path: /api/crs/converter/swagger-ui.html
@@ -1623,6 +1651,7 @@ jobs:
 
       - name: Create Helm Values - wks-service
         run: |
+          TAG=$(cat $GITHUB_WORKSPACE/configuration/release_$OSDU_VERSION.json | jq -c '.[] | select( .name == "wks")' | jq -r '.tag')
           cat > $GITHUB_WORKSPACE/apps/$CLUSTER/wks-service-values.yaml << EOF
           ---
           apiVersion: helm.toolkit.fluxcd.io/v2beta1
@@ -1635,6 +1664,7 @@ jobs:
               configuration:
               - scaledObject: wks
                 repository: $REGISTRY/wks
+                tag: $TAG
                 servicebusSubscription: eg_sb_wkssubscription
                 servicebusTopic: recordstopiceg
                 keyvault: true
@@ -1701,6 +1731,7 @@ jobs:
 
       - name: Create Helm Values - workflow-service
         run: |
+          TAG=$(cat $GITHUB_WORKSPACE/configuration/release_$OSDU_VERSION.json | jq -c '.[] | select( .name == "workflow")' | jq -r '.tag')
           cat > $GITHUB_WORKSPACE/apps/$CLUSTER/workflow-service-values.yaml << EOF
           ---
           apiVersion: helm.toolkit.fluxcd.io/v2beta1
@@ -1715,6 +1746,7 @@ jobs:
               configuration:
               - service: workflow
                 repository: $REGISTRY/workflow
+                tag: $TAG
                 path: /api/workflow/*
                 probe:
                   path: /api/workflow/swagger-ui.html
@@ -1801,6 +1833,7 @@ jobs:
 
       - name: Create Helm Values - ddms-seismic
         run: |
+          TAG=$(cat $GITHUB_WORKSPACE/configuration/release_$OSDU_VERSION.json | jq -c '.[] | select( .name == "sdms")' | jq -r '.tag')
           cat > $GITHUB_WORKSPACE/apps/$CLUSTER/ddms-seismic-values.yaml << EOF
           ---
           apiVersion: helm.toolkit.fluxcd.io/v2beta1
@@ -1834,6 +1867,7 @@ jobs:
                   value: "80"
               - service: seismic-ddms
                 repository: $REGISTRY/sdms
+                tag: $TAG
                 path: /seistore-svc/api/v3/*
                 probe:
                   path: /seistore-svc/api/v3/svcstatus
@@ -1861,6 +1895,7 @@ jobs:
 
       - name: Create Helm Values - ddms-wellbore
         run: |
+          TAG=$(cat $GITHUB_WORKSPACE/configuration/release_$OSDU_VERSION.json | jq -c '.[] | select( .name == "wellbore-ddms")' | jq -r '.tag')
           cat > $GITHUB_WORKSPACE/apps/$CLUSTER/ddms-wellbore-values.yaml << EOF
           ---
           apiVersion: helm.toolkit.fluxcd.io/v2beta1
@@ -1906,6 +1941,7 @@ jobs:
                   value: INFO
               - service: wellbore-ddms
                 repository: $REGISTRY/wellbore-ddms
+                tag: $TAG
                 path: /api/os-wellbore-ddms/*
                 probe:
                   path: /api/os-wellbore-ddms/healthz
@@ -1933,9 +1969,8 @@ jobs:
       - name: GitOps CheckIn
         uses: EndBug/add-and-commit@v7
         with:
-          message: 'Initialize Software Install'
-          add: '.'
-
+          message: "Initialize Software Install"
+          add: "."
 
   install-airflow:
     name: Airflow Installation
@@ -1963,7 +1998,7 @@ jobs:
       - name: AKS Context
         uses: azure/aks-set-context@v1
         with:
-          creds: '${{ secrets.AZURE_CREDENTIALS }}'
+          creds: "${{ secrets.AZURE_CREDENTIALS }}"
           cluster-name: ${{ env.CLUSTER_NAME }}
           resource-group: ${{ env.CLUSTER_RESOURCE_GROUP }}
 
@@ -2250,7 +2285,6 @@ jobs:
             attempt_counter=$(($attempt_counter+1))
             sleep 30
           done
-
 
       - name: Helm Install
         run: |

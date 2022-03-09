@@ -48,7 +48,7 @@ RUN if [ "${INSTALL_AZURE_CLI}" = "true" ]; then bash /tmp/library-scripts/azcli
 
 
 # Install Infra Azure Provisioning
-ARG OSDU_VERSION=v0.11.0
+ARG OSDU_VERSION=v0.13.0
 RUN bash /tmp/library-scripts/osdu-infra.sh
 
 # Install Terraform, tflint, Terragrunt

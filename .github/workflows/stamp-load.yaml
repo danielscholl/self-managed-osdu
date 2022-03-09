@@ -1,4 +1,4 @@
-name: '5. Stamp Load'
+name: "5. Stamp Load"
 
 on:
   workflow_dispatch:
@@ -6,11 +6,10 @@ on:
 env:
   CLI_VERSION: 2.30.0
 
-  OSDU_VERSION: 0.11.0
+  OSDU_VERSION: 0.13.0
   PARTITION_NAME: opendes
 
 jobs:
-
   initialize-entitlements:
     name: Entitlements Load
     runs-on: ubuntu-latest
@@ -189,7 +188,6 @@ jobs:
             if [ "${CSV_RESULT}" == "404" ]; then echo "INSTALL_CSV=true" >> $GITHUB_ENV; fi
             if [ "${ZGY_RESULT}" == "404" ]; then echo "INSTALL_ZGY=true" >> $GITHUB_ENV; fi
             if [ "${VDS_RESULT}" == "404" ]; then echo "INSTALL_VDS=true" >> $GITHUB_ENV; fi
-
 
       - name: Install Docker Workflows
         run: |
