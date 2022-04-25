@@ -166,7 +166,7 @@ variable "sb_topics" {
 variable "elasticsearch_endpoint" {
   type        = string
   description = "endpoint for elasticsearch cluster"
-  default     = "http://elasticsearch-es-http.elastic-instance.svc.cluster.local:9200"
+  default     = "https://osdu-elastic-haldu-dev.es.southcentralus.azure.elastic-cloud.com:9243"
 }
 
 variable "elasticsearch_username" {
@@ -178,7 +178,7 @@ variable "elasticsearch_username" {
 variable "elasticsearch_password" {
   type        = string
   description = "password for elasticsearch cluster"
-  default     = null
+  default     = "N7nKnKIYOUsMNXXqRDuUn8Qo"
 }
 
 

@@ -13,16 +13,16 @@
 //  limitations under the License.
 
 
-tenant_name = "<your_tenant>"
+tenant_name = "Halliburton"
 
 prefix = "osdu-self"
 
 dashboards = {
   default         = true
   appinsights     = true
-  airflow_infra   = false
-  airflow_service = false
-  airflow_dags    = false
+  airflow_infra   = true
+  airflow_service = true
+  airflow_dags    = true
 }
 
 

@@ -238,6 +238,6 @@ resource "azurerm_key_vault_secret" "elastic_username" {
 
 resource "azurerm_key_vault_secret" "elastic_password" {
   name         = local.elastic_password
-  value        = var.elasticsearch_password == null ? data.terraform_remote_state.service_resources.outputs.elastic_search_password.result.elastic : var.elasticsearch_password
+  value        = var.elasticsearch_password ==  var.elasticsearch_password
   key_vault_id = data.terraform_remote_state.central_resources.outputs.keyvault_id
 }

@@ -1,8 +1,8 @@
 [
   {
-    "name": "Malaysia",
-    "alpha2": "MY",
-    "numeric": 458,
+    "name": "United States of America",
+    "alpha2": "US",
+    "numeric": 1,
     "residencyRisk": "Client consent required"
   }
 ]
