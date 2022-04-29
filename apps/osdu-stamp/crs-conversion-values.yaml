@@ -7,10 +7,10 @@ metadata:
 spec:
   values:
     ingress:
-      dns: osdu-self-dpldccia-bihb-gw.eastus.cloudapp.azure.com
+      dns: osdu-self-dplcbjbb-gjl0-gw.eastus.cloudapp.azure.com
     configuration:
     - service: crs-conversion
-      repository: osduselfcpldcckg8jcr.azurecr.io/crs-conversion
+      repository: osduselfcplcbjqeldcr.azurecr.io/crs-conversion
       path: /api/crs/converter/*
       probe:
         path: /api/crs/converter/swagger-ui.html

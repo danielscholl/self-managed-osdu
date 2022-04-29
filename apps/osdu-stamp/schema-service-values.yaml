@@ -7,10 +7,10 @@ metadata:
 spec:
   values:
     ingress:
-      dns: osdu-self-dpldccia-bihb-gw.eastus.cloudapp.azure.com
+      dns: osdu-self-dplcbjbb-gjl0-gw.eastus.cloudapp.azure.com
     configuration:
     - service: schema
-      repository: osduselfcpldcckg8jcr.azurecr.io/schema
+      repository: osduselfcplcbjqeldcr.azurecr.io/schema
       path: /api/schema-service/v1/*
       probe:
         path: /api/schema-service/v1/swagger-ui.html
