@@ -15,8 +15,8 @@ prefix = "osdu-self"
 
 resource_tags = {
   environment = "Self Managed OSDU"
-  contact = "<your_name>"
-  repo = "https://github.dev/danielscholl/self-managed-osdu"
+  contact = "David Baumgarten"
+  repo = "https://github.com/grtn316/self-managed-osdu"
 }
 
 /* The below items are not typically modified */
