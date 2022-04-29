@@ -1,0 +1,73 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: wks-service
+  namespace: osdu-azure
+spec:
+  values:
+    configuration:
+    - scaledObject: wks
+      repository: osduselfcpldcckg8jcr.azurecr.io/wks
+      servicebusSubscription: eg_sb_wkssubscription
+      servicebusTopic: recordstopiceg
+      keyvault: true
+      env:
+      - name: spring_application_name
+        value: "wks"
+      - name: server_port
+        value: "80"
+      - name: cosmosdb_database
+        value: "osdu-db"
+      - name: servicebus_topic_name
+        value: "recordstopiceg"
+      - name: servicebus_topic_subscription
+        value: "eg_sb_wkssubscription"
+      - name: storage_container
+        value: "osdu-wks-mappings"
+      - name: partition_service_endpoint
+        value: "http://partition/api/partition/v1"
+      - name: storage_service_endpoint
+        value: "http://storage/api/storage/v2"
+      - name: schema_service_endpoint
+        value: "http://schema/api/schema-service/v1"
+      - name: search_service_endpoint
+        value: "http://search/api/search/v2"
+      - name: default_tenant
+        value: "opendes"
+      - name: max_concurrent_calls
+        value: "32"
+      - name: executor_n_threads
+        value: "32"
+      - name: max_lock_renew_duration_seconds
+        value: "600"
+      - name: azure_paas_podIdentity_isEnabled
+        value: "false"
+      - name: KEYVAULT_URI
+        config:
+          name: osdu-svc-config
+          key: ENV_KEYVAULT
+      - name: AZURE_CLIENT_ID
+        secret:
+          name: active-directory
+          key: principal-clientid
+      - name: AZURE_CLIENT_SECRET
+        secret:
+          name: active-directory
+          key: principal-clientpassword
+      - name: AZURE_TENANT_ID
+        secret:
+          name: active-directory
+          key: tenantid
+      - name: aad_client_id
+        secret:
+          name: active-directory
+          key: application-appid
+      - name: AZURE_APP_RESOURCE_ID
+        secret:
+          name: active-directory
+          key: application-appid
+      - name: appinsights_key
+        secret:
+          name: central-logging
+          key: appinsights

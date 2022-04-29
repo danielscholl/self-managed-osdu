@@ -1,0 +1,69 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: crs-conversion
+  namespace: osdu-azure
+spec:
+  values:
+    ingress:
+      dns: osdu-self-dpldccia-bihb-gw.eastus.cloudapp.azure.com
+    configuration:
+    - service: crs-conversion
+      repository: osduselfcpldcckg8jcr.azurecr.io/crs-conversion
+      path: /api/crs/converter/*
+      probe:
+        path: /api/crs/converter/swagger-ui.html
+        port: http
+      keyvault: true
+      auth:
+        disable:
+          - "/"
+          - "*/index.html"
+          - "*/v2/api-docs"
+          - "*/swagger-resources"
+          - "*/swagger-ui.html"
+          - "*/configuration/ui"
+          - "*/configuration/security"
+          - "/api/crs/converter/swagger-resources/*"
+          - "/api/crs/converter/webjars/*"
+          - "*/actuator/health"
+          - "*/health"
+          - "*/_ah/**"
+      pvc:
+      - name: crs-conversion
+        volume: shared-data
+      mount:
+      - name: shared-data
+        path: /mnt/crs_conversion
+      env:
+      - name: spring_application_name
+        value: crs-conversion-service
+      - name: server.servlet.contextPath
+        value: /api/crs/converter/
+      - name: server_port
+        value: 80
+      - name: ACCEPT_HTTP
+        value: true
+      - name: ENTITLEMENT_URL
+        value: http://entitlements/api/entitlements/v2
+      - name: ESRI_DATA_PATH
+        value: /crs-conversion-service
+      - name: service_domain_name
+        value: contoso.com
+      - name: SIS_DATA
+        value: /mnt/crs_conversion/apachesis_setup/SIS_DATA
+      - name: azure_istioauth_enabled
+        value: "true"
+      - name: KEYVAULT_URI
+        config:
+          name: osdu-svc-config
+          key: ENV_KEYVAULT
+      - name: aad_client_id
+        secret:
+          name: active-directory
+          key: application-appid
+      - name: appinsights_key
+        secret:
+          name: central-logging
+          key: appinsights

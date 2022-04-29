@@ -1,0 +1,96 @@
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1beta1
+kind: Kustomization
+metadata:
+  name: osdu-stamp
+  namespace: flux-system
+spec:
+  interval: 5m0s
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+  path: ./apps/osdu-stamp/
+  prune: true
+  validation: client
+  healthChecks:
+  - kind: Deployment
+    name: env-debug
+    namespace: dev-sample
+  - kind: Deployment
+    name: istio-operator
+    namespace: istio-operator
+  - kind: Deployment
+    name: istiod
+    namespace: istio-system
+  - kind: Deployment
+    name: istio-ingressgateway
+    namespace: istio-system
+  - kind: Deployment
+    name: appinsights-statsd
+    namespace: airflow
+  - kind: Deployment
+    name: log-processor
+    namespace: airflow
+  - kind: Deployment
+    name: default
+    namespace: osdu-azure
+  - kind: Deployment
+    name: token
+    namespace: dev-sample
+  - kind: Deployment
+    name: partition
+    namespace: osdu-azure
+  - kind: Deployment
+    name: entitlements
+    namespace: osdu-azure
+  - kind: Deployment
+    name: legal
+    namespace: osdu-azure
+  - kind: Deployment
+    name: storage
+    namespace: osdu-azure
+  - kind: Deployment
+    name: schema
+    namespace: osdu-azure
+  - kind: Deployment
+    name: file
+    namespace: osdu-azure
+  - kind: Deployment
+    name: dataset
+    namespace: osdu-azure
+  - kind: Deployment
+    name: indexer
+    namespace: osdu-azure
+  - kind: Deployment
+    name: indexer-queue
+    namespace: osdu-azure
+  - kind: Deployment
+    name: search
+    namespace: osdu-azure
+  - kind: Deployment
+    name: notification
+    namespace: osdu-azure
+  - kind: Deployment
+    name: register
+    namespace: osdu-azure
+  - kind: Deployment
+    name: unit
+    namespace: osdu-azure
+  - kind: Deployment
+    name: crs-catalog
+    namespace: osdu-azure
+  - kind: Deployment
+    name: crs-conversion
+    namespace: osdu-azure
+  - kind: Deployment
+    name: wks
+    namespace: osdu-azure
+  - kind: Deployment
+    name: workflow
+    namespace: osdu-azure
+  - kind: Deployment
+    name: seismic-ddms
+    namespace: ddms-seismic
+  - kind: Deployment
+    name: wellbore-ddms
+    namespace: ddms-wellbore

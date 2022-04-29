@@ -1,0 +1,37 @@
+---
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - ../base/osdu-base
+  - ../base/osdu-istio
+  - ../base/osdu-airflow
+  - ../base/dev-sample
+  - ../base/osdu-azure
+  - ../base/osdu-ddms-seismic
+  - ../base/osdu-ddms-wellbore
+patchesStrategicMerge:
+  - istio-values.yaml
+  - dev-sample-values.yaml
+  - airflow-base-values.yaml
+  - self-managed-base-values.yaml
+  - default-service-values.yaml
+  - token-service-values.yaml
+  - partition-service-values.yaml
+  - entitlement-service-values.yaml
+  - legal-service-values.yaml
+  - storage-service-values.yaml
+  - schema-service-values.yaml
+  - file-service-values.yaml
+  - dataset-service-values.yaml
+  - indexer-service-values.yaml
+  - indexer-queue-values.yaml
+  - search-service-values.yaml
+  - notification-service-values.yaml
+  - register-service-values.yaml
+  - unit-service-values.yaml
+  - crs-catalog-values.yaml
+  - crs-conversion-values.yaml
+  - wks-service-values.yaml
+  - workflow-service-values.yaml
+  - ddms-seismic-values.yaml
+  - ddms-wellbore-values.yaml
