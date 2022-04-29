@@ -19,7 +19,7 @@ prefix = "osdu-self"
 resource_tags = {
   environment = "Self Managed OSDU"
   contact = "David Baumgarten"
-  repo = "https://github.com/grtn316/self-managed-osdu"
+  repo = "https://github.dev/grtn316/self-managed-osdu"
 }
 
 # Network Addressing
