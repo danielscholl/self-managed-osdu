@@ -13,13 +13,13 @@ spec:
     - map: osdu-svc-config
       data:
       - name: ENV_KEYVAULT
-        value: "https://osdu-self-cplcbj-qeld-kv.vault.azure.net/"
+        value: "https://osdu-self-cplbec-41n5-kv.vault.azure.net/"
       - name: REDIS_DB_SDMS
         value: "10"
     - map: seistore-svc-config
       data:
       - name: DES_SERVICE_HOST
-        value: https://osdu-self-dplcbjbb-gjl0-gw.eastus.cloudapp.azure.com
+        value: https://osdu-self-dplbech-mrf9-gw.eastus.cloudapp.azure.com
       - name: REDIS_INSTANCE_PORT
         value: 6380
       - name: APP_ENVIRONMENT_IDENTIFIER
@@ -29,7 +29,7 @@ spec:
       - name: PORT
         value: "80"
     - service: seismic-ddms
-      repository: osduselfcplcbjqeldcr.azurecr.io/sdms
+      repository: osduselfcplbec41n5cr.azurecr.io/sdms
       path: /seistore-svc/api/v3/*
       probe:
         path: /seistore-svc/api/v3/svcstatus
