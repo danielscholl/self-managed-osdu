@@ -1,0 +1,12 @@
+---
+apiVersion: source.toolkit.fluxcd.io/v1beta1
+kind: GitRepository
+metadata:
+  name: helm-charts-azure
+  namespace: flux-system
+spec:
+  interval: 1m0s
+  ref:
+    branch: release/0.12
+  url: https://community.opengroup.org/osdu/platform/deployment-and-operations/helm-charts-azure
+

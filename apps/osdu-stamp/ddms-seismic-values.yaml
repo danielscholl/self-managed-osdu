@@ -1,0 +1,55 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: ddms-seismic
+  namespace: ddms-seismic
+spec:
+  values:
+    ingress:
+      dns: osdu-self-dplbdefe-w6b2-gw.westeurope.cloudapp.azure.com
+    configMap: seistore-svc-config
+    configuration:
+    - map: osdu-svc-config
+      data:
+      - name: ENV_KEYVAULT
+        value: "https://osdu-self-cplbec-41n5-kv.vault.azure.net/"
+      - name: REDIS_DB_SDMS
+        value: "10"
+    - map: seistore-svc-config
+      data:
+      - name: DES_SERVICE_HOST
+        value: https://osdu-self-dplbech-mrf9-gw.eastus.cloudapp.azure.com
+      - name: REDIS_INSTANCE_PORT
+        value: 6380
+      - name: APP_ENVIRONMENT_IDENTIFIER
+        value: cloud
+      - name: CLOUDPROVIDER
+        value: azure
+      - name: PORT
+        value: "80"
+    - service: seismic-ddms
+      repository: osduselfcplbec41n5cr.azurecr.io/sdms
+      path: /seistore-svc/api/v3/*
+      probe:
+        path: /seistore-svc/api/v3/svcstatus
+        port: http
+      auth:
+        disable:
+          - "/"
+          - "*/index.html"
+          - "*/v2/api-docs"
+          - "*/swagger"
+          - "*/swagger-ui.html"
+          - "*/swagger-resources"
+          - "*/actuator/health"
+          - "*/health"
+          - "*/configuration/ui"
+          - "*/configuration/security"
+          - "/seistore-svc/api/v3/swagger-resources/*"  # CAN"T FIND SWAGGER
+          - "/seistore-svc/api/v3/webjars/*"
+      env:
+      - name: KEYVAULT_URL
+        config:
+          name: osdu-svc-config
+          key: ENV_KEYVAULT

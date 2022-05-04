@@ -1,0 +1,95 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: workflow-service
+  namespace: osdu-azure
+spec:
+  values:
+    ingress:
+      dns: osdu-self-dplbech-mrf9-gw.eastus.cloudapp.azure.com
+    configuration:
+    - service: workflow
+      repository: osduselfcplbec41n5cr.azurecr.io/workflow
+      path: /api/workflow/*
+      probe:
+        path: /api/workflow/swagger-ui.html
+        port: http
+      keyvault: true
+      auth:
+        disable:
+          - "/"
+          - "*/index.html"
+          - "*/v2/api-docs"
+          - "*/swagger-resources"
+          - "*/swagger-ui.html"
+          - "*/configuration/ui"
+          - "*/configuration/security"
+          - "/api/workflow/swagger-resources/*"
+          - "/api/workflow/webjars/*"
+          - "*/actuator/health"
+          - "*/health"
+          - "*/_ah/**"
+      env:
+      - name: spring_application_name
+        value: "workflow"
+      - name: server.servlet.contextPath
+        value: "/api/workflow/"
+      - name: server_port
+        value: "80"
+      - name: ACCEPT_HTTP
+        value: "true"
+      - name: LOG_PREFIX
+        value: "workflow"
+      - name: cosmosdb_database
+        value: "osdu-db"
+      - name: partition_service_endpoint
+        value: "http://partition/api/partition/v1"
+      - name: OSDU_ENTITLEMENTS_URL
+        value: "http://entitlements/api/entitlements/v2"
+      - name: OSDU_ENTITLEMENTS_APPKEY
+        value: "OBSOLETE"
+      - name: OSDU_AIRFLOW_URL
+        value: "http://airflow-web.airflow.svc.cluster.local:8080/airflow"
+      - name: OSDU_AIRFLOW_USERNAME
+        value: "admin"
+      - name: azure_istioauth_enabled
+        value: "true"
+      - name: azure_activedirectory_AppIdUri
+        value: "api://0fcf2808-d6b3-4569-a2db-61f4a083741d"
+      - name: azure_paas_podIdentity_isEnabled
+        value: "false"
+      - name: dp_airflow_for_system_dag
+        value: "false"
+      - name: ignore_dagContent
+        value: "false"
+      - name: cosmosdb_system_database
+        value: "osdu-system-db"
+      - name: authorizeAPI
+        value: "http://entitlements/api/entitlements/v2"
+      - name: authorizeAPIKey
+        value: "OBSOLETE"
+      - name: KEYVAULT_URI
+        config:
+          name: osdu-svc-config
+          key: ENV_KEYVAULT
+      - name: aad_client_id
+        secret:
+          name: active-directory
+          key: application-appid
+      - name: appinsights_key
+        secret:
+          name: central-logging
+          key: appinsights
+      - name: OSDU_AIRFLOW_PASSWORD
+        secret:
+          name: airflow
+          key: admin-password
+      - name: AIRFLOW_STORAGE_ACCOUNT_NAME
+        secret:
+          name: airflow
+          key: azurestorageaccountname
+      - name: AIRFLOW_STORAGE_ACCOUNT_KEY
+        secret:
+          name: airflow
+          key: azurestorageaccountkey
