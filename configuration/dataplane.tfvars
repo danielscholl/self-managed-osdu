@@ -25,7 +25,7 @@ resource_tags = {
 # Network Addressing
 address_space     = "10.10.0.0/16"
 subnet_fe_prefix  = "10.10.1.0/26"
-subnet_aks_prefix = "10.10.2.0/22"
+subnet_aks_prefix = "10.10.0.0/22"
 subnet_be_prefix  = "10.10.3.0/28"
 
 # Kubernetes Settings
