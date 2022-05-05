@@ -412,6 +412,7 @@ module "aks" {
       enable_auto_scaling    = true
       min_count              = var.aks_agent_vm_count
       max_count              = var.aks_agent_vm_maxcount
+      max_pods               = 200
       os_disk_size_gb        = var.aks_agent_vm_disk
       subnet                 = "public"
 

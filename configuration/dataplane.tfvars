@@ -25,14 +25,14 @@ resource_tags = {
 # Network Addressing
 address_space     = "10.10.0.0/16"
 subnet_fe_prefix  = "10.10.1.0/26"
-subnet_aks_prefix = "10.10.2.0/23"
+subnet_aks_prefix = "10.10.2.0/22"
 subnet_be_prefix  = "10.10.3.0/28"
 
 # Kubernetes Settings
 kubernetes_version = "1.20.9"
 aks_agent_vm_count = "6"
 aks_agent_vm_disk  = 128
-aks_agent_vm_size  = "Standard_E4s_v3"
+aks_agent_vm_size  = "Standard_E16s_v3"
 
 # Database Settings
 cosmos_databases = [
