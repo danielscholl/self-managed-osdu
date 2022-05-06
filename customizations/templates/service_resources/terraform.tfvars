@@ -41,7 +41,7 @@ resource_tags = {
 # Kubernetes Settings
 kubernetes_version = "1.20.9"
 aks_agent_vm_size  = "Standard_E4s_v3"
-aks_agent_vm_count = "5"
+aks_agent_vm_count = "6"
 aks_agent_vm_disk  = 128
 subnet_aks_prefix  = "10.10.2.0/23"
 
