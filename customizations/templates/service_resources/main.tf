@@ -380,7 +380,7 @@ module "aks" {
   #identity_type          = "UserAssigned"
   network_policy         = "azure"
   configure_network_role = true
-  #kubernetes_version          = var.kubernetes_version
+  kubernetes_version          = var.kubernetes_version
 
   virtual_network = {
     subnets = {
