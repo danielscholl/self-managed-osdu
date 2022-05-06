@@ -2221,10 +2221,6 @@ jobs:
             sleep 30
           done
 
-      - name: Helm Install
-        run: |
-          helm upgrade --install osdu-airflow-base $GITHUB_WORKSPACE/charts/osdu-airflow-base --values ${{ runner.temp }}/airflow-base-values.yaml --namespace airflow
-
       - name: Airflow Base - Wait
         run: |
           echo "Checking Deployment Exists"
