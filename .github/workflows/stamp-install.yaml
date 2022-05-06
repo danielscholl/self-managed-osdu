@@ -2223,7 +2223,7 @@ jobs:
 
       - name: Helm Install
         run: |
-          helm upgrade --install airflow $GITHUB_WORKSPACE/charts/airflow --values ${{ runner.temp }}/custom-values.yaml --namespace airflow
+          helm upgrade --install osdu-airflow-base $GITHUB_WORKSPACE/charts/osdu-airflow-base --values ${{ runner.temp }}/custom-values.yaml --namespace airflow
 
       - name: Airflow Base - Wait
         run: |
@@ -2254,6 +2254,10 @@ jobs:
             attempt_counter=$(($attempt_counter+1))
             sleep 30
           done
+
+      - name: Helm Install
+        run: |
+          helm upgrade --install airflow $GITHUB_WORKSPACE/charts/airflow --values ${{ runner.temp }}/custom-values.yaml --namespace airflow
 
       - name: User Job - Create
         run: |
