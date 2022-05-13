@@ -22,4 +22,11 @@ tar -xzvf /tmp/osdu-downloads/osdu.tar.gz -C /osdu-azure --strip-components=2 in
 tar -xzvf /tmp/osdu-downloads/osdu.tar.gz -C /osdu-azure --strip-components=2 infra-azure-provisioning-${OSDU_VERSION}/infra/templates
 tar -xzvf /tmp/osdu-downloads/osdu.tar.gz -C /usr/local/bin --strip-components=3 infra-azure-provisioning-${OSDU_VERSION}/infra/scripts/terraform.sh
 cp /usr/local/bin/terraform.sh /usr/local/bin/deploy && chmod 766 /usr/local/bin/deploy
+
+# Insert Network-Existing into Terraform Modules 
+curl -sSL -o /tmp/osdu-downloads/network-existing.tar.gz https://github.com/grtn316/self-managed-osdu/raw/networking/scripts/assets/network-existing.tar.gz
+tar -xzvf /tmp/osdu-downloads/network-existing.tar.gz -C /osdu-azure/modules/providers/azure
+
+# Replace TF file with modified version for Network-Existing
+/osdu-azure/templates/osdu-r3-mvp/service_resources
 echo "Done!"
