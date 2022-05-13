@@ -28,5 +28,7 @@ curl -sSL -o /tmp/osdu-downloads/network-existing.tar.gz https://github.com/grtn
 tar -xzvf /tmp/osdu-downloads/network-existing.tar.gz -C /osdu-azure/modules/providers/azure
 
 # Replace TF file with modified version for Network-Existing
-/osdu-azure/templates/osdu-r3-mvp/service_resources
+curl -sSL -o /tmp/osdu-downloads/main.tf https://raw.githubusercontent.com/grtn316/self-managed-osdu/networking/scripts/assets/tf/main.tf
+cp /tmp/osdu-downloads/main.tf /osdu-azure/templates/osdu-r3-mvp/service_resources/main.tf
+
 echo "Done!"

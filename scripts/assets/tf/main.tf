@@ -320,7 +320,7 @@ module "appgateway" {
   resource_group_name = azurerm_resource_group.main.name
 
   vnet_name                       = module.network-existing.name
-  vnet_subnet_id                  = module.network.subnet_fe
+  vnet_subnet_id                  = module.network-existing.subnet_fe
   keyvault_id                     = data.terraform_remote_state.central_resources.outputs.keyvault_id
   keyvault_secret_id              = azurerm_key_vault_certificate.default.0.secret_id
   ssl_certificate_name            = local.ssl_cert_name
@@ -345,7 +345,7 @@ module "istio_appgateway" {
   resource_group_name = azurerm_resource_group.main.name
 
   vnet_name                       = module.network-existing.name
-  vnet_subnet_id                  = module.network.subnet_fe
+  vnet_subnet_id                  = module.network-existing.subnet_fe
   keyvault_id                     = data.terraform_remote_state.central_resources.outputs.keyvault_id
   keyvault_secret_id              = azurerm_key_vault_certificate.default.0.secret_id
   ssl_certificate_name            = local.ssl_cert_name
@@ -400,7 +400,7 @@ module "aks" {
   agent_vm_size      = var.aks_agent_vm_size
   agent_vm_disk      = var.aks_agent_vm_disk
   max_node_count     = var.aks_agent_vm_maxcount
-  vnet_subnet_id     = module.network.subnets.1
+  vnet_subnet_id     = module.network-existing.subnet_aks
   ssh_public_key     = file(var.ssh_public_key_file)
   kubernetes_version = var.kubernetes_version
   log_analytics_id   = data.terraform_remote_state.central_resources.outputs.log_analytics_id
@@ -423,7 +423,7 @@ resource "azurerm_kubernetes_cluster_node_pool" "services" {
   min_count             = var.aks_services_agent_vm_count
   max_count             = var.aks_services_agent_vm_maxcount
   availability_zones    = local.nodepool_zones
-  vnet_subnet_id        = module.network.subnets.1
+  vnet_subnet_id        = module.network-existing.subnet_aks
   orchestrator_version  = var.kubernetes_version
   vm_size               = var.aks_services_agent_vm_size
   os_disk_size_gb       = var.aks_services_agent_vm_disk
@@ -490,7 +490,7 @@ resource "azurerm_role_assignment" "subnet_contributor" {
   count = var.feature_flag.autoscaling ? 1 : 0
 
   principal_id         = module.aks.principal_id
-  scope                = module.network.subnets.1
+  scope                = module.network-existing.subnet_aks
   role_definition_name = "Contributor"
 }
 
