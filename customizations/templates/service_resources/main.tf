@@ -378,6 +378,7 @@ module "aks" {
   dns_prefix                 = local.aks_dns_prefix
   network_plugin             = "azure"
   #identity_type          = "UserAssigned"
+  kubernetes_version  = var.kubernetes_version
   network_policy         = "azure"
   configure_network_role = true
 
