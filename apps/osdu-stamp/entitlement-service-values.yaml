@@ -7,10 +7,10 @@ metadata:
 spec:
   values:
     ingress:
-      dns: osdu-self-dplcbhcf-sz13-gw.eastus.cloudapp.azure.com
+      dns: osdu-self-dplcgbgj-njls-gw.eastus.cloudapp.azure.com
     configuration:
     - service: entitlements
-      repository: osduselfcplcbhzpvwcr.azurecr.io/entitlements
+      repository: osduselfcplcgbwyr2cr.azurecr.io/entitlements
       path: /api/entitlements/v2/*
       probe:
         path: /api/entitlements/v2/_ah/readiness_check

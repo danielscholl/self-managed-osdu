@@ -7,7 +7,7 @@ metadata:
 spec:
   values:
     ingress:
-      dns: osdu-self-dplcbhcf-sz13-gw.eastus.cloudapp.azure.com
+      dns: osdu-self-dplcgbgj-njls-gw.eastus.cloudapp.azure.com
     configuration:
     - service: default
       repository: neilpeterson/aks-helloworld

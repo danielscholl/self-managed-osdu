@@ -13,8 +13,8 @@ spec:
       subscription: f222cf2e-9059-4809-9567-5c02ce6d0163
       tenant: 72f988bf-86f1-41af-91ab-2d7cd011db47
       vault:
-        name: osdu-self-cplcbh-zpvw-kv
-        group: osdu-self-cplcbhcf-zpvw-rg
+        name: osdu-self-cplcgb-wyr2-kv
+        group: osdu-self-cplcgbgj-wyr2-rg
         secret:
         - name: central-logging
           key: appinsights
@@ -23,7 +23,7 @@ spec:
     - map: osdu-svc-config
       data:
       - name: ENV_KEYVAULT
-        value: "https://osdu-self-cplcbh-zpvw-kv.vault.azure.net/"
+        value: "https://osdu-self-cplcgb-wyr2-kv.vault.azure.net/"
     - map: wellbore-svc-config
       data:
       - name: CLOUD_PROVIDER
@@ -41,7 +41,7 @@ spec:
       - name: AZ_LOGGER_LEVEL
         value: INFO
     - service: wellbore-ddms
-      repository: osduselfcplcbhzpvwcr.azurecr.io/wellbore-ddms
+      repository: osduselfcplcgbwyr2cr.azurecr.io/wellbore-ddms
       path: /api/os-wellbore-ddms/*
       probe:
         path: /api/os-wellbore-ddms/healthz

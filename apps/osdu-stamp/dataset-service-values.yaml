@@ -7,10 +7,10 @@ metadata:
 spec:
   values:
     ingress:
-      dns: osdu-self-dplcbhcf-sz13-gw.eastus.cloudapp.azure.com
+      dns: osdu-self-dplcgbgj-njls-gw.eastus.cloudapp.azure.com
     configuration:
     - service: dataset
-      repository: osduselfcplcbhzpvwcr.azurecr.io/dataset
+      repository: osduselfcplcgbwyr2cr.azurecr.io/dataset
       path: /api/dataset/*
       probe:
         path: /actuator/health
