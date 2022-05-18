@@ -307,10 +307,10 @@ resource "azurerm_role_assignment" "system_storage_data_contributor" {
 module "network-existing" {
   source = "../../../modules/providers/azure/network-existing"
 
-  existing_vnet_resource_group_name = rg_name
-  existing_virtual_network_name = vnet_name
-  existing_subnet_name_fe = fe_subnet_name
-  existing_subnet_name_aks = aks_subnet_name
+  existing_vnet_resource_group_name = rg-osdu
+  existing_virtual_network_name = vnet-odu
+  existing_subnet_name_fe = snfe
+  existing_subnet_name_aks = snaks
 }
 
 module "appgateway" {
