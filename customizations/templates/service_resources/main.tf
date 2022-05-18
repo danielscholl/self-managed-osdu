@@ -381,7 +381,6 @@ module "aks" {
   kubernetes_version  = var.kubernetes_version
   network_policy         = "azure"
   configure_network_role = true
-  kubernetes_version          = var.kubernetes_version
 
   virtual_network = {
     subnets = {
