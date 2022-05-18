@@ -1,0 +1,66 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: ddms-wellbore
+  namespace: ddms-wellbore
+spec:
+  values:
+    ingress:
+      dns: osdu-self-dplbdefe-w6b2-gw.westeurope.cloudapp.azure.com
+    configMap: wellbore-svc-config
+    azure:
+      subscription: f222cf2e-9059-4809-9567-5c02ce6d0163
+      tenant: 72f988bf-86f1-41af-91ab-2d7cd011db47
+      vault:
+        name: osdu-self-cplcgb-wyr2-kv
+        group: osdu-self-cplcgbgj-wyr2-rg
+        secret:
+        - name: central-logging
+          key: appinsights
+          value: appinsights-key
+    configuration:
+    - map: osdu-svc-config
+      data:
+      - name: ENV_KEYVAULT
+        value: "https://osdu-self-cplcgb-wyr2-kv.vault.azure.net/"
+    - map: wellbore-svc-config
+      data:
+      - name: CLOUD_PROVIDER
+        value: az
+      - name: OPENAPI_PREFIX
+        value: /api/os-wellbore-ddms
+      - name: SERVICE_HOST_STORAGE
+        value: http://storage.osdu-azure/api/storage
+      - name: SERVICE_HOST_SEARCH
+        value: http://search-service.osdu-azure/api/search
+      - name: SERVICE_HOST_PARTITION
+        value: http://partition.osdu-azure/api/partition
+      - name: USE_PARTITION_SERVICE
+        value: enabled
+      - name: AZ_LOGGER_LEVEL
+        value: INFO
+    - service: wellbore-ddms
+      repository: osduselfcplcgbwyr2cr.azurecr.io/wellbore-ddms
+      path: /api/os-wellbore-ddms/*
+      probe:
+        path: /api/os-wellbore-ddms/healthz
+        port: 8080
+      keyvault: true
+      auth:
+        disable:
+          - "/api/os-wellbore-ddms/"
+          - "/api/os-wellbore-ddms/ddms/v2/about"
+          - "/api/os-wellbore-ddms/docs"
+          - "/api/os-wellbore-ddms/openapi.json"
+      env:
+      - name: SERVICE_NAME
+        value: os-wellbore-ddms
+      - name: KEYVAULT_URL
+        config:
+          name: osdu-svc-config
+          key: ENV_KEYVAULT
+      - name: AZ_AI_INSTRUMENTATION_KEY
+        secret:
+          name: central-logging
+          key: appinsights
