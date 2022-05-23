@@ -103,6 +103,13 @@ locals {
   istio_app_gw_name   = "${local.base_name_21}-istio-gw"
   appgw_identity_name = format("%s-agic-identity", local.app_gw_name)
 
+  existing_resource_group_name = "rg-osdu"
+  existing_vnet_name           = "vnet-osdu"
+  existing_vnet_address_prefix = "10.0.0.0/16"
+  existing_subnet_name_fe      = "snfe"
+  existing_subnet_prefix_fe    = "10.0.0.0/24"
+  existing_subnet_name_aks     = "snaks"
+  existing_subnet_prefix_aks   = "10.0.1.0/24"
 
   aks_cluster_name  = "${local.base_name_60}-aks"
   aks_identity_name = format("%s-pod-identity", local.aks_cluster_name)
@@ -271,27 +278,20 @@ resource "azurerm_role_assignment" "system_storage_data_contributor" {
 module "network" {
   source = "git::https://github.com/danielscholl-terraform/module-virtual-network?ref=v1.0.0"
 
-  name                = local.vnet_name
-  resource_group_name = azurerm_resource_group.main.name
+  existing_resource_group_name = local.existing_resource_group_name
+  existing_vnet_name           = local.existing_vnet_name
+  existing_subnet_name_fe      = local.existing_subnet_name_fe
+  existing_subnet_name_aks     = local.existing_subnet_name_aks
+
   resource_tags       = var.resource_tags
 
-  address_space        = [var.address_space]
-  enforce_subnet_names = false
-
   subnets = {
-    gw-subnet = { cidrs = [var.subnet_fe_prefix]
-      create_network_security_group = false
-    }
-    iaas-public = {
-      cidrs                         = [var.subnet_aks_prefix]
+    local.existing_subnet_name_fe = {
+      cidrs                         = [local.existing_subnet_prefix_fe]
+         }
+    local.existing_subnet_name_aks = {
+      cidrs                         = [local.existing_subnet_prefix_aks]
       route_table_association       = "aks"
-      create_network_security_group = false
-      # configure_nsg_rules     = false
-      service_endpoints = ["Microsoft.Storage",
-        "Microsoft.AzureCosmosDB",
-        "Microsoft.KeyVault",
-        "Microsoft.ServiceBus",
-      "Microsoft.EventHub"]
     }
   }
 
@@ -305,7 +305,7 @@ module "network" {
           next_hop_type  = "Internet"
         }
         local-vnet = {
-          address_prefix = var.address_space
+          address_prefix = local.existing_vnet_address_prefix
           next_hop_type  = "vnetlocal"
         }
       }
@@ -319,8 +319,8 @@ module "appgateway" {
   name                = local.app_gw_name
   resource_group_name = azurerm_resource_group.main.name
 
-  vnet_name                       = module.network.vnet.name
-  vnet_subnet_id                  = module.network.subnets["gw-subnet"].id
+  vnet_name                       = module.network.exist_vnet_name
+  vnet_subnet_id                  = module.network.fe_sn_id
   keyvault_id                     = data.terraform_remote_state.central_resources.outputs.keyvault_id
   keyvault_secret_id              = azurerm_key_vault_certificate.default.0.secret_id
   ssl_certificate_name            = local.ssl_cert_name
@@ -385,7 +385,7 @@ module "aks" {
   virtual_network = {
     subnets = {
       public = {
-        id = module.network.subnets["iaas-public"].id
+        id = module.network.aks_sn_id
       }
     }
     route_table_id = module.network.route_tables.aks.id
