@@ -11,7 +11,7 @@
 #-------------------------------
 resource "azurerm_monitor_diagnostic_setting" "vnet_diagnostics" {
   name                       = "vnet_diagnostics"
-  target_resource_id         = module.network.vnet.id
+  target_resource_id         = module.network.exist_vnet_id
   log_analytics_workspace_id = data.terraform_remote_state.central_resources.outputs.log_analytics_id
 
   log {

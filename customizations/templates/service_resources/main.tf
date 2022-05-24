@@ -286,10 +286,10 @@ module "network" {
   resource_tags       = var.resource_tags
 
   subnets = {
-    local.existing_subnet_name_fe = {
+    (local.existing_subnet_name_fe) = {
       cidrs                         = [local.existing_subnet_prefix_fe]
          }
-    local.existing_subnet_name_aks = {
+    (local.existing_subnet_name_aks) = {
       cidrs                         = [local.existing_subnet_prefix_aks]
       route_table_association       = "aks"
     }
