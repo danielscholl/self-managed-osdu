@@ -276,7 +276,7 @@ resource "azurerm_role_assignment" "system_storage_data_contributor" {
 # Network
 #-------------------------------
 module "network" {
-  source = "git::https://github.com/cocallaw/tfmodule-osdu-network-existing?ref=v0.1.1"
+  source = "git::https://github.com/cocallaw/tfmodule-osdu-network-existing?ref=v0.1.2"
 
   existing_resource_group_name = local.existing_resource_group_name
   existing_vnet_name           = local.existing_vnet_name
