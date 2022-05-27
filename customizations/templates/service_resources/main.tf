@@ -277,7 +277,7 @@ resource "azurerm_role_assignment" "system_storage_data_contributor" {
 # Network
 #-------------------------------
 module "network" {
-  source = "git::https://github.com/cocallaw/tfmodule-osdu-network-existing?ref=v0.1.4"
+  source = "git::https://github.com/cocallaw/tfmodule-osdu-network-existing?ref=v0.1.5"
 
   existing_resource_group_name = local.existing_resource_group_name
   existing_vnet_name           = local.existing_vnet_name
@@ -378,7 +378,7 @@ module "aks" {
         id = module.network.aks_sn_id
       }
     }
-    route_table_id = module.network.route_tables.aks.id
+    route_table_id = module.network.aks_rt.id
   }
 
   linux_profile = {
