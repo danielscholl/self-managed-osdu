@@ -286,7 +286,7 @@ module "network" {
 
   resource_tags       = var.resource_tags
 
-  route_table_aks = {
+  aks_route_table = {
       route_table_name              = local.rt_aks_name
       disable_bgp_route_propagation = true
       use_inline_routes             = false
