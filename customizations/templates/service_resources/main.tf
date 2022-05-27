@@ -102,6 +102,7 @@ locals {
   app_gw_name         = "${local.base_name_60}-gw"
   istio_app_gw_name   = "${local.base_name_21}-istio-gw"
   appgw_identity_name = format("%s-agic-identity", local.app_gw_name)
+  rt_aks_name         = "${local.base_name_21}-rt-aks"
 
   existing_resource_group_name = "rg-osdu"
   existing_vnet_name           = "vnet-osdu"
@@ -276,7 +277,7 @@ resource "azurerm_role_assignment" "system_storage_data_contributor" {
 # Network
 #-------------------------------
 module "network" {
-  source = "git::https://github.com/cocallaw/tfmodule-osdu-network-existing?ref=v0.1.2"
+  source = "git::https://github.com/cocallaw/tfmodule-osdu-network-existing?ref=v0.1.3"
 
   existing_resource_group_name = local.existing_resource_group_name
   existing_vnet_name           = local.existing_vnet_name
@@ -285,18 +286,8 @@ module "network" {
 
   resource_tags       = var.resource_tags
 
-  subnets = {
-    (local.existing_subnet_name_fe) = {
-      cidrs                         = [local.existing_subnet_prefix_fe]
-         }
-    (local.existing_subnet_name_aks) = {
-      cidrs                         = [local.existing_subnet_prefix_aks]
-      route_table_association       = "aks"
-    }
-  }
-
-  route_tables = {
-    aks = {
+  route_table_aks = {
+      route_table_name              = local.rt_aks_name
       disable_bgp_route_propagation = true
       use_inline_routes             = false
       routes = {
@@ -309,7 +300,6 @@ module "network" {
           next_hop_type  = "vnetlocal"
         }
       }
-    }
   }
 }
 
