@@ -267,7 +267,7 @@ variable "aks_agent_vm_disk" {
 
 variable "kubernetes_version" {
   type    = string
-  default = "1.19.11"
+  default = "1.21.9"
 }
 
 variable "ssh_public_key_file" {

@@ -46,7 +46,7 @@ jobs:
         run: export FLUX_VERSION=0.27.4 && curl -s https://fluxcd.io/install.sh | bash;
 
       - name: Bootstrap Flux
-        run: flux bootstrap github --owner=${{ github.repository_owner }} --repository=$(echo $GITHUB_REPOSITORY | cut -d'/' -f2	) --branch=main --path=./clusters/${{ env.CLUSTER }}
+        run: flux bootstrap github --owner=${{ github.repository_owner }} --repository=$(echo $GITHUB_REPOSITORY | cut -d'/' -f2	) --branch=${{ github.ref_name }} --path=./clusters/${{ env.CLUSTER }}
 
       - name: GitOps Checkout
         uses: actions/checkout@v2
