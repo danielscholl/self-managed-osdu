@@ -310,7 +310,7 @@ module "appgateway" {
   resource_group_name = azurerm_resource_group.main.name
 
   vnet_name                       = module.network.exist_vnet_name
-  vnet_subnet_id                  = module.network.fe_sn_id
+  vnet_subnet_id                  = module.network.sn_id.fe
   keyvault_id                     = data.terraform_remote_state.central_resources.outputs.keyvault_id
   keyvault_secret_id              = azurerm_key_vault_certificate.default.0.secret_id
   ssl_certificate_name            = local.ssl_cert_name
@@ -375,7 +375,7 @@ module "aks" {
   virtual_network = {
     subnets = {
       public = {
-        id = module.network.aks_sn_id
+        id = module.network.sn_id.aks
       }
     }
     route_table_id = module.network.aks_rt.id
