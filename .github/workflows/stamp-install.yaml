@@ -1811,7 +1811,7 @@ jobs:
           spec:
             values:
               ingress:
-                dns: osdu-self-dplbdefe-w6b2-gw.westeurope.cloudapp.azure.com
+                dns: $DNS_HOST
               configMap: seistore-svc-config
               configuration:
               - map: osdu-svc-config
@@ -1871,7 +1871,7 @@ jobs:
           spec:
             values:
               ingress:
-                dns: osdu-self-dplbdefe-w6b2-gw.westeurope.cloudapp.azure.com
+                dns: $DNS_HOST
               configMap: wellbore-svc-config
               azure:
                 subscription: $(az keyvault secret show --id https://${ENV_VAULT}.vault.azure.net/secrets/subscription-id --query value -otsv)
