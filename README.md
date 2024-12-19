@@ -1,5 +1,7 @@
 # Self Managed OSDU
 
+> The replacement for this project is [osdu-developer](http://github.com/azure/osdu-developer)
+
 This is a prototype used to evaluate the possibility of providing an easy self managed instance of [OSDU on Azure](https://community.opengroup.org/osdu/platform/deployment-and-operations/infra-azure-provisioning) to ease the development experience of developing components or extensions that might run on top or inside of the OSDU Platform that runs in Azure.
 
 __Goals:__
